@@ -1,10 +1,10 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { ButtonModule } from 'primeng/button';
 @Component({
   selector: 'app-nx-welcome',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ButtonModule],
   template: `
     <!--
      * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -435,6 +435,7 @@ import { CommonModule } from '@angular/common';
             Welcome Events-System 👋
           </h1>
         </div>
+        <p-button label="Check" icon="pi pi-check"></p-button>
         <!--  HERO  -->
         <div id="hero" class="rounded">
           <div class="text-container">
