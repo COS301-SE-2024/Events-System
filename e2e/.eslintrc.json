@@ -15,6 +15,7 @@
     },
     {
       "files": ["*.js", "*.jsx"],
+      "extends": ["plugin:@nx/javascript"],
       "rules": {}
     },
     {
@@ -22,5 +23,6 @@
       "rules": {}
     }
   ],
-  "extends": ["plugin:playwright/recommended", "../.eslintrc.base.json"]
+  "extends": ["plugin:playwright/recommended"],
+  "plugins": ["@nx"]
 }
