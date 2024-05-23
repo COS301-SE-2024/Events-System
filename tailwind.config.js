@@ -5,6 +5,9 @@ module.exports = {
     'src/**/*.{html,ts}', // paths to your HTML and TypeScript files
     './libs/**/*.{html,ts}', // don't forget to include your libraries if you use any
   ],
+  daisyui: {
+    themes: ["light", "dark", "cupcake"],
+  },
   presets: [],
   darkMode: 'media', // or 'class'
   theme: {
@@ -1063,6 +1066,8 @@ module.exports = {
       50: '50',
     },
   },
-  plugins: [],
+  plugins: [
+    require('daisyui'),
+  ],
 }
 
