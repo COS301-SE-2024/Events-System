@@ -1,0 +1,11 @@
+.drawer-side{
+    transition: all 1s;
+}
+
+.drawer-side.thin {
+    width: 70px; /* adjust as needed */
+  }
+  
+  .drawer-side.thin .item-text {
+    display: none;
+  }
