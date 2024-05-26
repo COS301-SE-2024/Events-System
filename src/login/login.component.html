@@ -18,13 +18,87 @@
           </label>
           <input type="password" placeholder="password" class="input input-bordered" required />
           <label class="label">
-            <a href="#" class="label-text-alt link link-hover">Forgot password?</a>
+            <a class="label-text-alt link link-hover" onclick="my_modal_2.showModal()">Forgot password?</a>
           </label>
         </div>
         <div class="form-control mt-6">
           <button class="btn btn-primary">Login</button>
         </div>
+        <button class="btn btn-outline btn-primary"  onclick="my_modal_3.showModal()">Create Account</button>
+
       </form>
     </div>
   </div>
+  <!-- FORGOT PASSWORD MODAL HOME -->
+  <dialog id="my_modal_2" class="modal overflow-x-hidden">
+    <div class="modal-box overflow-x-hidden">
+      <form method="dialog">
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+      </form>
+      <div class="card shrink-0 w-full max-w-sm">
+        <form class="card-body">
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Name</span>
+            </label>
+            <input type="text" placeholder="name" class="input input-bordered" required />
+          </div>
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Email</span>
+            </label>
+            <input type="email" placeholder="email" class="input input-bordered" required />
+          </div>
+          <div class="form-control mt-6">
+            <button class="btn btn-primary">Create Account</button>
+          </div>
+  
+        </form>
+      </div>
+    </div>
+    <form method="dialog" class="modal-backdrop">
+      <button>close</button>
+    </form>
+  </dialog>
+
+    <!-- CREATE ACCOUNT MODAL HOME -->
+    <dialog id="my_modal_3" class="modal">
+      <div class="modal-box  overflow-x-hidden">
+        <form method="dialog">
+          <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+        </form>
+        <div class="card shrink-0 w-full max-w-sm">
+          <form class="card-body">
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text">Name</span>
+              </label>
+              <input type="text" placeholder="name" class="input input-bordered" required />
+            </div>
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text">Email</span>
+              </label>
+              <input type="email" placeholder="email" class="input input-bordered" required />
+            </div>
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text">Password</span>
+              </label>
+              <input type="password" placeholder="password" class="input input-bordered" required />
+              <label class="label">
+                <a class="label-text-alt link link-hover" onclick="my_modal_2.showModal()">Forgot password?</a>
+              </label>
+            </div>
+            <div class="form-control mt-6">
+              <button class="btn btn-primary">Create Account</button>
+            </div>
+    
+          </form>
+        </div>
+      </div>
+      <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+      </form>
+    </dialog>
 </div>
