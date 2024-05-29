@@ -1,41 +1,69 @@
-<div class="carousel rounded-box z-10">
+<div class="w-screen h-screen bg-red-700">
+
+  <div class="carousel rounded-sm h-full w-full absolute">
+    <div class="carousel-item h-full w-full">
+      <img class="h-full w-full" src="assets/pexels-rahulp9800-1652361.jpg" alt="Slide-image-2" />
+    </div> 
+  
+    <div class="carousel-item h-full w-full">
+      <img class="h-full w-full" src="assets/pexels-travelerchitect-15016180.jpg" alt="Slide-image-3" />
+    </div> 
+  
+    <div class="carousel-item h-full w-full">
+      <img class="h-full w-full" src="assets/pexels-vishnurnair-1105666.jpg" alt="Slide-image-4" />
+    </div> 
+  
     <div class="carousel-item">
-      <img src="https://img.daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.jpg" alt="Slide-image-1" />
+      <img class="h-full w-full" src="https://img.daisyui.com/images/stock/photo-1550258987-190a2d41a8ba.jpg" alt="Slide-image-5" />
     </div> 
 
-    <div class="carousel-item">
-      <img src="https://img.daisyui.com/images/stock/photo-1565098772267-60af42b81ef2.jpg" alt="Slide-image-2" />
+    <div class="carousel-item h-full w-full">
+      <img class="h-full w-full" src="assets/pexels-orlovamaria-4947565.jpg" alt="Slide-image-1" />
     </div> 
+    
+  </div>
+  
 
-    <div class="carousel-item">
-      <img src="https://img.daisyui.com/images/stock/photo-1572635148818-ef6fd45eb394.jpg" alt="Slide-image-3" />
-    </div> 
-
-    <div class="carousel-item">
-      <img src="https://img.daisyui.com/images/stock/photo-1494253109108-2e30c049369b.jpg" alt="Slide-image-4" />
-    </div> 
-
-    <div class="carousel-item">
-      <img src="https://img.daisyui.com/images/stock/photo-1550258987-190a2d41a8ba.jpg" alt="Slide-image-5" />
-    </div> 
-
-    <!-- Open the modal using ID.showModal() method -->
-    <button class="btn" onclick="my_modal_1.showModal()">open modal</button>
-    <dialog id="my_modal_1" class="modal">
+  <!-- Open the modal using ID.showModal() method -->
+  <div class="flex">
+    <div class="self-center">
+      <button class="btn glass flex flex-col" onclick="my_modal_1.showModal()">
+        <span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M7.646 2.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 3.707 2.354 9.354a.5.5 0 1 1-.708-.708z"/>
+            <path fill-rule="evenodd" d="M7.646 6.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 7.707l-5.646 5.647a.5.5 0 0 1-.708-.708z"/>
+          </svg>
+        </span>
+        
+        <span> Explore More </span>
+      </button>
+    </div>
+    
+    <dialog id="my_modal_1" class="modal opacity-65">
       <div class="modal-box">
-        <h3 class="font-bold text-lg">Hello!</h3>
-        <p class="py-4">Press ESC key or click the button below to close</p>
+        <h3 class="font-bold text-lg"> Discover Amazing Events Hosted By Your Organization</h3>
+        <p class="py-4">See what your organisation has in store for you </p>
         <div class="modal-action">
           <form method="dialog">
-            <!-- if there is a button in form, it will close the modal -->
-            <button class="btn glass z-50">Explore More</button>
+            <!-- google button -->
+            <!-- get started button -->
+            <!-- login button -->
+            
+            <button class="btn glass">Cancel</button>
           </form>
         </div>
       </div>
     </dialog>
+  </div>
+  
 </div>
+
 
 <!--want the carousel to loop-->
 <!--want the carousel to be animated-->
 <!--want the outer div to fit the size of the screen-->
-<!--add "explore more" button to modal-->
+<!--make component mobile responsive-->
+
+
+<!--tried adding angular icons; running into issues-->
+
