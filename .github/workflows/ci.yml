@@ -27,6 +27,10 @@ jobs:
         with:
           node-version: 20
           cache: 'npm'
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.4.1
+        with:
+          node-version: '20'
       - run: npm ci
       - uses: nrwl/nx-set-shas@v4
 
