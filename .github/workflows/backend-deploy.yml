@@ -1,0 +1,27 @@
+name: Deploy to Google Cloud
+
+on:
+  push:
+    branches:
+      - master
+      - develop
+      - feat/backend
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup Google Cloud SDK
+      uses: google-github-actions/setup-gcloud@master
+      with:
+        project_id: ${{ secrets.GCP_PROJECT_ID }}
+        service_account_key: ${{ secrets.GCP_SA_KEY }}
+        export_default_credentials: true
+
+    - name: Deploy to App Engine
+      run: |
+        cd Backend
+        gcloud app deploy app.yml
