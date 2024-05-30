@@ -23,7 +23,7 @@ jobs:
     - name: Set Google Cloud Project
       run: |
         gcloud config set project events-system-back
-
+    #deploys the backend to google cloud platform using app.yml
     - name: Deploy to App Engine
       run: |
         cd Backend
