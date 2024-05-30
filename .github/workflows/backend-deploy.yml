@@ -22,7 +22,7 @@ jobs:
 
     - name: Set Google Cloud Project
       run: |
-        gcloud config set project events-system-back
+        gcloud config set project YOUR_PROJECT_ID
 
     - name: Deploy to App Engine
       run: |
