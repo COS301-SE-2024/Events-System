@@ -354,6 +354,48 @@ system performance.
 \subsection{Design Patterns}
 \label{subsec:design-patterns}
 
+\subsection*{Singleton Pattern}
+\begin{itemize}[label=--]
+    \item \textbf{Configuration Settings}: The application may need to access configuration settings that should 
+    be consistent across the entire system, such as database connection strings, API keys, or feature toggles. 
+    The Singleton pattern ensures that these settings are loaded once and reused, avoiding inconsistencies and redundant loading.
+    \item \textbf{Database Connection Pool}: Managing a pool of database connections efficiently is crucial. 
+    The Singleton pattern ensures that the connection pool is created once and reused, managing resources effectively.
+\end{itemize}
+
+\subsection*{Factory Pattern}
+\begin{itemize}[label=--]
+    \item \textbf{Creating Different Types of Notifications}: The system might send various types of notifications, 
+    such as email, SMS, or push notifications. The Factory pattern can abstract the creation logic, allowing the 
+    system to generate the appropriate notification type without modifying the client code. This pattern makes it 
+    easy to extend the system with new notification types in the future.
+\end{itemize}
+
+\subsection*{Observer Pattern}
+\begin{itemize}[label=--]
+    \item \textbf{Event Notification}: When an event is created or updated in the system, multiple components may 
+    need to be notified and take action accordingly. The Observer pattern allows these components (observers) to 
+    subscribe to events and receive notifications when changes occur, ensuring loose coupling between the event 
+    source and the observers.
+\end{itemize}
+
+\subsection*{Builder Pattern}
+\begin{itemize}[label=--]
+    \item \textbf{Event Creation}: Creating complex event objects with optional parameters can be cumbersome. 
+    The Builder pattern separates the construction of a complex object from its representation, allowing the 
+    system to construct different configurations of event objects using the same building process. This pattern 
+    simplifies the creation of event objects and improves code readability.
+\end{itemize}
+
+\subsection*{Strategy Pattern}
+\begin{itemize}[label=--]
+    \item \textbf{Notification Strategies}: The system may need to support different strategies for sending 
+    notifications, such as synchronous or asynchronous methods, depending on various factors like urgency or 
+    volume. The Strategy pattern defines a family of algorithms, encapsulates each one, and makes them interchangeable. 
+    This allows the system to select the appropriate notification strategy dynamically at runtime.
+\end{itemize}
+
+
 \subsection{Constraints}
 \label{subsec:constraints}
 For our implementation, we are expected to abide by the following constraints:
