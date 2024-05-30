@@ -240,7 +240,8 @@ They also need the option to provide feedback on events they attend.
     1.3. The system shall allow for the deletion of events.\\
     1.4. The system shall allow for the addition of multimedia elements (e.g., images, videos) to event descriptions.\\\\
 2. \textbf{Event Details Viewing}\\
-    2.1. The system shall allow for the viewing of detailed information about an event, including time, date, location, host, participants, description, and preparation details.\\
+    2.1. The system shall allow for the viewing of detailed information about an event, including time, date, 
+    location, host, participants, description, and preparation details.\\
     2.2. The system shall provide a map or directions to the event location.\\\\
 3. \textbf{Calendar View}\\
     3.1. The system shall provide a calendar view for managing events.\\
@@ -276,25 +277,19 @@ They also need the option to provide feedback on events they attend.
 12. \textbf{Event Registration with QR Code}\\
     12.1. The system shall allow for the generation of a scannable QR code for event registration.\\
     12.2. The system shall allow for indicating attendance at events by scanning a QR code.\\
-    
-    \subsection{Subsystems}
 
-    1. \textbf{Event Management Subsystem}
-    
-    2. \textbf{Event Details Subsystem}
-    
-    3. \textbf{User Interaction Subsystem}
-    
-    4. \textbf{User Management Subsystem}
-    
-    5. \textbf{Analytics Subsystem}
-    
-    6. \textbf{Registration Subsystem}
+\subsection{Subsystems}
+1. \textbf{Event Management Subsystem}\\
+2. \textbf{Event Details Subsystem}\\
+3. \textbf{User Interaction Subsystem}\\
+4. \textbf{User Management Subsystem}\\
+5. \textbf{Analytics Subsystem}\\
+6. \textbf{Registration Subsystem}
+
 \section{Service Contracts}
 \label{sec:service-contracts}
 
 \section{Class Diagram}
-\label{sec:class-diagram}
 \label{sec:class-diagram}
 \begin{figure}[H]
     \centering
@@ -308,6 +303,50 @@ They also need the option to provide feedback on events they attend.
 
 \subsection{Quality Requirements}
 \label{subsec:quality-requirements}
+
+\subsubsection{Scalability}
+Ensuring the system can handle a growing user base and increased traffic, scalability is essential for 
+meeting user expectations, sustaining business growth, and remaining competitive in the market. This can 
+be achieved by implementing caching mechanisms for improved performance and optimizing database queries and indexing mechanisms.
+
+\subsubsection{Security}
+Implement security measures to protect user data by using secure hashing algorithms and prevent unauthorized 
+access by implementing role-based access control within the database to limit data exposure. Ensuring robust 
+security measures is crucial for DevOps when building the system. Security concerns such as data breaches, 
+unauthorized access, and privacy violations can severely impact user trust and the platform’s reputation. 
+Implementing security measures helps safeguard sensitive user data, prevents potential cyber attacks, and 
+ensures compliance with regulations such as GDPR or CCPA.
+
+\subsubsection{Documentation and Support}
+Access comprehensive documentation and reliable support for troubleshooting and guidance.
+
+\subsubsection{Cost-effectiveness}
+Minimize operational costs without compromising performance and functionality.
+
+\subsubsection{Compatibility}
+Addressing compatibility ensures that the system functions seamlessly across different devices, browsers, 
+and operating systems. DevOps involvement in compatibility testing and optimization ensures a consistent 
+user experience and expands the platform’s reach to a broader audience. Compatibility issues can lead to 
+user frustration, diminished engagement, and ultimately, a loss of users and revenue.
+
+\subsubsection{Reliability and Availability}
+By implementing robust infrastructure, monitoring systems, and disaster recovery protocols, DevOps teams 
+can minimize downtime, prevent service disruptions, and maintain a high level of user satisfaction. Reliability 
+and availability directly impact user retention, brand reputation, and overall platform success.
+
+\subsubsection{Maintainability and Manageability}
+By adhering to best practices in code organization, automation, and documentation, DevOps teams can streamline 
+development workflows, reduce technical debt, and facilitate easier troubleshooting and updates. Maintainability 
+and manageability ensure agility, scalability, and long-term sustainability of the platform.
+
+\subsubsection{Performance}
+In addressing performance concerns, we will employ specific strategies tailored to both frontend and backend 
+components. For the frontend, we will heavily leverage server-side rendering, leveraging the capabilities 
+offered by Angular using Angular Universal. Additionally, in the backend, we will enforce time constraints 
+for each function, communicating these constraints clearly to developers and incorporating timeout mechanisms 
+in our testing suite. This approach ensures that only efficient code makes its way into the code base, optimizing 
+system performance.
+
 
 \subsection{Architectural Patterns}
 \label{subsec:architectural-patterns}
