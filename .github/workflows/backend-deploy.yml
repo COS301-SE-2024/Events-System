@@ -6,7 +6,7 @@ on:
       - main
       - develop
       - feat/backend
-
+# only run on main, develop and feat/backend
 jobs:
   deploy:
     runs-on: ubuntu-latest
