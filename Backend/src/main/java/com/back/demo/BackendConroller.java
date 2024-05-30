@@ -8,6 +8,6 @@ public class BackendConroller {
 
     @GetMapping("/control")
     public String healthCheck() {
-        return "deployed automatically";
+        return "deployed automatically!";
     }
 }
