@@ -14,12 +14,12 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-
+    # authentication for google cloud
     - name: Authenticate to Google Cloud
       uses: 'google-github-actions/auth@v2'
       with:
         credentials_json: '${{ secrets.GOOGLE_SECRET }}'
-
+    #set the proper google cloud project used for deployment
     - name: Set Google Cloud Project
       run: |
         gcloud config set project events-system-back
