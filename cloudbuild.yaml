@@ -1,6 +1,6 @@
 steps:
 - name: "gcr.io/cloud-builders/gcloud"
-  args: ["app", "deploy", "Backend/app.yml"]
+  args: ["app", "deploy"]
 timeout: "1600s"
 options:
   logging: CLOUD_LOGGING_ONLY
