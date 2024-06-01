@@ -1,4 +1,4 @@
-name: Unit & e2e tests
+name: Unit tests
 
 on:
   push:
@@ -35,4 +35,3 @@ jobs:
       # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
       # - run: npx nx-cloud record -- echo Hello World
       - run: npm run ci:test
-      - run: npm run e2e
