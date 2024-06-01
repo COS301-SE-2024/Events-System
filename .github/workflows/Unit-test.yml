@@ -35,4 +35,4 @@ jobs:
       # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
       # - run: npx nx-cloud record -- echo Hello World
       - run: npm run ci:test
-      - run: npm run ci:e2e
+      - run: npm run e2e
