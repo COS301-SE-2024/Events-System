@@ -23,7 +23,7 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x Backend/gradlew
       - name: Build with Gradle
-        run: ./gradlew build
+        run: ./Backend/gradlew build
 
   main:
     runs-on: ubuntu-latest
