@@ -5,7 +5,10 @@
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test"
+    "test": "nx test",
+    "e2e": "nx run e2e:e2e",
+    "ci:test": "start-server-and-test 'npx nx serve Events-System' http://localhost:4200 'npm run test'",
+    "ci:e2e": "start-server-and-test 'npx nx serve Events-System' http://localhost:4200 'npm run e2e'"
   },
   "private": true,
   "dependencies": {
@@ -72,6 +75,7 @@
     "postcss": "^8.4.38",
     "postcss-loader": "^8.1.1",
     "prettier": "^2.6.2",
+    "start-server-and-test": "^2.0.3",
     "tailwindcss": "^3.4.3",
     "ts-jest": "^29.1.0",
     "ts-node": "10.9.1",
