@@ -1,10 +1,9 @@
 #!/bin/bash
 
 # Start up the frontend
-cd /src || exit
-npm nx Events-System:serve &
+npx nx serve Events-System &
 
-# Store the process ID (PID) of the server
+# Store the process ID (PID) of the serverchmod +x $(which node)
 next_pid=$!
 
 # Wait for the server to start up
