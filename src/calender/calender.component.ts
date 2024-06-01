@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+
 @Component({
   selector: 'app-calender',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './calender.component.html',
-  styleUrl: './calender.component.css',
+  styleUrls: ['./calender.component.css'],
 })
 export class CalenderComponent {
   currentDate = new Date();
@@ -24,13 +25,11 @@ export class CalenderComponent {
 
 
   nextMonth() {
-    this.currentDate.setMonth(this.currentDate.getMonth() + 1);
+    this.currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1, 1);
   }
 
 
   previousMonth() {
-    this.currentDate.setMonth(this.currentDate.getMonth() - 1);
+    this.currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() - 1, 1);
   }
-
-
 }
