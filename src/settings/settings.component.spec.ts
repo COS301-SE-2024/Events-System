@@ -1,16 +1,24 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { SettingsComponent } from './settings.component';
+import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 
 describe('SettingsComponent', () => {
   let component: SettingsComponent;
-  let fixture: ComponentFixture<SettingsComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [SettingsComponent],
-    }).compileComponents();
+    TestBed.configureTestingModule({
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            params: of({ id: 'testId' }) // Add your own mock values here
+          }
+        }
+      ]
+    });
 
-    fixture = TestBed.createComponent(SettingsComponent);
+    const fixture = TestBed.createComponent(SettingsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
