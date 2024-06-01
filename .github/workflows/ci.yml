@@ -24,6 +24,7 @@ jobs:
         run: chmod +x Backend/gradlew
       - name: Build with Gradle
         run: ./Backend/gradlew build
+        working-directory: Backend
 
   main:
     runs-on: ubuntu-latest
