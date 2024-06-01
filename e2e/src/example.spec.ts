@@ -1,9 +1,8 @@
 import { test, expect } from '@playwright/test';
 
 test('has title', async ({ page }) => {
-  await page.goto('http://localhost:4200');
+  await page.goto('/');
 
-  // Check that the correct element is present (replace selector as needed)
-  const element = page.locator('elementSelector');
-  expect(element).toBeTruthy();
+  // Expect h1 to contain a substring.
+  expect(await page.locator('h1').innerText()).toContain('Welcome');
 });

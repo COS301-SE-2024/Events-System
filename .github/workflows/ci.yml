@@ -1,7 +1,9 @@
-name: Unit tests
+name: CI
 
 on:
   push:
+    branches:
+      - master
   pull_request:
 
 permissions:
@@ -48,4 +50,5 @@ jobs:
 
       # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
       # - run: npx nx-cloud record -- echo Hello World
-      - run: npm run ci:test
+      - run: npx nx affected -t lint test build
+      - run: npx nx affected --parallel 1 -t e2e-ci
