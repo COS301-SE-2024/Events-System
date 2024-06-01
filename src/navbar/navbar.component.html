@@ -13,9 +13,9 @@
 
     <!--navbar links (centered)-->
     <div class="navbar-center">
-        <a class="btn btn-ghost text-xl">Link 1</a>
-        <a class="btn btn-ghost text-xl">Link 2</a>
-        <a class="btn btn-ghost text-xl">Link 3</a>
+        <a class="btn btn-ghost text-xl">Events</a>
+        <a class="btn btn-ghost text-xl">Calendar</a>
+        <a class="btn btn-ghost text-xl">Planner</a>
     </div>
 
     <!--navbar links (end)-->
@@ -35,15 +35,15 @@
                 </div>
             </div>
 
-            <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-            <li>
-                <a class="justify-between">
-                Profile
-                <span class="badge">New</span>
-                </a>
-            </li>
-            <li><a  routerLink="/settings">Settings</a></li>
-            <li><a  routerLink="/login">Logout</a></li>
+            <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-42">
+                <li>
+                    <a routerLink="/profile" class="justify-between">
+                    Profile
+                    <!-- <span class="badge">New</span> -->
+                    </a>
+                </li>
+                <li><a  routerLink="/settings">Settings</a></li>
+                <li><a  routerLink="/welcome">Logout</a></li>
             </ul>
         </div>
 
