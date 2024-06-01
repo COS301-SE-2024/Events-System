@@ -5,10 +5,7 @@
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test",
-    "e2e": "nx run e2e:e2e",
-    "ci:test": "start-server-and-test 'npx nx serve Events-System' http://localhost:4200 'npm run test'",
-    "ci:e2e": "start-server-and-test 'npx nx serve Events-System' http://localhost:4200 'npm run e2e'"
+    "test": "nx test"
   },
   "private": true,
   "dependencies": {
@@ -22,6 +19,9 @@
     "@angular/platform-server": "~17.3.0",
     "@angular/router": "~17.3.0",
     "@angular/ssr": "~17.3.0",
+    "@ng-icons/core": "^27.5.2",
+    "@ng-icons/feather-icons": "^27.5.2",
+    "@ng-icons/heroicons": "^27.5.2",
     "@nx/angular": "19.0.4",
     "@nxrocks/nx-spring-boot": "^10.0.2",
     "express": "~4.18.2",
@@ -43,7 +43,7 @@
     "@angular/cli": "~17.3.0",
     "@angular/compiler-cli": "~17.3.0",
     "@angular/language-service": "~17.3.0",
-    "@nrwl/angular": "^19.0.4",
+    "@nrwl/angular": "^19.1.1",
     "@nx/devkit": "19.0.4",
     "@nx/eslint": "19.0.4",
     "@nx/eslint-plugin": "19.0.4",
@@ -75,7 +75,6 @@
     "postcss": "^8.4.38",
     "postcss-loader": "^8.1.1",
     "prettier": "^2.6.2",
-    "start-server-and-test": "^2.0.3",
     "tailwindcss": "^3.4.3",
     "ts-jest": "^29.1.0",
     "ts-node": "10.9.1",

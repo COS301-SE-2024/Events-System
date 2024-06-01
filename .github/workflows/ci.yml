@@ -1,7 +1,9 @@
-name: Unit tests
+name: CI
 
 on:
   push:
+    branches:
+      - master
   pull_request:
 
 permissions:
@@ -16,6 +18,17 @@ jobs:
         with:
           fetch-depth: 0
 
+      - uses: actions/checkout@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '17'
+      - name: Grant execute permission for gradlew
+        run: chmod +x Backend/gradlew
+      - name: Build with Gradle
+        run: ./gradlew build
+        working-directory: Backend
       # Connect your workspace on nx.app and uncomment this to enable task distribution.
       # The "--stop-agents-after" is optional, but allows idle agents to shut down once the "e2e-ci" targets have been requested
       # - run: npx nx-cloud start-ci-run --distribute-on="5 linux-medium-js" --stop-agents-after="e2e-ci"
@@ -34,4 +47,5 @@ jobs:
 
       # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
       # - run: npx nx-cloud record -- echo Hello World
-      - run: npm run ci:test
+      - run: npx nx affected -t lint test build
+      - run: npx nx affected --parallel 1 -t e2e-ci
