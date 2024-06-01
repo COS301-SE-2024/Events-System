@@ -1,18 +1,21 @@
 <div class="overflow-x-auto">
     <div class="navbar bg-base-100">
         <div class="navbar-start">
-            January 2022
-        </div>
+            {{ currentDate | date:'MMMM yyyy' }}
+          </div>
+
 
         <div class="navbar-end">
             <div class="join">
-                <button class="join-item btn">«</button>
-                <button class="join-item btn">»</button>
+                <button class="join-item btn"  (click)="previousMonth()">«</button>
+                <button class="join-item btn" (click)="nextMonth()">>»</button>
+
             </div>
             <div class="divider divider-horizontal"></div>
             <button class="btn">Add Event</button>
         </div>
       </div>
+
 
     <table class="table">
       <!-- head -->
@@ -29,8 +32,11 @@
         </tr>
       </thead>
       <tbody>
+        <tr *ngFor="let week of getDaysInMonth()">
+            <td *ngFor="let day of week">{{ day }}</td>
+          </tr>
         <!-- row 1 -->
-        <tr class="bg-base-200">
+        <!-- <tr class="bg-base-200">
           <th></th>
           <td>26</td>
           <td>27</td>
@@ -40,7 +46,7 @@
           <td>31</td>
           <td>1</td>
         </tr>
-        <!-- row 2 -->
+
         <tr>
             <th></th>
             <td>2</td>
@@ -51,7 +57,7 @@
             <td>7</td>
             <td>8</td>
         </tr>
-        <!-- row 3 -->
+
         <tr>
             <th></th>
             <td>9</td>
@@ -62,7 +68,6 @@
             <td>14</td>
             <td>15</td>
         </tr>
-        <!-- row 4 -->
         <tr>
             <th></th>
             <td>16</td>
@@ -73,7 +78,6 @@
             <td>21</td>
             <td>22</td>
         </tr>
-        <!-- row 5 -->
         <tr>
             <th></th>
             <td>23</td>
@@ -84,7 +88,7 @@
             <td>28</td>
             <td>29</td>
         </tr>
-        <!-- row 6 -->
+
         <tr>
             <th></th>
             <td>30</td>
@@ -94,7 +98,13 @@
             <td>4</td>
             <td>5</td>
             <td>6</td>
-        </tr>
+        </tr> -->
       </tbody>
     </table>
+
+
+
+    <table>
+
+      </table>
   </div>
