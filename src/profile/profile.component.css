@@ -1,5 +1,6 @@
 .profile-container {
     display: flex;
+    align-items: center;
   }
   
   .sidebar {
