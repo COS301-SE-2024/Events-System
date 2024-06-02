@@ -1,4 +1,4 @@
-<div class="collapse bg-base-200">
+<div class="collapse bg-base-200 z-10">
     <input type="radio" name="my-accordion-1" checked="checked" /> 
     <div class="collapse-title text-xl font-medium">
         {{ eventTitle }}
@@ -9,8 +9,8 @@
             <div class="card-body">
                 <h2 class="card-title">{{ eventTitle }}</h2>
                 <p>{{ description }}</p>
-                <p>{{ startTime }}</p>
-                <p>{{ endTime }}</p>
+                <p>Dates: {{ startTime | date:'shortDate' }} - {{ endTime | date:'shortDate' }}</p>
+                <p>Times: {{ startTime | date:'shortTime' }} - {{ endTime | date:'shortTime' }}</p>
                 <p>{{ location }}</p>
                 <p>Hosted BY: {{ hostedBy }}</p>
                 <p>Social Club: {{ socialClub }}</p>
