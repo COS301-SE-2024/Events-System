@@ -48,9 +48,6 @@
     },
     "serve": {
       "executor": "@angular-devkit/build-angular:dev-server",
-      "options": {
-        "proxyConfig": "proxy.conf.json"
-      },
       "configurations": {
         "production": {
           "buildTarget": "Events-System:build:production"

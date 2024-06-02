@@ -1,8 +1,0 @@
-{
-  "/api": {
-    "target": "https://events-system-back.wn.r.appspot.com",
-    "secure": false,
-    "changeOrigin": true,
-    "logLevel": "debug"
-  }
-}
