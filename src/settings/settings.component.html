@@ -7,17 +7,24 @@
                 <input type="text" id="username" formControlName="username" class="input border border-gray-400" required>
               </div>
               <div class="form-control">
-                <label for="username" class="label">Username</label>
-                <input type="text" id="username" formControlName="username" class="input border border-gray-400" required>
-              </div>
-              <div class="form-control">
                 <label for="email" class="label">Email</label>
                 <input type="email" id="email" formControlName="email" class="input border border-gray-400" required>
               </div>
               <div class="form-control">
                 <label for="password" class="label">Password</label>
                 <input type="password" id="password" formControlName="password" class="input border border-gray-400" required>
-              </div><br>
+              </div>
+              <div class="form-control">
+                <label for="dietaryRequirements" class="label">Dietary Requirements</label>
+                <select id="dietaryRequirements" formControlName="dietaryRequirements" class="select border border-gray-400" required>
+                  <option value="" disabled selected>Select dietary requirement</option>
+                  <option value="None">None</option>
+                  <option value="Vegetarian">Vegetarian</option>
+                  <option value="Vegan">Vegan</option>
+                  <option value="Gluten-Free">Gluten-Free</option>
+                  </select>
+              </div>
+              <br>
               <button type="submit" class="btn btn-primary">Save</button>
             </form>
     </div>
