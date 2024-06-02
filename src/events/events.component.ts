@@ -40,12 +40,12 @@ export class EventsComponent implements OnInit {
     const formData = new FormData(form);
 
 
-    let title = this.sanitizeInput(formData.get('title') as string);
-    let description = this.sanitizeInput(formData.get('description') as string);
-    let startTime = this.sanitizeInput(formData.get('startTime') as string);
-    let endTime = this.sanitizeInput(formData.get('endTime') as string);
-    let location = this.sanitizeInput(formData.get('location') as string);
-    let socialClub = this.sanitizeInput(formData.get('socialClub') as string);
+    const title = this.sanitizeInput(formData.get('title') as string);
+    const description = this.sanitizeInput(formData.get('description') as string);
+    const startTime = this.sanitizeInput(formData.get('startTime') as string);
+    const endTime = this.sanitizeInput(formData.get('endTime') as string);
+    const location = this.sanitizeInput(formData.get('location') as string);
+    const socialClub = this.sanitizeInput(formData.get('socialClub') as string);
 
     if (!dateTimePattern.test(startTime) || !dateTimePattern.test(endTime)) {
       alert('Invalid date-time format. It should be YYYY-MM-DDTHH:MM:SS.000+00:00');
