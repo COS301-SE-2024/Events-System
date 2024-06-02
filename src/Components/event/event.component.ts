@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -8,4 +8,13 @@ import { CommonModule } from '@angular/common';
   templateUrl: './event.component.html',
   styleUrl: './event.component.css',
 })
-export class EventComponent {}
+export class EventComponent {
+  @Input() eventTitle: string | undefined;
+  @Input() description: string | undefined;
+  @Input() startTime: string | undefined;
+  @Input() endTime: string | undefined;
+  @Input() location: string | undefined;
+  @Input() hostedBy: string | undefined;
+  @Input() socialClub: string | undefined;
+}
+

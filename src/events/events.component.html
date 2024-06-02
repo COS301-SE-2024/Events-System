@@ -15,9 +15,36 @@
     <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
     <div class="drawer-content">
       <!-- Page content here -->
-        <app-event></app-event>
-        <app-event></app-event>
-        <app-event></app-event>
+      <app-event 
+      [eventTitle]="'Event 1'" 
+      [description]="'My Event Description'" 
+      [startTime]="'10:00 AM'" 
+      [endTime]="'2:00 PM'" 
+      [location]="'My Event Location'" 
+      [hostedBy]="'John Doe'" 
+      [socialClub]="'My Social Club'">
+    </app-event>
+    
+    <app-event 
+    [eventTitle]="'Event 2'" 
+    [description]="'My Event Description'" 
+    [startTime]="'11:00 AM'" 
+    [endTime]="'2:00 PM'" 
+    [location]="'My Event Location'" 
+    [hostedBy]="'John Doe'" 
+    [socialClub]="'My Social Club'">
+  </app-event>
+  
+  <app-event 
+  [eventTitle]="'Event 3'" 
+  [description]="'My Event Description'" 
+  [startTime]="'10:00 AM'" 
+  [endTime]="'2:00 PM'" 
+  [location]="'My Event Location'" 
+  [hostedBy]="'John Doe'" 
+  [socialClub]="'My Social Club'">
+</app-event>
+
     </div> 
     <div class="drawer-side">
       <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>
