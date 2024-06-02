@@ -28,3 +28,5 @@ jobs:
       run: |
         cd Backend
         gcloud app deploy app.yml
+      env:
+          DBPASS: ${{ secrets.DBPASS }}
