@@ -15,35 +15,16 @@
     <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
     <div class="drawer-content">
       <!-- Page content here -->
-      <app-event 
-      [eventTitle]="'Event 1'" 
-      [description]="'My Event Description'" 
-      [startTime]="'10:00 AM'" 
-      [endTime]="'2:00 PM'" 
-      [location]="'My Event Location'" 
-      [hostedBy]="'John Doe'" 
-      [socialClub]="'My Social Club'">
+            <app-event
+      *ngFor="let event of events"
+      [eventTitle]="event.title"
+      [description]="event.description"
+      [startTime]="event.startTime"
+      [endTime]="event.endTime"
+      [location]="event.location"
+      [hostedBy]="event.hostId"
+      [socialClub]="event.socialClub">
     </app-event>
-    
-    <app-event 
-    [eventTitle]="'Event 2'" 
-    [description]="'My Event Description'" 
-    [startTime]="'11:00 AM'" 
-    [endTime]="'2:00 PM'" 
-    [location]="'My Event Location'" 
-    [hostedBy]="'John Doe'" 
-    [socialClub]="'My Social Club'">
-  </app-event>
-  
-  <app-event 
-  [eventTitle]="'Event 3'" 
-  [description]="'My Event Description'" 
-  [startTime]="'10:00 AM'" 
-  [endTime]="'2:00 PM'" 
-  [location]="'My Event Location'" 
-  [hostedBy]="'John Doe'" 
-  [socialClub]="'My Social Club'">
-</app-event>
 
     </div> 
     <div class="drawer-side">
