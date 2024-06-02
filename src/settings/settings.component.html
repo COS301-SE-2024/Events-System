@@ -1,5 +1,33 @@
-<button class="btn btn-primary" routerLink="/login">login</button>
-<button class="btn btn-primary" routerLink="/settings">settings</button>
-<button class="btn btn-primary" routerLink="/">home</button>
-<button class="btn btn-primary" routerLink="/welcome">welcome</button>
-<button class="btn btn-primary" routerLink="/calendar">calendar</button>
+<div class="container mx-auto flex justify-center h-screen">
+    <div class="w-full max-w-md">
+        <h1 class="text-3xl font-semibold text-center mb-6">Account Settings</h1>
+        <form>
+              <div class="form-control mb-2">
+                <label for="username" class="label justify-center">Username</label>
+                <input type="text" id="username" formControlName="username" class="input border border-gray-400 mx-4" required>
+              </div>
+              <div class="form-control mb-2">
+                <label for="email" class="label justify-center">Email</label>
+                <input type="email" id="email" formControlName="email" class="input border border-gray-400 mx-4" required>
+              </div>
+              <div class="form-control mb-2">
+                <label for="password" class="label justify-center">Password</label>
+                <input type="password" id="password" formControlName="password" class="input border border-gray-400 mx-4" required>
+              </div>
+              <div class="form-control mb-2">
+                <label for="dietaryRequirements" class="label justify-center">Dietary Requirements</label>
+                <select id="dietaryRequirements" formControlName="dietaryRequirements" class="select border border-gray-400 mx-4" required>
+                  <option value="" disabled selected>Select dietary requirement</option>
+                  <option value="None">None</option>
+                  <option value="Vegetarian">Vegetarian</option>
+                  <option value="Vegan">Vegan</option>
+                  <option value="Gluten-Free">Gluten-Free</option>
+                  </select>
+              </div>
+              <br>
+              <div class="flex justify-center">
+                <button type="submit" class="btn btn-primary px-6 text-lg">Save</button>
+              </div>
+            </form>
+    </div>
+</div>
