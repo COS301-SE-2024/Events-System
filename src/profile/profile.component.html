@@ -1,56 +1,59 @@
-<div class="profile-container">
-    <div class="sidebar">
-        <div class="profile">
-          <div class="avatar"></div>
-          <div class="username">Username</div>
-          <div class="stats">
-            <div class="followers">Followers</div>
-            <div class="subscribers">Subscribers</div>
+<div class="flex h-screen">
+    <div class="w-1/5 p-5 bg-base-300 flex flex-col justify-between">
+      <div class="text-center">
+        <div class="w-24 h-24 bg-gray-500 rounded-full mx-auto"></div>
+        <div class="mt-4 text-xl">Username</div>
+        <div class="flex justify-around mt-4">
+          <div class="text-center">
+            <div class="text-lg">Followers</div>
+            <div class="text-sm">0</div>
           </div>
-          <div class="bio">Bio</div>
-          <button class="follow">Follow</button>
-          <button class="subscribe">Subscribe</button>
-        </div>
-      </div>
-    <div class="main-content">
-      <div class="search">
-        <input type="text" placeholder="Search for Achievement or Users">
-      </div>
-  
-      <div class="tabs">
-        <button class="tab">Feed</button>
-        <button class="tab">Subscribers</button>
-        <button class="tab">Achievements</button>
-      </div>
-  
-      <div class="feed">
-        <div class="post">
-          <div class="userInfo">
-            <div class="avatar"></div>
-            <div class="username">Username</div>
-            <button class="follow">Follow</button>
-          </div>
-          <div class="post-content">
-            Post content.
-          </div>
-          <div class="actions">
-            <button class="like">Like</button>
-            <button class="share">Share</button>
+          <div class="text-center">
+            <div class="text-lg">Subscribers</div>
+            <div class="text-sm">0</div>
           </div>
         </div>
+        <div class="mt-4">Bio</div>
+        <button class="btn btn-primary mt-4">Follow</button>
+        <button class="btn btn-secondary mt-2">Subscribe</button>
+      </div>
+    </div>
   
-        <div class="post">
-          <div class="user-info">
-            <div class="avatar"></div>
-            <div class="username">Username</div>
-            <button class="follow">Follow</button>
+    <div class="w-4/5 p-5 overflow-y-auto">
+      <div class="mb-4">
+        <input type="text" placeholder="Search for Achievement or Users" class="input input-bordered w-full">
+      </div>
+  
+      <div class="flex justify-around mb-4">
+        <button class="btn btn-outline">Feed</button>
+        <button class="btn btn-outline">Subscribers</button>
+        <button class="btn btn-outline">Achievements</button>
+      </div>
+  
+      <div class="space-y-4">
+        <div class="p-4 bg-base-300 rounded-box">
+          <div class="flex items-center mb-2">
+            <div class="w-10 h-10 bg-gray-500 rounded-full"></div>
+            <div class="ml-4">Username</div>
+            <button class="ml-auto btn btn-sm btn-outline">Follow</button>
           </div>
-          <div class="post-content">
-            Post content.
+          <div class="mb-2">Fantastic content for you to read.</div>
+          <div class="flex justify-around">
+            <button class="btn btn-sm btn-outline">Like</button>
+            <button class="btn btn-sm btn-outline">Share</button>
           </div>
-          <div class="actions">
-            <button class="like">Like</button>
-            <button class="share">Share</button>
+        </div>
+  
+        <div class="p-4 bg-base-300 rounded-box">
+          <div class="flex items-center mb-2">
+            <div class="w-10 h-10 bg-gray-500 rounded-full"></div>
+            <div class="ml-4">Username</div>
+            <button class="ml-auto btn btn-sm btn-outline">Follow</button>
+          </div>
+          <div class="mb-2">Fantastic content for you to read.</div>
+          <div class="flex justify-around">
+            <button class="btn btn-sm btn-outline">Like</button>
+            <button class="btn btn-sm btn-outline">Share</button>
           </div>
         </div>
       </div>
