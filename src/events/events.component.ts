@@ -23,26 +23,82 @@ export class EventsComponent implements OnInit {
     geolocation: '', // replace with actual geolocation
     socialClub: ''
   };
+  sanitizeInput(input: string): string {
+    return input
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+  
   onSubmit(event: Event): void {
     event.preventDefault(); // Prevent the form from refreshing the page
 
-
+    const dateTimePattern = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}\+\d{2}:\d{2}$/;
     const form = event.target as HTMLFormElement;
     const formData = new FormData(form);
 
 
+    let title = this.sanitizeInput(formData.get('title') as string);
+    let description = this.sanitizeInput(formData.get('description') as string);
+    let startTime = this.sanitizeInput(formData.get('startTime') as string);
+    let endTime = this.sanitizeInput(formData.get('endTime') as string);
+    let location = this.sanitizeInput(formData.get('location') as string);
+    let socialClub = this.sanitizeInput(formData.get('socialClub') as string);
+
+    if (!dateTimePattern.test(startTime) || !dateTimePattern.test(endTime)) {
+      alert('Invalid date-time format. It should be YYYY-MM-DDTHH:MM:SS.000+00:00');
+      return;
+    }
+  
+
+    if (!title) {
+      alert('Title is required');
+      return;
+    }
+    
+    
+    if (!description) {
+      alert('Description is required');
+      return;
+    }
+    
+    
+    if (!startTime) {
+      alert('Start time is required');
+      return;
+    }
+    
+    
+    if (!endTime) {
+      alert('End time is required');
+      return;
+    }
+    
+    
+    if (!location) {
+      alert('Location is required');
+      return;
+    }
+    
+    
+    if (!socialClub) {
+      alert('Social club is required');
+      return;
+    }
+    
     const eventDetails = {
-      title: formData.get('title'),
-      description: formData.get('description'),
-      startTime: formData.get('startTime'),
-      endTime: formData.get('endTime'),
-      location: formData.get('location'),
+      title,
+      description,
+      startTime,
+      endTime,
+      location,
       hostId: 1,
       geolocation: "new Geo",
-      socialClub: formData.get('socialClub'),
-      // Add other fields as necessary
+      socialClub,
     };
-
+  
 
     this.createEvent(eventDetails);
   }
