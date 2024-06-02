@@ -18,8 +18,9 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
-    public Optional<Employee> getEmployeeById(Long employeeId) {
-        return employeeRepository.findById(employeeId);
+
+    public Optional<Employee> getEmployeeById(Long id) {
+        return employeeRepository.findById(id);
     }
 
     public Employee createEmployee(Employee employee) {
@@ -35,13 +36,17 @@ public class EmployeeService {
             employee.setEmail(employeeDetails.getEmail());
             employee.setPassword(employeeDetails.getPassword());
             employee.setDietaryRequirements(employeeDetails.getDietaryRequirements());
+            employee.setEmployeeDescription(employeeDetails.getEmployeeDescription());
+            employee.setEmployeePictureLink(employeeDetails.getEmployeePictureLink());
+
             return employeeRepository.save(employee);
         } else {
             throw new RuntimeException("Employee not found with id " + employeeId);
         }
     }
 
-    public void deleteEmployee(Long employeeId) {
-        employeeRepository.deleteById(employeeId);
+
+    public void deleteEmployee(Long id) {
+        employeeRepository.deleteById(id);
     }
 }
