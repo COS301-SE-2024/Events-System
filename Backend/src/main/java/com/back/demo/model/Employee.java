@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+
 import java.sql.Timestamp;
 
 @Entity
@@ -31,6 +32,7 @@ public class Employee {
 
     @Column(name = "dietary_requirements")
     private String dietaryRequirements;
+
 
     @Column(name = "employee_description")
     private String employeeDescription;
@@ -92,6 +94,7 @@ public class Employee {
     public void setDietaryRequirements(String dietaryRequirements) {
         this.dietaryRequirements = dietaryRequirements;
     }
+
 
     public String getEmployeeDescription() {
         return employeeDescription;
