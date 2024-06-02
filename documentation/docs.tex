@@ -4,6 +4,8 @@
 \usepackage{hyperref}
 \usepackage{enumitem}
 \usepackage{float}
+\usepackage{geometry}
+\usepackage{array}
 
 \title{Events System Documentation}
 \author{Bieber Fever}
@@ -449,6 +451,30 @@ The proposed system should be developed using open-source technologies to ensure
 
 \section{Technology Requirements}
 \label{sec:technology-requirements}
+\begin{table}[htbp]
+\centering
+\caption{Technology Requirements}
+\label{tab:technology-requirements}
+\begin{tabular}{|>{\raggedright}p{3.5cm}|p{8.5cm}|}
+\hline
+\textbf{Category} & \textbf{Technologies} \\
+\hline
+Front End & Angular with angular service workers for PWA \\
+\hline
+Back End & Java \& Spring Boot \\
+\hline
+Database & Postgres \\
+\hline
+Hosting & AWS, Google Cloud \& Cloudflare Pages \\
+\hline
+Version Control & GitHub \\
+\hline
+Testing & Jest, Playwright, JUnit \\
+\hline
+CI/CD & GitHub Actions \\
+\hline
+\end{tabular}
+\end{table}
 
 \end{document}
 
