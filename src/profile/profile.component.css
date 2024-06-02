@@ -1,0 +1,124 @@
+.profile-container {
+    display: flex;
+  }
+  
+  .sidebar {
+    width: 20%;
+    padding: 20px;
+    background-color: #f5f5f5;
+  }
+  
+  .profile {
+    text-align: center;
+  }
+  
+  .avatar {
+    width: 100px;
+    height: 100px;
+    background-color: grey;
+    border-radius: 50%;
+    margin: 0 auto;
+  }
+  
+  .username {
+    font-size: 20px;
+    margin-top: 10px;
+  }
+  
+  .stats {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+  }
+  
+  .followers, .subscribers {
+    margin: 5px 0;
+  }
+  
+  .bio {
+    margin: 10px 0;
+  }
+  
+  .follow, .subscribe {
+    display: block;
+    margin: 10px auto;
+    width: 100px;
+  }
+  
+  .main-content {
+    width: 80%;
+    padding: 20px;
+  }
+  
+  .search {
+    margin-bottom: 20px;
+  }
+  
+  input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .tabs {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+  }
+  
+  .tab {
+    padding: 10px 20px;
+    background-color: lightgrey;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .feed {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  
+  .post {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+  }
+  
+  .user-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .user-info .avatar {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .user-info .username {
+    margin-left: 10px;
+    font-weight: bold;
+  }
+  
+  .post-content {
+    margin: 20px 0;
+  }
+  
+  .actions {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .actions button {
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    background-color: lightgrey;
+    border-radius: 4px;
+  }
+  
