@@ -6,7 +6,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-
 import java.sql.Timestamp;
 
 @Entity
@@ -33,6 +32,12 @@ public class Employee {
     @Column(name = "dietary_requirements")
     private String dietaryRequirements;
 
+    @Column(name = "employee_description")
+    private String employeeDescription;
+
+    @Column(name = "employee_picture_link")
+    private String employeePictureLink;
+
     @Column(name = "created_at", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Timestamp createdAt;
 
@@ -40,7 +45,6 @@ public class Employee {
     private Timestamp updatedAt;
 
     // Getters and Setters
-
     public Long getEmployeeId() {
         return employeeId;
     }
@@ -87,6 +91,22 @@ public class Employee {
 
     public void setDietaryRequirements(String dietaryRequirements) {
         this.dietaryRequirements = dietaryRequirements;
+    }
+
+    public String getEmployeeDescription() {
+        return employeeDescription;
+    }
+
+    public void setEmployeeDescription(String employeeDescription) {
+        this.employeeDescription = employeeDescription;
+    }
+
+    public String getEmployeePictureLink() {
+        return employeePictureLink;
+    }
+
+    public void setEmployeePictureLink(String employeePictureLink) {
+        this.employeePictureLink = employeePictureLink;
     }
 
     public Timestamp getCreatedAt() {
