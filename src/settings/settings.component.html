@@ -1,5 +1,24 @@
-<button class="btn btn-primary" routerLink="/login">login</button>
-<button class="btn btn-primary" routerLink="/settings">settings</button>
-<button class="btn btn-primary" routerLink="/">home</button>
-<button class="btn btn-primary" routerLink="/welcome">welcome</button>
-<button class="btn btn-primary" routerLink="/calendar">calendar</button>
+<div class="container mx-auto flex justify-center h-screen">
+    <div class="w-full max-w-md">
+        <h1 class="text-3xl font-semibold text-center mb-8">Settings</h1>
+        <form>
+              <div class="form-control">
+                <label for="username" class="label">Username</label>
+                <input type="text" id="username" formControlName="username" class="input border border-gray-400" required>
+              </div>
+              <div class="form-control">
+                <label for="username" class="label">Username</label>
+                <input type="text" id="username" formControlName="username" class="input border border-gray-400" required>
+              </div>
+              <div class="form-control">
+                <label for="email" class="label">Email</label>
+                <input type="email" id="email" formControlName="email" class="input border border-gray-400" required>
+              </div>
+              <div class="form-control">
+                <label for="password" class="label">Password</label>
+                <input type="password" id="password" formControlName="password" class="input border border-gray-400" required>
+              </div><br>
+              <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+    </div>
+</div>
