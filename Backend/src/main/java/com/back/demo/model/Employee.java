@@ -55,6 +55,8 @@ public class Employee implements UserDetails {
     @Column(name = "updated_at", nullable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Timestamp updatedAt;
 
+    // Getters and Setters
+
     public void setEmployeeId(Long employeeId) {
         this.employeeId = employeeId;
     }

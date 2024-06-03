@@ -1,1 +1,83 @@
-<p>profile works!</p>
+<div class="flex flex-col md:flex-row h-screen">
+    <!-- Sidebar -->
+    <div class="md:w-1/4 w-full md:p-5 p-3 bg-base-300 flex flex-col justify-between">
+        <div class="text-center">
+            <div class="btn btn-ghost btn-circle avatar">
+                <div class="w-10 rounded-full">
+                    <img alt="User Avatar" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg">
+                </div>
+            </div>
+            <div class="mt-4 text-xl md:text-lg">Username</div>
+            <div class="flex justify-around mt-4">
+                <div class="text-center">
+                    <div class="text-lg">Followers</div>
+                    <div class="text-sm">0</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-lg">Subscribers</div>
+                    <div class="text-sm">0</div>
+                </div>
+            </div>
+            <div class="mt-4">Bio</div>
+            <div class="text-center mt-4">
+                <div class="flex flex-row justify-between">
+                    <button class="btn btn-primary w-1/2 mr-2">Follow</button>
+                    <button class="btn btn-secondary w-1/2 ">Subscribe</button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="md:w-3/4 w-full md:p-5 p-3 overflow-y-auto">
+        <!-- Search Bar -->
+        <div class="mb-4">
+            <input type="text" placeholder="Search for Achievement or Users" class="input input-bordered w-full">
+        </div>
+
+        <!-- Tabs -->
+        <div class="flex justify-around mb-4">
+            <button class="btn btn-outline">Feed</button>
+            <button class="btn btn-outline">Subscribers</button>
+            <button class="btn btn-outline">Achievements</button>
+        </div>
+
+        <!-- Posts -->
+        <div class="space-y-4">
+            <div class="p-4 bg-base-300 rounded-box">
+                <div class="flex items-center mb-2">
+                    <div class="btn btn-ghost btn-circle avatar">
+                        <div class="w-10 rounded-full">
+                            <img alt="User Avatar" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg">
+                        </div>
+                    </div>
+                    <div class="ml-4">Username</div>
+                    <button class="ml-auto btn btn-sm btn-outline">Follow</button>
+                </div>
+                <div class="mb-2">Fantastic content for you to read.</div>
+                <div class="flex justify-around space-x-2">
+                    <button class="btn btn-sm btn-outline">Like</button>
+                    <button class="btn btn-sm btn-outline">Share</button>
+                </div>
+            </div>
+
+            <div class="p-4 bg-base-300 rounded-box">
+                <div class="flex items-center mb-2">
+                    <div class="btn btn-ghost btn-circle avatar">
+                        <div class="w-10 rounded-full">
+                            <img alt="User Avatar" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg">
+                        </div>
+                    </div>
+                    <div class="ml-4">Username</div>
+                    <button class="ml-auto btn btn-sm btn-outline">Follow</button>
+                </div>
+                <div class="mb-2">Fantastic content for you to read.</div>
+                <div class="flex justify-around space-x-2">
+                    <button class="btn btn-sm btn-outline">Like</button>
+                    <button class="btn btn-sm btn-outline">Share</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
