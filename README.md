@@ -15,7 +15,7 @@ Our team brings you an innovative team collaboration site powered by angular, st
 ## Demo Links
 
 - [Bieber-Fever-Demo1](https://drive.google.com/file/d/1GoK3O4X8PKB3mUamg4y7W9ZsaZihntTT/view?usp=drive_link)
-- [Requirement Specification (SRS)](https://docs.google.com/document/d/1Ua-ozu3NyXkPRFyHeLisvIxPVsGOXyUzePa9Ess68XM/edit?usp=drive_link)
+- [Requirement Specification (SRS)](https://docs.google.com/document/d/1tB-qbUNSPyBr2Tr_7dL7lmoo0pE9h0txdED0ytMwpaU/edit?usp=drive_link)
 - [GitHub Project Board](https://github.com/orgs/COS301-SE-2024/projects/40)
 - [Demo 1 Presentation](https://docs.google.com/presentation/d/1NSDw5gh4OhxJyg9cbAFVggOSfo9NXi0V793UXDFm7Fg/edit?usp=drive_link)
 
