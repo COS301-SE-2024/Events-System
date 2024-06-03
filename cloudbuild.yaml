@@ -1,4 +1,15 @@
 steps:
+- name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    gcloud secrets versions access latest --secret=DATABASE_URL | tr -d '\n' > url.txt
+    gcloud secrets versions access latest --secret=DATABASE_USERNAME | tr -d '\n' > username.txt
+    gcloud secrets versions access latest --secret=DATABASE_PASSWORD | tr -d '\n' > password.txt
+    sed -i 's/DATABASE_URL_PLACEHOLDER/$(cat url.txt)/g' Backend/app.yml
+    sed -i 's/DATABASE_USERNAME_PLACEHOLDER/$(cat username.txt)/g' Backend/app.yml
+    sed -i 's/DATABASE_PASSWORD_PLACEHOLDER/$(cat password.txt)/g' Backend/app.yml
 - name: "gcr.io/cloud-builders/gcloud"
   args: ["app", "deploy", "Backend/app.yml"]
 timeout: "1600s"
