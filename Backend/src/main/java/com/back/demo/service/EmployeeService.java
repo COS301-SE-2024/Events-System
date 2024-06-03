@@ -38,6 +38,8 @@ public class EmployeeService implements UserDetailsService {
             employee.setEmail(employeeDetails.getEmail());
             employee.setPassword(employeeDetails.getPassword());
             employee.setDietaryRequirements(employeeDetails.getDietaryRequirements());
+            employee.setEmployeeDescription(employeeDetails.getEmployeeDescription());
+            employee.setEmployeePictureLink(employeeDetails.getEmployeePictureLink());
             return employeeRepository.save(employee);
         } else {
             throw new RuntimeException("Employee not found with id " + employeeId);
