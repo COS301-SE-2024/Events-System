@@ -1,8 +1,9 @@
 package com.back.demo.config;
 
 import com.back.demo.auditing.ApplicationAuditAware;
+import com.back.demo.model.Employee;
 import com.back.demo.repository.EmployeeRepository;
-import jakarta.persistence.criteria.CriteriaBuilder;
+import com.back.demo.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,7 +12,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,9 +23,14 @@ public class ApplicationConfig {
     private final EmployeeRepository repository;
 
     @Bean
-    public UserDetailsService userDetailsService() {
-        return username -> repository.findByEmail(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    public EmployeeService userDetailsService() {
+        return new EmployeeService() {
+            @Override
+            public Employee loadUserByUsername(String username) throws UsernameNotFoundException {
+                return repository.findByEmail(username)
+                        .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + username));
+            }
+        };
     }
 
     @Bean

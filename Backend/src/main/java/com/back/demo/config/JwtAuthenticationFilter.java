@@ -1,6 +1,8 @@
 package com.back.demo.config;
 
+import com.back.demo.model.Employee;
 import com.back.demo.repository.TokenRepository;
+import com.back.demo.service.EmployeeService;
 import com.back.demo.service.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -28,7 +30,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
-    private final UserDetailsService userDetailsService;
+    private final EmployeeService userDetailsService;
     private final TokenRepository tokenRepository;
 
     @Override
