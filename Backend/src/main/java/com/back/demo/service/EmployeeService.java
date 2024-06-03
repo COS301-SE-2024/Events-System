@@ -3,13 +3,16 @@ package com.back.demo.service;
 import com.back.demo.model.Employee;
 import com.back.demo.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EmployeeService {
+public class EmployeeService implements UserDetailsService {
 
     @Autowired
     private EmployeeRepository employeeRepository;
@@ -43,5 +46,11 @@ public class EmployeeService {
 
     public void deleteEmployee(Long employeeId) {
         employeeRepository.deleteById(employeeId);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return employeeRepository.findByEmail(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + username));
     }
 }
