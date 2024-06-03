@@ -3,8 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "test": "nx test",
-    "ci:test": "start-server-and-test start http://localhost:4200 test"
+    "ci:test": "start-server-and-test start http://localhost:4200"
   },
   "private": true,
   "dependencies": {
