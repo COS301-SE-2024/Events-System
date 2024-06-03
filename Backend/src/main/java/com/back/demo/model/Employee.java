@@ -1,18 +1,22 @@
 package com.back.demo.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.Getter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.sql.Timestamp;
+import java.util.Collection;
+import java.util.List;
 
+@Getter
+@Table(name = "employees")
 @Entity
-@Table(name = "Employees")
-public class Employee {
+@Builder
+public class Employee implements UserDetails {
 
+    // Getters and Setters
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "employee_id")
@@ -33,6 +37,18 @@ public class Employee {
     @Column(name = "dietary_requirements")
     private String dietaryRequirements;
 
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    @OneToMany(mappedBy = "user")
+    private List<Token> tokens;
+
+    @Column(name = "employee_description")
+    private String employeeDescription;
+
+    @Column(name = "employee_picture_link")
+    private String employeePictureLink;
+
     @Column(name = "created_at", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Timestamp createdAt;
 
@@ -41,64 +57,73 @@ public class Employee {
 
     // Getters and Setters
 
-    public Long getEmployeeId() {
-        return employeeId;
-    }
-
     public void setEmployeeId(Long employeeId) {
         this.employeeId = employeeId;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
+    public Long getEmployeeId(){return this.employeeId;}
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
     }
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return role.getAuthorities();
+    }
+
+    @Override
+    public String getUsername() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
     }
 
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public String getDietaryRequirements() {
-        return dietaryRequirements;
-    }
-
     public void setDietaryRequirements(String dietaryRequirements) {
         this.dietaryRequirements = dietaryRequirements;
     }
 
-    public Timestamp getCreatedAt() {
-        return createdAt;
+
+    public void setEmployeeDescription(String employeeDescription) {
+        this.employeeDescription = employeeDescription;
+    }
+
+    public void setEmployeePictureLink(String employeePictureLink) {
+        this.employeePictureLink = employeePictureLink;
     }
 
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
-    }
-
-    public Timestamp getUpdatedAt() {
-        return updatedAt;
     }
 
     public void setUpdatedAt(Timestamp updatedAt) {
