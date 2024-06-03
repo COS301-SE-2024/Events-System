@@ -9,12 +9,12 @@ import org.springframework.data.repository.query.Param; // Import Param annotati
 
 public interface TokenRepository extends JpaRepository<Token, Long> {
 
-    @Query("""
-    SELECT t FROM Token t 
-    INNER JOIN Employee e ON t.user.id = e.id 
-    WHERE e.id = :id AND (t.expired = false OR t.revoked = false)
-    """)
-    List<Token> findAllValidTokenByEmployeeId(@Param("id") Long employeeId); // Use @Param annotation to match the query parameter name
+    @Query(value = """
+      select t from Token t inner join Employee u\s
+      on t.user.id = u.id\s
+      where u.id = :id and (t.expired = false or t.revoked = false)\s
+      """)
+    List<Token> findAllValidTokenByEmployeeId(@Param("id") Long employeeId);
 
     Optional<Token> findByToken(String token);
 }

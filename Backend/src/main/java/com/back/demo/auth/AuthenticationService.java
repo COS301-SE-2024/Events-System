@@ -40,7 +40,7 @@ public class AuthenticationService {
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .dietaryRequirements(request.getDietaryRequirements())
-                .role(request.getRole())
+                .role(Role.USER)
                 .build();
         var savedUser = repository.save(user);
         var jwtToken = jwtService.generateToken(user);
@@ -59,6 +59,7 @@ public class AuthenticationService {
                         request.getPassword()
                 )
         );
+        System.out.println("Yes");
         var user = repository.findByEmail(request.getEmail())
                 .orElseThrow();
         var jwtToken = jwtService.generateToken(user);
