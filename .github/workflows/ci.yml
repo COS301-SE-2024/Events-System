@@ -45,6 +45,9 @@ jobs:
 
       # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
       # - run: npx nx-cloud record -- echo Hello World
+      - run: git branch -a
+      - run: git fetch --all
+      - run: git checkout feat/testing
       - run: npx nx affected -t lint test build --base=feat/testing
       
       - name: Upload coverage reports to Codecov
