@@ -4,14 +4,16 @@ steps:
   args:
   - '-c'
   - |
-    gcloud secrets versions access latest --secret=DATABASE_URL | tr -d '\n' > url.txt
-    gcloud secrets versions access latest --secret=DATABASE_USERNAME | tr -d '\n' > username.txt
-    gcloud secrets versions access latest --secret=DATABASE_PASSWORD | tr -d '\n' > password.txt
-    sed -i 's/DATABASE_URL_PLACEHOLDER/$(cat url.txt)/g' Backend/app.yml
-    sed -i 's/DATABASE_USERNAME_PLACEHOLDER/$(cat username.txt)/g' Backend/app.yml
-    sed -i 's/DATABASE_PASSWORD_PLACEHOLDER/$(cat password.txt)/g' Backend/app.yml
+    echo "_DATABASE_URL=$(gcloud secrets versions access latest --secret=DATABASE_URL | tr -d '\n')" >> $HOME/substitutions
+    echo "_DATABASE_USERNAME=$(gcloud secrets versions access latest --secret=DATABASE_USERNAME | tr -d '\n')" >> $HOME/substitutions
+    echo "_DATABASE_PASSWORD=$(gcloud secrets versions access latest --secret=DATABASE_PASSWORD | tr -d '\n')" >> $HOME/substitutions
 - name: "gcr.io/cloud-builders/gcloud"
   args: ["app", "deploy", "Backend/app.yml"]
+  env: ['envsubst < $HOME/substitutions']
 timeout: "1600s"
 options:
   logging: CLOUD_LOGGING_ONLY
+substitutions:
+  _DATABASE_URL: "DATABASE_URL_PLACEHOLDER"
+  _DATABASE_USERNAME: "DATABASE_USERNAME_PLACEHOLDER"
+  _DATABASE_PASSWORD: "DATABASE_PASSWORD_PLACEHOLDER"
