@@ -1,0 +1,36 @@
+name: Deploy to Google Cloud
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - feat/backend
+# only run on main, develop and feat/backend
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    # authentication for google cloud
+    - name: Authenticate to Google Cloud
+      uses: 'google-github-actions/auth@v2'
+      with:
+        credentials_json: '${{ secrets.GOOGLE_SECRET }}'
+    #set the proper google cloud project used for deployment
+    - name: Set Google Cloud Project
+      run: |
+        gcloud config set project events-system-back
+    # set the database credentials as environment variables
+    - name: Set Database Credentials
+      run: |
+        echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> $GITHUB_ENV
+        echo "DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }}" >> $GITHUB_ENV
+        echo "DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}" >> $GITHUB_ENV
+    #deploys the backend to google cloud platform using app.yml
+    - name: Deploy to App Engine
+      run: |
+        cd Backend
+        gcloud app deploy app.yml
