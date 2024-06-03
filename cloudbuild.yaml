@@ -1,19 +1,21 @@
 steps:
-- name: 'gcr.io/cloud-builders/gcloud'
-  entrypoint: 'bash'
-  args:
-  - '-c'
-  - |
-    echo "_DATABASE_URL=$(gcloud secrets versions access latest --secret=DATABASE_URL | tr -d '\n')" >> $HOME/substitutions
-    echo "_DATABASE_USERNAME=$(gcloud secrets versions access latest --secret=DATABASE_USERNAME | tr -d '\n')" >> $HOME/substitutions
-    echo "_DATABASE_PASSWORD=$(gcloud secrets versions access latest --secret=DATABASE_PASSWORD | tr -d '\n')" >> $HOME/substitutions
 - name: "gcr.io/cloud-builders/gcloud"
+  secretEnv: ['DATABASE_URL','DATABASE_USERNAME', 'DATABASE_PASSWORD']
+    entrypoint: 'bash'   args: 
+  - -c
+  - |
+    echo $'\n  DATABASE_URL: '${DATABASE_URL} >> app.yml
+    echo $'\n  DATABASE_USERNAME: '${DATABASE_USERNAME} >> app.yml
+    echo $'\n  DATABASE_PASSWORD: '${DATABASE_PASSWORD} >> app.yml
   args: ["app", "deploy", "Backend/app.yml"]
-  env: ['envsubst < $HOME/substitutions']
 timeout: "1600s"
 options:
   logging: CLOUD_LOGGING_ONLY
-substitutions:
-  _DATABASE_URL: "DATABASE_URL_PLACEHOLDER"
-  _DATABASE_USERNAME: "DATABASE_USERNAME_PLACEHOLDER"
-  _DATABASE_PASSWORD: "DATABASE_PASSWORD_PLACEHOLDER"
+availableSecrets:
+  secretManager:
+  - versionName: projects/207465254722/secrets/DATABASE_URL/versions/1
+    env: 'DATABASE_URL'
+  - versionName: projects/207465254722/secrets/DATABASE_USERNAME/versions/1
+    env: 'DATABASE_USERNAME'
+  - versionName: projects/207465254722/secrets/DATABASE_PASSWORD/versions/1
+    env: 'DATABASE_PASSWORD'
