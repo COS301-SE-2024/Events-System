@@ -4,9 +4,9 @@ steps:
     entrypoint: 'bash'   args: 
   - -c
   - |
-    echo $'\n  DATABASE_URL: '$$DATABASE_URL >> app.yml
-    echo $'\n  DATABASE_USERNAME: '$$DATABASE_USERNAME >> app.yml
-    echo $'\n  DATABASE_PASSWORD: '$$DATABASE_PASSWORD >> app.yml
+    echo $'\n  DATABASE_URL: 'DATABASE_URL >> app.yml
+    echo $'\n  DATABASE_USERNAME: 'DATABASE_USERNAME >> app.yml
+    echo $'\n  DATABASE_PASSWORD: 'DATABASE_PASSWORD >> app.yml
   args: ["app", "deploy", "Backend/app.yml"]
 timeout: "1600s"
 options:
