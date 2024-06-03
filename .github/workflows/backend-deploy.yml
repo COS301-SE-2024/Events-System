@@ -23,12 +23,6 @@ jobs:
     - name: Set Google Cloud Project
       run: |
         gcloud config set project events-system-back
-    # set the database credentials as environment variables
-    - name: Set Database Credentials
-      run: |
-        echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> $GITHUB_ENV
-        echo "DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }}" >> $GITHUB_ENV
-        echo "DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}" >> $GITHUB_ENV
     #deploys the backend to google cloud platform using app.yml
     - name: Deploy to App Engine
       run: |
