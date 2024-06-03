@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "ci:test": "start-server-and-test start http://localhost:4200"
+    "ci:test": "start-server-and-test start http://localhost:4200 test"
   },
   "private": true,
   "dependencies": {
