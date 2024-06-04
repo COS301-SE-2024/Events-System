@@ -1,21 +1,6 @@
 steps:
 - name: "gcr.io/cloud-builders/gcloud"
-  secretEnv: ['DATABASE_URL','DATABASE_USERNAME', 'DATABASE_PASSWORD']
-    entrypoint: 'bash'   args: 
-  - -c
-  - |
-    echo $'\n  DATABASE_URL: 'DATABASE_URL >> app.yml
-    echo $'\n  DATABASE_USERNAME: 'DATABASE_USERNAME >> app.yml
-    echo $'\n  DATABASE_PASSWORD: 'DATABASE_PASSWORD >> app.yml
   args: ["app", "deploy", "Backend/app.yml"]
 timeout: "1600s"
 options:
   logging: CLOUD_LOGGING_ONLY
-availableSecrets:
-  secretManager:
-  - versionName: projects/207465254722/secrets/DATABASE_URL/versions/1
-    env: 'DATABASE_URL'
-  - versionName: projects/207465254722/secrets/DATABASE_USERNAME/versions/1
-    env: 'DATABASE_USERNAME'
-  - versionName: projects/207465254722/secrets/DATABASE_PASSWORD/versions/1
-    env: 'DATABASE_PASSWORD'
