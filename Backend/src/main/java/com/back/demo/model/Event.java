@@ -85,8 +85,8 @@ public class Event {
         return startTime;
     }
 
-    public void setStartTime(Time startTime) {
-        this.startTime = startTime;
+    public void setStartTime(Time value) {
+        this.startTime = value;
     }
 
     public Time getEndTime() {
@@ -160,4 +160,13 @@ public class Event {
     public void setUpdatedAt(Timestamp updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+    public void setStartTime(String startTime) {
+        this.startTime = Time.valueOf(startTime);
+    }
+    
+    public void setEndTime(String endTime) {
+        this.endTime = Time.valueOf(endTime);
+    }
+    
 }
