@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.sql.Timestamp;
 
-@Entity
+@Entity 
 @Table(name = "Events")
 public class Event {
 
