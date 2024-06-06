@@ -34,6 +34,8 @@ public class EventService {
             event.setDescription(eventDetails.getDescription());
             event.setStartTime(eventDetails.getStartTime());
             event.setEndTime(eventDetails.getEndTime());
+            event.setStartDate(eventDetails.getStartDate());
+            event.setEndDate(eventDetails.getEndDate());
             event.setLocation(eventDetails.getLocation());
             event.setHostId(eventDetails.getHostId());
             event.setGeolocation(eventDetails.getGeolocation());

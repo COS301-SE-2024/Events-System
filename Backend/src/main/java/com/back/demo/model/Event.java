@@ -6,6 +6,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+
+import java.sql.Date;
+import java.sql.Time;
 import java.sql.Timestamp;
 
 @Entity 
@@ -24,10 +27,16 @@ public class Event {
     private String description;
 
     @Column(name = "start_time", nullable = false)
-    private Timestamp startTime;
+    private Time startTime;
 
     @Column(name = "end_time", nullable = false)
-    private Timestamp endTime;
+    private Time endTime;
+
+    @Column(name = "start_date", nullable = false)
+    private Date startDate;
+
+    @Column(name = "end_date", nullable = false)
+    private Date endDate;
 
     @Column(name = "location")
     private String location;
@@ -48,7 +57,6 @@ public class Event {
     private Timestamp updatedAt;
 
     // Getters and Setters
-
     public Long getEventId() {
         return eventId;
     }
@@ -73,20 +81,36 @@ public class Event {
         this.description = description;
     }
 
-    public Timestamp getStartTime() {
+    public Time getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Timestamp startTime) {
+    public void setStartTime(Time startTime) {
         this.startTime = startTime;
     }
 
-    public Timestamp getEndTime() {
+    public Time getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Timestamp endTime) {
+    public void setEndTime(Time endTime) {
         this.endTime = endTime;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
     public String getLocation() {
