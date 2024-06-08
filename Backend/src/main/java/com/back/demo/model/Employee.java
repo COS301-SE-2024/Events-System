@@ -59,8 +59,6 @@ public class Employee implements UserDetails {
     @Column(name = "updated_at", nullable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Timestamp updatedAt;
 
-    // No-argument constructor is provided by @NoArgsConstructor
-
     public void setEmployeeId(Long employeeId) {
         this.employeeId = employeeId;
     }
