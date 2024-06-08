@@ -1,8 +1,10 @@
 package com.back.demo.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -14,6 +16,8 @@ import java.util.List;
 @Table(name = "employees")
 @Entity
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Employee implements UserDetails {
 
     // Getters and Setters
@@ -55,7 +59,7 @@ public class Employee implements UserDetails {
     @Column(name = "updated_at", nullable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Timestamp updatedAt;
 
-    // Getters and Setters
+    // No-argument constructor is provided by @NoArgsConstructor
 
     public void setEmployeeId(Long employeeId) {
         this.employeeId = employeeId;
@@ -82,27 +86,27 @@ public class Employee implements UserDetails {
 
     @Override
     public String getUsername() {
-        return null;
+        return email; // Updated to return the email as the username
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true; // Updated to return true
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true; // Updated to return true
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true; // Updated to return true
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true; // Updated to return true
     }
 
     public void setPassword(String password) {
@@ -112,7 +116,6 @@ public class Employee implements UserDetails {
     public void setDietaryRequirements(String dietaryRequirements) {
         this.dietaryRequirements = dietaryRequirements;
     }
-
 
     public void setEmployeeDescription(String employeeDescription) {
         this.employeeDescription = employeeDescription;
