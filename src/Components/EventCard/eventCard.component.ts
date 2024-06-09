@@ -8,4 +8,10 @@ import { CommonModule } from '@angular/common';
   templateUrl: './eventCard.component.html',
   styleUrl: './eventCard.component.css',
 })
-export class EventCardComponent {}
+export class EventCardComponent {
+  eventTitle: string | undefined;
+  hostName: string | undefined;
+  hostEmail: string | undefined;
+  startTime: string | undefined;
+  endTime: string | undefined;
+}
