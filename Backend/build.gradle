@@ -12,6 +12,14 @@ java {
 	sourceCompatibility = '17'
 }
 
+jar {
+    archiveBaseName = 'back'
+    archiveVersion = '0.0.1-SNAPSHOT'
+}
+bootJar {
+    archiveBaseName = 'back'
+    archiveVersion = '0.0.1-SNAPSHOT'
+}
 repositories {
 	mavenCentral()
 }
@@ -29,15 +37,6 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-}
-
-jar {
-    archiveBaseName = 'back'
-    archiveVersion = '0.0.1-SNAPSHOT'
-}
-bootJar {
-    archiveBaseName = 'back'
-    archiveVersion = '0.0.1-SNAPSHOT'
 }
 
 tasks.named('test') {
