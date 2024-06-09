@@ -3,25 +3,35 @@
 <!--In section 1, have an outside div, and 2 divs inside the main one. One for the image, and the other for the event information-->
 <!--worry about tailwind later :)-->
 
+<!--How do I now make them fit the main screen evenly, no space on all four sides-->
 <main class="lg:mt-0 lg:flex max-w-screen flex-col">
-    <section class="bg-transparent text-center"> <!--Featured events section-->
+    <section class="bg-transparent text-center mt-6"> <!--Featured events section-->
+      <h2 class="card-title">Featured Events</h2>
       <div class="flex flex-col ">
         <div class="card lg:card-side bg-base-100 shadow-xl">
-          <figure class="">
-            <img  src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg" alt="Album"/>
-          </figure>
+            <figure class="">
+              <img  src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg" alt="Album"/>
+            </figure>
 
-          <div class="card-body">
-            <h2 class="card-title">Event title</h2>
-            <p>Event description</p>
-
+            <div class="card-body">
+            <div>
+              <h2 class="card-title">Event title</h2>
+              <p class="card-title">Event description</p>
+            </div>
+            
+            <div>
+              <p>Host Name</p>
+              <p>Host Email</p>
+              <p>Start date - End date</p>
+              <p>Start time - End time</p>
+            </div>
 
             <form action="">
-              <div class="card-actions justify-end">
+              <div class="card-actions justify-end mr-10">
                 <button type="submit"
                     class="inline-flex cursor-pointer items-center justify-center rounded-xl border-none bg-gradient-to-r from-fuchsia-600 to-indigo-600 px-4 py-2.5 text-sm font-semibold text-white transition duration-200 hover:bg-gradient-to-r hover:from-fuchsia-600 hover:to-indigo-500 focus:outline-none focus:ring-2 focus:ring-orange-400/80 focus:ring-offset-0 disabled:opacity-30 disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80"
                   >
-                    RSVP
+                    Book Now
                   </button>
               </div>
             </form>
@@ -30,38 +40,37 @@
       </div>
     </section>
 
+    <section class="bg-transparent"> <!--Featured events section-->
+      <h2 class="card-title">Your Upcoming Events</h2>
+      <div class="flex flex-row"> <!--cards div-->
+        <div class="card bg-base-100 shadow-xl"> <!--card 1-->
+          <figure>
+            <img src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg" alt="Album"/>
+          </figure>
 
+          <div class="card-body">
+            <h2 class="card-title">Event title</h2>
 
-    <section class="bg-transparent text-center mt-5 justify-self-end"> <!--Featured events section-->
-
-      <section class="p-4 md:p-10">
-        <div class="grid grid-cols-1 gap-6 md:grid-cols-3 bg-red-900"> <!--row 1-->
-          <h2 class="card-title">Upcoming events</h2>
-
-
-          <div class="flex flex-col rounded-3xl p-3">
-            <div class="card lg:card-side bg-base-100 shadow-xl">
-              <figure><img src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg" alt="Album"/></figure>
-              <div class="card-body">
-                <h2 class="card-title">Event title</h2>
-                <p>Event description</p>
-
-
-                <form action="">
-                  <div class="card-actions justify-end">
-                    <button type="submit"
-                        class="inline-flex cursor-pointer items-center justify-center rounded-xl border-none bg-gradient-to-r from-fuchsia-600 to-indigo-600 px-4 py-2.5 text-sm font-semibold text-white transition duration-200 hover:bg-gradient-to-r hover:from-fuchsia-600 hover:to-indigo-500 focus:outline-none focus:ring-2 focus:ring-orange-400/80 focus:ring-offset-0 disabled:opacity-30 disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80"
-                      >
-                        RSVP
-                      </button>
-                  </div>
-                </form>
-              </div>
+            <div>
+              <p>Host Name</p>
+              <p>Host Email</p>
+              <p>Start date - End date</p>
+              <p>Start time - End time</p>
             </div>
+            
+            <form action="">
+              <div class="card-actions justify-end">
+                <button type="submit"
+                    class="inline-flex cursor-pointer items-center justify-center rounded-xl border-none bg-gradient-to-r from-fuchsia-600 to-indigo-600 px-4 py-2.5 text-sm font-semibold text-white transition duration-200 hover:bg-gradient-to-r hover:from-fuchsia-600 hover:to-indigo-500 focus:outline-none focus:ring-2 focus:ring-orange-400/80 focus:ring-offset-0 disabled:opacity-30 disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80"
+                  >
+                    Book Now
+                  </button>
+              </div>
+            </form>
           </div>
-
         </div>
-      </section>
+      </div>
+      
     </section>
 </main>
 
