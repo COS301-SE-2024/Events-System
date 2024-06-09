@@ -4,13 +4,13 @@
     </figure>
 
     <div class="card-body">
-      <h2 class="card-title">Event title</h2>
+      <h2 class="card-title">{{ eventTitle }}</h2>
 
       <div>
-        <p>Host Name</p>
-        <p>Host Email</p>
-        <p>Start date - End date</p>
-        <p>Start time - End time</p>
+        <p>{{ hostName }}</p>
+        <p>{{ hostEmail }}</p>
+        <p>{{ startTime | date:'shortDate' }} - {{ endTime | date:'shortDate' }}</p>
+        <p>{{ startTime | date:'shortTime' }} - {{ endTime | date:'shortTime' }}</p>
       </div>
       
       <form action="">
