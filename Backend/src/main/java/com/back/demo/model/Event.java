@@ -6,12 +6,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-
-import java.sql.Date;
-import java.sql.Time;
 import java.sql.Timestamp;
 
-@Entity 
+@Entity
 @Table(name = "Events")
 public class Event {
 
@@ -27,16 +24,10 @@ public class Event {
     private String description;
 
     @Column(name = "start_time", nullable = false)
-    private Time startTime;
+    private Timestamp startTime;
 
     @Column(name = "end_time", nullable = false)
-    private Time endTime;
-
-    @Column(name = "start_date", nullable = false)
-    private Date startDate;
-
-    @Column(name = "end_date", nullable = false)
-    private Date endDate;
+    private Timestamp endTime;
 
     @Column(name = "location")
     private String location;
@@ -57,6 +48,7 @@ public class Event {
     private Timestamp updatedAt;
 
     // Getters and Setters
+
     public Long getEventId() {
         return eventId;
     }
@@ -81,36 +73,20 @@ public class Event {
         this.description = description;
     }
 
-    public Time getStartTime() {
+    public Timestamp getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Time value) {
-        this.startTime = value;
+    public void setStartTime(Timestamp startTime) {
+        this.startTime = startTime;
     }
 
-    public Time getEndTime() {
+    public Timestamp getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Time endTime) {
+    public void setEndTime(Timestamp endTime) {
         this.endTime = endTime;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
     }
 
     public String getLocation() {
@@ -160,13 +136,4 @@ public class Event {
     public void setUpdatedAt(Timestamp updatedAt) {
         this.updatedAt = updatedAt;
     }
-
-    public void setStartTime(String startTime) {
-        this.startTime = Time.valueOf(startTime);
-    }
-    
-    public void setEndTime(String endTime) {
-        this.endTime = Time.valueOf(endTime);
-    }
-    
 }
