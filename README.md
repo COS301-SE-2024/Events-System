@@ -1,4 +1,4 @@
-#  Events System
+#  Entellect Events System
 
 [![ESLint and Unit tests](https://github.com/COS301-SE-2024/Events-System/actions/workflows/ci.yml/badge.svg)](https://github.com/COS301-SE-2024/Events-System/actions/workflows/ci.yml)
 ![commit activity](https://img.shields.io/github/commit-activity/y/COS301-SE-2024/Events-System?style=flat-square)
