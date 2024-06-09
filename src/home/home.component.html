@@ -7,11 +7,11 @@
 <main class="lg:mt-0 lg:flex max-w-screen flex-col">
     <section class="bg-transparent text-center mt-6"> <!--Featured events section-->
       <h2 class="card-title">Featured Events</h2>
-          <div class="carousel w-full h-[350px]">
+          <div class="carousel w-full h-[350px] ">
 
-            <div id="slide1" class="carousel-item relative w-full ">
-              <div class="flex flex-col ">
-                <div class="card lg:card-side bg-base-100 shadow-xl h-[350px]">
+            <div id="slide1" class="carousel-item relative w-full"> 
+              <div class="flex flex-col size-full">
+                <div class="card lg:card-side bg-base-100 shadow-xl size-full"> <!--card 1-->
                     <figure class="">
                       <img  src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg" alt="Album"/>
                     </figure>
@@ -50,7 +50,7 @@
 
 
             <div id="slide2" class="carousel-item relative w-full">
-              <img src="https://img.daisyui.com/images/stock/photo-1609621838510-5ad474b7d25d.jpg" class="w-full" />
+              <h2>slide 2</h2>
               <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
                 <a href="#slide1" class="btn btn-circle">❮</a> 
                 <a href="#slide3" class="btn btn-circle">❯</a>
@@ -59,7 +59,7 @@
 
 
             <div id="slide3" class="carousel-item relative w-full">
-              <img src="https://img.daisyui.com/images/stock/photo-1414694762283-acccc27bca85.jpg" class="w-full" />
+              <h2>slide 3</h2>
               <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
                 <a href="#slide2" class="btn btn-circle">❮</a> 
                 <a href="#slide4" class="btn btn-circle">❯</a>
@@ -68,7 +68,7 @@
 
 
             <div id="slide4" class="carousel-item relative w-full">
-              <img src="https://img.daisyui.com/images/stock/photo-1665553365602-b2fb8e5d1707.jpg" class="w-full" />
+              <h2>slide 4</h2>
               <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
                 <a href="#slide3" class="btn btn-circle">❮</a> 
                 <a href="#slide1" class="btn btn-circle">❯</a>
@@ -77,11 +77,22 @@
           </div>
     </section>
 
+
+
+
+
+
+
+
+
+
+
+
     <section class="bg-transparent bg-red-200"> <!--Featured events section-->
       <h2 class="card-title">Your Upcoming Events</h2>
       <div class="carousel w-full h-[430px]">
 
-        <div id="slide1" class="carousel-item relative w-full"> <!--slide 1-->
+        <div id="slide5" class="carousel-item relative w-full"> <!--slide 1-->
           <div class="card bg-base-100 shadow-xl bg-cyan-600"> 
             <figure class="size-60">
               <img src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg" alt="Album"/>
@@ -110,12 +121,12 @@
           </div>
   
           <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-            <a href="#slide4" class="btn btn-circle">❮</a> 
-            <a href="#slide2" class="btn btn-circle">❯</a>
+            <a href="#slide8" class="btn btn-circle">❮</a> 
+            <a href="#slide6" class="btn btn-circle">❯</a>
           </div>
         </div> 
     
-        <div id="slide2" class="carousel-item relative w-full"> <!--slide 2-->
+        <div id="slide6" class="carousel-item relative w-full"> <!--slide 2-->
           <div class="card bg-base-100 shadow-xl bg-purple-600"> 
             <figure class="size-60">
               <img src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg" alt="Album"/>
@@ -144,13 +155,13 @@
           </div>
 
           <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-            <a href="#slide1" class="btn btn-circle">❮</a> 
-            <a href="#slide3" class="btn btn-circle">❯</a>
+            <a href="#slide5" class="btn btn-circle">❮</a> 
+            <a href="#slide7" class="btn btn-circle">❯</a>
           </div>
         </div> 
   
   
-        <div id="slide3" class="carousel-item relative w-full"> <!--slide 3-->
+        <div id="slide7" class="carousel-item relative w-full"> <!--slide 3-->
           <div class="card bg-base-100 shadow-xl bg-green-600"> 
             <figure class="size-60">
               <img src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg" alt="Album"/>
@@ -177,13 +188,13 @@
               </form>
             </div>
           </div>          <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-            <a href="#slide2" class="btn btn-circle">❮</a> 
-            <a href="#slide4" class="btn btn-circle">❯</a>
+            <a href="#slide6" class="btn btn-circle">❮</a> 
+            <a href="#slide8" class="btn btn-circle">❯</a>
           </div>
         </div> 
   
   
-        <div id="slide4" class="carousel-item relative w-full">
+        <div id="slide8" class="carousel-item relative w-full">
           <div class="card bg-base-100 shadow-xl bg-orange-600"> <!--card 1-->
             <figure class="size-60">
               <img src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg" alt="Album"/>
@@ -210,8 +221,8 @@
               </form>
             </div>
           </div>          <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-            <a href="#slide3" class="btn btn-circle">❮</a> 
-            <a href="#slide1" class="btn btn-circle">❯</a>
+            <a href="#slide7" class="btn btn-circle">❮</a> 
+            <a href="#slide5" class="btn btn-circle">❯</a>
           </div>
         </div>
       </div>
