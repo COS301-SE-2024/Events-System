@@ -40,6 +40,51 @@ public class EmployeeService implements UserDetailsService {
             employee.setDietaryRequirements(employeeDetails.getDietaryRequirements());
             employee.setEmployeeDescription(employeeDetails.getEmployeeDescription());
             employee.setEmployeePictureLink(employeeDetails.getEmployeePictureLink());
+            employee.setTwitter(employeeDetails.getTwitter());
+            employee.setGithub(employeeDetails.getGithub());
+            employee.setLinkedin(employeeDetails.getLinkedin());
+            return employeeRepository.save(employee);
+        } else {
+            throw new RuntimeException("Employee not found with id " + employeeId);
+        }
+    }
+
+    public Employee patchEmployee(Long employeeId, Employee employeeDetails) {
+        Optional<Employee> optionalEmployee = employeeRepository.findById(employeeId);
+        if (optionalEmployee.isPresent()) {
+            Employee employee = optionalEmployee.get();
+
+            if (employeeDetails.getFirstName() != null) {
+                employee.setFirstName(employeeDetails.getFirstName());
+            }
+            if (employeeDetails.getLastName() != null) {
+                employee.setLastName(employeeDetails.getLastName());
+            }
+            if (employeeDetails.getEmail() != null) {
+                employee.setEmail(employeeDetails.getEmail());
+            }
+            if (employeeDetails.getPassword() != null) {
+                employee.setPassword(employeeDetails.getPassword());
+            }
+            if (employeeDetails.getDietaryRequirements() != null) {
+                employee.setDietaryRequirements(employeeDetails.getDietaryRequirements());
+            }
+            if (employeeDetails.getEmployeeDescription() != null) {
+                employee.setEmployeeDescription(employeeDetails.getEmployeeDescription());
+            }
+            if (employeeDetails.getEmployeePictureLink() != null) {
+                employee.setEmployeePictureLink(employeeDetails.getEmployeePictureLink());
+            }
+            if (employeeDetails.getTwitter() != null) {
+                employee.setTwitter(employeeDetails.getTwitter());
+            }
+            if (employeeDetails.getGithub() != null) {
+                employee.setGithub(employeeDetails.getGithub());
+            }
+            if (employeeDetails.getLinkedin() != null) {
+                employee.setLinkedin(employeeDetails.getLinkedin());
+            }
+
             return employeeRepository.save(employee);
         } else {
             throw new RuntimeException("Employee not found with id " + employeeId);
