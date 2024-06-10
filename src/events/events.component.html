@@ -10,13 +10,16 @@
           
           <div *ngIf="isLoading; else content">
             <!-- Skeleton screen goes here -->
-            <div class="lg:mb-96 mt-2 mb-80 ml-8 w-10/12 h-96 grid grid-cols-4 gap-24">
-             <app-ghost-event-card></app-ghost-event-card>
-             <app-ghost-event-card></app-ghost-event-card>
-             <app-ghost-event-card></app-ghost-event-card>
-             <app-ghost-event-card></app-ghost-event-card>
-             <app-ghost-event-card></app-ghost-event-card>
-             </div>
+            <div class="lg:mb-96 mt-2 mb-80 w-10/12 h-96 grid" style="grid-template-columns: repeat(4, 1fr); gap: 6rem ;">
+              <app-ghost-event-card></app-ghost-event-card>
+              <app-ghost-event-card></app-ghost-event-card>
+              <app-ghost-event-card></app-ghost-event-card>
+              <app-ghost-event-card></app-ghost-event-card>
+              <app-ghost-event-card></app-ghost-event-card>
+              <app-ghost-event-card></app-ghost-event-card>
+              <app-ghost-event-card></app-ghost-event-card>
+              <app-ghost-event-card></app-ghost-event-card>
+            </div>
           </div>
           
           <ng-template #content>
