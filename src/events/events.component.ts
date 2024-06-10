@@ -23,8 +23,8 @@ checkedSocialClubs: string[] = [];
   event = {
     title: '',
     description: '',
-    startTime: '',
-    endTime: '',
+    startTime: new Date(),
+    endTime: new Date(),
     startDate: '',
     endDate: '',
     location: '',

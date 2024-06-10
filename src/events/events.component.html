@@ -1,7 +1,7 @@
 
-  <div class="drawer lg:drawer-open drawer-end">
+  <div class="drawer overflow-auto lg:drawer-open drawer-end">
     <input id="my-drawer-3" type="checkbox" class="drawer-toggle"  #drawerToggle/>
-    <div class="drawer-content flex flex-col items-center justify-center">
+    <div class="drawer-content flex flex-col justify-start">
       <!-- Page content here -->
       <label for="my-drawer-3" class="btn btn-primary drawer-button lg:hidden w-full">Filter</label>
 
@@ -90,7 +90,7 @@
                 <!-- <button type="submit">Submit</button> -->
                 <div class="flex w-full">
                   <button class="btn btn-outline mt-4" (click)="clearDateFilter(); drawerToggle.checked = false">Clear</button>
-                  <button class="btn btn-primary mt-4" (click)="drawerToggle.checked = false" type="submit">Submit</button>                
+                  <button class="btn btn-primary mt-4 ml-24" (click)="drawerToggle.checked = false" type="submit">Submit</button>                
                  </div>
 
               </form>

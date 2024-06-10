@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -8,13 +8,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './eventCard.component.html',
   styleUrl: './eventCard.component.css',
 })
-export class EventCardComponent {
-  logDates(): void {
-    console.log(`Start Date 11: ${this.startDate}`);
-    console.log(`End Date 11: ${this.endDate}`);
-  }
-
-
+export class EventCardComponent implements OnChanges {
   @Input() eventTitle: string | undefined;
   @Input() description: string | undefined;
   @Input() startTime: string | undefined;
@@ -24,4 +18,22 @@ export class EventCardComponent {
   @Input() location: string | undefined;
   @Input() hostedBy: string | undefined;
   @Input() socialClub: string | undefined;
+
+  formatTime(time: string | undefined): string | undefined {
+    if (time) {
+      const parts = time.split(':');
+      return parts[0] + ':' + parts[1];
+    }
+    return undefined;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['startTime']) {
+      this.startTime = this.formatTime(this.startTime);
+    }
+    if (changes['endTime']) {
+      this.endTime = this.formatTime(this.endTime);
+    }
+  }
+
 }
