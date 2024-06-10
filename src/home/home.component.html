@@ -1,15 +1,49 @@
-<!--Have a main tag-->
-<!--Have 2 section tags-->
-<!--In section 1, have an outside div, and 2 divs inside the main one. One for the image, and the other for the event information-->
-<!--worry about tailwind later :)-->
-
-<!--How do I now make them fit the main screen evenly, no space on all four sides-->
 <main class="lg:mt-0 lg:flex max-w-screen flex-col justify-between">
-    <section class="bg-transparent text-center mt-6"> <!--Featured events section-->
-      <h2 class="card-title">Featured Events</h2>
+    <section class="bg-transparent text-center mt-6 shadow-2xl"> <!--Featured events section-->
+      <h2 class="card-title lexend-deca-extraLight mb-3.5 ml-5">Featured Events</h2>
           <div class="carousel w-full h-[350px] ">
 
             <div id="slide1" class="carousel-item relative w-full"> 
+              <div class="flex flex-col size-full">
+                <div class="card lg:card-side bg-base-100 shadow-xl size-full"> <!--card 1-->
+                    <figure class="">
+                      <img  src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg" alt="Album"/>
+                    </figure>
+        
+                    <div class="card-body">
+                    <div>
+                      <h2 class="card-title victor-mono-normal">Event title</h2>
+                      <p class="card-title victor-mono-normal">Event description</p>
+                    </div>
+                    
+                    <div>
+                      <p class="cutive-mono-regular">Host Name</p>
+                      <p class="cutive-mono-regular">Host Email</p>
+                      <p class="cutive-mono-regular">Start date - End date</p>
+                      <p class="cutive-mono-regular">Start time - End time</p>
+                    </div>
+        
+                    <form action="">
+                      <div class="card-actions justify-end mr-10">
+                        <button type="submit"
+                            class="inline-flex cursor-pointer items-center justify-center rounded-xl border-none bg-gradient-to-r from-fuchsia-600 to-indigo-600 px-4 py-2.5 text-sm font-semibold text-white transition duration-200 hover:bg-gradient-to-r hover:from-fuchsia-600 hover:to-indigo-500 focus:outline-none focus:ring-2 focus:ring-orange-400/80 focus:ring-offset-0 disabled:opacity-30 disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80"
+                          >
+                            Book Now
+                          </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+              <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                <a href="#slide4" class="btn btn-circle">❮</a> 
+                <a href="#slide2" class="btn btn-circle">❯</a>
+              </div>
+            </div> 
+
+
+            <div id="slide2" class="carousel-item relative w-full">
               <div class="flex flex-col size-full">
                 <div class="card lg:card-side bg-base-100 shadow-xl size-full"> <!--card 1-->
                     <figure class="">
@@ -43,15 +77,6 @@
               </div>
 
               <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                <a href="#slide4" class="btn btn-circle">❮</a> 
-                <a href="#slide2" class="btn btn-circle">❯</a>
-              </div>
-            </div> 
-
-
-            <div id="slide2" class="carousel-item relative w-full">
-              <h2>slide 2</h2>
-              <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
                 <a href="#slide1" class="btn btn-circle">❮</a> 
                 <a href="#slide3" class="btn btn-circle">❯</a>
               </div>
@@ -59,7 +84,38 @@
 
 
             <div id="slide3" class="carousel-item relative w-full">
-              <h2>slide 3</h2>
+              <div class="flex flex-col size-full">
+                <div class="card lg:card-side bg-base-100 shadow-xl size-full"> <!--card 1-->
+                    <figure class="">
+                      <img  src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg" alt="Album"/>
+                    </figure>
+        
+                    <div class="card-body">
+                    <div>
+                      <h2 class="card-title">Event title</h2>
+                      <p class="card-title">Event description</p>
+                    </div>
+                    
+                    <div>
+                      <p>Host Name</p>
+                      <p>Host Email</p>
+                      <p>Start date - End date</p>
+                      <p>Start time - End time</p>
+                    </div>
+        
+                    <form action="">
+                      <div class="card-actions justify-end mr-10">
+                        <button type="submit"
+                            class="inline-flex cursor-pointer items-center justify-center rounded-xl border-none bg-gradient-to-r from-fuchsia-600 to-indigo-600 px-4 py-2.5 text-sm font-semibold text-white transition duration-200 hover:bg-gradient-to-r hover:from-fuchsia-600 hover:to-indigo-500 focus:outline-none focus:ring-2 focus:ring-orange-400/80 focus:ring-offset-0 disabled:opacity-30 disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80"
+                          >
+                            Book Now
+                          </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
               <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
                 <a href="#slide2" class="btn btn-circle">❮</a> 
                 <a href="#slide4" class="btn btn-circle">❯</a>
@@ -68,7 +124,38 @@
 
 
             <div id="slide4" class="carousel-item relative w-full">
-              <h2>slide 4</h2>
+              <div class="flex flex-col size-full">
+                <div class="card lg:card-side bg-base-100 shadow-xl size-full"> <!--card 1-->
+                    <figure class="">
+                      <img  src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg" alt="Album"/>
+                    </figure>
+        
+                    <div class="card-body">
+                    <div>
+                      <h2 class="card-title">Event title</h2>
+                      <p class="card-title">Event description</p>
+                    </div>
+                    
+                    <div>
+                      <p>Host Name</p>
+                      <p>Host Email</p>
+                      <p>Start date - End date</p>
+                      <p>Start time - End time</p>
+                    </div>
+        
+                    <form action="">
+                      <div class="card-actions justify-end mr-10">
+                        <button type="submit"
+                            class="inline-flex cursor-pointer items-center justify-center rounded-xl border-none bg-gradient-to-r from-fuchsia-600 to-indigo-600 px-4 py-2.5 text-sm font-semibold text-white transition duration-200 hover:bg-gradient-to-r hover:from-fuchsia-600 hover:to-indigo-500 focus:outline-none focus:ring-2 focus:ring-orange-400/80 focus:ring-offset-0 disabled:opacity-30 disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80"
+                          >
+                            Book Now
+                          </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
               <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
                 <a href="#slide3" class="btn btn-circle">❮</a> 
                 <a href="#slide1" class="btn btn-circle">❯</a>
@@ -77,49 +164,166 @@
           </div>
     </section>
 
-    <section class="bg-transparent bg-red-200"> <!--Featured events section-->
-      <h2 class="card-title">Your Upcoming Events</h2>
+    <div class="mt-20"></div>
+
+    <section class="bg-transparent p-25 text-center shadow-2xl"> <!--Featured events section-->
+      <h2 class="card-title lexend-deca-extraLight ml-5 mb-3.5 ">Your Upcoming Events</h2>
       <div class="carousel w-full h-[430px]">
 
-        <div id="slide5" class="carousel-item relative w-full"> <!--slide 1-->
-          <app-event-card>
-            <!--array of events-->
-            <!--define variables-->
-          </app-event-card>
-  
-          <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-            <a href="#slide8" class="btn btn-circle">❮</a> 
-            <a href="#slide6" class="btn btn-circle">❯</a>
+        <div id="slide5" class="carousel-item relative w-full flex flex-row gap-6 justify-center"> <!--slide 1-->
+          <div id="card1" class="mt-2.5"> <!--card 1-->
+            <app-event-card>
+              <!--array of events-->
+              <!--define variables-->
+            </app-event-card>
+    
+            <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+              <a href="#slide8" class="btn btn-circle">❮</a> 
+              <a href="#slide6" class="btn btn-circle">❯</a>
+            </div>
+          </div>
+
+          <div id="card2" class="mt-2.5"> <!--card 2-->
+            <app-event-card>
+              <!--array of events-->
+              <!--define variables-->
+            </app-event-card>
+    
+            <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+              <a href="#slide8" class="btn btn-circle">❮</a> 
+              <a href="#slide6" class="btn btn-circle">❯</a>
+            </div>
+          </div>
+
+          <div id="card3" class="mt-2.5"> <!--card 3-->
+            <app-event-card>
+              <!--array of events-->
+              <!--define variables-->
+            </app-event-card>
+    
+            <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+              <a href="#slide8" class="btn btn-circle">❮</a> 
+              <a href="#slide6" class="btn btn-circle">❯</a>
+            </div>
+          </div>
+
+          <div id="card4" class="mt-2.5"> <!--card 4-->
+            <app-event-card>
+              <!--array of events-->
+              <!--define variables-->
+            </app-event-card>
+    
+            <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+              <a href="#slide8" class="btn btn-circle">❮</a> 
+              <a href="#slide6" class="btn btn-circle">❯</a>
+            </div>
           </div>
         </div> 
     
-        <div id="slide6" class="carousel-item relative w-full"> <!--slide 2-->
-          <app-event-card>
-            <!--array of events-->
-            <!--define variables-->
-          </app-event-card>
+        <div id="slide6" class="carousel-item relative w-full flex flex-row gap-6 justify-center"> <!--slide 2-->
+          <div id="card5" class="mt-2.5">
+            <app-event-card>
+              <!--array of events-->
+              <!--define variables-->
+            </app-event-card>
+  
+            <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+              <a href="#slide5" class="btn btn-circle">❮</a> 
+              <a href="#slide7" class="btn btn-circle">❯</a>
+            </div>
+          </div>
 
-          <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-            <a href="#slide5" class="btn btn-circle">❮</a> 
-            <a href="#slide7" class="btn btn-circle">❯</a>
+          <div id="card6" class="mt-2.5">
+            <app-event-card>
+              <!--array of events-->
+              <!--define variables-->
+            </app-event-card>
+  
+            <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+              <a href="#slide5" class="btn btn-circle">❮</a> 
+              <a href="#slide7" class="btn btn-circle">❯</a>
+            </div>
           </div>
-        </div> 
+
+          <div id="card7" class="mt-2.5">
+            <app-event-card>
+              <!--array of events-->
+              <!--define variables-->
+            </app-event-card>
   
+            <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+              <a href="#slide5" class="btn btn-circle">❮</a> 
+              <a href="#slide7" class="btn btn-circle">❯</a>
+            </div>
+          </div>
+
+          <div id="card8" class="mt-2.5">
+            <app-event-card>
+              <!--array of events-->
+              <!--define variables-->
+            </app-event-card>
   
-        <div id="slide7" class="carousel-item relative w-full"> <!--slide 3-->
-          <app-event-card>
-            <!--array of events-->
-            <!--define variables-->
-          </app-event-card>
+            <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+              <a href="#slide5" class="btn btn-circle">❮</a> 
+              <a href="#slide7" class="btn btn-circle">❯</a>
+            </div>
+          </div>
           
-          <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-            <a href="#slide6" class="btn btn-circle">❮</a> 
-            <a href="#slide8" class="btn btn-circle">❯</a>
+        </div> 
+  
+  
+        <div id="slide7" class="carousel-item relative w-full flex flex-row gap-6 justify-center"> <!--slide 3-->
+          <div id="card9" class="mt-2.5">
+            <app-event-card>
+              <!--array of events-->
+              <!--define variables-->
+            </app-event-card>
+  
+            <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+              <a href="#slide6" class="btn btn-circle">❮</a> 
+              <a href="#slide8" class="btn btn-circle">❯</a>
+            </div>
+          </div>
+
+          <div id="card10" class="mt-2.5">
+            <app-event-card>
+              <!--array of events-->
+              <!--define variables-->
+            </app-event-card>
+  
+            <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+              <a href="#slide6" class="btn btn-circle">❮</a> 
+              <a href="#slide8" class="btn btn-circle">❯</a>
+            </div>
+          </div>
+
+          <div id="card11" class="mt-2.5">
+            <app-event-card>
+              <!--array of events-->
+              <!--define variables-->
+            </app-event-card>
+  
+            <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+              <a href="#slide6" class="btn btn-circle">❮</a> 
+              <a href="#slide8" class="btn btn-circle">❯</a>
+            </div>
+          </div>
+
+          <div id="card12" class="mt-2.5">
+            <app-event-card>
+              <!--array of events-->
+              <!--define variables-->
+            </app-event-card>
+  
+            <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+              <a href="#slide6" class="btn btn-circle">❮</a> 
+              <a href="#slide8" class="btn btn-circle">❯</a>
+            </div>
           </div>
         </div> 
   
   
-        <div id="slide8" class="carousel-item relative w-full">
+        <div id="slide8" class="carousel-item relative w-full flex flex-row gap-6 justify-center">
           <div class="card bg-base-100 shadow-xl bg-orange-600"> <!--card 1-->
             <figure class="size-60">
               <img src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg" alt="Album"/>

@@ -36,4 +36,30 @@ body {
     background: #45474C;
     border-radius: 12px;
   }
+
+.lexend-deca-extraLight {
+  font-family: "Lexend Deca", serif;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-size: 30px;
+  font-style: normal;
+}
+
+.cutive-mono-regular {
+  font-family: "Cutive Mono", monospace;
+  font-weight: 400;
+  font-size: 18px;
+  font-style: normal;
+}
+
+.victor-mono-normal {
+  font-family: "Victor Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-size: 20px;
+  font-style: normal;
+}
+
+  
+  
   
