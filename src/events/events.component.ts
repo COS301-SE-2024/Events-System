@@ -14,6 +14,9 @@ import { GhostEventCardComponent } from 'src/Components/GhostEventCard/GhostEven
 export class EventsComponent implements OnInit{
   @ViewChild('dateInput') dateInput!: ElementRef;
   events: any[] = [];
+  selectedDate = '';
+  searchLocation = '';
+  searchTerm = '';
   uniqueSocialClubs: string[] = [];
 checkedSocialClubs: string[] = [];
   filteredEvents = this.events;
@@ -42,6 +45,8 @@ checkedSocialClubs: string[] = [];
     const dateInput = (<HTMLInputElement>document.getElementById('date-input')).value;
     console.log(dateInput);
     // You can now use the dateInput value for your needs
+    this.selectedDate = dateInput;
+    this.onDateChange();
   }
 
   ngOnInit(): void {
@@ -72,7 +77,13 @@ checkedSocialClubs: string[] = [];
       this.allClubsChecked = false;
     }
   }
-
+  handleInput(event: Event) {
+    const target = event.target as HTMLInputElement;
+    if (target) {
+      this.selectedDate = target.value;
+      this.onDateChange();
+    }
+  }
 
 
   selectSocialClub(socialClub: string) {
@@ -81,12 +92,30 @@ checkedSocialClubs: string[] = [];
   
   filterEvents() {
     if (this.checkedSocialClubs.length > 0) {
-      this.filteredEvents = this.events.filter(event => this.checkedSocialClubs.includes(event.socialClub));
+      this.filteredEvents = this.events.filter(event => 
+        this.checkedSocialClubs.includes(event.socialClub) &&
+        (!this.selectedDate || new Date(event.startDate).toDateString() === new Date(this.selectedDate).toDateString()) &&
+        event.title.toLowerCase().includes(this.searchTerm.toLowerCase()) &&
+        event.location.toLowerCase().includes(this.searchLocation.toLowerCase())
+      );
     } else {
-      this.filteredEvents = this.events;
+      this.filteredEvents = this.events.filter(event => 
+        (!this.selectedDate || new Date(event.startDate).toDateString() === new Date(this.selectedDate).toDateString()) &&
+        event.title.toLowerCase().includes(this.searchTerm.toLowerCase()) &&
+        event.location.toLowerCase().includes(this.searchLocation.toLowerCase())
+      );
     }
   }
-
+  updateSearchTerm(event: Event) {
+    const target = event.target as HTMLInputElement;
+    this.searchTerm = target?.value || '';
+    this.filterByTitle();
+  }
+  updateSearchLocation(event: Event) {
+    const target = event.target as HTMLInputElement;
+    this.searchLocation = target?.value || '';
+    this.filterEvents();
+  }
   onAllClubsClick() {
     if (this.allClubsChecked) {
       this.otherCheckboxes = this.otherCheckboxes.map(() => false);
@@ -96,4 +125,23 @@ checkedSocialClubs: string[] = [];
     }
     this.filterEvents();
   }
+
+  clearDateFilter() {
+    this.selectedDate = '';
+    this.filterEvents(); // reapply filters after clearing date filter
+  }
+  onDateChange() {
+    if (this.selectedDate) {
+      this.filteredEvents = this.events.filter(event => new Date(event.startDate).toDateString() === new Date(this.selectedDate).toDateString());
+    } else {
+      this.filteredEvents = this.events;
+    }
+  }
+  filterByTitle() {
+    this.filteredEvents = this.events.filter(event => 
+      event.title.toLowerCase().includes(this.searchTerm.toLowerCase()) &&
+      event.location.toLowerCase().includes(this.searchLocation.toLowerCase())
+    );
+  }
+  
 }

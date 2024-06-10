@@ -76,7 +76,7 @@
             </div>
             <div class="collapse-content"> 
               <ul class="menu bg-base-200 w-56 rounded-box">
-                <input type="text" placeholder="Search by title" class="input input-bordered w-full max-w-xs" />
+                <input type="text" class="input input-bordered w-full max-w-xs" (input)="updateSearchTerm($event)" placeholder="Search by title"/>   
               </ul>
             </div>
           </div>
@@ -86,9 +86,13 @@
             </div>
             <div class="collapse-content"> 
               <form (submit)="onSubmit()">
-                <input type="date" id="date-input" name="date-input" class="bg-gray-400 w-full px-3 py-2 rounded-lg border-2 border-gray-400 focus:border-indigo-500 text-base outline-none text-gray-700 transition-colors duration-200 ease-in-out">
+                <input type="date" id="date-input"  [value]="selectedDate" (input)="handleInput($event)" name="date-input" class="bg-gray-400 w-full px-3 py-2 rounded-lg border-2 border-gray-400 focus:border-indigo-500 text-base outline-none text-gray-700 transition-colors duration-200 ease-in-out">
                 <!-- <button type="submit">Submit</button> -->
-                <button class="btn btn-primary mt-4" type="submit">Submit</button>
+                <div class="flex w-full">
+                  <button class="btn btn-outline mt-4" (click)="clearDateFilter(); drawerToggle.checked = false">Clear</button>
+                  <button class="btn btn-primary mt-4" (click)="drawerToggle.checked = false" type="submit">Submit</button>                
+                 </div>
+
               </form>
             </div>
           </div>
@@ -99,29 +103,7 @@
             </div>
             <div class="collapse-content"> 
               <ul class="menu bg-base-200 w-56 rounded-box">
-                <!-- <label class="cursor-pointer label">
-                  <input type="checkbox" class="toggle toggle-primary" unchecked />
-                  <a class="label-text">Near Me</a> 
-  
-                </label>
-                <label class="cursor-pointer label">
-                  <input type="checkbox" class="toggle toggle-primary" unchecked />
-                  <a class="label-text">20-30km</a> 
-  
-                </label>
-                <label class="cursor-pointer label">
-                  <input type="checkbox" class="toggle toggle-primary" unchecked />
-                  <a class="label-text">30-40km</a> 
-                </label>
-                <label class="cursor-pointer label">
-                  <input type="checkbox" class="toggle toggle-primary" unchecked />
-                  <a class="label-text">40-50km</a> 
-                </label>
-                <label class="cursor-pointer label">
-                  <input type="checkbox" class="toggle toggle-primary" unchecked />
-                  <a class="label-text">50km+</a> 
-                </label> -->
-                <input type="text" placeholder="Search by Location" class="input input-bordered w-full max-w-xs" />
+                <input type="text" class="input input-bordered w-full max-w-xs" (input)="updateSearchLocation($event)" placeholder="Search by Location"/>   
               </ul>
             </div>
           </div>
