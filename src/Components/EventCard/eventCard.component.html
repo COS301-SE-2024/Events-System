@@ -1,0 +1,29 @@
+<div class="card shadow-xl bg-neutral"> 
+    <figure class="size-60 w-60">
+      <img src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg" alt="Album"/>
+    </figure>
+
+    <div class="card-body max-w-60">
+      <h2 class="card-title">{{ eventTitle }}</h2>
+
+      <div>
+        <p> <i class="fa-solid fa-user mr-2"></i> {{ hostedBy }}</p>
+        <p><i class="fa-solid fa-location-pin mr-3"></i>{{ location }}</p>
+        <p><i class="fa-regular fa-clock mr-2"></i> {{startTime }} - {{ endTime }} </p>
+        <p><i class="fa-regular fa-calendar-days mr-3"></i>{{startDate | date:'d MMM' }} - {{ endDate | date:'d MMM'  }} </p>
+
+        <!-- <p>{{ startDate | date:'shortDate' }} - {{ endDate | date:'shortDate' }}</p>
+        <p>{{ startTime | date:'shortTIme' }} - {{ endTime | date:'shortTime' }}</p> -->
+      </div>
+      
+      <form action="">
+        <div class="card-actions justify-end">
+          <button type="submit"
+              class="inline-flex cursor-pointer items-center justify-center rounded-xl border-none bg-accent px-4 py-2.5 text-sm font-semibold text-white transition duration-200 hover:bg-gradient-to-r hover:from-fuchsia-600 hover:to-indigo-500 focus:outline-none focus:ring-2 focus:ring-orange-400/80 focus:ring-offset-0 disabled:opacity-30 disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80"
+            >
+              Book Now
+            </button>
+        </div>
+      </form>
+    </div>
+</div>
