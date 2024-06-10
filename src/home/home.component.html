@@ -167,13 +167,21 @@
     <section class="bg-transparent text-center shadow-2xl"> <!--Featured events section-->
       <h2 class="lexend-deca-extraLight mb-1.5 ">Your Upcoming Events</h2>
       <div class="carousel w-full h-[318px]">
-
         <div id="slide5" class="carousel-item relative w-full flex flex-row gap-6 justify-center"> <!--slide 1-->
           <div id="card1" class="mt-2.5"> <!--card 1-->
-            <app-event-card>
-              <!--array of events-->
-              <!--define variables-->
-            </app-event-card>
+            
+            <!-- <ng-template #content> -->
+              <app-event-card
+                *ngFor="let event of events "
+                [eventTitle]="event.title"
+                [hostName]="event.hostId"
+                [startTime]="event.startTime"
+                [endTime]="event.endTime"
+                [startDate]="event.startDate"
+                [endDate]="event.endDate">
+              </app-event-card>
+            <!-- </ng-template> -->
+            
     
             <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
               <a href="#slide8" class="btn btn-circle">❮</a> 
