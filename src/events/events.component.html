@@ -1,21 +1,6 @@
-
-<div class="navbar bg-base-100">
-  <div class="navbar-start">
-  </div>
-  <div class="navbar-center hidden lg:flex">
-    <a class="btn btn-ghost text-xl">Events</a>
-
-  </div>
-  <div class="navbar-end">
-      <label for="my-drawer-4" class="drawer-button btn btn-primary">Create event</label>
-  </div>
-</div>
-
-<div class="drawer drawer-end">
-  <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
-  <div class="drawer-content">
-    <!-- Page content here -->
-          <app-event
+<div class="flex">
+  <div class="ml-8 w-10/12 h-96 grid grid-cols-4 gap-24">
+    <!-- <app-event-card    
     *ngFor="let event of events"
     [eventTitle]="event.title"
     [description]="event.description"
@@ -24,116 +9,117 @@
     [location]="event.location"
     [hostedBy]="event.hostId"
     [socialClub]="event.socialClub">
-  </app-event>
 
-  </div> 
-  <div class="drawer-side  z-20">
-    <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>
-    <ul class="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
-      <!-- Sidebar content here -->
-      <form class="card-body" (submit)="onSubmit($event)">
+    </app-event-card> -->
+    <app-event-card></app-event-card>
+    <app-event-card></app-event-card>
+    <app-event-card></app-event-card>
+    <app-event-card></app-event-card>
+    <app-event-card></app-event-card>
+    <app-event-card></app-event-card>
+    <app-event-card></app-event-card>
+    <app-event-card></app-event-card>
+    <app-event-card></app-event-card>
+    <app-event-card></app-event-card>
+    <app-event-card></app-event-card>
+  </div>
 
-          <div>
-            <label
-              htmlFor="title"
-              class="block text-sm font-semibold text-heading"
-            >
-              Title
-            </label>
-            <input
-              id="title"
-              name="title"
-              type="text"
-              class="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-primary focus:outline-none focus:ring-0 sm:text-sm"
-            />
-            
+  <div class="fixed right-0 w-96 h-full">
+    <!-- Add your navbar content here -->
+     <div class="bg-transparent">
+      <button class="btn w-full no-animation">Refine by social club</button>
+      <ul class="menu bg-base-200 w-full rounded-box">
+        <li><input type="checkbox" [checked]="allClubsChecked" (change)="allClubsChecked = !allClubsChecked; onAllClubsClick()" aria-label="All social clubs" class="btn w-full"/></li>
+        <li><input type="checkbox" [checked]="otherCheckboxes[0]" (change)="otherCheckboxes[0] = !otherCheckboxes[0]; onOtherClubClick(0)" aria-label="social club 1" class="btn" /></li>
+        <li><input type="checkbox" [checked]="otherCheckboxes[1]" (change)="otherCheckboxes[1] = !otherCheckboxes[1]; onOtherClubClick(1)" aria-label="social club 2" class="btn" /></li>
+        <li><input type="checkbox" [checked]="otherCheckboxes[2]" (change)="otherCheckboxes[2] = !otherCheckboxes[2]; onOtherClubClick(2)" aria-label="social club 3" class="btn" /></li>
+      </ul>  
+
+      <div class="mt-8">
+        <button class="btn w-full no-animation">Filter By:</button>
+  
+        <div class="collapse collapse-plus bg-base-200">
+          <input type="radio" name="my-accordion-3" checked="checked" /> 
+          <div class="collapse-title text-xl font-medium">
+            Date
           </div>
+          <div class="collapse-content"> 
+            <form (submit)="onSubmit()">
+              <input type="date" id="date-input" name="date-input" class="bg-gray-400 w-full px-3 py-2 rounded-lg border-2 border-gray-400 focus:border-indigo-500 text-base outline-none text-gray-700 transition-colors duration-200 ease-in-out">
+              <!-- <button type="submit">Submit</button> -->
+              <button class="btn btn-primary mt-4" type="submit">Submit</button>
+            </form>
+          </div>
+        </div>
+        <div class="collapse collapse-plus bg-base-200">
+          <input type="radio" name="my-accordion-3" /> 
+          <div class="collapse-title text-xl font-medium">
+            Location
+          </div>
+          <div class="collapse-content"> 
+            <ul class="menu bg-base-200 w-56 rounded-box">
+              <label class="cursor-pointer label">
+                <input type="checkbox" class="toggle toggle-primary" unchecked />
+                <a class="label-text">Near Me</a> 
 
-          <div>
-              <label
-                htmlFor="description"
-                class="block text-sm font-semibold text-heading"
-              >
-              Description
               </label>
-              <input
-              id="description"
-              name="description"
-              type="text"
-              class="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-primary focus:outline-none focus:ring-0 sm:text-sm"
-            />              </div>
+              <label class="cursor-pointer label">
+                <input type="checkbox" class="toggle toggle-primary" unchecked />
+                <a class="label-text">20-30km</a> 
 
-          <!-- start time input -->
-          <div>
-              <label
-                htmlFor="startTime"
-                class="block text-sm font-semibold text-heading"
-              >
-                Start time
               </label>
-              <input
-                id="startTime"
-                name="startTime"
-                type="text"
-                class="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-primary focus:outline-none focus:ring-0 sm:text-sm"
-              />
-            </div>
-
-          <!-- end time input -->
-          <div>
-              <label
-                htmlFor="endTime"
-                class="block text-sm font-semibold text-heading"
-              >
-                End time
+              <label class="cursor-pointer label">
+                <input type="checkbox" class="toggle toggle-primary" unchecked />
+                <a class="label-text">30-40km</a> 
               </label>
-              <input
-                id="endTime"
-                name="endTime"
-                type="text"
-                class="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-primary focus:outline-none focus:ring-0 sm:text-sm"
-              />
-            </div>
-
-          <!-- location input -->
-          <div>
-              <label
-                htmlFor="location"
-                class="block text-sm font-semibold text-heading"
-              >
-                Location
+              <label class="cursor-pointer label">
+                <input type="checkbox" class="toggle toggle-primary" unchecked />
+                <a class="label-text">40-50km</a> 
               </label>
-              <input
-                id="location"
-                name="location"
-                type="text"
-                class="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-primary focus:outline-none focus:ring-0 sm:text-sm"
-              />
-            </div>
-
-          <!-- location input -->
-          <div>
-              <label
-                htmlFor="socialClub"
-                class="block text-sm font-semibold text-heading"
-              >
-                social-club
+              <label class="cursor-pointer label">
+                <input type="checkbox" class="toggle toggle-primary" unchecked />
+                <a class="label-text">50km+</a> 
               </label>
-              <input
-                id="socialClub"
-                name="socialClub"
-                type="text"
-                class="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-primary focus:outline-none focus:ring-0 sm:text-sm"
-              />
-            </div>
+              <input type="text" placeholder="Search by Location" class="input input-bordered w-full max-w-xs" />
+            </ul>
+          </div>
+        </div>
+        <div class="collapse collapse-plus bg-base-200">
+          <input type="radio" name="my-accordion-3" /> 
+          <div class="collapse-title text-xl font-medium">
+            Dietary Requirements
+          </div>
+          <div class="collapse-content"> 
+            <ul class="menu bg-base-200 w-56 rounded-box">
+              <label class="label cursor-pointer">
+                <input type="radio" name="radio-10" class="radio checked:bg-red-500" checked />
+                <span class="label-text">None</span> 
+              </label>
+              <label class="label cursor-pointer">
+                <input type="radio" name="radio-10" class="radio checked:bg-red-500" unchecked />
+                <span class="label-text">Vegatarian</span> 
+                
+              </label>
+              <label class="label cursor-pointer">
+                <input type="radio" name="radio-10" class="radio checked:bg-red-500" unchecked />
+                <span class="label-text">Vegan</span> 
 
-            <button
-                  type="submit"
-                  class="mt-4 inline-flex cursor-pointer items-center justify-center rounded-xl border-2 border-primary bg-primary px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:border-primary-accent hover:bg-primary-accent focus:outline-none focus:ring-2 focus:ring-orange-400/80 focus:ring-offset-0 disabled:opacity-30 disabled:hover:border-primary disabled:hover:bg-primary disabled:hover:text-white dark:focus:ring-white/80"
-            >
-              Create Event
-            </button>
-      </form>
-    </ul>
+              </label>
+              <label class="label cursor-pointer">
+                <input type="radio" name="radio-10" class="radio checked:bg-red-500" unchecked />
+                <span class="label-text">Halal</span> 
+
+              </label>
+              <label class="label cursor-pointer">
+                <input type="radio" name="radio-10" class="radio checked:bg-red-500" unchecked />
+                <span class="label-text">Gluten-free</span> 
+
+              </label>
+            </ul>
+          </div>
+        </div>
+       </div>
+     </div>
+
   </div>
 </div>
