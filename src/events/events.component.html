@@ -1,125 +1,178 @@
-<div class="flex">
-  <div class="ml-8 w-10/12 h-96 grid grid-cols-4 gap-24">
-    <!-- <app-event-card    
-    *ngFor="let event of events"
-    [eventTitle]="event.title"
-    [description]="event.description"
-    [startTime]="event.startTime"
-    [endTime]="event.endTime"
-    [location]="event.location"
-    [hostedBy]="event.hostId"
-    [socialClub]="event.socialClub">
 
-    </app-event-card> -->
-    <app-event-card></app-event-card>
-    <app-event-card></app-event-card>
-    <app-event-card></app-event-card>
-    <app-event-card></app-event-card>
-    <app-event-card></app-event-card>
-    <app-event-card></app-event-card>
-    <app-event-card></app-event-card>
-    <app-event-card></app-event-card>
-    <app-event-card></app-event-card>
-    <app-event-card></app-event-card>
-    <app-event-card></app-event-card>
-  </div>
+  <div class="drawer lg:drawer-open drawer-end">
+    <input id="my-drawer-3" type="checkbox" class="drawer-toggle"  #drawerToggle/>
+    <div class="drawer-content flex flex-col items-center justify-center">
+      <!-- Page content here -->
+      <label for="my-drawer-3" class="btn btn-primary drawer-button lg:hidden w-full">Filter</label>
 
-  <div class="fixed right-0 w-96 h-full">
-    <!-- Add your navbar content here -->
-     <div class="bg-transparent">
-      <button class="btn w-full no-animation">Refine by social club</button>
-      <ul class="menu bg-base-200 w-full rounded-box">
-        <li><input type="checkbox" [checked]="allClubsChecked" (change)="allClubsChecked = !allClubsChecked; onAllClubsClick()" aria-label="All social clubs" class="btn w-full"/></li>
-        <li><input type="checkbox" [checked]="otherCheckboxes[0]" (change)="otherCheckboxes[0] = !otherCheckboxes[0]; onOtherClubClick(0)" aria-label="social club 1" class="btn" /></li>
-        <li><input type="checkbox" [checked]="otherCheckboxes[1]" (change)="otherCheckboxes[1] = !otherCheckboxes[1]; onOtherClubClick(1)" aria-label="social club 2" class="btn" /></li>
-        <li><input type="checkbox" [checked]="otherCheckboxes[2]" (change)="otherCheckboxes[2] = !otherCheckboxes[2]; onOtherClubClick(2)" aria-label="social club 3" class="btn" /></li>
-      </ul>  
+      <div class="flex">
+        <div class="lg:mb-96 mt-2 mb-80 ml-8 w-10/12 h-96 grid grid-cols-4 gap-24">
+          
+          <div *ngIf="isLoading; else content">
+            <!-- Skeleton screen goes here -->
+            <div class="lg:mb-96 mt-2 mb-80 ml-8 w-10/12 h-96 grid grid-cols-4 gap-24">
+             <app-ghost-event-card></app-ghost-event-card>
+             <app-ghost-event-card></app-ghost-event-card>
+             <app-ghost-event-card></app-ghost-event-card>
+             <app-ghost-event-card></app-ghost-event-card>
+             <app-ghost-event-card></app-ghost-event-card>
+             </div>
+          </div>
+          
+          <ng-template #content>
+            <!-- Actual content goes here -->
+              <app-event-card    
+              *ngFor="let event of filteredEvents"
+              [eventTitle]="event.title"
+              [description]="event.description"
+              [startTime]="event.startTime"
+              [endTime]="event.endTime"
+              [startDate]="event.startDate"
+              [endDate]="event.endDate"
+              [location]="event.location"
+              [hostedBy]="event.hostId"
+              [socialClub]="event.socialClub">
+              </app-event-card>
+          </ng-template>
 
-      <div class="mt-8">
-        <button class="btn w-full no-animation">Filter By:</button>
+          <!-- <app-event-card></app-event-card>
+          <app-event-card></app-event-card>
+          <app-event-card></app-event-card>
+          <app-event-card></app-event-card>
+          <app-event-card></app-event-card>
+          <app-event-card></app-event-card>
+          <app-event-card></app-event-card>
+          <app-event-card></app-event-card>
+          <app-event-card></app-event-card>
+          <app-event-card></app-event-card>
+          <app-event-card></app-event-card> -->
+        </div>
+      </div>
+      
+    
+    </div> 
+    <div class="drawer-side">
+      <label for="my-drawer-3" aria-label="close sidebar" class="drawer-overlay fixed"></label> 
+      <ul class="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+        <!-- Sidebar content here -->
+        <button class="btn w-full no-animation">Refine by social club</button>
+        <ul class="menu bg-base-200 w-full rounded-box">
+          <li><input type="checkbox" [checked]="allClubsChecked" (change)="allClubsChecked = !allClubsChecked; onAllClubsClick()" aria-label="All social clubs" class="btn w-full"/></li>
+          <li *ngFor="let club of uniqueSocialClubs; let i = index">
+            <input type="checkbox" [checked]="otherCheckboxes[i]" (change)="otherCheckboxes[i] = !otherCheckboxes[i]; onOtherClubClick(i)" (click)="filterEvents()"[attr.aria-label]="club" class="btn" />
+          </li>
+        </ul>  
   
-        <div class="collapse collapse-plus bg-base-200">
-          <input type="radio" name="my-accordion-3" checked="checked" /> 
-          <div class="collapse-title text-xl font-medium">
-            Date
+        <div class="mt-8">
+          <button class="btn w-full no-animation">Filter By:</button>
+    
+          <div class="collapse collapse-plus bg-base-200">
+            <input type="radio" name="my-accordion-3" checked="checked" /> 
+  
+                    <div class="collapse collapse-plus bg-base-200">
+            <input type="radio" name="my-accordion-3" /> 
+            <div class="collapse-title text-xl font-medium">
+              Title
+            </div>
+            <div class="collapse-content"> 
+              <ul class="menu bg-base-200 w-56 rounded-box">
+                <input type="text" placeholder="Search by title" class="input input-bordered w-full max-w-xs" />
+              </ul>
+            </div>
           </div>
-          <div class="collapse-content"> 
-            <form (submit)="onSubmit()">
-              <input type="date" id="date-input" name="date-input" class="bg-gray-400 w-full px-3 py-2 rounded-lg border-2 border-gray-400 focus:border-indigo-500 text-base outline-none text-gray-700 transition-colors duration-200 ease-in-out">
-              <!-- <button type="submit">Submit</button> -->
-              <button class="btn btn-primary mt-4" type="submit">Submit</button>
-            </form>
+            
+            <div class="collapse-title text-xl font-medium">
+              Date
+            </div>
+            <div class="collapse-content"> 
+              <form (submit)="onSubmit()">
+                <input type="date" id="date-input" name="date-input" class="bg-gray-400 w-full px-3 py-2 rounded-lg border-2 border-gray-400 focus:border-indigo-500 text-base outline-none text-gray-700 transition-colors duration-200 ease-in-out">
+                <!-- <button type="submit">Submit</button> -->
+                <button class="btn btn-primary mt-4" type="submit">Submit</button>
+              </form>
+            </div>
           </div>
-        </div>
-        <div class="collapse collapse-plus bg-base-200">
-          <input type="radio" name="my-accordion-3" /> 
-          <div class="collapse-title text-xl font-medium">
-            Location
+          <div class="collapse collapse-plus bg-base-200">
+            <input type="radio" name="my-accordion-3" /> 
+            <div class="collapse-title text-xl font-medium">
+              Location
+            </div>
+            <div class="collapse-content"> 
+              <ul class="menu bg-base-200 w-56 rounded-box">
+                <!-- <label class="cursor-pointer label">
+                  <input type="checkbox" class="toggle toggle-primary" unchecked />
+                  <a class="label-text">Near Me</a> 
+  
+                </label>
+                <label class="cursor-pointer label">
+                  <input type="checkbox" class="toggle toggle-primary" unchecked />
+                  <a class="label-text">20-30km</a> 
+  
+                </label>
+                <label class="cursor-pointer label">
+                  <input type="checkbox" class="toggle toggle-primary" unchecked />
+                  <a class="label-text">30-40km</a> 
+                </label>
+                <label class="cursor-pointer label">
+                  <input type="checkbox" class="toggle toggle-primary" unchecked />
+                  <a class="label-text">40-50km</a> 
+                </label>
+                <label class="cursor-pointer label">
+                  <input type="checkbox" class="toggle toggle-primary" unchecked />
+                  <a class="label-text">50km+</a> 
+                </label> -->
+                <input type="text" placeholder="Search by Location" class="input input-bordered w-full max-w-xs" />
+              </ul>
+            </div>
           </div>
-          <div class="collapse-content"> 
-            <ul class="menu bg-base-200 w-56 rounded-box">
-              <label class="cursor-pointer label">
-                <input type="checkbox" class="toggle toggle-primary" unchecked />
-                <a class="label-text">Near Me</a> 
-
-              </label>
-              <label class="cursor-pointer label">
-                <input type="checkbox" class="toggle toggle-primary" unchecked />
-                <a class="label-text">20-30km</a> 
-
-              </label>
-              <label class="cursor-pointer label">
-                <input type="checkbox" class="toggle toggle-primary" unchecked />
-                <a class="label-text">30-40km</a> 
-              </label>
-              <label class="cursor-pointer label">
-                <input type="checkbox" class="toggle toggle-primary" unchecked />
-                <a class="label-text">40-50km</a> 
-              </label>
-              <label class="cursor-pointer label">
-                <input type="checkbox" class="toggle toggle-primary" unchecked />
-                <a class="label-text">50km+</a> 
-              </label>
-              <input type="text" placeholder="Search by Location" class="input input-bordered w-full max-w-xs" />
-            </ul>
+  
+          <div class="collapse collapse-plus bg-base-200">
+            <input type="radio" name="my-accordion-3" /> 
+            <div class="collapse-title text-xl font-medium">
+              Dietary Requirements
+            </div>
+            <div class="collapse-content"> 
+              <ul class="menu bg-base-200 w-56 rounded-box">
+                <label class="label cursor-pointer">
+                  <input type="radio" name="radio-10" class="radio checked:bg-red-500" checked />
+                  <span class="label-text">None</span> 
+                </label>
+                <label class="label cursor-pointer">
+                  <input type="radio" name="radio-10" class="radio checked:bg-red-500" unchecked />
+                  <span class="label-text">Vegatarian</span> 
+                  
+                </label>
+                <label class="label cursor-pointer">
+                  <input type="radio" name="radio-10" class="radio checked:bg-red-500" unchecked />
+                  <span class="label-text">Vegan</span> 
+  
+                </label>
+                <label class="label cursor-pointer">
+                  <input type="radio" name="radio-10" class="radio checked:bg-red-500" unchecked />
+                  <span class="label-text">Halal</span> 
+  
+                </label>
+                <label class="label cursor-pointer">
+                  <input type="radio" name="radio-10" class="radio checked:bg-red-500" unchecked />
+                  <span class="label-text">Gluten-free</span> 
+  
+                </label>
+              </ul>
+            </div>
           </div>
-        </div>
-        <div class="collapse collapse-plus bg-base-200">
-          <input type="radio" name="my-accordion-3" /> 
-          <div class="collapse-title text-xl font-medium">
-            Dietary Requirements
-          </div>
-          <div class="collapse-content"> 
-            <ul class="menu bg-base-200 w-56 rounded-box">
-              <label class="label cursor-pointer">
-                <input type="radio" name="radio-10" class="radio checked:bg-red-500" checked />
-                <span class="label-text">None</span> 
-              </label>
-              <label class="label cursor-pointer">
-                <input type="radio" name="radio-10" class="radio checked:bg-red-500" unchecked />
-                <span class="label-text">Vegatarian</span> 
-                
-              </label>
-              <label class="label cursor-pointer">
-                <input type="radio" name="radio-10" class="radio checked:bg-red-500" unchecked />
-                <span class="label-text">Vegan</span> 
-
-              </label>
-              <label class="label cursor-pointer">
-                <input type="radio" name="radio-10" class="radio checked:bg-red-500" unchecked />
-                <span class="label-text">Halal</span> 
-
-              </label>
-              <label class="label cursor-pointer">
-                <input type="radio" name="radio-10" class="radio checked:bg-red-500" unchecked />
-                <span class="label-text">Gluten-free</span> 
-
-              </label>
-            </ul>
-          </div>
-        </div>
-       </div>
-     </div>
-
+         </div>
+         <div class="flex lg:hidden w-full">
+          <button class="btn btn-outline" (click)="drawerToggle.checked = false">Cancel</button>
+          <button class="btn btn-outline btn-primary ml-28" (click)="drawerToggle.checked = false">Save</button>
+         </div>
+      </ul>
+    
+    </div>
   </div>
-</div>
+  <!-- <div class="lg:block hidden fixed right-0 w-96 h-full"> -->
+    <!-- Add your navbar content here -->
+     <!-- <div class="bg-transparent"> -->
+
+     <!-- </div> -->
+
+  <!-- </div> -->

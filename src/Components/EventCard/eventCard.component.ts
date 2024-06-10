@@ -9,6 +9,12 @@ import { CommonModule } from '@angular/common';
   styleUrl: './eventCard.component.css',
 })
 export class EventCardComponent {
+  logDates(): void {
+    console.log(`Start Date 11: ${this.startDate}`);
+    console.log(`End Date 11: ${this.endDate}`);
+  }
+
+
   @Input() eventTitle: string | undefined;
   @Input() description: string | undefined;
   @Input() startTime: string | undefined;
