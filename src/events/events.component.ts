@@ -12,7 +12,6 @@ import { GhostEventCardComponent } from 'src/Components/GhostEventCard/GhostEven
 })
 
 export class EventsComponent implements OnInit{
-  @ViewChild('dateInput') dateInput!: ElementRef;
   events: any[] = [];
   selectedDate = '';
   searchLocation = '';
@@ -35,11 +34,7 @@ checkedSocialClubs: string[] = [];
   };  
   allClubsChecked = false;
   otherCheckboxes = [false, false, false]; // Adjust this to match the number of your other checkboxes
-  ngAfterViewInit() {
-    this.dateInput.nativeElement.addEventListener('input', () => {
-      this.filterEvents();
-    });
-  }
+
 
   onSubmit() {
     const dateInput = (<HTMLInputElement>document.getElementById('date-input')).value;
