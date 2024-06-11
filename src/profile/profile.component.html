@@ -1,123 +1,112 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desktop and Mobile UI with DaisyUI</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/@daisyui@1.14.0/dist/daisyui.min.js"></script>
-</head>
-<body class="bg-gray-100">
-
-    <!-- Desktop Version -->
-    <div class="hidden md:block">
-        <div class="container mx-auto p-4">
-            <!-- Profile Section -->
-            <div class="card w-full bg-base-100 shadow-xl mb-4">
-                <div class="card-body">
-                    <div class="flex justify-between items-center">
-                        <div>
-                            <div class="avatar">
-                                <div class="w-24 rounded-full">
-                                    <img src="https://via.placeholder.com/150" />
-                                </div>
-                            </div>
-                            <div>
-                                <h2 class="text-2xl">Profile Name</h2>
-                                <p>Profile Bio</p>
-                            </div>
-                        </div>
-                        <button class="btn btn-outline">Edit Profile</button>
-                    </div>
-                    <div class="tabs">
-                        <a class="tab tab-bordered tab-active">About</a>
-                        <a class="tab tab-bordered">Events History</a>
-                        <a class="tab tab-bordered">Subscriptions</a>
-                    </div>
-                    <div class="mt-4">
-                        <!-- About Content -->
-                        <div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse gravida, sem eget fringilla tempus.</p>
-                        </div>
-                        <!-- Contact Details -->
-                        <div class="mt-4">
-                            <h3 class="text-xl">Contact Details</h3>
-                            <ul>
-                                <li>Email: example email</li>
-                                <li>Profile X</li>
-                                <li>Profile LinkedIn</li>
-                                <li>Profile Discord</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+<!-- Desktop Version -->
+<div class="hidden md:block container mx-auto p-4">
+    <div class="card w-full bg-base-100 shadow-xl mb-4">
+      <div class="card-body">
+        <div class="flex justify-between items-center">
+          <div class="flex items-center">
+            <div class="avatar mr-4">
+              <div class="w-24 rounded-full">
+                <img src="https://via.placeholder.com/150" alt="Profile Picture" />
+              </div>
             </div>
-            
-            <!-- Events History Tab Content -->
-            <div class="card w-full bg-base-100 shadow-xl mb-4">
-                <div class="card-body">
-                    <h2 class="card-title">Event Title</h2>
-                    <p>Host Name</p>
-                    <p>Event Details</p>
-                    <button class="btn btn-outline">More details</button>
-                </div>
+            <div>
+              <h2 class="text-2xl">Profile Name</h2>
+              <p>Profile Bio</p>
             </div>
+          </div>
+          <button class="btn btn-outline">Edit Profile</button>
         </div>
-    </div>
-
-    <!-- Mobile Version -->
-    <div class="md:hidden">
-        <div class="container mx-auto p-4">
-            <!-- Profile Section -->
-            <div class="card w-full bg-base-100 shadow-xl mb-4">
-                <div class="card-body">
-                    <div class="flex flex-col items-center">
-                        <div class="avatar">
-                            <div class="w-24 rounded-full">
-                                <img src="https://via.placeholder.com/150" />
-                            </div>
-                        </div>
-                        <div>
-                            <h2 class="text-2xl">Profile Name</h2>
-                            <p>Profile Bio</p>
-                        </div>
-                        <button class="btn btn-outline mt-4">Edit Profile</button>
-                    </div>
-                    <div class="tabs tabs-boxed w-full">
-                        <a class="tab tab-bordered tab-active">About</a>
-                        <a class="tab tab-bordered">Events History</a>
-                        <a class="tab tab-bordered">Subscriptions</a>
-                    </div>
-                    <div class="mt-4">
-                        <!-- About Content -->
-                        <div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse gravida, sem eget fringilla tempus.</p>
-                        </div>
-                        <!-- Contact Details -->
-                        <div class="mt-4">
-                            <h3 class="text-xl">Contact Details</h3>
-                            <ul>
-                                <li>Email: example email</li>
-                                <li>Profile X</li>
-                                <li>Profile LinkedIn</li>
-                                <li>Profile Discord</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Events History Tab Content -->
-            <div class="card w-full bg-base-100 shadow-xl mb-4">
-                <div class="card-body">
-                    <h2 class="card-title">Event Title</h2>
-                    <p>Host Name</p>
-                    <p>Event Details</p>
-                    <button class="btn btn-outline">More details</button>
-                </div>
-            </div>
+        <div class="tabs">
+          <a class="tab tab-bordered" (click)="selectTab('about')" [class.tab-active]="selectedTab === 'about'">About</a>
+          <a class="tab tab-bordered" (click)="selectTab('events')" [class.tab-active]="selectedTab === 'events'">Events History</a>
+          <a class="tab tab-bordered" (click)="selectTab('subscriptions')" [class.tab-active]="selectedTab === 'subscriptions'">Subscriptions</a>
         </div>
+      </div>
     </div>
-
-</body>
-</html>
+  
+    <div *ngIf="selectedTab === 'about'" class="card w-full bg-base-100 shadow-xl mb-4">
+      <div class="card-body">
+        <h2 class="card-title">About Me</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse gravida, sem eget fringilla tempus.</p>
+        <h3 class="text-xl mt-4">Contact Details</h3>
+        <ul>
+          <li>Email: </li>
+          <li>Profile X</li>
+          <li>Profile LinkedIn</li>
+          <li>Profile Discord</li>
+        </ul>
+      </div>
+    </div>
+  
+    <div *ngIf="selectedTab === 'events'" class="card w-full bg-base-100 shadow-xl mb-4">
+      <div class="card-body">
+        <h2 class="card-title">Event Title</h2>
+        <p>Host Name</p>
+        <p>Event Details</p>
+        <button class="btn btn-outline">More details</button>
+      </div>
+    </div>
+  
+    <div *ngIf="selectedTab === 'subscriptions'" class="card w-full bg-base-100 shadow-xl mb-4">
+      <div class="card-body">
+        <h2 class="card-title">Subscriptions</h2>
+        <p>Details about the user's subscriptions.</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Mobile Version -->
+  <div class="md:hidden container mx-auto p-4">
+    <div class="card w-full bg-base-100 shadow-xl mb-4">
+      <div class="card-body">
+        <div class="flex flex-col items-center">
+          <div class="avatar mb-4">
+            <div class="w-24 rounded-full">
+              <img src="https://via.placeholder.com/150" alt="Profile Picture" />
+            </div>
+          </div>
+          <div>
+            <h2 class="text-2xl">Profile Name</h2>
+            <p>Profile Bio</p>
+          </div>
+          <button class="btn btn-outline mt-4">Edit Profile</button>
+        </div>
+        <div class="tabs tabs-boxed w-full">
+          <a class="tab tab-bordered" (click)="selectTab('about')" [class.tab-active]="selectedTab === 'about'">About</a>
+          <a class="tab tab-bordered" (click)="selectTab('events')" [class.tab-active]="selectedTab === 'events'">Events History</a>
+          <a class="tab tab-bordered" (click)="selectTab('subscriptions')" [class.tab-active]="selectedTab === 'subscriptions'">Subscriptions</a>
+        </div>
+      </div>
+    </div>
+  
+    <div *ngIf="selectedTab === 'about'" class="card w-full bg-base-100 shadow-xl mb-4">
+      <div class="card-body">
+        <h2 class="card-title">About Me</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse gravida, sem eget fringilla tempus.</p>
+        <h3 class="text-xl mt-4">Contact Details</h3>
+        <ul>
+          <li>Email: </li>
+          <li>Profile X</li>
+          <li>Profile LinkedIn</li>
+          <li>Profile Discord</li>
+        </ul>
+      </div>
+    </div>
+  
+    <div *ngIf="selectedTab === 'events'" class="card w-full bg-base-100 shadow-xl mb-4">
+      <div class="card-body">
+        <h2 class="card-title">Event Title</h2>
+        <p>Host Name</p>
+        <p>Event Details</p>
+        <button class="btn btn-outline">More details</button>
+      </div>
+    </div>
+  
+    <div *ngIf="selectedTab === 'subscriptions'" class="card w-full bg-base-100 shadow-xl mb-4">
+      <div class="card-body">
+        <h2 class="card-title">Subscriptions</h2>
+        <p>Details about the user's subscriptions.</p>
+      </div>
+    </div>
+  </div>
+  
