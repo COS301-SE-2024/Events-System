@@ -3,87 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DaisyUI Example</title>
+    <title>Desktop and Mobile UI with DaisyUI</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@daisyui@1.14.0/dist/daisyui.min.js"></script>
 </head>
 <body class="bg-gray-100">
+
     <!-- Desktop Version -->
     <div class="hidden md:block">
         <div class="container mx-auto p-4">
-            <header class="mb-4">
-                <h1 class="text-3xl font-bold">Header</h1>
-            </header>
-            <main>
-                <!-- Example Card -->
-                <div class="card w-96 bg-base-100 shadow-xl">
-                    <div class="card-body">
-                        <h2 class="card-title">Card Title</h2>
-                        <p>Card content goes here.</p>
-                        <div class="card-actions justify-end">
-                            <button class="btn btn-primary">Button</button>
+            <!-- Profile Section -->
+            <div class="card w-full bg-base-100 shadow-xl mb-4">
+                <div class="card-body">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <div class="avatar">
+                                <div class="w-24 rounded-full">
+                                    <img src="https://via.placeholder.com/150" />
+                                </div>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl">Profile Name</h2>
+                                <p>Profile Bio</p>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline">Edit Profile</button>
+                    </div>
+                    <div class="tabs">
+                        <a class="tab tab-bordered tab-active">About</a>
+                        <a class="tab tab-bordered">Events History</a>
+                        <a class="tab tab-bordered">Subscriptions</a>
+                    </div>
+                    <div class="mt-4">
+                        <!-- About Content -->
+                        <div>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse gravida, sem eget fringilla tempus.</p>
+                        </div>
+                        <!-- Contact Details -->
+                        <div class="mt-4">
+                            <h3 class="text-xl">Contact Details</h3>
+                            <ul>
+                                <li>Email: example email</li>
+                                <li>Profile X</li>
+                                <li>Profile LinkedIn</li>
+                                <li>Profile Discord</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-                <!-- Example Form -->
-                <form class="w-full max-w-lg mt-6">
-                    <div class="form-control">
-                        <label class="label">
-                            <span class="label-text">Email</span>
-                        </label>
-                        <input type="email" placeholder="email@example.com" class="input input-bordered w-full">
-                    </div>
-                    <div class="form-control mt-4">
-                        <label class="label">
-                            <span class="label-text">Password</span>
-                        </label>
-                        <input type="password" placeholder="********" class="input input-bordered w-full">
-                    </div>
-                    <div class="form-control mt-6">
-                        <button class="btn btn-primary w-full">Submit</button>
-                    </div>
-                </form>
-            </main>
+            </div>
+            
+            <!-- Events History Tab Content -->
+            <div class="card w-full bg-base-100 shadow-xl mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">Event Title</h2>
+                    <p>Host Name</p>
+                    <p>Event Details</p>
+                    <button class="btn btn-outline">More details</button>
+                </div>
+            </div>
         </div>
     </div>
 
     <!-- Mobile Version -->
     <div class="md:hidden">
         <div class="container mx-auto p-4">
-            <header class="mb-4">
-                <h1 class="text-2xl font-bold">Header</h1>
-            </header>
-            <main>
-                <!-- Example Card -->
-                <div class="card w-full bg-base-100 shadow-xl">
-                    <div class="card-body">
-                        <h2 class="card-title">Card Title</h2>
-                        <p>Card content goes here.</p>
-                        <div class="card-actions justify-end">
-                            <button class="btn btn-primary">Button</button>
+            <!-- Profile Section -->
+            <div class="card w-full bg-base-100 shadow-xl mb-4">
+                <div class="card-body">
+                    <div class="flex flex-col items-center">
+                        <div class="avatar">
+                            <div class="w-24 rounded-full">
+                                <img src="https://via.placeholder.com/150" />
+                            </div>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl">Profile Name</h2>
+                            <p>Profile Bio</p>
+                        </div>
+                        <button class="btn btn-outline mt-4">Edit Profile</button>
+                    </div>
+                    <div class="tabs tabs-boxed w-full">
+                        <a class="tab tab-bordered tab-active">About</a>
+                        <a class="tab tab-bordered">Events History</a>
+                        <a class="tab tab-bordered">Subscriptions</a>
+                    </div>
+                    <div class="mt-4">
+                        <!-- About Content -->
+                        <div>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse gravida, sem eget fringilla tempus.</p>
+                        </div>
+                        <!-- Contact Details -->
+                        <div class="mt-4">
+                            <h3 class="text-xl">Contact Details</h3>
+                            <ul>
+                                <li>Email: example email</li>
+                                <li>Profile X</li>
+                                <li>Profile LinkedIn</li>
+                                <li>Profile Discord</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-                <!-- Example Form -->
-                <form class="w-full mt-6">
-                    <div class="form-control">
-                        <label class="label">
-                            <span class="label-text">Email</span>
-                        </label>
-                        <input type="email" placeholder="email@example.com" class="input input-bordered w-full">
-                    </div>
-                    <div class="form-control mt-4">
-                        <label class="label">
-                            <span class="label-text">Password</span>
-                        </label>
-                        <input type="password" placeholder="********" class="input input-bordered w-full">
-                    </div>
-                    <div class="form-control mt-6">
-                        <button class="btn btn-primary w-full">Submit</button>
-                    </div>
-                </form>
-            </main>
+            </div>
+            
+            <!-- Events History Tab Content -->
+            <div class="card w-full bg-base-100 shadow-xl mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">Event Title</h2>
+                    <p>Host Name</p>
+                    <p>Event Details</p>
+                    <button class="btn btn-outline">More details</button>
+                </div>
+            </div>
         </div>
     </div>
+
 </body>
 </html>
