@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { EventComponent } from './event.component';
+import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 
 describe('EventComponent', () => {
   let component: EventComponent;
@@ -7,7 +9,15 @@ describe('EventComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EventComponent],
+      declarations: [EventComponent],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            params: of({ id: 'testId' }) // Add your own mock values here
+          }
+        }
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(EventComponent);
