@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import {EventCardComponent} from 'src/Components/EventCard/eventCard.component'
@@ -11,6 +11,15 @@ import {EventCardComponent} from 'src/Components/EventCard/eventCard.component'
   styleUrl: './home.component.css',
 })
 export class HomeComponent {
+  @Input() eventTitle: string | undefined;
+  @Input() eventDescription: string | undefined;
+  @Input() hostName: string | undefined;
+  @Input() hostEmail: string | undefined;
+  @Input() startTime: string | undefined;
+  @Input() endTime: string | undefined;
+  @Input() startDate: string | undefined;
+  @Input() endDate: string | undefined;
+
   events: any[] = [];
   upcomingEvents = this.events;
   isLoading = true;
