@@ -1,13 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { EventComponent } from './event.component';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { EventComponent } from './event.component'; // Import EventComponent
+
+// Mock component
+@Component({
+  selector: 'app-mock-app-event', // Change this to a unique selector
+  template: '',
+})
+class MockEventComponent {/*...*/}
 
 @Component({
-  template: '<event-component></event-component>',
+  template: '<app-mock-app-event></app-mock-app-event>', // Use the new selector
 })
-class TestHostComponent {}
+class TestHostComponent {/*...*/}
 
 describe('EventComponent', () => {
   let component: TestHostComponent;
@@ -15,7 +22,8 @@ describe('EventComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TestHostComponent, EventComponent],
+      imports: [EventComponent], // Move EventComponent to imports
+      declarations: [TestHostComponent, MockEventComponent], // Remove EventComponent from declarations
       providers: [
         {
           provide: ActivatedRoute,
@@ -25,7 +33,7 @@ describe('EventComponent', () => {
         }
       ]
     }).compileComponents();
-
+  
     fixture = TestBed.createComponent(TestHostComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
