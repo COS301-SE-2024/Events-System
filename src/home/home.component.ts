@@ -37,7 +37,6 @@ export class HomeComponent {
     //hostEmail
   }; 
   
-  
   ngOnInit(): void {
     fetch('https://events-system-back.wn.r.appspot.com/api/events')
       .then(response => {
@@ -45,13 +44,32 @@ export class HomeComponent {
       })
       .then(data => {
         this.events = Array.isArray(data) ? data : [data];
-        //this.filterEvents();
+        this.prepareSlides();
         this.isLoading = false;
       });
   }
 
-  // UpcomingEvents() 
-  // {
-     
-  // }
+  displayedSlides: any[] = [];
+  currentIndex: number = 0;
+  eventsPerSlide: number = 2; //on large screen
+
+  prepareSlides() 
+  {
+    for (let i = 0; i < this.events.length; i += this.eventsPerSlide) 
+    {
+      this.displayedSlides.push(this.events.slice(i, i + this.eventsPerSlide));
+    }
+
+    console.log(this.displayedSlides);
+  }
+
+  prevSlide() {
+    this.currentIndex = (this.currentIndex > 0) ? this.currentIndex - 1 : this.displayedSlides.length - 1;
+    console.log( "Prev slide:" + this.currentIndex)
+  }
+
+  nextSlide() {
+    this.currentIndex = (this.currentIndex < this.displayedSlides.length - 1) ? this.currentIndex + 1 : 0;
+    console.log("Next slide:" + this.currentIndex)
+  }
 }

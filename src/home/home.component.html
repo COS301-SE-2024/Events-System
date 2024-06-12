@@ -1,6 +1,6 @@
 <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
 <main class="flex w-screen h-screen flex-col content-between">
-    <section class="bg-transparent text-center shadow-2xl size-full bg-red-900"> <!--Featured events section-->
+    <section class="bg-transparent text-center shadow-2xl size-full"> <!--Featured events section-->
         <h2 class="lexend-deca-extraLight mb-3.5">Featured Events</h2>
   
           <div class="carousel w-full ">
@@ -169,12 +169,12 @@
     <section class="bg-transparent text-center shadow-2xl h-full"> <!--Featured events section-->
       <h2 class="lexend-deca-extraLight mb-1.5 ">Your Upcoming Events</h2>
 
-      <div class="carousel size-full bg-pink-600"> <!--carousel contained-->
-        <div id="slide5" class="carousel-item relative w-full flex flex-row gap-6 justify-center"> <!--slide 1-->
-          <div id="card1" class="mt-2.5"> <!--card 1-->
-     
+      <div class="carousel size-full"> <!--carousel contained-->
+        <!--for each slide, display 2 cards-->
+        <div class="carousel-item relative w-full flex flex-row gap-6 justify-center "> <!--slide 1-->
+          <div *ngFor="let slide of displayedSlides"> <!--size 5-->
               <app-event-card
-                *ngFor="let event of events "
+                *ngFor="let event of events"
                 [eventTitle]="event.title"
                 [hostName]="event.hostId"
                 [startTime]="event.startTime"
@@ -184,18 +184,16 @@
               </app-event-card>            
     
             <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-              <a href="#slide8" class="btn btn-circle">❮</a> 
-              <a href="#slide6" class="btn btn-circle">❯</a>
+              <button class="btn btn-circle glass sm:btn-sm md:btn-md lg:btn-lg" (click)=prevSlide()>❮</button>
+              <button class="btn btn-circle glass sm:btn-sm md:btn-md lg:btn-lg" (click)=nextSlide()>❯</button>
             </div>
           </div>
         </div> 
 
     
-        <div id="slide6" class="carousel-item relative w-full flex flex-row gap-6 justify-center"> <!--slide 2-->
+        <!-- <div id="slide6" class="carousel-item relative w-full flex flex-row gap-6 justify-center">
           <div id="card5" class="mt-2.5">
             <app-event-card>
-              <!--array of events-->
-              <!--define variables-->
             </app-event-card>
   
             <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
@@ -206,8 +204,6 @@
 
           <div id="card6" class="mt-2.5">
             <app-event-card>
-              <!--array of events-->
-              <!--define variables-->
             </app-event-card>
   
             <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
@@ -215,14 +211,13 @@
               <a href="#slide7" class="btn btn-circle">❯</a>
             </div>
           </div>
-        </div> 
+        </div>  -->
   
   
-        <div id="slide7" class="carousel-item relative w-full flex flex-row gap-6 justify-center"> <!--slide 3-->
+        <!-- <div id="slide7" class="carousel-item relative w-full flex flex-row gap-6 justify-center">
           <div id="card9" class="mt-2.5">
             <app-event-card>
-              <!--array of events-->
-              <!--define variables-->
+              
             </app-event-card>
   
             <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
@@ -233,8 +228,6 @@
 
           <div id="card10" class="mt-2.5">
             <app-event-card>
-              <!--array of events-->
-              <!--define variables-->
             </app-event-card>
   
             <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
@@ -242,14 +235,13 @@
               <a href="#slide8" class="btn btn-circle">❯</a>
             </div>
           </div>
-        </div> 
+        </div>  -->
   
   
-        <div id="slide8" class="carousel-item relative w-full flex flex-row gap-6 justify-center">
+        <!-- <div id="slide8" class="carousel-item relative w-full flex flex-row gap-6 justify-center">
           <div id="card10" class="mt-2.5">
             <app-event-card>
-              <!--array of events-->
-              <!--define variables-->
+              
             </app-event-card>
   
             <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
@@ -257,7 +249,7 @@
               <a href="#slide5" class="btn btn-circle">❯</a>
             </div>
           </div>          
-        </div>
+        </div> -->
       </div>
     </section>
 </main>
