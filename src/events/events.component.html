@@ -26,6 +26,7 @@
             <!-- Actual content goes here -->
               <app-event-card    
               *ngFor="let event of filteredEvents"
+              [eventID]="event.eventId"
               [eventTitle]="event.title"
               [description]="event.description"
               [startTime]="event.startTime"
@@ -33,7 +34,7 @@
               [startDate]="event.startDate"
               [endDate]="event.endDate"
               [location]="event.location"
-              [hostedBy]="event.hostId"
+              [hostedBy]="event.host.firstName + ' ' + event.host.lastName"
               [socialClub]="event.socialClub">
               </app-event-card>
           </ng-template>

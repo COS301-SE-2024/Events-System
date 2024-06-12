@@ -1,0 +1,159 @@
+<div class="min-w-full overflow-x-hidden mb-24">
+    <!-- skeleton content -->
+    <div *ngIf="isLoading">
+        <div class="skeleton h-80 min-w-dvw"></div>
+        <div class="flex lg:justify-between lg:flex-row flex-col">
+            <div>
+                <h1 class="skeleton text-6xl lg:ml-64 mt-8 lg:h-14 h-32 w-96"></h1>
+                <h2 class="skeleton mt-4 text-4xl lg:ml-64 text-secondary lg:h-8 h-24 lg:w-[700px] w-80"></h2>
+            </div>
+            <div>
+                <div class="card bg-base-100 shadow-xl lg:mt-4 mt-32">
+                    <div class="card-body">
+                      <h2 class="card-title skeleton lg:h-8 h-14 w-64 -ml-2"></h2>
+                      <p class="skeleton lg:h-8 h-24 lg:w-[200px] w-80-ml-4"></p>
+                      <div class="card-actions justify-end">
+                        <!-- <button class="btn btn-primary">Find out More</button> -->
+                      </div>
+                    </div>
+                  </div>
+
+
+            </div>
+
+        </div>
+        
+    </div> 
+        <!-- actual content -->
+        <div *ngIf="!isLoading && event">
+            <div class="hero h-80 min-w-dvw" style="background-image: url(https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg);">  </div>
+            <!-- <div class="absolute top-0 left-8"> -->
+                <button class="btn w-[50px] -mt-12 lg:ml-8 h-[30px] rounded-full"(click)="goBack()"><i class="fa-solid fa-arrow-left"></i></button>
+
+            <!-- </div> -->
+
+                <!-- title -->
+        
+                <div class="flex lg:justify-between lg:flex-row flex-col">
+                    <div>
+                        <h1 class="text-6xl lg:ml-64 mt-8">{{event.title}}</h1>
+                        <h2 class="mt-4 text-4xl lg:ml-64 text-secondary">{{event.description}}</h2>
+                    </div>
+                    <div>
+                        <div class="card bg-base-100 shadow-xl lg:mt-4 mt-32">
+                            <div class="card-body">
+                              <h2 class="card-title">Hosted by the: {{event.socialClub}}</h2>
+                              <p>a professional group for networking, <br/>sharing industry insights, and career growth.</p>
+                              <div class="card-actions justify-end">
+                                <button class="btn btn-primary">Find out More</button>
+                              </div>
+                            </div>
+                          </div>
+
+
+                    </div>
+
+                </div>
+                <!-- description -->
+
+                <!-- event details -->
+                <div class="card bg-base-100 shadow-xl mt-4">
+                    <div class="card-body">
+                      <h2 class="card-title text-4xl flex items-center justify-center mb-6">Event details</h2>
+                      <div class="flex lg:justify-evenly lg:flex-row flex-col">
+                        <div>
+                            <p class="lg:text-4xl text-2xl"> <i class="fa-solid fa-user mr-2"></i> {{host.firstName}} {{host.lastName}} </p>
+                            <p class="lg:text-4xl text-2xl"><i class="fa-solid fa-location-pin mr-4"></i>{{event.location}}</p>
+                        </div>
+                        <div>
+                            <p class="lg:text-4xl text-2xl"><i class="fa-regular fa-clock mr-2"></i> {{event.startTime}} - {{event.endTime}} </p>
+                            <p class="lg:text-4xl text-2xl"><i class="fa-regular fa-calendar-days mr-4"></i>{{event.startDate | date:'d MMM' }} - {{ event.endDate | date:'d MMM'  }} </p>
+                        </div>
+                    </div>
+                      <div class="card-actions justify-end">
+                        <button class="btn btn-accent">Book Now</button>
+                      </div>
+                    </div>
+                  </div>
+                <!-- dietary requirements -->
+                <div class="mt-28">
+                    <h2 class="text-4xl flex items-center justify-center">Dietary requirements</h2>
+                    <div class="flex items-center justify-center mt-4">
+                            <button class="btn btn-outline btn-secondary  btn-disabled">Vegatarian</button>
+                            <button class="btn btn-outline btn-accent lg:ml-8">Vegan</button>
+            
+                            <button class="btn btn-outline btn-secondary lg:ml-8  btn-disabled">Halal</button>
+                            <button class="btn btn-outline btn-accent lg:ml-8">Gluten-free</button>
+                      </div>
+                </div>
+            
+            <!-- Preperation details -->
+                <div class="mt-28">
+                    <h2 class="text-4xl flex items-center justify-center">Preperation details</h2>
+                    <div class="flex items-center justify-center mt-6">
+                        <ul class="steps steps-vertical lg:steps-horizontal lg:text-3xl text-xl">
+                            <li class="step step-primary step-large">Register</li>
+                            <li class="step step-primary step-large">Choose plan</li>
+                            <li class="step step-large">Purchase</li>
+                            <li class="step step-large">Receive Product</li>
+                        </ul>
+                    </div>
+                </div>
+        
+                
+                <!-- Agenda -->
+                <div class="mt-28">
+                    <h2 class="text-4xl flex items-center justify-center">Agenda</h2>
+                    <div class="flex items-center justify-center mt-4">
+                        <ul class="timeline timeline-vertical lg:text-3xl tetx-xl">
+                            <li>
+                              <div class="timeline-start timeline-box">First Macintosh computer</div>
+                              <div class="timeline-middle">
+                                <i class="fa-solid fa-check"></i></div>
+                              <hr class="bg-primary"/>
+                            </li>
+                            <li>
+                            <hr class="bg-primary"/>
+                              <div class="timeline-middle">
+                                <i class="fa-solid fa-check"></i></div>
+                              <div class="timeline-end timeline-box">iMac</div>
+                              <hr class="bg-primary"/>
+                            </li>
+                            <li>
+                              <hr class="bg-primary"/>
+                              <div class="timeline-start timeline-box">iPod</div>
+                              <div class="timeline-middle">
+                                <i class="fa-solid fa-check"></i></div>
+                              <hr/>
+                            </li>
+                            <li>
+                              <hr/>
+                              <div class="timeline-middle">
+                                <i class="fa-solid fa-xmark"></i></div>
+                              <div class="timeline-end timeline-box">iPhone</div>
+                              <hr/>
+                            </li>
+                            <li>
+                              <hr/>
+                              <div class="timeline-start timeline-box">Apple Watch</div>
+                              <div class="timeline-middle">
+                                <i class="fa-solid fa-xmark"></i></div>
+                            </li>
+                          </ul>
+                    </div>
+                </div>
+
+        </div>
+    
+
+
+        <!-- <p> <i class="fa-solid fa-user mr-2"></i> {{ hostedBy }}</p>
+        <p><i class="fa-solid fa-location-pin mr-3"></i>{{ location }}</p>
+        <p><i class="fa-regular fa-clock mr-2"></i> {{startTime }} - {{ endTime }} </p>
+        <p><i class="fa-regular fa-calendar-days mr-3"></i>{{startDate | date:'d MMM' }} - {{ endDate | date:'d MMM'  }} </p>
+        <p> <i class="fa-solid fa-user mr-2"></i> {{ eventID }}</p> -->
+    
+
+</div>
+
+

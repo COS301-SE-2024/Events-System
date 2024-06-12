@@ -13,6 +13,7 @@ import { GhostEventCardComponent } from 'src/Components/GhostEventCard/GhostEven
 
 export class EventsComponent implements OnInit{
   events: any[] = [];
+  host: any = null;
   selectedDate = '';
   searchLocation = '';
   searchTerm = '';
@@ -21,6 +22,7 @@ checkedSocialClubs: string[] = [];
   filteredEvents = this.events;
   isLoading = true;
   event = {
+    eventId: '',
     title: '',
     description: '',
     startTime: new Date(),
@@ -30,7 +32,8 @@ checkedSocialClubs: string[] = [];
     location: '',
     hostId: '',
     geolocation: '',
-    socialClub: ''
+    socialClub: '',
+    host: '',
   };  
   allClubsChecked = false;
   otherCheckboxes = [false, false, false]; // Adjust this to match the number of your other checkboxes
@@ -54,6 +57,17 @@ checkedSocialClubs: string[] = [];
         this.uniqueSocialClubs = [...new Set(this.events.map(event => event.socialClub))];
         this.filterEvents();
         this.isLoading = false;
+  
+        // Fetch host information for each event
+        this.events.forEach(event => {
+          fetch('https://events-system-back.wn.r.appspot.com/api/employees/' + event.hostId)
+            .then(response => {
+              return response.json();
+            })
+            .then(data => {
+              event.host = data; // Add host data to the event
+            });
+        });
       });
   }
 

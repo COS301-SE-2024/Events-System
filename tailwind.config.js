@@ -9,7 +9,6 @@ module.exports = {
     themes: [
       {
         entellect:{
-
           "primary": "#485970",
           "secondary": "#767D75",
           "accent": "#A0BE23",
@@ -19,7 +18,7 @@ module.exports = {
       },
       "light",
       "dark",
-       "cupcake"],
+       "corporate"],
   },
   presets: [],
   darkMode: 'media', // or 'class'
