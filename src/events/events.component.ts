@@ -56,18 +56,22 @@ checkedSocialClubs: string[] = [];
         this.events = Array.isArray(data) ? data : [data];
         this.uniqueSocialClubs = [...new Set(this.events.map(event => event.socialClub))];
         this.filterEvents();
+
+      // Fetch host information for each event
+      const hostFetches = this.events.map(event => {
+        return fetch('https://events-system-back.wn.r.appspot.com/api/employees/' + event.hostId)
+          .then(response => {
+            return response.json();
+          })
+          .then(data => {
+            event.host = data; // Add host data to the event
+          });
+      });
+
+      // Wait for all host fetches to complete before ending the loading state
+      Promise.all(hostFetches).then(() => {
         this.isLoading = false;
-  
-        // Fetch host information for each event
-        this.events.forEach(event => {
-          fetch('https://events-system-back.wn.r.appspot.com/api/employees/' + event.hostId)
-            .then(response => {
-              return response.json();
-            })
-            .then(data => {
-              event.host = data; // Add host data to the event
-            });
-        });
+      });
       });
   }
 
