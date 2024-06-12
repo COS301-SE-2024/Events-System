@@ -2,14 +2,20 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { EventCardComponent } from './eventCard.component';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
+import { Component } from '@angular/core';
+
+@Component({
+  template: '<event-component></event-component>',
+})
+class TestHostComponent {}
 
 describe('EventComponent', () => {
-  let component: EventCardComponent;
-  let fixture: ComponentFixture<EventCardComponent>;
+  let component: TestHostComponent;
+  let fixture: ComponentFixture<TestHostComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [EventCardComponent],
+      declarations: [TestHostComponent, EventCardComponent],
       providers: [
         {
           provide: ActivatedRoute,
@@ -20,7 +26,7 @@ describe('EventComponent', () => {
       ]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(EventCardComponent);
+    fixture = TestBed.createComponent(TestHostComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
