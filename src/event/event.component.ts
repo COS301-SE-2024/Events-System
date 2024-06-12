@@ -29,7 +29,7 @@ export class EventComponent implements OnInit{
       })
       .then(data => {
         this.event = data;
-        console.log(this.event);
+        // console.log(this.event);
         this.event.startTime = this.formatTime(this.event.startTime);
 this.event.endTime = this.formatTime(this.event.endTime);
         // Get the host information
@@ -39,7 +39,7 @@ this.event.endTime = this.formatTime(this.event.endTime);
         })
         .then(data => {
           this.host = data;
-          console.log(this.host); // Log the host data
+          // console.log(this.host); // Log the host data
           this.isLoading = false;
 
         });

@@ -41,7 +41,7 @@ checkedSocialClubs: string[] = [];
 
   onSubmit() {
     const dateInput = (<HTMLInputElement>document.getElementById('date-input')).value;
-    console.log(dateInput);
+    // console.log(dateInput);
     // You can now use the dateInput value for your needs
     this.selectedDate = dateInput;
     this.onDateChange();
