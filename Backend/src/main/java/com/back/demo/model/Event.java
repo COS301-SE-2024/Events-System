@@ -1,18 +1,12 @@
 package com.back.demo.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
+import jakarta.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
 
-@Entity 
-@Table(name = "Events")
+@Entity
+@Table(name = "events")
 public class Event {
 
     @Id
@@ -50,6 +44,18 @@ public class Event {
     @Column(name = "social_club")
     private String socialClub;
 
+    @Column(name = "event_picture_link")
+    private String eventPictureLink;
+
+    @Column(name = "event_agendas", columnDefinition = "TEXT[]")
+    private String[] eventAgendas;
+
+    @Column(name = "event_preparation", columnDefinition = "TEXT[]")
+    private String[] eventPreparation;
+
+    @Column(name = "event_dietary_accommodations", columnDefinition = "TEXT[]")
+    private String[] eventDietaryAccommodations;
+
     @Column(name = "created_at", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Timestamp createdAt;
 
@@ -85,8 +91,8 @@ public class Event {
         return startTime;
     }
 
-    public void setStartTime(Time value) {
-        this.startTime = value;
+    public void setStartTime(Time startTime) {
+        this.startTime = startTime;
     }
 
     public Time getEndTime() {
@@ -143,6 +149,38 @@ public class Event {
 
     public void setSocialClub(String socialClub) {
         this.socialClub = socialClub;
+    }
+
+    public String getEventPictureLink() {
+        return eventPictureLink;
+    }
+
+    public void setEventPictureLink(String eventPictureLink) {
+        this.eventPictureLink = eventPictureLink;
+    }
+
+    public String[] getEventAgendas() {
+        return eventAgendas;
+    }
+
+    public void setEventAgendas(String[] eventAgendas) {
+        this.eventAgendas = eventAgendas;
+    }
+
+    public String[] getEventPreparation() {
+        return eventPreparation;
+    }
+
+    public void setEventPreparation(String[] eventPreparation) {
+        this.eventPreparation = eventPreparation;
+    }
+
+    public String[] getEventDietaryAccommodations() {
+        return eventDietaryAccommodations;
+    }
+
+    public void setEventDietaryAccommodations(String[] eventDietaryAccommodations) {
+        this.eventDietaryAccommodations = eventDietaryAccommodations;
     }
 
     public Timestamp getCreatedAt() {
