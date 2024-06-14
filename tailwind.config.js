@@ -18,7 +18,7 @@ module.exports = {
       },
       "light",
       "dark",
-       "corporate"],
+       "wireframe"],
   },
   presets: [],
   darkMode: 'media', // or 'class'

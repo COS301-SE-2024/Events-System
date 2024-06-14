@@ -28,6 +28,10 @@ export class EventCardComponent implements OnChanges {
     return undefined;
   }
 
+  isSameDate(): boolean {
+    return this.startDate !== this.endDate;
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['startTime']) {
       this.startTime = this.formatTime(this.startTime);

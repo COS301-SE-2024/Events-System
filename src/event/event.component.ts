@@ -31,7 +31,7 @@ export class EventComponent implements OnInit{
         this.event = data;
         // console.log(this.event);
         this.event.startTime = this.formatTime(this.event.startTime);
-this.event.endTime = this.formatTime(this.event.endTime);
+        this.event.endTime = this.formatTime(this.event.endTime);
         // Get the host information
         fetch('https://events-system-back.wn.r.appspot.com/api/employees/' + this.event.hostId)
         .then(response => {
@@ -53,5 +53,9 @@ this.event.endTime = this.formatTime(this.event.endTime);
       return parts[0] + ':' + parts[1];
     }
     return undefined;
+  }
+
+  isAccommodationAvailable(accommodation: string): boolean {
+    return this.event?.eventDietaryAccommodations.includes(accommodation);
   }
 }

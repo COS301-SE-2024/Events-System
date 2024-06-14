@@ -34,10 +34,12 @@ checkedSocialClubs: string[] = [];
     geolocation: '',
     socialClub: '',
     host: '',
+    eventAgendas: '',
+    eventDietaryAccommodations: ''
   };  
   allClubsChecked = false;
   otherCheckboxes = [false, false, false]; // Adjust this to match the number of your other checkboxes
-
+  selectedDietaryAccommodation = '';
 
   onSubmit() {
     const dateInput = (<HTMLInputElement>document.getElementById('date-input')).value;
@@ -56,6 +58,7 @@ checkedSocialClubs: string[] = [];
         this.events = Array.isArray(data) ? data : [data];
         this.uniqueSocialClubs = [...new Set(this.events.map(event => event.socialClub))];
         this.filterEvents();
+        console.log(this.events);
 
       // Fetch host information for each event
       const hostFetches = this.events.map(event => {
@@ -109,13 +112,15 @@ checkedSocialClubs: string[] = [];
         this.checkedSocialClubs.includes(event.socialClub) &&
         (!this.selectedDate || new Date(event.startDate).toDateString() === new Date(this.selectedDate).toDateString()) &&
         event.title.toLowerCase().includes(this.searchTerm.toLowerCase()) &&
-        event.location.toLowerCase().includes(this.searchLocation.toLowerCase())
+        event.location.toLowerCase().includes(this.searchLocation.toLowerCase()) &&
+        (!this.selectedDietaryAccommodation || event.eventDietaryAccommodations.includes(this.selectedDietaryAccommodation))
       );
     } else {
       this.filteredEvents = this.events.filter(event => 
         (!this.selectedDate || new Date(event.startDate).toDateString() === new Date(this.selectedDate).toDateString()) &&
         event.title.toLowerCase().includes(this.searchTerm.toLowerCase()) &&
-        event.location.toLowerCase().includes(this.searchLocation.toLowerCase())
+        event.location.toLowerCase().includes(this.searchLocation.toLowerCase())  &&
+        (!this.selectedDietaryAccommodation || event.eventDietaryAccommodations.includes(this.selectedDietaryAccommodation))
       );
     }
   }
@@ -127,6 +132,10 @@ checkedSocialClubs: string[] = [];
   updateSearchLocation(event: Event) {
     const target = event.target as HTMLInputElement;
     this.searchLocation = target?.value || '';
+    this.filterEvents();
+  }
+  updateDietaryAccommodation(accommodation: string) {
+    this.selectedDietaryAccommodation = accommodation;
     this.filterEvents();
   }
   onAllClubsClick() {
@@ -153,7 +162,8 @@ checkedSocialClubs: string[] = [];
   filterByTitle() {
     this.filteredEvents = this.events.filter(event => 
       event.title.toLowerCase().includes(this.searchTerm.toLowerCase()) &&
-      event.location.toLowerCase().includes(this.searchLocation.toLowerCase())
+      event.location.toLowerCase().includes(this.searchLocation.toLowerCase()) &&
+      (!this.selectedDietaryAccommodation || event.eventDietaryAccommodations.includes(this.selectedDietaryAccommodation))
     );
   }
   

@@ -1,0 +1,4 @@
+.hide-scrollbar::-webkit-scrollbar {
+    @apply w-0;  /* Remove scrollbar space */
+    @apply bg-transparent;  /* Optional: just make scrollbar invisible */
+  }
