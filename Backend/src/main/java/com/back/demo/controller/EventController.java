@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -53,4 +54,16 @@ public class EventController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Event> partialUpdateEvent(@PathVariable(value = "id") Long eventId,
+                                                    @RequestBody Map<String, Object> updates) {
+        try {
+            Event updatedEvent = eventService.partialUpdateEvent(eventId, updates);
+            return ResponseEntity.ok(updatedEvent);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }
