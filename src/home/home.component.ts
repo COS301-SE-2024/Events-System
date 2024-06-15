@@ -41,9 +41,16 @@ export class HomeComponent {
         host: '',
     //hostEmail
   }; 
+
   currentSlideIndex = 0;
   nextSlideIndex = '';
   previousSlideIndex = '';
+
+  currentSocialClubSlideIndex = 0;
+  nextSocialClubSlideIndex = '';
+  previousSocialClubSlideIndex = '';
+
+
   slides: any[] = []; 
   ngOnInit(): void {
     fetch('https://events-system-back.wn.r.appspot.com/api/events')
@@ -92,7 +99,7 @@ export class HomeComponent {
         });
       });
   }
-  nextSlide() {
+  nextUSlide() {
     if (this.currentSlideIndex === this.slides.length - 3) {    
       this.currentSlideIndex = 0;   
       this.nextSlideIndex = this.slides[this.currentSlideIndex].id || '';    
@@ -107,10 +114,33 @@ export class HomeComponent {
     console.log("next " + this.nextSlideIndex);   
   }
   
-  previousSlide() {
+  previousUSlide() {
     if (this.currentSlideIndex > 0) {   
       this.currentSlideIndex -= 1;    
       this.previousSlideIndex = this.slides[this.currentSlideIndex].id  || '';    
+    }
+
+  }
+
+  nextSCSlide() {
+    if (this.currentSocialClubSlideIndex === this.slides.length - 3) {    
+      this.currentSocialClubSlideIndex = 0;   
+      this.nextSocialClubSlideIndex = this.slides[this.currentSocialClubSlideIndex].id || '';    
+      console.log("last current " + this.currentSocialClubSlideIndex);    
+      console.log("last next " + this.nextSocialClubSlideIndex);    
+    }else
+    if (this.currentSocialClubSlideIndex < this.slides.length - 1) {    
+      this.currentSocialClubSlideIndex += 1;    
+      this.nextSocialClubSlideIndex = this.slides[this.currentSocialClubSlideIndex + 2].id  || '';    
+    }
+    console.log("current " + this.currentSocialClubSlideIndex);   
+    console.log("next " + this.nextSocialClubSlideIndex);   
+  }
+  
+  previousSCSlide() {
+    if (this.currentSocialClubSlideIndex > 0) {   
+      this.currentSocialClubSlideIndex -= 1;    
+      this.previousSocialClubSlideIndex = this.slides[this.currentSocialClubSlideIndex].id  || '';    
     }
 
   }
