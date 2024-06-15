@@ -1,23 +1,24 @@
-<div class="card max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl shadow-xl mt-2.5"> 
+<div class="card max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl shadow-xl size-full"> 
   <div class="md:flex">
-    <!-- <div class="md:shrink-0">
-      <img class="h-48 w-full object-cover md:h-full md:w-48" src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg" alt="Album"/>
-    </div> -->
+    <div class="md:shrink-0">
+      <img class="h-full w-48 object-cover md:h-72 md:w-72" src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg" alt="Album"/>
+    </div>
 
     
-    <div class="card-body p-8">
+    <div class="card-body bg-purple-700">
       <h2 class="card-title victor-mono-normal uppercase tracking-wide text-sm text-indigo-500 font-semibold">{{ eventTitle }}</h2>
 
       <div>
         <p class="cutive-mono-regular">{{ hostName }}</p>
         <p class="cutive-mono-regular">{{ hostEmail }}</p>
         <p class="cutive-mono-regular">{{ startDate | date:'shortDate' }} - {{ endDate | date:'shortDate' }}</p>
-        <p class="cutive-mono-regular">{{ formattedStartTime }} - {{ formattedEndTime }}</p>      </div>
+        <p class="cutive-mono-regular">{{ formattedStartTime }} - {{ formattedEndTime }}</p>      
+      </div>
       
       <form action="">
-        <div class="card-actions justify-end">
+        <div class="card-actions mt-5 justify-center">
           <button type="submit"
-              class="inline-flex cursor-pointer items-center justify-center rounded-xl border-none bg-gradient-to-r from-fuchsia-600 to-indigo-600 px-4 py-2.5 text-sm font-semibold text-white transition duration-200 hover:bg-gradient-to-r hover:from-fuchsia-600 hover:to-indigo-500 focus:outline-none focus:ring-2 focus:ring-orange-400/80 focus:ring-offset-0 disabled:opacity-30 disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80"
+              class=" cursor-pointer rounded-xl border-none bg-gradient-to-r from-fuchsia-600 to-indigo-600 px-4 py-2.5 text-sm font-semibold text-white transition duration-200 hover:bg-gradient-to-r hover:from-fuchsia-600 hover:to-indigo-500 focus:outline-none focus:ring-2 focus:ring-orange-400/80 focus:ring-offset-0 disabled:opacity-30 disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80"
             >
               Book Now
             </button>
