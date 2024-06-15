@@ -3,7 +3,7 @@
     <section class="bg-transparent text-center shadow-2xl size-full"> <!--Featured events section-->
         <h2 class="lexend-deca-extraLight mb-3.5">Featured Events</h2>
   
-          <div class="carousel w-full">
+          <div class="carousel w-full size-60">
             <div id="slide1" class="carousel-item relative size-full"> 
               <div class="flex flex-col size-full">
                 <div class="card max-w-screen bg-white rounded-xl shadow-md md:max-w-2xl shadow-xl"> 
@@ -166,11 +166,11 @@
           </div>
     </section>
 
-    <section class="bg-transparent text-center shadow-2xl h-full "> <!--Featured events section-->
+    <section class="bg-transparent text-center  h-full "> <!--Featured events section-->
       <h2 class="lexend-deca-extraLight mb-1.5 ">Your Upcoming Events</h2>
       
       <div class="relative h-[300px]"> <!-- Fixed height for the outer div -->
-        <div class="carousel carousel-center w-[90%] p-4 space-x-4 bg-neutral rounded-box h-full">
+        <div class="carousel carousel-center w-[90%] p-4 space-x-4 bg-transparent rounded-box h-full">
           <div class="carousel-item relative w-1/3" *ngFor="let slide of slides; let i = index" [id]="'slide' + (i + 11)">
             <app-event-card
               [eventTitle]="slide.title"
@@ -195,7 +195,7 @@
       <h2 class="lexend-deca-extraLight mb-1.5 ">Social clubs</h2>
       
       <div class="relative h-[350px]"> <!-- Fixed height for the outer div -->
-        <div class="carousel items-center w-[90%] mx-4 space-x-4 bg-neutral rounded-box h-full size-full">
+        <div class="carousel items-center w-[90%] mx-4 space-x-4 bg-transparent rounded-box h-full size-full">
           <!-- <div class="carousel-item relative w-1/3" *ngFor="let slide of slides; let i = index" [id]="'slide' + (i + 11)">
           </div> -->
 
