@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 })
 export class LoginComponent {
   registerForm: FormGroup;
+  loginForm: FormGroup;
 
   constructor(
     private router: Router,
@@ -24,6 +25,10 @@ export class LoginComponent {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       role: ['USER', Validators.required] // Default role is Employee
+    });
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]]
     });
   }
 
@@ -54,6 +59,38 @@ export class LoginComponent {
       })
       .catch(error => {
         console.error('Error registering:', error);
+      });
+    } else {
+      console.log('Form is invalid. Please check the fields.');
+    }
+  }
+
+  onLogin()
+  {
+    if (this.loginForm.valid)
+    {
+      const formData =
+      {
+        email: this.loginForm.get('email')?.value,
+        password: this.loginForm.get('password')?.value
+      };
+
+      // Assuming API endpoint for registration
+      fetch('https://events-system-back.wn.r.appspot.com/api/v1/auth/authenticate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Login successful:', data);
+        // Optionally, navigate to another page on successful registration
+        this.router.navigate(['']);
+      })
+      .catch(error => {
+        console.error('Error registering:', JSON.stringify(formData));
       });
     } else {
       console.log('Form is invalid. Please check the fields.');
