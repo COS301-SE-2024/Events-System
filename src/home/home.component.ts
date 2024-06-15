@@ -2,12 +2,13 @@ import { Component, Input, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import {EventCardComponent} from 'src/Components/EventCard/eventCard.component'
+import {SocialClubCardComponent} from 'src/Components/SocialClubCard/socialClubCard.component'
 import { ViewportScroller } from '@angular/common';
 import { ChangeDetectorRef } from '@angular/core';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule, EventCardComponent],
+  imports: [CommonModule, RouterModule, EventCardComponent, SocialClubCardComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
