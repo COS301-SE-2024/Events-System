@@ -16,4 +16,13 @@ export class EventCardComponent {
   @Input() endTime: string | undefined;
   @Input() startDate: string | undefined;
   @Input() endDate: string | undefined;
+  @Input() hostedBy: string | undefined;
+  
+  get formattedStartTime() {
+    return this.startTime?.slice(0, -3);
+  }
+
+  get formattedEndTime() {
+    return this.endTime?.slice(0, -3);
+  }
 }

@@ -1,8 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import {EventCardComponent} from 'src/Components/EventCard/eventCard.component'
-
+import { ViewportScroller } from '@angular/common';
+import { ChangeDetectorRef } from '@angular/core';
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -11,6 +12,8 @@ import {EventCardComponent} from 'src/Components/EventCard/eventCard.component'
   styleUrl: './home.component.css',
 })
 export class HomeComponent {
+  constructor(private cdr: ChangeDetectorRef) { }
+
   @Input() eventTitle: string | undefined;
   @Input() eventDescription: string | undefined;
   @Input() hostName: string | undefined;
@@ -33,10 +36,14 @@ export class HomeComponent {
     location: '',
     hostId: '',
     geolocation: '',
-    socialClub: ''
+    socialClub: '',
+        host: '',
     //hostEmail
   }; 
-  
+  currentSlideIndex = 0;
+  nextSlideIndex = '';
+  previousSlideIndex = '';
+  slides: any[] = []; 
   ngOnInit(): void {
     fetch('https://events-system-back.wn.r.appspot.com/api/events')
       .then(response => {
@@ -44,32 +51,66 @@ export class HomeComponent {
       })
       .then(data => {
         this.events = Array.isArray(data) ? data : [data];
-        this.prepareSlides();
-        this.isLoading = false;
+  
+        
+        const hostFetches = this.events.map(event => {
+          return fetch('https://events-system-back.wn.r.appspot.com/api/employees/' + event.hostId)
+            .then(response => {
+              return response.json();
+            })
+            .then(data => {
+              event.host = data;
+            });
+        });
+  
+  
+        
+        Promise.all(hostFetches).then(() => {
+          
+          this.slides = this.events.map((eventData, index) => {
+            const slide = {
+              id: `slide${index + 11}`,
+              title: eventData.title,
+              description: eventData.description,
+              startTime: eventData.startTime,
+              endTime: eventData.endTime,
+              startDate: eventData.startDate,
+              endDate: eventData.endDate,
+              location: eventData.location,
+              hostId: eventData.hostId,
+              geolocation: eventData.geolocation,
+              socialClub: eventData.socialClub,
+              host: eventData.host 
+            };
+            this.cdr.detectChanges(); 
+            return slide;
+          });
+  
+          
+          this.isLoading = false;
+        });
       });
   }
-
-  displayedSlides: any[] = [];
-  currentIndex: number = 0;
-  eventsPerSlide: number = 2; //on large screen
-
-  prepareSlides() 
-  {
-    for (let i = 0; i < this.events.length; i += this.eventsPerSlide) 
-    {
-      this.displayedSlides.push(this.events.slice(i, i + this.eventsPerSlide));
+  nextSlide() {
+    if (this.currentSlideIndex === this.slides.length - 3) {    
+      this.currentSlideIndex = 0;   
+      this.nextSlideIndex = this.slides[this.currentSlideIndex].id || '';    
+      console.log("last current " + this.currentSlideIndex);    
+      console.log("last next " + this.nextSlideIndex);    
+    }else
+    if (this.currentSlideIndex < this.slides.length - 1) {    
+      this.currentSlideIndex += 1;    
+      this.nextSlideIndex = this.slides[this.currentSlideIndex + 2].id  || '';    
+    }
+    console.log("current " + this.currentSlideIndex);   
+    console.log("next " + this.nextSlideIndex);   
+  }
+  
+  previousSlide() {
+    if (this.currentSlideIndex > 0) {   
+      this.currentSlideIndex -= 1;    
+      this.previousSlideIndex = this.slides[this.currentSlideIndex].id  || '';    
     }
 
-    console.log(this.displayedSlides);
-  }
-
-  prevSlide() {
-    this.currentIndex = (this.currentIndex > 0) ? this.currentIndex - 1 : this.displayedSlides.length - 1;
-    console.log( "Prev slide:" + this.currentIndex)
-  }
-
-  nextSlide() {
-    this.currentIndex = (this.currentIndex < this.displayedSlides.length - 1) ? this.currentIndex + 1 : 0;
-    console.log("Next slide:" + this.currentIndex)
   }
 }
