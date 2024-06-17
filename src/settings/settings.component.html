@@ -7,6 +7,10 @@
   <div *ngIf="selectedTab === 'details'" class="tab-content active">
     <div class="details-section mb-4">
       <h3 class="text-lg font-bold mb-2">Details</h3>
+      <div class="mb-2">
+        <label for="avatar" class="block text-sm font-medium text-gray-700">Change Avatar</label>
+        <input type="file" id="avatar" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer focus:outline-none" (change)="onAvatarChange($event)">
+      </div>
       <input type="text" #nameInput placeholder="Name" class="input input-bordered w-full mb-2" (input)="name = nameInput.value">
       <input type="text" #surnameInput placeholder="Surname" class="input input-bordered w-full mb-2" (input)="surname = surnameInput.value">
       <textarea #descriptionInput placeholder="Description" class="textarea textarea-bordered w-full mb-2" (input)="description = descriptionInput.value"></textarea>
