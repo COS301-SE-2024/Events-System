@@ -4,35 +4,41 @@
       <div class="card-body">
         <div class="flex justify-between items-center">
           <div class="flex items-center">
-            <div _ngcontent-ng-c907525974="" tabindex="0" role="button" class="btn btn-ghost btn-circle avatar" style="width: 120px; height: 120px;">
-              <div _ngcontent-ng-c907525974="" class="w-full rounded-full"><img _ngcontent-ng-c907525974="" alt="Tailwind CSS Navbar component" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" style="width: 100%; height: 100%;"></div>
+            <div class="w-20">
+              <div _ngcontent-ng-c907525974="" tabindex="0" role="button" class="btn btn-ghost btn-circle avatar" style="width: 120px; height: 120px;">
+                <div _ngcontent-ng-c907525974="" class="w-full rounded-full"><img _ngcontent-ng-c907525974="" alt="Tailwind CSS Navbar component" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" style="width: 100%; height: 100%;"></div>
+              </div>
             </div>
-            <div>
+            <div class="ml-4">
               <h2 class="text-2xl">Profile Name</h2>
-              <p>Profile Bio</p>
+              <p>Profile Username</p>
             </div>
           </div>
           <button class="btn btn-outline">Edit Profile</button>
         </div>
         <div class="tabs">
-          <a class="tab tab-bordered hover:bg-blue-200 hover:text-blue-800" (click)="selectTab('about')" [class.tab-active]="selectedTab === 'about'">About</a>
-          <a class="tab tab-bordered hover:bg-blue-200 hover:text-blue-800" (click)="selectTab('events')" [class.tab-active]="selectedTab === 'events'">Events History</a>
-          <a class="tab tab-bordered hover:bg-blue-200 hover:text-blue-800" (click)="selectTab('subscriptions')" [class.tab-active]="selectedTab === 'subscriptions'">Subscriptions</a>
+          <a class="tab tab-bordered rounded-lg hover:bg-blue-200 hover:text-blue-800" (click)="selectTab('about')" [class.tab-active]="selectedTab === 'about'">About</a>
+          <a class="tab tab-bordered rounded-lg hover:bg-blue-200 hover:text-blue-800" (click)="selectTab('events')" [class.tab-active]="selectedTab === 'events'">Events History</a>
+          <a class="tab tab-bordered rounded-lg hover:bg-blue-200 hover:text-blue-800" (click)="selectTab('subscriptions')" [class.tab-active]="selectedTab === 'subscriptions'">Subscriptions</a>
         </div>
       </div>
     </div>
   
     <div *ngIf="selectedTab === 'about'" class="card w-full bg-base-100 shadow-2xl mb-4">
-      <div class="card-body">
-        <h2 class="card-title">About Me</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse gravida, sem eget fringilla tempus.</p>
-        <h3 class="text-xl mt-4">Contact Details</h3>
-        <ul>
-          <li>Email: </li>
-          <li>Profile X</li>
-          <li>Profile LinkedIn</li>
-          <li>Profile Discord</li>
-        </ul>
+      <div class="card-body flex-row">
+        <div class="w-1/2">
+          <h2 class="card-title">About Me</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse gravida, sem eget fringilla tempus.</p>
+        </div>
+        <div class="w-1/2">
+          <h3 class="text-xl mt-4">Contact Details</h3>
+          <ul class="flex flex-col">
+            <li class="flex items-center"><i class="far fa-envelope ml-2"></i></li>
+            <li class="flex items-center"><i class="fab fa-xing ml-2"></i></li>
+            <li class="flex items-center"><i class="fab fa-linkedin ml-2"></i></li>
+            <li class="flex items-center"><i class="fab fa-discord ml-2"></i></li>
+          </ul>
+        </div>
       </div>
     </div>
   
@@ -63,14 +69,14 @@
           </div>
           <div>
             <h2 class="text-2xl">Profile Name</h2>
-            <p>Profile Bio</p>
+            <p>Profile Username</p>
           </div>
           <button class="btn btn-outline mt-4">Edit Profile</button>
         </div>
         <div class="tabs tabs-boxed w-full">
-          <a class="tab tab-bordered hover:bg-blue-200 hover:text-blue-800" (click)="selectTab('about')" [class.tab-active]="selectedTab === 'about'">About</a>
-          <a class="tab tab-bordered hover:bg-blue-200 hover:text-blue-800" (click)="selectTab('events')" [class.tab-active]="selectedTab === 'events'">Events History</a>
-          <a class="tab tab-bordered hover:bg-blue-200 hover:text-blue-800" (click)="selectTab('subscriptions')" [class.tab-active]="selectedTab === 'subscriptions'">Subscriptions</a>
+          <a class="tab tab-bordered rounded-lg hover:bg-blue-200 hover:text-blue-800" (click)="selectTab('about')" [class.tab-active]="selectedTab === 'about'">About</a>
+          <a class="tab tab-bordered rounded-lg hover:bg-blue-200 hover:text-blue-800" (click)="selectTab('events')" [class.tab-active]="selectedTab === 'events'">Events History</a>
+          <a class="tab tab-bordered rounded-lg hover:bg-blue-200 hover:text-blue-800" (click)="selectTab('subscriptions')" [class.tab-active]="selectedTab === 'subscriptions'">Subscriptions</a>
         </div>
       </div>
     </div>

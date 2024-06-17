@@ -1,33 +1,40 @@
-<div class="container mx-auto flex justify-center h-screen">
-    <div class="w-full max-w-md">
-        <h1 class="text-3xl font-semibold text-center mb-6">Account Settings</h1>
-        <form>
-              <div class="form-control mb-2">
-                <label for="username" class="label justify-center">Username</label>
-                <input type="text" id="username" formControlName="username" class="input border border-gray-400 mx-4" required>
-              </div>
-              <div class="form-control mb-2">
-                <label for="email" class="label justify-center">Email</label>
-                <input type="email" id="email" formControlName="email" class="input border border-gray-400 mx-4" required>
-              </div>
-              <div class="form-control mb-2">
-                <label for="password" class="label justify-center">Password</label>
-                <input type="password" id="password" formControlName="password" class="input border border-gray-400 mx-4" required>
-              </div>
-              <div class="form-control mb-2">
-                <label for="dietaryRequirements" class="label justify-center">Dietary Requirements</label>
-                <select id="dietaryRequirements" formControlName="dietaryRequirements" class="select border border-gray-400 mx-4" required>
-                  <option value="" disabled selected>Select dietary requirement</option>
-                  <option value="None">None</option>
-                  <option value="Vegetarian">Vegetarian</option>
-                  <option value="Vegan">Vegan</option>
-                  <option value="Gluten-Free">Gluten-Free</option>
-                  </select>
-              </div>
-              <br>
-              <div class="flex justify-center">
-                <button type="submit" class="btn btn-primary px-6 text-lg">Save</button>
-              </div>
-            </form>
+<div class="w-full max-w-2xl mx-auto p-4 bg-white rounded-lg shadow-md">
+  <div class="tabs mb-4">
+    <button class="tab tab-bordered w-1/2" [class.tab-active]="selectedTab === 'details'" (click)="selectTab('details')">My details</button>
+    <button class="tab tab-bordered w-1/2" [class.tab-active]="selectedTab === 'security'" (click)="selectTab('security')">Security</button>
+  </div>
+
+  <div *ngIf="selectedTab === 'details'" class="tab-content active">
+    <div class="details-section mb-4">
+      <h3 class="text-lg font-bold mb-2">Details</h3>
+      <input type="text" #nameInput placeholder="Name" class="input input-bordered w-full mb-2" (input)="name = nameInput.value">
+      <input type="text" #surnameInput placeholder="Surname" class="input input-bordered w-full mb-2" (input)="surname = surnameInput.value">
+      <textarea #descriptionInput placeholder="Description" class="textarea textarea-bordered w-full mb-2" (input)="description = descriptionInput.value"></textarea>
+      <h3 class="text-lg font-bold mb-2">Social Media Links</h3>
+      <input type="email" #emailInput placeholder="Change Email" class="input input-bordered w-full mb-2" (input)="email = emailInput.value">
+      <input type="text" #xInput placeholder="Change X" class="input input-bordered w-full mb-2" (input)="x = xInput.value">
+      <input type="text" #linkedInInput placeholder="Change LinkedIn" class="input input-bordered w-full mb-2" (input)="linkedIn = linkedInInput.value">
+      <input type="text" #gitHubInput placeholder="Change GitHub" class="input input-bordered w-full mb-4" (input)="gitHub = gitHubInput.value">
+      <button class="btn btn-primary w-full" (click)="saveChanges()">Save changes</button>
     </div>
+  </div>
+
+  <div *ngIf="selectedTab === 'security'" class="tab-content active">
+    <div class="security-section mb-4">
+      <h3 class="text-lg font-bold mb-2">Public Information</h3>
+      <button class="btn btn-outline mb-2 w-full" (click)="makeContactInfoPublic = !makeContactInfoPublic">
+        Make Contact Information {{ makeContactInfoPublic ? 'Private' : 'Public' }}
+      </button>
+      <button class="btn btn-outline mb-4 w-full" (click)="makeScreenerPublic = !makeScreenerPublic">
+        Make Screener {{ makeScreenerPublic ? 'Private' : 'Public' }}
+      </button>
+      <h3 class="text-lg font-bold mb-2">Change Password</h3>
+      <input type="password" #currentPasswordInput placeholder="Current Password" class="input input-bordered w-full mb-2" (input)="currentPassword = currentPasswordInput.value">
+      <input type="password" #newPasswordInput placeholder="New Password" class="input input-bordered w-full mb-2" (input)="newPassword = newPasswordInput.value">
+      <input type="password" #confirmPasswordInput placeholder="Re-enter New Password" class="input input-bordered w-full mb-4" (input)="confirmPassword = confirmPasswordInput.value">
+      <h3 class="text-lg font-bold mb-2">Delete Profile</h3>
+      <button class="btn btn-error mb-2 w-full" (click)="deleteAccount()">Delete Account</button>
+      <button class="btn btn-primary w-full" (click)="saveChanges()">Save changes</button>
+    </div>
+  </div>
 </div>
