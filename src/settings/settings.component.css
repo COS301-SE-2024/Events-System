@@ -1,0 +1,10 @@
+.tabs {
+  display: flex;
+  justify-content: space-between;
+}
+.tab-content {
+  display: none;
+}
+.tab-content.active {
+  display: block;
+}
