@@ -6,6 +6,7 @@ import { ProfileComponent } from 'src/profile/profile.component';
 import { AppComponent } from './app.component';
 import { CalenderComponent } from 'src/calender/calender.component';
 import { EventsComponent } from 'src/events/events.component';
+import { EventComponent } from 'src/event/event.component';
 
 export const appRoutes: Route[] = [
   { path: '', component: HomeComponent }, // Home page
@@ -14,5 +15,6 @@ export const appRoutes: Route[] = [
   { path: 'calender', component: CalenderComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'events', component: EventsComponent },
+  { path: 'event/:id', component: EventComponent },
   // { path: 'home', component: SettingsComponent },
 ];

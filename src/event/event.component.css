@@ -1,0 +1,4 @@
+.step-large::after {
+  /* Adjust these values as needed */
+  @apply text-sm;
+}
