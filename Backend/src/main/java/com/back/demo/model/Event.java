@@ -42,7 +42,7 @@ public class Event {
     private String geolocation;
 
     @Column(name = "social_club")
-    private String socialClub;
+    private Integer socialClub;
 
     @Column(name = "event_picture_link")
     private String eventPictureLink;
@@ -143,11 +143,11 @@ public class Event {
         this.geolocation = geolocation;
     }
 
-    public String getSocialClub() {
+    public Integer getSocialClub() {
         return socialClub;
     }
 
-    public void setSocialClub(String socialClub) {
+    public void setSocialClub(Integer socialClub) {
         this.socialClub = socialClub;
     }
 
