@@ -89,7 +89,7 @@ public class EventService {
                         event.setGeolocation((String) value);
                         break;
                     case "socialClub":
-                        event.setSocialClub((String) value);
+                        event.setSocialClub((Integer) value);
                         break;
                     case "eventPictureLink":
                         event.setEventPictureLink((String) value);
