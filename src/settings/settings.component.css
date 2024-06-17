@@ -1,10 +1,19 @@
-.tabs {
-  display: flex;
-  justify-content: space-between;
-}
-.tab-content {
-  display: none;
-}
-.tab-content.active {
-  display: block;
-}
+.tab {
+    padding: 10px;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  .tab-active {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .tab-content {
+    display: none;
+  }
+  
+  .tab-content.active {
+    display: block;
+  }
+  

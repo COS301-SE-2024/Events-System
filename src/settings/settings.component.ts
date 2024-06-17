@@ -49,6 +49,9 @@ export class SettingsComponent {
       gitHub: this.gitHub,
       makeContactInfoPublic: this.makeContactInfoPublic,
       makeScreenerPublic: this.makeScreenerPublic,
+      currentPassword: this.currentPassword,
+      newPassword: this.newPassword,
+      confirmPassword: this.confirmPassword
     });
   }
 

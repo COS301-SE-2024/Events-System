@@ -1,44 +1,136 @@
-<div class="w-full max-w-2xl mx-auto p-4 bg-white rounded-lg shadow-md">
-  <div class="tabs mb-4">
-    <button class="tab tab-bordered w-1/2" [class.tab-active]="selectedTab === 'details'" (click)="selectTab('details')">My details</button>
-    <button class="tab tab-bordered w-1/2" [class.tab-active]="selectedTab === 'security'" (click)="selectTab('security')">Security</button>
-  </div>
-
-  <div *ngIf="selectedTab === 'details'" class="tab-content active">
-    <div class="details-section mb-4">
-      <h3 class="text-lg font-bold mb-2">Details</h3>
-      <div class="mb-2">
-        <label for="avatar" class="block text-sm font-medium text-gray-700">Change Avatar</label>
-        <input type="file" id="avatar" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer focus:outline-none" (change)="onAvatarChange($event)">
+<div class="container mx-auto p-4">
+  <div class="card w-full bg-base-100 shadow-2xl mb-4">
+    <div class="card-body">
+      <div class="flex justify-between items-center">
+        <div class="flex items-center">
+          <div class="w-20">
+            <div class="btn btn-ghost btn-circle avatar" style="width: 120px; height: 120px;">
+              <div class="w-full rounded-full">
+                <img alt="Avatar" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" style="width: 100%; height: 100%;">
+              </div>
+            </div>
+          </div>
+          <div class="ml-4">
+            <h2 class="text-2xl">Profile Name</h2>
+            <p>Profile Username</p>
+          </div>
+        </div>
+        <button class="btn btn-outline">Edit Profile</button>
       </div>
-      <input type="text" #nameInput placeholder="Name" class="input input-bordered w-full mb-2" (input)="name = nameInput.value">
-      <input type="text" #surnameInput placeholder="Surname" class="input input-bordered w-full mb-2" (input)="surname = surnameInput.value">
-      <textarea #descriptionInput placeholder="Description" class="textarea textarea-bordered w-full mb-2" (input)="description = descriptionInput.value"></textarea>
-      <h3 class="text-lg font-bold mb-2">Social Media Links</h3>
-      <input type="email" #emailInput placeholder="Change Email" class="input input-bordered w-full mb-2" (input)="email = emailInput.value">
-      <input type="text" #xInput placeholder="Change X" class="input input-bordered w-full mb-2" (input)="x = xInput.value">
-      <input type="text" #linkedInInput placeholder="Change LinkedIn" class="input input-bordered w-full mb-2" (input)="linkedIn = linkedInInput.value">
-      <input type="text" #gitHubInput placeholder="Change GitHub" class="input input-bordered w-full mb-4" (input)="gitHub = gitHubInput.value">
-      <button class="btn btn-primary w-full" (click)="saveChanges()">Save changes</button>
+      <div class="tabs">
+        <a class="tab tab-bordered rounded-lg" [class.tab-active]="selectedTab === 'details'" (click)="selectTab('details')">My Details</a>
+        <a class="tab tab-bordered rounded-lg" [class.tab-active]="selectedTab === 'security'" (click)="selectTab('security')">Security</a>
+      </div>
     </div>
   </div>
 
-  <div *ngIf="selectedTab === 'security'" class="tab-content active">
-    <div class="security-section mb-4">
-      <h3 class="text-lg font-bold mb-2">Public Information</h3>
-      <button class="btn btn-outline mb-2 w-full" (click)="makeContactInfoPublic = !makeContactInfoPublic">
-        Make Contact Information {{ makeContactInfoPublic ? 'Private' : 'Public' }}
-      </button>
-      <button class="btn btn-outline mb-4 w-full" (click)="makeScreenerPublic = !makeScreenerPublic">
-        Make Screener {{ makeScreenerPublic ? 'Private' : 'Public' }}
-      </button>
-      <h3 class="text-lg font-bold mb-2">Change Password</h3>
-      <input type="password" #currentPasswordInput placeholder="Current Password" class="input input-bordered w-full mb-2" (input)="currentPassword = currentPasswordInput.value">
-      <input type="password" #newPasswordInput placeholder="New Password" class="input input-bordered w-full mb-2" (input)="newPassword = newPasswordInput.value">
-      <input type="password" #confirmPasswordInput placeholder="Re-enter New Password" class="input input-bordered w-full mb-4" (input)="confirmPassword = confirmPasswordInput.value">
-      <h3 class="text-lg font-bold mb-2">Delete Profile</h3>
-      <button class="btn btn-error mb-2 w-full" (click)="deleteAccount()">Delete Account</button>
-      <button class="btn btn-primary w-full" (click)="saveChanges()">Save changes</button>
+  <div class="card w-full bg-base-100 shadow-2xl mb-4">
+    <div class="card-body" [class.hidden]="selectedTab !== 'details'">
+      <div class="details-section mb-4">
+        <h3 class="text-lg font-bold mb-2">Details</h3>
+        <div class="mb-2">
+          <label for="avatar" class="block text-sm font-medium text-gray-700">Change Avatar</label>
+          <input
+            type="file"
+            id="avatar"
+            class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer focus:outline-none"
+            (change)="onAvatarChange($event)"
+          >
+        </div>
+        <input
+          type="text"
+          #nameInput
+          placeholder="Name"
+          class="input input-bordered w-full mb-2"
+          (input)="name = nameInput.value"
+        >
+        <input
+          type="text"
+          #surnameInput
+          placeholder="Surname"
+          class="input input-bordered w-full mb-2"
+          (input)="surname = surnameInput.value"
+        >
+        <textarea
+          #descriptionInput
+          placeholder="Description"
+          class="textarea textarea-bordered w-full mb-2"
+          (input)="description = descriptionInput.value"
+        ></textarea>
+        <h3 class="text-lg font-bold mb-2">Social Media Links</h3>
+        <input
+          type="email"
+          #emailInput
+          placeholder="Change Email"
+          class="input input-bordered w-full mb-2"
+          (input)="email = emailInput.value"
+        >
+        <input
+          type="text"
+          #xInput
+          placeholder="Change X"
+          class="input input-bordered w-full mb-2"
+          (input)="x = xInput.value"
+        >
+        <input
+          type="text"
+          #linkedInInput
+          placeholder="Change LinkedIn"
+          class="input input-bordered w-full mb-2"
+          (input)="linkedIn = linkedInInput.value"
+        >
+        <input
+          type="text"
+          #gitHubInput
+          placeholder="Change GitHub"
+          class="input input-bordered w-full mb-4"
+          (input)="gitHub = gitHubInput.value"
+        >
+        <button class="btn btn-primary w-full" (click)="saveChanges()">Save changes</button>
+      </div>
+    </div>
+
+    <div class="card-body" [class.hidden]="selectedTab !== 'security'">
+      <div class="security-section mb-4">
+        <h3 class="text-lg font-bold mb-2">Public Information</h3>
+        <button
+          class="btn btn-outline mb-2 w-full"
+          (click)="makeContactInfoPublic = !makeContactInfoPublic"
+        >
+          Make Contact Information {{ makeContactInfoPublic ? 'Private' : 'Public' }}
+        </button>
+        <button
+          class="btn btn-outline mb-4 w-full"
+          (click)="makeScreenerPublic = !makeScreenerPublic"
+        >
+          Make Screener {{ makeScreenerPublic ? 'Private' : 'Public' }}
+        </button>
+        <h3 class="text-lg font-bold mb-2">Change Password</h3>
+        <input
+          type="password"
+          #currentPasswordInput
+          placeholder="Current Password"
+          class="input input-bordered w-full mb-2"
+          (input)="currentPassword = currentPasswordInput.value"
+        >
+        <input
+          type="password"
+          #newPasswordInput
+          placeholder="New Password"
+          class="input input-bordered w-full mb-2"
+          (input)="newPassword = newPasswordInput.value"
+        >
+        <input
+          type="password"
+          #confirmPasswordInput
+          placeholder="Re-enter New Password"
+          class="input input-bordered w-full mb-4"
+          (input)="confirmPassword = confirmPasswordInput.value"
+        >
+        <h3 class="text-lg font-bold mb-2">Delete Profile</h3>
+        <button class="btn btn-error mb-2 w-full" (click)="deleteAccount()">Delete Account</button>
+        <button class="btn btn-primary w-full" (click)="saveChanges()">Save changes</button>
+      </div>
     </div>
   </div>
 </div>
