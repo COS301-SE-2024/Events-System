@@ -14,15 +14,12 @@
         <div class="card bg-base-200 p-4 mb-4">
           <h3 class="text-lg font-bold mb-2">Profile Details</h3>
           <div class="ml-4"> <!-- Indentation -->
-            <!-- Avatar and Change Avatar Section -->
             <div class="mb-2 flex items-start">
-              <!-- Avatar Image with Padding -->
               <div class="btn btn-ghost btn-circle avatar p-2" style="width: 80px; height: 80px;">
                 <div class="w-full rounded-full">
                   <img alt="Avatar" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" style="width: 100%; height: 100%;">
                 </div>
               </div>
-              <!-- File Input for Avatar -->
               <input
                 type="file"
                 id="avatar"
@@ -30,7 +27,6 @@
                 (change)="onAvatarChange($event)"
               >
             </div>
-            <!-- Name Input Field -->
             <input
               type="text"
               #nameInput
@@ -38,7 +34,6 @@
               class="input input-bordered w-full mb-2"
               (input)="name = nameInput.value"
             >
-            <!-- Surname Input Field -->
             <input
               type="text"
               #surnameInput
@@ -46,7 +41,6 @@
               class="input input-bordered w-full mb-2"
               (input)="surname = surnameInput.value"
             >
-            <!-- Description Textarea -->
             <textarea
               #descriptionInput
               placeholder="Description"
@@ -60,7 +54,6 @@
         <div class="card bg-base-200 p-4 mb-4">
           <h3 class="text-lg font-bold mb-2">Social Media Links</h3>
           <div class="ml-4"> <!-- Indentation -->
-            <!-- Email Input Field -->
             <input
               type="email"
               #emailInput
@@ -68,7 +61,6 @@
               class="input input-bordered w-full mb-2"
               (input)="email = emailInput.value"
             >
-            <!-- X Input Field -->
             <input
               type="text"
               #xInput
@@ -76,7 +68,6 @@
               class="input input-bordered w-full mb-2"
               (input)="x = xInput.value"
             >
-            <!-- LinkedIn Input Field -->
             <input
               type="text"
               #linkedInInput
@@ -84,7 +75,6 @@
               class="input input-bordered w-full mb-2"
               (input)="linkedIn = linkedInInput.value"
             >
-            <!-- GitHub Input Field -->
             <input
               type="text"
               #gitHubInput
@@ -95,13 +85,13 @@
           </div>
         </div>
 
-        <!-- Save Changes Button -->
-        <button class="btn btn-primary w-full" (click)="saveChanges()">Save changes</button>
+        <!-- Save Changes Button (Right Aligned) -->
+        <button class="btn btn-primary btn-sm ml-auto" (click)="saveChanges()">Save changes</button>
       </div>
     </div>
   </div>
 
-  <!-- Security Section (Hidden by Default) -->
+  <!-- Security Section -->
   <div class="card w-full bg-base-100 shadow-2xl mb-4" [class.hidden]="selectedTab !== 'security'">
     <div class="card-body">
       <div class="security-section mb-4">
@@ -109,14 +99,12 @@
         <div class="card bg-base-200 p-4 mb-4">
           <h3 class="text-lg font-bold mb-2">Public Information</h3>
           <div class="ml-4"> <!-- Indentation -->
-            <!-- Daisy UI Toggle for Make Contact Information -->
             <div class="flex items-center mb-2">
               <label class="flex items-center">
                 <input type="checkbox" class="toggle toggle-primary" (click)="makeContactInfoPublic = !makeContactInfoPublic">
                 <span class="ml-2 text-sm font-medium text-gray-700">Make Contact Information {{ makeContactInfoPublic ? 'Private' : 'Public' }}</span>
               </label>
             </div>
-            <!-- Daisy UI Toggle for Make Screener -->
             <div class="flex items-center mb-4">
               <label class="flex items-center">
                 <input type="checkbox" class="toggle toggle-primary" (click)="makeScreenerPublic = !makeScreenerPublic">
@@ -157,11 +145,11 @@
         <!-- Delete Profile Card -->
         <div class="card bg-base-200 p-4 mb-4">
           <h3 class="text-lg font-bold mb-2">Delete Profile</h3>
-          <button class="btn btn-error mb-2 w-full" (click)="deleteAccount()">Delete Account</button>
+          <button class="btn btn-error btn-sm ml-auto" (click)="deleteAccount()">Delete Account</button>
         </div>
 
-        <!-- Save Changes Button -->
-        <button class="btn btn-primary w-full" (click)="saveChanges()">Save changes</button>
+        <!-- Save Changes Button (Right Aligned) -->
+        <button class="btn btn-primary btn-sm ml-auto" (click)="saveChanges()">Save changes</button>
       </div>
     </div>
   </div>
