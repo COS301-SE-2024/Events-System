@@ -1,0 +1,18 @@
+
+
+<div>
+    <div class="flex justify-end mt-4">
+        <button class="btn btn-outline btn-primary" routerLink="/createevent">
+            <a >Create event</a>
+        </button>
+    </div>
+    <div class="mt-4">
+        <app-my-events-card   
+        *ngFor="let event of events"
+        [eventID]="event.eventId"
+        [ID]="event.eventId"
+        [eventString]="event.eventId +'/'"
+        [eventTitle]="event.title"></app-my-events-card>
+
+    </div>
+</div>
