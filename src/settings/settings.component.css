@@ -4,11 +4,6 @@
     text-align: center;
   }
   
-  .tab-active {
-    background-color: #007bff;
-    color: white;
-  }
-  
   .tab-content {
     display: none;
   }

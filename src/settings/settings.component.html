@@ -1,42 +1,37 @@
 <div class="container mx-auto p-4">
   <div class="card w-full bg-base-100 shadow-2xl mb-4">
-    <div class="card-body">
-      <div class="flex justify-between items-center">
-        <div class="flex items-center">
-          <div class="w-20">
-            <div class="btn btn-ghost btn-circle avatar" style="width: 120px; height: 120px;">
-              <div class="w-full rounded-full">
-                <img alt="Avatar" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" style="width: 100%; height: 100%;">
-              </div>
-            </div>
-          </div>
-          <div class="ml-4">
-            <h2 class="text-2xl">Profile Name</h2>
-            <p>Profile Username</p>
-          </div>
-        </div>
-        <button class="btn btn-outline">Edit Profile</button>
-      </div>
+    <div class="card-body">      
+      <!-- Tabs Section -->
       <div class="tabs">
-        <a class="tab tab-bordered rounded-lg" [class.tab-active]="selectedTab === 'details'" (click)="selectTab('details')">My Details</a>
-        <a class="tab tab-bordered rounded-lg" [class.tab-active]="selectedTab === 'security'" (click)="selectTab('security')">Security</a>
+        <a class="tab tab-bordered rounded-lg hover:bg-blue-200 hover:text-blue-800" [class.tab-active]="selectedTab === 'details'" (click)="selectTab('details')">My Details</a>
+        <a class="tab tab-bordered rounded-lg hover:bg-blue-200 hover:text-blue-800" [class.tab-active]="selectedTab === 'security'" (click)="selectTab('security')">Security</a>
       </div>
     </div>
   </div>
 
+  <!-- Details and Security Cards -->
   <div class="card w-full bg-base-100 shadow-2xl mb-4">
+    <!-- Details Section -->
     <div class="card-body" [class.hidden]="selectedTab !== 'details'">
       <div class="details-section mb-4">
         <h3 class="text-lg font-bold mb-2">Details</h3>
-        <div class="mb-2">
-          <label for="avatar" class="block text-sm font-medium text-gray-700">Change Avatar</label>
+        <!-- Avatar and Change Avatar Section -->
+        <div class="mb-2 flex items-start">
+          <!-- Avatar Image with Padding -->
+          <div class="btn btn-ghost btn-circle avatar p-2" style="width: 80px; height: 80px;">
+            <div class="w-full rounded-full">
+              <img alt="Avatar" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" style="width: 100%; height: 100%;">
+            </div>
+          </div>
+          <!-- File Input for Avatar -->
           <input
             type="file"
             id="avatar"
-            class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer focus:outline-none"
+            class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer focus:outline-none ml-2"
             (change)="onAvatarChange($event)"
           >
         </div>
+        <!-- Name Input Field -->
         <input
           type="text"
           #nameInput
@@ -44,6 +39,7 @@
           class="input input-bordered w-full mb-2"
           (input)="name = nameInput.value"
         >
+        <!-- Other Input Fields for Profile Details -->
         <input
           type="text"
           #surnameInput
@@ -57,6 +53,7 @@
           class="textarea textarea-bordered w-full mb-2"
           (input)="description = descriptionInput.value"
         ></textarea>
+        <!-- Social Media Links -->
         <h3 class="text-lg font-bold mb-2">Social Media Links</h3>
         <input
           type="email"
@@ -86,13 +83,16 @@
           class="input input-bordered w-full mb-4"
           (input)="gitHub = gitHubInput.value"
         >
+        <!-- Save Changes Button -->
         <button class="btn btn-primary w-full" (click)="saveChanges()">Save changes</button>
       </div>
     </div>
 
+    <!-- Security Section -->
     <div class="card-body" [class.hidden]="selectedTab !== 'security'">
       <div class="security-section mb-4">
         <h3 class="text-lg font-bold mb-2">Public Information</h3>
+        <!-- Toggle Buttons for Public/Private Info -->
         <button
           class="btn btn-outline mb-2 w-full"
           (click)="makeContactInfoPublic = !makeContactInfoPublic"
@@ -105,6 +105,7 @@
         >
           Make Screener {{ makeScreenerPublic ? 'Private' : 'Public' }}
         </button>
+        <!-- Change Password Section -->
         <h3 class="text-lg font-bold mb-2">Change Password</h3>
         <input
           type="password"
@@ -127,8 +128,10 @@
           class="input input-bordered w-full mb-4"
           (input)="confirmPassword = confirmPasswordInput.value"
         >
+        <!-- Delete Account Button -->
         <h3 class="text-lg font-bold mb-2">Delete Profile</h3>
         <button class="btn btn-error mb-2 w-full" (click)="deleteAccount()">Delete Account</button>
+        <!-- Save Changes Button -->
         <button class="btn btn-primary w-full" (click)="saveChanges()">Save changes</button>
       </div>
     </div>
