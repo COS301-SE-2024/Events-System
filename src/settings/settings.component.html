@@ -92,19 +92,21 @@
     <div class="card-body" [class.hidden]="selectedTab !== 'security'">
       <div class="security-section mb-4">
         <h3 class="text-lg font-bold mb-2">Public Information</h3>
-        <!-- Toggle Buttons for Public/Private Info -->
-        <button
-          class="btn btn-outline mb-2 w-full"
-          (click)="makeContactInfoPublic = !makeContactInfoPublic"
-        >
-          Make Contact Information {{ makeContactInfoPublic ? 'Private' : 'Public' }}
-        </button>
-        <button
-          class="btn btn-outline mb-4 w-full"
-          (click)="makeScreenerPublic = !makeScreenerPublic"
-        >
-          Make Screener {{ makeScreenerPublic ? 'Private' : 'Public' }}
-        </button>
+        <!-- Daisy UI Toggle for Make Contact Information -->
+        <div class="flex items-center mb-2">
+          <label class="flex items-center">
+            <input type="checkbox" class="toggle toggle-primary" (click)="makeContactInfoPublic = !makeContactInfoPublic">
+            <span class="ml-2 text-sm font-medium text-gray-700">Make Contact Information {{ makeContactInfoPublic ? 'Private' : 'Public' }}</span>
+          </label>
+        </div>
+        <!-- Daisy UI Toggle for Make Screener -->
+        <div class="flex items-center mb-4">
+          <label class="flex items-center">
+            <input type="checkbox" class="toggle toggle-primary" (click)="makeScreenerPublic = !makeScreenerPublic">
+            <span class="ml-2 text-sm font-medium text-gray-700">Make Screener {{ makeScreenerPublic ? 'Private' : 'Public' }}</span>
+          </label>
+        </div>
+        
         <!-- Change Password Section -->
         <h3 class="text-lg font-bold mb-2">Change Password</h3>
         <input
