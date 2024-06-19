@@ -3,6 +3,8 @@ export default {
   displayName: 'Events-System',
   preset: './jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
+  collectCoverage: true,
+  coverageReporters: ['lcov', 'text', 'cobertura'],
   coverageDirectory: './coverage',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
