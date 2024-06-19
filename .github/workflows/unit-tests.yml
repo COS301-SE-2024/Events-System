@@ -41,7 +41,7 @@ jobs:
         run: npm run build
 
       - name: Run Jest tests with coverage
-        run: npx jest --config jest.config.ts -- --coverage
+        run: npx jest --config jest.config.ts --coverage
 
       - name: Show coverage directory contents
         run: ls -R ./coverage
