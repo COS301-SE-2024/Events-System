@@ -19,13 +19,5 @@ jobs:
     - name: Install Dependencies
       run: npm ci
 
-    - name: Run Jest Tests with Coverage
-      run: npx jest --config jest.config.ts --coverage
-
-    - name: Upload coverage reports to Codecov
-      uses: codecov/codecov-action@v4.0.1
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
-        files: ./coverage/Events-System/lcov.info
-        fail_ci_if_error: true
-        verbose: true
+    - name: Run Jest Tests
+      run: npx jest --config jest.config.ts

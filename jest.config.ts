@@ -3,7 +3,7 @@ export default {
   displayName: 'Events-System',
   preset: './jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: './coverage/Events-System',
+  coverageDirectory: './coverage',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',
