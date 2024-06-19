@@ -4,8 +4,8 @@
   "license": "MIT",
   "scripts": {
     "start": "nx serve",
-    "build": "nx build --no-cloud",
-    "test": "nx test --no-cloud"
+    "build": "nx build --no-cloud --coverage",
+    "test": "nx test --no-cloud --coverage"
   },
   "private": true,
   "dependencies": {
