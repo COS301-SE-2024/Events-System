@@ -13,6 +13,7 @@ import { GhostEventCardComponent } from 'src/Components/GhostEventCard/GhostEven
 
 export class EventsComponent implements OnInit{
   events: any[] = [];
+  host: any = null;
   selectedDate = '';
   searchLocation = '';
   searchTerm = '';
@@ -21,6 +22,7 @@ checkedSocialClubs: string[] = [];
   filteredEvents = this.events;
   isLoading = true;
   event = {
+    eventId: '',
     title: '',
     description: '',
     startTime: new Date(),
@@ -30,15 +32,18 @@ checkedSocialClubs: string[] = [];
     location: '',
     hostId: '',
     geolocation: '',
-    socialClub: ''
+    socialClub: '',
+    host: '',
+    eventAgendas: '',
+    eventDietaryAccommodations: ''
   };  
   allClubsChecked = false;
   otherCheckboxes = [false, false, false]; // Adjust this to match the number of your other checkboxes
-
+  selectedDietaryAccommodation = '';
 
   onSubmit() {
     const dateInput = (<HTMLInputElement>document.getElementById('date-input')).value;
-    console.log(dateInput);
+    // console.log(dateInput);
     // You can now use the dateInput value for your needs
     this.selectedDate = dateInput;
     this.onDateChange();
@@ -53,7 +58,23 @@ checkedSocialClubs: string[] = [];
         this.events = Array.isArray(data) ? data : [data];
         this.uniqueSocialClubs = [...new Set(this.events.map(event => event.socialClub))];
         this.filterEvents();
+        console.log(this.events);
+
+      // Fetch host information for each event
+      const hostFetches = this.events.map(event => {
+        return fetch('https://events-system-back.wn.r.appspot.com/api/employees/' + event.hostId)
+          .then(response => {
+            return response.json();
+          })
+          .then(data => {
+            event.host = data; // Add host data to the event
+          });
+      });
+
+      // Wait for all host fetches to complete before ending the loading state
+      Promise.all(hostFetches).then(() => {
         this.isLoading = false;
+      });
       });
   }
 
@@ -91,13 +112,15 @@ checkedSocialClubs: string[] = [];
         this.checkedSocialClubs.includes(event.socialClub) &&
         (!this.selectedDate || new Date(event.startDate).toDateString() === new Date(this.selectedDate).toDateString()) &&
         event.title.toLowerCase().includes(this.searchTerm.toLowerCase()) &&
-        event.location.toLowerCase().includes(this.searchLocation.toLowerCase())
+        event.location.toLowerCase().includes(this.searchLocation.toLowerCase()) &&
+        (!this.selectedDietaryAccommodation || event.eventDietaryAccommodations.includes(this.selectedDietaryAccommodation))
       );
     } else {
       this.filteredEvents = this.events.filter(event => 
         (!this.selectedDate || new Date(event.startDate).toDateString() === new Date(this.selectedDate).toDateString()) &&
         event.title.toLowerCase().includes(this.searchTerm.toLowerCase()) &&
-        event.location.toLowerCase().includes(this.searchLocation.toLowerCase())
+        event.location.toLowerCase().includes(this.searchLocation.toLowerCase())  &&
+        (!this.selectedDietaryAccommodation || event.eventDietaryAccommodations.includes(this.selectedDietaryAccommodation))
       );
     }
   }
@@ -109,6 +132,10 @@ checkedSocialClubs: string[] = [];
   updateSearchLocation(event: Event) {
     const target = event.target as HTMLInputElement;
     this.searchLocation = target?.value || '';
+    this.filterEvents();
+  }
+  updateDietaryAccommodation(accommodation: string) {
+    this.selectedDietaryAccommodation = accommodation;
     this.filterEvents();
   }
   onAllClubsClick() {
@@ -135,7 +162,8 @@ checkedSocialClubs: string[] = [];
   filterByTitle() {
     this.filteredEvents = this.events.filter(event => 
       event.title.toLowerCase().includes(this.searchTerm.toLowerCase()) &&
-      event.location.toLowerCase().includes(this.searchLocation.toLowerCase())
+      event.location.toLowerCase().includes(this.searchLocation.toLowerCase()) &&
+      (!this.selectedDietaryAccommodation || event.eventDietaryAccommodations.includes(this.selectedDietaryAccommodation))
     );
   }
   

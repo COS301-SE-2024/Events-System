@@ -44,6 +44,17 @@ public class EmployeeController {
         }
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<Employee> patchEmployee(@PathVariable(value = "id") Long employeeId,
+                                                  @RequestBody Employee employeeDetails) {
+        try {
+            Employee patchedEmployee = employeeService.patchEmployee(employeeId, employeeDetails);
+            return ResponseEntity.ok(patchedEmployee);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteEmployee(@PathVariable(value = "id") Long employeeId) {
         try {

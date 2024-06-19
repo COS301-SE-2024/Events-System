@@ -1,14 +1,15 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-event-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './eventCard.component.html',
   styleUrl: './eventCard.component.css',
 })
 export class EventCardComponent implements OnChanges {
+  @Input() eventID: string | undefined;
   @Input() eventTitle: string | undefined;
   @Input() description: string | undefined;
   @Input() startTime: string | undefined;
@@ -25,6 +26,10 @@ export class EventCardComponent implements OnChanges {
       return parts[0] + ':' + parts[1];
     }
     return undefined;
+  }
+
+  isSameDate(): boolean {
+    return this.startDate !== this.endDate;
   }
 
   ngOnChanges(changes: SimpleChanges): void {

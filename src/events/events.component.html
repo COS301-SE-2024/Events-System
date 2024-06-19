@@ -5,7 +5,7 @@
       <!-- Page content here -->
       <label for="my-drawer-3" class="btn btn-primary drawer-button lg:hidden w-full">Filter</label>
 
-      <div class="flex">
+      <div class="flex  justify-center items-center">
         <div class="lg:mb-96 mt-2 mb-80 ml-8 w-10/12 h-96 grid grid-cols-4 gap-24">
           
           <div *ngIf="isLoading; else content">
@@ -26,6 +26,7 @@
             <!-- Actual content goes here -->
               <app-event-card    
               *ngFor="let event of filteredEvents"
+              [eventID]="event.eventId"
               [eventTitle]="event.title"
               [description]="event.description"
               [startTime]="event.startTime"
@@ -33,7 +34,7 @@
               [startDate]="event.startDate"
               [endDate]="event.endDate"
               [location]="event.location"
-              [hostedBy]="event.hostId"
+              [hostedBy]="event.host.firstName + ' ' + event.host.lastName"
               [socialClub]="event.socialClub">
               </app-event-card>
           </ng-template>
@@ -54,7 +55,7 @@
       
     
     </div> 
-    <div class="drawer-side">
+    <div class="drawer-side hide-scrollbar">
       <label for="my-drawer-3" aria-label="close sidebar" class="drawer-overlay fixed"></label> 
       <ul class="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
         <!-- Sidebar content here -->
@@ -119,27 +120,24 @@
             <div class="collapse-content"> 
               <ul class="menu bg-base-200 w-56 rounded-box">
                 <label class="label cursor-pointer">
-                  <input type="radio" name="radio-10" class="radio checked:bg-red-500" checked />
+                  <input type="radio" name="radio-10" class="radio checked:bg-red-500" checked (change)="updateDietaryAccommodation('')" />
                   <span class="label-text">None</span> 
                 </label>
                 <label class="label cursor-pointer">
-                  <input type="radio" name="radio-10" class="radio checked:bg-red-500" unchecked />
-                  <span class="label-text">Vegatarian</span> 
-                  
+                  <input type="radio" name="radio-10" class="radio checked:bg-red-500" (change)="updateDietaryAccommodation('Vegetarian')" />
+                  <span class="label-text">Vegetarian</span> 
                 </label>
                 <label class="label cursor-pointer">
-                  <input type="radio" name="radio-10" class="radio checked:bg-red-500" unchecked />
+                  <input type="radio" name="radio-10" class="radio checked:bg-red-500" (change)="updateDietaryAccommodation('Vegan')" />
                   <span class="label-text">Vegan</span> 
-  
                 </label>
                 <label class="label cursor-pointer">
-                  <input type="radio" name="radio-10" class="radio checked:bg-red-500" unchecked />
+                  <input type="radio" name="radio-10" class="radio checked:bg-red-500" (change)="updateDietaryAccommodation('Halal')" />
                   <span class="label-text">Halal</span> 
-  
                 </label>
                 <label class="label cursor-pointer">
-                  <input type="radio" name="radio-10" class="radio checked:bg-red-500" unchecked />
-                  <span class="label-text">Gluten-free</span> 
+                  <input type="radio" name="radio-10" class="radio checked:bg-red-500" (change)="updateDietaryAccommodation('Gluten-free')" />
+                  <span class="label-text">Gluten-free</span>
   
                 </label>
               </ul>
