@@ -7,7 +7,10 @@ import { AppComponent } from './app.component';
 import { CalenderComponent } from 'src/calender/calender.component';
 import { EventsComponent } from 'src/events/events.component';
 import { EventComponent } from 'src/event/event.component';
-
+import { MyEventsComponent } from 'src/MyEvents/MyEvents.component';
+import { CreateEventComponent } from 'src/CreateEvent/CreateEvent.component';
+import { UpdateEventComponent } from 'src/UpdateEvent/UpdateEvent.component';
+import { DeleteEventComponent } from 'src/DeleteEvent/DeleteEvent.component';
 export const appRoutes: Route[] = [
   { path: '', component: HomeComponent }, // Home page
   { path: 'login', component: LoginComponent },
@@ -16,5 +19,8 @@ export const appRoutes: Route[] = [
   { path: 'profile', component: ProfileComponent },
   { path: 'events', component: EventsComponent },
   { path: 'event/:id', component: EventComponent },
-  // { path: 'home', component: SettingsComponent },
+  { path: 'myevents', component: MyEventsComponent },
+  { path: 'createevent', component: CreateEventComponent },
+  { path: 'updateevent/:id', component: UpdateEventComponent },
+  { path: 'deleteevent/:id', component: DeleteEventComponent },
 ];

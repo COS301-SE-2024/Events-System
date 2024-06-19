@@ -1,0 +1,140 @@
+<div>
+    <div >
+      <div class="flex justify-center items-center">
+        
+        <div>
+          
+          <h1 class="lg:text-6xl text-4xl text-center mt-8">Let's Make some changes!</h1>
+          <button class="btn w-[50px] -mt-12 lg:-ml-96 h-[30px] rounded-full"(click)="goBack()"><i class="fa-solid fa-arrow-left"></i></button>
+
+          <div class="mx-auto w-1/2">
+            <div class="label mt-4 flex justify-center">
+              <span class="label-text">Title</span>
+            </div>
+            <input  #nameInput type="text" placeholder="Type here" class="input input-bordered w-full max-w-xl text-lg h-12" required/>
+          </div>
+  
+          <div class="label mt-4 flex justify-center">
+            <span class="label-text">Description</span>
+          </div>
+          <textarea  #descriptionInput class="textarea textarea-bordered w-full h-44" placeholder="Bio"required></textarea>    
+          <div class="flex justify-evenly">
+            <div>
+              <div class="label mt-4">
+                <span class="label-text">Start Time</span>
+              </div>
+              <input #StartTimeInput type="time" class="input input-bordered lg:w-96 "required>
+            </div>
+            <div class="mt-7 lg:ml-8">
+              -
+            </div>
+            <div>
+              <div class="label mt-4 lg:ml-8">
+                <span class="label-text">End Time</span>
+              </div>
+              <input #EndTimeInput type="time" class="input input-bordered lg:w-96 lg:ml-8"required>
+            </div>
+  
+          </div>
+          <div class="flex justify-evenly">
+            <div>
+              <div class="label mt-4">
+                <span  class="label-text">Start Date</span>
+              </div>
+              <input #StartDateInput type="date" class="input input-bordered lg:w-96"required>
+            </div>
+            <div class="mt-7 lg:ml-8">
+              -
+            </div>
+            <div>
+              <div class="label mt-4 lg:ml-8">
+                <span  class="label-text">End Date</span>
+              </div>
+              <input #EndDateInput type="date" class="input input-bordered lg:w-96 lg:ml-8"required>
+            </div>
+          </div>
+          <div class="flex justify-evenly lg:flex-row flex-col">
+            <div>
+              <div class="label mt-4">
+                <span class="label-text">Location</span>
+              </div>
+              <input #LocationInput type="text" placeholder="Location" class="input input-bordered w-11/12"required>
+            </div>
+            <div class="mt-7">
+            </div>
+            
+            <div>
+              <div class="label mt-4">
+                <span class="label-text">Social club</span>
+              </div>
+              <input #SocialClubInput type="text"  placeholder="Social club"class="input input-bordered w-full"required>
+            </div>
+            
+          </div>  
+          <div class="flex justify-evenly lg:flex-row flex-col">
+            <div>
+              <div class="label mt-4 -mb-4">
+                <span class="label-text">Preparation Details</span>
+              </div>
+              <div *ngFor="let input of Prepinputs; let i = index">
+                <input #PrepInput [value]="input.value" (input)="updatePrepInput(i, $event)" class="input input-bordered w-full mt-4"required>
+              </div>
+              <div class="flex justify-center mt-4">
+                <button (click)="addPrepInput()" class="btn btn-success">+</button>
+              </div>
+            </div>
+            <div class="mt-7 ml-8">
+            </div>
+            <div>
+              <div class="label  mt-4 -mb-4">
+                <span class="label-text">Agenda Details</span>
+              </div>
+              <div *ngFor="let input of Agendainputs; let i = index">
+                <input #AgendaInput [value]="input.value" (input)="updateAgendaInput(i, $event)" class="input input-bordered w-full mt-4"required>
+              </div>
+              <div class="flex justify-center mt-4">
+                <button (click)="addAgendaInput()" class="btn btn-success">+</button>
+              </div>
+            </div>
+  
+          </div>  
+          <div class="flex items-center justify-center">
+            <div class="label mt-4">
+              <span class="label-text">Dietary accomodations</span>
+            </div>
+          </div>
+          <div class="flex items-center justify-center mt-4">
+            <button class="btn" [ngClass]="{'btn-outline': isVegetarianSelected}" (click)="toggleVegetarian()">Vegetarian</button>
+            <button class="btn lg:ml-8" [ngClass]="{'btn-outline': isVeganSelected}" (click)="toggleVegan()">Vegan</button>
+            <button class="btn lg:ml-8" [ngClass]="{'btn-outline': isHalalSelected}" (click)="toggleHalal()">Halal</button>
+            <button class="btn lg:ml-8" [ngClass]="{'btn-outline': isGlutenFreeSelected}" (click)="toggleGlutenFree()">Gluten-free</button>
+            </div>
+          <div class="flex justify-between mt-4">
+            <button class="btn btn-outline btn-warning">back</button>
+            <button (click)="presubmit()" class="btn btn-success">Update event</button>
+          </div>
+          
+        </div>
+      </div>  
+    </div>
+    <div class="toast" *ngIf="isAPILoading">
+        <div class="alert alert-info flex justify-center">
+            <span class="loading loading-dots loading-md"></span>
+        </div>
+      </div>
+
+
+    <div class="toast" *ngIf="showsuccessToast">
+      <div class="alert alert-success">
+        <span>Event succesfully updated Redirecting...</span>
+      </div>
+    </div>
+  
+    <div class="toast" *ngIf="showfailToast">
+      <div class="alert alert-error">
+        <span>error updating event</span>
+      </div>
+    </div>
+    <!-- <button (click)="previousStep()" class="btn btn-warning" [disabled]="currentStep === 0">Back</button>
+    <button (click)="nextStep()" class="btn btn-success">Next</button> -->
+  </div>
