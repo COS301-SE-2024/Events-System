@@ -3,7 +3,9 @@ export default {
   displayName: 'Events-System',
   preset: './jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: './coverage/Events-System',
+  collectCoverage: true,
+  coverageReporters: ['lcov', 'text', 'cobertura'],
+  coverageDirectory: './coverage',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',
@@ -22,5 +24,8 @@ export default {
   testMatch: [
     '<rootDir>/src/**/__tests__/**/*.[jt]s?(x)',
     '<rootDir>/src/**/*(*.)@(spec|test).[jt]s?(x)',
+  ],
+  testPathIgnorePatterns: [
+    '/node_modules/',
   ],
 };

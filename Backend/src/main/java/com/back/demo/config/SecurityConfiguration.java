@@ -50,6 +50,7 @@ public class SecurityConfiguration {
             "/api/events/**",      // Ensure all event-related endpoints are accessible
             "/api/event-rsvps/**", // Ensure all event-rsvp-related endpoints are accessible
             "/api/employees/**",   // Ensure all employee-related endpoints are accessible
+            "/api/socialclubs/**", // Ensure all social-club-related endpoints are accessible
             "https://events-system.org/events"
     };
 

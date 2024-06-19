@@ -8,6 +8,8 @@ import com.back.demo.config.TokenType;
 import com.back.demo.model.Role;
 import com.back.demo.repository.EmployeeRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -78,7 +80,7 @@ public class AuthenticationService {
         }
     }
 
-    public AuthenticationResponse authenticate(AuthenticationRequest request) {
+    public AuthenticationResponse authenticate(AuthenticationRequest request, HttpServletResponse response) {
         try
         {
             authenticationManager.authenticate(
@@ -98,6 +100,26 @@ public class AuthenticationService {
         var refreshToken = jwtService.generateRefreshToken(user);
         revokeAllUserTokens(user);
         saveUserToken(user, jwtToken);
+
+        // Set JWT as HttpOnly cookie
+        Cookie jwtCookie = new Cookie("jwt", jwtToken);
+        jwtCookie.setHttpOnly(true);
+        jwtCookie.setSecure(true); // Ensure this is only set over HTTPS
+        jwtCookie.setPath("/");
+        jwtCookie.setMaxAge(1 * 12 * 60 * 60); // 12 hours
+
+        Cookie refreshTokenCookie = new Cookie("refreshToken", refreshToken);
+        refreshTokenCookie.setHttpOnly(true);
+        refreshTokenCookie.setSecure(true); // Ensure this is only set over HTTPS
+        refreshTokenCookie.setPath("/");
+        refreshTokenCookie.setMaxAge(1 * 12 * 60 * 60); // 12 hours
+
+        response.addCookie(jwtCookie);
+        response.addCookie(refreshTokenCookie);
+
+        // Optionally, you can return some response body if needed
+        response.setStatus(HttpServletResponse.SC_OK);
+
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)

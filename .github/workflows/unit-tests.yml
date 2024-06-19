@@ -20,4 +20,9 @@ jobs:
       run: npm ci
 
     - name: Run Jest Tests
-      run: npx jest --config jest.config.ts
+      run: npx jest --config jest.config.ts --coverage
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v2
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
