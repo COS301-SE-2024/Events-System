@@ -1,139 +1,161 @@
 
-<div class="navbar bg-base-100">
-  <div class="navbar-start">
-  </div>
-  <div class="navbar-center hidden lg:flex">
-    <a class="btn btn-ghost text-xl">Events</a>
+  <div class="drawer overflow-auto lg:drawer-open drawer-end">
+    <input id="my-drawer-3" type="checkbox" class="drawer-toggle"  #drawerToggle/>
+    <div class="drawer-content flex flex-col justify-start">
+      <!-- Page content here -->
+      <label for="my-drawer-3" class="btn btn-primary drawer-button lg:hidden w-full">Filter</label>
 
-  </div>
-  <div class="navbar-end">
-      <label for="my-drawer-4" class="drawer-button btn btn-primary">Create event</label>
-  </div>
-</div>
-
-<div class="drawer drawer-end">
-  <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
-  <div class="drawer-content">
-    <!-- Page content here -->
-          <app-event
-    *ngFor="let event of events"
-    [eventTitle]="event.title"
-    [description]="event.description"
-    [startTime]="event.startTime"
-    [endTime]="event.endTime"
-    [location]="event.location"
-    [hostedBy]="event.hostId"
-    [socialClub]="event.socialClub">
-  </app-event>
-
-  </div> 
-  <div class="drawer-side  z-20">
-    <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>
-    <ul class="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
-      <!-- Sidebar content here -->
-      <form class="card-body" (submit)="onSubmit($event)">
-
-          <div>
-            <label
-              htmlFor="title"
-              class="block text-sm font-semibold text-heading"
-            >
-              Title
-            </label>
-            <input
-              id="title"
-              name="title"
-              type="text"
-              class="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-primary focus:outline-none focus:ring-0 sm:text-sm"
-            />
-            
+      <div class="flex  justify-center items-center">
+        <div class="lg:mb-96 mt-2 mb-80 ml-8 w-10/12 h-96 grid grid-cols-4 gap-24">
+          
+          <div *ngIf="isLoading; else content">
+            <!-- Skeleton screen goes here -->
+            <div class="lg:mb-96 mt-2 mb-80 w-10/12 h-96 grid" style="grid-template-columns: repeat(4, 1fr); gap: 6rem ;">
+              <app-ghost-event-card></app-ghost-event-card>
+              <app-ghost-event-card></app-ghost-event-card>
+              <app-ghost-event-card></app-ghost-event-card>
+              <app-ghost-event-card></app-ghost-event-card>
+              <app-ghost-event-card></app-ghost-event-card>
+              <app-ghost-event-card></app-ghost-event-card>
+              <app-ghost-event-card></app-ghost-event-card>
+              <app-ghost-event-card></app-ghost-event-card>
+            </div>
           </div>
+          
+          <ng-template #content>
+            <!-- Actual content goes here -->
+              <app-event-card    
+              *ngFor="let event of filteredEvents"
+              [eventID]="event.eventId"
+              [eventTitle]="event.title"
+              [description]="event.description"
+              [startTime]="event.startTime"
+              [endTime]="event.endTime"
+              [startDate]="event.startDate"
+              [endDate]="event.endDate"
+              [location]="event.location"
+              [hostedBy]="event.host.firstName + ' ' + event.host.lastName"
+              [socialClub]="event.socialClub">
+              </app-event-card>
+          </ng-template>
 
-          <div>
-              <label
-                htmlFor="description"
-                class="block text-sm font-semibold text-heading"
-              >
-              Description
-              </label>
-              <input
-              id="description"
-              name="description"
-              type="text"
-              class="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-primary focus:outline-none focus:ring-0 sm:text-sm"
-            />              </div>
-
-          <!-- start time input -->
-          <div>
-              <label
-                htmlFor="startTime"
-                class="block text-sm font-semibold text-heading"
-              >
-                Start time
-              </label>
-              <input
-                id="startTime"
-                name="startTime"
-                type="text"
-                class="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-primary focus:outline-none focus:ring-0 sm:text-sm"
-              />
+          <!-- <app-event-card></app-event-card>
+          <app-event-card></app-event-card>
+          <app-event-card></app-event-card>
+          <app-event-card></app-event-card>
+          <app-event-card></app-event-card>
+          <app-event-card></app-event-card>
+          <app-event-card></app-event-card>
+          <app-event-card></app-event-card>
+          <app-event-card></app-event-card>
+          <app-event-card></app-event-card>
+          <app-event-card></app-event-card> -->
+        </div>
+      </div>
+      
+    
+    </div> 
+    <div class="drawer-side hide-scrollbar">
+      <label for="my-drawer-3" aria-label="close sidebar" class="drawer-overlay fixed"></label> 
+      <ul class="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+        <!-- Sidebar content here -->
+        <button class="btn w-full no-animation">Refine by social club</button>
+        <ul class="menu bg-base-200 w-full rounded-box">
+          <li><input type="checkbox" [checked]="allClubsChecked" (change)="allClubsChecked = !allClubsChecked; onAllClubsClick()" aria-label="All social clubs" class="btn w-full"/></li>
+          <li *ngFor="let club of uniqueSocialClubs; let i = index">
+            <input type="checkbox" [checked]="otherCheckboxes[i]" (change)="otherCheckboxes[i] = !otherCheckboxes[i]; onOtherClubClick(i)" (click)="filterEvents()"[attr.aria-label]="club" class="btn" />
+          </li>
+        </ul>  
+  
+        <div class="mt-8">
+          <button class="btn w-full no-animation">Filter By:</button>
+    
+          <div class="collapse collapse-plus bg-base-200">
+            <input type="radio" name="my-accordion-3" checked="checked" /> 
+  
+                    <div class="collapse collapse-plus bg-base-200">
+            <input type="radio" name="my-accordion-3" /> 
+            <div class="collapse-title text-xl font-medium">
+              Title
             </div>
-
-          <!-- end time input -->
-          <div>
-              <label
-                htmlFor="endTime"
-                class="block text-sm font-semibold text-heading"
-              >
-                End time
-              </label>
-              <input
-                id="endTime"
-                name="endTime"
-                type="text"
-                class="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-primary focus:outline-none focus:ring-0 sm:text-sm"
-              />
+            <div class="collapse-content"> 
+              <ul class="menu bg-base-200 w-56 rounded-box">
+                <input type="text" class="input input-bordered w-full max-w-xs" (input)="updateSearchTerm($event)" placeholder="Search by title"/>   
+              </ul>
             </div>
-
-          <!-- location input -->
-          <div>
-              <label
-                htmlFor="location"
-                class="block text-sm font-semibold text-heading"
-              >
-                Location
-              </label>
-              <input
-                id="location"
-                name="location"
-                type="text"
-                class="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-primary focus:outline-none focus:ring-0 sm:text-sm"
-              />
+          </div>
+            
+            <div class="collapse-title text-xl font-medium">
+              Date
             </div>
+            <div class="collapse-content"> 
+              <form (submit)="onSubmit()">
+                <input type="date" id="date-input"  [value]="selectedDate" (input)="handleInput($event)" name="date-input" class="bg-gray-400 w-full px-3 py-2 rounded-lg border-2 border-gray-400 focus:border-indigo-500 text-base outline-none text-gray-700 transition-colors duration-200 ease-in-out">
+                <!-- <button type="submit">Submit</button> -->
+                <div class="flex w-full">
+                  <button class="btn btn-outline mt-4" (click)="clearDateFilter(); drawerToggle.checked = false">Clear</button>
+                  <button class="btn btn-primary mt-4 ml-24" (click)="drawerToggle.checked = false" type="submit">Submit</button>                
+                 </div>
 
-          <!-- location input -->
-          <div>
-              <label
-                htmlFor="socialClub"
-                class="block text-sm font-semibold text-heading"
-              >
-                social-club
-              </label>
-              <input
-                id="socialClub"
-                name="socialClub"
-                type="text"
-                class="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-primary focus:outline-none focus:ring-0 sm:text-sm"
-              />
+              </form>
             </div>
-
-            <button
-                  type="submit"
-                  class="mt-4 inline-flex cursor-pointer items-center justify-center rounded-xl border-2 border-primary bg-primary px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:border-primary-accent hover:bg-primary-accent focus:outline-none focus:ring-2 focus:ring-orange-400/80 focus:ring-offset-0 disabled:opacity-30 disabled:hover:border-primary disabled:hover:bg-primary disabled:hover:text-white dark:focus:ring-white/80"
-            >
-              Create Event
-            </button>
-      </form>
-    </ul>
+          </div>
+          <div class="collapse collapse-plus bg-base-200">
+            <input type="radio" name="my-accordion-3" /> 
+            <div class="collapse-title text-xl font-medium">
+              Location
+            </div>
+            <div class="collapse-content"> 
+              <ul class="menu bg-base-200 w-56 rounded-box">
+                <input type="text" class="input input-bordered w-full max-w-xs" (input)="updateSearchLocation($event)" placeholder="Search by Location"/>   
+              </ul>
+            </div>
+          </div>
+  
+          <div class="collapse collapse-plus bg-base-200">
+            <input type="radio" name="my-accordion-3" /> 
+            <div class="collapse-title text-xl font-medium">
+              Dietary Requirements
+            </div>
+            <div class="collapse-content"> 
+              <ul class="menu bg-base-200 w-56 rounded-box">
+                <label class="label cursor-pointer">
+                  <input type="radio" name="radio-10" class="radio checked:bg-red-500" checked (change)="updateDietaryAccommodation('')" />
+                  <span class="label-text">None</span> 
+                </label>
+                <label class="label cursor-pointer">
+                  <input type="radio" name="radio-10" class="radio checked:bg-red-500" (change)="updateDietaryAccommodation('Vegetarian')" />
+                  <span class="label-text">Vegetarian</span> 
+                </label>
+                <label class="label cursor-pointer">
+                  <input type="radio" name="radio-10" class="radio checked:bg-red-500" (change)="updateDietaryAccommodation('Vegan')" />
+                  <span class="label-text">Vegan</span> 
+                </label>
+                <label class="label cursor-pointer">
+                  <input type="radio" name="radio-10" class="radio checked:bg-red-500" (change)="updateDietaryAccommodation('Halal')" />
+                  <span class="label-text">Halal</span> 
+                </label>
+                <label class="label cursor-pointer">
+                  <input type="radio" name="radio-10" class="radio checked:bg-red-500" (change)="updateDietaryAccommodation('Gluten-free')" />
+                  <span class="label-text">Gluten-free</span>
+  
+                </label>
+              </ul>
+            </div>
+          </div>
+         </div>
+         <div class="flex lg:hidden w-full">
+          <button class="btn btn-outline" (click)="drawerToggle.checked = false">Cancel</button>
+          <button class="btn btn-outline btn-primary ml-28" (click)="drawerToggle.checked = false">Save</button>
+         </div>
+      </ul>
+    
+    </div>
   </div>
-</div>
+  <!-- <div class="lg:block hidden fixed right-0 w-96 h-full"> -->
+    <!-- Add your navbar content here -->
+     <!-- <div class="bg-transparent"> -->
+
+     <!-- </div> -->
+
+  <!-- </div> -->

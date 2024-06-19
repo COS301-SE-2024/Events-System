@@ -6,7 +6,19 @@ module.exports = {
     './libs/**/*.{html,ts}', // don't forget to include your libraries if you use any
   ],
   daisyui: {
-    themes: ["light", "dark", "cupcake"],
+    themes: [
+      {
+        entellect:{
+          "primary": "#485970",
+          "secondary": "#767D75",
+          "accent": "#A0BE23",
+          "neutral": "#13182C",
+          "base-100": "#12192D",
+        },
+      },
+      "light",
+      "dark",
+       "wireframe"],
   },
   presets: [],
   darkMode: 'media', // or 'class'

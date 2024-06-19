@@ -1,8 +1,11 @@
 package com.back.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -14,9 +17,10 @@ import java.util.List;
 @Table(name = "employees")
 @Entity
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Employee implements UserDetails {
 
-    // Getters and Setters
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "employee_id")
@@ -40,7 +44,8 @@ public class Employee implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Token> tokens;
 
     @Column(name = "employee_description")
@@ -49,6 +54,15 @@ public class Employee implements UserDetails {
     @Column(name = "employee_picture_link")
     private String employeePictureLink;
 
+    @Column(name = "twitter")
+    private String twitter;
+
+    @Column(name = "github")
+    private String github;
+
+    @Column(name = "linkedin")
+    private String linkedin;
+
     @Column(name = "created_at", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Timestamp createdAt;
 
@@ -56,12 +70,13 @@ public class Employee implements UserDetails {
     private Timestamp updatedAt;
 
     // Getters and Setters
+    public Long getEmployeeId() {
+        return employeeId;
+    }
 
     public void setEmployeeId(Long employeeId) {
         this.employeeId = employeeId;
     }
-
-    public Long getEmployeeId(){return this.employeeId;}
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
@@ -77,32 +92,32 @@ public class Employee implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return role.getAuthorities();
+        return role != null ? role.getAuthorities() : List.of(); // Return an empty list if role is null
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return email; // Updated to return the email as the username
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true; // Updated to return true
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true; // Updated to return true
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true; // Updated to return true
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true; // Updated to return true
     }
 
     public void setPassword(String password) {
@@ -112,7 +127,6 @@ public class Employee implements UserDetails {
     public void setDietaryRequirements(String dietaryRequirements) {
         this.dietaryRequirements = dietaryRequirements;
     }
-
 
     public void setEmployeeDescription(String employeeDescription) {
         this.employeeDescription = employeeDescription;
@@ -128,5 +142,65 @@ public class Employee implements UserDetails {
 
     public void setUpdatedAt(Timestamp updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public void setTwitter(String twitter) {
+        this.twitter = twitter;
+    }
+
+    public void setGithub(String github) {
+        this.github = github;
+    }
+
+    public void setLinkedin(String linkedin) {
+        this.linkedin = linkedin;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getDietaryRequirements() {
+        return dietaryRequirements;
+    }
+
+    public String getEmployeeDescription() {
+        return employeeDescription;
+    }
+
+    public String getEmployeePictureLink() {
+        return employeePictureLink;
+    }
+
+    public String getTwitter() {
+        return twitter;
+    }
+
+    public String getGithub() {
+        return github;
+    }
+
+    public String getLinkedin() {
+        return linkedin;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
     }
 }
