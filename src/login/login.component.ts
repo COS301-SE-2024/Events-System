@@ -65,16 +65,13 @@ export class LoginComponent {
     }
   }
 
-  onLogin()
-  {
-    if (this.loginForm.valid)
-    {
-      const formData =
-      {
+  onLogin() {
+    if (this.loginForm.valid) {
+      const formData = {
         email: this.loginForm.get('email')?.value,
         password: this.loginForm.get('password')?.value
       };
-
+  
       // Assuming API endpoint for registration
       fetch('https://events-system-back.wn.r.appspot.com/api/v1/auth/authenticate', {
         method: 'POST',
@@ -86,8 +83,8 @@ export class LoginComponent {
       .then(response => response.json())
       .then(data => {
         console.log('Login successful:', data);
-        // Optionally, navigate to another page on successful registration
-        this.router.navigate(['']);
+        // Navigate to home page with credentials as state data
+        this.router.navigate(['/'], { state: { credentials: formData } });
       })
       .catch(error => {
         console.error('Error registering:', JSON.stringify(formData));
