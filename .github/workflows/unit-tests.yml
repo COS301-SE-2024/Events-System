@@ -38,7 +38,7 @@ jobs:
         run: npm ci
 
       - name: Build with Webpack
-        run: npm run build -no-cloud
+        run: npm run build --no-cloud
 
       - name: Run Jest tests with coverage
         run: npm test -- --coverage
