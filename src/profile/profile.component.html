@@ -1,83 +1,114 @@
-<div class="flex flex-col md:flex-row h-screen">
-    <!-- Sidebar -->
-    <div class="md:w-1/4 w-full md:p-5 p-3 bg-base-300 flex flex-col justify-between">
-        <div class="text-center">
-            <div class="btn btn-ghost btn-circle avatar">
-                <div class="w-10 rounded-full">
-                    <img alt="User Avatar" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg">
-                </div>
+<!-- Desktop Version -->
+<div class="hidden md:block container mx-auto p-4">
+    <div class="card w-full bg-base-100 shadow-2xl mb-4">
+      <div class="card-body">
+        <div class="flex justify-between items-center">
+          <div class="flex items-center">
+            <div class="w-20">
+              <div _ngcontent-ng-c907525974="" tabindex="0" role="button" class="btn btn-ghost btn-circle avatar" style="width: 120px; height: 120px;">
+                <div _ngcontent-ng-c907525974="" class="w-full rounded-full"><img _ngcontent-ng-c907525974="" alt="Tailwind CSS Navbar component" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" style="width: 100%; height: 100%;"></div>
+              </div>
             </div>
-            <div class="mt-4 text-xl md:text-lg">Username</div>
-            <div class="flex justify-around mt-4">
-                <div class="text-center">
-                    <div class="text-lg">Followers</div>
-                    <div class="text-sm">0</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-lg">Subscribers</div>
-                    <div class="text-sm">0</div>
-                </div>
+            <div class="ml-4">
+              <h2 class="text-2xl">Profile Name</h2>
+              <p>Profile Username</p>
             </div>
-            <div class="mt-4">Bio</div>
-            <div class="text-center mt-4">
-                <div class="flex flex-row justify-between">
-                    <button class="btn btn-primary w-1/2 mr-2">Follow</button>
-                    <button class="btn btn-secondary w-1/2 ">Subscribe</button>
-                </div>
-            </div>
-            
+          </div>
+          <button class="btn btn-outline">Edit Profile</button>
         </div>
+        <div class="tabs">
+          <a class="tab tab-bordered rounded-lg hover:bg-blue-200 hover:text-blue-800" (click)="selectTab('about')" [class.tab-active]="selectedTab === 'about'">About</a>
+          <a class="tab tab-bordered rounded-lg hover:bg-blue-200 hover:text-blue-800" (click)="selectTab('events')" [class.tab-active]="selectedTab === 'events'">Events History</a>
+          <a class="tab tab-bordered rounded-lg hover:bg-blue-200 hover:text-blue-800" (click)="selectTab('subscriptions')" [class.tab-active]="selectedTab === 'subscriptions'">Subscriptions</a>
+        </div>
+      </div>
     </div>
-
-    <!-- Main Content -->
-    <div class="md:w-3/4 w-full md:p-5 p-3 overflow-y-auto">
-        <!-- Search Bar -->
-        <div class="mb-4">
-            <input type="text" placeholder="Search for Achievement or Users" class="input input-bordered w-full">
+  
+    <div *ngIf="selectedTab === 'about'" class="card w-full bg-base-100 shadow-2xl mb-4">
+      <div class="card-body flex-row">
+        <div class="w-1/2">
+          <h2 class="card-title">About Me</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse gravida, sem eget fringilla tempus.</p>
         </div>
-
-        <!-- Tabs -->
-        <div class="flex justify-around mb-4">
-            <button class="btn btn-outline">Feed</button>
-            <button class="btn btn-outline">Subscribers</button>
-            <button class="btn btn-outline">Achievements</button>
+        <div class="w-1/2">
+          <h3 class="text-xl mt-4">Contact Details</h3>
+          <ul class="flex flex-col">
+            <li class="flex items-center"><i class="far fa-envelope ml-2"></i></li>
+            <li class="flex items-center"><i class="fab fa-xing ml-2"></i></li>
+            <li class="flex items-center"><i class="fab fa-linkedin ml-2"></i></li>
+            <li class="flex items-center"><i class="fab fa-discord ml-2"></i></li>
+          </ul>
         </div>
-
-        <!-- Posts -->
-        <div class="space-y-4">
-            <div class="p-4 bg-base-300 rounded-box">
-                <div class="flex items-center mb-2">
-                    <div class="btn btn-ghost btn-circle avatar">
-                        <div class="w-10 rounded-full">
-                            <img alt="User Avatar" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg">
-                        </div>
-                    </div>
-                    <div class="ml-4">Username</div>
-                    <button class="ml-auto btn btn-sm btn-outline">Follow</button>
-                </div>
-                <div class="mb-2">Fantastic content for you to read.</div>
-                <div class="flex justify-around space-x-2">
-                    <button class="btn btn-sm btn-outline">Like</button>
-                    <button class="btn btn-sm btn-outline">Share</button>
-                </div>
-            </div>
-
-            <div class="p-4 bg-base-300 rounded-box">
-                <div class="flex items-center mb-2">
-                    <div class="btn btn-ghost btn-circle avatar">
-                        <div class="w-10 rounded-full">
-                            <img alt="User Avatar" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg">
-                        </div>
-                    </div>
-                    <div class="ml-4">Username</div>
-                    <button class="ml-auto btn btn-sm btn-outline">Follow</button>
-                </div>
-                <div class="mb-2">Fantastic content for you to read.</div>
-                <div class="flex justify-around space-x-2">
-                    <button class="btn btn-sm btn-outline">Like</button>
-                    <button class="btn btn-sm btn-outline">Share</button>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
-</div>
+  
+    <div *ngIf="selectedTab === 'events'" class="card w-full bg-base-100 shadow-2xl mb-4">
+      <div class="card-body">
+        <h2 class="card-title">Event Title</h2>
+        <p>Host Name</p>
+        <p>Event Details</p>
+        <button class="btn btn-outline">More details</button>
+      </div>
+    </div>
+  
+    <div *ngIf="selectedTab === 'subscriptions'" class="card w-full bg-base-100 shadow-2xl mb-4">
+      <div class="card-body">
+        <h2 class="card-title">Subscriptions</h2>
+        <p>Details about the user's subscriptions.</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Mobile Version -->
+  <div class="md:hidden container mx-auto p-4">
+    <div class="card w-full bg-base-100 shadow-2xl mb-4">
+      <div class="card-body">
+        <div class="flex flex-col items-center">
+          <div _ngcontent-ng-c907525974="" tabindex="0" role="button" class="btn btn-ghost btn-circle avatar" style="width: 120px; height: 120px;">
+            <div _ngcontent-ng-c907525974="" class="w-full rounded-full"><img _ngcontent-ng-c907525974="" alt="Tailwind CSS Navbar component" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" style="width: 100%; height: 100%;"></div>
+          </div>
+          <div>
+            <h2 class="text-2xl">Profile Name</h2>
+            <p>Profile Username</p>
+          </div>
+          <button class="btn btn-outline mt-4">Edit Profile</button>
+        </div>
+        <div class="tabs tabs-boxed w-full">
+          <a class="tab tab-bordered rounded-lg hover:bg-blue-200 hover:text-blue-800" (click)="selectTab('about')" [class.tab-active]="selectedTab === 'about'">About</a>
+          <a class="tab tab-bordered rounded-lg hover:bg-blue-200 hover:text-blue-800" (click)="selectTab('events')" [class.tab-active]="selectedTab === 'events'">Events History</a>
+          <a class="tab tab-bordered rounded-lg hover:bg-blue-200 hover:text-blue-800" (click)="selectTab('subscriptions')" [class.tab-active]="selectedTab === 'subscriptions'">Subscriptions</a>
+        </div>
+      </div>
+    </div>
+  
+    <div *ngIf="selectedTab === 'about'" class="card w-full bg-base-100 shadow-2xl mb-4">
+      <div class="card-body">
+        <h2 class="card-title">About Me</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse gravida, sem eget fringilla tempus.</p>
+        <h3 class="text-xl mt-4">Contact Details</h3>
+        <ul>
+          <li>Email: </li>
+          <li>Profile X</li>
+          <li>Profile LinkedIn</li>
+          <li>Profile Discord</li>
+        </ul>
+      </div>
+    </div>
+  
+    <div *ngIf="selectedTab === 'events'" class="card w-full bg-base-100 shadow-2xl mb-4">
+      <div class="card-body">
+        <h2 class="card-title">Event Title</h2>
+        <p>Host Name</p>
+        <p>Event Details</p>
+        <button class="btn btn-outline">More details</button>
+      </div>
+    </div>
+  
+    <div *ngIf="selectedTab === 'subscriptions'" class="card w-full bg-base-100 shadow-2xl mb-4">
+      <div class="card-body">
+        <h2 class="card-title">Subscriptions</h2>
+        <p>Details about the user's subscriptions.</p>
+      </div>
+    </div>
+  </div>
+  
