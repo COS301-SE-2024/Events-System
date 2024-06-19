@@ -41,7 +41,7 @@ jobs:
         run: npm run build
 
       - name: Run Jest tests with coverage
-        run: npm test -- --coverage
+        run: npx jest --config jest.config.ts -- --coverage
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
