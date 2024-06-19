@@ -1,5 +1,5 @@
 <!-- SIGN UP CARD -->
-  <form class="card-body">
+  <form (submit)="onLogin()" [formGroup]="loginForm" class="card-body">
     <div>
       <label
         htmlFor="email"
@@ -9,7 +9,7 @@
       </label>
       <input
         id="email"
-        name="email"
+        formControlName="email"
         type="email"
         class="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-primary focus:outline-none focus:ring-0 sm:text-sm"
       />
@@ -25,7 +25,7 @@
         </label>
         <input
           id="password"
-          name="password"
+          formControlName="password"
           type="password"
           class="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-primary focus:outline-none focus:ring-0 sm:text-sm"
         />
@@ -129,86 +129,116 @@
 
 <!-- CREATE ACCOUNT MODAL HOME -->
 <dialog id="my_modal_3" class="modal">
-  <div class="modal-box  overflow-x-hidden">
-
+  <div class="modal-box overflow-x-hidden">
     <form method="dialog">
-      <button class="btn btn-sm btn-circle btn-ghost absolute right-20 top-2">✕</button>
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-20 top-2">
+        ✕
+      </button>
+  <div class="card shrink-0 w-full max-w-sm">
+    <form (submit)="onRegister($event)" [formGroup]="registerForm" class="card-body">
+      <div>
+        <label htmlFor="firstName" class="block text-sm font-semibold text-heading">
+          First Name
+        </label>
+        <input
+          id="firstName"
+          name="firstName"
+          formControlName="firstName"
+          type="text"
+          class="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-primary focus:outline-none focus:ring-0 sm:text-sm"
+          required
+        />
+        <div *ngIf="registerForm.get('firstName')?.invalid && (registerForm.get('firstName')?.dirty || registerForm.get('firstName')?.touched)" class="text-red-500 text-sm mt-1">
+          First Name is required
+        </div>
+      </div>
+      <div>
+        <label htmlFor="lastName" class="block text-sm font-semibold text-heading">
+          Last Name
+        </label>
+        <input
+          id="lastName"
+          name="lastName"
+          formControlName="lastName"
+          type="text"
+          class="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-primary focus:outline-none focus:ring-0 sm:text-sm"
+          required
+        />
+        <div *ngIf="registerForm.get('lastName')?.invalid && (registerForm.get('lastName')?.dirty || registerForm.get('lastName')?.touched)" class="text-red-500 text-sm mt-1">
+          Last Name is required
+        </div>
+      </div>
+
+      <div>
+        <label htmlFor="email" class="block text-sm font-semibold text-heading">
+          Email
+        </label>
+        <input
+          id="email"
+          name="email"
+          formControlName="email"
+          type="email"
+          class="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-primary focus:outline-none focus:ring-0 sm:text-sm"
+          required
+        />
+        <div *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)" class="text-red-500 text-sm mt-1">
+          Email is required and must be valid
+        </div>
+      </div>
+
+      <div>
+        <label htmlFor="password" class="block text-sm font-semibold text-heading">
+          Password
+        </label>
+        <input
+          id="password"
+          name="password"
+          formControlName="password"
+          type="password"
+          class="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-primary focus:outline-none focus:ring-0 sm:text-sm"
+          required
+        />
+        <div *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)" class="text-red-500 text-sm mt-1">
+          Password is required and must be at least 6 characters
+        </div>
+      </div>
+
+      <div>
+        <label htmlFor="confirmPassword" class="block text-sm font-semibold text-heading">
+          Confirm Password
+        </label>
+        <input
+          type="password"
+          class="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-primary focus:outline-none focus:ring-0 sm:text-sm"
+          required
+        />
+        <div *ngIf="registerForm.get('confirmPassword')?.invalid && (registerForm.get('confirmPassword')?.dirty || registerForm.get('confirmPassword')?.touched)" class="text-red-500 text-sm mt-1">
+          Confirm Password is required
+        </div>
+        <div *ngIf="registerForm.hasError('passwordMismatch')" class="text-red-500 text-sm mt-1">
+          Passwords do not match
+        </div>
+      </div>
+
+      <div class="w-28">
+        I am a
+        <label class="label cursor-pointer">
+          <input type="radio" formControlName="role" value="Employee" required /> Employee
+        </label>
+        <label class="label cursor-pointer">
+          <input type="radio" formControlName="role" value="Host" /> Host
+        </label>
+      </div>
+      <button
+        type="submit"
+        [disabled]="registerForm.invalid"
+        class="mt-4 inline-flex cursor-pointer items-center justify-center rounded-xl border-2 border-primary bg-primary px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:border-primary-accent hover:bg-primary-accent focus:outline-none focus:ring-2 focus:ring-orange-400/80 focus:ring-offset-0 disabled:opacity-30 disabled:hover:border-primary disabled:hover:bg-primary disabled:hover:text-white dark:focus:ring-white/80"
+      >
+        Create Account
+      </button>
     </form>
-
-    <div class="card shrink-0 w-full max-w-sm">
-
-      <form class="card-body">
-        <div>
-          <label
-            htmlFor="name"
-            class="block text-sm font-semibold text-heading"
-          >
-            Name
-          </label>
-          <input
-            id="name"
-            name="name"
-            type="text"
-            class="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-primary focus:outline-none focus:ring-0 sm:text-sm"
-          />
-        </div>
-
-
-        <div>
-          <label
-            htmlFor="email"
-            class="block text-sm font-semibold text-heading"
-          >
-            Email
-          </label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            class="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-primary focus:outline-none focus:ring-0 sm:text-sm"
-          />
-        </div>
-
-
-        <div>
-          <label
-            htmlFor="password"
-            class="block text-sm font-semibold text-heading"
-          >
-            Password
-          </label>
-          <input
-            id="password"
-            name="password"
-            type="password"
-            class="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-primary focus:outline-none focus:ring-0 sm:text-sm"
-          />
-        </div>
-
-        <div>
-          <label
-            htmlFor="password"
-            class="block text-sm font-semibold text-heading"
-          >
-            Confirm Password
-          </label>
-          <input
-            id="password"
-            name="password"
-            type="password"
-            class="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-primary focus:outline-none focus:ring-0 sm:text-sm"
-          />
-        </div>
-
-
-        <button
-            type="submit"
-            class="mt-4 inline-flex cursor-pointer items-center justify-center rounded-xl border-2 border-primary bg-primary px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:border-primary-accent hover:bg-primary-accent focus:outline-none focus:ring-2 focus:ring-orange-400/80 focus:ring-offset-0 disabled:opacity-30 disabled:hover:border-primary disabled:hover:bg-primary disabled:hover:text-white dark:focus:ring-white/80"
-        >
-          Create Account
-        </button>
-      </form>
-    </div>
+  </div>
+</form>
   </div>
   <form method="dialog" class="modal-backdrop">
     <button>close</button>

@@ -17,5 +17,5 @@ public class RegisterRequest {
     private String email;
     private String password;
     private String dietaryRequirements;
-    private Role role;
+    private String role;
 }

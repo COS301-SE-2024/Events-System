@@ -35,7 +35,8 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @EnableMethodSecurity
 public class SecurityConfiguration {
 
-    private static final String[] WHITE_LIST_URL = {"/api/v1/auth/**",
+    private static final String[] WHITE_LIST_URL = {
+            "/api/v1/auth/**",
             "/v2/api-docs",
             "/v3/api-docs",
             "/v3/api-docs/**",
@@ -46,9 +47,13 @@ public class SecurityConfiguration {
             "/swagger-ui/**",
             "/webjars/**",
             "/swagger-ui.html",
-            "/api/events",
-            "/api/employees",
-            "https://events-system.org/events"};
+            "/api/events/**",      // Ensure all event-related endpoints are accessible
+            "/api/event-rsvps/**", // Ensure all event-rsvp-related endpoints are accessible
+            "/api/employees/**",   // Ensure all employee-related endpoints are accessible
+            "/api/socialclubs/**", // Ensure all social-club-related endpoints are accessible
+            "https://events-system.org/events"
+    };
+
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
     private final LogoutHandler logoutHandler;
@@ -75,8 +80,7 @@ public class SecurityConfiguration {
                         logout.logoutUrl("/api/v1/auth/logout")
                                 .addLogoutHandler(logoutHandler)
                                 .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext())
-                )
-        ;
+                );
 
         return http.build();
     }
