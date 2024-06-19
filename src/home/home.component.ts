@@ -2,13 +2,30 @@ import { Component, Input, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import {EventCardComponent} from 'src/Components/EventCard/eventCard.component'
+import {HomeFeaturedEventComponent} from 'src/Components/HomeFeaturedEvent/HomeFeaturedEvent.component'
 import {SocialClubCardComponent} from 'src/Components/SocialClubCard/socialClubCard.component'
-import { ViewportScroller } from '@angular/common';
 import { ChangeDetectorRef } from '@angular/core';
+import { ViewChild, ElementRef } from '@angular/core';
+
+
+export interface Slide {
+  id: string;
+  title: string;
+  description: string;
+  startTime: string;
+  endTime: string;
+  startDate: string;
+  endDate: string;
+  location: string;
+  hostId: string;
+  geolocation: string;
+  socialClub: string;
+  host: any; // replace 'any' with the actual type of 'host'
+}
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule, EventCardComponent, SocialClubCardComponent],
+  imports: [CommonModule, RouterModule, EventCardComponent, SocialClubCardComponent, HomeFeaturedEventComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
@@ -46,12 +63,21 @@ export class HomeComponent {
   nextSlideIndex = '';
   previousSlideIndex = '';
 
+  currentHomeSlideIndex = 0;
+  previousHomeSlideIndex = '';
+  nextHomeSlideIndex = '';
+  Homeslides: Slide[] = [];
   currentSocialClubSlideIndex = 0;
   nextSocialClubSlideIndex = '';
   previousSocialClubSlideIndex = '';
-
-
+  selectedDate = '';
+  allSlides: any[] = [];
+  numbers = Array(6).fill(0).map((x,i)=>i);
   slides: any[] = []; 
+  @ViewChild('carousel1') carousel1!: ElementRef;
+  @ViewChild('carousel2') carousel2!: ElementRef;
+  @ViewChild('carousel3') carousel3!: ElementRef;
+  
   ngOnInit(): void {
     fetch('https://events-system-back.wn.r.appspot.com/api/events')
       .then(response => {
@@ -60,7 +86,6 @@ export class HomeComponent {
       .then(data => {
         this.events = Array.isArray(data) ? data : [data];
   
-        
         const hostFetches = this.events.map(event => {
           return fetch('https://events-system-back.wn.r.appspot.com/api/employees/' + event.hostId)
             .then(response => {
@@ -71,10 +96,7 @@ export class HomeComponent {
             });
         });
   
-  
-        
         Promise.all(hostFetches).then(() => {
-          
           this.slides = this.events.map((eventData, index) => {
             const slide = {
               id: `slide${index + 11}`,
@@ -94,54 +116,101 @@ export class HomeComponent {
             return slide;
           });
   
-          
+          // Store all slides
+          this.allSlides = [...this.slides];
+  
+          // Populate Homeslides with slide IDs
+          // this.Homeslides = this.events.slice(0, 10).map((eventData, index) => `slide${index}`);
+  
+          // Create a separate copy for homeSlides
+          this.Homeslides = JSON.parse(JSON.stringify(this.slides.slice(0, 10)));
+  
           this.isLoading = false;
         });
       });
   }
+  nextHSlide() {
+    this.carousel1.nativeElement.scrollLeft += this.carousel1.nativeElement.offsetWidth;
+
+    if (this.currentHomeSlideIndex === this.Homeslides.length - 1) {    
+      this.currentHomeSlideIndex = 0;   
+    } else if (this.currentHomeSlideIndex < this.Homeslides.length - 1) {    
+      this.currentHomeSlideIndex += 1;    
+    }
+    this.nextHomeSlideIndex = this.Homeslides[this.currentHomeSlideIndex].id || '';  
+  }
+  
+  previousHSlide() {
+    this.carousel1.nativeElement.scrollLeft -= this.carousel1.nativeElement.offsetWidth;
+
+    if (this.currentHomeSlideIndex > 0) {   
+      this.currentHomeSlideIndex -= 1;    
+      this.previousHomeSlideIndex = this.Homeslides[this.currentHomeSlideIndex].id  || '';    
+    }
+
+  }
   nextUSlide() {
+    const singleSlideWidth = this.carousel2.nativeElement.offsetWidth / 3;
+    this.carousel2.nativeElement.scrollLeft += singleSlideWidth;
+
     if (this.currentSlideIndex === this.slides.length - 3) {    
       this.currentSlideIndex = 0;   
       this.nextSlideIndex = this.slides[this.currentSlideIndex].id || '';    
-      console.log("last current " + this.currentSlideIndex);    
-      console.log("last next " + this.nextSlideIndex);    
+  
     }else
     if (this.currentSlideIndex < this.slides.length - 1) {    
       this.currentSlideIndex += 1;    
       this.nextSlideIndex = this.slides[this.currentSlideIndex + 2].id  || '';    
     }
-    console.log("current " + this.currentSlideIndex);   
-    console.log("next " + this.nextSlideIndex);   
   }
   
   previousUSlide() {
-    if (this.currentSlideIndex > 0) {   
-      this.currentSlideIndex -= 1;    
-      this.previousSlideIndex = this.slides[this.currentSlideIndex].id  || '';    
-    }
+  const singleSlideWidth = this.carousel2.nativeElement.offsetWidth / 3;
+  this.carousel2.nativeElement.scrollLeft -= singleSlideWidth;
+    // if (this.currentSlideIndex > 0) {   
+    //   this.currentSlideIndex -= 1;    
+    //   this.previousSlideIndex = this.slides[this.currentSlideIndex].id  || '';    
+    // }
 
   }
 
   nextSCSlide() {
-    if (this.currentSocialClubSlideIndex === this.slides.length - 3) {    
-      this.currentSocialClubSlideIndex = 0;   
-      this.nextSocialClubSlideIndex = this.slides[this.currentSocialClubSlideIndex].id || '';    
-      console.log("last current " + this.currentSocialClubSlideIndex);    
-      console.log("last next " + this.nextSocialClubSlideIndex);    
-    }else
-    if (this.currentSocialClubSlideIndex < this.slides.length - 1) {    
-      this.currentSocialClubSlideIndex += 1;    
-      this.nextSocialClubSlideIndex = this.slides[this.currentSocialClubSlideIndex + 2].id  || '';    
-    }
-    console.log("current " + this.currentSocialClubSlideIndex);   
-    console.log("next " + this.nextSocialClubSlideIndex);   
+    this.carousel3.nativeElement.scrollLeft -= this.carousel3.nativeElement.offsetWidth;
+
+    // if (this.currentSocialClubSlideIndex === this.slides.length - 3) {    
+    //   this.currentSocialClubSlideIndex = 0;   
+    //   this.nextSocialClubSlideIndex = this.slides[this.currentSocialClubSlideIndex].id || '';    
+    //   console.log("last current " + this.currentSocialClubSlideIndex);    
+    //   console.log("last next " + this.nextSocialClubSlideIndex);    
+    // }else
+    // if (this.currentSocialClubSlideIndex < this.slides.length - 1) {    
+    //   this.currentSocialClubSlideIndex += 1;    
+    //   this.nextSocialClubSlideIndex = this.slides[this.currentSocialClubSlideIndex + 2].id  || '';    
+    // }
+    // console.log("current " + this.currentSocialClubSlideIndex);   
+    // console.log("next " + this.nextSocialClubSlideIndex);   
   }
   
   previousSCSlide() {
-    if (this.currentSocialClubSlideIndex > 0) {   
-      this.currentSocialClubSlideIndex -= 1;    
-      this.previousSocialClubSlideIndex = this.slides[this.currentSocialClubSlideIndex].id  || '';    
-    }
+    this.carousel3.nativeElement.scrollLeft += this.carousel3.nativeElement.offsetWidth;
 
+    // if (this.currentSocialClubSlideIndex > 0) {   
+    //   this.currentSocialClubSlideIndex -= 1;    
+    //   this.previousSocialClubSlideIndex = this.slides[this.currentSocialClubSlideIndex].id  || '';    
+    // }
+
+  }
+
+
+
+  filterByDate(date: string) {
+    this.selectedDate = date;
+    this.slides = this.allSlides.filter(slide => slide.startDate === this.selectedDate);
+  }
+
+  clearDate(dateInput: HTMLInputElement) {
+    this.selectedDate = '';
+    dateInput.value = '';
+    this.slides = [...this.allSlides];
   }
 }
