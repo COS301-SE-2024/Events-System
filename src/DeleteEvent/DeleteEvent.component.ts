@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 @Component({
@@ -12,11 +12,20 @@ export class DeleteEventComponent {
   isAPILoading = false;
   showsuccessToast = false;
   showfailToast = false;
+  @ViewChild('nameInput') nameInput!: ElementRef;
   eventId= '';
   myevent: any = {};
   constructor(private route: ActivatedRoute, private location: Location) { }  
   goBack(): void {
     window.history.back();
+  }
+  presubmit(){
+    if(this.nameInput.nativeElement.value === '' || this.nameInput.nativeElement.value !== this.myevent.title){
+      alert('Please enter the correct event name');
+      return;
+    }else{
+      this.submit();
+    }
   }
   submit(){
     this.isAPILoading = true; // Set isLoading to true at the start of the method

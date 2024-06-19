@@ -10,13 +10,13 @@
 
           <div class="">
             <div class="label mt-4 flex justify-center">
-              <span class="label-text text-lg">Enter the name of the event: {{myevent.title}}</span>
+              <span class="label-text text-lg">Enter the name of the event: <span class="text-accent">{{myevent.title}}</span></span>
             </div>
             <input  #nameInput type="text" placeholder="Type here" class="input input-bordered w-full max-w-xl text-lg h-12" required/>
           </div>
           <div class="flex justify-between mt-4">
             <button class="btn  btn-warning">back</button>
-            <button (click)="submit()" class="btn btn-error btn-outline">Delete event</button>
+            <button (click)="presubmit()" class="btn btn-error btn-outline">Delete event</button>
           </div>
         </div>
       </div>  
@@ -30,7 +30,7 @@
 
     <div class="toast" *ngIf="showsuccessToast">
       <div class="alert alert-success">
-        <span>Event succesfully Deleted</span>
+        <span>Event succesfully Deleted Redirecting...</span>
       </div>
     </div>
   

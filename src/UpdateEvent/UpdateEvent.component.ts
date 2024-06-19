@@ -39,7 +39,21 @@ Agendainputs: { id: number, value: string }[] = [{ id: 0, value: '' }];
   constructor(private route: ActivatedRoute, private location: Location) { }  goBack(): void {
     window.history.back();
   }
-
+presubmit(){
+  if (this.nameInput.nativeElement.value === '' || 
+    this.descriptionInput.nativeElement.value  === '' || 
+    this.StartTimeInput.nativeElement.value === '' || 
+    this.EndTimeInput.nativeElement.value === '' || 
+    this.StartDateInput.nativeElement.value === '' || 
+    this.EndDateInput.nativeElement.value === '' || 
+    this.LocationInput.nativeElement.value === '' || 
+    this.SocialClubInput.nativeElement.value === '') {
+    alert('Please fill in all the details');
+    return;
+}else{
+  this.submit();
+}
+}
   submit(){
     this.isAPILoading = true; // Set isLoading to true at the start of the method
 
@@ -121,8 +135,6 @@ Agendainputs: { id: number, value: string }[] = [{ id: 0, value: '' }];
           this.isGlutenFreeSelected = this.myevent.dietaryAccommodations.includes('Gluten-Free');
           sessionStorage.setItem('updateisGlutenFreeSelected', String(this.isGlutenFreeSelected));
         } else {
-          // Handle the case where this.myevent or this.myevent.dietaryAccommodations is undefined
-          // For example, you could set all the session storage items to 'false'
           sessionStorage.setItem('updateisVegetarianSelected', 'false');
           sessionStorage.setItem('updateisVeganSelected', 'false');
           sessionStorage.setItem('updateisHalalSelected', 'false');
@@ -153,8 +165,6 @@ Agendainputs: { id: number, value: string }[] = [{ id: 0, value: '' }];
       this.EndDateInput.nativeElement.value = this.myevent.endDate;
       this.LocationInput.nativeElement.value = this.myevent.location;
       this.SocialClubInput.nativeElement.value = this.myevent.socialClub;
-
-
     }
   }
   formatTime(time: string | undefined): string | undefined {

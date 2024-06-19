@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ViewChild, ElementRef, QueryList, ViewChildre
 import { CommonModule } from '@angular/common';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Location } from '@angular/common';
+import validator from 'validator';
 @Component({
   selector: 'app-create-event',
   standalone: true,
@@ -39,6 +40,9 @@ export class CreateEventComponent implements AfterViewInit{
   eventName= '';
   currentStep = 0;
   isAPILoading = false;
+  isNameEmpty = false;
+  isDescriptionEmpty = false;
+  isstep2Empty = false;
   showsuccessToast = false;
   showfailToast = false;
 // Define the Prepinputs and Agendainputs as an array of objects
@@ -49,28 +53,44 @@ ngOnInit() {
   const agendaInputsData = sessionStorage.getItem('AgendaInputs');
   this.Prepinputs = prepInputsData ? JSON.parse(prepInputsData) : [];
   this.Agendainputs = agendaInputsData ? JSON.parse(agendaInputsData) : [];
-  this.isVegetarianSelected = sessionStorage.getItem('isVegetarianSelected') === 'true';
-  this.isVeganSelected = sessionStorage.getItem('isVeganSelected') === 'true';
-  this.isHalalSelected = sessionStorage.getItem('isHalalSelected') === 'true';
-  this.isGlutenFreeSelected = sessionStorage.getItem('isGlutenFreeSelected') === 'true';
+  this.isVegetarianSelected = sessionStorage.getItem('isVegetarianSelected') === 'false';
+  this.isVeganSelected = sessionStorage.getItem('isVeganSelected') === 'false';
+  this.isHalalSelected = sessionStorage.getItem('isHalalSelected') === 'false';
+  this.isGlutenFreeSelected = sessionStorage.getItem('isGlutenFreeSelected') === 'false';
+}
+
+presubmit(){
+  if (!sessionStorage.getItem('title') || sessionStorage.getItem('title') === '' || 
+  !sessionStorage.getItem('description') || sessionStorage.getItem('description') === '' || 
+  !sessionStorage.getItem('startTime') || sessionStorage.getItem('startTime') === '' || 
+  !sessionStorage.getItem('endTime') || sessionStorage.getItem('endTime') === '' || 
+  !sessionStorage.getItem('startDate') || sessionStorage.getItem('startDate') === '' || 
+  !sessionStorage.getItem('endDate') || sessionStorage.getItem('endDate') === '' || 
+  !sessionStorage.getItem('location') || sessionStorage.getItem('location') === '' || 
+  !sessionStorage.getItem('eventDietaryAccommodations') || sessionStorage.getItem('eventDietaryAccommodations') === '') {
+  alert('Please fill in all the details');
+  return;
+}else{
+  this.submit();
+}
 }
 submit(){
     // Create the event object
     this.isAPILoading = true;
     const event = {
-      title: this.nameInput.nativeElement.value,
-      description: this.descriptionInput.nativeElement.value,
-      startTime: this.StartTimeInput.nativeElement.value+':00',
-      endTime: this.EndTimeInput.nativeElement.value+':00',
-      startDate: this.StartDateInput.nativeElement.value,
-      endDate: this.EndDateInput.nativeElement.value,
-      location: this.LocationInput.nativeElement.value,
+      title: validator.escape(this.nameInput.nativeElement.value),
+      description: validator.escape(this.descriptionInput.nativeElement.value),
+      startTime: validator.escape(this.StartTimeInput.nativeElement.value+':00'),
+      endTime: validator.escape(this.EndTimeInput.nativeElement.value+':00'),
+      startDate: validator.escape(this.StartDateInput.nativeElement.value),
+      endDate: validator.escape(this.EndDateInput.nativeElement.value),
+      location: validator.escape(this.LocationInput.nativeElement.value),
       hostId: 6,
-      geolocation: "51.507351, -0.127758", // Replace with actual geolocation
+      geolocation: "51.507351, -0.127758",
       socialClub: 2,
       eventPictureLink: "https://example.com/soccer-tournament.jpg", // Replace with actual picture link
-      eventAgendas: this.Agendainputs.map(input => input.value),
-      eventPreparation: this.Prepinputs.map(input => input.value),
+      eventAgendas: this.Agendainputs.map(input => validator.escape(input.value)),
+      eventPreparation: this.Prepinputs.map(input => validator.escape(input.value)),
       eventDietaryAccommodations: [
         this.isVegetarianSelected ? "Vegetarian" : null,
         this.isVeganSelected ? "Vegan" : null,
@@ -78,6 +98,8 @@ submit(){
         this.isGlutenFreeSelected ? "Gluten-free" : null
       ].filter(Boolean) // Remove null values
     };
+
+    console.log(event);
     // Send the POST request
     fetch('https://events-system-back.wn.r.appspot.com/api/events', {
       method: 'POST',
@@ -200,24 +222,45 @@ submit(){
       this.nameInput.nativeElement.value = namedata;
     }
   }
+
   nextStep() {
+    if ( this.nameInput.nativeElement.value === '') {
+      this.isNameEmpty = true;
+      return;
+    }
     if (this.currentStep < 4) {
       const nameinput = this.nameInput.nativeElement.value;
       sessionStorage.setItem(`Name`, nameinput);
+      this.isNameEmpty = false;
       this.currentStep++;
     }
   }
   nextStep1(){
+    if ( this.descriptionInput.nativeElement.value === '') {
+      this.isDescriptionEmpty = true;
+      return;
+    }
     if (this.currentStep < 4) {
       const descriptioninput = this.descriptionInput.nativeElement.value;
       sessionStorage.setItem(`Description`, descriptioninput);
+      this.isDescriptionEmpty = false;
       this.currentStep++;
     }
   }
   nextStep2(){
+    if ( this.StartTimeInput.nativeElement.value === '' || this.EndTimeInput.nativeElement.value === '' || this.StartDateInput.nativeElement.value === '' || this.EndDateInput.nativeElement.value === '' || this.LocationInput.nativeElement.value === '' || this.SocialClubInput.nativeElement.value === '') {
+      this.isstep2Empty = true;
+      return;
+    }
     if (this.currentStep < 4) {
       const starttimeinput = this.StartTimeInput.nativeElement.value;
       const endtimeinput = this.EndTimeInput.nativeElement.value;
+      const startDateTime = new Date(this.StartDateInput.nativeElement.value + 'T' + this.StartTimeInput.nativeElement.value);
+      const endDateTime = new Date(this.EndDateInput.nativeElement.value + 'T' + this.EndTimeInput.nativeElement.value);
+      if (startDateTime >= endDateTime) {
+        alert('End time & Date must be later than Start time & Date');
+        return;
+      }
       const startdateinput = this.StartDateInput.nativeElement.value;
       const enddateinput = this.EndDateInput.nativeElement.value;
       const locationinput = this.LocationInput.nativeElement.value;
@@ -228,6 +271,8 @@ submit(){
       sessionStorage.setItem(`EndDate`, enddateinput);
       sessionStorage.setItem(`Location`, locationinput);
       sessionStorage.setItem(`SocialClub`, socialclubinput);
+      this.isstep2Empty = false;
+
       this.currentStep++;
     }
   }
@@ -243,6 +288,9 @@ submit(){
     if (this.currentStep > 0) {
       this.currentStep--;
     }
+  }
+  navigateToStep(step: number) {
+    this.currentStep = step;
   }
   addPrepInput() {
     this.Prepinputs.push({ id: this.Prepinputs.length, value: '' });
