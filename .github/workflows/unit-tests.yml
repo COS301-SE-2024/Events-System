@@ -38,7 +38,7 @@ jobs:
         run: npm ci
 
       - name: Build with Webpack
-        run: npx nx build
+        run: npm run build
 
       - name: Run Jest tests with coverage
         run: npm test -- --coverage
