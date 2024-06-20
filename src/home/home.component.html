@@ -4,8 +4,33 @@
       <h2 class="lexend-deca-extraLight mb-3.5 pb-3">Featured Events</h2>
       <div class="relative lg:h-[400px]">
         <div class="carousel carousel-center max-w-screen space-x-4 bg-base-100" #carousel1>
-          <div class="carousel-item " *ngFor="let slide of Homeslides; let i = index" [id]="'slide' + i">              
-            <app-home-featured-event 
+          <!-- skeleton code to be moved -->
+          <div class="flex flex-row lg:h-[400px] w-screen">
+            <div class="skeleton rounded-none size-full w-[27%]"></div>
+    
+            <div class="flex flex-col items-center gap-4 w-52 w-full">
+              <!-- title -->
+              <div class="skeleton self-center mt-9 mb-3 h-8 w-2/5"></div>
+              
+              <!-- description -->
+              <div class="skeleton h-6 w-2/4"></div>
+              <div class="skeleton h-6 w-2/3 mb-5"></div>
+              <!-- <div class="skeleton h-6 w-3/5"></div> -->
+              
+
+              <!-- event details -->
+              <div class="skeleton h-5 w-1/5"></div>
+              <div class="skeleton h-5 w-1/5"></div>
+              <!-- <div class="skeleton h-5 w-1/5"></div> -->
+              
+
+              <!-- button -->
+              <div class="skeleton h-10 w-[100px]"></div>
+            </div>
+          </div>
+          
+          <div class="carousel-item " *ngFor="let slide of Homeslides; let i = index" [id]="'slide' + i">   
+              <app-home-featured-event 
               [eventTitle]="slide.title"
               [eventDescription]="slide.description"
               [hostName]="slide.hostId"
