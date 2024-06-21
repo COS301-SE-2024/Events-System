@@ -1,16 +1,40 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HomeFeaturedEventComponent } from './HomeFeaturedEvent.component';
+import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { HomeFeaturedEventComponent } from './HomeFeaturedEvent.component'; // Import EventComponent
 
-describe('HomeFeaturedEventComponent', () => {
-  let component: HomeFeaturedEventComponent;
-  let fixture: ComponentFixture<HomeFeaturedEventComponent>;
+// Mock component
+@Component({
+  selector: 'app-mock-app-home-featured-event',
+  template: '',
+})
+class MockEventComponent {/*...*/}
+
+@Component({
+  template: '<app-mock-app-home-featured-event></app-mock-app-home-featured-event>', // Use the correct selector
+})
+class TestHostComponent {/*...*/}
+
+describe('EventComponent', () => {
+  let component: TestHostComponent;
+  let fixture: ComponentFixture<TestHostComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HomeFeaturedEventComponent],
+      imports: [HomeFeaturedEventComponent], // Move EventComponent to imports
+      declarations: [TestHostComponent, MockEventComponent], // Remove EventComponent from declarations
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            params: of({ id: 'testId' }) // Add your own mock values here
+          }
+        }
+      ]
     }).compileComponents();
-
-    fixture = TestBed.createComponent(HomeFeaturedEventComponent);
+  
+    fixture = TestBed.createComponent(TestHostComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

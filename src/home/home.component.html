@@ -39,7 +39,8 @@
               [startDate]="slide.startDate"
               [endDate]="slide.endDate"
               [hostName]="slide.host.firstName + ' ' + slide.host.lastName"       
-              [hostEmail]="slide.host.email"         
+              [hostEmail]="slide.host.email"
+              [eventID]="slide.id"         
               ></app-home-featured-event>
           </div>
         </div>
@@ -79,7 +80,8 @@
             [endTime]="slide.endTime"
             [startDate]="slide.startDate"
             [endDate]="slide.endDate"
-            [hostName]="slide.host.firstName + ' ' + slide.host.lastName">
+            [hostName]="slide.host.firstName + ' ' + slide.host.lastName"
+            [eventID]="slide.id">
           </app-home-event-card>
         </div>
       </div>
@@ -99,6 +101,7 @@
          <div class="carousel-item relative lg:w-1/3" *ngFor="let clubs of socialClubs; let i = index" [id]="'slide' + (i + 11)">
           <app-social-club-card
           [socialClubName]="clubs.name"
+          [socialClubID]="clubs.id"
         ></app-social-club-card>
         </div>
         
