@@ -9,19 +9,19 @@ import { RouterModule } from '@angular/router';
   styleUrl: './settings.component.css',
 })
 export class SettingsComponent {
-  selectedTab: string = 'details';
-  name: string = '';
-  surname: string = '';
-  description: string = '';
-  email: string = '';
-  x: string = '';
-  linkedIn: string = '';
-  gitHub: string = '';
-  currentPassword: string = '';
-  newPassword: string = '';
-  confirmPassword: string = '';
-  makeContactInfoPublic: boolean = false;
-  makeScreenerPublic: boolean = false;
+  selectedTab= 'details';
+  name= '';
+  surname = '';
+  description = '';
+  email= '';
+  x = '';
+  linkedIn = '';
+  gitHub = '';
+  currentPassword = '';
+  newPassword = '';
+  confirmPassword = '';
+  makeContactInfoPublic = false;
+  makeScreenerPublic = false;
   avatar: File | null = null;
 
   selectTab(tab: string) {

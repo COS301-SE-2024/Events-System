@@ -3,9 +3,12 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "nx serve",
+    "start": "nx serve --no-cloud",
     "build": "nx build --no-cloud",
-    "test": "nx test --no-cloud"
+    "test": "nx test --no-cloud",
+    "lint": "nx lint --no-cloud",
+    "e2e": "npx playwright test e2e/",
+    "ci:test": "start-server-and-test start http://localhost:4200 e2e"
   },
   "private": true,
   "dependencies": {
@@ -80,7 +83,7 @@
     "postcss": "^8.4.38",
     "postcss-loader": "^8.1.1",
     "prettier": "^2.6.2",
-    "start-server-and-test": "^2.0.3",
+    "start-server-and-test": "^2.0.4",
     "tailwindcss": "^3.4.3",
     "ts-jest": "^29.1.0",
     "ts-node": "10.9.1",

@@ -41,7 +41,7 @@
     </div>
     <div class="flex justify-center items-center">
       <div *ngSwitchCase="2" [@fadeInOut]>
-        <h1 class="lg:text-6xl text-4xl text-center mt-8">Add some More details!</h1>
+        <h1 class="lg:text-6xl text-4xl text-center mt-8">Add some details!</h1>
           <div class="flex justify-evenly">
           <div>
             <div class="label mt-4">
@@ -99,34 +99,45 @@
     </div>  
     <div class="flex justify-center items-center">
       <div *ngSwitchCase="3" [@fadeInOut]>
-        <h1 class="lg:text-6xl text-4xl text-center mt-8">Add some More details!</h1>
+        <h1 class="lg:text-6xl text-4xl text-center mt-8">Add some more details!</h1>
         <div class="flex justify-evenly lg:flex-row flex-col">
           <div>
-            <div class="label  mt-4">
-              <span class="label-text">Add preperation Details</span>
-            </div>
-            <div *ngFor="let input of Prepinputs; let i = index">
-              <input #PrepInput type="text" [value]="input.value" (input)="updatePrepInput(i, $event)" class="input input-bordered w-full max-w-xl mt-4 text-lg h-12" required/>
-            </div>
-            <div class="flex justify-center mt-4">
-              <button (click)="addPrepInput()" class="btn btn-success">+</button>
-            </div>
-            </div>
-            <div class="mt-7 ml-8">
-            </div>
-            <div>
-              <div class="label  mt-4">
-                <span class="label-text">Add Agenda Details</span>
+            <div class="flex flex-col lg:flex-row justify-evenly items-start">
+              <div>
+                <div class="label mt-4  text-center">
+                  <span class="label-text">Preparation Details</span>
+                </div>
+                <form [formGroup]="prepform">
+                  <div formArrayName="prepinputs">
+                    <div *ngFor="let input of prepinputs.controls; index as i" [@fadeIn] class="flex">
+                      <input [formControlName]="i" class="input input-bordered w-full mt-4">
+                      <button (click)="removeprepInput(i)" class="btn btn-outline btn-warning mt-4 ml-2 opacity-35">-</button>
+                    </div>
+                  </div>
+                  <button [disabled]="prepinputs.length === 5" (click)="addprepInput()" class="btn btn-accent btn-outline btn-wide mt-4">+</button>
+                  <!-- <button (click)="saveInputs()">Next</button> -->
+                </form>
               </div>
-              <div *ngFor="let input of Agendainputs; let i = index">
-                <input #AgendaInput type="text" [value]="input.value" (input)="updateAgendaInput(i, $event)" class="input input-bordered w-full max-w-xl mt-4 text-lg h-12" required/>
+              <div class="mt-7 ml-8">
               </div>
-              <div class="flex justify-center mt-4">
-                <button (click)="addAgendaInput()" class="btn btn-success">+</button>
+              <div>
+                <div class="label  mt-4">
+                  <span class="label-text">Agenda Details</span>
+                </div>
+                <form [formGroup]="agendaform">
+                  <div formArrayName="agendainputs">
+                    <div *ngFor="let input of agendainputs.controls; index as i" [@fadeIn] class="flex">
+                      <input [formControlName]="i"  class="input input-bordered w-full mt-4">
+                      <button (click)="removeagendaInput(i)" class="btn btn-outline btn-warning mt-4 ml-2 opacity-35">-</button>
+                    </div>
+                  </div>
+                  <button [disabled]="agendainputs.length === 5" (click)="addagendaInput()" class="btn btn-accent btn-outline btn-wide mt-4">+</button>
+                  <!-- <button (click)="saveInputs()">Next</button> -->
+                </form>
               </div>
-            </div>
-
-        </div>
+            </div>  
+          </div>
+        </div> <!-- Close the flex container here -->
         <div class="flex items-center justify-center">
           <div class="label mt-4">
             <span class="label-text">Dietary accomodations</span>
@@ -205,27 +216,42 @@
           </div>
           
         </div>  
-        <div class="flex justify-evenly lg:flex-row flex-col">
-          <div>
-            <div class="label  mt-4">
-              <span class="label-text">Preparation Details</span>
+        <div>
+          <div class="flex flex-col lg:flex-row justify-evenly items-start">
+            <div>
+              <div class="label  mt-4">
+                <span class="label-text">Preparation Details</span>
+              </div>
+              <form [formGroup]="prepform">
+                <div formArrayName="prepinputs">
+                  <div *ngFor="let input of prepinputs.controls; index as i" [@fadeIn] class="flex">
+                    <input [formControlName]="i" class="input input-bordered w-full mt-4" >
+                    <button (click)="removeprepInput(i)" class="btn btn-outline btn-warning mt-4 ml-2 opacity-35">-</button>
+                  </div>
+                </div>
+                <button (click)="addprepInput()" class="btn btn-accent btn-outline btn-wide mt-4" disabled>+</button>
+                <!-- <button (click)="saveInputs()">Next</button> -->
+              </form>
             </div>
-            <div *ngFor="let input of Prepinputs; let i = index">
-              <input  disabled #PrepInput [value]="input.value" (input)="updatePrepInput(i, $event)" class="input input-bordered w-full mt-4"required>
+            <div class="mt-7 ml-8">
             </div>
-          </div>
-          <div class="mt-7 ml-8">
-          </div>
-          <div>
-            <div class="label  mt-4">
-              <span class="label-text">Agenda Details</span>
+            <div>
+              <div class="label  mt-4">
+                <span class="label-text">Agenda Details</span>
+              </div>
+              <form [formGroup]="agendaform">
+                <div formArrayName="agendainputs">
+                  <div *ngFor="let input of agendainputs.controls; index as i" [@fadeIn] class="flex">
+                    <input [formControlName]="i"  class="input input-bordered w-full mt-4">
+                    <button (click)="removeagendaInput(i)" class="btn btn-outline btn-warning mt-4 ml-2 opacity-35">-</button>
+                  </div>
+                </div>
+                <button (click)="addagendaInput()" class="btn btn-accent btn-outline btn-wide mt-4" disabled>+</button>
+                <!-- <button (click)="saveInputs()">Next</button> -->
+              </form>
             </div>
-            <div *ngFor="let input of Agendainputs; let i = index">
-              <input disabled #AgendaInput [value]="input.value" (input)="updateAgendaInput(i, $event)" class="input input-bordered w-full mt-4"required>
-            </div>
-          </div>
-
-        </div>  
+          </div>  
+        </div>
         <div class="flex items-center justify-center">
           <div class="label mt-4">
             <span class="label-text">Dietary accomodations</span>

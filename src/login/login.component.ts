@@ -82,11 +82,21 @@ export class LoginComponent {
       })
       .then(response => response.json())
       .then(data => {
-        console.log('Login successful:', data);
         // Navigate to home page with credentials as state data
-        this.router.navigate(['/'], { state: { credentials: formData } });
+        fetch('https://events-system-back.wn.r.appspot.com/api/v1/auth/'+ data.access_token, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+        })
+        .then(response => response.json())
+        .then(data2 => {
+          // Navigate to home page with credentials as state data
+          localStorage.setItem('ID', data2);
+        })
+        this.router.navigate(['/']);
       })
-      .catch(error => {
+      .catch(() => {
         console.error('Error registering:', JSON.stringify(formData));
       });
     } else {
