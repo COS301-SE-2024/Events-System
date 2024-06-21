@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './profile.component.css',
 })
 export class ProfileComponent {
-  selectedTab: string = 'about';
+  selectedTab = 'about';
 
   selectTab(tab: string) {
     this.selectedTab = tab;
