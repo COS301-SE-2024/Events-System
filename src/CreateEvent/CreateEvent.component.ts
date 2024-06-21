@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Location } from '@angular/common';
 import validator from 'validator';
+import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+
 @Component({
   selector: 'app-create-event',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './CreateEvent.component.html',
   styleUrl: './CreateEvent.component.css',
   animations: [
@@ -19,10 +21,21 @@ import validator from 'validator';
         animate('10ms', style({ opacity: 0 }))
       ])
     ]),
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('500ms', style({ opacity: 1 })),
+      ]),
+      transition(':leave', [
+        animate('200ms', style({ opacity: 0 })),
+      ]),
+    ]),
   ]
 })
 export class CreateEventComponent implements AfterViewInit{
-  constructor(private location: Location) { }
+  prepform!: FormGroup;
+  agendaform!: FormGroup;
+  constructor(private location: Location, private fb: FormBuilder) { }
   @ViewChildren('stepInput') stepInputs!: QueryList<ElementRef>;
   @ViewChild('nameInput') nameInput!: ElementRef;
   @ViewChild('nameInputs') nameInputs!: ElementRef;
@@ -36,7 +49,6 @@ export class CreateEventComponent implements AfterViewInit{
   
   @ViewChildren('PrepInput') PrepInputs!: QueryList<ElementRef>;
   @ViewChildren('AgendaInput') AgendaInputs!: QueryList<ElementRef>;
-  stepInputsArray: ElementRef[] = [];
   eventName= '';
   currentStep = 0;
   isAPILoading = false;
@@ -45,14 +57,27 @@ export class CreateEventComponent implements AfterViewInit{
   isstep2Empty = false;
   showsuccessToast = false;
   showfailToast = false;
-// Define the Prepinputs and Agendainputs as an array of objects
-Prepinputs: { id: number, value: string }[] = [{ id: 0, value: '' }];
-Agendainputs: { id: number, value: string }[] = [{ id: 0, value: '' }];
 ngOnInit() {
-  const prepInputsData = sessionStorage.getItem('PrepInputs');
-  const agendaInputsData = sessionStorage.getItem('AgendaInputs');
-  this.Prepinputs = prepInputsData ? JSON.parse(prepInputsData) : [];
-  this.Agendainputs = agendaInputsData ? JSON.parse(agendaInputsData) : [];
+  // const prepInputsData = sessionStorage.getItem('PrepInputs');
+  // const agendaInputsData = sessionStorage.getItem('AgendaInputs');
+  this.prepform = this.fb.group({
+    prepinputs: this.fb.array([])
+  });
+  this.agendaform = this.fb.group({
+    agendainputs: this.fb.array([])
+  });
+  const prepsavedInputs = sessionStorage.getItem('prepinputs');
+  if (prepsavedInputs) {
+    const prepinputs = JSON.parse(prepsavedInputs);
+    prepinputs.forEach((input: any) => this.addprepInput(input));
+  }
+  const agendasavedInputs = sessionStorage.getItem('agendainputs');
+  if (agendasavedInputs) {
+    const agendainputs = JSON.parse(agendasavedInputs);
+    agendainputs.forEach((input: any) => this.addagendaInput(input));
+  }
+  // this.Prepinputs = prepInputsData ? JSON.parse(prepInputsData) : [];
+  // this.Agendainputs = agendaInputsData ? JSON.parse(agendaInputsData) : [];
   this.isVegetarianSelected = sessionStorage.getItem('isVegetarianSelected') === 'false';
   this.isVeganSelected = sessionStorage.getItem('isVeganSelected') === 'false';
   this.isHalalSelected = sessionStorage.getItem('isHalalSelected') === 'false';
@@ -60,19 +85,36 @@ ngOnInit() {
 }
 
 presubmit(){
-  if (!sessionStorage.getItem('title') || sessionStorage.getItem('title') === '' || 
-  !sessionStorage.getItem('description') || sessionStorage.getItem('description') === '' || 
-  !sessionStorage.getItem('startTime') || sessionStorage.getItem('startTime') === '' || 
-  !sessionStorage.getItem('endTime') || sessionStorage.getItem('endTime') === '' || 
-  !sessionStorage.getItem('startDate') || sessionStorage.getItem('startDate') === '' || 
-  !sessionStorage.getItem('endDate') || sessionStorage.getItem('endDate') === '' || 
-  !sessionStorage.getItem('location') || sessionStorage.getItem('location') === '' || 
-  !sessionStorage.getItem('eventDietaryAccommodations') || sessionStorage.getItem('eventDietaryAccommodations') === '') {
-  alert('Please fill in all the details');
-  return;
-}else{
-  this.submit();
-}
+  const missingDetails = [];
+
+  if (!sessionStorage.getItem('Name') || sessionStorage.getItem('Name') === '') {
+    missingDetails.push('title');
+  }
+  if (!sessionStorage.getItem('Description') || sessionStorage.getItem('Description') === '') {
+    missingDetails.push('Description');
+  }
+  if (!sessionStorage.getItem('StartTime') || sessionStorage.getItem('StartTime') === '') {
+    missingDetails.push('Start time');
+  }
+  if (!sessionStorage.getItem('EndTime') || sessionStorage.getItem('EndTime') === '') {
+    missingDetails.push('End time');
+  }
+  if (!sessionStorage.getItem('StartDate') || sessionStorage.getItem('StartDate') === '') {
+    missingDetails.push('Start date');
+  }
+  if (!sessionStorage.getItem('EndDate') || sessionStorage.getItem('EndDate') === '') {
+    missingDetails.push('End date');
+  }
+  if (!sessionStorage.getItem('Location') || sessionStorage.getItem('Location') === '') {
+    missingDetails.push('Location');
+  }
+  
+  if (missingDetails.length > 0) {
+    alert('Please fill in the following details: ' + missingDetails.join(', '));
+    return;
+  }else{
+    this.submit();
+  }
 }
 submit(){
     // Create the event object
@@ -89,8 +131,8 @@ submit(){
       geolocation: "51.507351, -0.127758",
       socialClub: 2,
       eventPictureLink: "https://example.com/soccer-tournament.jpg", // Replace with actual picture link
-      eventAgendas: this.Agendainputs.map(input => validator.escape(input.value)),
-      eventPreparation: this.Prepinputs.map(input => validator.escape(input.value)),
+      eventAgendas: this.agendaform.get('agendaInputs')?.value.map((input: any) => validator.escape(input)),
+      eventPreparation: this.prepform.get('prepInputs')?.value.map((input: any) => validator.escape(input)),
       eventDietaryAccommodations: [
         this.isVegetarianSelected ? "Vegetarian" : null,
         this.isVeganSelected ? "Vegan" : null,
@@ -172,15 +214,6 @@ submit(){
     }
   }
   loadDataFromSessionStorage4() {
-    // Retrieve the PrepInputs and AgendaInputs
-    const prepInputsData = sessionStorage.getItem('PrepInputs');
-    const agendaInputsData = sessionStorage.getItem('AgendaInputs');
-    if (prepInputsData) {
-      this.Prepinputs = JSON.parse(prepInputsData);
-    }
-    if (agendaInputsData) {
-      this.Agendainputs = JSON.parse(agendaInputsData);
-    }
     this.isVegetarianSelected = sessionStorage.getItem('isVegetarianSelected') === 'true';
     this.isVeganSelected = sessionStorage.getItem('isVeganSelected') === 'true';
     this.isHalalSelected = sessionStorage.getItem('isHalalSelected') === 'true';
@@ -200,22 +233,49 @@ submit(){
     this.loadDataFromSessionStorage4();
   }
   ngAfterViewChecked() {
-    if (this.currentStep === 0 && this.nameInput && this.nameInput.nativeElement.offsetParent !== null) {
+    if (this.currentStep === 0 && this.nameInput && this.nameInput.nativeElement && this.nameInput.nativeElement.offsetParent !== null) {
       this.loadDataFromSessionStorage1();
-    } else if (this.currentStep === 1 && this.descriptionInput && this.descriptionInput.nativeElement.offsetParent !== null) {
+    } else if (this.currentStep === 1 && this.descriptionInput && this.descriptionInput.nativeElement && this.descriptionInput.nativeElement.offsetParent !== null) {
       this.loadDataFromSessionStorage2();
-    }else if (this.currentStep === 2 && this.StartTimeInput && this.StartTimeInput.nativeElement.offsetParent !== null) {
+    } else if (this.currentStep === 2 && this.StartTimeInput && this.StartTimeInput.nativeElement && this.StartTimeInput.nativeElement.offsetParent !== null) {
       this.loadDataFromSessionStorage3();
-    }else if (this.currentStep === 3 && this.PrepInputs && this.PrepInputs.first.nativeElement.offsetParent !== null) {
+    } else if (this.currentStep === 3 && this.PrepInputs && this.PrepInputs.first && this.PrepInputs.first.nativeElement && this.PrepInputs.first.nativeElement.offsetParent !== null) {
       this.loadDataFromSessionStorage4();
-    }
-    else if (this.currentStep === 4 && this.nameInput && this.StartTimeInput && this.nameInput.nativeElement.offsetParent !== null) {
+    } else if (this.currentStep === 4 && this.nameInput && this.StartTimeInput && this.nameInput.nativeElement && this.nameInput.nativeElement.offsetParent !== null) {
       this.loadDataFromSessionStorage5();
-
     }
     // Add other conditions for other steps
   }
 
+  get prepinputs() {
+    return this.prepform.get('prepinputs') as FormArray;
+  }
+  get agendainputs() {
+    return this.agendaform.get('agendainputs') as FormArray;
+  }
+
+
+  addprepInput(value = '') {
+    if (this.prepinputs.length < 5) {
+      this.prepinputs.push(this.fb.control(value));
+    }
+  }
+  
+  addagendaInput(value = '') {
+    if (this.agendainputs.length < 5) {
+      this.agendainputs.push(this.fb.control(value));
+    }
+  }
+  removeprepInput(index: number) {
+    this.prepinputs.removeAt(index);
+  }
+  removeagendaInput(index: number) {
+    this.agendainputs.removeAt(index);
+  }
+  saveInputs() {
+    sessionStorage.setItem('prepinputs', JSON.stringify(this.prepinputs.value));
+    sessionStorage.setItem('agendainputs', JSON.stringify(this.agendainputs.value));
+  }
   ngAfterViewInit() {
     const namedata = sessionStorage.getItem('Name');
     if (namedata) {
@@ -278,9 +338,7 @@ submit(){
   }
   nextStep3() {
     if (this.currentStep < 4) {
-      sessionStorage.setItem('PrepInputs', JSON.stringify(this.Prepinputs));
-      sessionStorage.setItem('AgendaInputs', JSON.stringify(this.Agendainputs));
-  
+      this.saveInputs();
       this.currentStep++;
     }
   }
@@ -292,25 +350,6 @@ submit(){
   navigateToStep(step: number) {
     this.currentStep = step;
   }
-  addPrepInput() {
-    this.Prepinputs.push({ id: this.Prepinputs.length, value: '' });
-  }
-
-  updatePrepInput(index: number, event: any) {
-    if (this.Prepinputs[index]) {
-      this.Prepinputs[index].value = event.target.value;
-    }
-  }
-  
-  addAgendaInput() {
-    this.Agendainputs.push({ id: this.AgendaInputs.length, value: '' });
-  }
-  updateAgendaInput(index: number, event: any) {
-    if (this.Agendainputs[index]) {
-      this.Agendainputs[index].value = event.target.value;
-    }
-  }
-  
   goBack(): void {
     window.history.back();
   }
