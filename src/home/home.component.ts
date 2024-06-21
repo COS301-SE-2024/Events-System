@@ -6,7 +6,10 @@ import {HomeFeaturedEventComponent} from 'src/Components/HomeFeaturedEvent/HomeF
 import {SocialClubCardComponent} from 'src/Components/SocialClubCard/socialClubCard.component'
 import { ChangeDetectorRef } from '@angular/core';
 import { ViewChild, ElementRef } from '@angular/core';
-
+const myCredentials = {
+  username: 'myUsername',
+  password: 'myPassword'
+};
 
 
 
@@ -29,7 +32,7 @@ export interface Slide {
   standalone: true,
   imports: [CommonModule, RouterModule, EventCardComponent, SocialClubCardComponent, HomeFeaturedEventComponent],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css',
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
   constructor(private cdr: ChangeDetectorRef) { }
@@ -205,5 +208,3 @@ export class HomeComponent {
     this.slides = [...this.allSlides];
   }
 }
-
-

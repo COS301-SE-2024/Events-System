@@ -1,28 +1,45 @@
-import { Component, Input} from '@angular/core';
-import { CommonModule } from '@angular/common';
 
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-event-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './eventCard.component.html',
   styleUrl: './eventCard.component.css',
 })
-export class EventCardComponent {
+export class EventCardComponent implements OnChanges {
+  @Input() eventID: string | undefined;
   @Input() eventTitle: string | undefined;
-  @Input() hostName: string | undefined;
-  @Input() hostEmail: string | undefined;
+  @Input() description: string | undefined;
   @Input() startTime: string | undefined;
   @Input() endTime: string | undefined;
   @Input() startDate: string | undefined;
   @Input() endDate: string | undefined;
+  @Input() location: string | undefined;
   @Input() hostedBy: string | undefined;
-  
-  get formattedStartTime() {
-    return this.startTime?.slice(0, -3);
+  @Input() socialClub: string | undefined;
+
+  formatTime(time: string | undefined): string | undefined {
+    if (time) {
+      const parts = time.split(':');
+      return parts[0] + ':' + parts[1];
+    }
+    return undefined;
   }
 
-  get formattedEndTime() {
-    return this.endTime?.slice(0, -3);
+  isSameDate(): boolean {
+    return this.startDate !== this.endDate;
   }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['startTime']) {
+      this.startTime = this.formatTime(this.startTime);
+    }
+    if (changes['endTime']) {
+      this.endTime = this.formatTime(this.endTime);
+    }
+  }
+
 }
