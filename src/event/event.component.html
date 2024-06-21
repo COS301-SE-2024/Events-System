@@ -42,10 +42,10 @@
                     <div>
                         <div class="card bg-base-100 shadow-xl lg:mt-4 mt-32">
                             <div class="card-body">
-                              <h2 class="card-title">Hosted by the: {{event.socialClub}}</h2>
-                              <p>a professional group for networking, <br/>sharing industry insights, and career growth.</p>
+                              <h2 class="card-title">Hosted by the: {{club.name}}</h2>
+                              <p>{{club.summaryDescription }} </p>
                               <div class="card-actions justify-end">
-                                <button class="btn btn-primary">Find out More</button>
+                                <button class="btn btn-primary" [routerLink]="['/socialclub', event.socialClub]">Find out More</button>
                               </div>
                             </div>
                           </div>

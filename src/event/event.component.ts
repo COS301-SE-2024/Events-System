@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-
+import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-event',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './event.component.html',
   styleUrl: './event.component.css',
 })
@@ -14,7 +14,7 @@ export class EventComponent implements OnInit{
   event: any = null;
   host: any = null;
   isLoading = true;
-
+  club: any = null;
   constructor(private route: ActivatedRoute) { }
   goBack(): void {
     window.history.back();
@@ -39,6 +39,15 @@ export class EventComponent implements OnInit{
         })
         .then(data => {
           this.host = data;
+          fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs/' + this.event.socialClub)
+          .then(response => {
+            return response.json();
+          })
+          .then(data => {
+            this.club = data;
+            this.isLoading = false;
+    
+          });
           // console.log(this.host); // Log the host data
           this.isLoading = false;
 
