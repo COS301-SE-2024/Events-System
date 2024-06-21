@@ -13,6 +13,9 @@ const myCredentials = {
 
 
 
+
+
+
 export interface Slide {
   id: string;
   title: string;
@@ -38,6 +41,8 @@ export class HomeComponent {
   constructor(private cdr: ChangeDetectorRef) { }
 
 
+
+
   @Input() eventTitle: string | undefined;
   @Input() eventDescription: string | undefined;
   @Input() hostName: string | undefined;
@@ -46,6 +51,8 @@ export class HomeComponent {
   @Input() endTime: string | undefined;
   @Input() startDate: string | undefined;
   @Input() endDate: string | undefined;
+
+
 
 
   events: any[] = [];
@@ -67,9 +74,13 @@ export class HomeComponent {
   };
 
 
+
+
   currentSlideIndex = 0;
   nextSlideIndex = '';
   previousSlideIndex = '';
+
+
 
 
   currentHomeSlideIndex = 0;
@@ -89,24 +100,19 @@ export class HomeComponent {
   @ViewChild('carousel3') carousel3!: ElementRef;
  
   ngOnInit(): void {
+    const employeeId = Number(localStorage.getItem('ID')); // Assuming the employeeId is stored in local storage
+ 
     fetch('https://events-system-back.wn.r.appspot.com/api/events')
-      .then(response => {
-        return response.json();
-      })
+      .then(response => response.json())
       .then(data => {
         this.events = Array.isArray(data) ? data : [data];
  
-        const hostFetches = this.events.map(event => {
-          return fetch('https://events-system-back.wn.r.appspot.com/api/employees/' + event.hostId)
-            .then(response => {
-              return response.json();
-            })
-            .then(data => {
-              event.host = data;
-            });
-        });
+        const hostFetches = this.events.map(event => fetch('https://events-system-back.wn.r.appspot.com/api/employees/' + event.hostId)
+          .then(response => response.json())
+          .then(data => {
+            event.host = data;
+          }));
  
-        // Fetch social clubs
         const socialClubsFetch = fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs')
           .then(response => response.json())
           .then(data => {
@@ -118,7 +124,7 @@ export class HomeComponent {
       .then(() => {
         this.slides = this.events.map((eventData, index) => {
           const slide = {
-            id: `slide${index + 11}`,
+            id: eventData.eventId,
             title: eventData.title,
             description: eventData.description,
             startTime: eventData.startTime,
@@ -135,14 +141,29 @@ export class HomeComponent {
           return slide;
         });
  
-        // Store all slides
         this.allSlides = [...this.slides];
- 
-        // Populate Homeslides with slide IDs
-        // this.Homeslides = this.events.slice(0, 10).map((eventData, index) => `slide${index}`);
- 
-        // Create a separate copy for homeSlides
         this.Homeslides = JSON.parse(JSON.stringify(this.slides.slice(0, 10)));
+ 
+        // Fetch RSVPs and filter slides
+        fetch('https://events-system-back.wn.r.appspot.com/api/event-rsvps')
+          .then(response => response.json())
+          .then(data => {
+            const rsvps = Array.isArray(data) ? data : [data];
+            const eventIds = rsvps.filter(rsvp => rsvp.employeeId === employeeId).map(rsvp => rsvp.eventId);
+            this.slides = this.slides.filter(slide => eventIds.includes(slide.id));
+
+
+            // Group RSVPs by event ID and count them
+          const rsvpCounts = rsvps.reduce((counts, rsvp) => {
+            counts[rsvp.eventId] = (counts[rsvp.eventId] || 0) + 1;
+            return counts;
+          }, {});
+
+
+            // Sort slides based on RSVP count
+            this.slides.sort((a, b) => (rsvpCounts[b.id] || 0) - (rsvpCounts[a.id] || 0));
+            this.Homeslides = JSON.parse(JSON.stringify(this.slides.slice(0, 10)));
+          });
  
         this.isLoading = false;
       })
@@ -168,6 +189,8 @@ export class HomeComponent {
     }
 
 
+
+
   }
   nextUSlide() {
     const singleSlideWidth = this.carousel2.nativeElement.offsetWidth / 3;
@@ -178,6 +201,8 @@ export class HomeComponent {
   const singleSlideWidth = this.carousel2.nativeElement.offsetWidth / 3;
   this.carousel2.nativeElement.scrollLeft -= singleSlideWidth;
   }
+
+
 
 
   nextSCSlide() {
@@ -196,10 +221,18 @@ export class HomeComponent {
 
 
 
+
+
+
+
+
+
   filterByDate(date: string) {
     this.selectedDate = date;
     this.slides = this.allSlides.filter(slide => slide.startDate === this.selectedDate);
   }
+
+
 
 
   clearDate(dateInput: HTMLInputElement) {
@@ -208,3 +241,7 @@ export class HomeComponent {
     this.slides = [...this.allSlides];
   }
 }
+
+
+
+
