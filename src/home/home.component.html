@@ -96,10 +96,9 @@
 
     <div class="relative lg:h-[350px]"> 
       <div class="carousel lg:w-11/12 p-4 lg:space-x-8 space-x-8 bg-transparent rounded-box h-full" #carousel3>
-         <div class="carousel-item relative lg:w-1/3" *ngFor="let slide of slides; let i = index" [id]="'slide' + (i + 11)">
+         <div class="carousel-item relative lg:w-1/3" *ngFor="let clubs of socialClubs; let i = index" [id]="'slide' + (i + 11)">
           <app-social-club-card
-          [socialClubName]="slide.socialClub"
-          [socialClubCreator]="slide.host"
+          [socialClubName]="clubs.name"
         ></app-social-club-card>
         </div>
         
@@ -112,35 +111,3 @@
     </div>
   </section>
 </main>
-
-
-<!-- skeleton code to be moved -->
-<div class="flex flex-row lg:h-[400px] w-screen">
-  <div class="skeleton h-64 w-[21%]"></div>
-
-  <div class="flex flex-col items-center gap-4 w-[21%]">
-    <!-- title -->
-    <div class="skeleton self-center mt-9 mb-1 h-5 w-2/4"></div>
-    
-
-    <!-- event details -->
-    <div class="skeleton h-3 w-2/5"></div>
-    <div class="skeleton h-3 w-3/5"></div>
-    <div class="skeleton h-3 w-2/5"></div>
-    <!-- <div class="skeleton h-5 w-1/5"></div> -->
-    
-
-    <!-- button -->
-    <div class="skeleton h-10 w-[100px]"></div>
-  </div>
-</div>
-
-
-<div class="flex flex-col gap-4 w-52">
-  <div class="flex gap-4 items-center">
-    <div class="skeleton w-80 h-80 rounded-full shrink-0"></div>
-    
-  </div>
-  
-</div>
-

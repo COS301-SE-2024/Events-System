@@ -8,6 +8,8 @@ import { ChangeDetectorRef } from '@angular/core';
 import { ViewChild, ElementRef } from '@angular/core';
 
 
+
+
 export interface Slide {
   id: string;
   title: string;
@@ -32,6 +34,7 @@ export interface Slide {
 export class HomeComponent {
   constructor(private cdr: ChangeDetectorRef) { }
 
+
   @Input() eventTitle: string | undefined;
   @Input() eventDescription: string | undefined;
   @Input() hostName: string | undefined;
@@ -40,6 +43,7 @@ export class HomeComponent {
   @Input() endTime: string | undefined;
   @Input() startDate: string | undefined;
   @Input() endDate: string | undefined;
+
 
   events: any[] = [];
   upcomingEvents = this.events;
@@ -57,11 +61,13 @@ export class HomeComponent {
     socialClub: '',
         host: '',
     //hostEmail
-  }; 
+  };
+
 
   currentSlideIndex = 0;
   nextSlideIndex = '';
   previousSlideIndex = '';
+
 
   currentHomeSlideIndex = 0;
   previousHomeSlideIndex = '';
@@ -73,11 +79,12 @@ export class HomeComponent {
   selectedDate = '';
   allSlides: any[] = [];
   numbers = Array(6).fill(0).map((x,i)=>i);
-  slides: any[] = []; 
+  slides: any[] = [];
+  socialClubs : any[] = [];
   @ViewChild('carousel1') carousel1!: ElementRef;
   @ViewChild('carousel2') carousel2!: ElementRef;
   @ViewChild('carousel3') carousel3!: ElementRef;
-  
+ 
   ngOnInit(): void {
     fetch('https://events-system-back.wn.r.appspot.com/api/events')
       .then(response => {
@@ -85,7 +92,7 @@ export class HomeComponent {
       })
       .then(data => {
         this.events = Array.isArray(data) ? data : [data];
-  
+ 
         const hostFetches = this.events.map(event => {
           return fetch('https://events-system-back.wn.r.appspot.com/api/employees/' + event.hostId)
             .then(response => {
@@ -95,111 +102,94 @@ export class HomeComponent {
               event.host = data;
             });
         });
-  
-        Promise.all(hostFetches).then(() => {
-          this.slides = this.events.map((eventData, index) => {
-            const slide = {
-              id: `slide${index + 11}`,
-              title: eventData.title,
-              description: eventData.description,
-              startTime: eventData.startTime,
-              endTime: eventData.endTime,
-              startDate: eventData.startDate,
-              endDate: eventData.endDate,
-              location: eventData.location,
-              hostId: eventData.hostId,
-              geolocation: eventData.geolocation,
-              socialClub: eventData.socialClub,
-              host: eventData.host 
-            };
-            this.cdr.detectChanges(); 
-            return slide;
+ 
+        // Fetch social clubs
+        const socialClubsFetch = fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs')
+          .then(response => response.json())
+          .then(data => {
+            this.socialClubs = Array.isArray(data) ? data : [data];
           });
-  
-          // Store all slides
-          this.allSlides = [...this.slides];
-  
-          // Populate Homeslides with slide IDs
-          // this.Homeslides = this.events.slice(0, 10).map((eventData, index) => `slide${index}`);
-  
-          // Create a separate copy for homeSlides
-          this.Homeslides = JSON.parse(JSON.stringify(this.slides.slice(0, 10)));
-  
-          this.isLoading = false;
+ 
+        return Promise.all([...hostFetches, socialClubsFetch]);
+      })
+      .then(() => {
+        this.slides = this.events.map((eventData, index) => {
+          const slide = {
+            id: `slide${index + 11}`,
+            title: eventData.title,
+            description: eventData.description,
+            startTime: eventData.startTime,
+            endTime: eventData.endTime,
+            startDate: eventData.startDate,
+            endDate: eventData.endDate,
+            location: eventData.location,
+            hostId: eventData.hostId,
+            geolocation: eventData.geolocation,
+            socialClub: eventData.socialClub,
+            host: eventData.host
+          };
+          this.cdr.detectChanges();
+          return slide;
         });
+ 
+        // Store all slides
+        this.allSlides = [...this.slides];
+ 
+        // Populate Homeslides with slide IDs
+        // this.Homeslides = this.events.slice(0, 10).map((eventData, index) => `slide${index}`);
+ 
+        // Create a separate copy for homeSlides
+        this.Homeslides = JSON.parse(JSON.stringify(this.slides.slice(0, 10)));
+ 
+        this.isLoading = false;
+      })
+      .catch(error => {
+        console.error('Error:', error);
       });
   }
   nextHSlide() {
     this.carousel1.nativeElement.scrollLeft += this.carousel1.nativeElement.offsetWidth;
-
     if (this.currentHomeSlideIndex === this.Homeslides.length - 1) {    
-      this.currentHomeSlideIndex = 0;   
+      this.currentHomeSlideIndex = 0;  
     } else if (this.currentHomeSlideIndex < this.Homeslides.length - 1) {    
       this.currentHomeSlideIndex += 1;    
     }
     this.nextHomeSlideIndex = this.Homeslides[this.currentHomeSlideIndex].id || '';  
   }
-  
+ 
   previousHSlide() {
     this.carousel1.nativeElement.scrollLeft -= this.carousel1.nativeElement.offsetWidth;
-
-    if (this.currentHomeSlideIndex > 0) {   
+    if (this.currentHomeSlideIndex > 0) {  
       this.currentHomeSlideIndex -= 1;    
       this.previousHomeSlideIndex = this.Homeslides[this.currentHomeSlideIndex].id  || '';    
     }
+
 
   }
   nextUSlide() {
     const singleSlideWidth = this.carousel2.nativeElement.offsetWidth / 3;
     this.carousel2.nativeElement.scrollLeft += singleSlideWidth;
-
-    if (this.currentSlideIndex === this.slides.length - 3) {    
-      this.currentSlideIndex = 0;   
-      this.nextSlideIndex = this.slides[this.currentSlideIndex].id || '';    
-  
-    }else
-    if (this.currentSlideIndex < this.slides.length - 1) {    
-      this.currentSlideIndex += 1;    
-      this.nextSlideIndex = this.slides[this.currentSlideIndex + 2].id  || '';    
-    }
   }
-  
+ 
   previousUSlide() {
   const singleSlideWidth = this.carousel2.nativeElement.offsetWidth / 3;
   this.carousel2.nativeElement.scrollLeft -= singleSlideWidth;
-    // if (this.currentSlideIndex > 0) {   
-    //   this.currentSlideIndex -= 1;    
-    //   this.previousSlideIndex = this.slides[this.currentSlideIndex].id  || '';    
-    // }
-
   }
+
 
   nextSCSlide() {
-    this.carousel3.nativeElement.scrollLeft -= this.carousel3.nativeElement.offsetWidth;
-
-    // if (this.currentSocialClubSlideIndex === this.slides.length - 3) {    
-    //   this.currentSocialClubSlideIndex = 0;   
-    //   this.nextSocialClubSlideIndex = this.slides[this.currentSocialClubSlideIndex].id || '';    
-    //   console.log("last current " + this.currentSocialClubSlideIndex);    
-    //   console.log("last next " + this.nextSocialClubSlideIndex);    
-    // }else
-    // if (this.currentSocialClubSlideIndex < this.slides.length - 1) {    
-    //   this.currentSocialClubSlideIndex += 1;    
-    //   this.nextSocialClubSlideIndex = this.slides[this.currentSocialClubSlideIndex + 2].id  || '';    
-    // }
-    // console.log("current " + this.currentSocialClubSlideIndex);   
-    // console.log("next " + this.nextSocialClubSlideIndex);   
+    const singleSlideWidth = this.carousel3.nativeElement.offsetWidth / 3;
+    this.carousel3.nativeElement.scrollLeft += singleSlideWidth;
   }
-  
+ 
+ 
   previousSCSlide() {
-    this.carousel3.nativeElement.scrollLeft += this.carousel3.nativeElement.offsetWidth;
-
-    // if (this.currentSocialClubSlideIndex > 0) {   
-    //   this.currentSocialClubSlideIndex -= 1;    
-    //   this.previousSocialClubSlideIndex = this.slides[this.currentSocialClubSlideIndex].id  || '';    
-    // }
-
+    const singleSlideWidth = this.carousel3.nativeElement.offsetWidth / 3;
+    this.carousel3.nativeElement.scrollLeft -= singleSlideWidth;
   }
+
+
+
 
 
 
@@ -208,9 +198,12 @@ export class HomeComponent {
     this.slides = this.allSlides.filter(slide => slide.startDate === this.selectedDate);
   }
 
+
   clearDate(dateInput: HTMLInputElement) {
     this.selectedDate = '';
     dateInput.value = '';
     this.slides = [...this.allSlides];
   }
 }
+
+
