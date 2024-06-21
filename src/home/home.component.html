@@ -72,7 +72,7 @@
       <div class="carousel carousel-center lg:w-11/12 p-4 lg:space-x-8  space-x-8 bg-transparent rounded-box h-full" #carousel2>
          
         <div class="carousel-item relative lg:w-1/3" *ngFor="let slide of slides; let i = index" [id]="'slide' + (i + 11)">
-          <app-event-card
+          <app-home-event-card
             [eventTitle]="slide.title"
             [hostName]="slide.hostId"
             [startTime]="slide.startTime"
@@ -80,7 +80,7 @@
             [startDate]="slide.startDate"
             [endDate]="slide.endDate"
             [hostName]="slide.host.firstName + ' ' + slide.host.lastName">
-          </app-event-card>
+          </app-home-event-card>
         </div>
       </div>
       

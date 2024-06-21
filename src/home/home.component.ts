@@ -1,7 +1,7 @@
 import { Component, Input, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import {EventCardComponent} from 'src/Components/EventCard/eventCard.component'
+import {HomeEventCardComponent} from 'src/Components/HomeEventCard/HomeEventCard.component'
 import {HomeFeaturedEventComponent} from 'src/Components/HomeFeaturedEvent/HomeFeaturedEvent.component'
 import {SocialClubCardComponent} from 'src/Components/SocialClubCard/socialClubCard.component'
 import { ChangeDetectorRef } from '@angular/core';
@@ -30,7 +30,7 @@ export interface Slide {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule, EventCardComponent, SocialClubCardComponent, HomeFeaturedEventComponent],
+  imports: [CommonModule, RouterModule, HomeEventCardComponent, SocialClubCardComponent, HomeFeaturedEventComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })

@@ -12,6 +12,7 @@ import { MyEventsComponent } from 'src/MyEvents/MyEvents.component';
 import { CreateEventComponent } from 'src/CreateEvent/CreateEvent.component';
 import { UpdateEventComponent } from 'src/UpdateEvent/UpdateEvent.component';
 import { DeleteEventComponent } from 'src/DeleteEvent/DeleteEvent.component';
+import { SocialClubComponent } from 'src/socialClub/socialClub.component';
 export const appRoutes: Route[] = [
   { path: '', component: HomeComponent }, // Home page
   { path: 'login', component: LoginComponent },
