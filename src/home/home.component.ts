@@ -1,7 +1,7 @@
 import { Component, Input, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import {EventCardComponent} from 'src/Components/EventCard/eventCard.component'
+import {HomeEventCardComponent} from 'src/Components/HomeEventCard/HomeEventCard.component'
 import {HomeFeaturedEventComponent} from 'src/Components/HomeFeaturedEvent/HomeFeaturedEvent.component'
 import {SocialClubCardComponent} from 'src/Components/SocialClubCard/socialClubCard.component'
 import { ChangeDetectorRef } from '@angular/core';
@@ -30,7 +30,7 @@ export interface Slide {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule, EventCardComponent, SocialClubCardComponent, HomeFeaturedEventComponent],
+  imports: [CommonModule, RouterModule, HomeEventCardComponent, SocialClubCardComponent, HomeFeaturedEventComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
@@ -89,36 +89,31 @@ export class HomeComponent {
   @ViewChild('carousel3') carousel3!: ElementRef;
  
   ngOnInit(): void {
+    const employeeId = Number(localStorage.getItem('ID')); // Assuming the employeeId is stored in local storage
+  
     fetch('https://events-system-back.wn.r.appspot.com/api/events')
-      .then(response => {
-        return response.json();
-      })
+      .then(response => response.json())
       .then(data => {
         this.events = Array.isArray(data) ? data : [data];
- 
-        const hostFetches = this.events.map(event => {
-          return fetch('https://events-system-back.wn.r.appspot.com/api/employees/' + event.hostId)
-            .then(response => {
-              return response.json();
-            })
-            .then(data => {
-              event.host = data;
-            });
-        });
- 
-        // Fetch social clubs
+  
+        const hostFetches = this.events.map(event => fetch('https://events-system-back.wn.r.appspot.com/api/employees/' + event.hostId)
+          .then(response => response.json())
+          .then(data => {
+            event.host = data;
+          }));
+  
         const socialClubsFetch = fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs')
           .then(response => response.json())
           .then(data => {
             this.socialClubs = Array.isArray(data) ? data : [data];
           });
- 
+  
         return Promise.all([...hostFetches, socialClubsFetch]);
       })
       .then(() => {
         this.slides = this.events.map((eventData, index) => {
           const slide = {
-            id: `slide${index + 11}`,
+            id: eventData.eventId,
             title: eventData.title,
             description: eventData.description,
             startTime: eventData.startTime,
@@ -134,17 +129,29 @@ export class HomeComponent {
           this.cdr.detectChanges();
           return slide;
         });
- 
-        // Store all slides
+  
         this.allSlides = [...this.slides];
- 
-        // Populate Homeslides with slide IDs
-        // this.Homeslides = this.events.slice(0, 10).map((eventData, index) => `slide${index}`);
- 
-        // Create a separate copy for homeSlides
-        this.Homeslides = JSON.parse(JSON.stringify(this.slides.slice(0, 10)));
- 
-        this.isLoading = false;
+  
+        // Fetch RSVPs and filter slides
+        fetch('https://events-system-back.wn.r.appspot.com/api/event-rsvps')
+          .then(response => response.json())
+          .then(data => {
+            const rsvps = Array.isArray(data) ? data : [data];
+  
+            // Group RSVPs by event ID and count them
+            const rsvpCounts = rsvps.reduce((counts, rsvp) => {
+              counts[rsvp.eventId] = (counts[rsvp.eventId] || 0) + 1;
+              return counts;
+            }, {});
+  
+            // Sort all slides based on RSVP count for home slides
+            const sortedSlides = [...this.slides].sort((a, b) => (rsvpCounts[b.id] || 0) - (rsvpCounts[a.id] || 0));
+            this.Homeslides = JSON.parse(JSON.stringify(sortedSlides.slice(0, 10)));
+  
+            // Filter slides based on the current user's RSVP'd events for RSVP'd slides
+            const eventIds = rsvps.filter(rsvp => rsvp.employeeId === employeeId).map(rsvp => rsvp.eventId);
+            this.slides = this.slides.filter(slide => eventIds.includes(slide.id));
+          });
       })
       .catch(error => {
         console.error('Error:', error);

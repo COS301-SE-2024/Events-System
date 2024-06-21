@@ -2,17 +2,17 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { HomeFeaturedEventComponent } from './HomeFeaturedEvent.component'; // Import EventComponent
+import { HomeEventCardComponent } from './HomeEventCard.component'; // Import EventComponent
 
 // Mock component
 @Component({
-  selector: 'app-mock-app-home-featured-event',
+  selector: 'app-mock-app-home-event-card',
   template: '',
 })
 class MockEventComponent {/*...*/}
 
 @Component({
-  template: '<app-mock-app-home-featured-event></app-mock-app-home-featured-event>', // Use the correct selector
+  template: '<app-mock-app-home-event-card></app-mock-app-home-event-card>', // Use the correct selector
 })
 class TestHostComponent {/*...*/}
 
@@ -22,7 +22,7 @@ describe('EventComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HomeFeaturedEventComponent], // Move EventComponent to imports
+      imports: [HomeEventCardComponent], // Move EventComponent to imports
       declarations: [TestHostComponent, MockEventComponent], // Remove EventComponent from declarations
       providers: [
         {
