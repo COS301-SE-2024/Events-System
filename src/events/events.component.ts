@@ -82,7 +82,6 @@ checkedSocialClubs: string[] = [];
             this.socialClubs.push(data);
           });
       });
-
       // Wait for all host fetches to complete before ending the loading state
       Promise.all(hostFetches).then(() => {
         this.isLoading = false;

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
+
 import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-event',
@@ -14,6 +15,7 @@ export class EventComponent implements OnInit{
   event: any = null;
   host: any = null;
   isLoading = true;
+
   club: any = null;
   constructor(private route: ActivatedRoute) { }
   goBack(): void {
@@ -48,6 +50,7 @@ export class EventComponent implements OnInit{
             this.isLoading = false;
     
           });
+
           // console.log(this.host); // Log the host data
           this.isLoading = false;
 
