@@ -1,0 +1,57 @@
+<div class="min-w-full overflow-x-hidden mb-24">
+    <!-- skeleton content -->
+    <div *ngIf="isLoading">
+        <div class="skeleton h-80 min-w-dvw"></div>
+        <div class="flex lg:justify-between lg:flex-row flex-col">
+            <div>
+                <h1 class="skeleton text-6xl lg:ml-64 mt-8 lg:h-14 h-32 w-96"></h1>
+                <h2 class="skeleton mt-4 text-4xl lg:ml-64 text-secondary lg:h-8 h-24 lg:w-[700px] w-80"></h2>
+            </div>
+
+        </div>
+        
+    </div> 
+        <!-- actual content -->
+        <div *ngIf="!isLoading && club">
+            <div class="hero h-80 min-w-dvw" style="background-image: url(https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg);">  </div>
+            <!-- <div class="absolute top-0 left-8"> -->
+                <button class="btn w-[50px] -mt-12 lg:ml-8 h-[30px] rounded-full"(click)="goBack()"><i class="fa-solid fa-arrow-left"></i></button>
+
+            <!-- </div> -->
+
+<!-- title -->
+<div role="tablist" class="tabs tabs-bordered">
+    <a role="tab" class="tab" [class.tab-active]="activeTab === 'tab1'" (click)="activeTab = 'tab1'">description</a>
+    <a role="tab" class="tab" [class.tab-active]="activeTab === 'tab2'" (click)="activeTab = 'tab2'">Event history</a>
+</div>
+
+<!-- Tab 1 content -->
+<div *ngIf="activeTab === 'tab1'" class="flex lg:justify-between lg:flex-row flex-col">
+    <div>
+        <h1 class="text-6xl lg:ml-64 mt-8">{{club.name}}</h1>
+        <h2 class="mt-4 text-4xl lg:ml-64 text-secondary">{{club.description}}</h2>
+    </div>
+    <div>
+    </div>
+</div>
+
+<!-- Tab 2 content -->
+<div *ngIf="activeTab === 'tab2'" class="flex lg:justify-between lg:flex-row flex-col">
+    <!-- Add your Tab 2 content here -->
+</div>
+
+</div>
+
+        </div>
+    
+
+
+        <!-- <p> <i class="fa-solid fa-user mr-2"></i> {{ hostedBy }}</p>
+        <p><i class="fa-solid fa-location-pin mr-3"></i>{{ location }}</p>
+        <p><i class="fa-regular fa-clock mr-2"></i> {{startTime }} - {{ endTime }} </p>
+        <p><i class="fa-regular fa-calendar-days mr-3"></i>{{startDate | date:'d MMM' }} - {{ endDate | date:'d MMM'  }} </p>
+        <p> <i class="fa-solid fa-user mr-2"></i> {{ eventID }}</p> -->
+    
+
+
+

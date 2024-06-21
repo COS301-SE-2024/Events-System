@@ -40,7 +40,7 @@ checkedSocialClubs: string[] = [];
   allClubsChecked = false;
   otherCheckboxes = [false, false, false]; // Adjust this to match the number of your other checkboxes
   selectedDietaryAccommodation = '';
-
+  socialClubs: any[] = [];
   onSubmit() {
     const dateInput = (<HTMLInputElement>document.getElementById('date-input')).value;
     // console.log(dateInput);
@@ -71,6 +71,17 @@ checkedSocialClubs: string[] = [];
           });
       });
 
+        // Fetch social club information for each unique social club
+      const socialClubFetches = this.uniqueSocialClubs.map(socialClubId => {
+        return fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs/' + socialClubId)
+          .then(response => {
+            return response.json();
+          })
+          .then(data => {
+            // Store the social club data in a property of the component
+            this.socialClubs.push(data);
+          });
+      });
       // Wait for all host fetches to complete before ending the loading state
       Promise.all(hostFetches).then(() => {
         this.isLoading = false;
