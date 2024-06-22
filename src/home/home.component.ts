@@ -92,21 +92,41 @@ export class HomeComponent {
     const employeeId = Number(localStorage.getItem('ID')); // Assuming the employeeId is stored in local storage
   
     fetch('https://events-system-back.wn.r.appspot.com/api/events')
-      .then(response => response.json())
-      .then(data => {
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.text();
+      })
+      .then(text => {
+        // Check if the response is not empty before parsing
+        const data = text ? JSON.parse(text) : [];
         this.events = Array.isArray(data) ? data : [data];
   
         const hostFetches = this.events.map(event => fetch('https://events-system-back.wn.r.appspot.com/api/employees/' + event.hostId)
-          .then(response => response.json())
-          .then(data => {
-            event.host = data;
-          }));
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.text();
+        })
+        .then(text => {
+          const data = text ? JSON.parse(text) : {};
+          event.host = data;
+        }));
+
   
         const socialClubsFetch = fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs')
-          .then(response => response.json())
-          .then(data => {
-            this.socialClubs = Array.isArray(data) ? data : [data];
-          });
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.text();
+        })
+        .then(text => {
+          const data = text ? JSON.parse(text) : [];
+          this.socialClubs = Array.isArray(data) ? data : [data];
+        });
   
         return Promise.all([...hostFetches, socialClubsFetch]);
       })
