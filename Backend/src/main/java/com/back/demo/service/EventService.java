@@ -26,6 +26,10 @@ public class EventService {
         return eventRepository.findById(eventId);
     }
 
+    public List<Event> getEventByHostId(Long hostId) {
+        return eventRepository.findAllHostEvents(hostId);
+    }
+
     public Event createEvent(Event event) {
         return eventRepository.save(event);
     }
