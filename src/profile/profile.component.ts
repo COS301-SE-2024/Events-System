@@ -11,12 +11,19 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 })
 export class ProfileComponent implements OnInit {
   selectedTab: string = 'about';
+  employeeData: any; // Define employeeData property
 
   constructor(private http: HttpClient) {}
 
-  ngOnInit() {
-    this.logLocalStorageItem();
+  ngOnInit(): void {
     this.getEmployeeById();
+    const storedEmployeeData = localStorage.getItem('employeeData');
+    if (storedEmployeeData) {
+      this.employeeData = JSON.parse(storedEmployeeData);
+      console.log(this.employeeData);
+    } else {
+      // Handle case where employeeData is not available in localStorage
+    }
   }
 
   selectTab(tab: string) {

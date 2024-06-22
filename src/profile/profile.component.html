@@ -5,15 +5,15 @@
         <div class="flex justify-between items-center">
           <div class="flex items-center">
             <div class="w-20">
-              <div _ngcontent-ng-c907525974="" tabindex="0" role="button" class="btn btn-ghost btn-circle avatar" style="width: 120px; height: 120px;">
-                <div _ngcontent-ng-c907525974="" class="w-full rounded-full">
-                  <img _ngcontent-ng-c907525974="" alt="Tailwind CSS Navbar component" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" style="width: 100%; height: 100%;">
+              <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar" style="width: 120px; height: 120px;">
+                <div class="w-full rounded-full">
+                  <img alt="Profile Picture" [src]="employeeData?.employeePictureLink || 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg'" style="width: 100%; height: 100%;">
                 </div>
               </div>
             </div>
-            <div class="ml-12"> <!-- Increased margin-left value -->
-              <h2 class="text-2xl">Profile Name</h2>
-              <p>Profile Username</p>
+            <div class="ml-12">
+              <h2 class="text-2xl">{{ employeeData?.firstName }} {{ employeeData?.lastName }}</h2>
+              <p>{{ employeeData?.email }}</p>
             </div>
           </div>          
           <button class="btn btn-outline">Edit Profile</button>
@@ -30,15 +30,15 @@
       <div class="card-body flex-row">
         <div class="w-1/2">
           <h2 class="card-title">About Me</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse gravida, sem eget fringilla tempus.</p>
+          <p>{{ employeeData?.employeeDescription || 'No description available.' }}</p>
         </div>
         <div class="w-1/2">
           <h3 class="text-xl mt-4">Contact Details</h3>
           <ul class="flex flex-col">
-            <li class="flex items-center"><i class="far fa-envelope ml-2"></i></li>
-            <li class="flex items-center"><i class="fab fa-xing ml-2"></i></li>
-            <li class="flex items-center"><i class="fab fa-linkedin ml-2"></i></li>
-            <li class="flex items-center"><i class="fab fa-discord ml-2"></i></li>
+            <li class="flex items-center"><i class="far fa-envelope ml-2"></i> {{ employeeData?.email }}</li>
+            <li class="flex items-center"><i class="fab fa-xing ml-2"></i> {{ employeeData?.twitter || 'Not available' }}</li>
+            <li class="flex items-center"><i class="fab fa-linkedin ml-2"></i> {{ employeeData?.linkedin || 'Not available' }}</li>
+            <li class="flex items-center"><i class="fab fa-discord ml-2"></i> {{ employeeData?.github || 'Not available' }}</li>
           </ul>
         </div>
       </div>
@@ -66,12 +66,12 @@
     <div class="card w-full bg-base-100 shadow-2xl mb-4">
       <div class="card-body">
         <div class="flex flex-col items-center">
-          <div _ngcontent-ng-c907525974="" tabindex="0" role="button" class="btn btn-ghost btn-circle avatar" style="width: 120px; height: 120px;">
-            <div _ngcontent-ng-c907525974="" class="w-full rounded-full"><img _ngcontent-ng-c907525974="" alt="Tailwind CSS Navbar component" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" style="width: 100%; height: 100%;"></div>
+          <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar" style="width: 120px; height: 120px;">
+            <div class="w-full rounded-full"><img alt="Profile Picture" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" style="width: 100%; height: 100%;"></div>
           </div>
           <div>
-            <h2 class="text-2xl">Profile Name</h2>
-            <p>Profile Username</p>
+            <h2 class="text-2xl">{{ employeeData?.firstName }} {{ employeeData?.lastName }}</h2>
+            <p>{{ employeeData?.email }}</p>
           </div>
           <button class="btn btn-outline mt-4">Edit Profile</button>
         </div>
@@ -86,10 +86,10 @@
     <div *ngIf="selectedTab === 'about'" class="card w-full bg-base-100 shadow-2xl mb-4">
       <div class="card-body">
         <h2 class="card-title">About Me</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse gravida, sem eget fringilla tempus.</p>
+        <p>{{ employeeData?.employeeDescription || 'No description available.' }}</p>
         <h3 class="text-xl mt-4">Contact Details</h3>
         <ul>
-          <li>Email: </li>
+          <li>Email: {{ employeeData?.email }}</li>
           <li>Profile X</li>
           <li>Profile LinkedIn</li>
           <li>Profile Discord</li>
@@ -113,4 +113,3 @@
       </div>
     </div>
   </div>
-  
