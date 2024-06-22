@@ -35,11 +35,28 @@
         <div class="w-1/2">
           <h3 class="text-xl mt-4">Contact Details</h3>
           <ul class="flex flex-col">
-            <li class="flex items-center"><i class="far fa-envelope ml-2"></i> {{ employeeData?.email }}</li>
-            <li class="flex items-center"><i class="fab fa-xing ml-2"></i> {{ employeeData?.twitter || 'Not available' }}</li>
-            <li class="flex items-center"><i class="fab fa-linkedin ml-2"></i> {{ employeeData?.linkedin || 'Not available' }}</li>
-            <li class="flex items-center"><i class="fab fa-discord ml-2"></i> {{ employeeData?.github || 'Not available' }}</li>
+            <li class="flex items-center">
+              <i class="far fa-envelope"></i>
+              <a *ngIf="employeeData?.email" [href]="'mailto:' + employeeData.email" class="ml-2">{{ employeeData.email }}</a>
+              <span *ngIf="!employeeData?.email" class="ml-2">Not available</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fab fa-xing"></i>
+              <a *ngIf="employeeData?.twitter" [href]="employeeData.twitter" target="_blank" rel="noopener noreferrer" class="ml-2">{{ employeeData.twitter }}</a>
+              <span *ngIf="!employeeData?.twitter" class="ml-2">Not available</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fab fa-linkedin"></i>
+              <a *ngIf="employeeData?.linkedin" [href]="employeeData.linkedin" target="_blank" rel="noopener noreferrer" class="ml-2">{{ employeeData.linkedin }}</a>
+              <span *ngIf="!employeeData?.linkedin" class="ml-2">Not available</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fab fa-github"></i>
+              <a *ngIf="employeeData?.github" [href]="employeeData.github" target="_blank" rel="noopener noreferrer" class="ml-2">{{ employeeData.github }}</a>
+              <span *ngIf="!employeeData?.github" class="ml-2">Not available</span>
+            </li>
           </ul>
+                           
         </div>
       </div>
     </div>
