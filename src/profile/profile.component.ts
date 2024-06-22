@@ -1,18 +1,50 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, HttpClientModule],
   templateUrl: './profile.component.html',
-  styleUrl: './profile.component.css',
+  styleUrls: ['./profile.component.css'],
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
   selectedTab: string = 'about';
+
+  constructor(private http: HttpClient) {}
+
+  ngOnInit() {
+    this.logLocalStorageItem();
+    this.getEmployeeById();
+  }
 
   selectTab(tab: string) {
     this.selectedTab = tab;
+  }
+
+  logLocalStorageItem() {
+    const employeeId = localStorage.getItem('ID');
+    console.log(employeeId);
+  }
+
+  getEmployeeById() {
+    const employeeId = localStorage.getItem('ID');
+    if (employeeId) {
+      this.http.get(`https://events-system-back.wn.r.appspot.com/api/employees/${employeeId}`).subscribe(
+        (data: any) => {
+          //console.log(data);
+          localStorage.setItem('employeeData', JSON.stringify(data));
+          //log the data to the console
+          console.log(localStorage.getItem('employeeData'));  
+        },
+        (error) => {
+          console.error('Error fetching employee data', error);
+        }
+      );
+    } else {
+      console.warn('No ID found in localStorage');
+    }
   }
 }
 
