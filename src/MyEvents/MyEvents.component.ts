@@ -16,8 +16,9 @@ export class MyEventsComponent implements OnInit {
   isLoading = true;
   events: any[] = [];
   ngOnInit(): void {
+    const employeeId = Number(localStorage.getItem('ID'));
     this.isLoading = true;
-    fetch('https://events-system-back.wn.r.appspot.com/api/events')
+    fetch('https://events-system-back.wn.r.appspot.com/api/events/host/' + employeeId)
       .then(response => {
         return response.json();
       })
