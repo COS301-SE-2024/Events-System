@@ -16,7 +16,7 @@
               <p>{{ employeeData?.email }}</p>
             </div>
           </div>          
-          <button class="btn btn-outline">Edit Profile</button>
+          <button class="btn btn-outline" (click)="navigateToSettings()">Edit Profile</button>
         </div>
         <div class="tabs">
           <a class="tab tab-bordered rounded-lg hover:bg-blue-200 hover:text-blue-800" (click)="selectTab('about')" [class.tab-active]="selectedTab === 'about'">About</a>

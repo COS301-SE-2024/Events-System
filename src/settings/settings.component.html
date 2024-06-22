@@ -50,13 +50,13 @@
             <input
               type="text"
               #surnameInput
-              [placeholder]="employeeData?.lastName || 'Name'"
+              [placeholder]="employeeData?.lastName || 'Surname'"
               class="input input-bordered w-full mb-2"
               (input)="surname = surnameInput.value"
             >
             <textarea
               #descriptionInput
-              [placeholder]="employeeData?.employeeDescription|| 'Name'"
+              [placeholder]="employeeData?.employeeDescription|| 'Bio'"
               class="textarea textarea-bordered w-full mb-2"
               (input)="description = descriptionInput.value"
             ></textarea>
@@ -70,28 +70,28 @@
             <input
               type="email"
               #emailInput
-              [placeholder]="employeeData?.email|| 'Name'"
+              [placeholder]="employeeData?.email|| 'E-mail'"
               class="input input-bordered w-full mb-2"
               (input)="email = emailInput.value"
             >
             <input
               type="text"
               #xInput
-              [placeholder]="employeeData?.twitter|| 'Name'"
+              [placeholder]="employeeData?.twitter|| 'Twitter'"
               class="input input-bordered w-full mb-2"
               (input)="x = xInput.value"
             >
             <input
               type="text"
               #linkedInInput
-              [placeholder]="employeeData?.linkedin|| 'Name'"
+              [placeholder]="employeeData?.linkedin|| 'LinkedIn'"
               class="input input-bordered w-full mb-2"
               (input)="linkedIn = linkedInInput.value"
             >
             <input
               type="text"
               #gitHubInput
-              [placeholder]="employeeData?.github|| 'Name'"
+              [placeholder]="employeeData?.github|| 'Github'"
               class="input input-bordered w-full mb-4"
               (input)="gitHub = gitHubInput.value"
             >

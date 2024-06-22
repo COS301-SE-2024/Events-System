@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule],
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
 })
@@ -13,7 +13,7 @@ export class ProfileComponent implements OnInit {
   selectedTab: string = 'about';
   employeeData: any; // Define employeeData property
 
-  constructor(private http: HttpClient) {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     const storedEmployeeData = localStorage.getItem('employeeData');
@@ -23,6 +23,10 @@ export class ProfileComponent implements OnInit {
     } else {
       // Handle case where employeeData is not available in localStorage
     }
+  }
+
+  navigateToSettings() {
+    this.router.navigate(['/settings']);
   }
 
   selectTab(tab: string) {
