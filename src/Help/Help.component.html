@@ -20,7 +20,7 @@
         <li><a (click)="setActiveSection('changelog')">Changelog</a></li>
       </ul>
       
-      <div *ngIf="activeSection === 'gettingStarted'" [@fadeInOut]>
+      <div *ngIf="activeSection === 'gettingStarted'" >
         <div class="flex justify-center">
             <h1 class="text-7xl lg:mt-0 mt-4">Welcome!</h1>
         </div>
@@ -31,11 +31,11 @@
 
         </p>
       </div>
-      <div *ngIf="activeSection === 'account'"  [@fadeInOut]>
+      <div *ngIf="activeSection === 'account'"  >
         <div class="flex justify-center">
             <h1 class="text-7xl lg:mt-0 mt-4">My account</h1>
         </div>
-        <div class="lg:ml-8 lg:mt-8 mt-8 ml-2 justify-center w-11/12 text-center">
+        <div class="lg:ml-8 lg:mt-8 mt-8 ml-2 justify-center w-11/12 text-center text-secondary">
             <ul class="list-disc lg:text-left text-center mt-8 mx-auto w-11/12 lg:w-3/4">
                 <li>
                     <strong>Update Account Details:</strong>
@@ -93,7 +93,7 @@
         </div>
 
       </div>
-      <div *ngIf="activeSection === 'faq'"  [@fadeInOut]>
+      <div *ngIf="activeSection === 'faq'"  >
         <div class="flex justify-center w-full">
             <h1 class="text-7xl lg:mt-0 mt-4">FAQ</h1>
         </div>
@@ -142,7 +142,7 @@
         </div>
 
       </div>
-      <div *ngIf="activeSection === 'status'" class="w-full"  [@fadeInOut]>
+      <div *ngIf="activeSection === 'status'" class="w-full"  >
         <div class="flex justify-center w-full">
             <h1 class="text-7xl lg:mt-0 mt-4">Site Status</h1>
         </div>
