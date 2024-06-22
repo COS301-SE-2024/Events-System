@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 @Component({
@@ -8,7 +8,8 @@ import { RouterModule } from '@angular/router';
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.css',
 })
-export class SettingsComponent {
+export class SettingsComponent implements OnInit {
+  employeeData: any; // Define employeeData property
   selectedTab: string = 'details';
   name: string = '';
   surname: string = '';
@@ -30,10 +31,24 @@ export class SettingsComponent {
 
   onAvatarChange(event: Event) {
     const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length) {
-      this.avatar = input.files[0];
-      // Handle avatar file upload logic here
-      console.log(this.avatar);
+    if (input.files && input.files[0]) {
+      const file = input.files[0];
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.employeeData.employeePictureLink = e.target.result;
+        // Optionally, upload the new image to the server here
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  ngOnInit(): void {
+    const storedEmployeeData = localStorage.getItem('employeeData');
+    if (storedEmployeeData) {
+      this.employeeData = JSON.parse(storedEmployeeData);
+      console.log(this.employeeData);
+    } else {
+      // Handle case where employeeData is not available in localStorage
     }
   }
 
