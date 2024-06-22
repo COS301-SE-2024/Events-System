@@ -2,8 +2,17 @@
     <h1 class="lg:text-6xl lg:ml-8 lg:mt-8 text-2xl ml-4">Getting Started</h1>
     <p class="lg:text-4xl lg:ml-8 text-2xl ml-4 text-slate-500">Learn how to start using our product, Understand the key features</p>
 </div>
-<div class="flex mt-8 w-max">
-    <ul class="menu bg-base-200 w-80 text h-screen">
+<div class="flex lg:flex-row flex-col lg:mt-8 mt-4">
+    <select class="select select-bordered w-full max-w-md lg:hidden" [(ngModel)]="selectedSection" (change)="setActiveSection(selectedSection)">
+        <option value="gettingStarted" selected>Getting Started</option>
+        <option value="account">Account</option>
+        <option value="faq">Frequently asked Questions</option>
+        <option value="status">Status</option>
+        <option value="changelog">Changelog</option>
+      </select>
+      
+      <!-- Menu for larger screens -->
+      <ul class="menu bg-base-200 w-80 text h-screen lg:block hidden">
         <li><a (click)="setActiveSection('gettingStarted')">Getting Started</a></li>
         <li><a (click)="setActiveSection('account')">Account</a></li>
         <li><a (click)="setActiveSection('faq')">Frequently asked Questions</a></li>
@@ -11,79 +20,82 @@
         <li><a (click)="setActiveSection('changelog')">Changelog</a></li>
       </ul>
       
-      <div *ngIf="activeSection === 'gettingStarted'">
-        <div class="flex justify-center w-full">
-            <h1 class="text-7xl">Welcome!</h1>
+      <div *ngIf="activeSection === 'gettingStarted'" [@fadeInOut]>
+        <div class="flex justify-center">
+            <h1 class="text-7xl lg:mt-0 mt-4">Welcome!</h1>
         </div>
-          <p class="lg:ml-8 lg:mt-8 justify-center w-11/12">
+          <p class="lg:ml-8 lg:mt-8 mt-8 ml-2 justify-center w-11/12 text-center text-secondary">
                 Welcome to the Help center for all things Events System!<br/>
                 Here you'll find all the guides and information you need to get started with our platform, manage your account, and troubleshoot any issues you may encounter.<br/>
                 If you have any questions or need further assistance, feel free to reach out to our support team for help! Bieber.Capstone&#64;gmail.com<br/>
 
         </p>
       </div>
-      <div *ngIf="activeSection === 'account'">
-        <div class="flex justify-center w-full">
-            <h1 class="text-7xl">My account!</h1>
+      <div *ngIf="activeSection === 'account'"  [@fadeInOut]>
+        <div class="flex justify-center">
+            <h1 class="text-7xl lg:mt-0 mt-4">My account</h1>
         </div>
-          <ul class="list-disc text-left mt-8 mx-auto w-11/12 lg:w-3/4">
-            <li>
-                <strong>Update Account Details:</strong>
-                <ul>
-                    <li>Navigate to your profile icon at the top right corner and select <em class="text-accent"><a href="/settings">Settings</a></em> from the dropdown menu.</li>
-                    <li>In the settings menu, click on <em  class="text-accent">My Details</em> to access and edit your personal information such as name, surname, and description.</li>
-                    <li>Remember to <span class="text-warning">save your changes</span> before exiting.</li>
-                </ul>
-            </li>
-            <li class="mt-2">
-                <strong>Privacy Settings:</strong>
-                <ul>
-                    <li>Go to <em  class="text-accent"><a href="/settings">Settings</a></em> by clicking on your profile icon.</li>
-                    <li>Select <em  class="text-accent">Security</em> from the sidebar.</li>
-                    <li>Here, you can toggle the visibility settings for your surname and account links.</li>
-                    <li>Choose your preferred level of privacy and click <em  class="text-warning">Save Changes</em> to apply.</li>
-                </ul>
-            </li>
-            <li class="mt-2">
-                <strong>Change Description:</strong>
-                <ul>
-                    <li>Update your profile description by accessing <em  class="text-accent"><a href="/settings">Settings > My Details</a></em>.</li>
-                    <li>Scroll down to the <em  class="text-accent">Description</em> section, where you can edit your professional bio.</li>
-                    <li>Use the text box to add or modify your description.</li>
-                    <li>Click <em  class="text-warning">Save Changes</em> to update your profile.</li>
-                </ul>
-            </li>
-            <li class="mt-2">
-                <strong>Add a Profile Photo:</strong>
-                <ul>
-                    <li>To upload a new profile photo, visit <em  class="text-accent"><a href="/settings">Settings > Profile Picture</a></em>.</li>
-                    <li>Click on the <em  class="text-accent">Choose File</em> button and select an image from your device.</li>
-                    <li>Supported formats are JPG, PNG, and GIF. Adjust the cropping if needed.</li>
-                    <li>Click <em  class="text-warning">Save Changes</em> to set your new profile picture.</li>
-                </ul>
-            </li>
-            <li class="mt-2">
-                <strong>Change Password:</strong>
-                <ul>
-                    <li>For security, regularly update your password under <em  class="text-accent"><a href="/settings">Settings > Security</a></em>.</li>
-                    <li>Click on <em  class="text-accent">Change Password</em>, enter your current password, and then your new password twice for confirmation.</li>
-                    <li>Passwords should be at least 8 characters long and include a mix of letters, numbers, and symbols.</li>
-                    <li>Click  <em  class="text-warning">Save Changes</em> to complete the change.</li>
-                </ul>
-            </li>
-            <li class="mt-2">
-                <strong>Delete Account:</strong>
-                <ul>
-                    <li>If you decide to delete your account, <span class="text-error">be aware that this action is irreversible and will result in the loss of all your data.</span> </li>
-                    <li>To proceed, navigate to <em class="text-accent"><a href="/settings">Settings > Security</a></em>, scroll to the bottom of the page, and click on <em>Delete Account</em>.</li>
-                    <!-- <li>You may be asked to enter your password and confirm your choice.</li> -->
-                </ul>
-            </li>
-        </ul>
+        <div class="lg:ml-8 lg:mt-8 mt-8 ml-2 justify-center w-11/12 text-center">
+            <ul class="list-disc lg:text-left text-center mt-8 mx-auto w-11/12 lg:w-3/4">
+                <li>
+                    <strong>Update Account Details:</strong>
+                    <ul>
+                        <li>Navigate to your profile icon at the top right corner and select <em class="text-accent"><a href="/settings">Settings</a></em> from the dropdown menu.</li>
+                        <li>In the settings menu, click on <em  class="text-accent">My Details</em> to access and edit your personal information such as name, surname, and description.</li>
+                        <li>Remember to <span class="text-warning">save your changes</span> before exiting.</li>
+                    </ul>
+                </li>
+                <li class="mt-4">
+                    <strong>Privacy Settings:</strong>
+                    <ul>
+                        <li>Go to <em  class="text-accent"><a href="/settings">Settings</a></em> by clicking on your profile icon.</li>
+                        <li>Select <em  class="text-accent">Security</em> from the sidebar.</li>
+                        <li>Here, you can toggle the visibility settings for your surname and account links.</li>
+                        <li>Choose your preferred level of privacy and click <em  class="text-warning">Save Changes</em> to apply.</li>
+                    </ul>
+                </li>
+                <li class="mt-4">
+                    <strong>Change Description:</strong>
+                    <ul>
+                        <li>Update your profile description by accessing <em  class="text-accent"><a href="/settings">Settings > My Details</a></em>.</li>
+                        <li>Scroll down to the <em  class="text-accent">Description</em> section, where you can edit your professional bio.</li>
+                        <li>Use the text box to add or modify your description.</li>
+                        <li>Click <em  class="text-warning">Save Changes</em> to update your profile.</li>
+                    </ul>
+                </li>
+                <li class="mt-4">
+                    <strong>Add a Profile Photo:</strong>
+                    <ul>
+                        <li>To upload a new profile photo, visit <em  class="text-accent"><a href="/settings">Settings > Profile Picture</a></em>.</li>
+                        <li>Click on the <em  class="text-accent">Choose File</em> button and select an image from your device.</li>
+                        <li>Supported formats are JPG, PNG, and GIF. Adjust the cropping if needed.</li>
+                        <li>Click <em  class="text-warning">Save Changes</em> to set your new profile picture.</li>
+                    </ul>
+                </li>
+                <li class="mt-4">
+                    <strong>Change Password:</strong>
+                    <ul>
+                        <li>For security, regularly update your password under <em  class="text-accent"><a href="/settings">Settings > Security</a></em>.</li>
+                        <li>Click on <em  class="text-accent">Change Password</em>, enter your current password, and then your new password twice for confirmation.</li>
+                        <li>Passwords should be at least 8 characters long and include a mix of letters, numbers, and symbols.</li>
+                        <li>Click  <em  class="text-warning">Save Changes</em> to complete the change.</li>
+                    </ul>
+                </li>
+                <li class="mt-4">
+                    <strong>Delete Account:</strong>
+                    <ul>
+                        <li>If you decide to delete your account, <span class="text-error">be aware that this action is irreversible and will result in the loss of all your data.</span> </li>
+                        <li>To proceed, navigate to <em class="text-accent"><a href="/settings">Settings > Security</a></em>, scroll to the bottom of the page, and click on <em>Delete Account</em>.</li>
+                        <!-- <li>You may be asked to enter your password and confirm your choice.</li> -->
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
       </div>
-      <div *ngIf="activeSection === 'faq'">
+      <div *ngIf="activeSection === 'faq'"  [@fadeInOut]>
         <div class="flex justify-center w-full">
-            <h1 class="text-7xl">FAQ!</h1>
+            <h1 class="text-7xl lg:mt-0 mt-4">FAQ</h1>
         </div>
         <div>
             <h2 class="text-5xl mt-8">Q: What's your tech stack?</h2>
@@ -130,12 +142,12 @@
         </div>
 
       </div>
-      <div *ngIf="activeSection === 'status'" class="w-full">
+      <div *ngIf="activeSection === 'status'" class="w-full"  [@fadeInOut]>
         <div class="flex justify-center w-full">
-            <h1 class="text-7xl">Site Status!</h1>
+            <h1 class="text-7xl lg:mt-0 mt-4">Site Status</h1>
         </div>
         <div class="flex flex-col items-center  w-full">
-            <p class="text-center w-11/12 lg:mt-8">Check the current status of our services for any outages or maintenance activities:</p>
+            <p class="text-center w-11/12 lg:mt-8 mt-4">Check the current status of our services for any outages or maintenance activities:</p>
             <a href="https://stats.uptimerobot.com/nso80Ipm4X" target="_blank" class="btn btn-primary mt-4" aria-label="View Uptime Report">
                 <i class="fas fa-chart-line"></i> View Uptime Report
             </a>
