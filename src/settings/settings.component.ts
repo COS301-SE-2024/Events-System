@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { catchError, of, tap } from 'rxjs';
 import { Router } from '@angular/router';
+import { createClient } from 'contentful-management';
+
 @Component({
   selector: 'app-settings',
   standalone: true,
@@ -27,10 +29,11 @@ export class SettingsComponent implements OnInit {
   makeContactInfoPublic: boolean = false;
   makeScreenerPublic: boolean = false;
   avatar: File | null = null;
-  
+  file: any;
+  pictureChanged: boolean = false;
 
-  constructor(private http: HttpClient, private router : Router ) {}
-  
+  constructor(private http: HttpClient, private router: Router) {}
+
   selectTab(tab: string) {
     this.selectedTab = tab;
   }
@@ -38,13 +41,14 @@ export class SettingsComponent implements OnInit {
   onAvatarChange(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
-      const file = input.files[0];
+      this.file = input.files[0];
       const reader = new FileReader();
       reader.onload = (e: any) => {
         this.employeeData.employeePictureLink = e.target.result;
+        this.pictureChanged = true;
         // Optionally, upload the new image to the server here
       };
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(this.file);
     }
   }
 
@@ -57,9 +61,39 @@ export class SettingsComponent implements OnInit {
     }
   }
 
+  async uploadFileToContentful(file: File) {
+    const client = createClient({
+      accessToken: 'CMA TOKEN',
+    });
+
+    const space = await client.getSpace('ox5lffnpftbk');
+    const environment = await space.getEnvironment('master');
+
+    const asset = await environment.createAssetFromFiles({
+      fields: {
+        title: {
+          'en-US': file.name,
+        },
+        file: {
+          'en-US': {
+            contentType: file.type,
+            fileName: file.name,
+            file: this.file,
+          },
+        },
+        description: {}
+      },
+    });
+
+    const processedAsset = await asset.processForAllLocales();
+    const publishedAsset = await processedAsset.publish();
+
+    return publishedAsset.fields.file['en-US'].url;
+  }
+
   saveChanges() {
     const updatedData: any = {};
-
+  
     if (this.name) updatedData.firstName = this.name;
     if (this.surname) updatedData.lastName = this.surname;
     if (this.description) updatedData.employeeDescription = this.description;
@@ -67,39 +101,49 @@ export class SettingsComponent implements OnInit {
     if (this.x) updatedData.twitter = this.x;
     if (this.linkedIn) updatedData.linkedin = this.linkedIn;
     if (this.gitHub) updatedData.github = this.gitHub;
-    if (this.employeePictureLink) updatedData.employeePictureLink = this.employeePictureLink;
-
-    // Only send the new password if it matches the confirm password and is not empty
-    if (this.newPassword && this.newPassword === this.confirmPassword) {
-      updatedData.password = this.newPassword;
-    }
-
+  
+    const uploadFile = async () => {
+      if (this.pictureChanged && this.file) {
+        try {
+          const fileUrl = await this.uploadFileToContentful(this.file);
+          updatedData.employeePictureLink = fileUrl;
+        } catch (error) {
+          console.error('Error uploading file:', error);
+        }
+      }
+    };
+  
     const id = localStorage.getItem('ID');
-
-    console.log('ID', id)
-    console.log('Changes saved', updatedData);
-
-
-    this.http.patch(`https://events-system-back.wn.r.appspot.com/api/employees/${id}`, updatedData)
-      .pipe(
-        tap((response: any) => {
-          console.log('Changes saved', response);
-          // Optionally update the local storage with the new data
-          const newEmployeeData = { ...this.employeeData, ...updatedData };
-          localStorage.setItem('employeeData', JSON.stringify(newEmployeeData));
-          this.employeeData = newEmployeeData;
-        }),
-        catchError((error: any) => {
-          console.error('Error saving changes:', error);
-          return of(null); // Return observable of null or handle error as needed
-        })
-      )
-      .subscribe(() => {
-        alert('Changes saved');
-        //navigate to profile page
-        this.router.navigate(['/profile']);
-      });
+  
+    const saveData = async () => {
+      if (this.pictureChanged) {
+        await uploadFile();
+      }
+  
+      this.http.patch(`https://events-system-back.wn.r.appspot.com/api/employees/${id}`, updatedData)
+        .pipe(
+          tap((response: any) => {
+            console.log('Changes saved', response);
+            // Optionally update the local storage with the new data
+            const newEmployeeData = { ...this.employeeData, ...updatedData };
+            localStorage.setItem('employeeData', JSON.stringify(newEmployeeData));
+            this.employeeData = newEmployeeData;
+          }),
+          catchError((error: any) => {
+            console.error('Error saving changes:', error);
+            return of(null); // Return observable of null or handle error as needed
+          })
+        )
+        .subscribe(() => {
+          alert('Changes saved');
+          //navigate to profile page
+          this.router.navigate(['/profile']);
+        });
+    };
+  
+    saveData();
   }
+  
 
   deleteAccount() {
     // Delete account logic here
