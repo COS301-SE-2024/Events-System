@@ -127,7 +127,7 @@ submit(){
       startDate: validator.escape(this.StartDateInput.nativeElement.value),
       endDate: validator.escape(this.EndDateInput.nativeElement.value),
       location: validator.escape(this.LocationInput.nativeElement.value),
-      hostId: sessionStorage.getItem('ID'),
+      hostId: localStorage.getItem('ID'),
       geolocation: "51.507351, -0.127758",
       socialClub: validator.escape(this.SocialClubInput.nativeElement.value),
       eventPictureLink: "https://example.com/soccer-tournament.jpg", // Replace with actual picture link
