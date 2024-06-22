@@ -16,7 +16,6 @@ export class ProfileComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.getEmployeeById();
     const storedEmployeeData = localStorage.getItem('employeeData');
     if (storedEmployeeData) {
       this.employeeData = JSON.parse(storedEmployeeData);
@@ -28,30 +27,6 @@ export class ProfileComponent implements OnInit {
 
   selectTab(tab: string) {
     this.selectedTab = tab;
-  }
-
-  logLocalStorageItem() {
-    const employeeId = localStorage.getItem('ID');
-    console.log(employeeId);
-  }
-
-  getEmployeeById() {
-    const employeeId = localStorage.getItem('ID');
-    if (employeeId) {
-      this.http.get(`https://events-system-back.wn.r.appspot.com/api/employees/${employeeId}`).subscribe(
-        (data: any) => {
-          //console.log(data);
-          localStorage.setItem('employeeData', JSON.stringify(data));
-          //log the data to the console
-          console.log(localStorage.getItem('employeeData'));  
-        },
-        (error) => {
-          console.error('Error fetching employee data', error);
-        }
-      );
-    } else {
-      console.warn('No ID found in localStorage');
-    }
   }
 }
 
@@ -87,3 +62,4 @@ function openTab(tab: HTMLElement, index: number) {
   tabContents[index].classList.remove('hidden');
   tab.classList.add('tab-active');
 }
+

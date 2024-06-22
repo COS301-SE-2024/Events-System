@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms'; 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient  } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -17,7 +17,8 @@ export class LoginComponent {
 
   constructor(
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private http: HttpClient
   ) {
     this.registerForm = this.fb.group({
       firstName: ['', Validators.required],
@@ -94,6 +95,24 @@ export class LoginComponent {
           // Navigate to home page with credentials as state data
           localStorage.setItem('ID', data2);
         })
+
+        const employeeId = localStorage.getItem('ID');
+        if (employeeId) {
+          this.http.get(`https://events-system-back.wn.r.appspot.com/api/employees/${employeeId}`).subscribe(
+            (data: any) => {
+              //console.log(data);
+              localStorage.setItem('employeeData', JSON.stringify(data));
+              //log the data to the console
+              console.log(localStorage.getItem('employeeData'));  
+            },
+            (error) => {
+              console.error('Error fetching employee data', error);
+            }
+          );
+        } else {
+          console.warn('No ID found in localStorage');
+        }
+
         this.router.navigate(['/']);
       })
       .catch(error => {
