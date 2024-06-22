@@ -84,7 +84,7 @@
       <div class="card-body">
         <div class="flex flex-col items-center">
           <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar" style="width: 120px; height: 120px;">
-            <div class="w-full rounded-full"><img alt="Profile Picture" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" style="width: 100%; height: 100%;"></div>
+            <div class="w-full rounded-full"><img alt="Profile Picture" [src]="employeeData?.employeePictureLink || 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg'" style="width: 100%; height: 100%;"></div>
           </div>
           <div>
             <h2 class="text-2xl">{{ employeeData?.firstName }} {{ employeeData?.lastName }}</h2>
@@ -106,10 +106,26 @@
         <p>{{ employeeData?.employeeDescription || 'No description available.' }}</p>
         <h3 class="text-xl mt-4">Contact Details</h3>
         <ul>
-          <li>Email: {{ employeeData?.email }}</li>
-          <li>Profile X</li>
-          <li>Profile LinkedIn</li>
-          <li>Profile Discord</li>
+          <li class="flex items-center">
+            <i class="far fa-envelope"></i>
+            <a *ngIf="employeeData?.email" [href]="'mailto:' + employeeData.email" class="ml-2">{{ employeeData.email }}</a>
+            <span *ngIf="!employeeData?.email" class="ml-2">Not available</span>
+          </li>
+          <li class="flex items-center">
+            <i class="fab fa-xing"></i>
+            <a *ngIf="employeeData?.twitter" [href]="employeeData.twitter" target="_blank" rel="noopener noreferrer" class="ml-2">{{ employeeData.twitter }}</a>
+            <span *ngIf="!employeeData?.twitter" class="ml-2">Not available</span>
+          </li>
+          <li class="flex items-center">
+            <i class="fab fa-linkedin"></i>
+            <a *ngIf="employeeData?.linkedin" [href]="employeeData.linkedin" target="_blank" rel="noopener noreferrer" class="ml-2">{{ employeeData.linkedin }}</a>
+            <span *ngIf="!employeeData?.linkedin" class="ml-2">Not available</span>
+          </li>
+          <li class="flex items-center">
+            <i class="fab fa-github"></i>
+            <a *ngIf="employeeData?.github" [href]="employeeData.github" target="_blank" rel="noopener noreferrer" class="ml-2">{{ employeeData.github }}</a>
+            <span *ngIf="!employeeData?.github" class="ml-2">Not available</span>
+          </li>
         </ul>
       </div>
     </div>
