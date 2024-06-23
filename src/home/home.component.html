@@ -72,7 +72,7 @@
     <div class="relative lg:h-[300px]"> 
       <div class="carousel carousel-center lg:w-11/12 p-4 lg:space-x-8  space-x-8 bg-transparent rounded-box h-full" #carousel2>
          
-        <div class="carousel-item relative lg:w-1/3" *ngFor="let slide of slides; let i = index" [id]="'slide' + (i + 11)">
+        <div class="carousel-item relative lg:w-1/3" *ngFor="let slide of rsvpdSlides; let i = index" [id]="'slide' + (i + 11)">
           <app-home-event-card
             [eventTitle]="slide.title"
             [hostName]="slide.hostId"
@@ -114,3 +114,7 @@
     </div>
   </section>
 </main>
+ 
+  
+  line 173 ( starts with this.slides ) 
+  in the "clearDate(dateInput: HTMLInputElement)" function change " this.slides = [...this.allSlides];" to " this.slides = [...this.rsvpdSlides]; "
