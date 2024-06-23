@@ -27,6 +27,13 @@ describe('ProfileComponent', () => {
     expect(aboutTabContent[0]).toBeInTheDocument();
   });
 
+  it('should switch to the Events history tab when clicked', async () => {
+    const EventsTabs = await screen.getAllByText(/Events History/i);
+    fireEvent.click(EventsTabs[0]);
+  const EventsTabContent = await screen.getAllByText(/Event Title/i);
+    expect(EventsTabContent[0]).toBeInTheDocument();
+  });
+
   it('should switch to the Subscriptions tab when clicked', async () => {
     const subscriptionsTabs = await screen.getAllByText(/Subscriptions/i);
     fireEvent.click(subscriptionsTabs[0]);
