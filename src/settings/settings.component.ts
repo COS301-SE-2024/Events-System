@@ -146,7 +146,26 @@ export class SettingsComponent implements OnInit {
   
 
   deleteAccount() {
-    // Delete account logic here
-    console.log('Account deleted');
+    const id = localStorage.getItem('ID');
+    if (id) {
+      this.http.delete(`https://events-system-back.wn.r.appspot.com/api/employees/${id}`)
+        .pipe(
+          tap((response: any) => {
+            //console.log('Account deleted', response);
+            alert('Account deleted');
+            //localStorage.removeItem('employeeData');
+            //localStorage.removeItem('ID');
+            //These are done whenever the login page is loaded
+            this.router.navigate(['/login']);
+          }),
+          catchError((error: any) => {
+            console.error('Error deleting account:', error);
+            return of(null); // Return observable of null or handle error as needed
+          })
+        )
+        .subscribe();
+    } else {
+      console.error('No ID found in localStorage');
+    }
   }
 }
