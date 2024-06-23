@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
 })
+
 export class ProfileComponent implements OnInit {
   selectedTab: string = 'about';
   employeeData: any; // Define employeeData property

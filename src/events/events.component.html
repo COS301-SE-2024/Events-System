@@ -62,8 +62,8 @@
         <button class="btn w-full no-animation">Refine by social club</button>
         <ul class="menu bg-base-200 w-full rounded-box">
           <li><input type="checkbox" [checked]="allClubsChecked" (change)="allClubsChecked = !allClubsChecked; onAllClubsClick()" aria-label="All social clubs" class="btn w-full"/></li>
-          <li *ngFor="let club of uniqueSocialClubs; let i = index">
-            <input type="checkbox" [checked]="otherCheckboxes[i]" (change)="otherCheckboxes[i] = !otherCheckboxes[i]; onOtherClubClick(i)" (click)="filterEvents()"[attr.aria-label]="club" class="btn" />
+          <li *ngFor="let club of socialClubs; let i = index">
+            <input type="checkbox" [checked]="otherCheckboxes[i]" (change)="otherCheckboxes[i] = !otherCheckboxes[i]; onOtherClubClick(i)" (click)="filterEvents()"[attr.aria-label]="club.name" class="btn" />
           </li>
         </ul>  
   

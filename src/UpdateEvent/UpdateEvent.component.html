@@ -11,19 +11,19 @@
             <div class="label mt-4 flex justify-center">
               <span class="label-text">Title</span>
             </div>
-            <input  #nameInput type="text" placeholder="Type here" class="input input-bordered w-full max-w-xl text-lg h-12" required/>
+            <input  #nameInput type="text" placeholder="Type here" class="input input-bordered w-full max-w-xl text-lg h-12"  oninput="sessionStorage.setItem('Name', this.value)"/>
           </div>
   
           <div class="label mt-4 flex justify-center">
             <span class="label-text">Description</span>
           </div>
-          <textarea  #descriptionInput class="textarea textarea-bordered w-full h-44" placeholder="Bio"required></textarea>    
+          <textarea  #descriptionInput class="textarea textarea-bordered w-full h-44" placeholder="Bio" oninput="sessionStorage.setItem('Description', this.value)"></textarea>    
           <div class="flex justify-evenly">
             <div>
               <div class="label mt-4">
                 <span class="label-text">Start Time</span>
               </div>
-              <input #StartTimeInput type="time" class="input input-bordered lg:w-96 "required>
+              <input #StartTimeInput type="time" class="input input-bordered lg:w-96 " oninput="sessionStorage.setItem('StartTime', this.value)">
             </div>
             <div class="mt-7 lg:ml-8">
               -
@@ -32,7 +32,7 @@
               <div class="label mt-4 lg:ml-8">
                 <span class="label-text">End Time</span>
               </div>
-              <input #EndTimeInput type="time" class="input input-bordered lg:w-96 lg:ml-8"required>
+              <input #EndTimeInput type="time" class="input input-bordered lg:w-96 lg:ml-8"  oninput="sessionStorage.setItem('EndTime', this.value)">
             </div>
   
           </div>
@@ -41,7 +41,7 @@
               <div class="label mt-4">
                 <span  class="label-text">Start Date</span>
               </div>
-              <input #StartDateInput type="date" class="input input-bordered lg:w-96"required>
+              <input #StartDateInput type="date" class="input input-bordered lg:w-96"  oninput="sessionStorage.setItem('StartDate', this.value)">
             </div>
             <div class="mt-7 lg:ml-8">
               -
@@ -50,7 +50,7 @@
               <div class="label mt-4 lg:ml-8">
                 <span  class="label-text">End Date</span>
               </div>
-              <input #EndDateInput type="date" class="input input-bordered lg:w-96 lg:ml-8"required>
+              <input #EndDateInput type="date" class="input input-bordered lg:w-96 lg:ml-8"  oninput="sessionStorage.setItem('EndDate', this.value)">
             </div>
           </div>
           <div class="flex justify-evenly lg:flex-row flex-col">
@@ -58,7 +58,7 @@
               <div class="label mt-4">
                 <span class="label-text">Location</span>
               </div>
-              <input #LocationInput type="text" placeholder="Location" class="input input-bordered w-11/12"required>
+              <input #LocationInput type="text" placeholder="Location" class="input input-bordered w-11/12"  oninput="sessionStorage.setItem('Location', this.value)">
             </div>
             <div class="mt-7">
             </div>
@@ -67,37 +67,46 @@
               <div class="label mt-4">
                 <span class="label-text">Social club</span>
               </div>
-              <input #SocialClubInput type="text"  placeholder="Social club"class="input input-bordered w-full"required>
+              <input #SocialClubInput type="text"  placeholder="Social club"class="input input-bordered w-full"  oninput="sessionStorage.setItem('SocialClub', this.value)">
             </div>
             
           </div>  
-          <div class="flex justify-evenly lg:flex-row flex-col">
-            <div>
-              <div class="label mt-4 -mb-4">
-                <span class="label-text">Preparation Details</span>
+          <div>
+            <div class="flex flex-col lg:flex-row justify-evenly items-start">
+              <div>
+                <div class="label mt-4  text-center">
+                  <span class="label-text">Preparation Details</span>
+                </div>
+                <form [formGroup]="prepform">
+                  <div formArrayName="prepinputs">
+                    <div *ngFor="let input of prepinputs.controls; index as i" [@fadeIn] class="flex">
+                      <input [formControlName]="i" class="input input-bordered w-full mt-4"  (blur)="saveInputs()">
+                      <button (click)="removeprepInput(i)" class="btn btn-outline btn-warning mt-4 ml-2 opacity-35">-</button>
+                    </div>
+                  </div>
+                  <button [disabled]="prepinputs.length === 5" (click)="addprepInput()" class="btn btn-accent btn-outline btn-wide mt-4">+</button>
+                  <!-- <button (click)="saveInputs()">Next</button> -->
+                </form>
               </div>
-              <div *ngFor="let input of Prepinputs; let i = index">
-                <input #PrepInput [value]="input.value" (input)="updatePrepInput(i, $event)" class="input input-bordered w-full mt-4"required>
+              <div class="mt-7 ml-8">
               </div>
-              <div class="flex justify-center mt-4">
-                <button (click)="addPrepInput()" class="btn btn-success">+</button>
+              <div>
+                <div class="label  mt-4">
+                  <span class="label-text">Agenda Details</span>
+                </div>
+                <form [formGroup]="agendaform">
+                  <div formArrayName="agendainputs">
+                    <div *ngFor="let input of agendainputs.controls; index as i" [@fadeIn] class="flex">
+                      <input [formControlName]="i"  class="input input-bordered w-full mt-4"  (blur)="saveInputs()">
+                      <button (click)="removeagendaInput(i)" class="btn btn-outline btn-warning mt-4 ml-2 opacity-35">-</button>
+                    </div>
+                  </div>
+                  <button [disabled]="agendainputs.length === 5" (click)="addagendaInput()" class="btn btn-accent btn-outline btn-wide mt-4">+</button>
+                  <!-- <button (click)="saveInputs()">Next</button> -->
+                </form>
               </div>
-            </div>
-            <div class="mt-7 ml-8">
-            </div>
-            <div>
-              <div class="label  mt-4 -mb-4">
-                <span class="label-text">Agenda Details</span>
-              </div>
-              <div *ngFor="let input of Agendainputs; let i = index">
-                <input #AgendaInput [value]="input.value" (input)="updateAgendaInput(i, $event)" class="input input-bordered w-full mt-4"required>
-              </div>
-              <div class="flex justify-center mt-4">
-                <button (click)="addAgendaInput()" class="btn btn-success">+</button>
-              </div>
-            </div>
-  
-          </div>  
+            </div>  
+          </div>
           <div class="flex items-center justify-center">
             <div class="label mt-4">
               <span class="label-text">Dietary accomodations</span>

@@ -1,19 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { EventCardComponent } from './eventCard.component'; // Import EventComponent
+import { SocialClubCardComponent } from './socialClubCard.component'; // Import EventComponent
 
 // Mock component
 @Component({
-  selector: 'app-mock-app-event-card',
+  selector: 'app-mock-app-social-club-card',
   template: '',
 })
 class MockEventComponent {/*...*/}
 
 @Component({
-  template: '<app-mock-app-event-card></app-mock-app-event-card>', // Use the correct selector
+  template: '<app-mock-app-social-club-card></app-mock-app-social-club-card>', // Use the correct selector
 })
 class TestHostComponent {/*...*/}
 
@@ -23,7 +22,7 @@ describe('EventComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EventCardComponent], // Move EventComponent to imports
+      imports: [SocialClubCardComponent], // Move EventComponent to imports
       declarations: [TestHostComponent, MockEventComponent], // Remove EventComponent from declarations
       providers: [
         {

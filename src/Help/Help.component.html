@@ -1,0 +1,162 @@
+<div>
+    <h1 class="lg:text-6xl lg:ml-8 lg:mt-8 text-2xl ml-4">Getting Started</h1>
+    <p class="lg:text-4xl lg:ml-8 text-2xl ml-4 text-slate-500">Learn how to start using our product, Understand the key features</p>
+</div>
+<div class="flex lg:flex-row flex-col lg:mt-8 mt-4">
+    <select class="select select-bordered w-full max-w-md lg:hidden" [(ngModel)]="selectedSection" (change)="setActiveSection(selectedSection)">
+        <option value="gettingStarted" selected>Getting Started</option>
+        <option value="account">Account</option>
+        <option value="faq">Frequently asked Questions</option>
+        <option value="status">Status</option>
+        <option value="changelog">Changelog</option>
+      </select>
+      
+      <!-- Menu for larger screens -->
+      <ul class="menu bg-base-200 w-80 text h-screen lg:block hidden">
+        <li><a (click)="setActiveSection('gettingStarted')">Getting Started</a></li>
+        <li><a (click)="setActiveSection('account')">Account</a></li>
+        <li><a (click)="setActiveSection('faq')">Frequently asked Questions</a></li>
+        <li><a (click)="setActiveSection('status')">Status</a></li>
+        <li><a (click)="setActiveSection('changelog')">Changelog</a></li>
+      </ul>
+      
+      <div *ngIf="activeSection === 'gettingStarted'" >
+        <div class="flex justify-center">
+            <h1 class="text-7xl lg:mt-0 mt-4">Welcome!</h1>
+        </div>
+          <p class="lg:ml-8 lg:mt-8 mt-8 ml-2 justify-center w-11/12 text-center text-secondary">
+                Welcome to the Help center for all things Events System!<br/>
+                Here you'll find all the guides and information you need to get started with our platform, manage your account, and troubleshoot any issues you may encounter.<br/>
+                If you have any questions or need further assistance, feel free to reach out to our support team for help! Bieber.Capstone&#64;gmail.com<br/>
+
+        </p>
+      </div>
+      <div *ngIf="activeSection === 'account'"  >
+        <div class="flex justify-center">
+            <h1 class="text-7xl lg:mt-0 mt-4">My account</h1>
+        </div>
+        <div class="lg:ml-8 lg:mt-8 mt-8 ml-2 justify-center w-11/12 text-center text-secondary">
+            <ul class="list-disc lg:text-left text-center mt-8 mx-auto w-11/12 lg:w-3/4">
+                <li>
+                    <strong>Update Account Details:</strong>
+                    <ul>
+                        <li>Navigate to your profile icon at the top right corner and select <em class="text-accent"><a href="/settings">Settings</a></em> from the dropdown menu.</li>
+                        <li>In the settings menu, click on <em  class="text-accent">My Details</em> to access and edit your personal information such as name, surname, and description.</li>
+                        <li>Remember to <span class="text-warning">save your changes</span> before exiting.</li>
+                    </ul>
+                </li>
+                <li class="mt-4">
+                    <strong>Privacy Settings:</strong>
+                    <ul>
+                        <li>Go to <em  class="text-accent"><a href="/settings">Settings</a></em> by clicking on your profile icon.</li>
+                        <li>Select <em  class="text-accent">Security</em> from the sidebar.</li>
+                        <li>Here, you can toggle the visibility settings for your surname and account links.</li>
+                        <li>Choose your preferred level of privacy and click <em  class="text-warning">Save Changes</em> to apply.</li>
+                    </ul>
+                </li>
+                <li class="mt-4">
+                    <strong>Change Description:</strong>
+                    <ul>
+                        <li>Update your profile description by accessing <em  class="text-accent"><a href="/settings">Settings > My Details</a></em>.</li>
+                        <li>Scroll down to the <em  class="text-accent">Description</em> section, where you can edit your professional bio.</li>
+                        <li>Use the text box to add or modify your description.</li>
+                        <li>Click <em  class="text-warning">Save Changes</em> to update your profile.</li>
+                    </ul>
+                </li>
+                <li class="mt-4">
+                    <strong>Add a Profile Photo:</strong>
+                    <ul>
+                        <li>To upload a new profile photo, visit <em  class="text-accent"><a href="/settings">Settings > Profile Picture</a></em>.</li>
+                        <li>Click on the <em  class="text-accent">Choose File</em> button and select an image from your device.</li>
+                        <li>Supported formats are JPG, PNG, and GIF. Adjust the cropping if needed.</li>
+                        <li>Click <em  class="text-warning">Save Changes</em> to set your new profile picture.</li>
+                    </ul>
+                </li>
+                <li class="mt-4">
+                    <strong>Change Password:</strong>
+                    <ul>
+                        <li>For security, regularly update your password under <em  class="text-accent"><a href="/settings">Settings > Security</a></em>.</li>
+                        <li>Click on <em  class="text-accent">Change Password</em>, enter your current password, and then your new password twice for confirmation.</li>
+                        <li>Passwords should be at least 8 characters long and include a mix of letters, numbers, and symbols.</li>
+                        <li>Click  <em  class="text-warning">Save Changes</em> to complete the change.</li>
+                    </ul>
+                </li>
+                <li class="mt-4">
+                    <strong>Delete Account:</strong>
+                    <ul>
+                        <li>If you decide to delete your account, <span class="text-error">be aware that this action is irreversible and will result in the loss of all your data.</span> </li>
+                        <li>To proceed, navigate to <em class="text-accent"><a href="/settings">Settings > Security</a></em>, scroll to the bottom of the page, and click on <em>Delete Account</em>.</li>
+                        <!-- <li>You may be asked to enter your password and confirm your choice.</li> -->
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+      </div>
+      <div *ngIf="activeSection === 'faq'"  >
+        <div class="flex justify-center w-full">
+            <h1 class="text-7xl lg:mt-0 mt-4">FAQ</h1>
+        </div>
+        <div>
+            <h2 class="text-5xl mt-8">Q: What's your tech stack?</h2>
+            <p class="text-xl mt-4">
+              A: Our application is built using a modern technology stack to ensure high performance and a great user experience. Here's a brief overview:
+            </p>
+            <ul class="list-disc text-left mt-4 mx-auto w-11/12 lg:w-3/4">
+              <li><strong>Frontend:</strong> Developed with <em>Angular</em>, utilizing <em>Tailwind CSS</em> for styling and <em>DaisyUI</em> for UI components.</li>
+              <li><strong>Backend:</strong> Powered by <em>Spring Boot</em>, with <em>JWT</em> for secure authentication.</li>
+              <li><strong>Deployment:</strong> The frontend is deployed on <em>Cloudflare Pages</em> for fast content delivery, while the backend is hosted on <em>Google Cloud Platform</em> for scalability and reliability.</li>
+              <li><strong>Database:</strong> Our data is securely hosted by <em>AWS</em>, ensuring high availability and performance.</li>
+            </ul>
+        </div>
+        <div>
+            <h2 class="text-5xl mt-8">Q: How do I create an event in the system?</h2>
+            <p class="text-xl mt-4">
+              A: Events can only be created by hosts, so if you happen to be a host! Creating an event in our system is a straightforward process that involves filling out a form on our website and submitting it. Here's how you can do it:
+            </p>
+            <ul class="list-disc text-left mt-4 mx-auto w-11/12 lg:w-3/4">
+              <li><strong>1. Navigate to the Event Creation Page:</strong> First, go to the event creation page on our website. You can find this by clicking on the "Create Event" link in the My Events menu.</li>
+              <li><strong>2. Fill Out the Event Form:</strong> On the event creation page, you will see a form that asks for details about the event you want to create. Fill out all the required fields, which typically include the event name, date, time, location, and a brief description.</li>
+              <li><strong>3. Submit the Form:</strong> After filling out the form, review the information to make sure everything is correct. Then, click the "Submit" button to create your event. The form data is sent to our backend service, specifically the createEvent method in the EventService, which saves the event</li>
+              <li><strong>4. Confirmation:</strong>  Once your event is successfully created, you will receive a confirmation message. This indicates that your event has been added to our system and is now visible to other users.</li>
+            </ul>
+        </div>
+        <div>
+            <h2 class="text-5xl mt-8">Q: What information do I need to provide to create an event?</h2>
+            <p class="text-xl mt-4">
+              A: When creating an event, you will need to provide the following information:
+            </p>
+            <ul class="list-disc text-left mt-4 mx-auto w-11/12 lg:w-3/4">
+              <li><strong>1. Event Name:</strong> A unique name for your event.</li>
+              <li><strong>2. Description:</strong> A brief description of your event.</li>
+              <li><strong>3. Date and Time:</strong> When your event will take place.</li>
+              <li><strong>4. Location:</strong> Where your event will be held.</li>
+              <li><strong>5. Social club:</strong> The club that will be hosting the event.</li>
+              <li><strong>6. Preperation details and agenda details:</strong> any important details attendees should know. </li>            </ul>
+        </div>
+        <div>
+            <h2 class="text-5xl mt-8">Q: Can I edit an event after creating it?</h2>
+            <p class="text-xl mt-4">
+              A: Yes, you can edit an event after it has been created. To do this, navigate to the My Event's page and look for the "Edit" button. Clicking this button will allow you to update the event's details.
+            </p>
+        </div>
+
+      </div>
+      <div *ngIf="activeSection === 'status'" class="w-full"  >
+        <div class="flex justify-center w-full">
+            <h1 class="text-7xl lg:mt-0 mt-4">Site Status</h1>
+        </div>
+        <div class="flex flex-col items-center  w-full">
+            <p class="text-center w-11/12 lg:mt-8 mt-4">Check the current status of our services for any outages or maintenance activities:</p>
+            <a href="https://stats.uptimerobot.com/nso80Ipm4X" target="_blank" class="btn btn-primary mt-4" aria-label="View Uptime Report">
+                <i class="fas fa-chart-line"></i> View Uptime Report
+            </a>
+        </div>
+
+      </div>
+      <div *ngIf="activeSection === 'changelog'">
+        <div class="flex justify-center w-full">
+            <h1 class="text-7xl">Changelog!</h1>
+        </div>
+    </div>
+</div>

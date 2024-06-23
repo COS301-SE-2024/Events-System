@@ -80,6 +80,7 @@ this.prepform.get('agendainputs')?.valueChanges.subscribe(values => {
   // Store the values as needed, e.g., in sessionStorage
   sessionStorage.setItem('agendainputs', JSON.stringify(values));
 });
+
   const prepsavedInputs = sessionStorage.getItem('prepinputs');
   if (prepsavedInputs) {
     const prepinputs = JSON.parse(prepsavedInputs);
@@ -98,6 +99,39 @@ this.prepform.get('agendainputs')?.valueChanges.subscribe(values => {
   this.isGlutenFreeSelected = sessionStorage.getItem('isGlutenFreeSelected') === 'false';
 }
 
+
+presubmit(){
+  const missingDetails = [];
+
+  if (!sessionStorage.getItem('Name') || sessionStorage.getItem('Name') === '') {
+    missingDetails.push('title');
+  }
+  if (!sessionStorage.getItem('Description') || sessionStorage.getItem('Description') === '') {
+    missingDetails.push('Description');
+  }
+  if (!sessionStorage.getItem('StartTime') || sessionStorage.getItem('StartTime') === '') {
+    missingDetails.push('Start time');
+  }
+  if (!sessionStorage.getItem('EndTime') || sessionStorage.getItem('EndTime') === '') {
+    missingDetails.push('End time');
+  }
+  if (!sessionStorage.getItem('StartDate') || sessionStorage.getItem('StartDate') === '') {
+    missingDetails.push('Start date');
+  }
+  if (!sessionStorage.getItem('EndDate') || sessionStorage.getItem('EndDate') === '') {
+    missingDetails.push('End date');
+  }
+  if (!sessionStorage.getItem('Location') || sessionStorage.getItem('Location') === '') {
+    missingDetails.push('Location');
+  }
+  
+  if (missingDetails.length > 0) {
+    alert('Please fill in the following details: ' + missingDetails.join(', '));
+    return;
+  }else{
+    this.submit();
+  }
+}
 
 submit(){
     // Create the event object
