@@ -55,7 +55,9 @@ export class LoginComponent {
       .then(data => {
         console.log('Registration successful:', data);
         // Optionally, navigate to another page on successful registration
-        this.router.navigate(['']);
+        this.loginForm.get('email')?.setValue(formData.email);
+        this.loginForm.get('password')?.setValue(formData.password);
+        this.onLogin();
       })
       .catch(error => {
         console.error('Error registering:', error);
