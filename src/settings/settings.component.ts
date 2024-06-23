@@ -14,23 +14,23 @@ import { createClient } from 'contentful-management';
 })
 export class SettingsComponent implements OnInit {
   employeeData: any; // Define employeeData property
-  selectedTab: string = 'details';
-  name: string = '';
-  surname: string = '';
-  description: string = '';
-  email: string = '';
-  x: string = '';
-  linkedIn: string = '';
-  gitHub: string = '';
-  currentPassword: string = '';
-  newPassword: string = '';
-  confirmPassword: string = '';
-  employeePictureLink: string = '';
-  makeContactInfoPublic: boolean = false;
-  makeScreenerPublic: boolean = false;
+  selectedTab= 'details';
+  name = '';
+  surname= '';
+  description= '';
+  email= '';
+  x= '';
+  linkedIn= '';
+  gitHub= '';
+  currentPassword= '';
+  newPassword= '';
+  confirmPassword= '';
+  employeePictureLink= '';
+  makeContactInfoPublic = false;
+  makeScreenerPublic = false;
   avatar: File | null = null;
   file: any;
-  pictureChanged: boolean = false;
+  pictureChanged = false;
 
   constructor(private http: HttpClient, private router: Router) {}
 

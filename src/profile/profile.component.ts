@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 
 export class ProfileComponent implements OnInit {
-  selectedTab: string = 'about';
+  selectedTab = 'about';
   employeeData: any; // Define employeeData property
 
   constructor(private router: Router) {}
