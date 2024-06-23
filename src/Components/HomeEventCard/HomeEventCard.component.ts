@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { RandomImageServiceService } from '../../app/random-image-service.service'; 
 @Component({
   selector: 'app-home-event-card',
   standalone: true,
@@ -8,7 +9,15 @@ import { RouterModule } from '@angular/router';
   templateUrl: './HomeEventCard.component.html',
   styleUrl: './HomeEventCard.component.css',
 })
-export class HomeEventCardComponent {
+export class HomeEventCardComponent implements OnInit{
+  imageSource: string;
+
+
+  // Inject RandomImageService into the constructor
+  constructor(private randomImageService: RandomImageServiceService) {
+    this.imageSource = '';
+  }
+
   @Input() eventTitle: string | undefined;
   @Input() hostName: string | undefined;
   @Input() hostEmail: string | undefined;
@@ -25,4 +34,9 @@ export class HomeEventCardComponent {
   get formattedEndTime() {
     return this.endTime?.slice(0, -3);
   }
+  ngOnInit(): void {
+    // Use the injected service
+    this.imageSource = this.randomImageService.getRandomImageSource();
+  }
+
 }
