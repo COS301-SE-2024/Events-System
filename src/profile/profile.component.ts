@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
@@ -7,10 +7,28 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './profile.component.html',
-  styleUrl: './profile.component.css',
+  styleUrls: ['./profile.component.css'],
 })
-export class ProfileComponent {
+
+export class ProfileComponent implements OnInit {
   selectedTab = 'about';
+  employeeData: any; // Define employeeData property
+
+  constructor(private router: Router) {}
+
+  ngOnInit(): void {
+    const storedEmployeeData = localStorage.getItem('employeeData');
+    if (storedEmployeeData) {
+      this.employeeData = JSON.parse(storedEmployeeData);
+      console.log(this.employeeData);
+    } else {
+      // Handle case where employeeData is not available in localStorage
+    }
+  }
+
+  navigateToSettings() {
+    this.router.navigate(['/settings']);
+  }
 
   selectTab(tab: string) {
     this.selectedTab = tab;
@@ -49,3 +67,4 @@ function openTab(tab: HTMLElement, index: number) {
   tabContents[index].classList.remove('hidden');
   tab.classList.add('tab-active');
 }
+

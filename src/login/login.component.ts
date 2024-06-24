@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms'; 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient  } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -17,7 +17,8 @@ export class LoginComponent {
 
   constructor(
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private http: HttpClient
   ) {
     this.registerForm = this.fb.group({
       firstName: ['', Validators.required],
@@ -30,6 +31,13 @@ export class LoginComponent {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
     });
+  }
+
+  //delete employeeData and ID from localStorage if they were already set
+  //whenever the login page is loaded
+  ngOnInit() {
+    localStorage.removeItem('employeeData');
+    localStorage.removeItem('ID');
   }
 
   onRegister(event: Event) {
@@ -65,40 +73,51 @@ export class LoginComponent {
     }
   }
 
-  onLogin() {
+  async onLogin() {
     if (this.loginForm.valid) {
       const formData = {
         email: this.loginForm.get('email')?.value,
         password: this.loginForm.get('password')?.value
       };
   
-      // Assuming API endpoint for registration
-      fetch('https://events-system-back.wn.r.appspot.com/api/v1/auth/authenticate', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-      })
-      .then(response => response.json())
-      .then(data => {
-        // Navigate to home page with credentials as state data
-        fetch('https://events-system-back.wn.r.appspot.com/api/v1/auth/'+ data.access_token, {
-          method: 'GET',
+      try {
+        // Authenticate user and get access token
+        const authResponse = await fetch('https://events-system-back.wn.r.appspot.com/api/v1/auth/authenticate', {
+          method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
-        })
-        .then(response => response.json())
-        .then(data2 => {
-          // Navigate to home page with credentials as state data
-          localStorage.setItem('ID', data2);
-        })
+          body: JSON.stringify(formData)
+        });
+        const authData = await authResponse.json();
+        
+        // Get employee ID using access token
+        const idResponse = await fetch('https://events-system-back.wn.r.appspot.com/api/v1/auth/' + authData.access_token, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        const idData = await idResponse.json();
+        
+        // Store employee ID in local storage
+        localStorage.setItem('ID', idData);
+
+        // Fetch employee data using ID
+        const employeeId = localStorage.getItem('ID');
+        if (employeeId) {
+          const employeeResponse = await this.http.get(`https://events-system-back.wn.r.appspot.com/api/employees/${employeeId}`).toPromise();
+          localStorage.setItem('employeeData', JSON.stringify(employeeResponse));
+          console.log('Employee data:', localStorage.getItem('employeeData'));
+        } else {
+          console.warn('No ID found in localStorage');
+        }
+
+        // Navigate to profile page
         this.router.navigate(['/']);
-      })
-      .catch(() => {
-        console.error('Error registering:', JSON.stringify(formData));
-      });
+      } catch (error) {
+        console.error('Error during login:', error);
+      }
     } else {
       console.log('Form is invalid. Please check the fields.');
     }
