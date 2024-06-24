@@ -1,11 +1,12 @@
-import { Component, Input, AfterViewInit } from '@angular/core';
+import { Component, Input, AfterViewInit, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import {HomeEventCardComponent} from 'src/Components/HomeEventCard/HomeEventCard.component'
 import {HomeFeaturedEventComponent} from 'src/Components/HomeFeaturedEvent/HomeFeaturedEvent.component'
 import {SocialClubCardComponent} from 'src/Components/SocialClubCard/socialClubCard.component'
 import { ChangeDetectorRef } from '@angular/core';
 import { ViewChild, ElementRef } from '@angular/core';
+import { Init } from 'v8';
 const myCredentials = {
   username: 'myUsername',
   password: 'myPassword'
@@ -34,8 +35,8 @@ export interface Slide {
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent {
-  constructor(private cdr: ChangeDetectorRef) { }
+export class HomeComponent implements OnInit {
+  constructor(private cdr: ChangeDetectorRef, private router: Router) { }
 
 
   @Input() eventTitle: string | undefined;
@@ -87,26 +88,51 @@ export class HomeComponent {
   @ViewChild('carousel1') carousel1!: ElementRef;
   @ViewChild('carousel2') carousel2!: ElementRef;
   @ViewChild('carousel3') carousel3!: ElementRef;
- 
+  rsvpdSlides: Slide[] = [];
   ngOnInit(): void {
     const employeeId = Number(localStorage.getItem('ID')); // Assuming the employeeId is stored in local storage
+
+    if (!employeeId) {
+      this.router.navigate(['/login']);
+      return;
+    }
   
     fetch('https://events-system-back.wn.r.appspot.com/api/events')
-      .then(response => response.json())
-      .then(data => {
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.text();
+      })
+      .then(text => {
+        // Check if the response is not empty before parsing
+        const data = text ? JSON.parse(text) : [];
         this.events = Array.isArray(data) ? data : [data];
   
         const hostFetches = this.events.map(event => fetch('https://events-system-back.wn.r.appspot.com/api/employees/' + event.hostId)
-          .then(response => response.json())
-          .then(data => {
-            event.host = data;
-          }));
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.text();
+        })
+        .then(text => {
+          const data = text ? JSON.parse(text) : {};
+          event.host = data;
+        }));
+
   
         const socialClubsFetch = fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs')
-          .then(response => response.json())
-          .then(data => {
-            this.socialClubs = Array.isArray(data) ? data : [data];
-          });
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.text();
+        })
+        .then(text => {
+          const data = text ? JSON.parse(text) : [];
+          this.socialClubs = Array.isArray(data) ? data : [data];
+        });
   
         return Promise.all([...hostFetches, socialClubsFetch]);
       })
@@ -150,7 +176,7 @@ export class HomeComponent {
   
             // Filter slides based on the current user's RSVP'd events for RSVP'd slides
             const eventIds = rsvps.filter(rsvp => rsvp.employeeId === employeeId).map(rsvp => rsvp.eventId);
-            this.slides = this.slides.filter(slide => eventIds.includes(slide.id));
+            this.rsvpdSlides = this.slides.filter(slide => eventIds.includes(slide.id));
           });
       })
       .catch(error => {
@@ -212,6 +238,6 @@ export class HomeComponent {
   clearDate(dateInput: HTMLInputElement) {
     this.selectedDate = '';
     dateInput.value = '';
-    this.slides = [...this.allSlides];
+    this.slides = [...this.rsvpdSlides];
   }
 }

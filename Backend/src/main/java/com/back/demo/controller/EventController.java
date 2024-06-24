@@ -29,6 +29,11 @@ public class EventController {
                     .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/host/{id}")
+    public List<Event> getEventByHostId(@PathVariable(value = "id") Long hostId) {
+        return eventService.getEventByHostId(hostId);
+    }
+
     @PostMapping
     public Event createEvent(@RequestBody Event event) {
         return eventService.createEvent(event);

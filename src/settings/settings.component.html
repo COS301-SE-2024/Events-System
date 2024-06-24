@@ -14,36 +14,49 @@
         <div class="card bg-base-200 p-4 mb-4">
           <h3 class="text-lg font-bold mb-2">Profile Details</h3>
           <div class="ml-4"> <!-- Indentation -->
-            <div class="mb-2 flex items-start">
-              <div class="btn btn-ghost btn-circle avatar p-2" style="width: 80px; height: 80px;">
-                <div class="w-full rounded-full">
-                  <img alt="Avatar" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" style="width: 100%; height: 100%;">
+            <div class="ml-4">
+              <div class="mb-2 flex flex-col items-center relative">
+                <div
+                  class="btn btn-ghost btn-circle avatar p-2 relative"
+                  style="width: 180px; height: 180px;"
+                  (click)="fileInput.click()"
+                >
+                  <div class="w-full rounded-full relative">
+                    <img alt="Avatar" [src]="employeeData?.employeePictureLink || 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg'" style="width: 100%; height: 100%;">
+                    <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-full">
+                      <i class="fas fa-pencil-alt text-white text-xl"></i>
+                    </div>
+                  </div>
                 </div>
+                <input
+                  type="file"
+                  #fileInput
+                  class="hidden"
+                  (change)="onAvatarChange($event)"
+                >
               </div>
-              <input
-                type="file"
-                id="avatar"
-                class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer focus:outline-none ml-2"
-                (change)="onAvatarChange($event)"
-              >
             </div>
+            
+            
+                       
             <input
               type="text"
               #nameInput
-              placeholder="Name"
+              [placeholder]="employeeData?.firstName || 'Name'"
               class="input input-bordered w-full mb-2"
               (input)="name = nameInput.value"
-            >
+            /> 
+
             <input
               type="text"
               #surnameInput
-              placeholder="Surname"
+              [placeholder]="employeeData?.lastName || 'Surname'"
               class="input input-bordered w-full mb-2"
               (input)="surname = surnameInput.value"
             >
             <textarea
               #descriptionInput
-              placeholder="Description"
+              [placeholder]="employeeData?.employeeDescription|| 'Bio'"
               class="textarea textarea-bordered w-full mb-2"
               (input)="description = descriptionInput.value"
             ></textarea>
@@ -57,28 +70,28 @@
             <input
               type="email"
               #emailInput
-              placeholder="Change Email"
+              [placeholder]="employeeData?.email|| 'E-mail'"
               class="input input-bordered w-full mb-2"
               (input)="email = emailInput.value"
             >
             <input
               type="text"
               #xInput
-              placeholder="Change X"
+              [placeholder]="employeeData?.twitter|| 'Twitter'"
               class="input input-bordered w-full mb-2"
               (input)="x = xInput.value"
             >
             <input
               type="text"
               #linkedInInput
-              placeholder="Change LinkedIn"
+              [placeholder]="employeeData?.linkedin|| 'LinkedIn'"
               class="input input-bordered w-full mb-2"
               (input)="linkedIn = linkedInInput.value"
             >
             <input
               type="text"
               #gitHubInput
-              placeholder="Change GitHub"
+              [placeholder]="employeeData?.github|| 'Github'"
               class="input input-bordered w-full mb-4"
               (input)="gitHub = gitHubInput.value"
             >
@@ -99,17 +112,21 @@
         <div class="card bg-base-200 p-4 mb-4">
           <h3 class="text-lg font-bold mb-2">Public Information</h3>
           <div class="ml-4"> <!-- Indentation -->
-            <div class="flex items-center mb-2">
+            <div class="flex-col items-center mb-2">
               <label class="flex items-center">
-                <input type="checkbox" class="toggle toggle-primary" (click)="makeContactInfoPublic = !makeContactInfoPublic">
-                <span class="ml-2 text-sm font-medium text-gray-700">Make Contact Information {{ makeContactInfoPublic ? 'Private' : 'Public' }}</span>
+                <input type="checkbox" class="toggle toggle-primary" [checked]="makeContactInfoPrivate" (change)="toggleContactInfoPrivate()">
+                <span class="ml-2 text-sm font-medium text-gray-700">Make Contact Information Private</span>
               </label>
+              <p *ngIf="!makeContactInfoPrivate" class="ml-8 text-sm text-gray-500">your contact information is currently visible to the public</p>
+              <p *ngIf="makeContactInfoPrivate" class="ml-8 text-sm text-gray-500">your contact information is currently private</p>
             </div>
-            <div class="flex items-center mb-4">
+            <div class="flex-col items-center mb-4">
               <label class="flex items-center">
-                <input type="checkbox" class="toggle toggle-primary" (click)="makeScreenerPublic = !makeScreenerPublic">
-                <span class="ml-2 text-sm font-medium text-gray-700">Make Screener {{ makeScreenerPublic ? 'Private' : 'Public' }}</span>
+                <input type="checkbox" class="toggle toggle-primary" [checked]="makeSurnamePrivate" (change) = "toggleSurnamePrivate()">
+                <span class="ml-2 text-sm font-medium text-gray-700">Make Surname Private</span>
               </label>
+              <p *ngIf="!makeSurnamePrivate" class="ml-8 text-sm text-gray-500">your surname is currently visible to the public</p>
+              <p *ngIf="makeSurnamePrivate" class="ml-8 text-sm text-gray-500">your surname is currently private</p>
             </div>
           </div>
         </div>
