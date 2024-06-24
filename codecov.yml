@@ -1,4 +1,0 @@
-coverage:
-  ignore:
-    - "src/**/*.ts"
-    - "!src/**/*.spec.ts"
