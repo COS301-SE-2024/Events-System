@@ -61,25 +61,25 @@ describe('SettingsComponent', () => {
     fireEvent.input(surnameInput, { target: { value: 'Doe' } });
     expect(surnameInput).toHaveValue('Doe');
 
-    const descriptionInput = screen.getByPlaceholderText(/Description/i);
+    const descriptionInput = screen.getByPlaceholderText(/Bio/i);
     fireEvent.input(descriptionInput, { target: { value: 'A brief description' } });
     expect(descriptionInput).toHaveValue('A brief description');
   });
 
   it('should update the social media links inputs correctly', async () => {
-    const emailInput = screen.getByPlaceholderText(/Change Email/i);
+    const emailInput = screen.getByPlaceholderText(/E-mail/i);
     fireEvent.input(emailInput, { target: { value: 'john.doe@example.com' } });
     expect(emailInput).toHaveValue('john.doe@example.com');
 
-    const xInput = screen.getByPlaceholderText(/Change X/i);
+    const xInput = screen.getByPlaceholderText(/Twitter/i);
     fireEvent.input(xInput, { target: { value: '@johndoe' } });
     expect(xInput).toHaveValue('@johndoe');
 
-    const linkedInInput = screen.getByPlaceholderText(/Change LinkedIn/i);
+    const linkedInInput = screen.getByPlaceholderText(/LinkedIn/i);
     fireEvent.input(linkedInInput, { target: { value: 'linkedin.com/in/johndoe' } });
     expect(linkedInInput).toHaveValue('linkedin.com/in/johndoe');
 
-    const gitHubInput = screen.getByPlaceholderText(/Change GitHub/i);
+    const gitHubInput = screen.getByPlaceholderText(/Github/i);
     fireEvent.input(gitHubInput, { target: { value: 'github.com/johndoe' } });
     expect(gitHubInput).toHaveValue('github.com/johndoe');
   });

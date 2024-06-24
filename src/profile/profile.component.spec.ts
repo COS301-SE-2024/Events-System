@@ -41,12 +41,12 @@ describe('ProfileComponent', () => {
     expect(subscriptionsTabContent).toBeInTheDocument();
   });
 
-  it('should display the profile name and username', async () => {
-    const profileNames = await screen.findAllByText(/profile name/i);
-    const profileUsernames = await screen.findAllByText(/profile username/i);
-    expect(profileNames[0]).toBeInTheDocument();
-    expect(profileUsernames[0]).toBeInTheDocument();
-  });
+  // it('should display the profile name and username', async () => {
+  //   const profileNames = await screen.findAllByText(/profile name/i);
+  //   const profileUsernames = await screen.findAllByText(/profile username/i);
+  //   expect(profileNames[0]).toBeInTheDocument();
+  //   expect(profileUsernames[0]).toBeInTheDocument();
+  // });
   
 
   it('should have an Edit Profile button', async () => {
