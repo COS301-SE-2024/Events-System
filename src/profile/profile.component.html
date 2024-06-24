@@ -5,14 +5,14 @@
         <div class="flex justify-between items-center">
           <div class="flex items-center">
             <div class="w-20">
-              <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar" style="width: 120px; height: 120px;">
-                <div class="w-full rounded-full">
-                  <img alt="Profile Picture" [src]="employeeData?.employeePictureLink || 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg'" style="width: 100%; height: 100%;">
+              <div  _ngcontent-ng-c907525974="" tabindex="0" role="button" class="btn btn-ghost btn-circle avatar" style="width: 120px; height: 120px;">
+                <div _ngcontent-ng-c907525974="" class="w-full rounded-full">
+                  <img  _ngcontent-ng-c907525974="" alt="Profile Picture" [src]="employeeData?.employeePictureLink || 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg'" style="width: 100%; height: 100%;">
                 </div>
               </div>
             </div>
             <div class="ml-12">
-              <h2 class="text-2xl">{{ employeeData?.firstName }} {{ employeeData?.lastName }}</h2>
+              <h2 name="name" class="text-2xl">{{ employeeData?.firstName }} {{ employeeData?.lastName }}</h2>
               <p>{{ employeeData?.email }}</p>
             </div>
           </div>          
@@ -90,7 +90,7 @@
             <h2 class="text-2xl">{{ employeeData?.firstName }} {{ employeeData?.lastName }}</h2>
             <p>{{ employeeData?.email }}</p>
           </div>
-          <button class="btn btn-outline mt-4">Edit Profile</button>
+          <button routerLink="/settings" class="btn btn-outline mt-4">Edit Profile</button>
         </div>
         <div class="tabs tabs-boxed w-full">
           <a class="tab tab-bordered rounded-lg hover:bg-blue-200 hover:text-blue-800" (click)="selectTab('about')" [class.tab-active]="selectedTab === 'about'">About</a>
