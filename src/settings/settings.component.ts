@@ -5,6 +5,7 @@ import { catchError, of, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { createClient } from 'contentful-management';
 
+
 @Component({
   selector: 'app-settings',
   standalone: true,
@@ -26,8 +27,8 @@ export class SettingsComponent implements OnInit {
   newPassword= '';
   confirmPassword= '';
   employeePictureLink= '';
-  makeContactInfoPublic = false;
-  makeScreenerPublic = false;
+  makeContactInfoPrivate = false;
+  makeSurnamePrivate = false;
   avatar: File | null = null;
   file: any;
   pictureChanged = false;
@@ -36,6 +37,14 @@ export class SettingsComponent implements OnInit {
 
   selectTab(tab: string) {
     this.selectedTab = tab;
+  }
+
+  toggleContactInfoPrivate() {
+    this.makeContactInfoPrivate = !this.makeContactInfoPrivate;
+  }
+
+  toggleSurnamePrivate() {
+    this.makeSurnamePrivate = !this.makeSurnamePrivate;
   }
 
   onAvatarChange(event: Event) {
