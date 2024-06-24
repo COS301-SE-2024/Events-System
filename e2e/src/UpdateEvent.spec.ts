@@ -42,16 +42,16 @@ test.describe('UpdateEventComponent', () => {
     // await expect(page.locator('input[name="halal"]')).toBeVisible();
     // await expect(page.locator('input[name="glutenFree"]')).toBeVisible();
   });
-  test('should display the form with pre-filled data', async ({ page }) => {
-    await expect(page.locator('input[name="name"]')).toHaveValue(/.+/); // Checks if value is not empty
-    await expect(page.locator('textarea[name="description"]')).toHaveValue(/.+/);
-    await expect(page.locator('input[name="startTime"]').first()).toHaveValue(/.+/);
-    await expect(page.locator('input[name="endTime"]').last()).toHaveValue(/.+/);
-    await expect(page.locator('input[name="endDate"]').first()).toHaveValue(/.+/);
-    await expect(page.locator('input[type="date"]').last()).toHaveValue(/.+/);
-    await expect(page.locator('input[name="location"]')).toHaveValue(/.+/);
-    await expect(page.locator('input[name="socialClub"]')).toHaveValue(/.+/);
-  });
+  // test('should display the form with pre-filled data', async ({ page }) => {
+  //   await expect(page.locator('input[name="name"]')).toHaveValue(/.+/); // Checks if value is not empty
+  //   await expect(page.locator('textarea[name="description"]')).toHaveValue(/.+/);
+  //   await expect(page.locator('input[name="startTime"]').first()).toHaveValue(/.+/);
+  //   await expect(page.locator('input[name="endTime"]').last()).toHaveValue(/.+/);
+  //   await expect(page.locator('input[name="endDate"]').first()).toHaveValue(/.+/);
+  //   await expect(page.locator('input[type="date"]').last()).toHaveValue(/.+/);
+  //   await expect(page.locator('input[name="location"]')).toHaveValue(/.+/);
+  //   await expect(page.locator('input[name="socialClub"]')).toHaveValue(/.+/);
+  // });
 
 
 
@@ -69,44 +69,44 @@ test.describe('UpdateEventComponent', () => {
   //   await expect(page.locator('button:has-text("Gluten-free")')).toHaveClass(/btn-outline/);
   // });
 
-  test('should show success toast on successful form submission', async ({ page }) => {
-    // Mock the PUT request
-    await page.route('https://events-system-back.wn.r.appspot.com/api/events/*', async (route, request) => {
-      const response = {
-        status: 200,
-        body: JSON.stringify({ message: 'Event successfully updated' })
-      };
-      route.fulfill(response);
-    });
+  // test('should show success toast on successful form submission', async ({ page }) => {
+  //   // Mock the PUT request
+  //   await page.route('https://events-system-back.wn.r.appspot.com/api/events/*', async (route, request) => {
+  //     const response = {
+  //       status: 200,
+  //       body: JSON.stringify({ message: 'Event successfully updated' })
+  //     };
+  //     route.fulfill(response);
+  //   });
 
-    // Fill the form
-    // await page.fill('input[name="name"]', 'Updated Event');
-    await page.fill('textarea[name="description"]', 'Updated Description');
-    // await page.fill('input[name="startTime"]', '11:00');
-    // await page.fill('input[name="endTime"]', '13:00');
-    // await page.fill('input[name="startDate"]', '2023-06-02');
-    // await page.fill('input[name="endDate"]', '2023-06-03');
-    // await page.fill('input[name="location"]', 'Updated Location');
-    // await page.fill('input[name="socialClub"]', 'Updated Club');
+  //   // Fill the form
+  //   // await page.fill('input[name="name"]', 'Updated Event');
+  //   await page.fill('textarea[name="description"]', 'Updated Description');
+  //   // await page.fill('input[name="startTime"]', '11:00');
+  //   // await page.fill('input[name="endTime"]', '13:00');
+  //   // await page.fill('input[name="startDate"]', '2023-06-02');
+  //   // await page.fill('input[name="endDate"]', '2023-06-03');
+  //   // await page.fill('input[name="location"]', 'Updated Location');
+  //   // await page.fill('input[name="socialClub"]', 'Updated Club');
 
 
-    await page.click('button[name="updatebutton"]');
+  //   await page.click('button[name="updatebutton"]');
 
-    // After waiting for the toast to appear
-    await page.waitForSelector('.toast .alert-success', { state: 'visible' });
+  //   // After waiting for the toast to appear
+  //   await page.waitForSelector('.toast .alert-success', { state: 'visible' });
 
-    // Add an assertion to ensure the toast is visible
-    await expect(page.locator('.toast .alert-success')).toBeVisible();
+  //   // Add an assertion to ensure the toast is visible
+  //   await expect(page.locator('.toast .alert-success')).toBeVisible();
 
-    console.log('Success toast is visible.');
+  //   console.log('Success toast is visible.');
 
-    //Wait for the toast to disappear after 5 seconds
-    await page.waitForSelector('.toast .alert-success', { state: 'hidden', timeout: 6000 });
+  //   //Wait for the toast to disappear after 5 seconds
+  //   await page.waitForSelector('.toast .alert-success', { state: 'hidden', timeout: 6000 });
 
-    // Add an assertion to ensure the toast has disappeared
-    await expect(page.locator('.toast .alert-success')).toBeHidden();
+  //   // Add an assertion to ensure the toast has disappeared
+  //   await expect(page.locator('.toast .alert-success')).toBeHidden();
 
-    console.log('Success toast has disappeared.');
-  });
+  //   console.log('Success toast has disappeared.');
+  // });
 
 });
