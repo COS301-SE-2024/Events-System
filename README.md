@@ -43,8 +43,10 @@ Our team brings you an innovative team collaboration site powered by angular, st
 | **Coding Standards**                 | [**Coding Standards**](https://github.com/COS301-SE-2024/Events-System/wiki/Backend-coding-standards) |
 | **SRS Document**                     | [**SRS Document**](https://docs.google.com/document/d/1mvmswjju0WjeTRpYFxQegYIIoYT4Datt/edit#heading=h.gjdgxs)              |
 | **Project Board**                    | [**Project Board**](https://github.com/orgs/COS301-SE-2024/projects/100)                     |
+| **Presentation**                      | [**Presentation**](https://docs.google.com/presentation/d/1EM2Ty5lHvUdEst7ako1a2BbfmTGBZG3zDtx87m4uyeg/edit?usp=drive_link) |
 | **Architecture**                      | [**Architecture Requirements**](https://docs.google.com/document/d/1SpovFwMZ3uR-gXR9dWy9J3rRJMp0mx0iiHiIWaObPw8/edit?usp=drive_link) |
 | **User Manual**                      | [**User Manual**](https://docs.google.com/document/d/1xO0cSPSQHnhkxeKAPsa4ioxWvDCbBV4v/edit?usp=drive_link&ouid=109080791434280347124&rtpof=true&sd=true) |
+
 </div>
 
 
