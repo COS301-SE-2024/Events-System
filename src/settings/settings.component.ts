@@ -28,7 +28,7 @@ export class SettingsComponent implements OnInit {
   confirmPassword= '';
   employeePictureLink= '';
   makeContactInfoPrivate = false;
-  makeSurnamePublic = false;
+  makeSurnamePrivate = false;
   avatar: File | null = null;
   file: any;
   pictureChanged = false;
@@ -43,8 +43,8 @@ export class SettingsComponent implements OnInit {
     this.makeContactInfoPrivate = !this.makeContactInfoPrivate;
   }
 
-  toggleSurnamePublic() {
-    this.makeSurnamePublic = !this.makeSurnamePublic;
+  toggleSurnamePrivate() {
+    this.makeSurnamePrivate = !this.makeSurnamePrivate;
   }
 
   onAvatarChange(event: Event) {

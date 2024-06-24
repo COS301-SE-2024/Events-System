@@ -122,10 +122,11 @@
             </div>
             <div class="flex-col items-center mb-4">
               <label class="flex items-center">
-                <input type="checkbox" class="toggle toggle-primary" [checked]="makeSurnamePublic" (change) = "toggleSurnamePublic()">
-                <span class="ml-2 text-sm font-medium text-gray-700">Make Surname Public</span>
+                <input type="checkbox" class="toggle toggle-primary" [checked]="makeSurnamePrivate" (change) = "toggleSurnamePrivate()">
+                <span class="ml-2 text-sm font-medium text-gray-700">Make Surname Private</span>
               </label>
-              <p *ngIf="makeSurnamePublic" class="ml-8 text-sm text-gray-500">your surname is publicly available</p>
+              <p *ngIf="!makeSurnamePrivate" class="ml-8 text-sm text-gray-500">your surname is currently visible to the public</p>
+              <p *ngIf="makeSurnamePrivate" class="ml-8 text-sm text-gray-500">your surname is currently private</p>
             </div>
           </div>
         </div>
