@@ -27,7 +27,7 @@ export class SettingsComponent implements OnInit {
   newPassword= '';
   confirmPassword= '';
   employeePictureLink= '';
-  makeContactInfoPublic = false;
+  makeContactInfoPrivate = false;
   makeSurnamePublic = false;
   avatar: File | null = null;
   file: any;
@@ -39,8 +39,8 @@ export class SettingsComponent implements OnInit {
     this.selectedTab = tab;
   }
 
-  toggleContactInfoPublic() {
-    this.makeContactInfoPublic = !this.makeContactInfoPublic;
+  toggleContactInfoPrivate() {
+    this.makeContactInfoPrivate = !this.makeContactInfoPrivate;
   }
 
   toggleSurnamePublic() {

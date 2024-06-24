@@ -114,10 +114,11 @@
           <div class="ml-4"> <!-- Indentation -->
             <div class="flex-col items-center mb-2">
               <label class="flex items-center">
-                <input type="checkbox" class="toggle toggle-primary" [checked]="makeContactInfoPublic" (change)="toggleContactInfoPublic()">
-                <span class="ml-2 text-sm font-medium text-gray-700">Make Contact Information Public</span>
+                <input type="checkbox" class="toggle toggle-primary" [checked]="makeContactInfoPrivate" (change)="toggleContactInfoPrivate()">
+                <span class="ml-2 text-sm font-medium text-gray-700">Make Contact Information Private</span>
               </label>
-              <p *ngIf="makeContactInfoPublic" class="ml-8 text-sm text-gray-500">your contact information is publicly available</p>
+              <p *ngIf="!makeContactInfoPrivate" class="ml-8 text-sm text-gray-500">your contact information is currently visible to the public</p>
+              <p *ngIf="makeContactInfoPrivate" class="ml-8 text-sm text-gray-500">your contact information is currently private</p>
             </div>
             <div class="flex-col items-center mb-4">
               <label class="flex items-center">
