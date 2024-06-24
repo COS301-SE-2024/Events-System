@@ -1,11 +1,12 @@
-import { Component, Input, AfterViewInit } from '@angular/core';
+import { Component, Input, AfterViewInit, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import {HomeEventCardComponent} from 'src/Components/HomeEventCard/HomeEventCard.component'
 import {HomeFeaturedEventComponent} from 'src/Components/HomeFeaturedEvent/HomeFeaturedEvent.component'
 import {SocialClubCardComponent} from 'src/Components/SocialClubCard/socialClubCard.component'
 import { ChangeDetectorRef } from '@angular/core';
 import { ViewChild, ElementRef } from '@angular/core';
+import { Init } from 'v8';
 const myCredentials = {
   username: 'myUsername',
   password: 'myPassword'
@@ -34,8 +35,8 @@ export interface Slide {
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent {
-  constructor(private cdr: ChangeDetectorRef) { }
+export class HomeComponent implements OnInit {
+  constructor(private cdr: ChangeDetectorRef, private router: Router) { }
 
 
   @Input() eventTitle: string | undefined;
@@ -90,6 +91,11 @@ export class HomeComponent {
   rsvpdSlides: Slide[] = [];
   ngOnInit(): void {
     const employeeId = Number(localStorage.getItem('ID')); // Assuming the employeeId is stored in local storage
+
+    if (!employeeId) {
+      this.router.navigate(['/login']);
+      return;
+    }
   
     fetch('https://events-system-back.wn.r.appspot.com/api/events')
       .then(response => {
