@@ -114,14 +114,14 @@
           <div class="ml-4"> <!-- Indentation -->
             <div class="flex items-center mb-2">
               <label class="flex items-center">
-                <input type="checkbox" class="toggle toggle-primary" (click)="makeContactInfoPublic = !makeContactInfoPublic">
-                <span class="ml-2 text-sm font-medium text-gray-700">Make Contact Information {{ makeContactInfoPublic ? 'Private' : 'Public' }}</span>
+                <input type="checkbox" class="toggle toggle-primary" [checked]="makeContactInfoPublic" (change)="toggleContactInfoPublic()">
+                <span class="ml-2 text-sm font-medium text-gray-700">Make Contact Information Public</span>
               </label>
             </div>
             <div class="flex items-center mb-4">
               <label class="flex items-center">
-                <input type="checkbox" class="toggle toggle-primary" (click)="makeScreenerPublic = !makeScreenerPublic">
-                <span class="ml-2 text-sm font-medium text-gray-700">Make Screener {{ makeScreenerPublic ? 'Private' : 'Public' }}</span>
+                <input type="checkbox" class="toggle toggle-primary" [checked]="makeSurnamePublic" (change) = "toggleSurnamePublic()">
+                <span class="ml-2 text-sm font-medium text-gray-700">Make Surname Public</span>
               </label>
             </div>
           </div>
