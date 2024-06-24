@@ -50,4 +50,22 @@ describe('SettingsComponent', () => {
     fireEvent.input(descriptionInput, { target: { value: 'A brief description' } });
     expect(descriptionInput).toHaveValue('A brief description');
   });
+
+  it('should update the social media links inputs correctly', async () => {
+    const emailInput = screen.getByPlaceholderText(/Change Email/i);
+    fireEvent.input(emailInput, { target: { value: 'john.doe@example.com' } });
+    expect(emailInput).toHaveValue('john.doe@example.com');
+
+    const xInput = screen.getByPlaceholderText(/Change X/i);
+    fireEvent.input(xInput, { target: { value: '@johndoe' } });
+    expect(xInput).toHaveValue('@johndoe');
+
+    const linkedInInput = screen.getByPlaceholderText(/Change LinkedIn/i);
+    fireEvent.input(linkedInInput, { target: { value: 'linkedin.com/in/johndoe' } });
+    expect(linkedInInput).toHaveValue('linkedin.com/in/johndoe');
+
+    const gitHubInput = screen.getByPlaceholderText(/Change GitHub/i);
+    fireEvent.input(gitHubInput, { target: { value: 'github.com/johndoe' } });
+    expect(gitHubInput).toHaveValue('github.com/johndoe');
+  });
 });
