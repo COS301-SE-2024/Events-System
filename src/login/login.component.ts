@@ -48,7 +48,8 @@ export class LoginComponent {
       firstName: this.registerForm.get('firstName')?.value,
       lastName: this.registerForm.get('lastName')?.value,
       email: this.registerForm.get('email')?.value,
-      password: this.registerForm.get('password')?.value
+      password: this.registerForm.get('password')?.value,
+      role: this.registerForm.get('role')?.value
     };
 
       // Assuming API endpoint for registration
