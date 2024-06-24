@@ -87,7 +87,7 @@ export class HomeComponent {
   @ViewChild('carousel1') carousel1!: ElementRef;
   @ViewChild('carousel2') carousel2!: ElementRef;
   @ViewChild('carousel3') carousel3!: ElementRef;
- 
+  rsvpdSlides: Slide[] = [];
   ngOnInit(): void {
     const employeeId = Number(localStorage.getItem('ID')); // Assuming the employeeId is stored in local storage
   
@@ -170,7 +170,7 @@ export class HomeComponent {
   
             // Filter slides based on the current user's RSVP'd events for RSVP'd slides
             const eventIds = rsvps.filter(rsvp => rsvp.employeeId === employeeId).map(rsvp => rsvp.eventId);
-            this.slides = this.slides.filter(slide => eventIds.includes(slide.id));
+            this.rsvpdSlides = this.slides.filter(slide => eventIds.includes(slide.id));
           });
       })
       .catch(error => {
@@ -232,6 +232,6 @@ export class HomeComponent {
   clearDate(dateInput: HTMLInputElement) {
     this.selectedDate = '';
     dateInput.value = '';
-    this.slides = [...this.allSlides];
+    this.slides = [...this.rsvpdSlides];
   }
 }
