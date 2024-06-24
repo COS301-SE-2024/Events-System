@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { RandomHeaderService } from '../app/random-header.service';
+
 import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-event',
@@ -11,21 +11,17 @@ import { RouterModule } from '@angular/router';
   styleUrl: './event.component.css',
 })
 export class EventComponent implements OnInit{
-  imageSource: string;
   eventId= '';
   event: any = null;
   host: any = null;
   isLoading = true;
 
   club: any = null;
-  constructor(private route: ActivatedRoute, private randomHeaderService: RandomHeaderService) { 
-    this.imageSource = '';
-  }
+  constructor(private route: ActivatedRoute) { }
   goBack(): void {
     window.history.back();
   }
   ngOnInit(): void {
-    this.imageSource = this.randomHeaderService.getRandomHeaderSource();
     this.route.params.subscribe(params => {
       this.eventId = params['id'];
 

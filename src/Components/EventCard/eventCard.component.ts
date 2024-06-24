@@ -1,8 +1,7 @@
 
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { RandomImageServiceService } from '../../app/random-image-service.service'; 
 @Component({
   selector: 'app-event-card',
   standalone: true,
@@ -10,15 +9,7 @@ import { RandomImageServiceService } from '../../app/random-image-service.servic
   templateUrl: './eventCard.component.html',
   styleUrl: './eventCard.component.css',
 })
-export class EventCardComponent implements OnChanges, OnInit{
-  imageSource: string;
-
-
-  // Inject RandomImageService into the constructor
-  constructor(private randomImageService: RandomImageServiceService) {
-    this.imageSource = '';
-  }
-
+export class EventCardComponent implements OnChanges {
   @Input() eventID: string | undefined;
   @Input() eventTitle: string | undefined;
   @Input() description: string | undefined;
@@ -50,10 +41,5 @@ export class EventCardComponent implements OnChanges, OnInit{
       this.endTime = this.formatTime(this.endTime);
     }
   }
-  ngOnInit(): void {
-    // Use the injected service
-    this.imageSource = this.randomImageService.getRandomImageSource();
-  }
-
 
 }

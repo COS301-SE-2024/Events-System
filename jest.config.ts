@@ -6,12 +6,6 @@ export default {
   collectCoverage: true,
   coverageReporters: ['lcov', 'text', 'cobertura'],
   coverageDirectory: './coverage',
-  collectCoverageFrom: [
-    "src/**/*.ts",
-    "src/**/*.html",
-    "!src/**/*.component.ts"
-  ],
-
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',
