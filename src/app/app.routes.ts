@@ -13,6 +13,7 @@ import { UpdateEventComponent } from 'src/UpdateEvent/UpdateEvent.component';
 import { DeleteEventComponent } from 'src/DeleteEvent/DeleteEvent.component';
 import { HelpComponent } from 'src/Help/Help.component';
 import { SocialClubComponent } from 'src/socialClub/socialClub.component';
+
 export const appRoutes: Route[] = [
   { path: '', component: HomeComponent }, // Home page
   { path: 'login', component: LoginComponent },

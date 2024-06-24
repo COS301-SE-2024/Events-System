@@ -66,6 +66,21 @@ ngOnInit() {
   this.agendaform = this.fb.group({
     agendainputs: this.fb.array([])
   });
+
+// Subscribe to changes in the form array if 'prepinputs' exists
+this.prepform.get('prepinputs')?.valueChanges.subscribe(values => {
+  console.log('Form values changed:', values);
+  // Store the values as needed, e.g., in sessionStorage
+  sessionStorage.setItem('prepinputs', JSON.stringify(values));
+});
+
+// Subscribe to changes in the form array if 'agendainputs' exists
+this.prepform.get('agendainputs')?.valueChanges.subscribe(values => {
+  console.log('Form values changed:', values);
+  // Store the values as needed, e.g., in sessionStorage
+  sessionStorage.setItem('agendainputs', JSON.stringify(values));
+});
+
   const prepsavedInputs = sessionStorage.getItem('prepinputs');
   if (prepsavedInputs) {
     const prepinputs = JSON.parse(prepsavedInputs);
@@ -83,6 +98,7 @@ ngOnInit() {
   this.isHalalSelected = sessionStorage.getItem('isHalalSelected') === 'false';
   this.isGlutenFreeSelected = sessionStorage.getItem('isGlutenFreeSelected') === 'false';
 }
+
 
 presubmit(){
   const missingDetails = [];
@@ -116,23 +132,24 @@ presubmit(){
     this.submit();
   }
 }
+
 submit(){
     // Create the event object
     this.isAPILoading = true;
     const event = {
       title: validator.escape(this.nameInput.nativeElement.value),
       description: validator.escape(this.descriptionInput.nativeElement.value),
-      startTime: validator.escape(this.StartTimeInput.nativeElement.value+':00'),
-      endTime: validator.escape(this.EndTimeInput.nativeElement.value+':00'),
+      startTime: validator.escape(this.StartTimeInput.nativeElement.value),
+      endTime: validator.escape(this.EndTimeInput.nativeElement.value),
       startDate: validator.escape(this.StartDateInput.nativeElement.value),
       endDate: validator.escape(this.EndDateInput.nativeElement.value),
       location: validator.escape(this.LocationInput.nativeElement.value),
-      hostId: 6,
+      hostId: localStorage.getItem('ID'),
       geolocation: "51.507351, -0.127758",
-      socialClub: 2,
+      socialClub: validator.escape(this.SocialClubInput.nativeElement.value),
       eventPictureLink: "https://example.com/soccer-tournament.jpg", // Replace with actual picture link
-      eventAgendas: this.agendaform.get('agendaInputs')?.value.map((input: any) => validator.escape(input)),
-      eventPreparation: this.prepform.get('prepInputs')?.value.map((input: any) => validator.escape(input)),
+      eventAgendas: this.agendaform.get('agendainputs')?.value.map((input: any) => validator.escape(input)),
+      eventPreparation: this.prepform.get('prepinputs')?.value.map((input: any) => validator.escape(input)),
       eventDietaryAccommodations: [
         this.isVegetarianSelected ? "Vegetarian" : null,
         this.isVeganSelected ? "Vegan" : null,
@@ -172,6 +189,7 @@ submit(){
       console.error('Error:', error);
     });
 }
+
   // Add a variable to save the input values
   inputValues: string[] = [];
   isTransitioningToPreviousStep = false;

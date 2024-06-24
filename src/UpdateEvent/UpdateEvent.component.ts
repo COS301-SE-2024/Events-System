@@ -103,9 +103,9 @@ presubmit(){
         startDate: validator.escape(this.StartDateInput.nativeElement.value),
         endDate: validator.escape(this.EndDateInput.nativeElement.value),
         location: validator.escape(this.LocationInput.nativeElement.value),
-        hostId: 6,
-        geolocation: "51.507351, -0.127758", // Replace with actual geolocation
-        socialClub: 2,
+        hostId: localStorage.getItem('ID'),
+        geolocation: "51.507351, -0.127758",
+        socialClub: validator.escape(this.SocialClubInput.nativeElement.value),
         eventPictureLink: "https://example.com/soccer-tournament.jpg", // Replace with actual picture link
         eventAgendas: this.agendainputs?.value.map((input: any) => validator.escape(input)),
         eventPreparation: this.prepinputs?.value.map((input: any) => validator.escape(input)),
