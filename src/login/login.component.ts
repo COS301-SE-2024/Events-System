@@ -105,11 +105,7 @@ export class LoginComponent {
 
         // Fetch employee data using ID
         const employeeId = localStorage.getItem('ID');
-        if (employeeId) {
-          const employeeResponse = await this.http.get(`https://events-system-back.wn.r.appspot.com/api/employees/${employeeId}`).toPromise();
-          localStorage.setItem('employeeData', JSON.stringify(employeeResponse));
-          console.log('Employee data:', localStorage.getItem('employeeData'));
-        } else {
+        if (!employeeId) {
           console.warn('No ID found in localStorage');
         }
 
