@@ -36,4 +36,18 @@ describe('SettingsComponent', () => {
     const securityContent = await screen.findByText(/Change Password/i);
     expect(securityContent).toBeInTheDocument();
   });
+
+  it('should update the profile details inputs correctly', async () => {
+    const nameInput = screen.getAllByPlaceholderText(/Name/i)[0];
+    fireEvent.input(nameInput, { target: { value: 'John' } });
+    expect(nameInput).toHaveValue('John');
+
+    const surnameInput = screen.getByPlaceholderText(/Surname/i);
+    fireEvent.input(surnameInput, { target: { value: 'Doe' } });
+    expect(surnameInput).toHaveValue('Doe');
+
+    const descriptionInput = screen.getByPlaceholderText(/Description/i);
+    fireEvent.input(descriptionInput, { target: { value: 'A brief description' } });
+    expect(descriptionInput).toHaveValue('A brief description');
+  });
 });
