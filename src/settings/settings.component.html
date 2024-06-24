@@ -112,17 +112,19 @@
         <div class="card bg-base-200 p-4 mb-4">
           <h3 class="text-lg font-bold mb-2">Public Information</h3>
           <div class="ml-4"> <!-- Indentation -->
-            <div class="flex items-center mb-2">
+            <div class="flex-col items-center mb-2">
               <label class="flex items-center">
                 <input type="checkbox" class="toggle toggle-primary" [checked]="makeContactInfoPublic" (change)="toggleContactInfoPublic()">
                 <span class="ml-2 text-sm font-medium text-gray-700">Make Contact Information Public</span>
               </label>
+              <p *ngIf="makeContactInfoPublic" class="ml-8 text-sm text-gray-500">your contact information is publicly available</p>
             </div>
-            <div class="flex items-center mb-4">
+            <div class="flex-col items-center mb-4">
               <label class="flex items-center">
                 <input type="checkbox" class="toggle toggle-primary" [checked]="makeSurnamePublic" (change) = "toggleSurnamePublic()">
                 <span class="ml-2 text-sm font-medium text-gray-700">Make Surname Public</span>
               </label>
+              <p *ngIf="makeSurnamePublic" class="ml-8 text-sm text-gray-500">your surname is publicly available</p>
             </div>
           </div>
         </div>
