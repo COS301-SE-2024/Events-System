@@ -1,29 +1,29 @@
-import { TestBed } from '@angular/core/testing';
-import { SettingsComponent } from './settings.component';
+import { render, screen, fireEvent } from '@testing-library/angular';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
+import '@testing-library/jest-dom';
+import { SettingsComponent } from './settings.component';
 
 describe('SettingsComponent', () => {
-  let component: SettingsComponent;
-
   beforeEach(async () => {
-    TestBed.configureTestingModule({
+    await render(SettingsComponent, {
       providers: [
         {
           provide: ActivatedRoute,
           useValue: {
-            params: of({ id: 'testId' }) // Add your own mock values here
+            params: of({ id: 'testId' })
           }
         }
       ]
     });
-
-    const fixture = TestBed.createComponent(SettingsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(SettingsComponent).toBeTruthy();
+  });
+
+  it('should display the My Details tab content by default', async () => {
+    const detailsContent = screen.getByText(/Profile Details/i);
+    expect(detailsContent).toBeInTheDocument();
   });
 });
