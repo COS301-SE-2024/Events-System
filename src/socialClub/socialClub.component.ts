@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { RandomHeaderService } from '../app/random-header.service';
 @Component({
   selector: 'app-social-club',
   standalone: true,
@@ -10,6 +11,7 @@ import { RouterModule } from '@angular/router';
   styleUrl: './socialClub.component.css',
 })
 export class SocialClubComponent  implements OnInit{
+  imageSource: string;
   isLoading = true;
   clubId= '';
   club: any = null;
@@ -17,9 +19,11 @@ export class SocialClubComponent  implements OnInit{
   goBack(): void {
     window.history.back();
   }
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private randomHeaderService: RandomHeaderService) { 
+    this.imageSource = '';
+  }
   ngOnInit(): void {
-
+    this.imageSource = this.randomHeaderService.getRandomHeaderSource();
     this.route.params.subscribe(params => {
       this.clubId = params['id'];
       fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs/' + this.clubId)
