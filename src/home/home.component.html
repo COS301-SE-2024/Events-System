@@ -28,8 +28,7 @@
               <div class="skeleton h-10 w-[100px]"></div>
             </div>
           </div>
-          
-          <div class="carousel-item " *ngFor="let slide of Homeslides; let i = index" [id]="'slide' + i">   
+            <div class="carousel-item " *ngFor="let slide of Homeslides; let i = index" [id]="'slide' + i">   
               <app-home-featured-event 
               [eventTitle]="slide.title"
               [eventDescription]="slide.description"
@@ -43,6 +42,7 @@
               [eventID]="slide.id"         
               ></app-home-featured-event>
           </div>
+
         </div>
 
       
@@ -53,7 +53,7 @@
       </div>
   </section>
 
-  <section class="bg-transparent text-center shadow-2xl pt-8 h-full "> <!--Featured events section-->
+  <section class="bg-transparent text-center shadow-2xl pt-8 h-full"> <!--Featured events section-->
     <div class="flex flex-col text-center"> <!--lg:flex-row-->
       <h2 class="lexend-deca-extraLight mb-1.5 pb-3 ">Your Upcoming Events</h2>
      
