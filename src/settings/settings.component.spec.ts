@@ -6,9 +6,11 @@ import { SettingsComponent } from './settings.component';
 
 describe('SettingsComponent', () => {
   let saveChangesSpy: jest.SpyInstance;
+  let deleteAccountSpy: jest.SpyInstance;
 
   beforeEach(async () => {
     saveChangesSpy = jest.spyOn(SettingsComponent.prototype, 'saveChanges');
+    deleteAccountSpy = jest.spyOn(SettingsComponent.prototype, 'deleteAccount');
     await render(SettingsComponent, {
       providers: [
         {
@@ -25,6 +27,9 @@ describe('SettingsComponent', () => {
   afterEach(() => {
     if (saveChangesSpy) {
       saveChangesSpy.mockRestore();
+    }
+    if (deleteAccountSpy) {
+      deleteAccountSpy.mockRestore();
     }
   });
 
@@ -83,5 +88,14 @@ describe('SettingsComponent', () => {
     const saveChangesButton = screen.getAllByText(/Save changes/i)[0];
     fireEvent.click(saveChangesButton);
     expect(saveChangesSpy).toHaveBeenCalled();
+  });
+
+  it('should call deleteAccount when Delete Account button is clicked', async () => {
+    const securityTab = screen.getByText(/Security/i);
+    fireEvent.click(securityTab);
+    const deleteAccountButton = await screen.findByText(/Delete Account/i);
+    fireEvent.click(deleteAccountButton);
+    const deleteAccountSpy = jest.spyOn(SettingsComponent.prototype, 'deleteAccount');
+    expect(deleteAccountSpy).toHaveBeenCalled();
   });
 });
