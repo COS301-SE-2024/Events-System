@@ -5,7 +5,10 @@ import '@testing-library/jest-dom';
 import { SettingsComponent } from './settings.component';
 
 describe('SettingsComponent', () => {
+  let saveChangesSpy: jest.SpyInstance;
+
   beforeEach(async () => {
+    saveChangesSpy = jest.spyOn(SettingsComponent.prototype, 'saveChanges');
     await render(SettingsComponent, {
       providers: [
         {
@@ -16,6 +19,13 @@ describe('SettingsComponent', () => {
         }
       ]
     });
+    
+  });
+
+  afterEach(() => {
+    if (saveChangesSpy) {
+      saveChangesSpy.mockRestore();
+    }
   });
 
   it('should create', () => {
@@ -67,5 +77,11 @@ describe('SettingsComponent', () => {
     const gitHubInput = screen.getByPlaceholderText(/Change GitHub/i);
     fireEvent.input(gitHubInput, { target: { value: 'github.com/johndoe' } });
     expect(gitHubInput).toHaveValue('github.com/johndoe');
+  });
+
+  it('should call saveChanges when Save changes button is clicked', async () => {
+    const saveChangesButton = screen.getAllByText(/Save changes/i)[0];
+    fireEvent.click(saveChangesButton);
+    expect(saveChangesSpy).toHaveBeenCalled();
   });
 });
