@@ -26,4 +26,14 @@ describe('SettingsComponent', () => {
     const detailsContent = screen.getByText(/Profile Details/i);
     expect(detailsContent).toBeInTheDocument();
   });
+
+  it('should switch to the Security tab when clicked', async () => {
+    // Find and click the Security tab
+    const securityTab = screen.getByText(/Security/i);
+    fireEvent.click(securityTab);
+
+    // Verify the Security tab content is displayed
+    const securityContent = await screen.findByText(/Change Password/i);
+    expect(securityContent).toBeInTheDocument();
+  });
 });
