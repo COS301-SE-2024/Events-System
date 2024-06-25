@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+import withMT from "@material-tailwind/html/utils/withMT";
+module.exports = withMT({
   content: [
     'src/app/**/*.{html,ts}', // paths to your HTML and TypeScript files
     'src/**/*.{html,ts}', // paths to your HTML and TypeScript files
@@ -1081,5 +1082,5 @@ module.exports = {
   plugins: [
     require('daisyui'),
   ],
-}
+});
 

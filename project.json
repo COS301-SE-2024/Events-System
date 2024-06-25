@@ -17,7 +17,9 @@
         "tsConfig": "./tsconfig.app.json",
         "assets": ["./src/favicon.ico", "./src/assets"],
         "styles": ["./src/styles.css"],
-        "scripts": []
+        "scripts": [
+          "./node_modules/@material-tailwind/html/scripts/ripple.js"
+        ]
       },
       "configurations": {
         "production": {
