@@ -80,8 +80,8 @@ body {
   --fc-button-active-bg-color: #1a252f;
   --fc-button-active-border-color: #151e27;
 
-  --fc-event-bg-color: #3788d8;
-  --fc-event-border-color: #3788d8;
+  --fc-event-bg-color: #767D75;
+  --fc-event-border-color: #767D75;
   --fc-event-text-color: #fff;
   --fc-event-selected-overlay-color: rgba(0, 0, 0, 0.25);
 
@@ -107,7 +107,9 @@ body {
 /* .fc .fc-media-screen {
   max-height: 100%;
 } */
-
+*{
+  text-overflow:ellipsis;
+}
 .fc-event-main {
   display: flex;
   justify-content: space-between; /* This separates the time and title */
@@ -119,6 +121,10 @@ body {
 
 .fc-event-main, i{
   margin-right: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* width: 100%; */
 }
 
 .fc-daygrid-event-harness .fc-event {
@@ -132,4 +138,13 @@ body {
 }
 .fc-daygrid-event-harness .fc-event i {
   margin-right: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* width: 100%; */
+}
+
+.fc-popover {
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
