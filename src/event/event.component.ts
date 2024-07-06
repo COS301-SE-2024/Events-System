@@ -1,25 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-
+import { RandomHeaderService } from '../app/random-header.service';
+import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-event',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './event.component.html',
   styleUrl: './event.component.css',
 })
 export class EventComponent implements OnInit{
+  imageSource: string;
   eventId= '';
   event: any = null;
   host: any = null;
   isLoading = true;
 
-  constructor(private route: ActivatedRoute) { }
+  club: any = null;
+  constructor(private route: ActivatedRoute, private randomHeaderService: RandomHeaderService) { 
+    this.imageSource = '';
+  }
   goBack(): void {
     window.history.back();
   }
   ngOnInit(): void {
+    this.imageSource = this.randomHeaderService.getRandomHeaderSource();
     this.route.params.subscribe(params => {
       this.eventId = params['id'];
 
@@ -39,6 +45,16 @@ export class EventComponent implements OnInit{
         })
         .then(data => {
           this.host = data;
+          fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs/' + this.event.socialClub)
+          .then(response => {
+            return response.json();
+          })
+          .then(data => {
+            this.club = data;
+            this.isLoading = false;
+    
+          });
+
           // console.log(this.host); // Log the host data
           this.isLoading = false;
 

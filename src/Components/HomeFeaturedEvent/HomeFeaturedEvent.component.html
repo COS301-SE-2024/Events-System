@@ -1,0 +1,74 @@
+<div class="card max-w-screen bg-base-100 rounded-xl shadow-xl w-full size-full"> 
+    <div class="md:flex">
+      <div class="md:shrink-0">
+        <img class="h-48 w-full object-cover md:h-full" [src]="imageSource" alt="Album"/>
+      </div>
+  
+      
+      <div class="card-body w-dvw">
+
+        <h2 class="victor-mono-normal uppercase tracking-wide text-xl text-accent font-semibold text-center">{{ eventTitle }}</h2>
+        <p class=" victor-mono-normal mt-10 text-center lg:block hidden">{{ eventDescription }}</p>
+
+        <div>
+          <p class="cutive-mono-regular">{{ hostName }}</p>
+          <p class="cutive-mono-regular">{{ hostEmail }}</p>
+          <p class="cutive-mono-regular">{{ startDate | date:'dd MMM' }} - {{ endDate | date:'dd MMM' }}</p>
+          <p class="cutive-mono-regular">{{ formattedStartTime }} - {{ formattedEndTime }}</p>
+        </div>
+        
+        <form action="">
+          <div class="card-actions justify-center">
+            <button [routerLink]="['/event', eventID]" type="submit" class="inline-flex cursor-pointer items-center justify-center rounded-xl border-none bg-gradient-to-r from-accent to-secondary px-4 py-2.5 text-sm font-semibold text-white transition duration-200 hover:bg-gradient-to-r hover:from-accent hover:to-accent focus:outline-none focus:ring-2 focus:ring-orange-400/80 focus:ring-offset-0 disabled:opacity-30 disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80">               
+               See More !
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- <div class="card max-w-screen bg-base-100 rounded-xl shadow-xl w-full size-full"> 
+    <div class="md:flex">
+      <div class="md:shrink-0">
+        <img class="h-48 w-full object-cover md:h-full" src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg" alt="Album"/>
+      </div>
+  
+      
+      <div class="card-body flex flex-col justify-between h-full w-screen">
+        <div class="flex flex-col items-center justify-center">
+          <h2 class="victor-mono-normal uppercase tracking-wide text-xl text-indigo-500 font-semibold text-center">{{ eventTitle }}</h2>
+          
+          <div class="flex gap-4 mt-5 items-center justify-center bg-red-600">
+            
+            <div class="bg-purple-900 p-4 w-1/2 break-words whitespace-normal h-full">
+              <p class="victor-mono-normal"> Join us for an exciting company soccer tournament! 
+                This fun-filled event will bring together teams from various departments to compete in friendly matches, 
+                fostering teamwork and camaraderie. Whether you're a seasoned player or just looking to have some fun, 
+                this tournament is a perfect opportunity to showcase your skills and enjoy a day of sports and networking. 
+                Don't miss out on the chance to score some goals and create unforgettable memories with your colleagues!</p>
+            </div>
+            
+            <div class="bg-green-900 p-4 w-1/2 h-full flex-col">
+              <p class="cutive-mono-regular">{{ hostName }}</p>
+              <p class="cutive-mono-regular">{{ hostEmail }}</p>
+              <p class="cutive-mono-regular">{{ startDate | date:'dd MMM' }} - {{ endDate | date:'dd MMM' }}</p>
+              <p class="cutive-mono-regular">{{ formattedStartTime }} - {{ formattedEndTime }}</p>
+            </div>
+          </div>
+          
+        </div>
+        
+        <form action="" class="mt-auto">
+          <div class="card-actions justify-center">
+            <button type="submit" class="inline-flex cursor-pointer items-center justify-center rounded-xl border-none bg-gradient-to-r from-fuchsia-600 to-indigo-600 px-4 py-2.5 text-sm font-semibold text-white transition duration-200 hover:bg-gradient-to-r hover:from-fuchsia-600 hover:to-indigo-500 focus:outline-none focus:ring-2 focus:ring-orange-400/80 focus:ring-offset-0 disabled:opacity-30 disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80">
+              Book Now
+            </button>
+          </div>
+        </form>
+      </div>
+      
+    </div>
+  </div> -->

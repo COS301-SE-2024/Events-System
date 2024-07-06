@@ -26,7 +26,7 @@
     </div> 
         <!-- actual content -->
         <div *ngIf="!isLoading && event">
-            <div class="hero h-80 min-w-dvw" style="background-image: url(https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg);">  </div>
+            <div class="hero h-80 min-w-dvw" [style.background-image]="'url(' + imageSource + ')'">  </div>
             <!-- <div class="absolute top-0 left-8"> -->
                 <button class="btn w-[50px] -mt-12 lg:ml-8 h-[30px] rounded-full"(click)="goBack()"><i class="fa-solid fa-arrow-left"></i></button>
 
@@ -42,10 +42,11 @@
                     <div>
                         <div class="card bg-base-100 shadow-xl lg:mt-4 mt-32">
                             <div class="card-body">
-                              <h2 class="card-title">Hosted by the: {{event.socialClub}}</h2>
-                              <p>a professional group for networking, <br/>sharing industry insights, and career growth.</p>
+
+                              <h2 class="card-title">Hosted by the: {{club.name}}</h2>
+                              <p>{{club.summaryDescription }} </p>
                               <div class="card-actions justify-end">
-                                <button class="btn btn-primary">Find out More</button>
+                                <button class="btn btn-primary" [routerLink]="['/socialclub', event.socialClub]">Find out More</button>
                               </div>
                             </div>
                           </div>

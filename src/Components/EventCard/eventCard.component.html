@@ -1,9 +1,10 @@
-<div class="card shadow-xl bg-secondary h-96 lg:w-60 w:80 "> 
+
+<div class="card shadow-xl dark:bg-neutral bg-base-100 h-96 lg:w-60 w:80 "> 
     <figure class="size-60 w-60">
-      <img src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg" alt="Album"/>
+      <img [src]="imageSource" alt="Album"/>
     </figure>
 
-    <div class="card-body max-w-60 max-h-80">
+    <div class="card-body max-w-60 max-h-80  text-slate-400">
       <h2 class="card-title text-ellipsis">{{ eventTitle }}</h2>
 
       <div>
