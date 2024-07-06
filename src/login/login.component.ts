@@ -81,6 +81,7 @@ export class LoginComponent {
         password: this.loginForm.get('password')?.value
       };
   
+
       try {
         // Authenticate user and get access token
         const authResponse = await fetch('https://events-system-back.wn.r.appspot.com/api/v1/auth/authenticate', {

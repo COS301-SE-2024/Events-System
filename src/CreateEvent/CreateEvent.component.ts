@@ -66,7 +66,6 @@ ngOnInit() {
   this.agendaform = this.fb.group({
     agendainputs: this.fb.array([])
   });
-
 // Subscribe to changes in the form array if 'prepinputs' exists
 this.prepform.get('prepinputs')?.valueChanges.subscribe(values => {
   console.log('Form values changed:', values);

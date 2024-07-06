@@ -13,6 +13,7 @@ import { createClient } from 'contentful-management';
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.css',
 })
+
 export class SettingsComponent implements OnInit {
   employeeData: any; // Define employeeData property
   selectedTab= 'details';
