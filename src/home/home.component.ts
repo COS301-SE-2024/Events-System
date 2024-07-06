@@ -85,6 +85,8 @@ export class HomeComponent implements OnInit {
   numbers = Array(6).fill(0).map((x,i)=>i);
   slides: any[] = [];
   socialClubs : any[] = [];
+  allRsvpdSlides: Slide[] = []; // Declare the allRsvpdSlides property
+
   @ViewChild('carousel1') carousel1!: ElementRef;
   @ViewChild('carousel2') carousel2!: ElementRef;
   @ViewChild('carousel3') carousel3!: ElementRef;
@@ -177,11 +179,34 @@ export class HomeComponent implements OnInit {
             // Filter slides based on the current user's RSVP'd events for RSVP'd slides
             const eventIds = rsvps.filter(rsvp => rsvp.employeeId === employeeId).map(rsvp => rsvp.eventId);
             this.rsvpdSlides = this.slides.filter(slide => eventIds.includes(slide.id));
+            this.allRsvpdSlides = this.slides.filter(slide => eventIds.includes(slide.id));
+
           });
       })
       .catch(error => {
         console.error('Error:', error);
       });
+  }
+  filterByDate(date: string) {
+    this.selectedDate = date;
+  this.rsvpdSlides = this.rsvpdSlides.filter(slide => slide.startDate === this.selectedDate);
+  }
+
+  updateFilteredRsvpdSlides(): void {
+    if (this.selectedDate) {
+      this.rsvpdSlides = this.rsvpdSlides.filter(slide => slide.startDate === this.selectedDate);
+    } else {
+      // Assuming you have a method or logic to fetch or store all RSVP'd slides without date filtering
+      // For demonstration, let's say all RSVP'd slides are stored in `allRsvpdSlides`
+      this.rsvpdSlides = [...this.allRsvpdSlides];
+    }
+  }
+  
+  // Step 2: Modify the clearDate method to use the new filtering logic
+  clearDate(dateInput: HTMLInputElement): void {
+    this.selectedDate = '';
+    dateInput.value = '';
+    this.updateFilteredRsvpdSlides(); // Reapply the filter based on the updated selectedDate
   }
   nextHSlide() {
     this.carousel1.nativeElement.scrollLeft += this.carousel1.nativeElement.offsetWidth;
@@ -229,15 +254,5 @@ export class HomeComponent implements OnInit {
 
 
 
-  filterByDate(date: string) {
-    this.selectedDate = date;
-    this.slides = this.allSlides.filter(slide => slide.startDate === this.selectedDate);
-  }
 
-
-  clearDate(dateInput: HTMLInputElement) {
-    this.selectedDate = '';
-    dateInput.value = '';
-    this.slides = [...this.rsvpdSlides];
-  }
 }
