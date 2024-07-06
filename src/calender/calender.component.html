@@ -1,72 +1,12 @@
-<div class="overflow-x-hidden">
-    <div class="navbar bg-base-100">
-        <div class="navbar-start">
-            {{ currentDate | date:'MMMM yyyy' }}
-          </div>
 
+<div class='demo-ap'>
+  <div class='demo-app-main'>
 
-        <div class="navbar-end">
-            <div class="join">
-                <button class="join-item btn"  (click)="previousMonth()">«</button>
-                <button class="join-item btn" (click)="nextMonth()">>»</button>
-
-            </div>
-            <div class="divider divider-horizontal"></div>
-            <button class="btn">Add Event</button>
-        </div>
-      </div>
-
-      <div class="flex flex-row w-dvw">
-        <div class="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center">Mon</div> 
-        <div class="grid h-20 ml-2 flex-grow card bg-base-300 rounded-box place-items-center">Tue</div> 
-        <div class="grid h-20 ml-2 flex-grow card bg-base-300 rounded-box place-items-center">Wed</div> 
-        <div class="grid h-20 ml-2 flex-grow card bg-base-300 rounded-box place-items-center">Thur</div> 
-        <div class="grid h-20 ml-2 flex-grow card bg-base-300 rounded-box place-items-center">Fri</div> 
-        <div class="grid h-20 ml-2 flex-grow card bg-base-300 rounded-box place-items-center">Sat</div> 
-        <div class="grid h-20 ml-2 flex-grow card bg-base-300 rounded-box place-items-center">Sun</div> 
-      </div>
-      <div class="flex flex-row w-dvw dates">
-        <div class="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center">1</div> 
-        <div class="grid h-20 ml-2 flex-grow card bg-base-300 rounded-box place-items-center">2</div> 
-        <div class="grid h-20 ml-2 flex-grow card bg-base-300 rounded-box place-items-center">3</div> 
-        <div class="grid h-20 ml-2 flex-grow card bg-base-300 rounded-box place-items-center">4</div> 
-        <div class="grid h-20 ml-2 flex-grow card bg-base-300 rounded-box place-items-center">5</div> 
-        <div class="grid h-20 ml-2 flex-grow card bg-base-300 rounded-box place-items-center">6</div> 
-        <div class="grid h-20 ml-2 flex-grow card bg-base-300 rounded-box place-items-center">7</div> 
-      </div>
-      <div class="flex flex-row w-dvw dates">
-        <div class="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center">8</div> 
-        <div class="grid h-20 ml-2 flex-grow card bg-base-300 rounded-box place-items-center">9</div> 
-        <div class="grid h-20 ml-2 flex-grow card bg-base-300 rounded-box place-items-center">10</div> 
-        <div class="grid h-20 ml-2 flex-grow card bg-base-300 rounded-box place-items-center">11</div> 
-        <div class="grid h-20 ml-2 flex-grow card bg-base-300 rounded-box place-items-center">12</div> 
-        <div class="grid h-20 ml-2 flex-grow card bg-base-300 rounded-box place-items-center">13</div> 
-        <div class="grid h-20 ml-2 flex-grow card bg-base-300 rounded-box place-items-center">14</div> 
-      </div>
-      <div class="flex flex-row w-dvw dates">
-        <div class="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center">15</div> 
-        <div class="grid h-20 ml-2 flex-grow card bg-base-300 rounded-box place-items-center">16</div> 
-        <div class="grid h-20 ml-2 flex-grow card bg-base-300 rounded-box place-items-center">17</div> 
-        <div class="grid h-20 ml-2 flex-grow card bg-base-300 rounded-box place-items-center">18<br>
-          <app-calender-event-button></app-calender-event-button></div> 
-        <div class="grid h-20 ml-2 flex-grow card bg-base-300 rounded-box place-items-center">19</div> 
-        <div class="grid h-20 ml-2 flex-grow card bg-base-300 rounded-box place-items-center">20</div> 
-        <div class="grid h-20 ml-2 flex-grow card bg-base-300 rounded-box place-items-center">21</div> 
-      </div>
-      <div class="flex flex-row w-dvw dates">
-        <div class="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center">22</div> 
-        <div class="grid h-20 ml-2 flex-grow card bg-base-300 rounded-box place-items-center">23</div> 
-        <div class="grid h-20 ml-2 flex-grow card bg-base-300 rounded-box place-items-center">24</div> 
-        <div class="grid h-20 ml-2 flex-grow card bg-base-300 rounded-box place-items-center">25</div> 
-        <div class="grid h-20 ml-2 flex-grow card bg-base-300 rounded-box place-items-center">26</div> 
-        <div class="grid h-20 ml-2 flex-grow card bg-base-300 rounded-box place-items-center">27</div> 
-        <div class="grid h-20 ml-2 flex-grow card bg-base-300 rounded-box place-items-center">28</div> 
-      </div>
-      <div class="flex flex-row w-dvw dates">
-        <div class="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center">29</div> 
-        <div class="grid h-20 ml-2 flex-grow card bg-base-300 rounded-box place-items-center">30</div> 
-        <div class="grid h-20 ml-2 flex-grow card bg-base-300 rounded-box place-items-center">31</div> 
-      </div>
-      <div>
-
+    <full-calendar *ngIf='calendarVisible()' [options]='calendarOptions()'>
+      <ng-template #eventContent let-arg  >
+        <b>{{ arg.timeText }}</b>
+        <i>{{ arg.event.title }}</i>
+      </ng-template>
+    </full-calendar>
   </div>
+</div>
