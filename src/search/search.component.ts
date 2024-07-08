@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {SearchEventCardComponent} from 'src/Components/SearchEventCard/searchEventCard.component';
+import {SearchHostCardComponent } from 'src/Components/searchHostCard/searchHostCard.component';
 
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [CommonModule, SearchEventCardComponent],
+  imports: [CommonModule, SearchEventCardComponent, SearchHostCardComponent],
   templateUrl: './search.component.html',
   styleUrl: './search.component.css',
 })
