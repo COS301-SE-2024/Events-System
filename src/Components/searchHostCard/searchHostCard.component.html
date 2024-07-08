@@ -13,7 +13,38 @@
     </div>
 
     <div class="flex flex-col justify-center">
-        <button class="cutive-mono-regular flex h-8 shrink-0 items-center justify-center text-sm rounded-xl bg-[#243647] pl-4 pr-2"> View Clubs</button>
+        <button onclick="my_modal_1.showModal()" class="cutive-mono-regular cursor-pointer flex h-8 shrink-0 items-center justify-center font-semibold text-white text-sm border-none rounded-xl bg-gradient-to-r from-accent to-secondary pl-4 pr-4 transition duration-200 hover:bg-gradient-to-r hover:from-accent hover:to-accent disabled:opacity-30 disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80"> 
+            View Clubs
+        </button>
     </div>
+    <dialog id="my_modal_1" class="modal">
+        <div class="modal-box flex flex-col gap-10">
+            <div>
+                <h3 class="text-lg font-bold">[Host name]'s social clubs</h3>
+            </div>
+            
+            
+            <div routerLink class="w-full h-full flex flex-col items-center justify-center">
+                <div class="socialClubCircle gradient-border from-accent to-secondary">
+                  <div>
+                    <img src="assets/pexels-rahulp9800-1652361.jpg" alt="Social club image" />
+                  </div>
+                </div>
+            </div>
+
+
+          <div class="modal-action">
+            <form method="dialog">
+              <!-- if there is a button in form, it will close the modal -->
+              <button class="btn">Done</button>
+            </form>
+          </div>
+        </div>
+    </dialog>
 </div>
+ 
+
+
+
+
 
