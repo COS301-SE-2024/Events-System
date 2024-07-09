@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  errorMessage: string = '';
+  errorMessage = '';
   registerForm: FormGroup;
   loginForm: FormGroup;
 
