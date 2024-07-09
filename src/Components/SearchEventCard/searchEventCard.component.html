@@ -1,6 +1,8 @@
 <div class="flex gap-4 bg-transparent px-4 py-3">
-    <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-[70px]">
-        <img src="" alt="event image">
+    <div class="avatar">
+        <div class="w-24 rounded-xl">
+          <img src="assets/pexels-rahulp9800-1652361.jpg" alt="event image" />
+        </div>
     </div>
     
     <div class="flex flex-1 flex-col justify-center">
@@ -10,11 +12,36 @@
     </div>
 
     <div class="flex flex-col gap-2 justify-center">
-        <button class="cutive-mono-regular cursor-pointer flex h-8 shrink-0 items-center justify-center font-semibold text-white text-sm border-none rounded-xl bg-gradient-to-r from-accent to-secondary pl-4 pr-4 transition duration-200 hover:bg-gradient-to-r hover:from-accent hover:to-accent focus:outline-none focus:ring-2 focus:ring-orange-400/80 focus:ring-offset-0 disabled:opacity-30 disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80"> 
+        <button onclick="view_more_modal.showModal()" class="cutive-mono-regular cursor-pointer flex h-8 shrink-0 items-center justify-center font-semibold text-white text-sm border-none rounded-xl bg-gradient-to-r from-accent to-secondary pl-4 pr-4 transition duration-200 hover:bg-gradient-to-r hover:from-accent hover:to-accent focus:outline-none disabled:opacity-30 disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80"> 
             View More
         </button>
-        <button class="cutive-mono-regular cursor-pointer flex h-8 shrink-0 items-center justify-center font-semibold text-white text-sm border-none rounded-xl bg-gradient-to-r from-accent to-secondary pl-4 pr-4 transition duration-200 hover:bg-gradient-to-r hover:from-accent hover:to-accent focus:outline-none focus:ring-2 focus:ring-orange-400/80 focus:ring-offset-0 disabled:opacity-30 disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80"> 
+        <button class="cutive-mono-regular cursor-pointer flex h-8 shrink-0 items-center justify-center font-semibold text-white text-sm border-none rounded-xl bg-gradient-to-r from-accent to-secondary pl-4 pr-4 transition duration-200 hover:bg-gradient-to-r hover:from-accent hover:to-accent focus:outline-none disabled:opacity-30 disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80"> 
             Subscribe!
         </button>
     </div>
+
+    <!-- view more modal -->
+    <!-- <dialog id="view_more_modal" class="modal">
+        <div class="modal-box flex flex-col gap-10">
+            <div>
+                <h3 class="text-lg font-bold">[Host name]'s social clubs</h3>
+            </div>
+            
+            
+            <div routerLink class="w-full h-full flex flex-col items-center justify-center">
+                <div class="socialClubCircle gradient-border from-accent to-secondary">
+                  <div>
+                    <img src="assets/pexels-rahulp9800-1652361.jpg" alt="Social club image" />
+                  </div>
+                </div>
+            </div>
+
+
+          <div class="modal-action">
+            <form method="dialog">
+              <button class="cutive-mono-regular cursor-pointer flex h-8 shrink-0 items-center justify-center font-semibold text-white text-sm border-none rounded-xl bg-gradient-to-r from-accent to-secondary pl-3 pr-3 transition duration-200 hover:bg-gradient-to-r hover:from-accent hover:to-accent focus:outline-none disabled:opacity-30 disabled:opacity-30 disabled:hover:text-white ">Book Now</button>
+            </form>
+          </div>
+        </div>
+    </dialog> -->
   </div>
