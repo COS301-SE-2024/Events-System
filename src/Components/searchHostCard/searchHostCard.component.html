@@ -18,18 +18,34 @@
         </button>
     </div>
     <dialog id="my_modal_1" class="modal">
-        <div class="flex flex-col bg-[#243647] rounded-lg gap-10 px-10">
+        <div class="flex flex-col bg-[#0f1628] w-1/2 h-1/2 rounded-xl gap-10 px-10">
             <div>
-                <h3 class="lexend-deca-extraLight justify-center font-bold">[Host name]'s social clubs</h3>
+                <h3 class="lexend-deca-extraLight justify-center font-medium mt-5">[Host name]'s social clubs</h3>
             </div>
             
-            <div class="flex flex-row gap-4">
+            <div class="flex flex-wrap gap-10 size-full justify-center overflow-y-scroll snap-y snap-mandatory pt-10">
+              <app-search-social-club-card></app-search-social-club-card>
+              <app-search-social-club-card></app-search-social-club-card>
+              <app-search-social-club-card></app-search-social-club-card>
+              <app-search-social-club-card></app-search-social-club-card>
+              <app-search-social-club-card></app-search-social-club-card>
+              <app-search-social-club-card></app-search-social-club-card>
+              <app-search-social-club-card></app-search-social-club-card>
+              <app-search-social-club-card></app-search-social-club-card>
+              <app-search-social-club-card></app-search-social-club-card>
+              <app-search-social-club-card></app-search-social-club-card>
+              <app-search-social-club-card></app-search-social-club-card>
+              <app-search-social-club-card></app-search-social-club-card>
+              <app-search-social-club-card></app-search-social-club-card>
               <app-search-social-club-card></app-search-social-club-card>
             </div>
-          <div class="modal-action">
+            
+          <div class="modal-action items-center justify-center mb-5">
             <form method="dialog">
               <!-- if there is a button in form, it will close the modal -->
-              <button class="btn">Done</button>
+              <button class="cutive-mono-regular cursor-pointer flex h-8 shrink-0 items-center justify-center font-semibold text-white text-sm border-none rounded-xl bg-gradient-to-r from-accent to-secondary pl-4 pr-4 transition duration-200 hover:bg-gradient-to-r hover:from-accent hover:to-accent disabled:opacity-30 disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80">
+                Close
+              </button>
             </form>
           </div>
         </div>
