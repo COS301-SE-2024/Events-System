@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  errorMessage: string = '';
   registerForm: FormGroup;
   loginForm: FormGroup;
 
@@ -91,6 +92,7 @@ export class LoginComponent {
           },
           body: JSON.stringify(formData)
         });
+
         const authData = await authResponse.json();
         
         // Get employee ID using access token
@@ -119,6 +121,8 @@ export class LoginComponent {
         this.router.navigate(['/']);
       } catch (error) {
         console.error('Error during login:', error);
+        this.errorMessage = 'Invalid credentials. Please try again.'; // Set error message for invalid credentials
+        window.location.reload();
       }
     } else {
       console.log('Form is invalid. Please check the fields.');

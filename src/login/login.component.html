@@ -1,4 +1,7 @@
 <!-- SIGN UP CARD -->
+<div *ngIf="errorMessage" class="alert alert-danger">
+  {{ errorMessage }}
+</div>
   <form (submit)="onLogin()" [formGroup]="loginForm" class="card-body">
     <div>
       <label
