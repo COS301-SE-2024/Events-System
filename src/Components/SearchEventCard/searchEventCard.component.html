@@ -1,6 +1,6 @@
 <div class="flex gap-4 bg-transparent px-4 py-3">
     <div class="avatar">
-        <div class="w-24 rounded-xl">
+        <div class="w-44 rounded-xl">
           <img src="assets/pexels-rahulp9800-1652361.jpg" alt="event image" />
         </div>
     </div>
@@ -9,6 +9,22 @@
       <p class="victor-mono-normal uppercase tracking-wide text-accent font-semibold text-base">Event title</p>
       <p class="cutive-mono-regular text-[#93adc8] text-sm font-normal ">Event description</p>
       <p class="cutive-mono-regular text-[#93adc8] text-sm font-normal ">Event date and time</p>
+
+      <div class="flex gap-3 p-3 flex-wrap ">
+        <app-tag></app-tag>
+
+        <button class="flex h-7 shrink-0 items-center justify-center gap-x-2 rounded-xl bg-secondary pl-3 pr-3">
+          <p class="text-white text-sm font-light leading-normal">[Host]</p>
+        </button>
+
+        <button class="flex h-7 shrink-0 items-center justify-center gap-x-2 rounded-xl bg-secondary pl-3 pr-3">
+          <p class="text-white text-sm font-light leading-normal">[Location]</p>
+        </button>
+
+        <button class="flex h-7 shrink-0 items-center justify-center gap-x-2 rounded-xl bg-secondary pl-3 pr-3">
+          <p class="text-white text-sm font-light leading-normal">[]</p>
+        </button>
+      </div>
     </div>
 
     <div class="flex flex-col gap-2 justify-center">
