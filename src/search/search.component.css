@@ -56,7 +56,7 @@
   color: #f1c40f;
 }
 
-/* .hover,
+.hover,
 h1 {
   cursor: pointer;
 }
@@ -64,16 +64,15 @@ h1 {
 h1 {
   position: relative;
   color: #fff;
-  font: 900 60px Montserrat;
+  font: 90 35px Montserrat;
   text-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-} */
+}
 
-/* .concept {
-  padding: 5em;
-  scroll-snap-align: center;
-} */
+.concept {
+  /* scroll-snap-align: center; */
+}
 
-/* .concept:before {
+.concept:before {
   content: "";
   position: absolute;
   top: 0;
@@ -83,19 +82,15 @@ h1 {
   transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-.title {
-  padding: 5em;
-} */
-
-/* .title .hover {
+.title .hover {
   flex: 1;
   display: grid;
-  height: calc(100vh - 10em);
-  grid: repeat(2, 2fr) / 100%;
+  height: calc(10em - 5em);
+  grid: repeat(2, fr) / 100%;
   position: relative;
-} */
+}
 
-/* .title .hover div {
+.title .hover div {
   position: relative;
   z-index: 5;
 }
@@ -106,9 +101,9 @@ h1 {
 
 .title .hover div:nth-child(2):hover ~ h1 {
   margin-top: -50px;
-} */
+}
 
-/* .title h1 {
+.title h1 {
   position: absolute;
   margin: auto;
   left: 0;
@@ -117,5 +112,5 @@ h1 {
   margin-top: -30px;
   transition: 0.3s cubic-bezier(0.23, 1, 0.32, 1);
   z-index: 0;
-} */
+}
 
