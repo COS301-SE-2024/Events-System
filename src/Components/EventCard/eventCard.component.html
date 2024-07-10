@@ -1,4 +1,4 @@
-
+<!-- 
 <div class="card shadow-xl dark:bg-neutral bg-base-100 h-96 lg:w-60 w:80 "> 
     <figure class="size-60 w-60">
       <img [src]="imageSource" alt="Album"/>
@@ -14,8 +14,7 @@
         <p *ngIf="isSameDate()">
           <i class="fa-regular fa-calendar-days mr-3"></i>
           {{startDate | date:'d MMM' }} - {{ endDate| date:'d MMM'  }}
-        </p>        <!-- <p>{{ startDate | date:'shortDate' }} - {{ endDate | date:'shortDate' }}</p>
-        <p>{{ startTime | date:'shortTIme' }} - {{ endTime | date:'shortTime' }}</p> -->
+        </p>
       </div>
       
       <form action="">
@@ -29,4 +28,31 @@
         </div>
       </form>
     </div>
-</div>
+</div> -->
+
+<div class="relative flex flex-col mt-6  h-96 text-slate-400 dark:bg-neutral bg-base-100 shadow-md bg-clip-border rounded-xl w-72">
+  <div
+    class="relative h-32 mx-4 -mt-6 overflow-hidden shadow-lg bg-clip-border rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40">
+    <img [src]="imageSource" alt="Album"/>
+  </div>
+  <div class="p-6">
+    <h5 class="block mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-slate-200">
+      {{ eventTitle }}
+    </h5>
+    <p> <i class="fa-solid fa-user mr-2"></i> {{ hostedBy }}</p>
+    <p><i class="fa-solid fa-location-pin mr-3"></i>{{ location }}</p>
+    <p><i class="fa-regular fa-clock mr-2"></i> {{startTime }} - {{ endTime }} </p>
+    <p *ngIf="isSameDate()">
+      <i class="fa-regular fa-calendar-days mr-3"></i>
+      {{startDate | date:'d MMM' }} - {{ endDate| date:'d MMM'  }}
+    </p>
+  </div>
+  <div class="p-6 pt-0 flex justify-center items-center">
+    <button 
+      [routerLink]="['/event', eventID]"
+      class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-base-100 text-primary shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
+      type="button" >
+      Book Now
+    </button>
+  </div>
+</div>  

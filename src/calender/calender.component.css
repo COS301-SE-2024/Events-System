@@ -1,0 +1,29 @@
+:root {
+    --neutral: #1c2340; /* Neutral color from the entellect theme */
+}
+
+
+.fc-theme-standard td, .fc-theme-standard th {
+    border: 3px solid var(--neutral);
+}
+*, ::before, ::after {
+    box-sizing: border-box;
+    border-width: 0;
+    border-style: solid;
+    border-color: var(--neutral);
+}
+.current-day {
+    position: relative;
+  }
+  
+  .current-day::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    margin: -3px 0 0 -3px;
+    border-radius: 50%;
+    background-color: red; /* Customize the color as needed */
+  }

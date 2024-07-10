@@ -36,30 +36,41 @@
                 >
               </div>
             </div>
-            
-            
-                       
-            <input
-              type="text"
-              #nameInput
-              [placeholder]="employeeData?.firstName || 'Name'"
-              class="input input-bordered w-full mb-2"
-              (input)="name = nameInput.value"
-            /> 
 
-            <input
-              type="text"
-              #surnameInput
-              [placeholder]="employeeData?.lastName || 'Surname'"
-              class="input input-bordered w-full mb-2"
-              (input)="surname = surnameInput.value"
-            >
-            <textarea
-              #descriptionInput
-              [placeholder]="employeeData?.employeeDescription|| 'Bio'"
-              class="textarea textarea-bordered w-full mb-2"
-              (input)="description = descriptionInput.value"
-            ></textarea>
+            <!-- Container for Name -->
+            <div class="lg:ml-16 items-center justify-around lg:grid grid-cols-2 gap-4">
+              <h3 class="text-xl font-bold mb-2 text-slate-600">Name</h3>
+              <input
+                type="text"
+                #nameInput
+                [placeholder]="employeeData?.firstName || 'Name'"
+                class="input input-bordered w-full mb-2"
+                (input)="name = nameInput.value"
+              /> 
+            </div>
+            
+            <!-- Container for Surname -->
+            <div class="lg:ml-16  items-center justify-around lg:grid grid-cols-2 gap-4">
+              <h3 class="text-xl font-bold mb-2 text-slate-600">Surname</h3>
+              <input
+                type="text"
+                #surnameInput
+                [placeholder]="employeeData?.lastName || 'Surname'"
+                class="input input-bordered w-full mb-2"
+                (input)="surname = surnameInput.value"
+              >
+            </div>
+            
+            <!-- Container for Bio -->
+            <div class=" lg:ml-16 items-center justify-around  lg:grid grid-cols-2 gap-4">
+              <h3 class="text-xl font-bold mb-2 text-slate-600">Bio</h3>
+              <textarea
+                #descriptionInput
+                [placeholder]="employeeData?.employeeDescription || 'Bio'"
+                class="textarea textarea-bordered w-full mb-2"
+                (input)="description = descriptionInput.value"
+              ></textarea>
+            </div>
           </div>
         </div>
         
@@ -67,6 +78,8 @@
         <div class="card bg-base-200 p-4 mb-4">
           <h3 class="text-lg font-bold mb-2">Social Media Links</h3>
           <div class="ml-4"> <!-- Indentation -->
+            <div class=" lg:ml-16  items-center justify-around  lg:grid grid-cols-2 gap-4">
+              <h3 class="text-xl font-bold mb-2 text-slate-600">Gmail</h3>
             <input
               type="email"
               #emailInput
@@ -74,6 +87,9 @@
               class="input input-bordered w-full mb-2"
               (input)="email = emailInput.value"
             >
+            </div>
+            <div class=" lg:ml-16  items-center justify-around  lg:grid grid-cols-2 gap-4">
+              <h3 class="text-xl font-bold mb-2 text-slate-600">X</h3>
             <input
               type="text"
               #xInput
@@ -81,6 +97,9 @@
               class="input input-bordered w-full mb-2"
               (input)="x = xInput.value"
             >
+            </div>
+            <div class=" lg:ml-16  items-center justify-around  lg:grid grid-cols-2 gap-4">
+              <h3 class="text-xl font-bold mb-2 text-slate-600">LinkedIn</h3>
             <input
               type="text"
               #linkedInInput
@@ -88,6 +107,9 @@
               class="input input-bordered w-full mb-2"
               (input)="linkedIn = linkedInInput.value"
             >
+            </div>
+            <div class=" lg:ml-16  items-center justify-around  lg:grid grid-cols-2 gap-4">
+              <h3 class="text-xl font-bold mb-2 text-slate-600">Github</h3>
             <input
               type="text"
               #gitHubInput
@@ -95,6 +117,7 @@
               class="input input-bordered w-full mb-4"
               (input)="gitHub = gitHubInput.value"
             >
+            </div>
           </div>
         </div>
 
@@ -162,7 +185,7 @@
         <!-- Delete Profile Card -->
         <div class="card bg-base-200 p-4 mb-4">
           <h3 class="text-lg font-bold mb-2">Delete Profile</h3>
-          <button class="btn btn-error btn-sm ml-auto" (click)="deleteAccount()">Delete Account</button>
+          <button class="btn btn-error btn-sm ml-auto" onClick="my_modal_2.showModal()">Delete Account</button>
         </div>
 
         <!-- Save Changes Button (Right Aligned) -->
@@ -170,4 +193,57 @@
       </div>
     </div>
   </div>
+</div>
+
+<dialog id="my_modal_2" class="modal overflow-x-hidden backdrop-blur-sm">
+  <div class="modal-box">
+    <h3 class="font-bold text-lg">Delete Account?</h3>
+    <p class="py-4">Are you sure you want to delete this event?<br/> <span class="text-orange-300">this action is not reversible</span></p>
+    <div class="modal-action">
+    </div>
+    <div class="flex justify-between mt-4">
+      <form method="dialog">
+        <button class="btn btn-warning">Close</button>
+      </form>
+      <form method="dialog">
+        <button for="my_modal_2" (click)="deleteAccount()" class="btn btn-outline btn-error">Delete my account</button>
+      </form>
+
+    </div>
+  </div>
+  <label class="modal-backdrop" for="my_modal_2">Close</label>
+  <!-- <form method="dialog" class="modal-backdrop">
+    <button>close</button>
+  </form> -->
+</dialog>
+
+<div class="toast" *ngIf="isAPILoading">
+  <div class="alert alert-info flex justify-center">
+      <span class="loading loading-dots loading-md"></span>
+  </div>
+</div>
+
+<div class="toast" *ngIf="showchangesuccessToast">
+  <div class="alert alert-success">
+    <span>Changes saved</span>
+  </div>
+  </div>
+  
+  <div class="toast" *ngIf="showchangefailToast">
+  <div class="alert alert-error">
+    <span>Error saving changes</span>
+  </div>
+  </div>
+
+
+<div class="toast" *ngIf="showdeletesuccessToast">
+<div class="alert alert-success">
+  <span>Account deleted Redirecting...</span>
+</div>
+</div>
+
+<div class="toast" *ngIf="showdeletefailToast">
+<div class="alert alert-error">
+  <span>Error deleting account</span>
+</div>
 </div>
