@@ -7,13 +7,14 @@ export const INITIAL_EVENTS: EventInput[] = [
   {
     id: createEventId(),
     title: 'All-day event',
-    start: TODAY_STR
+    start: TODAY_STR,
   },
   {
     id: createEventId(),
     title: 'Timed event',
     start: TODAY_STR + 'T00:00:00',
-    end: TODAY_STR + 'T03:00:00'
+    end: TODAY_STR + 'T03:00:00',
+
   },
   {
     id: createEventId(),
@@ -30,8 +31,8 @@ export const INITIAL_EVENTS: EventInput[] = [
   {
     id: createEventId(),
     title: 'Timed event',
-    start: '2024-07-12T14:30:00',
-    end: '2024-07-12T20:00:00'
+      start: '2024-07-12T14:30:00',
+      end: '2024-07-12T20:00:00'
   },
   {
     id: createEventId(),

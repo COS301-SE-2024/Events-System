@@ -5,6 +5,11 @@
 @import 'tailwindcss/components' layer(tailwindcss);
 @import 'tailwindcss/utilities' layer(tailwindcss);
 
+  .app-wrapper1 {
+    min-height: 100vh; /* Full viewport height */
+    overflow-y: auto; /* Enables vertical scrolling */
+    overflow-x: hidden; /* Prevents horizontal scrolling */
+}
 body {
     font-family: var(--font-family);
     -webkit-font-smoothing: antialiased;

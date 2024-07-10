@@ -1,9 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FullCalendarModule } from '@fullcalendar/angular';
-
-
 @Component({
   standalone: true,
   imports: [RouterModule, CommonModule, FullCalendarModule],
@@ -17,11 +15,13 @@ export class AppComponent {
   isDrawerThin = false;
   employeeData: any; // Define employeeData property
 
-  constructor() {
+  constructor(private router: Router) {
     // Initialize employeeData from localStorage or any other source
     this.employeeData = JSON.parse(localStorage.getItem('employeeData') || '{}');
   }
-
+  get isLoginRoute() {
+    return this.router.url === '/login';
+  }
   toggleDrawer() {
     this.isDrawerThin = !this.isDrawerThin;
   }

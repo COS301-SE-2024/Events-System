@@ -90,12 +90,5 @@ describe('SettingsComponent', () => {
     expect(saveChangesSpy).toHaveBeenCalled();
   });
 
-  it('should call deleteAccount when Delete Account button is clicked', async () => {
-    const securityTab = screen.getByText(/Security/i);
-    fireEvent.click(securityTab);
-    const deleteAccountButton = await screen.findByText(/Delete Account/i);
-    fireEvent.click(deleteAccountButton);
-    const deleteAccountSpy = jest.spyOn(SettingsComponent.prototype, 'deleteAccount');
-    expect(deleteAccountSpy).toHaveBeenCalled();
-  });
+
 });

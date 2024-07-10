@@ -20,16 +20,108 @@ import { get } from 'http';
   styleUrls: ['./calender.component.css'],
 })
 export class CalenderComponent implements OnInit{
-  async ngOnInit() {
-    const events = await this.calenderEventsService.fetchAndFormatEvents();
-    this.calendarOptions.update(options => {
-        return {
-          ...options,
-          events: events,
-        };
-    });
+  uniqueSocialClubs: any[] = [];
+  checkedSocialClubs: any[] = [];
+  allClubsChecked = false;
+  socialClubs: any[] = [];
+  otherCheckboxes: boolean[] = [];
+  events: any[] = [];
+  filteredEvents: any[] = [];
 
+  selectedDietaryAccommodation = '';
+  async ngOnInit() {
+      // Fetch social club information for each unique social club
+      fetch('https://events-system-back.wn.r.appspot.com/api/events')
+        .then(response => response.json())
+        .then(async data => { // Mark this function as async
+  
+          this.events = Array.isArray(data) ? data : [data];
+          this.uniqueSocialClubs = [...new Set(this.events.map(event => event.socialClub))];
+          this.otherCheckboxes = new Array(this.uniqueSocialClubs.length).fill(false);
+
+
+          // Prepare fetch requests for each unique social club
+          const socialClubFetches = this.uniqueSocialClubs.map(socialClubId =>
+            fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs/' + socialClubId)
+              .then(response => response.json())
+          );
+  
+          // Wait for all social club fetches to complete
+          const socialClubsData = await Promise.all(socialClubFetches);
+          socialClubsData.forEach(data => {
+            console.log(data);
+            // Store the social club data in a property of the component
+            this.socialClubs.push(data);
+          });
+          // Update uniqueSocialClubs and otherCheckboxes based on loaded socialClubs
+          this.uniqueSocialClubs = [...new Set(this.socialClubs.map(club => club))];
+          this.otherCheckboxes = new Array(this.uniqueSocialClubs.length).fill(false);
+  
+          // Now that all social clubs are loaded, fetch and format events
+          const events = await this.calenderEventsService.fetchAndFormatEvents();
+          this.calendarOptions.update(options => {
+            return {
+              ...options,
+              events: events,
+            };
+          });
+        });
   }
+  onAllClubsClick() {
+    if (this.allClubsChecked) {
+      this.otherCheckboxes = this.otherCheckboxes.map(() => false);
+      this.checkedSocialClubs = [];
+      this.updateCalender('all');
+      // this.calenderEventsService.fetchAndFormatEvents('all');
+
+    } else {
+      this.checkedSocialClubs = [...this.uniqueSocialClubs];
+    }
+  }
+  onOtherClubClick(i: number) {
+    if(this.checkedSocialClubs.length > 1){
+      this.updateCalender('all');
+    }
+    const club = this.uniqueSocialClubs[i];
+    if (this.otherCheckboxes[i]) {
+      this.checkedSocialClubs.push(club);
+    } else {
+      const index = this.checkedSocialClubs.indexOf(club);
+      if (index > -1) {
+        this.checkedSocialClubs.splice(index, 1);
+      }
+    }
+    // console.log(this.checkedSocialClubs.map(club => club['id']));
+    this.updateCalender(this.checkedSocialClubs.map(club => club['id']));
+
+    // this.calenderEventsService.fetchAndFormatEvents(this.checkedSocialClubs.map(club => club['id']));   
+    // this.updateCalendarOptions();
+     if (this.otherCheckboxes[i]) {
+      this.allClubsChecked = false;
+    }
+  }
+
+  async updateCalender(selectedSocialClubs: string[] | 'all' = 'all') {
+    if (selectedSocialClubs.length === 0) {
+      selectedSocialClubs = 'all';
+    }
+    const filteredEvents = await this.calenderEventsService.fetchAndFormatEvents(selectedSocialClubs);
+    this.calendarOptions.update(options => {
+      return {
+        ...options,
+        events: filteredEvents,
+      };
+    });
+  }
+    filterEvents1(event: any[]) {
+
+    if (this.checkedSocialClubs.length > 0) {
+      this.filteredEvents = this.events.filter(event => 
+        this.checkedSocialClubs.includes(event.socialClub) 
+      );
+    } 
+  }
+
 
   calendarVisible = signal(true);
   calendarOptions = signal<CalendarOptions>({
@@ -49,6 +141,7 @@ export class CalenderComponent implements OnInit{
     initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
     weekends: true,
     editable: true,
+    // defaultAllDay: true,
     selectable: true,
     selectMirror: true,
     fixedWeekCount: false,
@@ -71,26 +164,21 @@ export class CalenderComponent implements OnInit{
     eventRemove:
     */
   });
+  isSingleDayEvent(event: any): boolean {
+    const startDate = new Date(event.start).toDateString();
+    const endDate = new Date(event.end).toDateString();
+    return startDate === endDate;
+  }
+  
   
   currentEvents: any[] =[];
   filterEvents: any[] =[];
   handleMoreLinkClick(info: any) {
-    // Extract the date from the info object
-    console.log('More link clicked info:', info);
     const clickedDate = info.date;
-  
-    // Log the clicked date or perform any action you need with it
-    console.log('More link clicked date:', clickedDate.toISOString());
     this.getEventsForDate(clickedDate.toISOString());
-    // If you need just the day part
-    console.log('Day of the month:', clickedDate.getDate());
-  
-    // Add any additional logic you need for when a more link is clicked
   }
   constructor(private changeDetector: ChangeDetectorRef, private calenderEventsService: CalenderEventsService, private router: Router) {
     this.updateCalendarOptions(); // Set initial options based on current viewport size
-  
-    // Listen for window resize events to adjust calendar options
     window.addEventListener('resize', () => this.updateCalendarOptions());
   }
   
@@ -110,27 +198,30 @@ export class CalenderComponent implements OnInit{
 
   onDateClick(dateStr: DateClickArg) {
     // Your logic to fetch and display events for the clicked date
-    console.log('Date clicked: ', dateStr.dateStr);
     const eventsForDate = this.getEventsForDate(dateStr.dateStr);
-    // Example: Fetch events for 'dateStr' and display them in the mobile-specific div
   }
 
-  getEventsForDate(dateStr: string){
-    console.log("current events: " + JSON.stringify(this.currentEvents));
+  getEventsForDate(dateStr: string) {
     const targetDate = new Date(dateStr);
-
+    targetDate.setHours(0, 0, 0, 0); // Normalize the target date to start of day for comparison
+    
+    const uniqueEventIds = new Set(); // Set to track unique event IDs
     this.filterEvents = this.currentEvents.filter((event) => {
-        const eventStartDate = new Date(event.start);
-        // Compare year, month, and day
-        const isSameDate = eventStartDate.getFullYear() === targetDate.getFullYear() &&
-                           eventStartDate.getMonth() === targetDate.getMonth() &&
-                           eventStartDate.getDate() === targetDate.getDate();
-
-        console.log("Event matches date: " + isSameDate + " for event: " + JSON.stringify(event));
-
-        return isSameDate;
+      const eventStartDate = new Date(event.start);
+      eventStartDate.setHours(0, 0, 0, 0); // Normalize start date to start of day
+      const eventEndDate = new Date(event.end);
+      eventEndDate.setHours(23, 59, 59, 999); // Set end date to end of day for inclusive comparison
+  
+      // Check if targetDate is between event start and end dates (inclusive)
+      const isDateInRange = targetDate >= eventStartDate && targetDate <= eventEndDate;
+  
+      // Check if the event ID is already in the set
+      if (isDateInRange && !uniqueEventIds.has(event.id)) {
+        uniqueEventIds.add(event.id); // Add event ID to the set
+        return true;
+      }
+      return false;
     });
-
   }
   formatEventTime(startTime: string, endTime: string): string {
     const formatTime = (date: Date) => {
@@ -139,7 +230,7 @@ export class CalenderComponent implements OnInit{
       const ampm = hours >= 12 ? 'pm' : 'am';
       hours = hours % 12;
       hours = hours ? hours : 12; // the hour '0' should be '12'
-      const minutesStr = minutes < 10 ? '0'+minutes : minutes;
+      const minutesStr = minutes < 10 ? '0'+ minutes : minutes;
       return `${hours}:${minutesStr}${ampm}`;
     };
   

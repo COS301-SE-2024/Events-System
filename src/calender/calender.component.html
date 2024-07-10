@@ -1,39 +1,73 @@
 
-<div class='demo-ap'>
-  <div class='demo-app-main'>
+<div class='demo-app'>
+  
+  <div class="drawer lg:drawer-open">
+    <input id="my-drawer" type="checkbox" class="drawer-toggle"  #drawerToggle/>
+    <div class="drawer-content">
+      <label for="my-drawer" class="btn btn-primary drawer-button lg:hidden w-full">Filter</label>
+      <!-- Page content here -->
+      <div class='demo-app-main'>
 
-    <full-calendar *ngIf='calendarVisible()' [options]='calendarOptions()'>
-      <ng-template #eventContent let-arg  >
-        <b>{{ arg.timeText }}</b>
-        <i>{{ arg.event.title }}</i>
-      </ng-template>
-    </full-calendar>
-  </div>
-
-  <div class="block lg:hidden bg-neutral min-h-screen mobile-specific">
-    <div class="md:py-8 py-5 md:px-16 px-5 rounded-b">
-      <div class="px-4">
-          <div class="border-b pb-4 border-gray-400 border-dashed flex flex-row justify-between" *ngFor="let event of filterEvents">
-            <div>
-              <p class="text-xs font-light leading-3 text-gray-500 dark:text-gray-300"><i class="fa fa-clock-o" aria-hidden="true"></i> {{ formatEventTime(event.start, event.end) }}</p>
-              <span class="mt-8"><a tabindex="0" class="focus:outline-none text-lg font-medium leading-5 text-gray-800 dark:text-gray-100 mt-2">{{ event.title }}</a></span>
-            </div>
-
-            <div>
-              <button class="btn btn-outline btn-secondary" [routerLink]="['/event', event.id]">More details</button>
-              <button class="btn btn-outline btn-accent">RSVP</button>
-            </div>
-          </div>
-          <!-- <div class="border-b pb-4 border-gray-400 border-dashed pt-5">
-              <p class="text-xs font-light leading-3 text-gray-500 dark:text-gray-300">10:00 AM</p>
-              <a tabindex="0" class="focus:outline-none text-lg font-medium leading-5 text-gray-800 dark:text-gray-100 mt-2">Orientation session with new hires</a>
-          </div>
-          <div class="border-b pb-4 border-gray-400 border-dashed pt-5">
-              <p class="text-xs font-light leading-3 text-gray-500 dark:text-gray-300">9:00 AM</p>
-              <a tabindex="0" class="focus:outline-none text-lg font-medium leading-5 text-gray-800 dark:text-gray-100 mt-2">Zoom call with design team</a>
-              <p class="text-sm pt-2 leading-4 leading-none text-gray-600 dark:text-gray-300">Discussion on UX sprint and Wireframe review</p>
-          </div> -->
+        <full-calendar *ngIf='calendarVisible()' [options]='calendarOptions()'>
+          <ng-template #eventContent let-arg  >
+            <b>{{ arg.timeText }}</b>
+            <i>{{ arg.event.title }}</i>
+          </ng-template>
+        </full-calendar>
       </div>
+    
+      <div class="block lg:hidden bg-neutral min-h-screen mobile-specific">
+        <div class="md:py-8 py-5 md:px-16 px-5 rounded-b">
+          <div class="px-4">
+              <div class="pb-4 flex flex-row justify-between" *ngFor="let event of filterEvents">
+                
+                <div class="flex flex-row">
+                  <div class="flex flex-col mt-4">
+                    <p *ngIf="isSingleDayEvent(event)" class="text-xs font-light leading-3 text-gray-500 dark:text-gray-300">{{ event.start | date:'HH:mm' }} </p>
+                    <p *ngIf="isSingleDayEvent(event)" class="text-xs font-light leading-3 text-gray-500 dark:text-gray-300 mt-12">{{ event.end | date:'HH:mm' }} </p>
+                  </div>
+                  <div class=" rounded-xl bg-base-100  px-4 py-4 ml-4">
+                    <div>
+                      <span class="mt-8"><a tabindex="0" class="focus:outline-none text-lg font-medium leading-5 text-gray-800 dark:text-gray-100 mt-2">{{ event.title }}</a></span>
+                    </div>
+                    <p class="flex items-center justify-center">
+                      <span><i class="fa-solid fa-location-pin mr-3 mt-2"></i> {{event.extendedProps.location }}</span>
+                    </p>
+                    <div>
+                      <button class="btn btn-outline btn-secondary" [routerLink]="['/event', event.id]">More details</button>
+                      
+                      <button class="btn btn-outline btn-accent">RSVP</button>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+    
+          </div>
+      </div>
+      </div>
+    </div>
+    <div class="drawer-side z-20">
+      <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
+      <ul class="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+        <label class="input input-bordered flex items-center gap-2">
+          <input type="text" class="grow" placeholder="Search for an event" />
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </label>
+        <!-- Sidebar content here -->
+        <button class="btn w-full no-animation">Refine by social club</button>
+        <ul class="menu bg-base-200 w-full rounded-box">
+          <li><input type="checkbox" [checked]="allClubsChecked" (change)="allClubsChecked = !allClubsChecked; onAllClubsClick()" aria-label="All social clubs" class="btn w-full"/></li>
+          <li *ngFor="let club of socialClubs; let i = index">
+            <input type="checkbox" [checked]="otherCheckboxes[i]" (change)="otherCheckboxes[i] = !otherCheckboxes[i]; onOtherClubClick(i)" [attr.aria-label]="club.name" class="btn" />
+          </li>
+        </ul>  
+        <div class="flex lg:hidden w-full">
+          <button class="btn btn-outline" (click)="drawerToggle.checked = false">Cancel</button>
+          <button class="btn btn-outline btn-primary ml-28" (click)="drawerToggle.checked = false">Save</button>
+         </div>
+      </ul>
+    </div>
   </div>
-  </div>
+
 </div>
