@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.css',
 })
+
 export class SettingsComponent implements OnInit {
   employeeData: any; // Define employeeData property
   selectedTab= 'details';
