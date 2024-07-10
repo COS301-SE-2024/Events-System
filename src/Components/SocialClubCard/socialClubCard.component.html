@@ -1,4 +1,16 @@
-<div class="h-80 w-80 rounded-full relative flex items-center justify-center cursor-pointer" [routerLink]="['/socialclub', socialClubID]">    <div class="card w-full h-full bg-base-100 shadow-xl image-full rounded-full overflow-hidden">
+<div class="relative"  [routerLink]="['/socialclub', socialClubID]">
+  <img class="h-80 w-80 rounded-full cursor-pointer" src="assets/pexels-rahulp9800-1652361.jpg" alt="Pizza"/>
+  <!-- Overlay -->
+  <div class="absolute inset-0 bg-black opacity-50 h-80 w-80 rounded-full"></div>
+  <div class=" absolute inset-0 flex items-center justify-center">
+    <div class="text-center">
+      <h2 class="font-semibold text-white">{{socialClubName}}</h2>
+      <h2 class="text-white">{{socialClubCreator}}</h2>
+    </div>
+  </div>    
+</div>
+
+    <!-- <div class="h-80 w-80 rounded-full relative flex items-center justify-center cursor-pointer" [routerLink]="['/socialclub', socialClubID]">    <div class="card w-full h-full bg-base-100 shadow-xl image-full rounded-full overflow-hidden">
       <figure class="absolute inset-0">
         <img src="assets/pexels-rahulp9800-1652361.jpg" alt="event image" class="w-full h-full object-cover rounded-full" />
       </figure>
@@ -7,4 +19,4 @@
         <h2 class=" text-center text-white">{{socialClubCreator}}</h2>
       </div>
     </div>
-</div>
+</div> -->
