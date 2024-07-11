@@ -150,8 +150,7 @@ export class LoginComponent {
         this.isAPILoading = false;
         setTimeout(() => {
           this.showloginfailToast = false;
-        }, 10000);
-        console.error('Error:', error);
+        }, 5000);
         console.error('Error during login:', error);
       }
     } else {

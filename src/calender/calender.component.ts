@@ -11,6 +11,8 @@ import listPlugin from '@fullcalendar/list';
 import { INITIAL_EVENTS, createEventId } from './event-utils';
 import { Router, RouterModule} from '@angular/router';
 import { CalenderEventsService } from './calender-event.service';
+import { trigger, state, style, transition, animate } from '@angular/animations';
+
 import { get } from 'http';
 @Component({
   selector: 'app-calender',
@@ -18,7 +20,26 @@ import { get } from 'http';
   imports: [CommonModule, CalenderEventButtonComponent, FullCalendarModule, RouterModule],
   templateUrl: './calender.component.html',
   styleUrls: ['./calender.component.css'],
+  animations: [
+    trigger('buttonFade', [
+      state('notRSVPd', style({
+        opacity: 1,
+      })),
+      state('RSVPd', style({
+        opacity: 1,
+      })),
+      transition('notRSVPd => RSVPd', [
+        animate('1.5s', style({ opacity: 0 })),
+        animate('1.5s', style({ opacity: 1 }))
+      ]),
+      transition('RSVPd => notRSVPd', [
+        animate('1.5s', style({ opacity: 0 })),
+        animate('1.5s', style({ opacity: 1 }))
+      ]),
+    ]),
+  ]
 })
+
 export class CalenderComponent implements OnInit{
   uniqueSocialClubs: any[] = [];
   checkedSocialClubs: any[] = [];
@@ -28,6 +49,7 @@ export class CalenderComponent implements OnInit{
   events: any[] = [];
   filteredEvents: any[] = [];
 
+  
   selectedDietaryAccommodation = '';
   async ngOnInit() {
       // Fetch social club information for each unique social club
@@ -67,6 +89,7 @@ export class CalenderComponent implements OnInit{
           });
         });
   }
+
   onAllClubsClick() {
     if (this.allClubsChecked) {
       this.otherCheckboxes = this.otherCheckboxes.map(() => false);
@@ -310,4 +333,48 @@ export class CalenderComponent implements OnInit{
       }
     });
   }
+  isAPILoading = false;
+  showrsvpsuccessToast = false;
+  showrsvpfailToast = false;
+
+  async rsvpToEvent(eventId: number, status: string): Promise<void> {
+    this.isAPILoading = true;
+    const requestBody = {
+      eventId,
+      employeeId: localStorage.getItem('ID'),
+      status
+    };
+  
+    try {
+      const response = await fetch('https://events-system-back.wn.r.appspot.com/api/event-rsvps', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to RSVP to event');
+      }
+  
+      const responseData = await response.json();
+      this.showrsvpsuccessToast = true;
+      this.isAPILoading = false;
+      console.log('RSVP successful:', responseData);
+      setTimeout(() => {
+        this.showrsvpsuccessToast = false;
+      }, 5000);
+
+    } catch (error) {
+      this.showrsvpfailToast = true;
+      this.isAPILoading = false;
+      setTimeout(() => {
+        this.showrsvpfailToast = false;
+      }, 10000);
+      console.error('Error RSVPing to event:', error);
+      // Handle error
+    }
+  }
+
 }
