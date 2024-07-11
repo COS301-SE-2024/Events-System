@@ -66,7 +66,6 @@ ngOnInit() {
   this.agendaform = this.fb.group({
     agendainputs: this.fb.array([])
   });
-
 // Subscribe to changes in the form array if 'prepinputs' exists
 this.prepform.get('prepinputs')?.valueChanges.subscribe(values => {
   console.log('Form values changed:', values);
@@ -139,8 +138,8 @@ submit(){
     const event = {
       title: validator.escape(this.nameInput.nativeElement.value),
       description: validator.escape(this.descriptionInput.nativeElement.value),
-      startTime: validator.escape(this.StartTimeInput.nativeElement.value),
-      endTime: validator.escape(this.EndTimeInput.nativeElement.value),
+      startTime: validator.escape(this.StartTimeInput.nativeElement.value+':00'),
+      endTime: validator.escape(this.EndTimeInput.nativeElement.value+':00'),
       startDate: validator.escape(this.StartDateInput.nativeElement.value),
       endDate: validator.escape(this.EndDateInput.nativeElement.value),
       location: validator.escape(this.LocationInput.nativeElement.value),

@@ -9,8 +9,8 @@
             <div class="card-body">
                 <h2 class="card-title">{{ eventTitle }}</h2>
                 <p>{{ description }}</p>
-                <p>Dates: {{ startTime | date:'shortDate' }} - {{ endTime | date:'shortDate' }}</p>
-                <p>Times: {{ startTime | date:'shortTime' }} - {{ endTime | date:'shortTime' }}</p>
+                <p>Dates: {{ startDate | date:'shortDate' }} - {{ endDate | date:'shortDate' }}</p>
+                <p>Times:  {{ endTime | date:'shortTime' }}</p>
                 <p>{{ location }}</p>
                 <p>Hosted BY: {{ hostedBy }}</p>
                 <p>Social Club: {{ socialClub }}</p>

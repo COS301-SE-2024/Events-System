@@ -3,7 +3,8 @@
 
 
     <div class="dropdown">
-      <label for="my-drawer-2" class="">
+    
+      <label for="my-drawer-2" class=""  *ngIf="!isLoginRoute">
           <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
             <i class="fa-solid fa-bars"></i>            </div>
         </label>
@@ -12,13 +13,13 @@
   </div>
   <div class="navbar-center">
 
-    <a routerLink="/" class="btn btn-ghost text-xl">Events System</a>
+    <a routerLink="/" class="btn btn-ghost text-xl"  *ngIf="!isLoginRoute">Events System</a>
   </div>
   <div class="navbar-end">
-    <button class="btn btn-ghost btn-circle hidden lg:block">
+    <button class="btn btn-ghost btn-circle hidden lg:block"  *ngIf="!isLoginRoute">
       <i class="fa-solid fa-magnifying-glass"></i>    </button>
-    <div class="dropdown dropdown-end">
-      <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+    <div class="dropdown dropdown-end"  *ngIf="!isLoginRoute">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar" >
         <div class="w-10 rounded-full">
           <img alt="Tailwind CSS Navbar component" [src]="employeeData?.employeePictureLink || 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg'" />
         </div>
@@ -27,7 +28,6 @@
         <li>
           <a routerLink="/profile" class="justify-between">
             Profile
-            <span class="badge">New</span>
           </a>
         </li>
         <li><a  routerLink="/settings">Settings</a></li>
