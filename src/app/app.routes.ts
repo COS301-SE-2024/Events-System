@@ -13,6 +13,7 @@ import { UpdateEventComponent } from 'src/UpdateEvent/UpdateEvent.component';
 import { DeleteEventComponent } from 'src/DeleteEvent/DeleteEvent.component';
 import { HelpComponent } from 'src/Help/Help.component';
 import { SocialClubComponent } from 'src/socialClub/socialClub.component';
+import { SocialClubListingComponent } from 'src/SocialClubHubListing/socialClubListing.component';
 
 export const appRoutes: Route[] = [
   { path: '', component: HomeComponent }, // Home page
@@ -27,6 +28,7 @@ export const appRoutes: Route[] = [
   { path: 'updateevent/:id', component: UpdateEventComponent },
   { path: 'deleteevent/:id', component: DeleteEventComponent },
   { path: 'socialclub/:id', component: SocialClubComponent},
+  { path: 'socialclublisting', component: SocialClubListingComponent},
   { path: 'help', component: HelpComponent}
   // { path: 'home', component: SettingsComponent },
 ];
