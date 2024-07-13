@@ -99,7 +99,13 @@ export class HomeComponent implements OnInit {
       return;
     }
   
-    fetch('https://events-system-back.wn.r.appspot.com/api/events')
+    fetch('https://events-system-back.wn.r.appspot.com/api/events', {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json"
+      }
+  })
       .then(response => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -111,7 +117,13 @@ export class HomeComponent implements OnInit {
         const data = text ? JSON.parse(text) : [];
         this.events = Array.isArray(data) ? data : [data];
   
-        const hostFetches = this.events.map(event => fetch('https://events-system-back.wn.r.appspot.com/api/employees/' + event.hostId)
+        const hostFetches = this.events.map(event => fetch('https://events-system-back.wn.r.appspot.com/api/employees/' + event.hostId, {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          }
+      })
         .then(response => {
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
