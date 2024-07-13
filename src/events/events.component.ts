@@ -38,7 +38,7 @@ checkedSocialClubs: string[] = [];
     eventDietaryAccommodations: ''
   };  
   allClubsChecked = false;
-  otherCheckboxes = [false, false, false]; // Adjust this to match the number of your other checkboxes
+  otherCheckboxes: boolean[] = [];
   selectedDietaryAccommodation = '';
   socialClubs: any[] = [];
   onSubmit() {
@@ -57,8 +57,8 @@ checkedSocialClubs: string[] = [];
       .then(data => {
         this.events = Array.isArray(data) ? data : [data];
         this.uniqueSocialClubs = [...new Set(this.events.map(event => event.socialClub))];
+        this.otherCheckboxes = new Array(this.uniqueSocialClubs.length).fill(false);
         this.filterEvents();
-        console.log(this.events);
 
       // Fetch host information for each event
       const hostFetches = this.events.map(event => {
@@ -80,6 +80,8 @@ checkedSocialClubs: string[] = [];
           .then(data => {
             // Store the social club data in a property of the component
             this.socialClubs.push(data);
+            this.uniqueSocialClubs = [...new Set(this.socialClubs.map(club => club))];
+            this.otherCheckboxes = new Array(this.uniqueSocialClubs.length).fill(false);
           });
       });
       // Wait for all host fetches to complete before ending the loading state

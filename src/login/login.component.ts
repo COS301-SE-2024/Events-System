@@ -15,7 +15,12 @@ export class LoginComponent {
   errorMessage = '';
   registerForm: FormGroup;
   loginForm: FormGroup;
-
+  isAPILoading = false;
+  showloginsuccessToast = false;
+  showregistersuccessToast = false;
+  showloginfailToast = false;
+  showregisterfailToast = false;
+  hidePassword = true;
   constructor(
     private router: Router,
     private fb: FormBuilder,
@@ -41,7 +46,14 @@ export class LoginComponent {
     localStorage.removeItem('ID');
   }
 
+  togglePasswordVisibility(): void {
+    this.hidePassword = !this.hidePassword;
+    const passwordInput = document.getElementById('password') as HTMLInputElement;
+    passwordInput.type = this.hidePassword ? 'password' : 'text';
+  }
+
   onRegister(event: Event) {
+    this.isAPILoading = true;
     event.preventDefault();
 
     if (this.registerForm.valid) {
@@ -52,7 +64,7 @@ export class LoginComponent {
       password: this.registerForm.get('password')?.value,
       role: this.registerForm.get('role')?.value
     };
-
+    console.log('Form data:', formData);
       // Assuming API endpoint for registration
       fetch('https://events-system-back.wn.r.appspot.com/api/v1/auth/register', {
         method: 'POST',
@@ -63,12 +75,23 @@ export class LoginComponent {
       })
       .then(response => response.json())
       .then(data => {
+        this.showregistersuccessToast = true;
+        this.isAPILoading = false;
         console.log('Registration successful:', data);
+        setTimeout(() => {
+          this.showregistersuccessToast = false;
+          this.router.navigate(['']);
+        }, 5000);
         // Optionally, navigate to another page on successful registration
-        this.router.navigate(['']);
+
       })
       .catch(error => {
-        console.error('Error registering:', error);
+        this.showregisterfailToast = true;
+        this.isAPILoading = false;
+        setTimeout(() => {
+          this.showregisterfailToast = false;
+        }, 10000);
+        console.error('Error:', error);
       });
     } else {
       console.log('Form is invalid. Please check the fields.');
@@ -76,13 +99,12 @@ export class LoginComponent {
   }
 
   async onLogin() {
+    this.isAPILoading = true;
     if (this.loginForm.valid) {
       const formData = {
         email: this.loginForm.get('email')?.value,
         password: this.loginForm.get('password')?.value
       };
-  
-
       try {
         // Authenticate user and get access token
         const authResponse = await fetch('https://events-system-back.wn.r.appspot.com/api/v1/auth/authenticate', {
@@ -117,10 +139,22 @@ export class LoginComponent {
         } else {
           console.warn('No ID found in localStorage');
         }
-
+        this.showloginsuccessToast = true;
+        this.isAPILoading = false;
+        // Hide the toast after 5 seconds
+        setTimeout(() => {
+          this.showloginsuccessToast = false;
+          this.router.navigate(['']);
+        }, 5000);
         // Navigate to profile page
-        this.router.navigate(['/']);
+
       } catch (error) {
+        this.showloginfailToast = true;
+        this.isAPILoading = false;
+        setTimeout(() => {
+          this.showloginfailToast = false;
+        }, 10000);
+        console.error('Error:', error);
         console.error('Error during login:', error);
         this.errorMessage = 'Invalid credentials. Please try again.'; // Set error message for invalid credentials
         window.location.reload();

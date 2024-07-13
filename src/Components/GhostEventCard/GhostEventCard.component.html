@@ -1,26 +1,25 @@
-<div class="card bg-base-100 shadow-xl "> 
-    <figure class="size-60 w-60">
-        <div class="skeleton w-60 -mt-32 h-64"></div>
-    </figure>
+<div class="relative flex flex-col mt-6  h-96 text-slate-400 dark:bg-neutral bg-base-100 shadow-md bg-clip-border rounded-xl w-72">
+  <div
+    class="skeleton relative h-32 mx-4 -mt-6 overflow-hidden shadow-lg bg-clip-border rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40">
+    <!-- <img [src]="imageSource" alt="Album"/> -->
+  </div>
+  <div class="p-6">
+    <h5 class="block mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-slate-200">
+      <!-- {{ eventTitle }} -->
+    </h5>
+    <p> <i class="fa-solid fa-user mr-2"></i></p>
+    <p><i class="fa-solid fa-location-pin mr-3"></i></p>
+    <p><i class="fa-regular fa-clock mr-2"></i> </p>
+    <p>
+      <i class="fa-regular fa-calendar-days mr-3"></i>
+    </p>
+  </div>
+  <div class="p-6 pt-0 flex justify-center items-center">
+    <button 
 
-    <div class="card-body max-w-60">
-      <h2 class="card-title"></h2>
-
-      <div>
-        <p></p>
-        <p></p>
-        <p></p>
-        <p></p>
-      </div>
-      
-      <form action="">
-        <div class="card-actions justify-end">
-          <button type="submit"
-              class="inline-flex cursor-pointer items-center justify-center rounded-xl border-none bg-accent px-4 py-2.5 text-sm font-semibold text-white transition duration-200 hover:bg-gradient-to-r hover:from-fuchsia-600 hover:to-indigo-500 focus:outline-none focus:ring-2 focus:ring-orange-400/80 focus:ring-offset-0 disabled:opacity-30 disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80"
-            >
-              Book Now
-            </button>
-        </div>
-      </form>
-    </div>
-</div>
+      class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-base-100 text-primary shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
+      type="button" >
+      Book Now
+    </button>
+  </div>
+</div>  

@@ -1,16 +1,15 @@
-
-  <div class="drawer overflow-auto lg:drawer-open drawer-end">
+  <div class="drawer lg:drawer-open drawer-end">
     <input id="my-drawer-3" type="checkbox" class="drawer-toggle"  #drawerToggle/>
-    <div class="drawer-content flex flex-col justify-start">
+    <div class="drawer-content flex flex-col justify-center">
       <!-- Page content here -->
       <label for="my-drawer-3" class="btn btn-primary drawer-button lg:hidden w-full">Filter</label>
 
       <div class="flex  justify-center items-center">
-        <div class="lg:mb-96 mt-2 mb-80 ml-8 w-10/12 h-96 grid grid-cols-4 gap-24">
+        <div class="lg:mb-96 mt-2 mb-80 w-11/12 h-96 grid lg:grid-cols-4 grid-cols-1 lg:gap-6">
           
           <div *ngIf="isLoading; else content">
             <!-- Skeleton screen goes here -->
-            <div class="lg:mb-96 mt-2 mb-80 w-10/12 h-96 grid" style="grid-template-columns: repeat(4, 1fr); gap: 6rem ;">
+            <div class="lg:mb-96 mt-2 mb-80 lg:ml-16 w-11/12 h-96 grid lg:grid-cols-4 grid-cols-1 gap-x-80 gap-y-12">
               <app-ghost-event-card></app-ghost-event-card>
               <app-ghost-event-card></app-ghost-event-card>
               <app-ghost-event-card></app-ghost-event-card>
@@ -19,7 +18,7 @@
               <app-ghost-event-card></app-ghost-event-card>
               <app-ghost-event-card></app-ghost-event-card>
               <app-ghost-event-card></app-ghost-event-card>
-            </div>
+              </div>
           </div>
           
           <ng-template #content>
@@ -70,10 +69,10 @@
         <div class="mt-8">
           <button class="btn w-full no-animation">Filter By:</button>
     
-          <div class="collapse collapse-plus bg-base-200">
+          <div class="collapse collapse-plus">
             <input type="radio" name="my-accordion-3" checked="checked" /> 
   
-                    <div class="collapse collapse-plus bg-base-200">
+                    <div class="collapse collapse-plus">
             <input type="radio" name="my-accordion-3" /> 
             <div class="collapse-title text-xl font-medium">
               Title

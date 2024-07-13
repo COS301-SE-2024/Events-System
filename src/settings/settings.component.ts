@@ -4,12 +4,13 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { catchError, of, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { createClient } from 'contentful-management';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
   selector: 'app-settings',
   standalone: true,
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule, HttpClientModule, FormsModule],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.css',
 })
@@ -30,6 +31,12 @@ export class SettingsComponent implements OnInit {
   employeePictureLink= '';
   makeContactInfoPrivate = false;
   makeSurnamePrivate = false;
+  isAPILoading = false;
+  showdeletesuccessToast = false;
+  showchangesuccessToast = false;
+  showdeletefailToast = false;
+  showchangefailToast = false;
+
   avatar: File | null = null;
   file: any;
   pictureChanged = false;
@@ -102,6 +109,7 @@ export class SettingsComponent implements OnInit {
   }
 
   saveChanges() {
+    this.isAPILoading = true;
     const updatedData: any = {};
   
     if (this.name) updatedData.firstName = this.name;
@@ -126,6 +134,8 @@ export class SettingsComponent implements OnInit {
     const id = localStorage.getItem('ID');
   
     const saveData = async () => {
+
+
       if (this.pictureChanged) {
         await uploadFile();
       }
@@ -133,21 +143,30 @@ export class SettingsComponent implements OnInit {
       this.http.patch(`https://events-system-back.wn.r.appspot.com/api/employees/${id}`, updatedData)
         .pipe(
           tap((response: any) => {
-            console.log('Changes saved', response);
+
+            // console.log('Changes saved', response);
             // Optionally update the local storage with the new data
             const newEmployeeData = { ...this.employeeData, ...updatedData };
             localStorage.setItem('employeeData', JSON.stringify(newEmployeeData));
             this.employeeData = newEmployeeData;
           }),
           catchError((error: any) => {
+            this.showchangefailToast = true;
+            this.isAPILoading = false;
             console.error('Error saving changes:', error);
             return of(null); // Return observable of null or handle error as needed
           })
         )
         .subscribe(() => {
-          alert('Changes saved');
-          //navigate to profile page
+        this.showchangesuccessToast = true;
+        this.isAPILoading = false;
+        setTimeout(() => {
+          this.showchangesuccessToast = false;
           this.router.navigate(['/profile']);
+        }, 2000);
+          // alert('Changes saved');
+          //navigate to profile page
+          // this.router.navigate(['/profile']);
         });
     };
   
@@ -156,20 +175,29 @@ export class SettingsComponent implements OnInit {
   
 
   deleteAccount() {
+    this.isAPILoading = true;
+
     const id = localStorage.getItem('ID');
     if (id) {
       this.http.delete(`https://events-system-back.wn.r.appspot.com/api/employees/${id}`)
         .pipe(
           tap((response: any) => {
+            this.showdeletesuccessToast = true;
+            this.isAPILoading = false;
+            setTimeout(() => {
+              this.showdeletesuccessToast = false;
+              this.router.navigate(['/login']);
+            }, 5000);
             //console.log('Account deleted', response);
-            alert('Account deleted');
+            // alert('Account deleted');
             //localStorage.removeItem('employeeData');
             //localStorage.removeItem('ID');
             //These are done whenever the login page is loaded
-            this.router.navigate(['/login']);
+            // this.router.navigate(['/login']);
           }),
           catchError((error: any) => {
-            console.error('Error deleting account:', error);
+            this.showdeletefailToast = true;
+            this.isAPILoading = false;
             return of(null); // Return observable of null or handle error as needed
           })
         )
