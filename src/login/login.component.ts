@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  errorMessage = '';
   registerForm: FormGroup;
   loginForm: FormGroup;
   isAPILoading = false;
@@ -113,6 +114,7 @@ export class LoginComponent {
           },
           body: JSON.stringify(formData)
         });
+
         const authData = await authResponse.json();
         
         // Get employee ID using access token
@@ -126,6 +128,7 @@ export class LoginComponent {
         
         // Store employee ID in local storage
         localStorage.setItem('ID', idData);
+        document.cookie = `jwt=${authData.access_token}; path=/; expires=` + new Date(new Date().getTime() + 15 * 60 * 1000).toUTCString();
 
         // Fetch employee data using ID
         const employeeId = localStorage.getItem('ID');
@@ -153,6 +156,8 @@ export class LoginComponent {
         }, 10000);
         console.error('Error:', error);
         console.error('Error during login:', error);
+        this.errorMessage = 'Invalid credentials. Please try again.'; // Set error message for invalid credentials
+        window.location.reload();
       }
     } else {
       console.log('Form is invalid. Please check the fields.');

@@ -93,6 +93,10 @@ public class AuthenticationService {
         catch (AuthenticationException e)
         {
             System.out.println("Authentication failed: " + e.getMessage());
+
+            // Set the response status and return an error response
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            throw e;
         }
         var user = repository.findByEmail(request.getEmail())
                 .orElseThrow();
@@ -106,13 +110,13 @@ public class AuthenticationService {
         jwtCookie.setHttpOnly(true);
         jwtCookie.setSecure(true); // Ensure this is only set over HTTPS
         jwtCookie.setPath("/");
-        jwtCookie.setMaxAge(1 * 12 * 60 * 60); // 12 hours
+        jwtCookie.setMaxAge(60 * 60); // 1 hour
 
         Cookie refreshTokenCookie = new Cookie("refreshToken", refreshToken);
         refreshTokenCookie.setHttpOnly(true);
         refreshTokenCookie.setSecure(true); // Ensure this is only set over HTTPS
         refreshTokenCookie.setPath("/");
-        refreshTokenCookie.setMaxAge(1 * 12 * 60 * 60); // 12 hours
+        refreshTokenCookie.setMaxAge(7 * 12 * 60 * 60); // 7 days
 
         response.addCookie(jwtCookie);
         response.addCookie(refreshTokenCookie);
