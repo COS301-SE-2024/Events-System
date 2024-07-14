@@ -1,1 +1,75 @@
-<p>updateSocialClub works!</p>
+<div class="relative flex size-full min-h-screen flex-col bg-transparent overflow-x-hidden">
+    <div class="layout-container flex h-full grow flex-col">
+      <div class="px-40 flex flex-1 justify-center py-5 ">
+        <div class="layout-content-container flex flex-col max-w-[2010px] flex-1">
+            <!--Page heading-->
+            <div class="flex items-center justify-between mx-10">
+                <div class="text-white text-center font-bold text-3xl"><p>Update Clubs</p></div>
+            </div>
+
+            <div class="flex justify-center items-center">
+                <div>
+                    <p>Club Profile</p>
+                    <!-- <div class="tooltip tooltip-open tooltip-error mb-4" data-tip="please upload a club profile"></div> -->
+                    <div>
+                      <div class="mb-2 flex flex-col items-center relative">
+                        <div class="btn btn-ghost btn-square avatar p-2 relative" style="width: 240px; height: 240px;" (click)="fileInput.click()">
+                          <div class="w-full relative">
+                            <img alt="Social Club Image" style="width: 100%; height: 100%;">
+                            <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-lg">
+                              <i class="fas fa-pencil-alt text-white text-xl"></i>
+                            </div>
+                          </div>
+                        </div>
+                        <input type="file" #fileInput class="hidden">
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="flex justify-center items-center">
+                <div>
+                    <p>Club  Name</p>
+                    <!-- <div class="tooltip tooltip-open tooltip-error mb-4" data-tip="please enter a club name"></div> -->
+                    <input #nameInput type="text" placeholder="Type club name..." class="input input-bordered w-full max-w-xl text-lg h-12 mt-8" required/>
+                </div>
+            </div>
+    
+    
+            <div class="flex justify-center items-center">
+                <div>
+                    <p>Club description & Category</p>
+                    <div>
+                        <!-- <div class="tooltip tooltip-open tooltip-error lg:ml-8 ml-4 -mb-4" data-tip="please enter a Description"></div> -->
+                        <textarea #descriptionInput class="textarea textarea-bordered w-full h-20 mt-4" placeholder="Summary" required></textarea>        
+                        <textarea #descriptionInput class="textarea textarea-bordered w-full h-44 mt-4" placeholder="Description" required></textarea>        
+    
+                    </div>
+    
+                    <p>Category</p>
+                    <div>
+                        <!-- <div class="tooltip tooltip-open tooltip-error lg:ml-8 ml-4 -mb-4" data-tip="please enter a Description"></div> -->
+                        <select class="select select-accent w-full max-w-xs focus:border-none mt-4">
+                          <option disabled selected>Select ...</option>
+                          <option>Category 1</option>
+                          <option>Category 2</option>
+                          <option>Category 3</option>
+                          <option>Category 4</option>
+                          <option>Category 5</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-between mt-4">
+                <button class="btn btn-success">Save changes</button>
+            </div>
+            
+           
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  
