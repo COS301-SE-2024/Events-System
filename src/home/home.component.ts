@@ -99,7 +99,7 @@ export class HomeComponent implements OnInit {
       return;
     }
   
-    fetch('https://events-system-back.wn.r.appspot.com/api/events', {
+    fetch('http://localhost:8080/api/events', {
       method: "GET",
       credentials: "include",
       headers: {
@@ -117,7 +117,7 @@ export class HomeComponent implements OnInit {
         const data = text ? JSON.parse(text) : [];
         this.events = Array.isArray(data) ? data : [data];
   
-        const hostFetches = this.events.map(event => fetch('https://events-system-back.wn.r.appspot.com/api/employees/' + event.hostId, {
+        const hostFetches = this.events.map(event => fetch('http://localhost:8080/api/employees/' + event.hostId, {
           method: "GET",
           credentials: "include",
           headers: {
