@@ -1,6 +1,6 @@
-<div class="relative flex size-full min-h-screen flex-col bg-transparent overflow-x-hidden">
+<div class="relative flex h-screen min-h-screen flex-col bg-transparent overflow-x-hidden">
     <div class="layout-container flex h-full grow flex-col">
-      <div class="px-40 flex flex-1 justify-center py-5 ">
+      <div class="px-32 flex flex-1 justify-center py-5 h-full">
         <div class="layout-content-container flex flex-col max-w-[2010px] flex-1">
             <!--Page heading-->
             <div class="relative">
@@ -113,7 +113,7 @@
                 </label>
             </div>
 
-            <div class="snap-y snap-mandatory">
+            <div class="overflow-y-auto h-full flex flex-col gap-10">
               <app-search-event-card   
               *ngFor="let event of filteredEvents"
               [eventID]="event.eventId"
@@ -131,16 +131,7 @@
               [hostEmail]="host.email"
               [hostImage]="host.employee_picture_link"
               ></app-search-host-card>
-              <!-- <app-search-event-card></app-search-event-card>
-              <app-search-event-card></app-search-event-card>
-              <app-search-host-card></app-search-host-card>
-              <app-search-event-card></app-search-event-card>
-              <app-search-event-card></app-search-event-card>
-              <app-search-host-card></app-search-host-card> -->
-              <!-- <app-search-host-card></app-search-host-card> -->
             </div>
-
-          
         </div>
       </div>
     </div>
