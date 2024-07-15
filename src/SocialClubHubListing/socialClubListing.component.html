@@ -1,9 +1,9 @@
 <div class="relative flex h-screen flex-col bg-transparent overflow-hidden ">
     <div class="layout-container flex h-full grow flex-col">
-      <div class="px-40 flex flex-1 justify-center py-5 h-full ">
+      <div class="px-5 md:px-32 flex flex-1 justify-center py-5 h-full ">
         <div class="layout-content-container flex flex-col max-w-[2010px] h-full flex-1">
             <!--Page heading-->
-            <div class="flex items-center justify-between mx-10 mb-5">
+            <div class="flex items-center justify-between md:mx-10 mb-5">
                 <div class="text-white text-center font-bold text-2xl"><p>My Clubs</p></div>
                 <div>
                     <button  class="btn" routerLink="/socialclubcreate">
@@ -12,7 +12,7 @@
                 </div>
             </div>
 
-              <div class="overflow-y-auto h-full">
+              <div class="overflow-y-auto h-full flex flex-col gap-10">
                 <app-social-club-listing-card></app-social-club-listing-card>
                 <app-social-club-listing-card></app-social-club-listing-card>
                 <app-social-club-listing-card></app-social-club-listing-card>
