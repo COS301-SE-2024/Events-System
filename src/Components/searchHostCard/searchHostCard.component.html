@@ -1,14 +1,14 @@
 
 <div class="flex gap-4 bg-transparent px-4 py-3">
-    <div class="avatar">
+    <div class="avatar placeholder">
         <div class="w-44 rounded-xl">
-          <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+          <span class="text-3xl">{{ getInitials() }}</span>
         </div>
     </div>
     
     <div class="flex flex-1 flex-col justify-center">
-      <p class="victor-mono-normal uppercase tracking-wide text-accent font-semibold text-base">Host Name</p>
-      <p class="cutive-mono-regular text-[#93adc8] text-sm font-normal ">Host Email</p>
+      <p class="victor-mono-normal uppercase tracking-wide text-accent font-semibold text-base">{{hostName}}</p>
+      <p class="cutive-mono-regular text-[#93adc8] text-sm font-normal ">{{hostEmail}}</p>
       <p class="cutive-mono-regular text-[#93adc8] text-sm font-normal ">Host clubs</p>
     </div>
 
@@ -20,7 +20,7 @@
     <dialog id="my_modal_1" class="modal">
         <div class="flex flex-col bg-[#0f1628] w-1/2 h-1/2 rounded-xl gap-10 px-10">
             <div>
-                <h3 class="lexend-deca-extraLight justify-center font-medium mt-5">[Host name]'s social clubs</h3>
+                <h3 class="lexend-deca-extraLight justify-center font-medium mt-5">{{hostName}}'s social clubs</h3>
             </div>
             
             <div class="flex flex-wrap gap-10 size-full justify-center overflow-y-scroll snap-y snap-mandatory pt-10">
