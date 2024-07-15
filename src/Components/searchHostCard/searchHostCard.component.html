@@ -1,55 +1,66 @@
 
 <div class="flex gap-4 bg-transparent px-4 py-3">
-    <div class="avatar placeholder">
-        <div class="w-44 rounded-xl">
-          <span class="text-3xl">{{ getInitials() }}</span>
-        </div>
-    </div>
-    
-    <div class="flex flex-1 flex-col justify-center">
-      <p class="victor-mono-normal uppercase tracking-wide text-accent font-semibold text-base">{{hostName}}</p>
-      <p class="cutive-mono-regular text-[#93adc8] text-sm font-normal ">{{hostEmail}}</p>
-      <p class="cutive-mono-regular text-[#93adc8] text-sm font-normal ">Host clubs</p>
-    </div>
 
-    <div class="flex flex-col justify-center">
-        <button onclick="my_modal_1.showModal()" class="cutive-mono-regular cursor-pointer flex h-8 shrink-0 items-center justify-center font-semibold text-white text-sm border-none rounded-xl bg-gradient-to-r from-accent to-secondary pl-4 pr-4 transition duration-200 hover:bg-gradient-to-r hover:from-accent hover:to-accent disabled:opacity-30 disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80"> 
-            View Clubs
-        </button>
+    
+</div>
+
+
+<div class="card lg:card-side bg-base-100 shadow-xl">
+  
+    <div class="md:w-96 sm:rounded-l-3xl bg-pink-700">
+      <span class="text-3xl items-center justify-center">{{ getInitials() }}</span>
+    </div>
+      
+  <div class="card-body">
+    <div class="flex flex-1 flex-col justify-center">
+      <p class="victor-mono-normal uppercase tracking-wide text-accent font-semibold text-base mb-5">{{hostName}}</p>
+      <p class="cutive-mono-regular text-[#93adc8] text-sm font-normal mb-1.5">{{hostEmail}}</p>
+      <p class="cutive-mono-regular text-[#93adc8] text-sm font-normal ">Host clubs</p>
+      
+      <div class="flex gap-3 p-3 flex-wrap ">
+        <!-- <app-tag></app-tag> -->
+      </div>
+    </div>
+      
+    <div class="card-actions justify-end">
+      <button onclick="my_modal_1.showModal()"  class="cutive-mono-regular cursor-pointer flex h-8 shrink-0 items-center justify-center font-semibold text-white text-sm border-none rounded-xl bg-gradient-to-r from-accent to-secondary pl-6 pr-7 transition duration-200 hover:bg-gradient-to-r hover:from-accent hover:to-accent focus:outline-none disabled:opacity-30 disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80"> 
+        View Clubs
+      </button>
     </div>
     <dialog id="my_modal_1" class="modal">
-        <div class="flex flex-col bg-[#0f1628] w-1/2 h-1/2 rounded-xl gap-10 px-10">
-            <div>
-                <h3 class="lexend-deca-extraLight justify-center font-medium mt-5">{{hostName}}'s social clubs</h3>
-            </div>
-            
-            <div class="flex flex-wrap gap-10 size-full justify-center overflow-y-scroll snap-y snap-mandatory pt-10">
-              <app-search-social-club-card></app-search-social-club-card>
-              <app-search-social-club-card></app-search-social-club-card>
-              <app-search-social-club-card></app-search-social-club-card>
-              <app-search-social-club-card></app-search-social-club-card>
-              <app-search-social-club-card></app-search-social-club-card>
-              <app-search-social-club-card></app-search-social-club-card>
-              <app-search-social-club-card></app-search-social-club-card>
-              <app-search-social-club-card></app-search-social-club-card>
-              <app-search-social-club-card></app-search-social-club-card>
-              <app-search-social-club-card></app-search-social-club-card>
-              <app-search-social-club-card></app-search-social-club-card>
-              <app-search-social-club-card></app-search-social-club-card>
-              <app-search-social-club-card></app-search-social-club-card>
-              <app-search-social-club-card></app-search-social-club-card>
-            </div>
-            
-          <div class="modal-action items-center justify-center mb-5">
-            <form method="dialog">
-              <!-- if there is a button in form, it will close the modal -->
-              <button class="cutive-mono-regular cursor-pointer flex h-8 shrink-0 items-center justify-center font-semibold text-white text-sm border-none rounded-xl bg-gradient-to-r from-accent to-secondary pl-4 pr-4 transition duration-200 hover:bg-gradient-to-r hover:from-accent hover:to-accent disabled:opacity-30 disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80">
-                Close
-              </button>
-            </form>
+      <div class="flex flex-col bg-[#0f1628] w-1/2 h-1/2 rounded-xl gap-10 px-10">
+          <div>
+              <h3 class="lexend-deca-extraLight justify-center font-medium mt-5">{{hostName}}'s social clubs</h3>
           </div>
+          
+          <div class="flex flex-wrap gap-10 size-full justify-center overflow-y-scroll snap-y snap-mandatory pt-10">
+            <app-search-social-club-card></app-search-social-club-card>
+            <app-search-social-club-card></app-search-social-club-card>
+            <app-search-social-club-card></app-search-social-club-card>
+            <app-search-social-club-card></app-search-social-club-card>
+            <app-search-social-club-card></app-search-social-club-card>
+            <app-search-social-club-card></app-search-social-club-card>
+            <app-search-social-club-card></app-search-social-club-card>
+            <app-search-social-club-card></app-search-social-club-card>
+            <app-search-social-club-card></app-search-social-club-card>
+            <app-search-social-club-card></app-search-social-club-card>
+            <app-search-social-club-card></app-search-social-club-card>
+            <app-search-social-club-card></app-search-social-club-card>
+            <app-search-social-club-card></app-search-social-club-card>
+            <app-search-social-club-card></app-search-social-club-card>
+          </div>
+          
+        <div class="modal-action items-center justify-center mb-5">
+          <form method="dialog">
+            <!-- if there is a button in form, it will close the modal -->
+            <button class="cutive-mono-regular cursor-pointer flex h-8 shrink-0 items-center justify-center font-semibold text-white text-sm border-none rounded-xl bg-gradient-to-r from-accent to-secondary pl-4 pr-4 transition duration-200 hover:bg-gradient-to-r hover:from-accent hover:to-accent disabled:opacity-30 disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80">
+              Close
+            </button>
+          </form>
         </div>
-    </dialog>
+      </div>
+  </dialog>
+  </div>
 </div>
  
 
