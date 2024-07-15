@@ -52,7 +52,6 @@ public class EventService {
             event.setEventAgendas(eventDetails.getEventAgendas());
             event.setEventPreparation(eventDetails.getEventPreparation());
             event.setEventDietaryAccommodations(eventDetails.getEventDietaryAccommodations());
-            event.setTags(eventDetails.getTags());
             return eventRepository.save(event);
         } else {
             throw new RuntimeException("Event not found with id " + eventId);
@@ -107,9 +106,6 @@ public class EventService {
                         break;
                     case "eventDietaryAccommodations":
                         event.setEventDietaryAccommodations(convertToStringArray(value));
-                        break;
-                    case "tags":
-                        event.setTags(convertToStringArray(value));
                         break;
                     default:
                         throw new IllegalArgumentException("Invalid attribute: " + key);

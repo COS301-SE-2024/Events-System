@@ -56,9 +56,6 @@ public class Event {
     @Column(name = "event_dietary_accommodations", columnDefinition = "TEXT[]")
     private String[] eventDietaryAccommodations;
 
-    @Column(name = "tags", columnDefinition = "TEXT[]")
-    private String[] tags;
-
     @Column(name = "created_at", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Timestamp createdAt;
 
@@ -184,14 +181,6 @@ public class Event {
 
     public void setEventDietaryAccommodations(String[] eventDietaryAccommodations) {
         this.eventDietaryAccommodations = eventDietaryAccommodations;
-    }
-
-    public String[] getTags() {
-        return tags;
-    }
-
-    public void setTags(String[] tags) {
-        this.tags = tags;
     }
 
     public Timestamp getCreatedAt() {
