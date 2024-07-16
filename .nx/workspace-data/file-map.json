@@ -125,1121 +125,6 @@
   "fileMap": {
     "nonProjectFiles": [],
     "projectFileMap": {
-      "Events-System": [
-        {
-          "file": ".eslintignore",
-          "hash": "13404745306227114823"
-        },
-        {
-          "file": ".eslintrc.json",
-          "hash": "12676166696332028973"
-        },
-        {
-          "file": ".gcloudignore",
-          "hash": "2977003314359055797"
-        },
-        {
-          "file": ".github/ISSUE_TEMPLATE/bug_report.md",
-          "hash": "2066545712756389666"
-        },
-        {
-          "file": ".github/ISSUE_TEMPLATE/feature_request.md",
-          "hash": "9899739965381985595"
-        },
-        {
-          "file": ".github/ISSUE_TEMPLATE/working_on.md",
-          "hash": "8077016225033028441"
-        },
-        {
-          "file": ".github/pull_request_template.md",
-          "hash": "15559114681152154216"
-        },
-        {
-          "file": ".github/workflows/code-coverage.yml",
-          "hash": "6744021159549392766"
-        },
-        {
-          "file": ".github/workflows/e2e-tests.yml",
-          "hash": "11321929738127511680"
-        },
-        {
-          "file": ".github/workflows/unit-tests.yml",
-          "hash": "9130784407178762884"
-        },
-        {
-          "file": ".gitignore",
-          "hash": "5716721999052945312"
-        },
-        {
-          "file": ".prettierignore",
-          "hash": "135344717789917661"
-        },
-        {
-          "file": ".prettierrc",
-          "hash": "6820402234827505055"
-        },
-        {
-          "file": ".vscode/extensions.json",
-          "hash": "12670930285458316005"
-        },
-        {
-          "file": ".vscode/settings.json",
-          "hash": "79448974790339836"
-        },
-        {
-          "file": "README.md",
-          "hash": "14365389750893311813"
-        },
-        {
-          "file": "backend-deploy.bash",
-          "hash": "10842902167819811765"
-        },
-        {
-          "file": "cloudbuild.yaml",
-          "hash": "9413698248199728893"
-        },
-        {
-          "file": "jest.config.ts",
-          "hash": "9530947708705214178"
-        },
-        {
-          "file": "jest.preset.js",
-          "hash": "7473220183190921152",
-          "deps": [
-            "npm:@nx/jest"
-          ]
-        },
-        {
-          "file": "ngsw-config.json",
-          "hash": "9118285195023689490"
-        },
-        {
-          "file": "nx.json",
-          "hash": "10308169088070628167"
-        },
-        {
-          "file": "package-lock.json",
-          "hash": "8567873452206843045"
-        },
-        {
-          "file": "package.json",
-          "hash": "7358191058978519892",
-          "deps": [
-            "npm:@angular-builders/custom-webpack",
-            "npm:@angular-devkit/build-angular",
-            "npm:@angular-devkit/core",
-            "npm:@angular-devkit/schematics",
-            "npm:@angular-eslint/eslint-plugin",
-            "npm:@angular-eslint/eslint-plugin-template",
-            "npm:@angular-eslint/template-parser",
-            "npm:@angular/cli",
-            "npm:@angular/compiler-cli",
-            "npm:@angular/language-service",
-            "npm:@angular/pwa",
-            "npm:@nx/eslint-plugin",
-            "npm:@nx/jest",
-            "npm:@nx/js",
-            "npm:@nx/playwright",
-            "npm:@nx/workspace",
-            "npm:@playwright/test",
-            "npm:@schematics/angular",
-            "npm:@swc-node/register",
-            "npm:@swc/core",
-            "npm:@swc/helpers",
-            "npm:@testing-library/angular",
-            "npm:@testing-library/jest-dom",
-            "npm:@types/express",
-            "npm:@types/jest",
-            "npm:@types/node",
-            "npm:@types/validator",
-            "npm:@typescript-eslint/eslint-plugin",
-            "npm:@typescript-eslint/parser",
-            "npm:autoprefixer",
-            "npm:browser-sync",
-            "npm:cross-fetch",
-            "npm:daisyui",
-            "npm:eslint",
-            "npm:eslint-config-prettier",
-            "npm:eslint-plugin-playwright",
-            "npm:jest",
-            "npm:jest-environment-jsdom",
-            "npm:jest-fetch-mock",
-            "npm:jest-preset-angular",
-            "npm:node-fetch",
-            "npm:nx",
-            "npm:playwright",
-            "npm:postcss",
-            "npm:postcss-loader",
-            "npm:prettier",
-            "npm:start-server-and-test",
-            "npm:tailwindcss",
-            "npm:ts-jest",
-            "npm:ts-node",
-            "npm:typescript",
-            "npm:@angular/animations",
-            "npm:@angular/common",
-            "npm:@angular/compiler",
-            "npm:@angular/core",
-            "npm:@angular/forms",
-            "npm:@angular/platform-browser",
-            "npm:@angular/platform-browser-dynamic",
-            "npm:@angular/platform-server",
-            "npm:@angular/router",
-            "npm:@angular/service-worker",
-            "npm:@angular/ssr",
-            "npm:@fullcalendar/core",
-            "npm:@fullcalendar/daygrid",
-            "npm:@fullcalendar/interaction",
-            "npm:@fullcalendar/list",
-            "npm:@fullcalendar/timegrid",
-            "npm:@material-tailwind/html",
-            "npm:@ng-icons/core",
-            "npm:@ng-icons/feather-icons",
-            "npm:@ng-icons/heroicons",
-            "npm:@nxrocks/nx-spring-boot",
-            "npm:contentful-management",
-            "npm:express",
-            "npm:fullcalendar",
-            "npm:primeflex",
-            "npm:primeicons",
-            "npm:rxjs",
-            "npm:tslib",
-            "npm:validator",
-            "npm:zone.js"
-          ]
-        },
-        {
-          "file": "project.json",
-          "hash": "8603798285533325588"
-        },
-        {
-          "file": "public/icons/icon-128x128.png",
-          "hash": "16119513566521364320"
-        },
-        {
-          "file": "public/icons/icon-144x144.png",
-          "hash": "7918264055681161054"
-        },
-        {
-          "file": "public/icons/icon-152x152.png",
-          "hash": "15801439294603939434"
-        },
-        {
-          "file": "public/icons/icon-192x192.png",
-          "hash": "5426725225393538606"
-        },
-        {
-          "file": "public/icons/icon-384x384.png",
-          "hash": "14349113523743396697"
-        },
-        {
-          "file": "public/icons/icon-512x512.png",
-          "hash": "15496412176428542718"
-        },
-        {
-          "file": "public/icons/icon-72x72.png",
-          "hash": "8211841038932698272"
-        },
-        {
-          "file": "public/icons/icon-96x96.png",
-          "hash": "17857169027528193372"
-        },
-        {
-          "file": "public/manifest.webmanifest",
-          "hash": "7909873097175117086"
-        },
-        {
-          "file": "readme/BK.jpg",
-          "hash": "3543663753310597543"
-        },
-        {
-          "file": "readme/Kezlyyn.jpg",
-          "hash": "12314720298271248642"
-        },
-        {
-          "file": "readme/Mathenda.jpeg",
-          "hash": "1342842690170281425"
-        },
-        {
-          "file": "readme/Mathenda1.jpg",
-          "hash": "7879110586544683312"
-        },
-        {
-          "file": "readme/Ofentse.jpg",
-          "hash": "3905451743052703555"
-        },
-        {
-          "file": "readme/Rea.jpg",
-          "hash": "17445860757041059775"
-        },
-        {
-          "file": "readme/tester.txt",
-          "hash": "13923616600913384927"
-        },
-        {
-          "file": "server.ts",
-          "hash": "10667595029257176534",
-          "deps": [
-            "npm:zone.js",
-            "npm:@angular/common",
-            "npm:@angular/ssr",
-            "npm:express"
-          ]
-        },
-        {
-          "file": "src/Components/Calender-Event-Button/Calender-Event-button.component.css",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "src/Components/Calender-Event-Button/Calender-Event-button.component.html",
-          "hash": "9208491089454010633"
-        },
-        {
-          "file": "src/Components/Calender-Event-Button/Calender-Event-button.component.spec.ts",
-          "hash": "1673279356129564527",
-          "deps": [
-            "npm:@angular/core"
-          ]
-        },
-        {
-          "file": "src/Components/Calender-Event-Button/Calender-Event-button.component.ts",
-          "hash": "9608668022678538489",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/common"
-          ]
-        },
-        {
-          "file": "src/Components/EventCard/eventCard.component.css",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "src/Components/EventCard/eventCard.component.html",
-          "hash": "4282394394270549039"
-        },
-        {
-          "file": "src/Components/EventCard/eventCard.component.spec.ts",
-          "hash": "2659409748987392406",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/router",
-            "npm:rxjs"
-          ]
-        },
-        {
-          "file": "src/Components/EventCard/eventCard.component.ts",
-          "hash": "10689540842690235600",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/common",
-            "npm:@angular/router"
-          ]
-        },
-        {
-          "file": "src/Components/GhostEventCard/GhostEventCard.component.css",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "src/Components/GhostEventCard/GhostEventCard.component.html",
-          "hash": "12968668284903987524"
-        },
-        {
-          "file": "src/Components/GhostEventCard/GhostEventCard.component.spec.ts",
-          "hash": "16552357647522424953",
-          "deps": [
-            "npm:@angular/core"
-          ]
-        },
-        {
-          "file": "src/Components/GhostEventCard/GhostEventCard.component.ts",
-          "hash": "6668319847042355460",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/common"
-          ]
-        },
-        {
-          "file": "src/Components/HomeEventCard/HomeEventCard.component.css",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "src/Components/HomeEventCard/HomeEventCard.component.html",
-          "hash": "5440342735369063603"
-        },
-        {
-          "file": "src/Components/HomeEventCard/HomeEventCard.component.spec.ts",
-          "hash": "5380062564359265962",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/router",
-            "npm:rxjs"
-          ]
-        },
-        {
-          "file": "src/Components/HomeEventCard/HomeEventCard.component.ts",
-          "hash": "4490635617892163289",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/common",
-            "npm:@angular/router"
-          ]
-        },
-        {
-          "file": "src/Components/HomeFeaturedEvent/HomeFeaturedEvent.component.css",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "src/Components/HomeFeaturedEvent/HomeFeaturedEvent.component.html",
-          "hash": "7614470835144731042"
-        },
-        {
-          "file": "src/Components/HomeFeaturedEvent/HomeFeaturedEvent.component.spec.ts",
-          "hash": "15012571920505524103",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/router",
-            "npm:rxjs"
-          ]
-        },
-        {
-          "file": "src/Components/HomeFeaturedEvent/HomeFeaturedEvent.component.ts",
-          "hash": "10348874373689320769",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/common",
-            "npm:@angular/router"
-          ]
-        },
-        {
-          "file": "src/Components/MyEventsCard/MyEventsCard.component.css",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "src/Components/MyEventsCard/MyEventsCard.component.html",
-          "hash": "662909933533209234"
-        },
-        {
-          "file": "src/Components/MyEventsCard/MyEventsCard.component.spec.ts",
-          "hash": "14735198250467844737",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/router",
-            "npm:rxjs"
-          ]
-        },
-        {
-          "file": "src/Components/MyEventsCard/MyEventsCard.component.ts",
-          "hash": "13467596836781752526",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/common",
-            "npm:@angular/router"
-          ]
-        },
-        {
-          "file": "src/Components/MyEventsCardSkeleton/MyEventsCardSkeleton.component.css",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "src/Components/MyEventsCardSkeleton/MyEventsCardSkeleton.component.html",
-          "hash": "12002524691798306404"
-        },
-        {
-          "file": "src/Components/MyEventsCardSkeleton/MyEventsCardSkeleton.component.spec.ts",
-          "hash": "9202736930330172718",
-          "deps": [
-            "npm:@angular/core"
-          ]
-        },
-        {
-          "file": "src/Components/MyEventsCardSkeleton/MyEventsCardSkeleton.component.ts",
-          "hash": "15525094564547620819",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/common"
-          ]
-        },
-        {
-          "file": "src/Components/SocialClubCard/socialClubCard.component.css",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "src/Components/SocialClubCard/socialClubCard.component.html",
-          "hash": "4055739382697055907"
-        },
-        {
-          "file": "src/Components/SocialClubCard/socialClubCard.component.spec.ts",
-          "hash": "9954916506620792513",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/router",
-            "npm:rxjs"
-          ]
-        },
-        {
-          "file": "src/Components/SocialClubCard/socialClubCard.component.ts",
-          "hash": "604390451346350956",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/common",
-            "npm:@angular/router"
-          ]
-        },
-        {
-          "file": "src/Components/event/event.component.css",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "src/Components/event/event.component.html",
-          "hash": "450750402230626167"
-        },
-        {
-          "file": "src/Components/event/event.component.spec.ts",
-          "hash": "589325166925661669",
-          "deps": [
-            "npm:@angular/core"
-          ]
-        },
-        {
-          "file": "src/Components/event/event.component.ts",
-          "hash": "7020974058432950247",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/common"
-          ]
-        },
-        {
-          "file": "src/CreateEvent/CreateEvent.component.css",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "src/CreateEvent/CreateEvent.component.html",
-          "hash": "11880030418633815352"
-        },
-        {
-          "file": "src/CreateEvent/CreateEvent.component.spec.ts",
-          "hash": "12908298534984604973",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/router",
-            "npm:rxjs"
-          ]
-        },
-        {
-          "file": "src/CreateEvent/CreateEvent.component.ts",
-          "hash": "4333695437438590257",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/common",
-            "npm:@angular/animations",
-            "npm:validator",
-            "npm:@angular/forms"
-          ]
-        },
-        {
-          "file": "src/CreateEvent/event-data.service.ts",
-          "hash": "8226058424893630583",
-          "deps": [
-            "npm:@angular/core"
-          ]
-        },
-        {
-          "file": "src/DeleteEvent/DeleteEvent.component.css",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "src/DeleteEvent/DeleteEvent.component.html",
-          "hash": "6457744470351480536"
-        },
-        {
-          "file": "src/DeleteEvent/DeleteEvent.component.spec.ts",
-          "hash": "16883380046351437564",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/router",
-            "npm:rxjs"
-          ]
-        },
-        {
-          "file": "src/DeleteEvent/DeleteEvent.component.ts",
-          "hash": "15452663311747735406",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/common",
-            "npm:@angular/router"
-          ]
-        },
-        {
-          "file": "src/Help/Help.component.css",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "src/Help/Help.component.html",
-          "hash": "18107712979290559847"
-        },
-        {
-          "file": "src/Help/Help.component.spec.ts",
-          "hash": "17992384897300200893",
-          "deps": [
-            "npm:@angular/core"
-          ]
-        },
-        {
-          "file": "src/Help/Help.component.ts",
-          "hash": "17865919291848086248",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/common",
-            "npm:@angular/forms"
-          ]
-        },
-        {
-          "file": "src/MyEvents/MyEvents.component.css",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "src/MyEvents/MyEvents.component.html",
-          "hash": "533323609662691658"
-        },
-        {
-          "file": "src/MyEvents/MyEvents.component.spec.ts",
-          "hash": "16758165759302940330",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/router",
-            "npm:rxjs"
-          ]
-        },
-        {
-          "file": "src/MyEvents/MyEvents.component.ts",
-          "hash": "11170190566113104742",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/common",
-            "npm:@angular/router"
-          ]
-        },
-        {
-          "file": "src/UpdateEvent/UpdateEvent.component.css",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "src/UpdateEvent/UpdateEvent.component.html",
-          "hash": "2612315278319847948"
-        },
-        {
-          "file": "src/UpdateEvent/UpdateEvent.component.spec.ts",
-          "hash": "17849546176991741458",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/router",
-            "npm:rxjs"
-          ]
-        },
-        {
-          "file": "src/UpdateEvent/UpdateEvent.component.ts",
-          "hash": "3535283149044599214",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/router",
-            "npm:@angular/common",
-            "npm:@angular/animations",
-            "npm:validator",
-            "npm:@angular/forms"
-          ]
-        },
-        {
-          "file": "src/app/app.component.css",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "src/app/app.component.html",
-          "hash": "17125052494484260733"
-        },
-        {
-          "file": "src/app/app.component.spec.ts",
-          "hash": "15089087513778722369",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/router"
-          ]
-        },
-        {
-          "file": "src/app/app.component.ts",
-          "hash": "4579127336072196058",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/router",
-            "npm:@angular/common",
-            "npm:@fullcalendar/angular",
-            "npm:rxjs"
-          ]
-        },
-        {
-          "file": "src/app/app.config.server.ts",
-          "hash": "9913780908210103544",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/platform-server"
-          ]
-        },
-        {
-          "file": "src/app/app.config.ts",
-          "hash": "16870461093434633519",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/router",
-            "npm:@angular/platform-browser",
-            "npm:@angular/service-worker"
-          ]
-        },
-        {
-          "file": "src/app/app.routes.ts",
-          "hash": "15971655461836828078",
-          "deps": [
-            "npm:@angular/router"
-          ]
-        },
-        {
-          "file": "src/app/pwa.service.spec.ts",
-          "hash": "9568167236721579797",
-          "deps": [
-            "npm:@angular/core"
-          ]
-        },
-        {
-          "file": "src/app/pwa.service.ts",
-          "hash": "6662473526073568330",
-          "deps": [
-            "npm:@angular/core",
-            "npm:rxjs"
-          ]
-        },
-        {
-          "file": "src/app/random-header.service.ts",
-          "hash": "6906966724142490761",
-          "deps": [
-            "npm:@angular/core"
-          ]
-        },
-        {
-          "file": "src/app/random-image-service.service.ts",
-          "hash": "3788469175594338424",
-          "deps": [
-            "npm:@angular/core"
-          ]
-        },
-        {
-          "file": "src/assets/.gitkeep",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "src/assets/icons/icon-128x128.png",
-          "hash": "13615529486228990951"
-        },
-        {
-          "file": "src/assets/icons/icon-144x144.png",
-          "hash": "7025829944022228135"
-        },
-        {
-          "file": "src/assets/icons/icon-152x152.png",
-          "hash": "17984962064727462808"
-        },
-        {
-          "file": "src/assets/icons/icon-192x192.png",
-          "hash": "18060266301614708629"
-        },
-        {
-          "file": "src/assets/icons/icon-384x384.png",
-          "hash": "15987642442916206050"
-        },
-        {
-          "file": "src/assets/icons/icon-48x48.png",
-          "hash": "16293462733058606352"
-        },
-        {
-          "file": "src/assets/icons/icon-512x512.png",
-          "hash": "16547280844040200349"
-        },
-        {
-          "file": "src/assets/icons/icon-72x72.png",
-          "hash": "8381800887959774357"
-        },
-        {
-          "file": "src/assets/icons/icon-96x96.png",
-          "hash": "15858774662546546138"
-        },
-        {
-          "file": "src/assets/manifest.webmanifest",
-          "hash": "18077391278371872486"
-        },
-        {
-          "file": "src/assets/pexels-orlovamaria-4947565.jpg",
-          "hash": "3927389773880462384"
-        },
-        {
-          "file": "src/assets/pexels-rahulp9800-1652361.jpg",
-          "hash": "11575063713931845490"
-        },
-        {
-          "file": "src/assets/pexels-travelerchitect-15016180.jpg",
-          "hash": "14460480520178271545"
-        },
-        {
-          "file": "src/assets/pexels-vishnurnair-1105666.jpg",
-          "hash": "16026712457933984445"
-        },
-        {
-          "file": "src/assets/screenshots/1.png",
-          "hash": "16943756826676396648"
-        },
-        {
-          "file": "src/assets/screenshots/2.png",
-          "hash": "1800606749505105352"
-        },
-        {
-          "file": "src/calender/calender-event.service.ts",
-          "hash": "4188448419958502813",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@fullcalendar/core"
-          ]
-        },
-        {
-          "file": "src/calender/calender.component.css",
-          "hash": "16787893789805537497"
-        },
-        {
-          "file": "src/calender/calender.component.html",
-          "hash": "15250676913519073626"
-        },
-        {
-          "file": "src/calender/calender.component.spec.ts",
-          "hash": "3286567669491655099",
-          "deps": [
-            "npm:@angular/core"
-          ]
-        },
-        {
-          "file": "src/calender/calender.component.ts",
-          "hash": "15410187510657906392",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/common",
-            "npm:@fullcalendar/daygrid",
-            "npm:@angular/router",
-            "npm:@fullcalendar/core",
-            "npm:@fullcalendar/interaction",
-            "npm:@fullcalendar/timegrid",
-            "npm:@fullcalendar/list",
-            "npm:@angular/animations"
-          ]
-        },
-        {
-          "file": "src/calender/event-utils.ts",
-          "hash": "8395933343461612339",
-          "deps": [
-            "npm:@fullcalendar/core"
-          ]
-        },
-        {
-          "file": "src/event/event.component.css",
-          "hash": "10215178299943568581"
-        },
-        {
-          "file": "src/event/event.component.html",
-          "hash": "6042319200540397736"
-        },
-        {
-          "file": "src/event/event.component.spec.ts",
-          "hash": "5336333917592745565",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/router",
-            "npm:rxjs"
-          ]
-        },
-        {
-          "file": "src/event/event.component.ts",
-          "hash": "4554695652906138688",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/router",
-            "npm:@angular/common",
-            "npm:@angular/animations"
-          ]
-        },
-        {
-          "file": "src/events/events.component.css",
-          "hash": "12717642519783201180"
-        },
-        {
-          "file": "src/events/events.component.html",
-          "hash": "6464736425522873170"
-        },
-        {
-          "file": "src/events/events.component.spec.ts",
-          "hash": "10627675933009583935",
-          "deps": [
-            "npm:@angular/core"
-          ]
-        },
-        {
-          "file": "src/events/events.component.ts",
-          "hash": "5317820009622449698",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/common"
-          ]
-        },
-        {
-          "file": "src/favicon.ico",
-          "hash": "9303420814833116677"
-        },
-        {
-          "file": "src/home/home.component.css",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "src/home/home.component.html",
-          "hash": "2000452768932108692"
-        },
-        {
-          "file": "src/home/home.component.spec.ts",
-          "hash": "12115975632006562492",
-          "deps": [
-            "npm:@angular/core"
-          ]
-        },
-        {
-          "file": "src/home/home.component.ts",
-          "hash": "8922689399253011486",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/common",
-            "npm:@angular/router"
-          ]
-        },
-        {
-          "file": "src/index.html",
-          "hash": "3851723274961344318"
-        },
-        {
-          "file": "src/login/login.component.css",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "src/login/login.component.html",
-          "hash": "12933238484181316331"
-        },
-        {
-          "file": "src/login/login.component.spec.ts",
-          "hash": "5724457895725300355",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/router",
-            "npm:rxjs"
-          ]
-        },
-        {
-          "file": "src/login/login.component.ts",
-          "hash": "939734113568428025",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/router",
-            "npm:@angular/forms",
-            "npm:@angular/common"
-          ]
-        },
-        {
-          "file": "src/main.server.ts",
-          "hash": "9257623809215978365",
-          "deps": [
-            "npm:@angular/platform-browser"
-          ]
-        },
-        {
-          "file": "src/main.ts",
-          "hash": "875041330523952236",
-          "deps": [
-            "npm:@angular/platform-browser"
-          ]
-        },
-        {
-          "file": "src/profile/profile.component.css",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "src/profile/profile.component.html",
-          "hash": "1426929990707360643"
-        },
-        {
-          "file": "src/profile/profile.component.spec.ts",
-          "hash": "11774746668524996965",
-          "deps": [
-            "npm:@testing-library/angular",
-            "npm:@angular/router",
-            "npm:rxjs",
-            "npm:@testing-library/jest-dom"
-          ]
-        },
-        {
-          "file": "src/profile/profile.component.ts",
-          "hash": "13772507148083959426",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/common",
-            "npm:@angular/router"
-          ]
-        },
-        {
-          "file": "src/settings/settings.component.css",
-          "hash": "17821034069673885187"
-        },
-        {
-          "file": "src/settings/settings.component.html",
-          "hash": "1041812718750876363"
-        },
-        {
-          "file": "src/settings/settings.component.spec.ts",
-          "hash": "6686448280443457284",
-          "deps": [
-            "npm:@testing-library/angular",
-            "npm:@angular/router",
-            "npm:rxjs",
-            "npm:@testing-library/jest-dom"
-          ]
-        },
-        {
-          "file": "src/settings/settings.component.ts",
-          "hash": "8942486261953707517",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/common",
-            "npm:rxjs",
-            "npm:@angular/router",
-            "npm:contentful-management",
-            "npm:@angular/forms"
-          ]
-        },
-        {
-          "file": "src/socialClub/socialClub.component.css",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "src/socialClub/socialClub.component.html",
-          "hash": "17791815863536992390"
-        },
-        {
-          "file": "src/socialClub/socialClub.component.spec.ts",
-          "hash": "14189668192101721373",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/router",
-            "npm:rxjs"
-          ]
-        },
-        {
-          "file": "src/socialClub/socialClub.component.ts",
-          "hash": "2790131510213062626",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/router",
-            "npm:@angular/common"
-          ]
-        },
-        {
-          "file": "src/styles.css",
-          "hash": "7099113843679733981"
-        },
-        {
-          "file": "src/test-setup.ts",
-          "hash": "15080743512370418069",
-          "deps": [
-            "npm:jest-preset-angular",
-            "npm:jest-fetch-mock"
-          ]
-        },
-        {
-          "file": "tailwind.config.js",
-          "hash": "5651587236504355459",
-          "deps": [
-            "npm:daisyui"
-          ]
-        },
-        {
-          "file": "test-results/.last-run.json",
-          "hash": "8683462887774408116"
-        },
-        {
-          "file": "tsconfig.app.json",
-          "hash": "16864811146245124190"
-        },
-        {
-          "file": "tsconfig.editor.json",
-          "hash": "17575078801745175164"
-        },
-        {
-          "file": "tsconfig.json",
-          "hash": "16580656841355313823"
-        },
-        {
-          "file": "tsconfig.server.json",
-          "hash": "3488468286174578404"
-        },
-        {
-          "file": "tsconfig.spec.json",
-          "hash": "1293240435771606091"
-        },
-        {
-          "file": "webpack.config.js",
-          "hash": "9763475564647512955",
-          "deps": [
-            [
-              "npm:postcss-import",
-              "dynamic"
-            ],
-            [
-              "npm:tailwindcss",
-              "dynamic"
-            ],
-            [
-              "npm:autoprefixer",
-              "dynamic"
-            ]
-          ]
-        }
-      ],
-      "e2e": [
-        {
-          "file": "e2e/.eslintrc.json",
-          "hash": "15603494122075574473"
-        },
-        {
-          "file": "e2e/playwright.config.ts",
-          "hash": "9971182091902929953",
-          "deps": [
-            "npm:@playwright/test",
-            "npm:@nx/playwright",
-            "npm:@nx/devkit"
-          ]
-        },
-        {
-          "file": "e2e/project.json",
-          "hash": "5814830115590049490"
-        },
-        {
-          "file": "e2e/src/events.spec.ts",
-          "hash": "17134108875182778158",
-          "deps": [
-            "npm:@playwright/test"
-          ]
-        },
-        {
-          "file": "e2e/tsconfig.json",
-          "hash": "5846556622446948315"
-        }
-      ],
       "backend": [
         {
           "file": "Backend/.gcloudignore",
@@ -1440,6 +325,726 @@
         {
           "file": "Backend/src/test/java/com/back/demo/EmployeeServiceTest.java",
           "hash": "4130237426376566568"
+        }
+      ],
+      "e2e": [
+        {
+          "file": "e2e/.eslintrc.json",
+          "hash": "15603494122075574473"
+        },
+        {
+          "file": "e2e/playwright.config.ts",
+          "hash": "9971182091902929953"
+        },
+        {
+          "file": "e2e/project.json",
+          "hash": "5814830115590049490"
+        },
+        {
+          "file": "e2e/src/events.spec.ts",
+          "hash": "17134108875182778158"
+        },
+        {
+          "file": "e2e/tsconfig.json",
+          "hash": "5846556622446948315"
+        }
+      ],
+      "Events-System": [
+        {
+          "file": ".eslintignore",
+          "hash": "13404745306227114823"
+        },
+        {
+          "file": ".eslintrc.json",
+          "hash": "12676166696332028973"
+        },
+        {
+          "file": ".gcloudignore",
+          "hash": "2977003314359055797"
+        },
+        {
+          "file": ".github/ISSUE_TEMPLATE/bug_report.md",
+          "hash": "2066545712756389666"
+        },
+        {
+          "file": ".github/ISSUE_TEMPLATE/feature_request.md",
+          "hash": "9899739965381985595"
+        },
+        {
+          "file": ".github/ISSUE_TEMPLATE/working_on.md",
+          "hash": "8077016225033028441"
+        },
+        {
+          "file": ".github/pull_request_template.md",
+          "hash": "15559114681152154216"
+        },
+        {
+          "file": ".github/workflows/code-coverage.yml",
+          "hash": "6744021159549392766"
+        },
+        {
+          "file": ".github/workflows/e2e-tests.yml",
+          "hash": "11321929738127511680"
+        },
+        {
+          "file": ".github/workflows/unit-tests.yml",
+          "hash": "9130784407178762884"
+        },
+        {
+          "file": ".gitignore",
+          "hash": "5716721999052945312"
+        },
+        {
+          "file": ".prettierignore",
+          "hash": "135344717789917661"
+        },
+        {
+          "file": ".prettierrc",
+          "hash": "6820402234827505055"
+        },
+        {
+          "file": ".vscode/extensions.json",
+          "hash": "12670930285458316005"
+        },
+        {
+          "file": ".vscode/settings.json",
+          "hash": "79448974790339836"
+        },
+        {
+          "file": "README.md",
+          "hash": "14365389750893311813"
+        },
+        {
+          "file": "backend-deploy.bash",
+          "hash": "10842902167819811765"
+        },
+        {
+          "file": "cloudbuild.yaml",
+          "hash": "9413698248199728893"
+        },
+        {
+          "file": "jest.config.ts",
+          "hash": "9530947708705214178"
+        },
+        {
+          "file": "jest.preset.js",
+          "hash": "7473220183190921152"
+        },
+        {
+          "file": "ngsw-config.json",
+          "hash": "9118285195023689490"
+        },
+        {
+          "file": "nx.json",
+          "hash": "10308169088070628167"
+        },
+        {
+          "file": "package.json",
+          "hash": "7358191058978519892"
+        },
+        {
+          "file": "project.json",
+          "hash": "8603798285533325588"
+        },
+        {
+          "file": "public/icons/icon-128x128.png",
+          "hash": "16119513566521364320"
+        },
+        {
+          "file": "public/icons/icon-144x144.png",
+          "hash": "7918264055681161054"
+        },
+        {
+          "file": "public/icons/icon-152x152.png",
+          "hash": "15801439294603939434"
+        },
+        {
+          "file": "public/icons/icon-192x192.png",
+          "hash": "5426725225393538606"
+        },
+        {
+          "file": "public/icons/icon-384x384.png",
+          "hash": "14349113523743396697"
+        },
+        {
+          "file": "public/icons/icon-512x512.png",
+          "hash": "15496412176428542718"
+        },
+        {
+          "file": "public/icons/icon-72x72.png",
+          "hash": "8211841038932698272"
+        },
+        {
+          "file": "public/icons/icon-96x96.png",
+          "hash": "17857169027528193372"
+        },
+        {
+          "file": "public/manifest.webmanifest",
+          "hash": "7909873097175117086"
+        },
+        {
+          "file": "readme/BK.jpg",
+          "hash": "3543663753310597543"
+        },
+        {
+          "file": "readme/Kezlyyn.jpg",
+          "hash": "12314720298271248642"
+        },
+        {
+          "file": "readme/Mathenda.jpeg",
+          "hash": "1342842690170281425"
+        },
+        {
+          "file": "readme/Mathenda1.jpg",
+          "hash": "7879110586544683312"
+        },
+        {
+          "file": "readme/Ofentse.jpg",
+          "hash": "3905451743052703555"
+        },
+        {
+          "file": "readme/Rea.jpg",
+          "hash": "17445860757041059775"
+        },
+        {
+          "file": "readme/tester.txt",
+          "hash": "13923616600913384927"
+        },
+        {
+          "file": "server.ts",
+          "hash": "10667595029257176534"
+        },
+        {
+          "file": "src/Components/Calender-Event-Button/Calender-Event-button.component.css",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/Components/Calender-Event-Button/Calender-Event-button.component.html",
+          "hash": "9208491089454010633"
+        },
+        {
+          "file": "src/Components/Calender-Event-Button/Calender-Event-button.component.spec.ts",
+          "hash": "1673279356129564527"
+        },
+        {
+          "file": "src/Components/Calender-Event-Button/Calender-Event-button.component.ts",
+          "hash": "9608668022678538489"
+        },
+        {
+          "file": "src/Components/EventCard/eventCard.component.css",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/Components/EventCard/eventCard.component.html",
+          "hash": "4282394394270549039"
+        },
+        {
+          "file": "src/Components/EventCard/eventCard.component.spec.ts",
+          "hash": "2659409748987392406"
+        },
+        {
+          "file": "src/Components/EventCard/eventCard.component.ts",
+          "hash": "10689540842690235600"
+        },
+        {
+          "file": "src/Components/GhostEventCard/GhostEventCard.component.css",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/Components/GhostEventCard/GhostEventCard.component.html",
+          "hash": "12968668284903987524"
+        },
+        {
+          "file": "src/Components/GhostEventCard/GhostEventCard.component.spec.ts",
+          "hash": "16552357647522424953"
+        },
+        {
+          "file": "src/Components/GhostEventCard/GhostEventCard.component.ts",
+          "hash": "6668319847042355460"
+        },
+        {
+          "file": "src/Components/HomeEventCard/HomeEventCard.component.css",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/Components/HomeEventCard/HomeEventCard.component.html",
+          "hash": "5440342735369063603"
+        },
+        {
+          "file": "src/Components/HomeEventCard/HomeEventCard.component.spec.ts",
+          "hash": "5380062564359265962"
+        },
+        {
+          "file": "src/Components/HomeEventCard/HomeEventCard.component.ts",
+          "hash": "4490635617892163289"
+        },
+        {
+          "file": "src/Components/HomeFeaturedEvent/HomeFeaturedEvent.component.css",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/Components/HomeFeaturedEvent/HomeFeaturedEvent.component.html",
+          "hash": "7614470835144731042"
+        },
+        {
+          "file": "src/Components/HomeFeaturedEvent/HomeFeaturedEvent.component.spec.ts",
+          "hash": "15012571920505524103"
+        },
+        {
+          "file": "src/Components/HomeFeaturedEvent/HomeFeaturedEvent.component.ts",
+          "hash": "10348874373689320769"
+        },
+        {
+          "file": "src/Components/MyEventsCard/MyEventsCard.component.css",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/Components/MyEventsCard/MyEventsCard.component.html",
+          "hash": "662909933533209234"
+        },
+        {
+          "file": "src/Components/MyEventsCard/MyEventsCard.component.spec.ts",
+          "hash": "14735198250467844737"
+        },
+        {
+          "file": "src/Components/MyEventsCard/MyEventsCard.component.ts",
+          "hash": "13467596836781752526"
+        },
+        {
+          "file": "src/Components/MyEventsCardSkeleton/MyEventsCardSkeleton.component.css",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/Components/MyEventsCardSkeleton/MyEventsCardSkeleton.component.html",
+          "hash": "12002524691798306404"
+        },
+        {
+          "file": "src/Components/MyEventsCardSkeleton/MyEventsCardSkeleton.component.spec.ts",
+          "hash": "9202736930330172718"
+        },
+        {
+          "file": "src/Components/MyEventsCardSkeleton/MyEventsCardSkeleton.component.ts",
+          "hash": "15525094564547620819"
+        },
+        {
+          "file": "src/Components/SocialClubCard/socialClubCard.component.css",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/Components/SocialClubCard/socialClubCard.component.html",
+          "hash": "4055739382697055907"
+        },
+        {
+          "file": "src/Components/SocialClubCard/socialClubCard.component.spec.ts",
+          "hash": "9954916506620792513"
+        },
+        {
+          "file": "src/Components/SocialClubCard/socialClubCard.component.ts",
+          "hash": "604390451346350956"
+        },
+        {
+          "file": "src/Components/event/event.component.css",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/Components/event/event.component.html",
+          "hash": "450750402230626167"
+        },
+        {
+          "file": "src/Components/event/event.component.spec.ts",
+          "hash": "589325166925661669"
+        },
+        {
+          "file": "src/Components/event/event.component.ts",
+          "hash": "7020974058432950247"
+        },
+        {
+          "file": "src/CreateEvent/CreateEvent.component.css",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/CreateEvent/CreateEvent.component.html",
+          "hash": "11880030418633815352"
+        },
+        {
+          "file": "src/CreateEvent/CreateEvent.component.spec.ts",
+          "hash": "12908298534984604973"
+        },
+        {
+          "file": "src/CreateEvent/CreateEvent.component.ts",
+          "hash": "4333695437438590257"
+        },
+        {
+          "file": "src/CreateEvent/event-data.service.ts",
+          "hash": "8226058424893630583"
+        },
+        {
+          "file": "src/DeleteEvent/DeleteEvent.component.css",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/DeleteEvent/DeleteEvent.component.html",
+          "hash": "6457744470351480536"
+        },
+        {
+          "file": "src/DeleteEvent/DeleteEvent.component.spec.ts",
+          "hash": "16883380046351437564"
+        },
+        {
+          "file": "src/DeleteEvent/DeleteEvent.component.ts",
+          "hash": "15452663311747735406"
+        },
+        {
+          "file": "src/Help/Help.component.css",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/Help/Help.component.html",
+          "hash": "18107712979290559847"
+        },
+        {
+          "file": "src/Help/Help.component.spec.ts",
+          "hash": "17992384897300200893"
+        },
+        {
+          "file": "src/Help/Help.component.ts",
+          "hash": "17865919291848086248"
+        },
+        {
+          "file": "src/MyEvents/MyEvents.component.css",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/MyEvents/MyEvents.component.html",
+          "hash": "533323609662691658"
+        },
+        {
+          "file": "src/MyEvents/MyEvents.component.spec.ts",
+          "hash": "16758165759302940330"
+        },
+        {
+          "file": "src/MyEvents/MyEvents.component.ts",
+          "hash": "11170190566113104742"
+        },
+        {
+          "file": "src/UpdateEvent/UpdateEvent.component.css",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/UpdateEvent/UpdateEvent.component.html",
+          "hash": "2612315278319847948"
+        },
+        {
+          "file": "src/UpdateEvent/UpdateEvent.component.spec.ts",
+          "hash": "17849546176991741458"
+        },
+        {
+          "file": "src/UpdateEvent/UpdateEvent.component.ts",
+          "hash": "3535283149044599214"
+        },
+        {
+          "file": "src/app/app.component.css",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/app/app.component.html",
+          "hash": "17125052494484260733"
+        },
+        {
+          "file": "src/app/app.component.spec.ts",
+          "hash": "15089087513778722369"
+        },
+        {
+          "file": "src/app/app.component.ts",
+          "hash": "4579127336072196058"
+        },
+        {
+          "file": "src/app/app.config.server.ts",
+          "hash": "9913780908210103544"
+        },
+        {
+          "file": "src/app/app.config.ts",
+          "hash": "16870461093434633519"
+        },
+        {
+          "file": "src/app/app.routes.ts",
+          "hash": "15971655461836828078"
+        },
+        {
+          "file": "src/app/pwa.service.spec.ts",
+          "hash": "9568167236721579797"
+        },
+        {
+          "file": "src/app/pwa.service.ts",
+          "hash": "6662473526073568330"
+        },
+        {
+          "file": "src/app/random-header.service.ts",
+          "hash": "6906966724142490761"
+        },
+        {
+          "file": "src/app/random-image-service.service.ts",
+          "hash": "3788469175594338424"
+        },
+        {
+          "file": "src/assets/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/assets/icons/icon-128x128.png",
+          "hash": "13615529486228990951"
+        },
+        {
+          "file": "src/assets/icons/icon-144x144.png",
+          "hash": "7025829944022228135"
+        },
+        {
+          "file": "src/assets/icons/icon-152x152.png",
+          "hash": "17984962064727462808"
+        },
+        {
+          "file": "src/assets/icons/icon-192x192.png",
+          "hash": "18060266301614708629"
+        },
+        {
+          "file": "src/assets/icons/icon-384x384.png",
+          "hash": "15987642442916206050"
+        },
+        {
+          "file": "src/assets/icons/icon-48x48.png",
+          "hash": "16293462733058606352"
+        },
+        {
+          "file": "src/assets/icons/icon-512x512.png",
+          "hash": "16547280844040200349"
+        },
+        {
+          "file": "src/assets/icons/icon-72x72.png",
+          "hash": "8381800887959774357"
+        },
+        {
+          "file": "src/assets/icons/icon-96x96.png",
+          "hash": "15858774662546546138"
+        },
+        {
+          "file": "src/assets/manifest.webmanifest",
+          "hash": "18077391278371872486"
+        },
+        {
+          "file": "src/assets/pexels-orlovamaria-4947565.jpg",
+          "hash": "3927389773880462384"
+        },
+        {
+          "file": "src/assets/pexels-rahulp9800-1652361.jpg",
+          "hash": "11575063713931845490"
+        },
+        {
+          "file": "src/assets/pexels-travelerchitect-15016180.jpg",
+          "hash": "14460480520178271545"
+        },
+        {
+          "file": "src/assets/pexels-vishnurnair-1105666.jpg",
+          "hash": "16026712457933984445"
+        },
+        {
+          "file": "src/assets/screenshots/1.png",
+          "hash": "16943756826676396648"
+        },
+        {
+          "file": "src/assets/screenshots/2.png",
+          "hash": "1800606749505105352"
+        },
+        {
+          "file": "src/calender/calender-event.service.ts",
+          "hash": "4188448419958502813"
+        },
+        {
+          "file": "src/calender/calender.component.css",
+          "hash": "16787893789805537497"
+        },
+        {
+          "file": "src/calender/calender.component.html",
+          "hash": "15250676913519073626"
+        },
+        {
+          "file": "src/calender/calender.component.spec.ts",
+          "hash": "3286567669491655099"
+        },
+        {
+          "file": "src/calender/calender.component.ts",
+          "hash": "15410187510657906392"
+        },
+        {
+          "file": "src/calender/event-utils.ts",
+          "hash": "8395933343461612339"
+        },
+        {
+          "file": "src/event/event.component.css",
+          "hash": "10215178299943568581"
+        },
+        {
+          "file": "src/event/event.component.html",
+          "hash": "6042319200540397736"
+        },
+        {
+          "file": "src/event/event.component.spec.ts",
+          "hash": "5336333917592745565"
+        },
+        {
+          "file": "src/event/event.component.ts",
+          "hash": "4554695652906138688"
+        },
+        {
+          "file": "src/events/events.component.css",
+          "hash": "12717642519783201180"
+        },
+        {
+          "file": "src/events/events.component.html",
+          "hash": "6464736425522873170"
+        },
+        {
+          "file": "src/events/events.component.spec.ts",
+          "hash": "10627675933009583935"
+        },
+        {
+          "file": "src/events/events.component.ts",
+          "hash": "5317820009622449698"
+        },
+        {
+          "file": "src/favicon.ico",
+          "hash": "9303420814833116677"
+        },
+        {
+          "file": "src/home/home.component.css",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/home/home.component.html",
+          "hash": "2000452768932108692"
+        },
+        {
+          "file": "src/home/home.component.spec.ts",
+          "hash": "12115975632006562492"
+        },
+        {
+          "file": "src/home/home.component.ts",
+          "hash": "8922689399253011486"
+        },
+        {
+          "file": "src/index.html",
+          "hash": "3851723274961344318"
+        },
+        {
+          "file": "src/login/login.component.css",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/login/login.component.html",
+          "hash": "12933238484181316331"
+        },
+        {
+          "file": "src/login/login.component.spec.ts",
+          "hash": "5724457895725300355"
+        },
+        {
+          "file": "src/login/login.component.ts",
+          "hash": "939734113568428025"
+        },
+        {
+          "file": "src/main.server.ts",
+          "hash": "9257623809215978365"
+        },
+        {
+          "file": "src/main.ts",
+          "hash": "875041330523952236"
+        },
+        {
+          "file": "src/profile/profile.component.css",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/profile/profile.component.html",
+          "hash": "1426929990707360643"
+        },
+        {
+          "file": "src/profile/profile.component.spec.ts",
+          "hash": "11774746668524996965"
+        },
+        {
+          "file": "src/profile/profile.component.ts",
+          "hash": "13772507148083959426"
+        },
+        {
+          "file": "src/settings/settings.component.css",
+          "hash": "17821034069673885187"
+        },
+        {
+          "file": "src/settings/settings.component.html",
+          "hash": "1041812718750876363"
+        },
+        {
+          "file": "src/settings/settings.component.spec.ts",
+          "hash": "6686448280443457284"
+        },
+        {
+          "file": "src/settings/settings.component.ts",
+          "hash": "8942486261953707517"
+        },
+        {
+          "file": "src/socialClub/socialClub.component.css",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/socialClub/socialClub.component.html",
+          "hash": "17791815863536992390"
+        },
+        {
+          "file": "src/socialClub/socialClub.component.spec.ts",
+          "hash": "14189668192101721373"
+        },
+        {
+          "file": "src/socialClub/socialClub.component.ts",
+          "hash": "2790131510213062626"
+        },
+        {
+          "file": "src/styles.css",
+          "hash": "7099113843679733981"
+        },
+        {
+          "file": "src/test-setup.ts",
+          "hash": "15080743512370418069"
+        },
+        {
+          "file": "tailwind.config.js",
+          "hash": "5651587236504355459"
+        },
+        {
+          "file": "test-results/.last-run.json",
+          "hash": "8683462887774408116"
+        },
+        {
+          "file": "tsconfig.app.json",
+          "hash": "16864811146245124190"
+        },
+        {
+          "file": "tsconfig.editor.json",
+          "hash": "17575078801745175164"
+        },
+        {
+          "file": "tsconfig.json",
+          "hash": "16580656841355313823"
+        },
+        {
+          "file": "tsconfig.server.json",
+          "hash": "3488468286174578404"
+        },
+        {
+          "file": "tsconfig.spec.json",
+          "hash": "1293240435771606091"
+        },
+        {
+          "file": "webpack.config.js",
+          "hash": "9763475564647512955"
         }
       ]
     }
