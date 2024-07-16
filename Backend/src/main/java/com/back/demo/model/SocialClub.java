@@ -22,6 +22,9 @@ public class SocialClub {
     @Column(name = "summary_description")
     private String summaryDescription;
 
+    @Column(name = "categories", columnDefinition = "TEXT[]")
+    private String[] categories;
+
     // Getters and Setters
 
     public Long getId() {
@@ -62,5 +65,13 @@ public class SocialClub {
 
     public void setSummaryDescription(String summaryDescription) {
         this.summaryDescription = summaryDescription;
+    }
+
+    public String[] getCategories() {
+        return categories;
+    }
+
+    public void setCategories(String[] categories) {
+        this.categories = categories;
     }
 }

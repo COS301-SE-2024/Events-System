@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -61,6 +63,28 @@ public class EmployeeController {
             employeeService.deleteEmployee(employeeId);
             return ResponseEntity.noContent().build();
         } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    // New Endpoint with Null Handling
+    @GetMapping("/profile/{id}")
+    public ResponseEntity<Map<String, Object>> getEmployeeProfileById(@PathVariable(value = "id") Long employeeId) {
+        Optional<Employee> employeeOptional = employeeService.getEmployeeById(employeeId);
+        if (employeeOptional.isPresent()) {
+            Employee employee = employeeOptional.get();
+            Map<String, Object> profile = new HashMap<>();
+            profile.put("firstName", employee.getFirstName());
+            profile.put("lastName", employee.getLastName());
+            profile.put("email", employee.getEmail());
+            profile.put("employeeDescription", employee.getEmployeeDescription());
+            profile.put("employeePictureLink", employee.getEmployeePictureLink());
+            profile.put("twitter", employee.getTwitter());
+            profile.put("github", employee.getGithub());
+            profile.put("linkedin", employee.getLinkedin());
+
+            return ResponseEntity.ok(profile);
+        } else {
             return ResponseEntity.notFound().build();
         }
     }

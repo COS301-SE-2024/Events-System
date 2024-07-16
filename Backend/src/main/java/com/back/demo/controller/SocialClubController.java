@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -38,6 +39,17 @@ public class SocialClubController {
                                                        @RequestBody SocialClub socialClubDetails) {
         try {
             SocialClub updatedSocialClub = socialClubService.updateSocialClub(socialClubId, socialClubDetails);
+            return ResponseEntity.ok(updatedSocialClub);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<SocialClub> partialUpdateSocialClub(@PathVariable(value = "id") Long socialClubId,
+                                                              @RequestBody Map<String, Object> updates) {
+        try {
+            SocialClub updatedSocialClub = socialClubService.partialUpdateSocialClub(socialClubId, updates);
             return ResponseEntity.ok(updatedSocialClub);
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
