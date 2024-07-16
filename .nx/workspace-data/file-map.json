@@ -327,28 +327,6 @@
           "hash": "4130237426376566568"
         }
       ],
-      "e2e": [
-        {
-          "file": "e2e/.eslintrc.json",
-          "hash": "15603494122075574473"
-        },
-        {
-          "file": "e2e/playwright.config.ts",
-          "hash": "9971182091902929953"
-        },
-        {
-          "file": "e2e/project.json",
-          "hash": "5814830115590049490"
-        },
-        {
-          "file": "e2e/src/events.spec.ts",
-          "hash": "17134108875182778158"
-        },
-        {
-          "file": "e2e/tsconfig.json",
-          "hash": "5846556622446948315"
-        }
-      ],
       "Events-System": [
         {
           "file": ".eslintignore",
@@ -380,19 +358,19 @@
         },
         {
           "file": ".github/workflows/code-coverage.yml",
-          "hash": "6744021159549392766"
+          "hash": "11204395658162121197"
         },
         {
           "file": ".github/workflows/e2e-tests.yml",
-          "hash": "11321929738127511680"
+          "hash": "775633673331883916"
         },
         {
           "file": ".github/workflows/unit-tests.yml",
-          "hash": "9130784407178762884"
+          "hash": "11433001001860085510"
         },
         {
           "file": ".gitignore",
-          "hash": "5716721999052945312"
+          "hash": "4803202000021567538"
         },
         {
           "file": ".prettierignore",
@@ -1045,6 +1023,28 @@
         {
           "file": "webpack.config.js",
           "hash": "9763475564647512955"
+        }
+      ],
+      "e2e": [
+        {
+          "file": "e2e/.eslintrc.json",
+          "hash": "15603494122075574473"
+        },
+        {
+          "file": "e2e/playwright.config.ts",
+          "hash": "9971182091902929953"
+        },
+        {
+          "file": "e2e/project.json",
+          "hash": "5814830115590049490"
+        },
+        {
+          "file": "e2e/src/events.spec.ts",
+          "hash": "17134108875182778158"
+        },
+        {
+          "file": "e2e/tsconfig.json",
+          "hash": "5846556622446948315"
         }
       ]
     }
