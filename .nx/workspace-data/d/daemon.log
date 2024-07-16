@@ -1431,3 +1431,25 @@ Error: write EPIPE
 [NX Daemon Server] - 2024-07-16T15:55:28.057Z - Handled GET_CONTEXT_FILE_DATA. Handling time: 0. Response time: 1.
 [NX Daemon Server] - 2024-07-16T15:55:28.057Z - [WATCHER]: Stopping the watcher for c:\Users\mathe\OneDrive\Documents\GitHub\Events-System (outputs)
 [NX Daemon Server] - 2024-07-16T15:55:28.057Z - Server stopped because: "Stopping the daemon the set of ignored files changed (native)"
+[NX Daemon Server] - 2024-07-16T15:55:28.638Z - Started listening on: \\.\pipe\nx\C:\Users\mathe\AppData\Local\Temp\1dc38cdf997e09d71d07\d.sock
+[NX Daemon Server] - 2024-07-16T15:55:28.641Z - [WATCHER]: Subscribed to changes within: c:\Users\mathe\OneDrive\Documents\GitHub\Events-System (native)
+[NX Daemon Server] - 2024-07-16T15:55:28.642Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-16T15:55:28.643Z - Established a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-07-16T15:55:28.644Z - Closed a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-16T15:55:28.645Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-07-16T15:55:29.157Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-16T15:55:29.157Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-16T15:55:29.157Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-16T15:55:31.045Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-07-16T15:55:31.046Z - Time taken for 'total for creating and serializing project graph' 2400.2425999976695ms
+[NX Daemon Server] - 2024-07-16T15:55:31.046Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-07-16T15:55:31.047Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 2400. Response time: 2.
+[NX Daemon Server] - 2024-07-16T15:55:31.048Z - [REQUEST]: Responding to the client. handleContextFileData
+[NX Daemon Server] - 2024-07-16T15:55:31.048Z - Done responding to the client handleContextFileData
+[NX Daemon Server] - 2024-07-16T15:55:31.048Z - Handled GET_CONTEXT_FILE_DATA. Handling time: 1. Response time: 0.
+[NX Daemon Server] - 2024-07-16T15:55:31.049Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-07-16T15:55:35.154Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-16T16:01:39.110Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-16T16:01:39.111Z - [WATCHER]: Stopping the watcher for c:\Users\mathe\OneDrive\Documents\GitHub\Events-System (sources)
+[NX Daemon Server] - 2024-07-16T16:01:39.111Z - [WATCHER]: Stopping the watcher for c:\Users\mathe\OneDrive\Documents\GitHub\Events-System (outputs)
+[NX Daemon Server] - 2024-07-16T16:01:39.111Z - Server stopped because: "LOCK_FILES_CHANGED"

@@ -1,7 +1,8 @@
 {
   "name": "Events system",
-  "short_name": "EES",
+  "short_name": "SynC",
   "display": "minimal-ui",
+  "background_color": "#12192C",
   "description": "Collaborate with your colleagues and friends today, with the Entelect events System",
   "screenshots" : [
     {

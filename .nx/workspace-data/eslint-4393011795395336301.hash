@@ -1132,5 +1132,173 @@
         }
       }
     }
+  },
+  "6424416233514771639": {
+    ".": {
+      "targets": {
+        "lint": {
+          "command": "eslint ./src",
+          "cache": true,
+          "options": {
+            "cwd": "."
+          },
+          "inputs": [
+            "default",
+            "^default",
+            "{projectRoot}/eslintrc.json",
+            "{projectRoot}/.eslintignore",
+            "{workspaceRoot}/tools/eslint-rules/**/*",
+            {
+              "externalDependencies": [
+                "eslint"
+              ]
+            }
+          ],
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "metadata": {
+            "technologies": [
+              "eslint"
+            ],
+            "description": "Runs ESLint on project",
+            "help": {
+              "command": "npx eslint --help",
+              "example": {
+                "options": {
+                  "max-warnings": 0
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "10827524896752911661": {
+    ".": {
+      "targets": {
+        "lint": {
+          "command": "eslint ./src",
+          "cache": true,
+          "options": {
+            "cwd": "."
+          },
+          "inputs": [
+            "default",
+            "^default",
+            "{projectRoot}/eslintrc.json",
+            "{projectRoot}/.eslintignore",
+            "{workspaceRoot}/tools/eslint-rules/**/*",
+            {
+              "externalDependencies": [
+                "eslint"
+              ]
+            }
+          ],
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "metadata": {
+            "technologies": [
+              "eslint"
+            ],
+            "description": "Runs ESLint on project",
+            "help": {
+              "command": "npx eslint --help",
+              "example": {
+                "options": {
+                  "max-warnings": 0
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "1026544927265724624": {
+    ".": {
+      "targets": {
+        "lint": {
+          "command": "eslint ./src",
+          "cache": true,
+          "options": {
+            "cwd": "."
+          },
+          "inputs": [
+            "default",
+            "^default",
+            "{projectRoot}/eslintrc.json",
+            "{projectRoot}/.eslintignore",
+            "{workspaceRoot}/tools/eslint-rules/**/*",
+            {
+              "externalDependencies": [
+                "eslint"
+              ]
+            }
+          ],
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "metadata": {
+            "technologies": [
+              "eslint"
+            ],
+            "description": "Runs ESLint on project",
+            "help": {
+              "command": "npx eslint --help",
+              "example": {
+                "options": {
+                  "max-warnings": 0
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "925701633916391908": {
+    ".": {
+      "targets": {
+        "lint": {
+          "command": "eslint ./src",
+          "cache": true,
+          "options": {
+            "cwd": "."
+          },
+          "inputs": [
+            "default",
+            "^default",
+            "{projectRoot}/eslintrc.json",
+            "{projectRoot}/.eslintignore",
+            "{workspaceRoot}/tools/eslint-rules/**/*",
+            {
+              "externalDependencies": [
+                "eslint"
+              ]
+            }
+          ],
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "metadata": {
+            "technologies": [
+              "eslint"
+            ],
+            "description": "Runs ESLint on project",
+            "help": {
+              "command": "npx eslint --help",
+              "example": {
+                "options": {
+                  "max-warnings": 0
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
