@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -34,9 +35,52 @@ public class SocialClubService {
             socialClub.setDescription(socialClubDetails.getDescription());
             socialClub.setPictureLink(socialClubDetails.getPictureLink());
             socialClub.setSummaryDescription(socialClubDetails.getSummaryDescription());
+            socialClub.setCategories(socialClubDetails.getCategories());
             return socialClubRepository.save(socialClub);
         } else {
-            throw new RuntimeException("SocialClub not found with id " + socialClubId);
+            throw new RuntimeException("Social Club not found with id " + socialClubId);
+        }
+    }
+
+    public SocialClub partialUpdateSocialClub(Long socialClubId, Map<String, Object> updates) {
+        Optional<SocialClub> optionalSocialClub = socialClubRepository.findById(socialClubId);
+        if (optionalSocialClub.isPresent()) {
+            SocialClub socialClub = optionalSocialClub.get();
+            updates.forEach((key, value) -> {
+                switch (key) {
+                    case "name":
+                        socialClub.setName((String) value);
+                        break;
+                    case "description":
+                        socialClub.setDescription((String) value);
+                        break;
+                    case "pictureLink":
+                        socialClub.setPictureLink((String) value);
+                        break;
+                    case "summaryDescription":
+                        socialClub.setSummaryDescription((String) value);
+                        break;
+                    case "categories":
+                        socialClub.setCategories(convertToStringArray(value));
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Invalid attribute: " + key);
+                }
+            });
+            return socialClubRepository.save(socialClub);
+        } else {
+            throw new RuntimeException("Social Club not found with id " + socialClubId);
+        }
+    }
+
+    private String[] convertToStringArray(Object value) {
+        if (value instanceof List) {
+            List<?> list = (List<?>) value;
+            return list.toArray(new String[0]);
+        } else if (value instanceof String[]) {
+            return (String[]) value;
+        } else {
+            throw new IllegalArgumentException("Expected value to be a list or array of strings");
         }
     }
 
