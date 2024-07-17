@@ -277,7 +277,7 @@ export class HomeComponent implements OnInit {
             break;
         }
     }
-    for (let cookie of cookies) {
+    for (const cookie of cookies) {
       const [name, value] = cookie.split('=');
       if (name === "refresh") {
           refreshToken = decodeURIComponent(value);
@@ -312,7 +312,7 @@ export class HomeComponent implements OnInit {
         console.log('Token refresh successful');
         // Handle the response data as needed
       } catch (error) {
-          console.error('Error refreshing token:', error);
+          console.error('Error refreshing token');
           // Handle errors appropriately
       }
     }
@@ -325,7 +325,7 @@ export class HomeComponent implements OnInit {
     const cookieArray = decodedCookie.split(';');
 
     for (let i = 0; i < cookieArray.length; i++) {
-        let cookie = cookieArray[i].trim();
+        const cookie = cookieArray[i].trim();
         if (cookie.indexOf(name) === 0) {
             return cookie.substring(name.length, cookie.length);
         }
