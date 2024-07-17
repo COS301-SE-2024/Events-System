@@ -91,15 +91,17 @@ export class HomeComponent implements OnInit {
   @ViewChild('carousel2') carousel2!: ElementRef;
   @ViewChild('carousel3') carousel3!: ElementRef;
   rsvpdSlides: Slide[] = [];
-  ngOnInit(): void {
+  ngOnInit() {
     const employeeId = Number(localStorage.getItem('ID')); // Assuming the employeeId is stored in local storage
+
+    this.checkCookies();
 
     if (!employeeId) {
       this.router.navigate(['/login']);
       return;
     }
   
-    fetch('http://localhost:8080/api/events', {
+    fetch('https://events-system-back.wn.r.appspot.com/api/events', {
       method: "GET",
       credentials: "include",
       headers: {
@@ -117,7 +119,7 @@ export class HomeComponent implements OnInit {
         const data = text ? JSON.parse(text) : [];
         this.events = Array.isArray(data) ? data : [data];
   
-        const hostFetches = this.events.map(event => fetch('http://localhost:8080/api/employees/' + event.hostId, {
+        const hostFetches = this.events.map(event => fetch('https://events-system-back.wn.r.appspot.com/api/employees/' + event.hostId, {
           method: "GET",
           credentials: "include",
           headers: {
@@ -260,9 +262,76 @@ export class HomeComponent implements OnInit {
     this.carousel3.nativeElement.scrollLeft -= singleSlideWidth;
   }
 
+  
+  async checkCookies() {
+    // Get all cookies
+    const cookies = document.cookie.split('; ');
+
+    // Find the cookie by name
+    let accessToken = null;
+    let refreshToken = null;
+    for (let cookie of cookies) {
+        const [name, value] = cookie.split('=');
+        if (name === "jwt") {
+            accessToken = decodeURIComponent(value);
+            break;
+        }
+    }
+    for (let cookie of cookies) {
+      const [name, value] = cookie.split('=');
+      if (name === "refresh") {
+          refreshToken = decodeURIComponent(value);
+          break;
+      }
+  }
+    
+    if(!accessToken)        //If access token expired
+    {
+      if(!refreshToken)     //If refresh token expired
+      {
+        this.router.navigate(["/login"]);
+      }
+
+      try {
+        const response = await fetch("https://events-system-back.wn.r.appspot.com/api/v1/auth/refresh-token", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.getCookie("refresh")}`
+            },
+            body: JSON.stringify(FormData)
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const authData = await response.json();
+        document.cookie = `jwt=${authData.access_token}; path=/; expires=` + new Date(new Date().getTime() + 15 * 60 * 1000).toUTCString();
+        document.cookie = `refresh=${authData.refresh_token}; path=/; expires=` + new Date(new Date().getTime() + 24* 60 * 60 * 1000).toUTCString();
+        console.log('Token refresh successful');
+        // Handle the response data as needed
+      } catch (error) {
+          console.error('Error refreshing token:', error);
+          // Handle errors appropriately
+      }
+    }
+  }
 
 
+  getCookie(cookieName: string) {
+    const name = cookieName + '=';
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const cookieArray = decodedCookie.split(';');
 
+    for (let i = 0; i < cookieArray.length; i++) {
+        let cookie = cookieArray[i].trim();
+        if (cookie.indexOf(name) === 0) {
+            return cookie.substring(name.length, cookie.length);
+        }
+    }
+    return null;
+}
 
 
 
