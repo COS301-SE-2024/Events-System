@@ -262,7 +262,7 @@ export class HomeComponent implements OnInit {
     this.carousel3.nativeElement.scrollLeft -= singleSlideWidth;
   }
 
-  
+
   async checkCookies() {
     // Get all cookies
     const cookies = document.cookie.split('; ');
@@ -270,7 +270,7 @@ export class HomeComponent implements OnInit {
     // Find the cookie by name
     let accessToken = null;
     let refreshToken = null;
-    for (let cookie of cookies) {
+    for (const cookie of cookies) {
         const [name, value] = cookie.split('=');
         if (name === "jwt") {
             accessToken = decodeURIComponent(value);
