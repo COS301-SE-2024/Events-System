@@ -21,6 +21,11 @@ export class LoginComponent {
   showloginfailToast = false;
   showregisterfailToast = false;
   hidePassword = true;
+  googleClientId = '207465254722-7p4odomht6nnoc2cek9cb0j5jht2faos.apps.googleusercontent.com';
+  redirectUri = 'http://localhost:4200/oauth/callback'; // e.g., http://localhost:4200/oauth/callback
+  googleAuthEndpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
+  responseType = 'code';
+  scope = 'openid email profile';
   constructor(
     private router: Router,
     private fb: FormBuilder,
@@ -162,5 +167,10 @@ export class LoginComponent {
     } else {
       console.log('Form is invalid. Please check the fields.');
     }
+  }
+
+  signInWithGoogle() {
+    const googleAuthUrl = `${this.googleAuthEndpoint}?response_type=${this.responseType}&client_id=${this.googleClientId}&redirect_uri=${this.redirectUri}&scope=${this.scope}`;
+    window.location.href = googleAuthUrl;
   }
 }

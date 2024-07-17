@@ -8,7 +8,22 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
+import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
+import org.springframework.security.oauth2.client.registration.ClientRegistration;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
+import org.springframework.security.oauth2.core.AuthorizationGrantType;
+import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
+import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
+import org.springframework.security.oauth2.core.oidc.IdTokenClaimNames;
+import org.springframework.security.oauth2.core.oidc.OidcIdToken;
+import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
+import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
+import org.springframework.security.oauth2.core.oidc.user.OidcUserAuthority;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
@@ -32,6 +47,8 @@ import static org.springframework.http.HttpMethod.PUT;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Configuration
 @EnableWebSecurity
@@ -69,7 +86,7 @@ public class SecurityConfiguration {
                 .cors(corsConfigurer -> {
                 CorsConfigurationSource source = request -> {
                     CorsConfiguration config = new CorsConfiguration();
-                    config.setAllowedOrigins(List.of("http://localhost:4200", "https://events-system.org"));
+                    config.setAllowedOrigins(List.of("http://localhost:4200", "https://events-system.org", "https://c71gwk8b-4200.uks1.devtunnels.ms"));
                     config.setAllowedMethods(List.of("*"));
                     config.setAllowedHeaders(List.of("*"));
                     config.setAllowCredentials(true);
@@ -88,6 +105,13 @@ public class SecurityConfiguration {
                                 .anyRequest()
                                 .authenticated()
                 )
+                .oauth2Login(oauth2 -> 
+                        oauth2
+                        .userInfoEndpoint(userInfoEndpoint ->
+                        userInfoEndpoint.oidcUserService(this.customOidcUserService()))
+                        .loginPage("/oauth2/authorization/google") // Customize login page if needed
+                              .defaultSuccessUrl("/", true) // Redirect after successful login
+                              .failureUrl("/login?error=true")) // Redirect after failure
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
@@ -98,5 +122,34 @@ public class SecurityConfiguration {
                 );
 
         return http.build();
+    }
+
+    @Bean
+    public OidcUserService customOidcUserService() {
+        return new OidcUserService() {
+            private final OidcUserService delegate = new OidcUserService();
+
+            @Override
+            public OidcUser loadUser(OidcUserRequest userRequest) throws OAuth2AuthenticationException {
+                OidcUser oidcUser = delegate.loadUser(userRequest);
+
+                Set<GrantedAuthority> mappedAuthorities = oidcUser.getAuthorities().stream()
+                    .map(authority -> {
+                        if (authority instanceof OidcUserAuthority) {
+                            OidcUserAuthority oidcUserAuthority = (OidcUserAuthority) authority;
+                            OidcIdToken idToken = oidcUserAuthority.getIdToken();
+                            OidcUserInfo userInfo = oidcUserAuthority.getUserInfo();
+
+                            // Map the claims found in idToken and/or userInfo to one or more GrantedAuthority's and add it to mappedAuthorities
+
+                        }
+                        return authority;
+                    })
+                    .collect(Collectors.toSet());
+
+                // Create a new OidcUser with the mapped authorities
+                return new DefaultOidcUser(mappedAuthorities, oidcUser.getIdToken(), oidcUser.getUserInfo());
+            }
+        };
     }
 }
