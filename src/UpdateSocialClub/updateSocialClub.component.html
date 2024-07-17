@@ -1,9 +1,9 @@
 <div class="relative flex size-full min-h-screen flex-col bg-transparent overflow-x-hidden">
     <div class="layout-container flex h-full grow flex-col">
-      <div class="px-40 flex flex-1 justify-center py-5 ">
+      <div class=" px-5 md:px-32 flex flex-1 justify-center py-5">
         <div class="layout-content-container flex flex-col max-w-[2010px] flex-1">
             <!--Page heading-->
-            <div class="flex items-center justify-between mx-10">
+            <div class="flex items-center justify-between mb-6 md:mx-10">
                 <div class="text-white text-center font-bold text-3xl"><p>Update Clubs</p></div>
             </div>
 
@@ -12,9 +12,9 @@
                     <p class="text-xl" >Club Profile</p>
                     <!-- <div class="tooltip tooltip-open tooltip-error mb-4" data-tip="please upload a club profile"></div> -->
                     <div class="mt-3 flex flex-col items-center relative">
-                      <div class="btn btn-ghost btn-square avatar p-2 relative md:w-[400px] md:h-[380px]" (click)="fileInput.click()">
+                      <div class="btn btn-ghost btn-square avatar p-2 relative w-72 h-72 md:w-[400px] md:h-[380px]" (click)="fileInput.click()">
                         <div class="w-full">
-                          <img alt="Social Club Image w-full h-full">
+                          <img alt="Social Club Image" class="w-full h-full">
                           <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-lg">
                             <i class="fas fa-pencil-alt text-white text-xl"></i>
                           </div>
