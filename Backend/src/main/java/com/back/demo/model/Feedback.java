@@ -1,7 +1,8 @@
 package com.back.demo.model;
 
 import jakarta.persistence.*;
-import java.sql.Timestamp;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "feedback")
@@ -12,20 +13,20 @@ public class Feedback {
     @Column(name = "feedback_id")
     private Long feedbackId;
 
-    @Column(name = "event_id", nullable = false)
-    private Integer eventId;
+    @Column(name = "event_id")
+    private Long eventId;
 
-    @Column(name = "employee_id", nullable = false)
-    private Integer employeeId;
+    @Column(name = "employee_id")
+    private Long employeeId;
 
-    @Column(name = "rating", nullable = false)
+    @Column(name = "rating")
     private Integer rating;
 
     @Column(name = "comments")
     private String comments;
 
-    @Column(name = "created_at", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private Timestamp createdAt;
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
 
     // Getters and Setters
 
@@ -37,19 +38,19 @@ public class Feedback {
         this.feedbackId = feedbackId;
     }
 
-    public Integer getEventId() {
+    public Long getEventId() {
         return eventId;
     }
 
-    public void setEventId(Integer eventId) {
+    public void setEventId(Long eventId) {
         this.eventId = eventId;
     }
 
-    public Integer getEmployeeId() {
+    public Long getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(Integer employeeId) {
+    public void setEmployeeId(Long employeeId) {
         this.employeeId = employeeId;
     }
 
@@ -69,11 +70,11 @@ public class Feedback {
         this.comments = comments;
     }
 
-    public Timestamp getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 }

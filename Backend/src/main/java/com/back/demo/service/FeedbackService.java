@@ -5,6 +5,7 @@ import com.back.demo.repository.FeedbackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +32,10 @@ public class FeedbackService {
     }
 
     public Feedback createFeedback(Feedback feedback) {
+        // Ensure createdAt is set
+        if (feedback.getCreatedAt() == null) {
+            feedback.setCreatedAt(LocalDateTime.now());
+        }
         return feedbackRepository.save(feedback);
     }
 
@@ -42,6 +47,28 @@ public class FeedbackService {
             feedback.setEmployeeId(feedbackDetails.getEmployeeId());
             feedback.setRating(feedbackDetails.getRating());
             feedback.setComments(feedbackDetails.getComments());
+            return feedbackRepository.save(feedback);
+        } else {
+            throw new RuntimeException("Feedback not found with id " + feedbackId);
+        }
+    }
+
+    public Feedback patchFeedback(Long feedbackId, Feedback feedbackDetails) {
+        Optional<Feedback> optionalFeedback = feedbackRepository.findById(feedbackId);
+        if (optionalFeedback.isPresent()) {
+            Feedback feedback = optionalFeedback.get();
+            if (feedbackDetails.getEventId() != null) {
+                feedback.setEventId(feedbackDetails.getEventId());
+            }
+            if (feedbackDetails.getEmployeeId() != null) {
+                feedback.setEmployeeId(feedbackDetails.getEmployeeId());
+            }
+            if (feedbackDetails.getRating() != null) {
+                feedback.setRating(feedbackDetails.getRating());
+            }
+            if (feedbackDetails.getComments() != null) {
+                feedback.setComments(feedbackDetails.getComments());
+            }
             return feedbackRepository.save(feedback);
         } else {
             throw new RuntimeException("Feedback not found with id " + feedbackId);

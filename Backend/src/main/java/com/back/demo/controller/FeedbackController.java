@@ -54,6 +54,17 @@ public class FeedbackController {
         }
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<Feedback> patchFeedback(@PathVariable(value = "id") Long feedbackId,
+                                                  @RequestBody Feedback feedbackDetails) {
+        try {
+            Feedback patchedFeedback = feedbackService.patchFeedback(feedbackId, feedbackDetails);
+            return ResponseEntity.ok(patchedFeedback);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteFeedback(@PathVariable(value = "id") Long feedbackId) {
         try {
