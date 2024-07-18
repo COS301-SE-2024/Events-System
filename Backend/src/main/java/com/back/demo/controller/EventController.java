@@ -71,4 +71,9 @@ public class EventController {
         }
     }
 
+    @GetMapping("/employee/{employeeId}/rsvps")
+    public List<Event> getEventsByEmployeeId(@PathVariable Long employeeId) {
+        return eventService.getEventsByEmployeeId(employeeId);
+    }
+
 }

@@ -1,22 +1,28 @@
 package com.back.demo.service;
 
 import com.back.demo.model.Event;
+import com.back.demo.model.EventRSVP;
+import com.back.demo.repository.EventRSVPRepository;
 import com.back.demo.repository.EventRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.sql.Date;
-import java.sql.Time;
+import java.util.stream.Collectors;
 
 @Service
 public class EventService {
 
     @Autowired
     private EventRepository eventRepository;
+
+    @Autowired
+    private EventRSVPRepository eventRSVPRepository;
 
     public List<Event> getAllEvents() {
         return eventRepository.findAll();
@@ -130,5 +136,15 @@ public class EventService {
         } else {
             throw new IllegalArgumentException("Expected value to be a list or array of strings");
         }
+    }
+
+    public List<Event> getEventsByEmployeeId(Long employeeId) {
+        List<EventRSVP> rsvps = eventRSVPRepository.findByEmployeeIdAndStatus(employeeId, "attending");
+        List<Integer> eventIds = rsvps.stream().map(EventRSVP::getEventId).collect(Collectors.toList());
+        //conversion of List<Integer> to List<Long> is not possible
+        //so we have to convert List<Integer> to List<Long> by iterating over the list
+        List<Long> eventIdsLong = eventIds.stream().map(Integer::longValue).collect(Collectors.toList());
+
+        return eventRepository.findAllById(eventIdsLong);
     }
 }
