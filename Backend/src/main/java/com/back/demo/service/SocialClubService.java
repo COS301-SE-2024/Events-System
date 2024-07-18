@@ -31,11 +31,11 @@ public class SocialClubService {
         Optional<SocialClub> optionalSocialClub = socialClubRepository.findById(socialClubId);
         if (optionalSocialClub.isPresent()) {
             SocialClub socialClub = optionalSocialClub.get();
-            socialClub.setName(socialClubDetails.getName());
-            socialClub.setDescription(socialClubDetails.getDescription());
-            socialClub.setPictureLink(socialClubDetails.getPictureLink());
-            socialClub.setSummaryDescription(socialClubDetails.getSummaryDescription());
-            socialClub.setCategories(socialClubDetails.getCategories());
+            if (socialClubDetails.getName() != null) socialClub.setName(socialClubDetails.getName());
+            if (socialClubDetails.getDescription() != null) socialClub.setDescription(socialClubDetails.getDescription());
+            if (socialClubDetails.getPictureLink() != null) socialClub.setPictureLink(socialClubDetails.getPictureLink());
+            if (socialClubDetails.getSummaryDescription() != null)socialClub.setSummaryDescription(socialClubDetails.getSummaryDescription());
+            if (socialClubDetails.getCategories() != null) socialClub.setCategories(socialClubDetails.getCategories());
             return socialClubRepository.save(socialClub);
         } else {
             throw new RuntimeException("Social Club not found with id " + socialClubId);
