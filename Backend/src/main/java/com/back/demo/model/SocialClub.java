@@ -10,6 +10,10 @@ public class SocialClub {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Id
+    @Column(name = "ownerID", nullable = false)
+    private Long ownerID;
+
     @Column(name = "name", nullable = false)
     private String name;
 
