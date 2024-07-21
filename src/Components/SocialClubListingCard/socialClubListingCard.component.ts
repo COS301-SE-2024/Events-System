@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
@@ -9,4 +9,18 @@ import { RouterModule } from '@angular/router';
   templateUrl: './socialClubListingCard.component.html',
   styleUrl: './socialClubListingCard.component.css',
 })
-export class SocialClubListingCardComponent {}
+export class SocialClubListingCardComponent {
+  @Input() clubID: string | undefined;
+  @Input() clubName: string | undefined;
+  @Input() description: string | undefined;
+  @Input() pictureLink: string | undefined;
+  @Input() summary: string | undefined;
+  @Input() categories: string[] | undefined;
+
+  // clubID: '',
+  // clubName: '',
+  // description: '',
+  // pictureLink: '',
+  // summary: '',
+  // categories: []
+}

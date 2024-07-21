@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms'; 
 import { HttpClientModule, HttpClient  } from '@angular/common/http';
 
@@ -12,10 +12,12 @@ import { HttpClientModule, HttpClient  } from '@angular/common/http';
   styleUrl: './updateSocialClub.component.css',
 })
 
-export class UpdateSocialClubComponent {
+export class UpdateSocialClubComponent implements OnInit{
+  clubID = '';
   updateForm: FormGroup;
-  isAPILoading = false;
+  isLoading = false;
   constructor(
+    private route: ActivatedRoute,
     private fb: FormBuilder,
     private http: HttpClient
   )
@@ -29,37 +31,79 @@ export class UpdateSocialClubComponent {
     });
   }
 
-  async updateClub() {
-    this.isAPILoading = true;
+  ngOnInit(): void{
+    this.isLoading = true;
 
-    if (!this.updateForm.valid) {
-      console.log("yes");
-      const formData = {
-        name: this.updateForm.get('name')?.value,
-        description: this.updateForm.get('description')?.value,
-        pictureLink: this.updateForm.get('pictureLink')?.value,
-        summaryDescription: this.updateForm.get('summaryDescription')?.value,
-        categories: this.updateForm.get('categories')?.value
-      };
-      console.log(formData);
-      try{
-        fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs/1', {
-          method: 'PUT',
+    this.route.params.subscribe(params => {   // Get the event ID from the URL
+      this.clubID = params['id'];
+      console.log('ID: ' + this.clubID);
+
+      try {
+        fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs/' + this.clubID, {
+          method: 'GET',
+          credentials: 'include',
           headers: {
             'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(formData)
+          }
         })
-      .then(response => response.json())
-      .then(data => {
-          // Show the success toast
-        console.log(data);
-      });}
+        .then(response => response.json())
+        .then(data => {
+            // Show the success toast
+            console.log(data);
+            this.updateForm.setValue({
+              name: data.name,
+              description: data.description,
+              pictureLink: data.pictureLink,
+              summaryDescription: data.summaryDescription,
+              categories: data.categories
+            });
+            this.isLoading = false;
+        });
+      }
       catch (error)
       {
         console.error('Error:', error);
         console.error('Error during login:', error);
       }
-    }
+    });
+  }
+  
+  async updateClub() {
+    this.isLoading = true;
+    
+    if (!this.updateForm.valid) {
+      this.route.params.subscribe(params => {   // Get the event ID from the URL
+    
+        this.clubID = params['id'];
+        const formData = {
+          name: this.updateForm.get('name')?.value,
+          description: this.updateForm.get('description')?.value,
+          pictureLink: this.updateForm.get('pictureLink')?.value,
+          summaryDescription: this.updateForm.get('summaryDescription')?.value,
+          categories: this.updateForm.get('categories')?.value
+        };
+        console.log(formData);
+        
+        try{
+          fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs/' + this.clubID, {
+            method: 'PUT',
+            credentials: 'include',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+          })
+          .then(response => response.json())
+          .then(data => {
+              // Show the success toast
+          });
+        }
+        catch (error)
+        {
+          console.error('Error:', error);
+          console.error('Error during login:', error);
+        }
+      }
+    )};
   }
 }

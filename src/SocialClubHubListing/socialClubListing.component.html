@@ -13,6 +13,17 @@
             </div>
 
               <div class="overflow-y-auto h-full flex flex-col gap-10">
+                <app-social-club-listing-card
+                *ngFor="let club of clubs"
+                [clubID]="club.id"
+                [clubName]="club.name"
+                [description]="club.description"
+                [pictureLink]="club.pictureLink"
+                [summary]="club.summaryDescription"
+                [categories]="club.categories">
+                </app-social-club-listing-card>
+
+                <!-- <app-social-club-listing-card></app-social-club-listing-card>
                 <app-social-club-listing-card></app-social-club-listing-card>
                 <app-social-club-listing-card></app-social-club-listing-card>
                 <app-social-club-listing-card></app-social-club-listing-card>
@@ -29,8 +40,7 @@
                 <app-social-club-listing-card></app-social-club-listing-card>
                 <app-social-club-listing-card></app-social-club-listing-card>
                 <app-social-club-listing-card></app-social-club-listing-card>
-                <app-social-club-listing-card></app-social-club-listing-card>
-                <app-social-club-listing-card></app-social-club-listing-card>
+                <app-social-club-listing-card></app-social-club-listing-card> -->
               </div>
             
         </div>

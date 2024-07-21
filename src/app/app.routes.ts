@@ -33,7 +33,7 @@ export const appRoutes: Route[] = [
   { path: 'socialclub/:id', component: SocialClubComponent},
   { path: 'socialclublisting', component: SocialClubListingComponent},
   { path: 'socialclubcreate', component: SocialClubCreateComponent},
-  { path: 'updatesocialclub', component: UpdateSocialClubComponent},
+  { path: 'updatesocialclub/:id', component: UpdateSocialClubComponent},
   { path: 'deletesocialclub', component: DeleteSocialClubComponent},
   { path: 'help', component: HelpComponent}
 
