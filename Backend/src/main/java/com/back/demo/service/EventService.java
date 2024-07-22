@@ -138,13 +138,20 @@ public class EventService {
         }
     }
 
-    public List<Event> getEventsByEmployeeId(Long employeeId) {
+    public List<Event> getEventsAttended(Long employeeId) { 
         List<EventRSVP> rsvps = eventRSVPRepository.findByEmployeeIdAndStatus(employeeId, "attending");
         List<Integer> eventIds = rsvps.stream().map(EventRSVP::getEventId).collect(Collectors.toList());
         //conversion of List<Integer> to List<Long> is not possible
         //so we have to convert List<Integer> to List<Long> by iterating over the list
         List<Long> eventIdsLong = eventIds.stream().map(Integer::longValue).collect(Collectors.toList());
 
-        return eventRepository.findAllById(eventIdsLong);
+        List<Event> events = eventRepository.findAllById(eventIdsLong);
+
+        //If an events startDate variable is after the current date, remove it from the list
+        Date currentDate = new Date(System.currentTimeMillis());
+
+        events.removeIf(event -> event.getStartDate().after(currentDate));
+
+        return events;
     }
 }
