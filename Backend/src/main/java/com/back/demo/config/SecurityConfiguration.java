@@ -52,6 +52,7 @@ public class SecurityConfiguration {
             "/webjars/**",
             "/swagger-ui.html",
             "/api/events/**",       // Ensure all event-related endpoints are accessible
+            "/api/feedback/**",    // Ensure all feedback-related endpoints are accessible
             "/api/event-rsvps/**", // Ensure all event-rsvp-related endpoints are accessible
             "/api/employees/**",   // Ensure all employee-related endpoints are accessible
             "/api/socialclubs/**", // Ensure all social-club-related endpoints are accessible
