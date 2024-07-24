@@ -30,12 +30,14 @@ export class NotificationsComponent implements OnInit {
     this.notifications = [];
   }
 
-  markAsRead(notificationId: number): void {
+  markAsRead(event: MouseEvent, notificationId: number): void {
+    event.stopPropagation(); // Prevents the click from bubbling up to the notification card
     const notification = this.notifications.find(n => n.id === notificationId);
     if (notification) {
       notification.read = true;
     }
   }
+  
 
   openPopover(notification: any): void {
     this.selectedNotification = notification;
