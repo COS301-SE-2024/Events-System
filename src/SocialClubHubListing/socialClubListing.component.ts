@@ -36,20 +36,4 @@ export class SocialClubListingComponent implements OnInit {
         this.clubs = Array.isArray(data) ? data : [data];
       })
   }
-
-  deleteClub(id: string) {
-    fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs', {
-      method: 'DELETE',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-    })
-    .then(response => {
-      return response.json();
-    })
-    .then(data => {
-      this.clubs = Array.isArray(data) ? data : [data];
-    })
-  }
 }

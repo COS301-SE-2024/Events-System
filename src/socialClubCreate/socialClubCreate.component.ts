@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms'; 
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -11,7 +11,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
   templateUrl: './socialClubCreate.component.html',
   styleUrl: './socialClubCreate.component.css',
 })
-export class SocialClubCreateComponent {
+export class SocialClubCreateComponent implements OnInit {
   createForm: FormGroup;
   hostID: any;
   constructor(
@@ -31,17 +31,57 @@ export class SocialClubCreateComponent {
     });
   }
 
+  ngOnInit(): void {
+    this.checkCookies();
+  }
+
   createClub() {
     if (this.createForm.valid) {
-        console.log("bums");
-        
+
         try{
-          fetch('https://events-system-back.wn.r.appspot.com/api/v1/auth//' + this.getCookie("jwt"))
+          fetch('https://events-system-back.wn.r.appspot.com/api/v1/auth/' + this.getCookie("jwt"), {
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
           .then(response => response.json())
           .then(data => {
               // Show the success toast
               this.hostID = data;
-              console.log("hostID :" + data);
+              console.log("hostID : " + data);
+
+              const formData = {
+                ownerID: this.hostID,
+                name: this.createForm.get('name')?.value,
+                description: this.createForm.get('description')?.value,
+                pictureLink: this.createForm.get('pictureLink')?.value,
+                summaryDescription: this.createForm.get('summaryDescription')?.value,
+                categories: this.createForm.get('categories')?.value
+              };
+              console.log("Form data: " + formData);
+              
+              try{
+                fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs', {
+                  method: 'POST',
+                  credentials: 'include',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify(formData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Show the success toast
+                    console.log(data);
+                });
+              }
+              catch (error)
+              {
+                console.error('Error:', error);
+                console.error('Error during club creation:', error);
+              }
           });
         }
         catch (error)
@@ -51,39 +91,9 @@ export class SocialClubCreateComponent {
         }
        //this.hostID = localStorage.getItem("ID");
 
-        const formData = {
-          ownerID: this.hostID,
-          name: this.createForm.get('name')?.value,
-          description: this.createForm.get('description')?.value,
-          pictureLink: this.createForm.get('pictureLink')?.value,
-          summaryDescription: this.createForm.get('summaryDescription')?.value,
-          categories: this.createForm.get('categories')?.value
-        };
-        console.log("Form data: " + formData);
-        
-        try{
-          fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs', {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
-          })
-          .then(response => response.json())
-          .then(data => {
-              // Show the success toast
-              console.log(data);
-          });
-        }
-        catch (error)
-        {
-          console.error('Error:', error);
-          console.error('Error during club creation:', error);
-        }
-      };
-
-    this.router.navigate(['/socialclublisting']);
+ 
+     this.router.navigate(['/socialclublisting']);
+       }
   }
 
   async checkCookies() {
