@@ -31,6 +31,7 @@ public class SocialClubService {
         Optional<SocialClub> optionalSocialClub = socialClubRepository.findById(socialClubId);
         if (optionalSocialClub.isPresent()) {
             SocialClub socialClub = optionalSocialClub.get();
+            socialClub.setOwnerID(socialClubDetails.getOwnerID());
             socialClub.setName(socialClubDetails.getName());
             socialClub.setDescription(socialClubDetails.getDescription());
             socialClub.setPictureLink(socialClubDetails.getPictureLink());
