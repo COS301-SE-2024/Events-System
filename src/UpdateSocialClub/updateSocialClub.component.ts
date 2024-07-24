@@ -17,6 +17,7 @@ export class UpdateSocialClubComponent implements OnInit{
   updateForm: FormGroup;
   isLoading = false;
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private http: HttpClient
@@ -69,9 +70,8 @@ export class UpdateSocialClubComponent implements OnInit{
   }
   
   async updateClub() {
-    this.isLoading = true;
     
-    if (!this.updateForm.valid) {
+    if (this.updateForm.valid) {
       this.route.params.subscribe(params => {   // Get the event ID from the URL
     
         this.clubID = params['id'];
@@ -82,7 +82,7 @@ export class UpdateSocialClubComponent implements OnInit{
           summaryDescription: this.updateForm.get('summaryDescription')?.value,
           categories: this.updateForm.get('categories')?.value
         };
-        console.log(formData);
+        console.log("Form data: " + formData);
         
         try{
           fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs/' + this.clubID, {
@@ -96,6 +96,7 @@ export class UpdateSocialClubComponent implements OnInit{
           .then(response => response.json())
           .then(data => {
               // Show the success toast
+              console.log(data);
           });
         }
         catch (error)
@@ -105,5 +106,7 @@ export class UpdateSocialClubComponent implements OnInit{
         }
       }
     )};
+
+    this.router.navigate(['/socialclublisting']);
   }
 }

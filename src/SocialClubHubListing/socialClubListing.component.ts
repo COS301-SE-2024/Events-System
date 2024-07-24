@@ -27,18 +27,29 @@ export class SocialClubListingComponent implements OnInit {
     categories: []
   };
 
-  private cache: Cache = {};
-
   ngOnInit(): void {
       fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs')
       .then(response => {
         return response.json();
       })
       .then(data => {
-        const clubs = Array.isArray(data) ? data : [data];
-        localStorage.setItem('socialClubs', JSON.stringify(clubs));
-        this.clubs = clubs;
-        console.log(localStorage.getItem('socialClubs'));
+        this.clubs = Array.isArray(data) ? data : [data];
       })
+  }
+
+  deleteClub(id: string) {
+    fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs', {
+      method: 'DELETE',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+      return response.json();
+    })
+    .then(data => {
+      this.clubs = Array.isArray(data) ? data : [data];
+    })
   }
 }
