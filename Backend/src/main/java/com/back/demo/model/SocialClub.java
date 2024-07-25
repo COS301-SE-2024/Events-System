@@ -10,9 +10,6 @@ public class SocialClub {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "owner_id", nullable = false)
-    private Long ownerID;
-
     @Column(name = "name", nullable = false)
     private String name;
 
@@ -25,9 +22,6 @@ public class SocialClub {
     @Column(name = "summary_description")
     private String summaryDescription;
 
-    @Column(name = "categories", columnDefinition = "TEXT[]")
-    private String[] categories;
-
     // Getters and Setters
 
     public Long getId() {
@@ -36,14 +30,6 @@ public class SocialClub {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getOwnerID() {
-        return ownerID;
-    }
-
-    public void setOwnerID(Long ownerID) {
-        this.ownerID = ownerID;
     }
 
     public String getName() {
@@ -76,13 +62,5 @@ public class SocialClub {
 
     public void setSummaryDescription(String summaryDescription) {
         this.summaryDescription = summaryDescription;
-    }
-
-    public String[] getCategories() {
-        return categories;
-    }
-
-    public void setCategories(String[] categories) {
-        this.categories = categories;
     }
 }

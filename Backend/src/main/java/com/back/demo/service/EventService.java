@@ -1,28 +1,22 @@
 package com.back.demo.service;
 
 import com.back.demo.model.Event;
-import com.back.demo.model.EventRSVP;
-import com.back.demo.repository.EventRSVPRepository;
 import com.back.demo.repository.EventRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
-import java.sql.Time;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
+import java.sql.Date;
+import java.sql.Time;
 
 @Service
 public class EventService {
 
     @Autowired
     private EventRepository eventRepository;
-
-    @Autowired
-    private EventRSVPRepository eventRSVPRepository;
 
     public List<Event> getAllEvents() {
         return eventRepository.findAll();
@@ -58,7 +52,6 @@ public class EventService {
             event.setEventAgendas(eventDetails.getEventAgendas());
             event.setEventPreparation(eventDetails.getEventPreparation());
             event.setEventDietaryAccommodations(eventDetails.getEventDietaryAccommodations());
-            event.setTags(eventDetails.getTags());
             return eventRepository.save(event);
         } else {
             throw new RuntimeException("Event not found with id " + eventId);
@@ -114,9 +107,6 @@ public class EventService {
                     case "eventDietaryAccommodations":
                         event.setEventDietaryAccommodations(convertToStringArray(value));
                         break;
-                    case "tags":
-                        event.setTags(convertToStringArray(value));
-                        break;
                     default:
                         throw new IllegalArgumentException("Invalid attribute: " + key);
                 }
@@ -136,39 +126,5 @@ public class EventService {
         } else {
             throw new IllegalArgumentException("Expected value to be a list or array of strings");
         }
-    }
-
-    public List<Event> getEventsAttended(Long employeeId) { 
-        List<EventRSVP> rsvps = eventRSVPRepository.findByEmployeeIdAndStatus(employeeId, "attending");
-        List<Integer> eventIds = rsvps.stream().map(EventRSVP::getEventId).collect(Collectors.toList());
-        //conversion of List<Integer> to List<Long> is not possible
-        //so we have to convert List<Integer> to List<Long> by iterating over the list
-        List<Long> eventIdsLong = eventIds.stream().map(Integer::longValue).collect(Collectors.toList());
-
-        List<Event> events = eventRepository.findAllById(eventIdsLong);
-
-        //If an events startDate variable is after the current date, remove it from the list
-        Date currentDate = new Date(System.currentTimeMillis());
-
-        events.removeIf(event -> event.getStartDate().after(currentDate));
-
-        return events;
-    }
-
-    public List<Event> getUpcomingEvents(Long employeeId) { 
-        List<EventRSVP> rsvps = eventRSVPRepository.findByEmployeeIdAndStatus(employeeId, "attending");
-        List<Integer> eventIds = rsvps.stream().map(EventRSVP::getEventId).collect(Collectors.toList());
-        //conversion of List<Integer> to List<Long> is not possible
-        //so we have to convert List<Integer> to List<Long> by iterating over the list
-        List<Long> eventIdsLong = eventIds.stream().map(Integer::longValue).collect(Collectors.toList());
-
-        List<Event> events = eventRepository.findAllById(eventIdsLong);
-
-        //If an events startDate variable is after the current date, remove it from the list
-        Date currentDate = new Date(System.currentTimeMillis());
-
-        events.removeIf(event -> event.getStartDate().before(currentDate));
-
-        return events;
     }
 }
