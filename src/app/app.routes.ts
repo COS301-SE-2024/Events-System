@@ -14,6 +14,7 @@ import { DeleteEventComponent } from 'src/DeleteEvent/DeleteEvent.component';
 import { HelpComponent } from 'src/Help/Help.component';
 import { SocialClubComponent } from 'src/socialClub/socialClub.component';
 import { NotificationsComponent } from 'src/notifications/notifications.component';
+import { NotifPopupComponent } from 'src/notif-popup/notif-popup.component';
 export const appRoutes: Route[] = [
   { path: '', component: HomeComponent }, // Home page
   { path: 'login', component: LoginComponent },
@@ -28,6 +29,7 @@ export const appRoutes: Route[] = [
   { path: 'deleteevent/:id', component: DeleteEventComponent },
   { path: 'socialclub/:id', component: SocialClubComponent},
   { path: 'help', component: HelpComponent},
-  { path: 'notifications', component: NotificationsComponent}
+  { path: 'notifications', component: NotificationsComponent},
+  { path: 'notif-popup', component: NotifPopupComponent}
   // { path: 'home', component: SettingsComponent },
 ];

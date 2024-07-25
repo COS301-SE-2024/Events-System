@@ -1,0 +1,26 @@
+<div class="relative">
+    <div class="popover-content bg-base-100 shadow-xl rounded-lg w-80 p-4 absolute top-0 right-0 mt-4 mr-4 z-50">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-lg font-bold">Notifications</h3>
+        <button class="btn btn-sm btn-ghost">Mark all as read</button>
+      </div>
+      <div class="notification-list space-y-4">
+        <div *ngFor="let notification of notifications" 
+             class="card p-4 mb-4 shadow-xl"
+             [ngClass]="{'bg-gray-200': notification.read, 'bg-base-200': !notification.read, 'border-l-4 border-accent': !notification.read, 'border-none': notification.read}"
+             (click)="openPopover(notification)">
+          <div class="flex justify-between items-center">
+            <div class="flex items-center">
+              <span class="material-icons mr-2 text-info" [ngClass]="{'text-gray-400': notification.read, 'text-info': !notification.read}">notifications</span>
+              <div>
+                <h3 class="text-lg font-bold" [ngClass]="{'text-gray-500': notification.read, 'text-base-content': !notification.read}">
+                  {{ notification.title }}
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
