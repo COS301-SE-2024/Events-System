@@ -1491,3 +1491,1907 @@ Error: write EPIPE
 [NX Daemon Server] - 2024-07-25T10:21:03.948Z - Done responding to the client handleContextFileData
 [NX Daemon Server] - 2024-07-25T10:21:03.948Z - Handled GET_CONTEXT_FILE_DATA. Handling time: 0. Response time: 0.
 [NX Daemon Server] - 2024-07-25T10:21:03.949Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-07-25T11:15:03.550Z - Started listening on: \\.\pipe\nx\C:\Users\OFENTS~1\AppData\Local\Temp\3b232e4856b4e9ef5939\d.sock
+[NX Daemon Server] - 2024-07-25T11:15:03.568Z - [WATCHER]: Subscribed to changes within: C:\Users\Ofentse Ramothibe\Documents\Github Projects\Events-System (native)
+[NX Daemon Server] - 2024-07-25T11:15:03.572Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-25T11:15:03.574Z - Established a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-07-25T11:15:03.577Z - Closed a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-25T11:15:03.588Z - [REQUEST]: Responding to the client. handleGlob
+[NX Daemon Server] - 2024-07-25T11:15:03.588Z - Done responding to the client handleGlob
+[NX Daemon Server] - 2024-07-25T11:15:03.588Z - Handled GLOB. Handling time: 9. Response time: 1.
+[NX Daemon Server] - 2024-07-25T11:15:05.560Z - [REQUEST]: Responding to the client. handleHashGlob
+[NX Daemon Server] - 2024-07-25T11:15:05.561Z - Done responding to the client handleHashGlob
+[NX Daemon Server] - 2024-07-25T11:15:05.561Z - Handled HASH_GLOB. Handling time: 3. Response time: 1.
+[NX Daemon Server] - 2024-07-25T11:15:05.566Z - [REQUEST]: Responding to the client. handleHashGlob
+[NX Daemon Server] - 2024-07-25T11:15:05.566Z - Done responding to the client handleHashGlob
+[NX Daemon Server] - 2024-07-25T11:15:05.566Z - Handled HASH_GLOB. Handling time: 1. Response time: 0.
+[NX Daemon Server] - 2024-07-25T11:15:05.574Z - [REQUEST]: Responding to the client. handleHashGlob
+[NX Daemon Server] - 2024-07-25T11:15:05.575Z - Done responding to the client handleHashGlob
+[NX Daemon Server] - 2024-07-25T11:15:05.576Z - Handled HASH_GLOB. Handling time: 1. Response time: 2.
+[NX Daemon Server] - 2024-07-25T11:15:05.578Z - [REQUEST]: Responding to the client. handleGlob
+[NX Daemon Server] - 2024-07-25T11:15:05.578Z - Done responding to the client handleGlob
+[NX Daemon Server] - 2024-07-25T11:15:05.578Z - Handled GLOB. Handling time: 1. Response time: 0.
+[NX Daemon Server] - 2024-07-25T11:15:13.462Z - [REQUEST]: Responding to the client. handleNxWorkspaceFiles
+[NX Daemon Server] - 2024-07-25T11:15:13.463Z - Done responding to the client handleNxWorkspaceFiles
+[NX Daemon Server] - 2024-07-25T11:15:13.463Z - Handled GET_NX_WORKSPACE_FILES. Handling time: 5. Response time: 1.
+[NX Daemon Server] - 2024-07-25T11:15:14.103Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-07-25T11:15:15.197Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:15:39.393Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:20.788Z - Started listening on: \\.\pipe\nx\C:\Users\OFENTS~1\AppData\Local\Temp\3b232e4856b4e9ef5939\d.sock
+[NX Daemon Server] - 2024-07-25T11:16:20.793Z - [WATCHER]: Subscribed to changes within: C:\Users\Ofentse Ramothibe\Documents\Github Projects\Events-System (native)
+[NX Daemon Server] - 2024-07-25T11:16:20.795Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-25T11:16:20.797Z - Established a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-07-25T11:16:20.799Z - Closed a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-25T11:16:20.801Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-07-25T11:16:21.537Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T11:16:21.537Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T11:16:21.537Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T11:16:24.047Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-07-25T11:16:24.047Z - Time taken for 'total for creating and serializing project graph' 3245.7134ms
+[NX Daemon Server] - 2024-07-25T11:16:24.048Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-07-25T11:16:24.048Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 3246. Response time: 1.
+[NX Daemon Server] - 2024-07-25T11:16:24.139Z - [REQUEST]: Responding to the client. handleHashTasks
+[NX Daemon Server] - 2024-07-25T11:16:24.140Z - Done responding to the client handleHashTasks
+[NX Daemon Server] - 2024-07-25T11:16:24.140Z - Handled HASH_TASKS. Handling time: 7. Response time: 1.
+[NX Daemon Server] - 2024-07-25T11:16:26.428Z - Established a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-07-25T11:16:26.428Z - Closed a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-25T11:16:26.430Z - Established a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-07-25T11:16:26.437Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-07-25T11:16:26.437Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-07-25T11:16:26.438Z - Time taken for 'total for creating and serializing project graph' 0.5803999999998268ms
+[NX Daemon Server] - 2024-07-25T11:16:26.438Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-07-25T11:16:26.438Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 0. Response time: 1.
+[NX Daemon Server] - 2024-07-25T11:16:45.288Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:45.341Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:45.594Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:45.925Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:46.003Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:46.068Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:46.125Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:46.190Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:46.257Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:46.445Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:46.504Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:46.573Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:46.958Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:47.770Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:49.581Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:49.640Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:49.691Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:49.817Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:49.896Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:49.958Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:50.038Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:50.989Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:51.097Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:51.176Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:51.258Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:51.318Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:51.395Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:51.506Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:51.583Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:51.647Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:51.960Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:52.070Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:52.355Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:53.537Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:53.725Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:53.817Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:53.910Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:53.969Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:54.035Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:54.193Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:54.255Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:54.427Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:54.704Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:54.822Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:54.914Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:54.965Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:55.074Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:55.311Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:56.620Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:56.716Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:56.773Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:56.828Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:56.888Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:56.964Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:57.484Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:57.545Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:57.601Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:57.657Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:57.714Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:57.767Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:57.818Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:57.872Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:57.931Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:57.981Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:58.077Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:58.135Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:58.188Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:58.262Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:58.325Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:58.429Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:58.494Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:58.780Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:58.890Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:58.987Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:59.046Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:59.099Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:59.154Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:59.205Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:59.266Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:59.319Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:59.375Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:59.438Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:59.502Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:59.559Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:59.617Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:59.678Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:59.801Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:16:59.956Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:17:00.007Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:17:00.066Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:17:00.119Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:17:00.173Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:17:00.231Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:17:00.286Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:17:00.344Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:17:00.400Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:17:00.462Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:17:00.523Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:17:00.582Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:17:00.634Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:17:00.691Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:17:00.745Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:17:00.799Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:17:00.856Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:17:00.912Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:17:00.971Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:17:01.031Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:17:09.316Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:17:09.630Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:18:07.534Z - Established a connection. Number of open connections: 3
+[NX Daemon Server] - 2024-07-25T11:18:07.534Z - Closed a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-07-25T11:18:07.535Z - Established a connection. Number of open connections: 3
+[NX Daemon Server] - 2024-07-25T11:18:07.540Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-07-25T11:18:07.541Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-07-25T11:18:07.541Z - Time taken for 'total for creating and serializing project graph' 0.938800000003539ms
+[NX Daemon Server] - 2024-07-25T11:18:07.541Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-07-25T11:18:07.541Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 1. Response time: 0.
+[NX Daemon Server] - 2024-07-25T11:18:08.151Z - Closed a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-07-25T11:18:11.742Z - Established a connection. Number of open connections: 3
+[NX Daemon Server] - 2024-07-25T11:18:11.742Z - Closed a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-07-25T11:18:11.744Z - Established a connection. Number of open connections: 3
+[NX Daemon Server] - 2024-07-25T11:18:11.747Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-07-25T11:18:11.748Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-07-25T11:18:11.748Z - Time taken for 'total for creating and serializing project graph' 0.7584999999962747ms
+[NX Daemon Server] - 2024-07-25T11:18:11.748Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-07-25T11:18:11.748Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 1. Response time: 0.
+[NX Daemon Server] - 2024-07-25T11:18:12.294Z - Closed a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-07-25T11:18:15.940Z - Established a connection. Number of open connections: 3
+[NX Daemon Server] - 2024-07-25T11:18:15.940Z - Closed a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-07-25T11:18:15.942Z - Established a connection. Number of open connections: 3
+[NX Daemon Server] - 2024-07-25T11:18:15.944Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-07-25T11:18:15.945Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-07-25T11:18:15.945Z - Time taken for 'total for creating and serializing project graph' 0.6981999999989057ms
+[NX Daemon Server] - 2024-07-25T11:18:15.945Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-07-25T11:18:15.945Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 1. Response time: 0.
+[NX Daemon Server] - 2024-07-25T11:18:16.490Z - Closed a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-07-25T11:18:20.125Z - Established a connection. Number of open connections: 3
+[NX Daemon Server] - 2024-07-25T11:18:20.126Z - Closed a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-07-25T11:18:20.128Z - Established a connection. Number of open connections: 3
+[NX Daemon Server] - 2024-07-25T11:18:20.131Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-07-25T11:18:20.131Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-07-25T11:18:20.131Z - Time taken for 'total for creating and serializing project graph' 0.6392000000050757ms
+[NX Daemon Server] - 2024-07-25T11:18:20.132Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-07-25T11:18:20.132Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 0. Response time: 1.
+[NX Daemon Server] - 2024-07-25T11:18:20.698Z - Closed a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-07-25T11:18:24.183Z - Established a connection. Number of open connections: 3
+[NX Daemon Server] - 2024-07-25T11:18:24.183Z - Closed a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-07-25T11:18:24.185Z - Established a connection. Number of open connections: 3
+[NX Daemon Server] - 2024-07-25T11:18:24.188Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-07-25T11:18:24.189Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-07-25T11:18:24.189Z - Time taken for 'total for creating and serializing project graph' 0.8742999999958556ms
+[NX Daemon Server] - 2024-07-25T11:18:24.189Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-07-25T11:18:24.189Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 1. Response time: 0.
+[NX Daemon Server] - 2024-07-25T11:18:24.785Z - Closed a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-07-25T11:18:28.318Z - Established a connection. Number of open connections: 3
+[NX Daemon Server] - 2024-07-25T11:18:28.318Z - Closed a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-07-25T11:18:28.320Z - Established a connection. Number of open connections: 3
+[NX Daemon Server] - 2024-07-25T11:18:28.323Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-07-25T11:18:28.323Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-07-25T11:18:28.324Z - Time taken for 'total for creating and serializing project graph' 0.6719000000011874ms
+[NX Daemon Server] - 2024-07-25T11:18:28.324Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-07-25T11:18:28.324Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 0. Response time: 1.
+[NX Daemon Server] - 2024-07-25T11:18:28.860Z - Closed a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-07-25T11:18:56.977Z - Established a connection. Number of open connections: 3
+[NX Daemon Server] - 2024-07-25T11:18:56.977Z - Closed a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-07-25T11:18:56.979Z - Established a connection. Number of open connections: 3
+[NX Daemon Server] - 2024-07-25T11:18:56.982Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-07-25T11:18:56.983Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-07-25T11:18:56.983Z - Time taken for 'total for creating and serializing project graph' 0.7373000000079628ms
+[NX Daemon Server] - 2024-07-25T11:18:56.983Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-07-25T11:18:56.983Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 1. Response time: 0.
+[NX Daemon Server] - 2024-07-25T11:18:57.526Z - Closed a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-07-25T11:19:01.918Z - Established a connection. Number of open connections: 3
+[NX Daemon Server] - 2024-07-25T11:19:01.919Z - Closed a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-07-25T11:19:01.920Z - Established a connection. Number of open connections: 3
+[NX Daemon Server] - 2024-07-25T11:19:01.924Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-07-25T11:19:01.925Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-07-25T11:19:01.925Z - Time taken for 'total for creating and serializing project graph' 0.7465000000083819ms
+[NX Daemon Server] - 2024-07-25T11:19:01.925Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-07-25T11:19:01.925Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 1. Response time: 0.
+[NX Daemon Server] - 2024-07-25T11:19:02.720Z - Closed a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-07-25T11:19:07.039Z - Established a connection. Number of open connections: 3
+[NX Daemon Server] - 2024-07-25T11:19:07.041Z - Closed a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-07-25T11:19:07.043Z - Established a connection. Number of open connections: 3
+[NX Daemon Server] - 2024-07-25T11:19:07.046Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-07-25T11:19:07.047Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-07-25T11:19:07.048Z - Time taken for 'total for creating and serializing project graph' 0.8515999999945052ms
+[NX Daemon Server] - 2024-07-25T11:19:07.048Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-07-25T11:19:07.048Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 1. Response time: 1.
+[NX Daemon Server] - 2024-07-25T11:19:07.788Z - Closed a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-07-25T11:19:08.837Z - Established a connection. Number of open connections: 3
+[NX Daemon Server] - 2024-07-25T11:19:08.837Z - Closed a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-07-25T11:19:08.839Z - Established a connection. Number of open connections: 3
+[NX Daemon Server] - 2024-07-25T11:19:08.842Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-07-25T11:19:08.843Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-07-25T11:19:08.843Z - Time taken for 'total for creating and serializing project graph' 0.6506999999983236ms
+[NX Daemon Server] - 2024-07-25T11:19:08.844Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-07-25T11:19:08.844Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 1. Response time: 1.
+[NX Daemon Server] - 2024-07-25T11:19:09.448Z - Closed a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-07-25T11:19:09.501Z - [WATCHER]: 0 file(s) created or restored, 6 file(s) modified, 0 file(s) deleted
+[NX Daemon Server] - 2024-07-25T11:19:09.502Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:19:09.630Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T11:19:09.630Z - [REQUEST]: src/EventRatings/eventRatings.component.spec.ts,src/EventRatings/eventRatings.component.ts,nx.json,src/EventRatings/eventRatings.component.css,src/EventRatings/eventRatings.component.html,tsconfig.json
+[NX Daemon Server] - 2024-07-25T11:19:09.630Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T11:19:09.865Z - Time taken for 'hash changed files from watcher' 9.526600000011967ms
+[NX Daemon Server] - 2024-07-25T11:19:11.533Z - Established a connection. Number of open connections: 3
+[NX Daemon Server] - 2024-07-25T11:19:11.533Z - Closed a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-07-25T11:19:11.535Z - Established a connection. Number of open connections: 3
+[NX Daemon Server] - 2024-07-25T11:19:11.537Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-07-25T11:19:11.537Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-07-25T11:19:11.538Z - Time taken for 'total for creating and serializing project graph' 0.5412000000069384ms
+[NX Daemon Server] - 2024-07-25T11:19:11.538Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-07-25T11:19:11.538Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 0. Response time: 1.
+[NX Daemon Server] - 2024-07-25T11:19:12.025Z - Closed a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-07-25T11:19:36.640Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:19:36.646Z - [WATCHER]: src/app/app.routes.ts was modified
+[NX Daemon Server] - 2024-07-25T11:19:36.752Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T11:19:36.752Z - [REQUEST]: src/app/app.routes.ts
+[NX Daemon Server] - 2024-07-25T11:19:36.753Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T11:19:37.080Z - Time taken for 'hash changed files from watcher' 0.6992000000027474ms
+[NX Daemon Server] - 2024-07-25T11:19:39.283Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:19:40.794Z - [WATCHER]: src/app/app.routes.ts was modified
+[NX Daemon Server] - 2024-07-25T11:19:40.795Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:19:41.011Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T11:19:41.011Z - [REQUEST]: src/app/app.routes.ts
+[NX Daemon Server] - 2024-07-25T11:19:41.011Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T11:19:41.340Z - Time taken for 'hash changed files from watcher' 0.8892000000050757ms
+[NX Daemon Server] - 2024-07-25T11:19:42.578Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:19:42.581Z - [WATCHER]: src/app/app.routes.ts was modified
+[NX Daemon Server] - 2024-07-25T11:19:42.993Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T11:19:42.994Z - [REQUEST]: src/app/app.routes.ts
+[NX Daemon Server] - 2024-07-25T11:19:42.994Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T11:19:43.233Z - Time taken for 'hash changed files from watcher' 1.077900000003865ms
+[NX Daemon Server] - 2024-07-25T11:19:44.231Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:19:44.406Z - [WATCHER]: src/app/app.routes.ts was modified
+[NX Daemon Server] - 2024-07-25T11:19:44.407Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:19:45.211Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T11:19:45.211Z - [REQUEST]: src/app/app.routes.ts
+[NX Daemon Server] - 2024-07-25T11:19:45.211Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T11:19:45.418Z - Time taken for 'hash changed files from watcher' 0.4974999999976717ms
+[NX Daemon Server] - 2024-07-25T11:19:45.691Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:19:46.241Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:19:46.242Z - [WATCHER]: src/app/app.routes.ts was modified
+[NX Daemon Server] - 2024-07-25T11:19:46.804Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:19:47.856Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T11:19:47.856Z - [REQUEST]: src/app/app.routes.ts
+[NX Daemon Server] - 2024-07-25T11:19:47.856Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T11:19:48.098Z - Time taken for 'hash changed files from watcher' 0.8922000000020489ms
+[NX Daemon Server] - 2024-07-25T11:19:48.721Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:19:49.052Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:19:49.306Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:19:49.474Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:19:49.478Z - [WATCHER]: src/app/app.routes.ts was modified
+[NX Daemon Server] - 2024-07-25T11:19:51.135Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:19:52.682Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T11:19:52.682Z - [REQUEST]: src/app/app.routes.ts
+[NX Daemon Server] - 2024-07-25T11:19:52.682Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T11:19:52.812Z - Time taken for 'hash changed files from watcher' 0.616199999989476ms
+[NX Daemon Server] - 2024-07-25T11:19:53.140Z - [WATCHER]: src/app/app.routes.ts was modified
+[NX Daemon Server] - 2024-07-25T11:19:53.141Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:19:54.119Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:19:58.609Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:19:58.612Z - [WATCHER]: src/app/app.routes.ts was modified
+[NX Daemon Server] - 2024-07-25T11:19:59.553Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T11:19:59.553Z - [REQUEST]: src/app/app.routes.ts
+[NX Daemon Server] - 2024-07-25T11:19:59.553Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T11:19:59.854Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:19:59.854Z - Time taken for 'hash changed files from watcher' 0.6396999999997206ms
+[NX Daemon Server] - 2024-07-25T11:20:08.845Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:20:08.848Z - [WATCHER]: src/app/app.routes.ts was modified
+[NX Daemon Server] - 2024-07-25T11:20:09.903Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:20:15.258Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T11:20:15.258Z - [REQUEST]: src/app/app.routes.ts
+[NX Daemon Server] - 2024-07-25T11:20:15.258Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T11:20:15.535Z - Time taken for 'hash changed files from watcher' 0.9700000000011642ms
+[NX Daemon Server] - 2024-07-25T11:20:16.810Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:20:16.813Z - [WATCHER]: src/app/app.routes.ts was modified
+[NX Daemon Server] - 2024-07-25T11:20:17.820Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:20:19.183Z - [WATCHER]: src/app/app.routes.ts was modified
+[NX Daemon Server] - 2024-07-25T11:20:19.183Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:20:19.413Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:20:19.726Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:20:19.978Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:20:20.652Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:20:20.731Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:20:20.795Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:20:20.970Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:20:22.005Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:20:22.324Z - [WATCHER]: src/app/app.routes.ts was modified
+[NX Daemon Server] - 2024-07-25T11:20:22.325Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:20:23.217Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T11:20:23.217Z - [REQUEST]: src/app/app.routes.ts
+[NX Daemon Server] - 2024-07-25T11:20:23.217Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T11:20:23.454Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:20:23.455Z - Time taken for 'hash changed files from watcher' 0.7302999999956228ms
+[NX Daemon Server] - 2024-07-25T11:20:23.464Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:20:23.466Z - [WATCHER]: src/app/app.routes.ts was modified
+[NX Daemon Server] - 2024-07-25T11:20:26.715Z - [WATCHER]: src/app/app.routes.ts was modified
+[NX Daemon Server] - 2024-07-25T11:20:26.716Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:20:27.602Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:20:27.669Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:20:29.877Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T11:20:29.877Z - [REQUEST]: src/app/app.routes.ts
+[NX Daemon Server] - 2024-07-25T11:20:29.877Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T11:20:30.116Z - Time taken for 'hash changed files from watcher' 1.168100000009872ms
+[NX Daemon Server] - 2024-07-25T11:20:31.854Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:20:31.857Z - [WATCHER]: src/app/app.routes.ts was modified
+[NX Daemon Server] - 2024-07-25T11:20:32.685Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:20:34.096Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:20:38.270Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T11:20:38.272Z - [REQUEST]: src/app/app.routes.ts
+[NX Daemon Server] - 2024-07-25T11:20:38.273Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T11:20:38.535Z - Time taken for 'hash changed files from watcher' 0.7620000000169966ms
+[NX Daemon Server] - 2024-07-25T11:28:04.106Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:28:04.109Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T11:28:05.571Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T11:28:10.525Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T11:28:10.525Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T11:28:10.525Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T11:28:10.763Z - Time taken for 'hash changed files from watcher' 1.224199999938719ms
+[NX Daemon Server] - 2024-07-25T11:29:06.170Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:05:18.063Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:05:18.069Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:05:19.572Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:05:24.472Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:05:24.472Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:05:24.472Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:05:24.734Z - Time taken for 'hash changed files from watcher' 0.9597999998368323ms
+[NX Daemon Server] - 2024-07-25T12:06:21.270Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:06:22.476Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:06:22.582Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:08:09.469Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:08:09.476Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:08:11.230Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:08:15.894Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:08:15.894Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:08:15.894Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:08:16.166Z - Time taken for 'hash changed files from watcher' 1.1043000002391636ms
+[NX Daemon Server] - 2024-07-25T12:08:34.982Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:08:34.985Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:08:36.618Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:08:38.069Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:08:39.218Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:08:39.221Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:08:40.367Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:08:41.396Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:08:41.397Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:08:41.397Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:08:41.694Z - Time taken for 'hash changed files from watcher' 1.1154999998398125ms
+[NX Daemon Server] - 2024-07-25T12:08:48.114Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:08:48.116Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:08:49.244Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:08:54.524Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:08:54.524Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:08:54.524Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:08:54.826Z - Time taken for 'hash changed files from watcher' 1.2764000003226101ms
+[NX Daemon Server] - 2024-07-25T12:09:40.125Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:09:40.127Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:09:41.323Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:09:42.851Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:09:46.540Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:09:46.541Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:09:46.541Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:09:46.960Z - Time taken for 'hash changed files from watcher' 0.883899999782443ms
+[NX Daemon Server] - 2024-07-25T12:09:51.974Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:09:51.978Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:09:53.392Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:09:54.249Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:09:54.250Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:09:55.208Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:09:55.540Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:09:55.543Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:09:56.561Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:09:58.030Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:09:58.390Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:09:58.390Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:09:58.390Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:09:58.596Z - Time taken for 'hash changed files from watcher' 0.569300000090152ms
+[NX Daemon Server] - 2024-07-25T12:10:07.671Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:10:07.671Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:10:08.918Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:10:14.077Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:10:14.078Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:10:14.078Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:10:14.327Z - Time taken for 'hash changed files from watcher' 1.0672999997623265ms
+[NX Daemon Server] - 2024-07-25T12:10:38.876Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:10:38.878Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:10:40.221Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:10:40.285Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:10:41.880Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:10:41.942Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:10:44.596Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:10:44.599Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:10:45.295Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:10:45.295Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:10:45.295Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:10:45.623Z - Time taken for 'hash changed files from watcher' 1.1615999997593462ms
+[NX Daemon Server] - 2024-07-25T12:10:46.000Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:10:47.823Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:10:47.836Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:10:48.790Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:10:50.139Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:10:50.172Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:10:54.231Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:10:54.232Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:10:54.232Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:10:54.539Z - Time taken for 'hash changed files from watcher' 0.6186999999918044ms
+[NX Daemon Server] - 2024-07-25T12:10:57.851Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:10:57.854Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:10:58.981Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:10:59.876Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:10:59.878Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:11:02.110Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:11:03.122Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:11:03.132Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:11:04.216Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:11:04.266Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:11:04.267Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:11:04.267Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:11:04.519Z - Time taken for 'hash changed files from watcher' 1.0084999999962747ms
+[NX Daemon Server] - 2024-07-25T12:11:12.113Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:11:12.116Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:11:13.198Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:11:14.741Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:11:18.528Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:11:18.528Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:11:18.528Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:11:18.821Z - Time taken for 'hash changed files from watcher' 0.8616999997757375ms
+[NX Daemon Server] - 2024-07-25T12:17:13.009Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:17:13.017Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:17:14.593Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:17:16.099Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:17:19.420Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:17:19.421Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:17:19.421Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:17:19.736Z - Time taken for 'hash changed files from watcher' 0.8238999997265637ms
+[NX Daemon Server] - 2024-07-25T12:17:37.937Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:17:37.938Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:17:39.339Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:17:43.113Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:17:43.116Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:17:44.342Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:17:44.342Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:17:44.342Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:17:44.382Z - Time taken for 'hash changed files from watcher' 0.8316000001505017ms
+[NX Daemon Server] - 2024-07-25T12:17:45.673Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:18:49.152Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:18:49.152Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:18:50.721Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:18:52.256Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:18:55.568Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:18:55.568Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:18:55.568Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:18:55.974Z - Time taken for 'hash changed files from watcher' 0.6850000000558794ms
+[NX Daemon Server] - 2024-07-25T12:18:58.755Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:18:58.758Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:19:00.080Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:19:01.514Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:19:05.161Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:19:05.161Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:19:05.161Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:19:05.452Z - Time taken for 'hash changed files from watcher' 0.9287000000476837ms
+[NX Daemon Server] - 2024-07-25T12:19:57.390Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:19:57.391Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:19:58.863Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:19:59.797Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:19:59.799Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:20:00.805Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:20:02.122Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:20:02.174Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:20:03.661Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:20:03.664Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:20:03.803Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:20:03.803Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:20:03.803Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:20:04.054Z - Time taken for 'hash changed files from watcher' 0.6151999998837709ms
+[NX Daemon Server] - 2024-07-25T12:20:04.862Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:20:05.178Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:20:05.183Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:20:07.490Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:20:10.792Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:20:10.794Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:20:11.596Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:20:11.596Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:20:11.596Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:20:11.647Z - Time taken for 'hash changed files from watcher' 1.0877000000327826ms
+[NX Daemon Server] - 2024-07-25T12:20:13.146Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:20:14.668Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:20:14.669Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:20:15.644Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:20:16.939Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:20:16.999Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:20:17.302Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:20:17.304Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:20:18.309Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:20:19.620Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:20:21.081Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:20:21.081Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:20:21.081Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:20:21.321Z - Time taken for 'hash changed files from watcher' 0.8470000000670552ms
+[NX Daemon Server] - 2024-07-25T12:20:37.423Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:20:37.426Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:20:38.496Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:20:39.726Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:20:39.728Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:20:40.736Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:20:42.386Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:20:43.065Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:20:43.066Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:20:43.838Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:20:43.838Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:20:43.839Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:20:44.201Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:20:44.201Z - Time taken for 'hash changed files from watcher' 0.9822000004351139ms
+[NX Daemon Server] - 2024-07-25T12:20:45.827Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:20:45.829Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:20:46.733Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:20:47.136Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:20:47.138Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:20:47.993Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:20:49.287Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:20:50.840Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:20:50.841Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:20:51.799Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:20:52.278Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:20:52.278Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:20:52.278Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:20:52.609Z - Time taken for 'hash changed files from watcher' 0.817599999718368ms
+[NX Daemon Server] - 2024-07-25T12:20:53.388Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:22:34.037Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:22:34.038Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:22:35.429Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:22:37.083Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:22:40.441Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:22:40.441Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:22:40.441Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:22:40.718Z - Time taken for 'hash changed files from watcher' 0.568399999756366ms
+[NX Daemon Server] - 2024-07-25T12:22:45.555Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:22:45.556Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:22:46.980Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:22:48.418Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:22:51.965Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:22:51.965Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:22:51.965Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:22:52.233Z - Time taken for 'hash changed files from watcher' 1.0032999999821186ms
+[NX Daemon Server] - 2024-07-25T12:25:04.337Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:25:04.338Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:25:05.783Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:25:07.217Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:25:07.780Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:25:07.782Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:25:09.032Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:25:09.577Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:25:09.579Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:25:10.541Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:25:10.749Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:25:10.749Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:25:10.749Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:25:10.954Z - Time taken for 'hash changed files from watcher' 0.8270000000484288ms
+[NX Daemon Server] - 2024-07-25T12:25:11.914Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:25:19.089Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:25:19.089Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:25:20.301Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:25:20.779Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:25:20.780Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:25:21.820Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:25:21.972Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:25:21.975Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:25:23.086Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:25:23.953Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:25:23.954Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:25:25.505Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:25:25.505Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:25:25.505Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:25:25.769Z - Time taken for 'hash changed files from watcher' 0.8292999998666346ms
+[NX Daemon Server] - 2024-07-25T12:25:26.207Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:25:26.274Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:25:27.521Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:25:27.521Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:25:29.293Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:25:29.296Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:25:30.371Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:25:31.720Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:25:33.929Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:25:33.929Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:25:33.929Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:25:34.281Z - Time taken for 'hash changed files from watcher' 1.0720999999903142ms
+[NX Daemon Server] - 2024-07-25T12:25:35.778Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:25:35.798Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:25:36.834Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:25:38.180Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:25:39.239Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:25:39.240Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:25:41.652Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:25:42.208Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:25:42.209Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:25:42.209Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:25:42.266Z - Time taken for 'hash changed files from watcher' 1.0699000000022352ms
+[NX Daemon Server] - 2024-07-25T12:25:42.413Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:25:42.414Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:25:43.466Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:25:44.886Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:25:44.886Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:25:45.239Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:25:45.293Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:25:45.703Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:25:45.972Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:25:48.821Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:25:48.821Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:25:48.822Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:25:49.024Z - Time taken for 'hash changed files from watcher' 0.9615000002086163ms
+[NX Daemon Server] - 2024-07-25T12:26:07.027Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:26:07.028Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:26:08.317Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:26:09.422Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:26:09.425Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:26:10.419Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:26:11.819Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:26:12.540Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:26:12.541Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:26:13.436Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:26:13.436Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:26:13.436Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:26:13.662Z - Time taken for 'hash changed files from watcher' 0.8204999999143183ms
+[NX Daemon Server] - 2024-07-25T12:26:13.687Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:26:13.746Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:26:13.746Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:26:14.944Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:26:15.215Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:26:15.215Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:26:16.365Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:26:17.633Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:26:17.633Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:26:18.732Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:26:18.843Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:26:18.846Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:26:20.124Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:26:20.157Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:26:20.158Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:26:20.158Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:26:20.422Z - Time taken for 'hash changed files from watcher' 0.6306999996304512ms
+[NX Daemon Server] - 2024-07-25T12:26:21.004Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:26:21.004Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:26:21.888Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:26:22.045Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:26:22.048Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:26:23.029Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:26:24.434Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:26:26.001Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:26:26.004Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:26:26.947Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:26:27.421Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:26:27.421Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:26:27.421Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:26:27.625Z - Time taken for 'hash changed files from watcher' 1.8240999998524785ms
+[NX Daemon Server] - 2024-07-25T12:26:54.951Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:26:54.953Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:26:56.436Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:26:57.201Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:26:57.203Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:26:58.299Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:26:59.806Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:26:59.859Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:27:00.566Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:27:00.567Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:27:01.357Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:27:01.357Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:27:01.357Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:27:01.566Z - Time taken for 'hash changed files from watcher' 0.5665000006556511ms
+[NX Daemon Server] - 2024-07-25T12:27:01.688Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:27:03.638Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:27:03.639Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:27:04.660Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:27:06.200Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:27:10.047Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:27:10.047Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:27:10.047Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:27:10.284Z - Time taken for 'hash changed files from watcher' 0.8618999999016523ms
+[NX Daemon Server] - 2024-07-25T12:27:44.448Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:27:44.456Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:27:45.928Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:27:47.431Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:27:48.205Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:27:48.205Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:27:49.542Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:27:50.884Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:27:50.884Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:27:50.884Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:27:51.188Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:27:51.188Z - Time taken for 'hash changed files from watcher' 0.6821999996900558ms
+[NX Daemon Server] - 2024-07-25T12:27:57.256Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:27:57.258Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:27:58.363Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:27:59.855Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:28:03.674Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:28:03.674Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:28:03.675Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:28:03.896Z - Time taken for 'hash changed files from watcher' 1.0730999996885657ms
+[NX Daemon Server] - 2024-07-25T12:28:52.388Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:28:52.391Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:28:53.936Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:28:55.591Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:28:58.806Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:28:58.807Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:28:58.807Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:28:59.034Z - Time taken for 'hash changed files from watcher' 0.9337999997660518ms
+[NX Daemon Server] - 2024-07-25T12:30:07.286Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:30:07.286Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:30:08.890Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:30:10.355Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:30:13.702Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:30:13.702Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:30:13.702Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:30:14.091Z - Time taken for 'hash changed files from watcher' 0.7311999993398786ms
+[NX Daemon Server] - 2024-07-25T12:30:17.779Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:30:17.781Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:30:20.263Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:30:24.184Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:30:24.184Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:30:24.184Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:30:24.363Z - Time taken for 'hash changed files from watcher' 0.825199999846518ms
+[NX Daemon Server] - 2024-07-25T12:30:45.798Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:30:45.800Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:30:47.430Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:30:48.043Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:30:48.044Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:30:49.080Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:30:50.599Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:30:52.209Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:30:52.210Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:30:52.210Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:30:52.418Z - Time taken for 'hash changed files from watcher' 0.9297000002115965ms
+[NX Daemon Server] - 2024-07-25T12:31:10.809Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:31:10.810Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:31:12.104Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:31:13.621Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:31:17.229Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:31:17.229Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:31:17.229Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:31:17.461Z - Time taken for 'hash changed files from watcher' 0.9565999992191792ms
+[NX Daemon Server] - 2024-07-25T12:31:36.515Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:31:36.517Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:31:37.970Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:31:39.422Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:31:39.486Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:31:42.924Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:31:42.924Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:31:42.924Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:31:43.153Z - Time taken for 'hash changed files from watcher' 0.7911999998614192ms
+[NX Daemon Server] - 2024-07-25T12:31:56.628Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:31:56.629Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:31:57.870Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:31:59.315Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:31:59.367Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:32:03.039Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:32:03.039Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:32:03.039Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:32:03.287Z - Time taken for 'hash changed files from watcher' 0.8920999998226762ms
+[NX Daemon Server] - 2024-07-25T12:32:05.796Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:32:05.798Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:32:07.051Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:32:08.524Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:32:08.590Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:32:12.204Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:32:12.205Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:32:12.205Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:32:12.420Z - Time taken for 'hash changed files from watcher' 0.6990999998524785ms
+[NX Daemon Server] - 2024-07-25T12:32:14.541Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:32:14.544Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:32:15.566Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:32:16.980Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:32:17.116Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:32:17.117Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:32:18.162Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:32:19.143Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:32:19.144Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:32:20.086Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:32:20.951Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:32:20.951Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:32:20.951Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:32:21.137Z - Time taken for 'hash changed files from watcher' 0.5506999995559454ms
+[NX Daemon Server] - 2024-07-25T12:32:21.537Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:32:22.870Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:32:22.871Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:32:23.988Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:32:25.340Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:32:25.341Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:32:26.246Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:32:27.653Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:32:28.532Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:32:28.536Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:32:29.282Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:32:29.282Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:32:29.282Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:32:29.479Z - Time taken for 'hash changed files from watcher' 0.6047999998554587ms
+[NX Daemon Server] - 2024-07-25T12:32:29.736Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:32:31.196Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:33:01.234Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:33:01.235Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:33:02.785Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:33:04.299Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:33:07.648Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:33:07.648Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:33:07.649Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:33:08.016Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:33:08.017Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:33:08.017Z - Time taken for 'hash changed files from watcher' 0.8372999997809529ms
+[NX Daemon Server] - 2024-07-25T12:33:09.141Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:33:10.617Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:33:14.418Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:33:14.418Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:33:14.418Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:33:14.663Z - Time taken for 'hash changed files from watcher' 0.8989000003784895ms
+[NX Daemon Server] - 2024-07-25T12:33:20.985Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:33:20.989Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:33:22.304Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:33:23.804Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:33:23.963Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:33:27.394Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:33:27.394Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:33:27.394Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:33:27.604Z - Time taken for 'hash changed files from watcher' 0.5142000000923872ms
+[NX Daemon Server] - 2024-07-25T12:34:35.476Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:34:35.478Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:34:36.967Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:34:38.538Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:34:41.891Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:34:41.891Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:34:41.891Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:34:42.097Z - Time taken for 'hash changed files from watcher' 0.8688000002875924ms
+[NX Daemon Server] - 2024-07-25T12:35:05.488Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:35:05.490Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:35:06.846Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:35:08.362Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:35:08.419Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:35:11.903Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:35:11.903Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:35:11.903Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:35:12.113Z - Time taken for 'hash changed files from watcher' 1.3457999993115664ms
+[NX Daemon Server] - 2024-07-25T12:35:20.046Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:35:20.047Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:35:21.348Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:35:22.407Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:35:22.408Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:35:23.420Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:35:24.839Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:35:26.451Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:35:26.451Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:35:26.451Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:35:26.656Z - Time taken for 'hash changed files from watcher' 0.8449999997392297ms
+[NX Daemon Server] - 2024-07-25T12:35:46.105Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:35:46.107Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:35:47.229Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:35:48.071Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:35:48.073Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:35:49.033Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:35:50.455Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:35:51.300Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:35:51.302Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:35:52.346Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:35:52.522Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:35:52.522Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:35:52.522Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:35:52.770Z - Time taken for 'hash changed files from watcher' 0.6343999998643994ms
+[NX Daemon Server] - 2024-07-25T12:35:53.820Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:35:56.117Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:35:56.120Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:35:57.174Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:35:58.591Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:35:59.504Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:35:59.508Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:36:00.447Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:36:00.544Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:36:00.544Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:36:01.775Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:36:02.524Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:36:02.524Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:36:02.524Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:36:02.801Z - Time taken for 'hash changed files from watcher' 0.8829000005498528ms
+[NX Daemon Server] - 2024-07-25T12:36:03.183Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:36:15.062Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:36:15.065Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:36:16.238Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:36:17.716Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:36:17.827Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:36:17.828Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:36:18.821Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:36:20.303Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:36:20.440Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:36:21.478Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:36:21.478Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:36:21.478Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:36:21.811Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:36:21.813Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:36:21.814Z - Time taken for 'hash changed files from watcher' 0.6170999994501472ms
+[NX Daemon Server] - 2024-07-25T12:36:22.681Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:36:23.059Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:36:23.060Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:36:23.910Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:36:24.216Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:36:24.218Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:36:25.094Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:36:26.363Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:36:26.365Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:36:27.510Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:36:28.216Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:36:28.216Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:36:28.216Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:36:28.429Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:36:28.431Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:36:28.432Z - Time taken for 'hash changed files from watcher' 0.8996999999508262ms
+[NX Daemon Server] - 2024-07-25T12:36:29.240Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:36:30.674Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:36:30.727Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:36:32.932Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:36:32.934Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:36:34.008Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:36:34.849Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:36:34.850Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:36:34.850Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:36:35.082Z - Time taken for 'hash changed files from watcher' 1.2567999996244907ms
+[NX Daemon Server] - 2024-07-25T12:36:35.367Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:36:35.922Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:36:35.936Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:36:36.910Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:36:38.454Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:36:42.325Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:36:42.325Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:36:42.325Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:36:42.536Z - Time taken for 'hash changed files from watcher' 0.8689000001177192ms
+[NX Daemon Server] - 2024-07-25T12:37:04.281Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:37:04.281Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:37:05.498Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:37:07.067Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:37:10.704Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:37:10.704Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:37:10.704Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:37:10.947Z - Time taken for 'hash changed files from watcher' 2.3555000005289912ms
+[NX Daemon Server] - 2024-07-25T12:37:21.316Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:37:21.316Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:37:22.479Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:37:22.766Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:37:22.766Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:37:23.844Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:37:25.327Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:37:25.633Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:37:25.634Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:37:26.541Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:37:27.731Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:37:27.731Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:37:27.731Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:37:27.931Z - Time taken for 'hash changed files from watcher' 0.8222000002861023ms
+[NX Daemon Server] - 2024-07-25T12:37:27.952Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:37:28.732Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:37:28.732Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:37:29.853Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:37:31.238Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:37:35.147Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:37:35.147Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:37:35.147Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:37:35.399Z - Time taken for 'hash changed files from watcher' 0.6185999996960163ms
+[NX Daemon Server] - 2024-07-25T12:37:37.496Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:37:37.496Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:37:38.576Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:37:40.035Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:37:43.901Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:37:43.901Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:37:43.901Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:37:44.113Z - Time taken for 'hash changed files from watcher' 0.552000000141561ms
+[NX Daemon Server] - 2024-07-25T12:44:55.033Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:44:55.038Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:44:56.586Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:44:58.236Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:45:01.443Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:45:01.443Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:45:01.444Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:45:01.764Z - Time taken for 'hash changed files from watcher' 0.9475000007078052ms
+[NX Daemon Server] - 2024-07-25T12:45:12.376Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:45:12.377Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:45:13.662Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:45:15.119Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:45:17.604Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:45:17.606Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:45:18.703Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:45:18.783Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:45:18.783Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:45:18.784Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:45:18.968Z - Time taken for 'hash changed files from watcher' 0.47620000038295984ms
+[NX Daemon Server] - 2024-07-25T12:45:21.185Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:45:21.281Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:45:21.637Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:45:21.638Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:45:22.762Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:45:24.172Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:45:26.233Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:45:26.235Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:45:27.326Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:45:28.045Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:45:28.045Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:45:28.045Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:45:28.282Z - Time taken for 'hash changed files from watcher' 0.8126999996602535ms
+[NX Daemon Server] - 2024-07-25T12:45:28.814Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:45:29.203Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:45:29.206Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:45:30.256Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:45:31.638Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:45:31.655Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:45:32.513Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:45:34.791Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:45:35.623Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:45:35.624Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:45:35.624Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:45:35.816Z - Time taken for 'hash changed files from watcher' 0.6670000003650784ms
+[NX Daemon Server] - 2024-07-25T12:46:00.106Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:46:00.107Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:46:01.506Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:46:03.011Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:46:04.672Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:46:04.673Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:46:05.770Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:46:06.532Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:46:06.532Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:46:06.532Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:46:06.738Z - Time taken for 'hash changed files from watcher' 0.5608000000938773ms
+[NX Daemon Server] - 2024-07-25T12:46:07.250Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:46:07.251Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:46:07.304Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:46:07.556Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:46:08.287Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:46:09.276Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:46:09.277Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:46:10.270Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:46:11.737Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:46:11.790Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:46:13.667Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:46:13.667Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:46:13.668Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:46:13.878Z - Time taken for 'hash changed files from watcher' 0.9561999998986721ms
+[NX Daemon Server] - 2024-07-25T12:46:22.771Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:46:22.772Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:46:23.976Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:46:25.438Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:46:29.176Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:46:29.176Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:46:29.176Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:46:29.393Z - Time taken for 'hash changed files from watcher' 0.5674999998882413ms
+[NX Daemon Server] - 2024-07-25T12:49:36.246Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:49:36.272Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:49:37.095Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:49:38.317Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:49:38.319Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:49:39.030Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:49:39.588Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:49:39.589Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:49:40.258Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:49:40.757Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:49:40.759Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:49:41.436Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:49:42.694Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:49:42.694Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:49:42.695Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:49:42.973Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:49:42.974Z - Time taken for 'hash changed files from watcher' 1.2979000005871058ms
+[NX Daemon Server] - 2024-07-25T12:49:46.147Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:49:46.147Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:49:46.767Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:49:48.085Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:49:52.179Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:49:52.180Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:49:52.557Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:49:52.557Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:49:52.557Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:49:52.691Z - Time taken for 'hash changed files from watcher' 0.3217000002041459ms
+[NX Daemon Server] - 2024-07-25T12:49:52.886Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:49:54.210Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:51:59.831Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:51:59.832Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:52:00.659Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:52:02.056Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:52:02.116Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:52:06.250Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:52:06.250Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:52:06.250Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:52:06.380Z - Time taken for 'hash changed files from watcher' 5.316899999976158ms
+[NX Daemon Server] - 2024-07-25T12:52:34.430Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:52:34.430Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:52:36.509Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:52:39.344Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:52:39.346Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:52:40.052Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:52:40.842Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:52:40.842Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:52:40.842Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:52:40.987Z - Time taken for 'hash changed files from watcher' 0.43049999978393316ms
+[NX Daemon Server] - 2024-07-25T12:52:41.404Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:53:30.070Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:53:30.072Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:53:30.866Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:53:32.285Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:53:33.127Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:53:33.129Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:53:33.893Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:53:35.231Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:53:36.525Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:53:36.525Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:53:36.525Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:53:36.655Z - Time taken for 'hash changed files from watcher' 0.5825000004842877ms
+[NX Daemon Server] - 2024-07-25T12:53:40.559Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:53:40.559Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:53:41.253Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:53:42.550Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:53:46.036Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:53:46.037Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:53:46.648Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:53:46.967Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:53:46.967Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:53:46.967Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:53:47.111Z - Time taken for 'hash changed files from watcher' 0.6670000003650784ms
+[NX Daemon Server] - 2024-07-25T12:53:47.943Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:53:50.392Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:53:50.395Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:53:52.204Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:53:53.417Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:53:53.417Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:53:54.008Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:53:55.273Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:53:56.797Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:53:56.797Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:53:56.797Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:53:56.923Z - Time taken for 'hash changed files from watcher' 0.7479000007733703ms
+[NX Daemon Server] - 2024-07-25T12:54:45.044Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:54:45.045Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:54:45.969Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:54:47.330Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:54:51.457Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:54:51.457Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:54:51.457Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:54:51.582Z - Time taken for 'hash changed files from watcher' 0.6317999996244907ms
+[NX Daemon Server] - 2024-07-25T12:54:58.674Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:54:58.676Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:54:59.543Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:55:00.848Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:55:05.077Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:55:05.077Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:55:05.077Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:55:05.203Z - Time taken for 'hash changed files from watcher' 0.3368999995291233ms
+[NX Daemon Server] - 2024-07-25T12:55:09.524Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:55:09.524Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:55:10.251Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:55:11.132Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:55:11.133Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:55:11.761Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:55:12.321Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:55:12.322Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:55:12.982Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:55:14.297Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:55:14.327Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:55:15.930Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:55:15.930Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:55:15.930Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:55:16.048Z - Time taken for 'hash changed files from watcher' 0.7357999999076128ms
+[NX Daemon Server] - 2024-07-25T12:56:00.919Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:56:00.919Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:56:01.880Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:56:03.305Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:56:07.330Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:56:07.330Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:56:07.330Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:56:07.473Z - Time taken for 'hash changed files from watcher' 0.4156999997794628ms
+[NX Daemon Server] - 2024-07-25T12:56:21.174Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:56:21.175Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:56:21.930Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:56:23.262Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:56:27.581Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:56:27.581Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:56:27.581Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:56:27.694Z - Time taken for 'hash changed files from watcher' 0.3354000002145767ms
+[NX Daemon Server] - 2024-07-25T12:56:38.947Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:56:38.948Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:56:39.922Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:56:41.310Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:56:45.350Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:56:45.350Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:56:45.350Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:56:45.469Z - Time taken for 'hash changed files from watcher' 0.7186000002548099ms
+[NX Daemon Server] - 2024-07-25T12:56:57.112Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:56:57.115Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:56:57.910Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:56:59.278Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:57:03.530Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:57:03.530Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:57:03.530Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:57:03.658Z - Time taken for 'hash changed files from watcher' 0.3135000001639128ms
+[NX Daemon Server] - 2024-07-25T12:57:29.990Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:57:29.992Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:57:30.841Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:57:32.142Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:57:32.658Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:57:32.659Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:57:34.544Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:57:35.531Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:57:35.533Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:57:36.453Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:57:36.453Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:57:36.453Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:57:36.650Z - Time taken for 'hash changed files from watcher' 0.5196000002324581ms
+[NX Daemon Server] - 2024-07-25T12:57:37.434Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:58:17.381Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:58:17.383Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:58:18.247Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:58:18.902Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:58:18.903Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:58:19.540Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:58:20.856Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:58:22.544Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:58:22.547Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:58:23.293Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:58:23.792Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:58:23.792Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:58:23.792Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:58:23.930Z - Time taken for 'hash changed files from watcher' 0.6052999999374151ms
+[NX Daemon Server] - 2024-07-25T12:58:24.576Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:58:24.879Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:58:24.880Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:58:25.624Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:58:26.903Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:58:28.146Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:58:28.148Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:58:28.789Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:58:30.097Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:58:31.286Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:58:31.286Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:58:31.286Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:58:31.422Z - Time taken for 'hash changed files from watcher' 0.9224000005051494ms
+[NX Daemon Server] - 2024-07-25T12:58:47.800Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:58:47.802Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T12:58:49.923Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T12:58:54.211Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T12:58:54.211Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T12:58:54.211Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T12:58:54.314Z - Time taken for 'hash changed files from watcher' 0.7413999997079372ms
+[NX Daemon Server] - 2024-07-25T13:00:03.531Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:00:03.532Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:00:04.319Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:00:05.753Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:00:09.933Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:00:09.933Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:00:09.933Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:00:10.050Z - Time taken for 'hash changed files from watcher' 0.42240000050514936ms
+[NX Daemon Server] - 2024-07-25T13:00:12.224Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:00:12.227Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:00:12.971Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:00:14.205Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:00:14.207Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:00:14.873Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:00:16.171Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:00:18.641Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:00:18.641Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:00:18.641Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:00:18.768Z - Time taken for 'hash changed files from watcher' 1.1578999999910593ms
+[NX Daemon Server] - 2024-07-25T13:00:30.884Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:00:30.886Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:00:31.725Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:00:33.188Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:00:37.288Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:00:37.289Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:00:37.289Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:00:37.406Z - Time taken for 'hash changed files from watcher' 0.7170000001788139ms
+[NX Daemon Server] - 2024-07-25T13:03:12.367Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:03:12.367Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:03:13.131Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:03:14.511Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:03:18.782Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:03:18.782Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:03:18.782Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:03:18.920Z - Time taken for 'hash changed files from watcher' 0.4071999993175268ms
+[NX Daemon Server] - 2024-07-25T13:03:37.277Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:03:37.278Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:03:38.078Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:03:39.418Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:03:43.703Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:03:43.703Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:03:43.703Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:03:43.824Z - Time taken for 'hash changed files from watcher' 0.3406999995931983ms
+[NX Daemon Server] - 2024-07-25T13:04:04.376Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:04:04.377Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:04:05.030Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:04:06.345Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:04:10.241Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:04:10.242Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:04:10.781Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:04:10.781Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:04:10.781Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:04:10.920Z - Time taken for 'hash changed files from watcher' 0.3473999993875623ms
+[NX Daemon Server] - 2024-07-25T13:04:10.953Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:04:12.266Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:04:12.926Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:04:12.926Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:04:13.549Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:04:14.831Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:04:15.691Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:04:15.692Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:04:16.430Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:04:17.313Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:04:17.315Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:04:17.926Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:04:19.226Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:04:19.338Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:04:19.338Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:04:19.338Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:04:19.470Z - Time taken for 'hash changed files from watcher' 0.4131999993696809ms
+[NX Daemon Server] - 2024-07-25T13:04:27.371Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:04:27.373Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:04:28.018Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:04:29.493Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:04:33.784Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:04:33.784Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:04:33.784Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:04:33.902Z - Time taken for 'hash changed files from watcher' 0.6342000002041459ms
+[NX Daemon Server] - 2024-07-25T13:04:35.688Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:04:35.690Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:04:36.353Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:04:37.691Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:04:42.107Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:04:42.107Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:04:42.107Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:04:42.229Z - Time taken for 'hash changed files from watcher' 0.7180999992415309ms
+[NX Daemon Server] - 2024-07-25T13:05:06.394Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:05:06.395Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:05:07.367Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:05:10.234Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:05:12.797Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:05:12.797Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:05:12.797Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:05:12.939Z - Time taken for 'hash changed files from watcher' 0.6401000004261732ms
+[NX Daemon Server] - 2024-07-25T13:05:20.345Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:05:20.345Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:05:24.289Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:05:26.756Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:05:26.756Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:05:26.756Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:05:26.980Z - Time taken for 'hash changed files from watcher' 1.9906999999657273ms
+[NX Daemon Server] - 2024-07-25T13:05:46.005Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:05:46.006Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:05:46.907Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:05:48.279Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:05:52.413Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:05:52.413Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:05:52.413Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:05:52.541Z - Time taken for 'hash changed files from watcher' 0.3558000000193715ms
+[NX Daemon Server] - 2024-07-25T13:05:54.856Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:05:54.856Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:05:55.625Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:05:56.974Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:06:01.265Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:06:01.265Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:06:01.265Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:06:01.384Z - Time taken for 'hash changed files from watcher' 0.38929999992251396ms
+[NX Daemon Server] - 2024-07-25T13:06:01.772Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:06:01.774Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:06:02.670Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:06:03.991Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:06:08.182Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:06:08.183Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:06:08.183Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:06:08.292Z - Time taken for 'hash changed files from watcher' 0.7971000000834465ms
+[NX Daemon Server] - 2024-07-25T13:06:08.607Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:06:08.607Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:06:09.358Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:06:10.731Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:06:15.015Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:06:15.015Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:06:15.015Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:06:15.131Z - Time taken for 'hash changed files from watcher' 0.37369999941438437ms
+[NX Daemon Server] - 2024-07-25T13:06:17.657Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:06:17.659Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:06:18.356Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:06:19.138Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:06:19.138Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:06:19.785Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:06:21.122Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:06:24.071Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:06:24.071Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:06:24.071Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:06:24.204Z - Time taken for 'hash changed files from watcher' 0.655799999833107ms
+[NX Daemon Server] - 2024-07-25T13:06:27.432Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:06:27.433Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:06:28.183Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:06:28.785Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:06:28.787Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:06:30.940Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:06:33.840Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:06:33.840Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:06:33.840Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:06:33.946Z - Time taken for 'hash changed files from watcher' 0.3092000000178814ms
+[NX Daemon Server] - 2024-07-25T13:06:56.985Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:06:56.985Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:06:57.753Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:06:59.137Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:07:03.393Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:07:03.393Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:07:03.393Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:07:03.514Z - Time taken for 'hash changed files from watcher' 0.6423000004142523ms
+[NX Daemon Server] - 2024-07-25T13:07:11.881Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:07:11.882Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:07:12.624Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:07:13.952Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:07:18.287Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:07:18.287Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:07:18.287Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:07:18.418Z - Time taken for 'hash changed files from watcher' 0.33509999979287386ms
+[NX Daemon Server] - 2024-07-25T13:07:24.587Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:07:24.587Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:07:26.651Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:07:30.989Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:07:30.989Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:07:30.989Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:07:31.111Z - Time taken for 'hash changed files from watcher' 0.6002000002190471ms
+[NX Daemon Server] - 2024-07-25T13:07:45.262Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:07:45.263Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:07:46.017Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:07:47.388Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:07:47.979Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:07:47.981Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:07:48.729Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:07:49.884Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:07:49.886Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:07:51.679Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:07:51.679Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:07:51.679Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:07:51.840Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:07:51.840Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:07:51.841Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:07:51.842Z - Time taken for 'hash changed files from watcher' 0.4417000003159046ms
+[NX Daemon Server] - 2024-07-25T13:07:52.703Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:07:52.704Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:07:53.376Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:07:54.652Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:07:56.732Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:07:56.732Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:07:57.322Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:07:58.137Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:07:58.138Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:07:58.243Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:07:58.244Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:07:58.244Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:07:58.369Z - Time taken for 'hash changed files from watcher' 0.6826999997720122ms
+[NX Daemon Server] - 2024-07-25T13:07:58.746Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:08:00.100Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:08:01.937Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:08:01.938Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:08:02.629Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:08:03.910Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:08:04.280Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:08:04.282Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:08:04.854Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:08:06.205Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:08:07.668Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:08:07.668Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:08:08.299Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:08:08.349Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:08:08.349Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:08:08.349Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:08:08.486Z - Time taken for 'hash changed files from watcher' 0.49770000018179417ms
+[NX Daemon Server] - 2024-07-25T13:08:09.547Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:08:14.684Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:08:14.685Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:08:15.321Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:08:16.610Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:08:19.310Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:08:19.310Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:08:19.931Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:08:21.092Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:08:21.092Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:08:21.092Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:08:21.248Z - Time taken for 'hash changed files from watcher' 0.6523000001907349ms
+[NX Daemon Server] - 2024-07-25T13:08:21.357Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:08:21.908Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:08:21.909Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:08:22.549Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:08:23.439Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:08:23.439Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:08:24.025Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:08:25.348Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:08:28.317Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:08:28.317Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:08:28.317Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:08:28.444Z - Time taken for 'hash changed files from watcher' 0.4007999999448657ms
+[NX Daemon Server] - 2024-07-25T13:08:44.713Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:08:44.715Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:08:45.467Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:08:46.026Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:08:46.027Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:08:46.718Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:08:48.084Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:08:51.122Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:08:51.122Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:08:51.122Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:08:51.240Z - Time taken for 'hash changed files from watcher' 0.37609999999403954ms
+[NX Daemon Server] - 2024-07-25T13:09:19.321Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:09:19.321Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:09:20.115Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:09:21.450Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:09:23.835Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:09:23.836Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:09:24.493Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:09:25.729Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:09:25.730Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:09:25.730Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:09:25.852Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:09:25.853Z - Time taken for 'hash changed files from watcher' 0.6875999998301268ms
+[NX Daemon Server] - 2024-07-25T13:09:28.830Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:09:28.832Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:09:29.508Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:09:30.776Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:09:35.245Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:09:35.245Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:09:35.245Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:09:35.358Z - Time taken for 'hash changed files from watcher' 0.4084000000730157ms
+[NX Daemon Server] - 2024-07-25T13:10:21.456Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:10:21.456Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:10:22.307Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:10:23.167Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:10:23.169Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:10:23.912Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:10:25.296Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:10:27.870Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:10:27.870Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:10:27.871Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:10:28.002Z - Time taken for 'hash changed files from watcher' 0.6458999998867512ms
+[NX Daemon Server] - 2024-07-25T13:10:30.791Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:10:30.791Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:10:32.721Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:10:32.760Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:10:37.197Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:10:37.197Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:10:37.197Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:10:37.314Z - Time taken for 'hash changed files from watcher' 0.37719999998807907ms
+[NX Daemon Server] - 2024-07-25T13:10:38.483Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:10:38.483Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:10:39.124Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:10:40.460Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:10:44.900Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:10:44.900Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:10:44.900Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:10:45.016Z - Time taken for 'hash changed files from watcher' 0.6214999994263053ms
+[NX Daemon Server] - 2024-07-25T13:10:59.717Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:10:59.717Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:11:00.526Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:11:01.921Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:11:01.981Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:11:06.129Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:11:06.129Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:11:06.129Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:11:06.244Z - Time taken for 'hash changed files from watcher' 0.3780999993905425ms
+[NX Daemon Server] - 2024-07-25T13:11:32.364Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:11:32.366Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:11:33.135Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:11:34.450Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:11:35.053Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:11:35.053Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:11:35.659Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:11:36.920Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:11:38.793Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:11:38.793Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:11:38.793Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:11:38.934Z - Time taken for 'hash changed files from watcher' 0.3930000001564622ms
+[NX Daemon Server] - 2024-07-25T13:11:41.673Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:11:41.674Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:11:42.368Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:11:43.675Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:11:45.151Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:11:45.151Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:11:45.777Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:11:47.092Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:11:47.625Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:11:47.626Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:11:48.089Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:11:48.089Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:11:48.089Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:11:48.233Z - Time taken for 'hash changed files from watcher' 0.7320999996736646ms
+[NX Daemon Server] - 2024-07-25T13:11:48.277Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:11:49.538Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:11:49.599Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:11:59.492Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:11:59.493Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:12:00.279Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:12:01.673Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:12:05.898Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:12:05.898Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:12:05.898Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:12:06.013Z - Time taken for 'hash changed files from watcher' 0.3970999997109175ms
+[NX Daemon Server] - 2024-07-25T13:19:08.804Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:19:08.804Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:19:09.653Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:19:10.966Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:19:15.215Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:19:15.215Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:19:15.215Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:19:15.345Z - Time taken for 'hash changed files from watcher' 0.9586000004783273ms
+[NX Daemon Server] - 2024-07-25T13:21:23.486Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:21:23.488Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:21:24.357Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:21:25.815Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:21:29.896Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:21:29.896Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:21:29.896Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:21:30.027Z - Time taken for 'hash changed files from watcher' 0.5203999998047948ms
+[NX Daemon Server] - 2024-07-25T13:21:59.065Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:21:59.066Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:21:59.903Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:22:01.220Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:22:01.640Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:22:01.704Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:22:05.475Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:22:05.476Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:22:05.476Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:22:05.610Z - Time taken for 'hash changed files from watcher' 0.3740000007674098ms
+[NX Daemon Server] - 2024-07-25T13:22:06.453Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:22:06.454Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:22:07.118Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:22:12.863Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:22:12.863Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:22:12.863Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:22:13.021Z - Time taken for 'hash changed files from watcher' 0.3256999999284744ms
+[NX Daemon Server] - 2024-07-25T13:22:23.022Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:22:23.023Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:22:24.447Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:22:24.452Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:22:25.181Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:22:26.513Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:22:26.587Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:22:28.349Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:22:28.350Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:22:28.964Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:22:29.434Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:22:29.434Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:22:29.434Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:22:29.579Z - Time taken for 'hash changed files from watcher' 0.3877999996766448ms
+[NX Daemon Server] - 2024-07-25T13:22:31.816Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:22:31.817Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:22:32.460Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:22:33.748Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:22:38.232Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:22:38.232Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:22:38.233Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:22:38.360Z - Time taken for 'hash changed files from watcher' 0.777900000102818ms
+[NX Daemon Server] - 2024-07-25T13:23:07.098Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:23:07.099Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:23:07.931Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:23:09.325Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:23:09.486Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:23:09.488Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:23:13.300Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:23:13.301Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:23:13.506Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:23:13.507Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:23:13.507Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:23:13.636Z - Time taken for 'hash changed files from watcher' 0.4166000001132488ms
+[NX Daemon Server] - 2024-07-25T13:23:13.947Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:23:15.239Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:23:16.883Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:23:16.884Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:23:17.546Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:23:18.475Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:23:18.476Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:23:19.072Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:23:20.369Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:23:22.002Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:23:22.002Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:23:22.647Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:23:23.290Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:23:23.290Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:23:23.290Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:23:23.410Z - Time taken for 'hash changed files from watcher' 1.2261999994516373ms
+[NX Daemon Server] - 2024-07-25T13:23:23.907Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:23:33.062Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:23:33.066Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:23:33.796Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:23:35.161Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:23:36.625Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:23:36.626Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:23:37.298Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:23:38.573Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:23:38.753Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:23:38.754Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:23:39.364Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:23:39.476Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:23:39.476Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:23:39.476Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:23:39.677Z - Time taken for 'hash changed files from watcher' 0.4770999997854233ms
+[NX Daemon Server] - 2024-07-25T13:23:39.793Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:23:39.795Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:23:40.457Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:23:41.764Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:23:46.198Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:23:46.199Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:23:46.199Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:23:46.332Z - Time taken for 'hash changed files from watcher' 0.6616000002250075ms
+[NX Daemon Server] - 2024-07-25T13:23:56.159Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:23:56.159Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:23:56.865Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:23:58.136Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:24:00.507Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:24:00.507Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:24:01.166Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:24:02.424Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:24:02.564Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:24:02.564Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:24:02.564Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:24:02.689Z - Time taken for 'hash changed files from watcher' 0.37369999941438437ms
+[NX Daemon Server] - 2024-07-25T13:24:03.952Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:24:03.953Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:24:04.597Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:24:05.851Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:24:10.362Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:24:10.362Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:24:10.362Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:24:10.474Z - Time taken for 'hash changed files from watcher' 0.3022999996319413ms
+[NX Daemon Server] - 2024-07-25T13:27:00.148Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:27:00.150Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:27:02.307Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:27:06.555Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:27:06.556Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:27:06.556Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:27:06.688Z - Time taken for 'hash changed files from watcher' 0.4714000001549721ms
+[NX Daemon Server] - 2024-07-25T13:27:16.403Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:27:16.403Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:27:18.398Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:27:18.559Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:27:18.561Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:27:20.464Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:27:22.806Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:27:22.806Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:27:22.806Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:27:22.905Z - Time taken for 'hash changed files from watcher' 0.5146000003442168ms
+[NX Daemon Server] - 2024-07-25T13:30:38.641Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:30:38.642Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:30:39.417Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:30:40.811Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:30:45.045Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:30:45.045Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:30:45.045Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:30:45.177Z - Time taken for 'hash changed files from watcher' 0.3537000007927418ms
+[NX Daemon Server] - 2024-07-25T13:30:52.488Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:30:52.488Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:30:53.198Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:30:54.515Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:30:58.892Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:30:58.892Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:30:58.892Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:30:59.041Z - Time taken for 'hash changed files from watcher' 0.3837000001221895ms
+[NX Daemon Server] - 2024-07-25T13:31:04.329Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:31:04.330Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:31:05.008Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:31:06.269Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:31:06.270Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:31:06.457Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:31:06.957Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:31:08.234Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:31:10.734Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:31:10.734Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:31:10.734Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:31:10.862Z - Time taken for 'hash changed files from watcher' 0.5581000000238419ms
+[NX Daemon Server] - 2024-07-25T13:31:26.764Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:31:26.765Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:31:27.583Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:31:28.960Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:31:29.018Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:31:29.255Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:31:29.255Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:31:29.945Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:31:30.449Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:31:30.449Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:31:31.112Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:31:32.392Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:31:33.015Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:31:33.015Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:31:33.170Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:31:33.170Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:31:33.170Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:31:33.298Z - Time taken for 'hash changed files from watcher' 0.3037000000476837ms
+[NX Daemon Server] - 2024-07-25T13:31:33.628Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:31:34.474Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:31:34.474Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:31:35.297Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:31:36.049Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:31:36.050Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:31:36.668Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:31:37.235Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:31:37.235Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:31:37.936Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:31:39.234Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:31:40.880Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:31:40.880Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:31:40.880Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:31:40.989Z - Time taken for 'hash changed files from watcher' 0.5131999999284744ms
+[NX Daemon Server] - 2024-07-25T13:33:46.931Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:33:46.933Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:33:47.826Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:33:49.185Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:33:49.248Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:33:53.338Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:33:53.338Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:33:53.338Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:33:53.469Z - Time taken for 'hash changed files from watcher' 0.39269999973475933ms
+[NX Daemon Server] - 2024-07-25T13:34:19.600Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:34:19.600Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:34:20.362Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:34:21.664Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:34:26.009Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:34:26.009Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:34:26.009Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:34:26.127Z - Time taken for 'hash changed files from watcher' 0.39249999914318323ms
+[NX Daemon Server] - 2024-07-25T13:34:35.421Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:34:35.426Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:34:36.215Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:34:37.549Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:34:41.824Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:34:41.824Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:34:41.824Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:34:42.023Z - Time taken for 'hash changed files from watcher' 0.6237000003457069ms
+[NX Daemon Server] - 2024-07-25T13:34:44.077Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:34:44.079Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:34:44.856Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:34:46.236Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:34:49.668Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:34:49.669Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:34:50.314Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:34:50.493Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:34:50.493Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:34:50.493Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:34:50.683Z - Time taken for 'hash changed files from watcher' 1.651300000026822ms
+[NX Daemon Server] - 2024-07-25T13:34:51.595Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:34:59.447Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:34:59.447Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:35:00.154Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:35:01.427Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:35:05.860Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:35:05.861Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:35:05.861Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:35:05.977Z - Time taken for 'hash changed files from watcher' 0.3780999993905425ms
+[NX Daemon Server] - 2024-07-25T13:35:32.548Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:35:32.550Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:35:33.389Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:35:34.752Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:35:35.505Z - [WATCHER]: src/EventRatings/eventRatings.component.html was modified
+[NX Daemon Server] - 2024-07-25T13:35:35.505Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:35:36.172Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:35:37.473Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-25T13:35:38.954Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-25T13:35:38.954Z - [REQUEST]: src/EventRatings/eventRatings.component.html
+[NX Daemon Server] - 2024-07-25T13:35:38.954Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-25T13:35:39.080Z - Time taken for 'hash changed files from watcher' 0.6092999996617436ms

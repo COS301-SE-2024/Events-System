@@ -1,0 +1,407 @@
+<div class="hero h-80 min-w-dvw" > Event image </div> <!-- [style.background-image]="'url(' + imageSource + ')'" -->
+<button class="btn w-[50px] -mt-12 lg:ml-8 h-[30px] rounded-full"><i class="fa-solid fa-arrow-left"></i></button> <!-- (click)="goBack()" -->
+
+<div class="relative flex size-full h-screen flex-col bg-white group/design-root overflow-x-hidden" style='font-family: Manrope, "Noto Sans", sans-serif;'>
+    <div class="layout-container flex h-full grow flex-col">
+
+    <div class="px-40 flex flex-1 justify-center py-5">
+        <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+            <div class="flex lg:justify-between lg:flex-row flex-col">
+                <div>
+                    <h1 class="text-6xl  mt-8">event title</h1>
+                    <h2 class="mt-4 text-xl  text-secondary">event description</h2>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap gap-x-8 gap-y-6 p-4">
+              <div class="flex flex-col gap-2">
+                <p class="text-green-700 text-4xl font-black leading-tight tracking-[-0.033em]">4.3</p>
+                <div class="flex gap-0.5">
+                  
+                    <div class="text-accent" data-icon="Star" data-size="18px" data-weight="fill">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" fill="green" viewBox="0 0 256 256">
+                        <path
+                        d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"
+                        ></path>
+                        </svg>
+                    </div>
+
+                    <div class="text-[#111418]" data-icon="Star" data-size="18px" data-weight="fill">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" fill="green" viewBox="0 0 256 256">
+                        <path
+                            d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"
+                        ></path>
+                        </svg>
+                    </div>
+
+                    <div class="text-[#111418]" data-icon="Star" data-size="18px" data-weight="fill">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" fill="green" viewBox="0 0 256 256">
+                        <path
+                            d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"
+                        ></path>
+                        </svg>
+                    </div>
+
+                    <div class="text-[#111418]" data-icon="Star" data-size="18px" data-weight="fill">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" fill="green" viewBox="0 0 256 256">
+                        <path
+                            d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"
+                        ></path>
+                        </svg>
+                    </div>
+
+                    <div class="text-[#111418]" data-icon="Star" data-size="18px" data-weight="regular">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" fill="green" viewBox="0 0 256 256">
+                        <path
+                            d="M239.2,97.29a16,16,0,0,0-13.81-11L166,81.17,142.72,25.81h0a15.95,15.95,0,0,0-29.44,0L90.07,81.17,30.61,86.32a16,16,0,0,0-9.11,28.06L66.61,153.8,53.09,212.34a16,16,0,0,0,23.84,17.34l51-31,51.11,31a16,16,0,0,0,23.84-17.34l-13.51-58.6,45.1-39.36A16,16,0,0,0,239.2,97.29Zm-15.22,5-45.1,39.36a16,16,0,0,0-5.08,15.71L187.35,216v0l-51.07-31a15.9,15.9,0,0,0-16.54,0l-51,31h0L82.2,157.4a16,16,0,0,0-5.08-15.71L32,102.35a.37.37,0,0,1,0-.09l59.44-5.14a16,16,0,0,0,13.35-9.75L128,32.08l23.2,55.29a16,16,0,0,0,13.35,9.75L224,102.26S224,102.32,224,102.33Z"
+                        ></path>
+                        </svg>
+                    </div>
+
+                    </div>
+                        <p class="text-[#111418] text-base font-normal leading-normal">20 reviews</p>
+                    </div>
+
+              <div class="grid min-w-[200px] max-w-[400px] flex-1 grid-cols-[20px_1fr_40px] items-center gap-y-3">
+                <p class="text-[#111418] text-sm font-normal leading-normal">5</p>
+                <div class="flex h-2 flex-1 overflow-hidden rounded-full bg-[#dce0e5]"><div class="rounded-full bg-green-700" style="width: 60%;"></div></div>
+                <p class="text-[#637588] text-sm font-normal leading-normal text-right">60%</p>
+                <p class="text-[#111418] text-sm font-normal leading-normal">4</p>
+                <div class="flex h-2 flex-1 overflow-hidden rounded-full bg-[#dce0e5]"><div class="rounded-full bg-green-700" style="width: 10%;"></div></div>
+                <p class="text-[#637588] text-sm font-normal leading-normal text-right">10%</p>
+                <p class="text-[#111418] text-sm font-normal leading-normal">3</p>
+                <div class="flex h-2 flex-1 overflow-hidden rounded-full bg-[#dce0e5]"><div class="rounded-full bg-green-700" style="width: 10%;"></div></div>
+                <p class="text-[#637588] text-sm font-normal leading-normal text-right">10%</p>
+                <p class="text-[#111418] text-sm font-normal leading-normal">2</p>
+                <div class="flex h-2 flex-1 overflow-hidden rounded-full bg-[#dce0e5]"><div class="rounded-full bg-green-700" style="width: 10%;"></div></div>
+                <p class="text-[#637588] text-sm font-normal leading-normal text-right">10%</p>
+                <p class="text-[#111418] text-sm font-normal leading-normal">1</p>
+                <div class="flex h-2 flex-1 overflow-hidden rounded-full bg-[#dce0e5]"><div class="rounded-full bg-green-700" style="width: 10%;"></div></div>
+                <p class="text-[#637588] text-sm font-normal leading-normal text-right">10%</p>
+              </div>
+            </div>
+
+            <div class="flex flex-col gap-8 overflow-x-hidden p-4">
+              <div class="flex flex-col gap-3 bg-white">
+                <div class="flex flex-row gap-2">
+                    <div class="avatar">
+                        <div class="w-24 rounded-full">
+                            <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                        </div>
+                    </div>
+                    
+                    <div class=" flex flex-col flex-1">
+                        <p class="text-[#111418] text-base font-medium leading-normal">Polina</p>
+                        <p class="text-[#637588] text-sm font-normal leading-normal">May 16, 2023</p>
+                    </div>
+                </div>
+
+
+                <div class="flex gap-0.5">
+                    <div class="text-[#111418]" data-icon="Star" data-size="20px" data-weight="fill">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="green" viewBox="0 0 256 256">
+                        <path
+                            d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"
+                        ></path>
+                        </svg>
+                    </div>
+
+                    <div class="text-[#111418]" data-icon="Star" data-size="20px" data-weight="fill">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="green" viewBox="0 0 256 256">
+                        <path
+                            d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"
+                        ></path>
+                        </svg>
+                    </div>
+
+                    <div class="text-[#111418]" data-icon="Star" data-size="20px" data-weight="fill">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="green" viewBox="0 0 256 256">
+                        <path
+                            d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"
+                        ></path>
+                        </svg>
+                    </div>
+                    <div class="text-[#111418]" data-icon="Star" data-size="20px" data-weight="fill">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="green" viewBox="0 0 256 256">
+                        <path
+                            d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"
+                        ></path>
+                        </svg>
+                    </div>
+                    <div class="text-[#111418]" data-icon="Star" data-size="20px" data-weight="fill">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="green" viewBox="0 0 256 256">
+                        <path
+                            d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"
+                        ></path>
+                        </svg>
+                    </div>
+                </div>
+
+                <p class="text-[#111418] text-base font-normal leading-normal">
+                    One of the best I've attended in years! The atmosphere was electric, and the competition was fierce. 
+                    Highly recommend attending future events by Henry!
+                </p>
+              </div>
+            </div>
+
+
+
+            <div class="flex flex-col gap-8 overflow-x-hidden p-4">
+                <div class="flex flex-col gap-3 bg-white">
+                  <div class="flex flex-row gap-2">
+                      <div class="avatar">
+                          <div class="w-24 rounded-full">
+                              <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                          </div>
+                      </div>
+                      
+                      <div class=" flex flex-col flex-1">
+                          <p class="text-[#111418] text-base font-medium leading-normal">Polina</p>
+                          <p class="text-[#637588] text-sm font-normal leading-normal">May 16, 2023</p>
+                      </div>
+                  </div>
+  
+  
+                  <div class="flex gap-0.5">
+                      <div class="text-[#111418]" data-icon="Star" data-size="20px" data-weight="fill">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="green" viewBox="0 0 256 256">
+                          <path
+                              d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"
+                          ></path>
+                          </svg>
+                      </div>
+  
+                      <div class="text-[#111418]" data-icon="Star" data-size="20px" data-weight="fill">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="green" viewBox="0 0 256 256">
+                          <path
+                              d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"
+                          ></path>
+                          </svg>
+                      </div>
+  
+                      <div class="text-[#111418]" data-icon="Star" data-size="20px" data-weight="fill">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="green" viewBox="0 0 256 256">
+                          <path
+                              d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"
+                          ></path>
+                          </svg>
+                      </div>
+                      <div class="text-[#111418]" data-icon="Star" data-size="20px" data-weight="fill">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="green" viewBox="0 0 256 256">
+                          <path
+                              d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"
+                          ></path>
+                          </svg>
+                      </div>
+                      <div class="text-[#111418]" data-icon="Star" data-size="20px" data-weight="fill">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="green" viewBox="0 0 256 256">
+                          <path
+                              d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"
+                          ></path>
+                          </svg>
+                      </div>
+                  </div>
+  
+                  <p class="text-[#111418] text-base font-normal leading-normal">
+                      One of the best I've attended in years! The atmosphere was electric, and the competition was fierce. 
+                      Highly recommend attending future events by Henry!
+                  </p>
+                </div>
+            </div>
+
+
+            <div class="flex flex-col gap-8 overflow-x-hidden p-4">
+                <div class="flex flex-col gap-3 bg-white">
+                  <div class="flex flex-row gap-2">
+                      <div class="avatar">
+                          <div class="w-24 rounded-full">
+                              <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                          </div>
+                      </div>
+                      
+                      <div class=" flex flex-col flex-1">
+                          <p class="text-[#111418] text-base font-medium leading-normal">Polina</p>
+                          <p class="text-[#637588] text-sm font-normal leading-normal">May 16, 2023</p>
+                      </div>
+                  </div>
+  
+  
+                  <div class="flex gap-0.5">
+                      <div class="text-[#111418]" data-icon="Star" data-size="20px" data-weight="fill">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="green" viewBox="0 0 256 256">
+                          <path
+                              d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"
+                          ></path>
+                          </svg>
+                      </div>
+  
+                      <div class="text-[#111418]" data-icon="Star" data-size="20px" data-weight="fill">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="green" viewBox="0 0 256 256">
+                          <path
+                              d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"
+                          ></path>
+                          </svg>
+                      </div>
+  
+                      <div class="text-[#111418]" data-icon="Star" data-size="20px" data-weight="fill">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="green" viewBox="0 0 256 256">
+                          <path
+                              d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"
+                          ></path>
+                          </svg>
+                      </div>
+                      <div class="text-[#111418]" data-icon="Star" data-size="20px" data-weight="fill">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="green" viewBox="0 0 256 256">
+                          <path
+                              d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"
+                          ></path>
+                          </svg>
+                      </div>
+                      <div class="text-[#111418]" data-icon="Star" data-size="20px" data-weight="fill">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="green" viewBox="0 0 256 256">
+                          <path
+                              d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"
+                          ></path>
+                          </svg>
+                      </div>
+                  </div>
+  
+                  <p class="text-[#111418] text-base font-normal leading-normal">
+                      One of the best I've attended in years! The atmosphere was electric, and the competition was fierce. 
+                      Highly recommend attending future events by Henry!
+                  </p>
+                </div>
+              </div>
+
+
+              <div class="flex flex-col gap-8 overflow-x-hidden p-4">
+                <div class="flex flex-col gap-3 bg-white">
+                  <div class="flex flex-row gap-2">
+                      <div class="avatar">
+                          <div class="w-24 rounded-full">
+                              <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                          </div>
+                      </div>
+                      
+                      <div class=" flex flex-col flex-1">
+                          <p class="text-[#111418] text-base font-medium leading-normal">Polina</p>
+                          <p class="text-[#637588] text-sm font-normal leading-normal">May 16, 2023</p>
+                      </div>
+                  </div>
+  
+  
+                  <div class="flex gap-0.5">
+                      <div class="text-[#111418]" data-icon="Star" data-size="20px" data-weight="fill">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="green" viewBox="0 0 256 256">
+                          <path
+                              d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"
+                          ></path>
+                          </svg>
+                      </div>
+  
+                      <div class="text-[#111418]" data-icon="Star" data-size="20px" data-weight="fill">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="green" viewBox="0 0 256 256">
+                          <path
+                              d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"
+                          ></path>
+                          </svg>
+                      </div>
+  
+                      <div class="text-[#111418]" data-icon="Star" data-size="20px" data-weight="fill">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="green" viewBox="0 0 256 256">
+                          <path
+                              d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"
+                          ></path>
+                          </svg>
+                      </div>
+                      <div class="text-[#111418]" data-icon="Star" data-size="20px" data-weight="fill">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="green" viewBox="0 0 256 256">
+                          <path
+                              d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"
+                          ></path>
+                          </svg>
+                      </div>
+                      <div class="text-[#111418]" data-icon="Star" data-size="20px" data-weight="fill">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="green" viewBox="0 0 256 256">
+                          <path
+                              d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"
+                          ></path>
+                          </svg>
+                      </div>
+                  </div>
+  
+                  <p class="text-[#111418] text-base font-normal leading-normal">
+                      One of the best I've attended in years! The atmosphere was electric, and the competition was fierce. 
+                      Highly recommend attending future events by Henry!
+                  </p>
+                </div>
+              </div>
+
+
+              <div class="flex flex-col gap-8 overflow-x-hidden p-4">
+                <div class="flex flex-col gap-3 bg-white">
+                  <div class="flex flex-row gap-2">
+                      <div class="avatar">
+                          <div class="w-24 rounded-full">
+                              <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                          </div>
+                      </div>
+                      
+                      <div class=" flex flex-col flex-1">
+                          <p class="text-[#111418] text-base font-medium leading-normal">Polina</p>
+                          <p class="text-[#637588] text-sm font-normal leading-normal">May 16, 2023</p>
+                      </div>
+                  </div>
+  
+  
+                  <div class="flex gap-0.5">
+                      <div class="text-[#111418]" data-icon="Star" data-size="20px" data-weight="fill">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="green" viewBox="0 0 256 256">
+                          <path
+                              d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"
+                          ></path>
+                          </svg>
+                      </div>
+  
+                      <div class="text-[#111418]" data-icon="Star" data-size="20px" data-weight="fill">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="green" viewBox="0 0 256 256">
+                          <path
+                              d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"
+                          ></path>
+                          </svg>
+                      </div>
+  
+                      <div class="text-[#111418]" data-icon="Star" data-size="20px" data-weight="fill">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="green" viewBox="0 0 256 256">
+                          <path
+                              d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"
+                          ></path>
+                          </svg>
+                      </div>
+                      <div class="text-[#111418]" data-icon="Star" data-size="20px" data-weight="fill">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="green" viewBox="0 0 256 256">
+                          <path
+                              d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"
+                          ></path>
+                          </svg>
+                      </div>
+                      <div class="text-[#111418]" data-icon="Star" data-size="20px" data-weight="fill">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="green" viewBox="0 0 256 256">
+                          <path
+                              d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"
+                          ></path>
+                          </svg>
+                      </div>
+                  </div>
+  
+                  <p class="text-[#111418] text-base font-normal leading-normal">
+                      One of the best I've attended in years! The atmosphere was electric, and the competition was fierce. 
+                      Highly recommend attending future events by Henry!
+                  </p>
+                </div>
+              </div>
+
+          </div>
+        </div>
+      </div>
+    </div>

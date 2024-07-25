@@ -58,7 +58,7 @@
     "@angular/compiler-cli": "~18.1.0",
     "@angular/language-service": "~18.1.0",
     "@angular/pwa": "^18.1.0",
-    "@nrwl/angular": "^19.4.3",
+    "@nrwl/angular": "^19.5.3",
     "@nx/devkit": "19.4.3",
     "@nx/eslint": "19.4.3",
     "@nx/eslint-plugin": "19.4.3",
