@@ -15,11 +15,8 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(@NonNull CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins(
-                 "http://localhost:4200",
-                            "https://events-system.org") // Allow requests from any origin
+                        .allowedOrigins("*") // Allow requests from any origin
                         .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE") // Allowed HTTP methods
-                        .allowCredentials(true)
                         .allowedHeaders("*"); // Allowed headers
             }
         };
