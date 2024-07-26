@@ -700,7 +700,7 @@
         },
         {
           "file": "src/EventRatings/eventRatings.component.html",
-          "hash": "10604885676905852166"
+          "hash": "17484231339765685771"
         },
         {
           "file": "src/EventRatings/eventRatings.component.spec.ts",
@@ -708,7 +708,7 @@
         },
         {
           "file": "src/EventRatings/eventRatings.component.ts",
-          "hash": "9333385548056208049"
+          "hash": "13583829615191412634"
         },
         {
           "file": "src/Help/Help.component.css",
@@ -1061,6 +1061,22 @@
         {
           "file": "webpack.config.js",
           "hash": "9763475564647512955"
+        },
+        {
+          "file": "src/Components/UserReviewCard/userReviewCard.component.spec.ts",
+          "hash": "4024229044352859703"
+        },
+        {
+          "file": "src/Components/UserReviewCard/userReviewCard.component.ts",
+          "hash": "18066208142854584849"
+        },
+        {
+          "file": "src/Components/UserReviewCard/userReviewCard.component.css",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/Components/UserReviewCard/userReviewCard.component.html",
+          "hash": "6728860663162214199"
         }
       ]
     }
