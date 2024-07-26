@@ -52,6 +52,7 @@ public class SecurityConfiguration {
             "/webjars/**",
             "/swagger-ui.html",
             "/api/events/**",       // Ensure all event-related endpoints are accessible
+            "/api/feedback/**",    // Ensure all feedback-related endpoints are accessible
             "/api/event-rsvps/**", // Ensure all event-rsvp-related endpoints are accessible
             "/api/employees/**",   // Ensure all employee-related endpoints are accessible
             "/api/socialclubs/**", // Ensure all social-club-related endpoints are accessible
@@ -69,7 +70,8 @@ public class SecurityConfiguration {
                 .cors(corsConfigurer -> {
                 CorsConfigurationSource source = request -> {
                     CorsConfiguration config = new CorsConfiguration();
-                    config.setAllowedOrigins(List.of("http://localhost:4200"));
+                    //config.setAllowedOrigins(List.of("http://localhost:4200", "https://events-system.org"));
+                    config.setAllowedOriginPatterns(List.of("http://*", "https://*"));
                     config.setAllowedMethods(List.of("*"));
                     config.setAllowedHeaders(List.of("*"));
                     config.setAllowCredentials(true);

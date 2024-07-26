@@ -14,8 +14,6 @@
   <div class="navbar-center">
 
     <a routerLink="/" class="btn btn-ghost text-xl"  *ngIf="!isLoginRoute">Events System</a>
-    <!-- <button class="btn btn-primary" type="button" (click)="installPwa()">install</button>     -->
-
   </div>
   <div class="navbar-end">
     <button class="btn btn-ghost btn-circle hidden lg:block"  *ngIf="!isLoginRoute">
@@ -100,7 +98,6 @@
           <li><a routerLink="/settings"><i class="fa-solid fa-gear"></i>Settings</a></li>
           <li><a routerLink=""><i class="fa-solid fa-magnifying-glass"></i>Search</a></li>
           <li><a routerLink="/help"><i class="fa fa-info"></i>Help</a></li>
-          <li><a  (click)="installPwa()"><i class="fa fa-download"></i>Download app</a></li>
     </ul>
   
   </div>

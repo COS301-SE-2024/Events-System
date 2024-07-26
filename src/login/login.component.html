@@ -340,10 +340,10 @@
 
 <!-- FORGOT PASSWORD MODAL HOME -->
 <dialog id="my_modal_2" class="modal overflow-x-hidden backdrop-blur-sm">
-  <div class="modal-box overflow-x-hidden bg-neutral ">
+  <div class="modal-box overflow-x-hidden  bg-neutral ">
 
     <form method="dialog">
-      <button class="btn btn-sm btn-circle btn-ghost absolute right-4 top-2">✕</button>
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-10 top-2">✕</button>
     </form>
 
     <div class="mx-auto max-w-md">
@@ -397,21 +397,21 @@
 </dialog>
 
 <!-- CREATE ACCOUNT MODAL HOME -->
-<dialog id="my_modal_3" class="modal modal-middle overflow-x-hidden backdrop-blur-sm ">
+<dialog id="my_modal_3" class="modal modal-middle  backdrop-blur-sm ">
   
-  <div class="modal-box  lg:w-11/12 lg:max-w-5xl bg-neutral ">
+  <div class="modal-box w-3/4 max-w-3xl bg-neutral ">
     <form method="dialog">
-      <button class="btn btn-sm btn-circle btn-ghost absolute right-4 top-2">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-20 top-2">
         ✕
       </button>
-      <div class="text-center sm:p-2 p-4">
+      <div class="text-center min-h-[160px] sm:p-6 p-4">
         <h4 class="sm:text-3xl text-2xl font-bold text-white">Create your account</h4>
         <h4 class="mb-2 font-medium text-slate-400 xl:text-xl">Enter your information to register</h4>
       </div>
-  <div class="">
+  <div class="shrink-0 w-full">
     <form (submit)="onRegister($event)" [formGroup]="registerForm" class="">
       
-      <div class="">
+      <div class="flex  justify-center items-center">
       <div  class="grid md:grid-cols-2 gap-x-12 gap-y-6">
         <!-- First name -->
         <div>
@@ -422,9 +422,8 @@
             id="firstName"
             name="firstName"
             formControlName="firstName"
-            
             type="text"
-            class="input input-bordered  w-full max-w-md"
+            class="input input-bordered 2-2xl"
             required
           />
           <div *ngIf="registerForm.get('firstName')?.invalid && (registerForm.get('firstName')?.dirty || registerForm.get('firstName')?.touched)" class="text-red-500 text-sm mt-1">
@@ -441,7 +440,7 @@
             name="lastName"
             formControlName="lastName"
             type="text"
-            class="input input-bordered  w-full max-w-md"
+            class="input input-bordered  max-w-md"
             required
           />
           <div *ngIf="registerForm.get('lastName')?.invalid && (registerForm.get('lastName')?.dirty || registerForm.get('lastName')?.touched)" class="text-red-500 text-sm mt-1">
@@ -458,7 +457,7 @@
             name="email"
             formControlName="email"
             type="email"
-            class="input input-bordered w-full max-w-md"
+            class="input input-bordered max-w-md"
             required
           />
           <div *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)" class="text-red-500 text-sm mt-1">
@@ -475,7 +474,7 @@
             name="password"
             formControlName="password"
             type="password"
-            class="input input-bordered w-full max-w-md"
+            class="input input-bordered max-w-md"
             required
           />
           <div *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)" class="text-red-500 text-sm mt-1">
@@ -501,7 +500,7 @@
         </label>
         <input
           type="password"
-          class="input input-bordered w-full max-w-md"
+          class="input input-bordered  max-w-md"
           required
         />
         <div *ngIf="registerForm.get('confirmPassword')?.invalid && (registerForm.get('confirmPassword')?.dirty || registerForm.get('confirmPassword')?.touched)" class="text-red-500 text-sm mt-1">
@@ -529,13 +528,13 @@
       </div>
       <div class="divider">or</div>
   <div class="flex flex-col justify-center items-center">
-    <button class="btn lg:w-96 w-full mb-4">        <img
+    <button class="btn w-96 mb-4">        <img
       src="https://www.material-tailwind.com/logos/logo-google.png"
       alt="google"
       
       class="h-6 w-6"
     />Sign in with google</button>
-    <button class="btn lg:w-96 w-full"> <i class="fa-brands fa-x-twitter text-xl"></i>Sign in with X</button>
+    <button class="btn w-96"> <i class="fa-brands fa-x-twitter text-xl"></i>Sign in with X</button>
   </div>
 
     </form>

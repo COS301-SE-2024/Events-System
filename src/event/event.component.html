@@ -72,9 +72,7 @@
                         </div>
                     </div>
                       <div class="card-actions justify-end">
-                        <button class="btn btn-accent" *ngIf="!hasUserRSVPd"  @buttonFade (click)="rsvpToEvent()">Book Now</button>
-                        <button class="btn btn-outline btn-warning" *ngIf="hasUserRSVPd"  @buttonFade (click)="rsvpToEvent()">Cancel booking</button>
-
+                        <button class="btn btn-accent">Book Now</button>
                       </div>
                     </div>
                   </div>
@@ -128,33 +126,5 @@
     
 
 </div>
-<div class="toast" *ngIf="isAPILoading">
-  <div class="alert alert-info flex justify-center">
-      <span class="loading loading-dots loading-md"></span>
-  </div>
-</div>
 
 
-<div class="toast" *ngIf="showrsvpsuccessToast">
-  <div class="alert alert-success">
-    <span>Succesfully Booked</span>
-  </div>
-  </div>
-  
-  <div class="toast" *ngIf="showrsvpfailToast">
-  <div class="alert alert-error">
-    <span>Error Booking for event</span>
-  </div>
-  </div>
-
-  <div class="toast" *ngIf="showunrsvpsuccessToast">
-    <div class="alert alert-success">
-      <span>Succesfully removed Booking</span>
-    </div>
-    </div>
-    
-    <div class="toast" *ngIf="showunrsvpfailToast">
-    <div class="alert alert-error">
-      <span>Error Removing Booking for event</span>
-    </div>
-    </div>
