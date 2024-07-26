@@ -700,7 +700,7 @@
         },
         {
           "file": "src/EventRatings/eventRatings.component.html",
-          "hash": "17484231339765685771"
+          "hash": "1952045441287289167"
         },
         {
           "file": "src/EventRatings/eventRatings.component.spec.ts",
@@ -1076,7 +1076,7 @@
         },
         {
           "file": "src/Components/UserReviewCard/userReviewCard.component.html",
-          "hash": "6728860663162214199"
+          "hash": "4671560082823998825"
         }
       ]
     }
