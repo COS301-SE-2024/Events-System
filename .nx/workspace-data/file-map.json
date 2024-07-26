@@ -643,6 +643,22 @@
           "hash": "604390451346350956"
         },
         {
+          "file": "src/Components/UserReviewCard/userReviewCard.component.css",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/Components/UserReviewCard/userReviewCard.component.html",
+          "hash": "4671560082823998825"
+        },
+        {
+          "file": "src/Components/UserReviewCard/userReviewCard.component.spec.ts",
+          "hash": "4024229044352859703"
+        },
+        {
+          "file": "src/Components/UserReviewCard/userReviewCard.component.ts",
+          "hash": "18066208142854584849"
+        },
+        {
           "file": "src/Components/event/event.component.css",
           "hash": "3244421341483603138"
         },
@@ -693,6 +709,22 @@
         {
           "file": "src/DeleteEvent/DeleteEvent.component.ts",
           "hash": "15452663311747735406"
+        },
+        {
+          "file": "src/EventFeedback/eventFeedback.component.css",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/EventFeedback/eventFeedback.component.html",
+          "hash": "18263834457988261303"
+        },
+        {
+          "file": "src/EventFeedback/eventFeedback.component.spec.ts",
+          "hash": "15182771067520046404"
+        },
+        {
+          "file": "src/EventFeedback/eventFeedback.component.ts",
+          "hash": "297060850431848161"
         },
         {
           "file": "src/EventRatings/eventRatings.component.css",
@@ -784,7 +816,7 @@
         },
         {
           "file": "src/app/app.routes.ts",
-          "hash": "7268722291424992061"
+          "hash": "5576561114177981096"
         },
         {
           "file": "src/app/pwa.service.spec.ts",
@@ -1061,22 +1093,6 @@
         {
           "file": "webpack.config.js",
           "hash": "9763475564647512955"
-        },
-        {
-          "file": "src/Components/UserReviewCard/userReviewCard.component.spec.ts",
-          "hash": "4024229044352859703"
-        },
-        {
-          "file": "src/Components/UserReviewCard/userReviewCard.component.ts",
-          "hash": "18066208142854584849"
-        },
-        {
-          "file": "src/Components/UserReviewCard/userReviewCard.component.css",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "src/Components/UserReviewCard/userReviewCard.component.html",
-          "hash": "4671560082823998825"
         }
       ]
     }
