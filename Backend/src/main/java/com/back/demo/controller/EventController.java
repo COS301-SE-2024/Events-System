@@ -71,4 +71,14 @@ public class EventController {
         }
     }
 
+    @GetMapping("/employee/{employeeId}/events-attended")
+    public List<Event> getEventsAttended(@PathVariable Long employeeId) {
+        return eventService.getEventsAttended(employeeId); 
+    }
+
+    @GetMapping("/employee/{employeeId}/upcoming-events")
+    public List<Event> getUpcomingEvents(@PathVariable Long employeeId) {
+        return eventService.getUpcomingEvents(employeeId);
+    }
+
 }
