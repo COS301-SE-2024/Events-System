@@ -2,6 +2,8 @@ package com.back.demo.controller;
 
 import com.back.demo.model.Event;
 import com.back.demo.service.EventService;
+import com.back.demo.servicebus.EventServiceBus;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +15,13 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/events")
 public class EventController {
+
+    private final EventServiceBus eventServiceBus;
+
+    @Autowired
+    public EventController(EventServiceBus eventServiceBus) {
+        this.eventServiceBus = eventServiceBus;
+    }
 
     @Autowired
     private EventService eventService;
@@ -71,14 +80,24 @@ public class EventController {
         }
     }
 
+    // @GetMapping("/employee/{employeeId}/events-attended")
+    // public List<Event> getEventsAttended(@PathVariable Long employeeId) {
+    //     return eventService.getEventsAttended(employeeId); 
+    // }
+
+    // @GetMapping("/employee/{employeeId}/upcoming-events")
+    // public List<Event> getUpcomingEvents(@PathVariable Long employeeId) {
+    //     return eventService.getUpcomingEvents(employeeId);
+    // }
+
     @GetMapping("/employee/{employeeId}/events-attended")
     public List<Event> getEventsAttended(@PathVariable Long employeeId) {
-        return eventService.getEventsAttended(employeeId); 
+        return eventServiceBus.getEventsAttended(employeeId);
     }
 
     @GetMapping("/employee/{employeeId}/upcoming-events")
     public List<Event> getUpcomingEvents(@PathVariable Long employeeId) {
-        return eventService.getUpcomingEvents(employeeId);
+        return eventServiceBus.getUpcomingEvents(employeeId);
     }
 
 }
