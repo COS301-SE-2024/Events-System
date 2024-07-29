@@ -17,7 +17,7 @@
   </div>
   <div class="navbar-end">
     <!-- Notification Bell -->
-    <button class="btn btn-ghost btn-circle relative" routerLink="/notif-popup">
+    <button class="btn btn-ghost btn-circle relative" (click)="togglePopover()">
       <div class="relative">
         <!-- DaisyUI Notification Bell Icon -->
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -27,6 +27,9 @@
         <span class="absolute top-0 right-0 w-4 h-4 text-xs text-white bg-red-500 rounded-full flex items-center justify-center transform translate-x-1/2 -translate-y-1/2">3</span>
       </div>
     </button>
+    <app-notif-popup *ngIf="isPopoverVisible"></app-notif-popup>
+    
+
     <button class="btn btn-ghost btn-circle hidden lg:block"  *ngIf="!isLoginRoute">
       <i class="fa-solid fa-magnifying-glass"></i>    </button>
     <div class="dropdown dropdown-end"  *ngIf="!isLoginRoute">
