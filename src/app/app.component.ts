@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+
 import { FullCalendarModule } from '@fullcalendar/angular';
 @Component({
   standalone: true,

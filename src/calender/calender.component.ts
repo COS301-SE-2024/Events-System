@@ -11,7 +11,6 @@ import listPlugin from '@fullcalendar/list';
 import { INITIAL_EVENTS, createEventId } from './event-utils';
 import { Router, RouterModule} from '@angular/router';
 import { CalenderEventsService } from './calender-event.service';
-import { get } from 'http';
 @Component({
   selector: 'app-calender',
   standalone: true,

@@ -7,7 +7,9 @@ import {SocialClubCardComponent} from 'src/Components/SocialClubCard/socialClubC
 import { ChangeDetectorRef } from '@angular/core';
 import { ViewChild, ElementRef } from '@angular/core';
 import { HomeUpcomingSkeletonComponent } from 'src/Components/HomeUpcomingSkeleton/HomeUpcomingSkeleton.component';
-import { Init } from 'v8';
+// import { NotificationComponent } from 'src/Components/Notification/notification.component';
+import { WebSocketService } from 'src/app/websocket.service';
+import { NotificationService } from 'src/app/notification.service';
 const myCredentials = {
   username: 'myUsername',
   password: 'myPassword'
@@ -35,11 +37,36 @@ export interface Slide {
   imports: [CommonModule, RouterModule, HomeEventCardComponent, SocialClubCardComponent, HomeFeaturedEventComponent, HomeUpcomingSkeletonComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
+  providers: [WebSocketService],
 })
 export class HomeComponent implements OnInit {
-  constructor(private cdr: ChangeDetectorRef, private router: Router) { }
+  public notifications = 0;
+  @ViewChild('toastContainer', { static: true }) toastContainer!: ElementRef;
 
 
+
+  constructor(private cdr: ChangeDetectorRef, 
+    private router: Router,
+     private webSocketService: WebSocketService,
+      private notificationService: NotificationService) { 
+	// 	// Open connection with server socket
+  //   const stompClient = this.webSocketService.connect();
+  //   stompClient.connect({}, (frame : any) => {
+
+  // // Subscribe to notification topic
+  //       stompClient.subscribe('/topic/notification', notifications => {
+
+  //   // Update notifications attribute with the recent messsage sent from the server
+  //           this.notifications = JSON.parse(notifications.body).count;
+  //       })
+  //   });
+
+    }
+notify() {
+  this.notificationService.sendNotification().subscribe(response => {
+    console.log(response); // Handle the response as needed
+  });
+}
   @Input() eventTitle: string | undefined;
   @Input() eventDescription: string | undefined;
   @Input() hostName: string | undefined;
@@ -92,7 +119,29 @@ export class HomeComponent implements OnInit {
   @ViewChild('carousel2') carousel2!: ElementRef;
   @ViewChild('carousel3') carousel3!: ElementRef;
   rsvpdSlides: Slide[] = [];
+  showToast(message: string) {
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.innerHTML = `
+      <div class="alert alert-info">
+        <span>${message}</span>
+      </div>
+    `;
+    this.toastContainer.nativeElement.appendChild(toast);
+
+    // Remove the toast after a few seconds
+    setTimeout(() => {
+      this.toastContainer.nativeElement.removeChild(toast);
+    }, 3000);
+}
   ngOnInit() {
+    const stompClient = this.webSocketService.connect();
+    stompClient.connect({}, (frame: any) => {
+      stompClient.subscribe('/topic/notification', (notifications: any) => {
+        this.notifications = JSON.parse(notifications.body).count;
+        this.showToast('New message arrived.');
+      });
+    });
     const employeeId = Number(localStorage.getItem('ID')); // Assuming the employeeId is stored in local storage
 
     this.checkCookies();
