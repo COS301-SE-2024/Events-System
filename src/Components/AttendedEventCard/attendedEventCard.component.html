@@ -1,0 +1,27 @@
+<div class="relative flex flex-col mt-6  h-96 text-slate-400 dark:bg-neutral bg-base-100 shadow-md bg-clip-border rounded-xl w-72">
+    <div
+        class="relative h-32 mx-4 -mt-6 overflow-hidden shadow-lg bg-clip-border rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40">
+        <img [src]="" alt="Event Image"/>
+    </div>
+
+    <div class="p-6">
+        <h5 class="block mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-slate-200">
+        <!-- {{ eventTitle }} -->
+            Chess Tournament
+        </h5>
+        <p>
+            <!-- {{ hostedBy }} -->
+            Annual chess tournament for employees and their families
+        </p>
+    </div>
+
+    <div class="p-6 pt-0 flex justify-center items-center bg-red-600">
+        <button 
+        
+        class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-base-100 text-primary shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
+        type="button" >
+        See Reviews
+        </button> 
+        <!-- [routerLink]="['/event', eventID]" -->
+    </div>
+</div>

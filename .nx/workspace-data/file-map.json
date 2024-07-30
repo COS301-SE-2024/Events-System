@@ -125,28 +125,6 @@
   "fileMap": {
     "nonProjectFiles": [],
     "projectFileMap": {
-      "e2e": [
-        {
-          "file": "e2e/.eslintrc.json",
-          "hash": "15603494122075574473"
-        },
-        {
-          "file": "e2e/playwright.config.ts",
-          "hash": "9971182091902929953"
-        },
-        {
-          "file": "e2e/project.json",
-          "hash": "5814830115590049490"
-        },
-        {
-          "file": "e2e/src/events.spec.ts",
-          "hash": "17134108875182778158"
-        },
-        {
-          "file": "e2e/tsconfig.json",
-          "hash": "5846556622446948315"
-        }
-      ],
       "backend": [
         {
           "file": "Backend/.gcloudignore",
@@ -711,28 +689,12 @@
           "hash": "15452663311747735406"
         },
         {
-          "file": "src/EventFeedback/eventFeedback.component.css",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "src/EventFeedback/eventFeedback.component.html",
-          "hash": "17797004489679032396"
-        },
-        {
-          "file": "src/EventFeedback/eventFeedback.component.spec.ts",
-          "hash": "15182771067520046404"
-        },
-        {
-          "file": "src/EventFeedback/eventFeedback.component.ts",
-          "hash": "297060850431848161"
-        },
-        {
           "file": "src/EventRatings/eventRatings.component.css",
           "hash": "3244421341483603138"
         },
         {
           "file": "src/EventRatings/eventRatings.component.html",
-          "hash": "13804230756458266878"
+          "hash": "15003073510622230276"
         },
         {
           "file": "src/EventRatings/eventRatings.component.spec.ts",
@@ -816,7 +778,7 @@
         },
         {
           "file": "src/app/app.routes.ts",
-          "hash": "5576561114177981096"
+          "hash": "7268722291424992061"
         },
         {
           "file": "src/app/pwa.service.spec.ts",
@@ -1012,7 +974,7 @@
         },
         {
           "file": "src/profile/profile.component.html",
-          "hash": "1426929990707360643"
+          "hash": "3871926936787638875"
         },
         {
           "file": "src/profile/profile.component.spec.ts",
@@ -1020,7 +982,7 @@
         },
         {
           "file": "src/profile/profile.component.ts",
-          "hash": "13772507148083959426"
+          "hash": "45182749860735906"
         },
         {
           "file": "src/settings/settings.component.css",
@@ -1093,6 +1055,44 @@
         {
           "file": "webpack.config.js",
           "hash": "9763475564647512955"
+        },
+        {
+          "file": "src/Components/AttendedEventCard/attendedEventCard.component.css",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/Components/AttendedEventCard/attendedEventCard.component.html",
+          "hash": "14022830291845660023"
+        },
+        {
+          "file": "src/Components/AttendedEventCard/attendedEventCard.component.ts",
+          "hash": "593954418225995020"
+        },
+        {
+          "file": "src/Components/AttendedEventCard/attendedEventCard.component.spec.ts",
+          "hash": "10928349134732739272"
+        }
+      ],
+      "e2e": [
+        {
+          "file": "e2e/.eslintrc.json",
+          "hash": "15603494122075574473"
+        },
+        {
+          "file": "e2e/playwright.config.ts",
+          "hash": "9971182091902929953"
+        },
+        {
+          "file": "e2e/project.json",
+          "hash": "5814830115590049490"
+        },
+        {
+          "file": "e2e/src/events.spec.ts",
+          "hash": "17134108875182778158"
+        },
+        {
+          "file": "e2e/tsconfig.json",
+          "hash": "5846556622446948315"
         }
       ]
     }

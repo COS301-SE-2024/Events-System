@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
+import {AttendedEventCardComponent} from 'src/Components/AttendedEventCard/attendedEventCard.component'
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, AttendedEventCardComponent],
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
 })

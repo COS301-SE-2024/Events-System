@@ -1,5 +1,5 @@
 <!-- Desktop Version -->
-<div class="hidden md:block container mx-auto p-4">
+<div class="h-screen hidden md:block container mx-auto p-4">
     <div class="card w-full bg-base-100 shadow-2xl mb-4">
       <div class="card-body">
         <div class="flex justify-between items-center">
@@ -58,12 +58,25 @@
     </div>
   
     <div *ngIf="selectedTab === 'events'" class="card w-full bg-base-100 shadow-2xl mb-4">
-      <div class="card-body">
+      <div class="flex flex-wrap mt-5 gap-8 overflow-y-auto">
+        <app-attended-event-card></app-attended-event-card>
+        <app-attended-event-card></app-attended-event-card>
+        <app-attended-event-card></app-attended-event-card>
+        <app-attended-event-card></app-attended-event-card>
+        <app-attended-event-card></app-attended-event-card>
+        <app-attended-event-card></app-attended-event-card>
+        <app-attended-event-card></app-attended-event-card>
+        <app-attended-event-card></app-attended-event-card>
+        <app-attended-event-card></app-attended-event-card>
+        <app-attended-event-card></app-attended-event-card>
+      </div>
+      
+      <!-- <div class="card-body">
         <h2 class="card-title">Event Title</h2>
         <p>Host Name</p>
         <p>Event Details</p>
         <button class="btn btn-outline">More details</button>
-      </div>
+      </div> -->
     </div>
   
     <div *ngIf="selectedTab === 'subscriptions'" class="card w-full bg-base-100 shadow-2xl mb-4">
@@ -72,7 +85,7 @@
         <p>Details about the user's subscriptions.</p>
       </div>
     </div>
-  </div>
+</div>
   
   <!-- Mobile Version -->
   <div class="md:hidden container mx-auto p-4">
