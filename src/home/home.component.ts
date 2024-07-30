@@ -6,6 +6,7 @@ import {HomeFeaturedEventComponent} from 'src/Components/HomeFeaturedEvent/HomeF
 import {SocialClubCardComponent} from 'src/Components/SocialClubCard/socialClubCard.component'
 import { ChangeDetectorRef } from '@angular/core';
 import { ViewChild, ElementRef } from '@angular/core';
+import { HomeUpcomingSkeletonComponent } from 'src/Components/HomeUpcomingSkeleton/HomeUpcomingSkeleton.component';
 import { Init } from 'v8';
 const myCredentials = {
   username: 'myUsername',
@@ -31,7 +32,7 @@ export interface Slide {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule, HomeEventCardComponent, SocialClubCardComponent, HomeFeaturedEventComponent],
+  imports: [CommonModule, RouterModule, HomeEventCardComponent, SocialClubCardComponent, HomeFeaturedEventComponent, HomeUpcomingSkeletonComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
@@ -72,7 +73,7 @@ export class HomeComponent implements OnInit {
   nextSlideIndex = '';
   previousSlideIndex = '';
 
-
+  index2 = 3;
   currentHomeSlideIndex = 0;
   previousHomeSlideIndex = '';
   nextHomeSlideIndex = '';
@@ -194,6 +195,7 @@ export class HomeComponent implements OnInit {
             const eventIds = rsvps.filter(rsvp => rsvp.employeeId === employeeId).map(rsvp => rsvp.eventId);
             this.rsvpdSlides = this.slides.filter(slide => eventIds.includes(slide.id));
             this.allRsvpdSlides = this.slides.filter(slide => eventIds.includes(slide.id));
+            this.isLoading = false;
 
           });
       })

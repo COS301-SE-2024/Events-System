@@ -8,9 +8,14 @@ import { FullCalendarModule } from '@fullcalendar/angular';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
+    template: `
+        <button class="button button-primary" (click)="subscribeToNotifications()">
+          Subscribe
+        </button>;`
 })
 export class AppComponent {
+  
   title = 'Events-System';
   isDrawerThin = false;
   employeeData: any; // Define employeeData property
