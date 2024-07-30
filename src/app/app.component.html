@@ -27,7 +27,8 @@
         <span class="absolute top-0 right-0 w-4 h-4 text-xs text-white bg-red-500 rounded-full flex items-center justify-center transform translate-x-1/2 -translate-y-1/2">3</span>
       </div>
     </button>
-    <app-notif-popup *ngIf="isPopoverVisible"></app-notif-popup>
+    <app-notif-popup *ngIf="isPopoverVisible" (closePopup)="closePopup()"></app-notif-popup>
+
     
 
     <button class="btn btn-ghost btn-circle hidden lg:block"  *ngIf="!isLoginRoute">

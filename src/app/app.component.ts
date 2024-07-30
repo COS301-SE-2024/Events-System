@@ -35,37 +35,14 @@ export class AppComponent {
     this.isPopoverVisible = !this.isPopoverVisible;
   }
 
-  notifications = [
-    { id: 1, title: 'Notification Title 1', read: false },
-    { id: 2, title: 'Notification Title 2', read: false },
-    { id: 3, title: 'Notification Title 3', read: false },
-  ];
+  closePopup(): void {
+    this.isPopoverVisible = false;
+  }
 
   selectedNotification: any = null;
 
   ngOnInit(): void {}
 
-  markAllAsRead(): void {
-    this.notifications.forEach(notification => notification.read = true);
-  }
 
-  clearAll(): void {
-    this.notifications = [];
-  }
 
-  markAsRead(event: MouseEvent, notificationId: number): void {
-    event.stopPropagation();
-    const notification = this.notifications.find(n => n.id === notificationId);
-    if (notification) {
-      notification.read = true;
-    }
-  }
-
-  openPopover(notification: any): void {
-    this.selectedNotification = notification;
-  }
-
-  closePopover(): void {
-    this.selectedNotification = null;
-  }
 }
