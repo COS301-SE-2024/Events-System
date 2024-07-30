@@ -1,5 +1,5 @@
 <!-- Desktop Version -->
-<div class="h-screen hidden md:block container mx-auto p-4">
+<div class="h-screen hidden md:block container mx-auto p-4 overflow-hidden mb-5">
     <div class="card w-full bg-base-100 shadow-2xl mb-4">
       <div class="card-body">
         <div class="flex justify-between items-center">
@@ -57,19 +57,31 @@
       </div>
     </div>
   
-    <div *ngIf="selectedTab === 'events'" class="card w-full bg-base-100 shadow-2xl mb-4">
-      <div class="flex flex-wrap mt-5 gap-8 overflow-y-auto">
-        <app-attended-event-card></app-attended-event-card>
-        <app-attended-event-card></app-attended-event-card>
-        <app-attended-event-card></app-attended-event-card>
-        <app-attended-event-card></app-attended-event-card>
-        <app-attended-event-card></app-attended-event-card>
-        <app-attended-event-card></app-attended-event-card>
-        <app-attended-event-card></app-attended-event-card>
-        <app-attended-event-card></app-attended-event-card>
-        <app-attended-event-card></app-attended-event-card>
-        <app-attended-event-card></app-attended-event-card>
+    <div *ngIf="selectedTab === 'events'" class="card h-[732px] w-full items-center shadow-2xl">
+      <div class=" overflow-y-auto">
+        <div class="flex flex-wrap gap-x-20 gap-y-14 pt-6 pl-14">
+          <app-attended-event-card></app-attended-event-card>
+          <app-attended-event-card></app-attended-event-card>
+          <app-attended-event-card></app-attended-event-card>
+          <app-attended-event-card></app-attended-event-card>
+          <app-attended-event-card></app-attended-event-card>
+          <app-attended-event-card></app-attended-event-card>
+          <app-attended-event-card></app-attended-event-card>
+          <app-attended-event-card></app-attended-event-card>
+          <app-attended-event-card></app-attended-event-card>
+          <app-attended-event-card></app-attended-event-card>
+          <app-attended-event-card></app-attended-event-card>
+          <app-attended-event-card></app-attended-event-card>
+          <app-attended-event-card></app-attended-event-card>
+          <app-attended-event-card></app-attended-event-card>
+          <app-attended-event-card></app-attended-event-card>
+          <app-attended-event-card></app-attended-event-card>
+          <app-attended-event-card></app-attended-event-card>
+          <app-attended-event-card></app-attended-event-card>
+          
+        </div>
       </div>
+      
       
       <!-- <div class="card-body">
         <h2 class="card-title">Event Title</h2>
