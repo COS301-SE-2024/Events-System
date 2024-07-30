@@ -10,7 +10,7 @@
         <!-- Notification Items -->
         <div *ngFor="let notification of notifications" 
              class="card p-4 mb-4 shadow-xl"
-             [ngClass]="{'bg-gray-200': notification.read, 'bg-base-200': !notification.read, 'border-l-4 border-accent': !notification.read, 'border-none': notification.read}"
+             [ngClass]="{'bg-base-100': notification.read, 'bg-base-200': !notification.read, 'border-l-4 border-accent': !notification.read, 'border-none': notification.read}"
              (click)="openPopover(notification)">
           <div class="flex justify-between items-center">
             <div class="flex items-center">
