@@ -1,0 +1,520 @@
+{
+  "nodes": {
+    "backend": {
+      "name": "backend",
+      "type": "app",
+      "data": {
+        "root": "Backend",
+        "name": "backend",
+        "projectType": "application",
+        "tags": [
+          "type:nx-spring-boot"
+        ],
+        "targets": {
+          "build": {
+            "executor": "@nxrocks/nx-spring-boot:build",
+            "options": {
+              "root": "Backend",
+              "runFromParentModule": false
+            },
+            "cache": true,
+            "dependsOn": [
+              "^install"
+            ],
+            "outputs": [
+              "{workspaceRoot}/Backend/build"
+            ],
+            "configurations": {}
+          },
+          "install": {
+            "executor": "@nxrocks/nx-spring-boot:install",
+            "options": {
+              "root": "Backend",
+              "runFromParentModule": false
+            },
+            "cache": true,
+            "dependsOn": [
+              "^install"
+            ],
+            "outputs": [
+              "{workspaceRoot}/Backend/build"
+            ],
+            "configurations": {}
+          },
+          "test": {
+            "executor": "@nxrocks/nx-spring-boot:test",
+            "options": {
+              "root": "Backend",
+              "runFromParentModule": false
+            },
+            "outputs": [
+              "{workspaceRoot}/Backend/build"
+            ],
+            "configurations": {}
+          },
+          "clean": {
+            "executor": "@nxrocks/nx-spring-boot:clean",
+            "options": {
+              "root": "Backend",
+              "runFromParentModule": false
+            },
+            "configurations": {}
+          },
+          "format": {
+            "executor": "@nxrocks/nx-spring-boot:format",
+            "options": {
+              "root": "Backend",
+              "runFromParentModule": false
+            },
+            "configurations": {}
+          },
+          "apply-format": {
+            "executor": "@nxrocks/nx-spring-boot:apply-format",
+            "options": {
+              "root": "Backend",
+              "runFromParentModule": false
+            },
+            "configurations": {}
+          },
+          "check-format": {
+            "executor": "@nxrocks/nx-spring-boot:check-format",
+            "options": {
+              "root": "Backend",
+              "runFromParentModule": false
+            },
+            "configurations": {}
+          },
+          "run": {
+            "executor": "@nxrocks/nx-spring-boot:run",
+            "options": {
+              "root": "Backend",
+              "runFromParentModule": false
+            },
+            "dependsOn": [
+              "^install"
+            ],
+            "configurations": {}
+          },
+          "serve": {
+            "executor": "@nxrocks/nx-spring-boot:serve",
+            "options": {
+              "root": "Backend",
+              "runFromParentModule": false
+            },
+            "dependsOn": [
+              "^install"
+            ],
+            "configurations": {}
+          },
+          "build-image": {
+            "executor": "@nxrocks/nx-spring-boot:build-image",
+            "options": {
+              "root": "Backend",
+              "runFromParentModule": false
+            },
+            "outputs": [
+              "{workspaceRoot}/Backend/build"
+            ],
+            "configurations": {}
+          },
+          "build-info": {
+            "executor": "@nxrocks/nx-spring-boot:build-info",
+            "options": {
+              "root": "Backend",
+              "runFromParentModule": false
+            },
+            "configurations": {}
+          }
+        },
+        "implicitDependencies": []
+      }
+    },
+    "e2e": {
+      "name": "e2e",
+      "type": "e2e",
+      "data": {
+        "root": "e2e",
+        "metadata": {
+          "targetGroups": {
+            "E2E (CI)": [
+              "e2e-ci--src/events.spec.ts",
+              "e2e-ci"
+            ]
+          }
+        },
+        "targets": {
+          "e2e": {
+            "options": {
+              "cwd": "e2e",
+              "command": "playwright test"
+            },
+            "metadata": {
+              "technologies": [
+                "playwright"
+              ],
+              "description": "Runs Playwright Tests",
+              "help": {
+                "command": "npx playwright test --help",
+                "example": {
+                  "options": {
+                    "workers": 1
+                  }
+                }
+              }
+            },
+            "cache": true,
+            "inputs": [
+              "default",
+              "^production",
+              {
+                "externalDependencies": [
+                  "@playwright/test"
+                ]
+              }
+            ],
+            "outputs": [
+              "{workspaceRoot}\\dist\\.playwright\\e2e\\playwright-report",
+              "{workspaceRoot}\\dist\\.playwright\\e2e\\test-output"
+            ],
+            "executor": "nx:run-commands",
+            "configurations": {}
+          },
+          "e2e-ci--src/events.spec.ts": {
+            "options": {
+              "cwd": "e2e",
+              "command": "playwright test src/events.spec.ts"
+            },
+            "metadata": {
+              "technologies": [
+                "playwright"
+              ],
+              "description": "Runs Playwright Tests in src/events.spec.ts in CI",
+              "help": {
+                "command": "npx playwright test --help",
+                "example": {
+                  "options": {
+                    "workers": 1
+                  }
+                }
+              }
+            },
+            "cache": true,
+            "inputs": [
+              "default",
+              "^production",
+              {
+                "externalDependencies": [
+                  "@playwright/test"
+                ]
+              }
+            ],
+            "outputs": [
+              "{workspaceRoot}\\dist\\.playwright\\e2e\\playwright-report",
+              "{workspaceRoot}\\dist\\.playwright\\e2e\\test-output"
+            ],
+            "executor": "nx:run-commands",
+            "configurations": {}
+          },
+          "e2e-ci": {
+            "executor": "nx:noop",
+            "cache": true,
+            "inputs": [
+              "default",
+              "^production",
+              {
+                "externalDependencies": [
+                  "@playwright/test"
+                ]
+              }
+            ],
+            "outputs": [
+              "{workspaceRoot}\\dist\\.playwright\\e2e\\playwright-report",
+              "{workspaceRoot}\\dist\\.playwright\\e2e\\test-output"
+            ],
+            "dependsOn": [
+              {
+                "target": "e2e-ci--src/events.spec.ts",
+                "projects": "self",
+                "params": "forward"
+              }
+            ],
+            "metadata": {
+              "technologies": [
+                "playwright"
+              ],
+              "description": "Runs Playwright Tests in CI",
+              "nonAtomizedTarget": "e2e",
+              "help": {
+                "command": "npx playwright test --help",
+                "example": {
+                  "options": {
+                    "workers": 1
+                  }
+                }
+              }
+            },
+            "options": {},
+            "configurations": {}
+          },
+          "lint": {
+            "cache": true,
+            "options": {
+              "cwd": "e2e",
+              "command": "eslint ."
+            },
+            "inputs": [
+              "default",
+              "^default",
+              "{workspaceRoot}/.eslintrc.json",
+              "{projectRoot}/.eslintrc.json",
+              "{workspaceRoot}/tools/eslint-rules/**/*",
+              {
+                "externalDependencies": [
+                  "eslint"
+                ]
+              }
+            ],
+            "outputs": [
+              "{options.outputFile}"
+            ],
+            "metadata": {
+              "technologies": [
+                "eslint"
+              ],
+              "description": "Runs ESLint on project",
+              "help": {
+                "command": "npx eslint --help",
+                "example": {
+                  "options": {
+                    "max-warnings": 0
+                  }
+                }
+              }
+            },
+            "executor": "nx:run-commands",
+            "configurations": {}
+          }
+        },
+        "name": "e2e",
+        "$schema": "../node_modules/nx/schemas/project-schema.json",
+        "projectType": "application",
+        "sourceRoot": "e2e/src",
+        "implicitDependencies": [
+          "Events-System"
+        ],
+        "tags": []
+      }
+    },
+    "Events-System": {
+      "name": "Events-System",
+      "type": "app",
+      "data": {
+        "root": ".",
+        "targets": {
+          "lint": {
+            "executor": "@nx/eslint:lint",
+            "cache": true,
+            "inputs": [
+              "default",
+              "{workspaceRoot}/.eslintrc.json",
+              "{workspaceRoot}/.eslintignore",
+              "{workspaceRoot}/eslint.config.js"
+            ],
+            "options": {
+              "lintFilePatterns": [
+                "./src"
+              ]
+            },
+            "configurations": {}
+          },
+          "build": {
+            "executor": "@angular-devkit/build-angular:browser",
+            "cache": true,
+            "dependsOn": [
+              "^build"
+            ],
+            "inputs": [
+              "production",
+              "^production"
+            ],
+            "outputs": [
+              "{options.outputPath}"
+            ],
+            "options": {
+              "outputPath": "dist/Events-System/browser",
+              "index": "./src/index.html",
+              "main": "./src/main.ts",
+              "polyfills": [
+                "zone.js"
+              ],
+              "tsConfig": "./tsconfig.app.json",
+              "assets": [
+                "./src/favicon.ico",
+                "./src/assets"
+              ],
+              "styles": [
+                "./src/styles.css"
+              ],
+              "scripts": [],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
+            },
+            "configurations": {
+              "production": {
+                "budgets": [
+                  {
+                    "type": "initial",
+                    "maximumWarning": "2mb",
+                    "maximumError": "3mb"
+                  },
+                  {
+                    "type": "anyComponentStyle",
+                    "maximumWarning": "2kb",
+                    "maximumError": "4kb"
+                  }
+                ],
+                "outputHashing": "all"
+              },
+              "development": {
+                "buildOptimizer": false,
+                "optimization": false,
+                "vendorChunk": true,
+                "extractLicenses": false,
+                "sourceMap": true,
+                "namedChunks": true
+              }
+            },
+            "defaultConfiguration": "production"
+          },
+          "test": {
+            "executor": "@nx/jest:jest",
+            "cache": true,
+            "inputs": [
+              "default",
+              "^production",
+              "{workspaceRoot}/jest.preset.js"
+            ],
+            "outputs": [
+              "{workspaceRoot}/coverage/{projectName}"
+            ],
+            "options": {
+              "passWithNoTests": true,
+              "jestConfig": "jest.config.ts"
+            },
+            "configurations": {
+              "ci": {
+                "ci": true,
+                "codeCoverage": true
+              }
+            }
+          },
+          "server": {
+            "executor": "@angular-devkit/build-angular:server",
+            "cache": true,
+            "dependsOn": [
+              "build"
+            ],
+            "options": {
+              "outputPath": "dist/Events-System/server",
+              "main": "server.ts",
+              "tsConfig": "tsconfig.server.json"
+            },
+            "configurations": {
+              "production": {
+                "outputHashing": "media"
+              },
+              "development": {
+                "buildOptimizer": false,
+                "optimization": false,
+                "sourceMap": true,
+                "extractLicenses": false,
+                "vendorChunk": true
+              }
+            },
+            "defaultConfiguration": "production"
+          },
+          "serve": {
+            "executor": "@angular-devkit/build-angular:dev-server",
+            "configurations": {
+              "production": {
+                "buildTarget": "Events-System:build:production"
+              },
+              "development": {
+                "buildTarget": "Events-System:build:development"
+              }
+            },
+            "defaultConfiguration": "development",
+            "options": {}
+          },
+          "extract-i18n": {
+            "executor": "@angular-devkit/build-angular:extract-i18n",
+            "options": {
+              "buildTarget": "Events-System:build"
+            },
+            "configurations": {}
+          },
+          "serve-ssr": {
+            "executor": "@angular-devkit/build-angular:ssr-dev-server",
+            "configurations": {
+              "development": {
+                "browserTarget": "Events-System:build:development",
+                "serverTarget": "Events-System:server:development"
+              },
+              "production": {
+                "browserTarget": "Events-System:build:production",
+                "serverTarget": "Events-System:server:production"
+              }
+            },
+            "defaultConfiguration": "development",
+            "options": {}
+          },
+          "prerender": {
+            "executor": "@angular-devkit/build-angular:prerender",
+            "options": {
+              "routes": [
+                "/"
+              ]
+            },
+            "configurations": {
+              "development": {
+                "browserTarget": "Events-System:build:development",
+                "serverTarget": "Events-System:server:development"
+              },
+              "production": {
+                "browserTarget": "Events-System:build:production",
+                "serverTarget": "Events-System:server:production"
+              }
+            },
+            "defaultConfiguration": "production"
+          }
+        },
+        "sourceRoot": "./src",
+        "name": "Events-System",
+        "includedScripts": [],
+        "tags": [
+          "npm:private"
+        ],
+        "metadata": {
+          "targetGroups": {}
+        },
+        "$schema": "node_modules/nx/schemas/project-schema.json",
+        "projectType": "application",
+        "prefix": "app",
+        "implicitDependencies": []
+      }
+    }
+  },
+  "externalNodes": {},
+  "dependencies": {
+    "backend": [],
+    "e2e": [
+      {
+        "source": "e2e",
+        "target": "Events-System",
+        "type": "implicit"
+      }
+    ],
+    "Events-System": []
+  },
+  "version": "6.0"
+}
