@@ -35,7 +35,7 @@ export class EventComponent implements OnInit{
         this.event = data;
         this.event.startTime = this.formatTime(this.event.startTime);
         this.event.endTime = this.formatTime(this.event.endTime);
-        console.log(this.event);
+        // console.log(this.event);
         return fetch('https://events-system-back.wn.r.appspot.com/api/employees/' + this.event.hostId);
       })
       .then(response => response.json())

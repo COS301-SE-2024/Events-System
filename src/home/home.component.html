@@ -79,9 +79,10 @@
       <div class="carousel carousel-center lg:w-11/12 p-4 lg:space-x-8 space-x-8 bg-transparent rounded-box h-full" #carousel2>
 
         <div *ngIf="isLoading; else content1" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <app-home-upcoming-skeleton></app-home-upcoming-skeleton>
-          <app-home-upcoming-skeleton></app-home-upcoming-skeleton>
-          <app-home-upcoming-skeleton></app-home-upcoming-skeleton>
+          <app-home-upcoming-skeleton class="block lg:hidden"></app-home-upcoming-skeleton>
+          <app-home-upcoming-skeleton class="hidden lg:block"></app-home-upcoming-skeleton>
+          <app-home-upcoming-skeleton class="hidden lg:block"></app-home-upcoming-skeleton>
+          <app-home-upcoming-skeleton class="hidden lg:block"></app-home-upcoming-skeleton>
         </div>
 
 
