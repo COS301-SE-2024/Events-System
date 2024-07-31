@@ -3,6 +3,9 @@ import { RouterModule, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { PwaService } from './pwa.service'; // Adjust the path as necessary
+import { Subscription } from 'rxjs';
+
 @Component({
   standalone: true,
   imports: [RouterModule, CommonModule, FullCalendarModule],
@@ -20,14 +23,26 @@ export class AppComponent {
   title = 'Events-System';
   isDrawerThin = false;
   employeeData: any; // Define employeeData property
+  private pwaServiceSubscriber?: Subscription;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private pwaService: PwaService) {
     // Initialize employeeData from localStorage or any other source
     this.employeeData = JSON.parse(localStorage.getItem('employeeData') || '{}');
   }
+
   get isLoginRoute() {
     return this.router.url === '/login';
   }
+
+  installPwa(): void {
+    console.log('Attempting to install PWA');
+    this.pwaService.promptUserForInstallation();
+  }
+
+  ngOnDestroy(): void {
+    this.pwaServiceSubscriber?.unsubscribe();
+  }
+  
   toggleDrawer() {
     this.isDrawerThin = !this.isDrawerThin;
   }
