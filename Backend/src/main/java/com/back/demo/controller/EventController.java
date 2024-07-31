@@ -23,36 +23,33 @@ public class EventController {
         this.eventServiceBus = eventServiceBus;
     }
 
-    @Autowired
-    private EventService eventService;
-
     @GetMapping
     public List<Event> getAllEvents() {
-        return eventService.getAllEvents();
+        return eventServiceBus.getAllEvents();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Event> getEventById(@PathVariable(value = "id") Long eventId) {
-        Optional<Event> event = eventService.getEventById(eventId);
+        Optional<Event> event = eventServiceBus.getEventById(eventId);
         return event.map(ResponseEntity::ok)
                     .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping("/host/{id}")
     public List<Event> getEventByHostId(@PathVariable(value = "id") Long hostId) {
-        return eventService.getEventByHostId(hostId);
+        return eventServiceBus.getEventByHostId(hostId);
     }
 
     @PostMapping
     public Event createEvent(@RequestBody Event event) {
-        return eventService.createEvent(event);
+        return eventServiceBus.createEvent(event);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Event> updateEvent(@PathVariable(value = "id") Long eventId,
                                              @RequestBody Event eventDetails) {
         try {
-            Event updatedEvent = eventService.updateEvent(eventId, eventDetails);
+            Event updatedEvent = eventServiceBus.updateEvent(eventId, eventDetails);
             return ResponseEntity.ok(updatedEvent);
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
@@ -62,7 +59,7 @@ public class EventController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteEvent(@PathVariable(value = "id") Long eventId) {
         try {
-            eventService.deleteEvent(eventId);
+            eventServiceBus.deleteEvent(eventId);
             return ResponseEntity.noContent().build();
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
@@ -73,7 +70,7 @@ public class EventController {
     public ResponseEntity<Event> partialUpdateEvent(@PathVariable(value = "id") Long eventId,
                                                     @RequestBody Map<String, Object> updates) {
         try {
-            Event updatedEvent = eventService.partialUpdateEvent(eventId, updates);
+            Event updatedEvent = eventServiceBus.partialUpdateEvent(eventId, updates);
             return ResponseEntity.ok(updatedEvent);
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
