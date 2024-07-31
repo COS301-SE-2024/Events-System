@@ -63,7 +63,7 @@ export class HomeComponent implements OnInit {
 
     }
 notify() {
-  this.notificationService.sendNotification().subscribe(response => {
+  this.notificationService.sendNotification(Number(localStorage.getItem('ID'))).subscribe(response => {
     console.log(response); // Handle the response as needed
   });
 }
@@ -135,13 +135,19 @@ notify() {
     }, 3000);
 }
   ngOnInit() {
-    const stompClient = this.webSocketService.connect();
-    stompClient.connect({}, (frame: any) => {
-      stompClient.subscribe('/topic/notification', (notifications: any) => {
-        this.notifications = JSON.parse(notifications.body).count;
-        this.showToast('New message arrived.');
-      });
+
+    this.webSocketService.connect();
+    this.webSocketService.notifications.subscribe((message:any) => {
+      this.showToast(message);
     });
+
+    // const stompClient = this.webSocketService.connect();
+    // stompClient.connect({}, (frame: any) => {
+    //   stompClient.subscribe('/topic/notification', (notifications: any) => {
+    //     this.notifications = JSON.parse(notifications.body).count;
+    //     this.showToast('New message arrived.');
+    //   });
+    // });
     const employeeId = Number(localStorage.getItem('ID')); // Assuming the employeeId is stored in local storage
 
     this.checkCookies();

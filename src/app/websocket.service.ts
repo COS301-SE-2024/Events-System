@@ -1,18 +1,31 @@
 // src/app/services/websocket.service.ts
 import { Injectable } from '@angular/core';
-import { Stomp } from '@stomp/stompjs';
+import { Client, Stomp } from '@stomp/stompjs';
 import * as SockJS from 'sockjs-client';
+import { Subject } from 'rxjs';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class WebSocketService {
-    // Open connection with the back-end socket
-    public connect() {
-        const socket = new SockJS(`http://localhost:8080/socket`);
+  private stompClient: Client;
+  private notificationSubject = new Subject<string>();
 
-        const stompClient = Stomp.over(socket);
+  constructor() {
+    const socket = new SockJS('http://localhost:8080/socket');
+    this.stompClient = Stomp.over(socket);
+    this.stompClient.onConnect = (frame) => {
+      this.stompClient.subscribe('/topic/notification', message => {
+        this.notificationSubject.next(message.body);
+      });
+    };
+  }
 
-        return stompClient;
-    }
+  connect() {
+    this.stompClient.activate();
+  }
+
+  get notifications() {
+    return this.notificationSubject.asObservable();
+  }
 }
