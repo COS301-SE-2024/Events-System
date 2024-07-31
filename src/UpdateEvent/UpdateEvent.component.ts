@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Location } from '@angular/common';
 import validator from 'validator';
+import { NotificationService } from 'src/app/notification.service';
 
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
@@ -65,7 +66,7 @@ export class UpdateEventComponent implements OnInit, AfterViewChecked{
   isHalalSelected = false;
   isGlutenFreeSelected = false;
 
-  constructor(private route: ActivatedRoute, private location: Location, private fb: FormBuilder) {
+  constructor(private route: ActivatedRoute, private location: Location, private fb: FormBuilder, private notificationService: NotificationService) {
     this.prepform = this.fb.group({
       prepinputs: this.fb.array([])
     });
@@ -137,6 +138,7 @@ presubmit(){
         console.log(data);
 
           this.showsuccessToast = true;
+          this.notify();
           this.isAPILoading = false;
           // Hide the toast after 5 seconds
           setTimeout(() => {
@@ -156,6 +158,12 @@ presubmit(){
 
     // Create the event object
     
+}
+notify() {
+  this.notificationService.sendNotification(Number(localStorage.getItem('ID')), Number(this.eventId), "Event Updated").subscribe(response => {
+    console.log(response); // Handle the response as needed
+  });
+
 }
 get prepinputs() {
   return this.prepform.get('prepinputs') as FormArray;

@@ -1,3 +1,4 @@
+
 <div class="navbar bg-base-100 ">
   <div class="navbar-start">
 
@@ -20,13 +21,13 @@
   <div class="navbar-end">
     <!-- Notification Bell -->
     <button class="btn btn-ghost btn-circle relative" (click)="togglePopover()">
-      <div class="relative">
+      <div class="relative"  *ngIf="!isLoginRoute" >
         <!-- DaisyUI Notification Bell Icon -->
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2 2 0 0118 14V9a6 6 0 00-12 0v5a2 2,0,01-.595,1.195L3,17h5m6 0a3 3 0,01-6 0m6 0h-6" />
         </svg>
         <!-- Badge for unread notifications -->
-        <span class="absolute top-0 right-0 w-4 h-4 text-xs text-white bg-red-500 rounded-full flex items-center justify-center transform translate-x-1/2 -translate-y-1/2">3</span>
+        <span  class="absolute top-0 right-0 w-4 h-4 text-xs text-white bg-red-500 rounded-full flex items-center justify-center transform translate-x-1/2 -translate-y-1/2"> {{ notificationCount }} </span>
       </div>
     </button>
     <app-notif-popup *ngIf="isPopoverVisible" (closePopup)="closePopup()"></app-notif-popup>
@@ -73,6 +74,8 @@
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
         </div>
     </label> -->
+    <div #toastContainer  class="relative z-50"></div>
+
     <router-outlet></router-outlet>
   </div> 
   <div class="drawer-side z-50">

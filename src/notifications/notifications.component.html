@@ -17,18 +17,30 @@
               <span class="material-icons mr-2 text-info" [ngClass]="{'text-gray-400': notification.read, 'text-info': !notification.read}">notifications</span>
               <div>
                 <h3 class="text-lg font-bold" [ngClass]="{'text-gray-500': notification.read, 'text-base-content': !notification.read}">
-                  {{ notification.title }}
+                  {{ notification.eventId }}
                 </h3>
                 <p class="text-sm" [ngClass]="{'text-gray-400': notification.read, 'text-primary': !notification.read}">
-                  {{ notification.description }}
+                  {{ notification.message }}
                 </p>
               </div>
             </div>
             <button class="btn btn-sm btn-outline ml-2" 
-                    (click)="markAsRead($event, notification.id)"
+                    (click)="markAsRead($event, notification.notificationId)"
                     [disabled]="notification.read">
               Mark as Read
             </button>
+            <button class="btn btn-sm btn-outline ml-2 " 
+            (click)="markAsRead($event, notification.notificationId)"
+            [disabled]="notification.read"
+            [routerLink]="['/event', notification.eventId]">
+      View More
+    </button>
+            <button class="btn btn-sm btn-outline ml-2 btn-error" 
+            (click)="delete($event, notification.notificationId)"
+            [disabled]="notification.read"
+            >
+      delete
+    </button>
           </div>
         </div>
       </div>

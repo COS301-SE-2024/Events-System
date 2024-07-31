@@ -24,7 +24,8 @@
             "outputs": [
               "{workspaceRoot}/Backend/build"
             ],
-            "configurations": {}
+            "configurations": {},
+            "parallelism": true
           },
           "install": {
             "executor": "@nxrocks/nx-spring-boot:install",
@@ -39,7 +40,8 @@
             "outputs": [
               "{workspaceRoot}/Backend/build"
             ],
-            "configurations": {}
+            "configurations": {},
+            "parallelism": true
           },
           "test": {
             "executor": "@nxrocks/nx-spring-boot:test",
@@ -50,7 +52,8 @@
             "outputs": [
               "{workspaceRoot}/Backend/build"
             ],
-            "configurations": {}
+            "configurations": {},
+            "parallelism": true
           },
           "clean": {
             "executor": "@nxrocks/nx-spring-boot:clean",
@@ -58,7 +61,8 @@
               "root": "Backend",
               "runFromParentModule": false
             },
-            "configurations": {}
+            "configurations": {},
+            "parallelism": true
           },
           "format": {
             "executor": "@nxrocks/nx-spring-boot:format",
@@ -66,7 +70,8 @@
               "root": "Backend",
               "runFromParentModule": false
             },
-            "configurations": {}
+            "configurations": {},
+            "parallelism": true
           },
           "apply-format": {
             "executor": "@nxrocks/nx-spring-boot:apply-format",
@@ -74,7 +79,8 @@
               "root": "Backend",
               "runFromParentModule": false
             },
-            "configurations": {}
+            "configurations": {},
+            "parallelism": true
           },
           "check-format": {
             "executor": "@nxrocks/nx-spring-boot:check-format",
@@ -82,7 +88,8 @@
               "root": "Backend",
               "runFromParentModule": false
             },
-            "configurations": {}
+            "configurations": {},
+            "parallelism": true
           },
           "run": {
             "executor": "@nxrocks/nx-spring-boot:run",
@@ -93,7 +100,8 @@
             "dependsOn": [
               "^install"
             ],
-            "configurations": {}
+            "configurations": {},
+            "parallelism": true
           },
           "serve": {
             "executor": "@nxrocks/nx-spring-boot:serve",
@@ -104,7 +112,8 @@
             "dependsOn": [
               "^install"
             ],
-            "configurations": {}
+            "configurations": {},
+            "parallelism": true
           },
           "build-image": {
             "executor": "@nxrocks/nx-spring-boot:build-image",
@@ -115,7 +124,8 @@
             "outputs": [
               "{workspaceRoot}/Backend/build"
             ],
-            "configurations": {}
+            "configurations": {},
+            "parallelism": true
           },
           "build-info": {
             "executor": "@nxrocks/nx-spring-boot:build-info",
@@ -123,7 +133,8 @@
               "root": "Backend",
               "runFromParentModule": false
             },
-            "configurations": {}
+            "configurations": {},
+            "parallelism": true
           }
         },
         "implicitDependencies": []
@@ -177,7 +188,8 @@
               "{workspaceRoot}\\dist\\.playwright\\e2e\\test-output"
             ],
             "executor": "nx:run-commands",
-            "configurations": {}
+            "configurations": {},
+            "parallelism": true
           },
           "e2e-ci--src/events.spec.ts": {
             "options": {
@@ -213,7 +225,8 @@
               "{workspaceRoot}\\dist\\.playwright\\e2e\\test-output"
             ],
             "executor": "nx:run-commands",
-            "configurations": {}
+            "configurations": {},
+            "parallelism": true
           },
           "e2e-ci": {
             "executor": "nx:noop",
@@ -253,8 +266,9 @@
                 }
               }
             },
+            "configurations": {},
             "options": {},
-            "configurations": {}
+            "parallelism": true
           },
           "lint": {
             "cache": true,
@@ -292,7 +306,8 @@
               }
             },
             "executor": "nx:run-commands",
-            "configurations": {}
+            "configurations": {},
+            "parallelism": true
           }
         },
         "name": "e2e",
@@ -313,30 +328,23 @@
         "targets": {
           "lint": {
             "executor": "@nx/eslint:lint",
+            "options": {
+              "lintFilePatterns": [
+                "./src"
+              ]
+            },
+            "configurations": {},
+            "parallelism": true,
             "cache": true,
             "inputs": [
               "default",
               "{workspaceRoot}/.eslintrc.json",
               "{workspaceRoot}/.eslintignore",
               "{workspaceRoot}/eslint.config.js"
-            ],
-            "options": {
-              "lintFilePatterns": [
-                "./src"
-              ]
-            },
-            "configurations": {}
+            ]
           },
           "build": {
             "executor": "@angular-devkit/build-angular:browser",
-            "cache": true,
-            "dependsOn": [
-              "^build"
-            ],
-            "inputs": [
-              "production",
-              "^production"
-            ],
             "outputs": [
               "{options.outputPath}"
             ],
@@ -384,36 +392,67 @@
                 "namedChunks": true
               }
             },
-            "defaultConfiguration": "production"
+            "defaultConfiguration": "production",
+            "parallelism": true,
+            "cache": true,
+            "dependsOn": [
+              "^build"
+            ],
+            "inputs": [
+              "production",
+              "^production"
+            ]
+          },
+          "serve": {
+            "executor": "@angular-devkit/build-angular:dev-server",
+            "configurations": {
+              "production": {
+                "buildTarget": "Events-System:build:production"
+              },
+              "development": {
+                "buildTarget": "Events-System:build:development"
+              }
+            },
+            "defaultConfiguration": "development",
+            "options": {},
+            "parallelism": true
+          },
+          "extract-i18n": {
+            "executor": "@angular-devkit/build-angular:extract-i18n",
+            "options": {
+              "buildTarget": "Events-System:build"
+            },
+            "configurations": {},
+            "parallelism": true
           },
           "test": {
             "executor": "@nx/jest:jest",
-            "cache": true,
-            "inputs": [
-              "default",
-              "^production",
-              "{workspaceRoot}/jest.preset.js"
-            ],
             "outputs": [
               "{workspaceRoot}/coverage/{projectName}"
             ],
             "options": {
-              "passWithNoTests": true,
-              "jestConfig": "jest.config.ts"
+              "jestConfig": "jest.config.ts",
+              "passWithNoTests": true
             },
             "configurations": {
               "ci": {
                 "ci": true,
                 "codeCoverage": true
               }
-            }
+            },
+            "parallelism": true,
+            "cache": true,
+            "inputs": [
+              "default",
+              "^production",
+              "{workspaceRoot}/jest.preset.js"
+            ]
           },
           "server": {
-            "executor": "@angular-devkit/build-angular:server",
-            "cache": true,
             "dependsOn": [
               "build"
             ],
+            "executor": "@angular-devkit/build-angular:server",
             "options": {
               "outputPath": "dist/Events-System/server",
               "main": "server.ts",
@@ -431,27 +470,9 @@
                 "vendorChunk": true
               }
             },
-            "defaultConfiguration": "production"
-          },
-          "serve": {
-            "executor": "@angular-devkit/build-angular:dev-server",
-            "configurations": {
-              "production": {
-                "buildTarget": "Events-System:build:production"
-              },
-              "development": {
-                "buildTarget": "Events-System:build:development"
-              }
-            },
-            "defaultConfiguration": "development",
-            "options": {}
-          },
-          "extract-i18n": {
-            "executor": "@angular-devkit/build-angular:extract-i18n",
-            "options": {
-              "buildTarget": "Events-System:build"
-            },
-            "configurations": {}
+            "defaultConfiguration": "production",
+            "parallelism": true,
+            "cache": true
           },
           "serve-ssr": {
             "executor": "@angular-devkit/build-angular:ssr-dev-server",
@@ -466,7 +487,8 @@
               }
             },
             "defaultConfiguration": "development",
-            "options": {}
+            "options": {},
+            "parallelism": true
           },
           "prerender": {
             "executor": "@angular-devkit/build-angular:prerender",
@@ -485,7 +507,8 @@
                 "serverTarget": "Events-System:server:production"
               }
             },
-            "defaultConfiguration": "production"
+            "defaultConfiguration": "production",
+            "parallelism": true
           }
         },
         "sourceRoot": "./src",

@@ -29,7 +29,7 @@ public class Notification {
     @Column(name = "sent_at", nullable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Timestamp sentAt;
 
-    @Column(name = "read_at", nullable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Column(name = "read_at", nullable = true)
     private Timestamp readAt;
 
     // Getters and setters

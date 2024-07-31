@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, from } from 'rxjs';
+import { Observable, from, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,11 +9,11 @@ export class NotificationService {
   private apiUrl = 'http://localhost:8080/notify';
 
 
-  sendNotification(Number: number): Observable<string> {
+  sendNotification(Number: number, eventId: number, Message: any): Observable<string> {
     const event = {
       employeeId: Number,
-      eventId: 98,
-      message: "test notification"
+      eventId: eventId,
+      message: Message
     };
 
     return from(fetch(this.apiUrl, {
@@ -23,4 +23,12 @@ export class NotificationService {
       },
       body: JSON.stringify(event)
     }).then(response => response.text()));  }
+
+    private notificationSubject = new Subject<void>();
+
+    notification$ = this.notificationSubject.asObservable();
+  
+    notify() {
+      this.notificationSubject.next();
+    }
 }
