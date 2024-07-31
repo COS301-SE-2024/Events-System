@@ -1,0 +1,26 @@
+Daemon process terminated and closed the connection
+
+Messages from the log:
+Error: Cannot find module 'C:\Users\mathe\OneDrive\Documents\GitHub\Events-System\node_modules\nx\src\daemon\server\start.js'
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1145:15)
+    at Module._load (node:internal/modules/cjs/loader:986:27)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:174:12)
+    at node:internal/main/run_main_module:28:49 {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: []
+}
+
+Node.js v20.13.1
+[NX Daemon Server] - 2024-07-30T08:36:41.885Z - Started listening on: \\.\pipe\nx\C:\Users\mathe\AppData\Local\Temp\1dc38cdf997e09d71d07\d.sock
+[NX Daemon Server] - 2024-07-30T08:36:41.908Z - [WATCHER]: Subscribed to changes within: c:\Users\mathe\OneDrive\Documents\GitHub\Events-System (native)
+[NX Daemon Server] - 2024-07-30T08:36:41.914Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-30T08:36:41.918Z - Established a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-07-30T08:36:41.924Z - Closed a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-30T08:36:41.931Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-07-30T08:37:08.765Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-30T08:37:08.765Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-30T08:37:08.765Z - [REQUEST]: 
+
+
+
+More information: c:\Users\mathe\OneDrive\Documents\GitHub\Events-System\.nx\workspace-data\d\daemon.log

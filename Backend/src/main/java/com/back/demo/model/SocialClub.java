@@ -10,6 +10,9 @@ public class SocialClub {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "owner_id", nullable = false)
+    private Long ownerID;
+
     @Column(name = "name", nullable = false)
     private String name;
 
@@ -33,6 +36,14 @@ public class SocialClub {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getOwnerID() {
+        return ownerID;
+    }
+
+    public void setOwnerID(Long ownerID) {
+        this.ownerID = ownerID;
     }
 
     public String getName() {

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms'; 
+import { FormBuilder, FormControl, ValidationErrors,  FormGroup, Validators, ReactiveFormsModule } from '@angular/forms'; 
 import { HttpClientModule, HttpClient  } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 
@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  
   errorMessage = '';
   registerForm: FormGroup;
   loginForm: FormGroup;
@@ -21,26 +22,41 @@ export class LoginComponent {
   showloginfailToast = false;
   showregisterfailToast = false;
   hidePassword = true;
+  hidePassword1 = true;
+  hidePassword2 = true;
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private http: HttpClient
   ) {
+    // Adjusted registerForm initialization
     this.registerForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      role: ['USER', Validators.required] // Default role is Employee
-    });
+      password: this.passwordControl2,
+      confirmPassword: this.passwordControl3,
+      role: ['USER', Validators.required]
+    }, { validators: this.passwordMatchValidator });
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
     });
   }
-
+  passwordPattern = '^(?=.*[a-z])(?!.* ).{8,20}$';
+  
+    passwordControl2 = new FormControl('', [Validators.pattern(this.passwordPattern)]);
+    passwordControl3 = new FormControl('', [Validators.pattern(this.passwordPattern)]);
   //delete employeeData and ID from localStorage if they were already set
   //whenever the login page is loaded
+  private passwordMatchValidator(formGroup: FormGroup): ValidationErrors | null {
+    const password = formGroup.get('password')?.value;
+    const confirmPassword = formGroup.get('confirmPassword')?.value;
+    return password === confirmPassword ? null : { passwordMismatch: true };
+  }
+  get passwordMismatchError(): boolean {
+    return this.registerForm.errors?.['passwordMismatch'] && this.registerForm.get('confirmPassword')?.touched;
+  }
   ngOnInit() {
     localStorage.removeItem('employeeData');
     localStorage.removeItem('ID');
@@ -50,6 +66,16 @@ export class LoginComponent {
     this.hidePassword = !this.hidePassword;
     const passwordInput = document.getElementById('password') as HTMLInputElement;
     passwordInput.type = this.hidePassword ? 'password' : 'text';
+  }
+  togglePasswordVisibility1(): void {
+    this.hidePassword1 = !this.hidePassword1;
+    const passwordInput = document.getElementById('password1') as HTMLInputElement;
+    passwordInput.type = this.hidePassword1 ? 'password' : 'text';
+  }
+  togglePasswordVisibility2(): void {
+    this.hidePassword2 = !this.hidePassword2;
+    const passwordInput = document.getElementById('password2') as HTMLInputElement;
+    passwordInput.type = this.hidePassword2 ? 'password' : 'text';
   }
 
   onRegister(event: Event) {
@@ -129,12 +155,11 @@ export class LoginComponent {
         // Store employee ID in local storage
         localStorage.setItem('ID', idData);
         document.cookie = `jwt=${authData.access_token}; path=/; expires=` + new Date(new Date().getTime() + 15 * 60 * 1000).toUTCString();
-        document.cookie = `refresh=${authData.refresh_token}; path=/; expires=` + new Date(new Date().getTime() + 24* 60 * 60 * 1000).toUTCString();
 
         // Fetch employee data using ID
         const employeeId = localStorage.getItem('ID');
         if (employeeId) {
-          const employeeResponse = await this.http.get(`https://events-system-back.wn.r.appspot.com/api/employees/profile/${employeeId}`).toPromise();
+          const employeeResponse = await this.http.get(`https://events-system-back.wn.r.appspot.com/api/employees/${employeeId}`).toPromise();
           localStorage.setItem('employeeData', JSON.stringify(employeeResponse));
           console.log('Employee data:', localStorage.getItem('employeeData'));
         } else {
@@ -154,8 +179,7 @@ export class LoginComponent {
         this.isAPILoading = false;
         setTimeout(() => {
           this.showloginfailToast = false;
-        }, 10000);
-        console.error('Error:', error);
+        }, 5000);
         console.error('Error during login:', error);
         this.errorMessage = 'Invalid credentials. Please try again.'; // Set error message for invalid credentials
         window.location.reload();

@@ -1,0 +1,18 @@
+#toastContainer {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: column-reverse; /* Stack toasts from bottom to top */
+    align-items: flex-end;
+  }
+  
+  .toast-container {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    z-index: 1000;
+  }
