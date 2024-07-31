@@ -39,16 +39,11 @@
     "@angular-devkit/build-angular": "~18.1.3",
     "@angular-devkit/core": "~18.1.3",
     "@angular-devkit/schematics": "~18.1.3",
-    "@angular-eslint/eslint-plugin": "~18.1.0",
-    "@angular-eslint/eslint-plugin-template": "~18.1.0",
-    "@angular-eslint/template-parser": "~18.1.0",
     "@angular/cli": "~18.1.3",
     "@angular/compiler-cli": "~18.1.2",
     "@angular/language-service": "~18.1.2",
     "@nrwl/angular": "^19.5.4",
     "@nx/devkit": "19.5.4",
-    "@nx/eslint": "19.5.4",
-    "@nx/eslint-plugin": "19.5.4",
     "@nx/jest": "19.5.4",
     "@nx/js": "19.5.4",
     "@nx/playwright": "19.5.4",
@@ -65,15 +60,10 @@
     "@types/node": "22.0.0",
     "@types/sockjs-client": "^1.5.4",
     "@types/validator": "^13.12.0",
-    "@typescript-eslint/eslint-plugin": "^7.18.0",
-    "@typescript-eslint/parser": "^7.18.0",
     "autoprefixer": "^10.4.19",
     "browser-sync": "^3.0.2",
     "cross-fetch": "^4.0.0",
     "daisyui": "^4.12.10",
-    "eslint": "~8.57.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-playwright": "^1.6.2",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "jest-fetch-mock": "^3.0.3",
@@ -124,6 +114,248 @@
   ],
   "fileMap": {
     "projectFileMap": {
+      "backend": [
+        {
+          "file": "Backend/.gcloudignore",
+          "hash": "15571358692473431522"
+        },
+        {
+          "file": "Backend/.gitignore",
+          "hash": "71976021094201820"
+        },
+        {
+          "file": "Backend/app.yml",
+          "hash": "2652495079192119860"
+        },
+        {
+          "file": "Backend/build.gradle",
+          "hash": "435476853395795948"
+        },
+        {
+          "file": "Backend/gradle/wrapper/gradle-wrapper.jar",
+          "hash": "16190395672885700475"
+        },
+        {
+          "file": "Backend/gradle/wrapper/gradle-wrapper.properties",
+          "hash": "10562977481734284362"
+        },
+        {
+          "file": "Backend/gradlew",
+          "hash": "13076229180715721110"
+        },
+        {
+          "file": "Backend/gradlew.bat",
+          "hash": "8837338129170646035"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/BackendApplication.java",
+          "hash": "16741472620818673984"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/BackendConroller.java",
+          "hash": "2908253035642305562"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/CorsConfig.java",
+          "hash": "3209742303883108229"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/HealthCheckController.java",
+          "hash": "926037260233672702"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/Notifications.java",
+          "hash": "1529376247568933044"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/auditing/ApplicationAuditAware.java",
+          "hash": "3082015574846855127"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/auth/AuthenticationController.java",
+          "hash": "16862813548542715467"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/auth/AuthenticationRequest.java",
+          "hash": "7441329599581095574"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/auth/AuthenticationResponse.java",
+          "hash": "6503624083177636740"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/auth/AuthenticationService.java",
+          "hash": "13372785453001002786"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/auth/RegisterRequest.java",
+          "hash": "142099241752059050"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/config/ApplicationConfig.java",
+          "hash": "10202384569668110960"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/config/JwtAuthenticationFilter.java",
+          "hash": "5032856282311710314"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/config/OpenApiConfig.java",
+          "hash": "16616841775596320254"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/config/SecurityConfiguration.java",
+          "hash": "6119934955731029756"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/config/TokenType.java",
+          "hash": "893574830451128260"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/config/WebSocketConfiguration.java",
+          "hash": "16462806430074113491"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/controller/EmployeeController.java",
+          "hash": "5672871028830230653"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/controller/EventController.java",
+          "hash": "8884735518854416681"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/controller/EventRSVPController.java",
+          "hash": "10919588381118086452"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/controller/FeedbackController.java",
+          "hash": "5322895677198880370"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/controller/NotificationController.java",
+          "hash": "7988806371679234754"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/controller/SocialClubController.java",
+          "hash": "17802857733389349921"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/model/ChangePasswordRequest.java",
+          "hash": "7066214523450953400"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/model/Employee.java",
+          "hash": "13447305475849727350"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/model/Event.java",
+          "hash": "15597095085849856640"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/model/EventRSVP.java",
+          "hash": "16565570240587265134"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/model/Feedback.java",
+          "hash": "11907225044043278204"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/model/Notification.java",
+          "hash": "910202608489819039"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/model/Permission.java",
+          "hash": "8900581970194394041"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/model/Role.java",
+          "hash": "1625592257158392988"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/model/SocialClub.java",
+          "hash": "16379890993642053362"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/model/Token.java",
+          "hash": "18397022628670382057"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/repository/EmployeeRepository.java",
+          "hash": "567010665469840751"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/repository/EventRSVPRepository.java",
+          "hash": "7751938456705798828"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/repository/EventRepository.java",
+          "hash": "6402291389485444450"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/repository/FeedbackRepository.java",
+          "hash": "14355542941606082501"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/repository/NotificationRepository.java",
+          "hash": "2488107665952174179"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/repository/SocialClubRepository.java",
+          "hash": "9890627571110114105"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/repository/TokenRepository.java",
+          "hash": "858417389129488358"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/security/SecurityApplication.java",
+          "hash": "17049825198381826749"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/service/EmployeeService.java",
+          "hash": "12175815540197515013"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/service/EventRSVPService.java",
+          "hash": "5075894531434997825"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/service/EventService.java",
+          "hash": "11445784458877163699"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/service/FeedbackService.java",
+          "hash": "6104662180000856504"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/service/JwtService.java",
+          "hash": "10974029108628516441"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/service/LogoutService.java",
+          "hash": "15075459421773915055"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/service/NotificationService.java",
+          "hash": "3236237452156937009"
+        },
+        {
+          "file": "Backend/src/main/java/com/back/demo/service/SocialClubService.java",
+          "hash": "700990055248400272"
+        },
+        {
+          "file": "Backend/src/main/resources/application-test.properties",
+          "hash": "11772607353188381495"
+        },
+        {
+          "file": "Backend/src/main/resources/application.properties",
+          "hash": "14281390320366311423"
+        },
+        {
+          "file": "Backend/src/test/java/com/back/demo/EmployeeServiceTest.java",
+          "hash": "4130237426376566568"
+        }
+      ],
       "Events-System": [
         {
           "file": ".eslintignore",
@@ -884,248 +1116,6 @@
         {
           "file": "webpack.config.js",
           "hash": "9763475564647512955"
-        }
-      ],
-      "backend": [
-        {
-          "file": "Backend/.gcloudignore",
-          "hash": "15571358692473431522"
-        },
-        {
-          "file": "Backend/.gitignore",
-          "hash": "71976021094201820"
-        },
-        {
-          "file": "Backend/app.yml",
-          "hash": "2652495079192119860"
-        },
-        {
-          "file": "Backend/build.gradle",
-          "hash": "435476853395795948"
-        },
-        {
-          "file": "Backend/gradle/wrapper/gradle-wrapper.jar",
-          "hash": "16190395672885700475"
-        },
-        {
-          "file": "Backend/gradle/wrapper/gradle-wrapper.properties",
-          "hash": "10562977481734284362"
-        },
-        {
-          "file": "Backend/gradlew",
-          "hash": "13076229180715721110"
-        },
-        {
-          "file": "Backend/gradlew.bat",
-          "hash": "8837338129170646035"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/BackendApplication.java",
-          "hash": "16741472620818673984"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/BackendConroller.java",
-          "hash": "2908253035642305562"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/CorsConfig.java",
-          "hash": "3209742303883108229"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/HealthCheckController.java",
-          "hash": "926037260233672702"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/Notifications.java",
-          "hash": "1529376247568933044"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/auditing/ApplicationAuditAware.java",
-          "hash": "3082015574846855127"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/auth/AuthenticationController.java",
-          "hash": "16862813548542715467"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/auth/AuthenticationRequest.java",
-          "hash": "7441329599581095574"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/auth/AuthenticationResponse.java",
-          "hash": "6503624083177636740"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/auth/AuthenticationService.java",
-          "hash": "13372785453001002786"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/auth/RegisterRequest.java",
-          "hash": "142099241752059050"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/config/ApplicationConfig.java",
-          "hash": "10202384569668110960"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/config/JwtAuthenticationFilter.java",
-          "hash": "5032856282311710314"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/config/OpenApiConfig.java",
-          "hash": "16616841775596320254"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/config/SecurityConfiguration.java",
-          "hash": "6119934955731029756"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/config/TokenType.java",
-          "hash": "893574830451128260"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/config/WebSocketConfiguration.java",
-          "hash": "16462806430074113491"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/controller/EmployeeController.java",
-          "hash": "5672871028830230653"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/controller/EventController.java",
-          "hash": "8884735518854416681"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/controller/EventRSVPController.java",
-          "hash": "10919588381118086452"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/controller/FeedbackController.java",
-          "hash": "5322895677198880370"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/controller/NotificationController.java",
-          "hash": "7988806371679234754"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/controller/SocialClubController.java",
-          "hash": "17802857733389349921"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/model/ChangePasswordRequest.java",
-          "hash": "7066214523450953400"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/model/Employee.java",
-          "hash": "13447305475849727350"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/model/Event.java",
-          "hash": "15597095085849856640"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/model/EventRSVP.java",
-          "hash": "16565570240587265134"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/model/Feedback.java",
-          "hash": "11907225044043278204"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/model/Notification.java",
-          "hash": "910202608489819039"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/model/Permission.java",
-          "hash": "8900581970194394041"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/model/Role.java",
-          "hash": "1625592257158392988"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/model/SocialClub.java",
-          "hash": "16379890993642053362"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/model/Token.java",
-          "hash": "18397022628670382057"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/repository/EmployeeRepository.java",
-          "hash": "567010665469840751"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/repository/EventRSVPRepository.java",
-          "hash": "7751938456705798828"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/repository/EventRepository.java",
-          "hash": "6402291389485444450"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/repository/FeedbackRepository.java",
-          "hash": "14355542941606082501"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/repository/NotificationRepository.java",
-          "hash": "2488107665952174179"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/repository/SocialClubRepository.java",
-          "hash": "9890627571110114105"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/repository/TokenRepository.java",
-          "hash": "858417389129488358"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/security/SecurityApplication.java",
-          "hash": "17049825198381826749"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/service/EmployeeService.java",
-          "hash": "12175815540197515013"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/service/EventRSVPService.java",
-          "hash": "5075894531434997825"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/service/EventService.java",
-          "hash": "11445784458877163699"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/service/FeedbackService.java",
-          "hash": "6104662180000856504"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/service/JwtService.java",
-          "hash": "10974029108628516441"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/service/LogoutService.java",
-          "hash": "15075459421773915055"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/service/NotificationService.java",
-          "hash": "3236237452156937009"
-        },
-        {
-          "file": "Backend/src/main/java/com/back/demo/service/SocialClubService.java",
-          "hash": "700990055248400272"
-        },
-        {
-          "file": "Backend/src/main/resources/application-test.properties",
-          "hash": "11772607353188381495"
-        },
-        {
-          "file": "Backend/src/main/resources/application.properties",
-          "hash": "14281390320366311423"
-        },
-        {
-          "file": "Backend/src/test/java/com/back/demo/EmployeeServiceTest.java",
-          "hash": "4130237426376566568"
         }
       ],
       "e2e": [
