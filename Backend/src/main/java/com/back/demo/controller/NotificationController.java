@@ -60,7 +60,18 @@ public class NotificationController {
         notificationService.deleteAllNotificationsForEmployee(employeeId);
         return ResponseEntity.noContent().build();
     }
-
+    @CrossOrigin(origins = "*")
+    @DeleteMapping("/api/notifications/{employeeId}/markAllAsRead")
+    public ResponseEntity<Void> markAllNotificationsAsRead(@PathVariable int employeeId) {
+        notificationService.markAllNotificationsAsRead(employeeId);
+        return ResponseEntity.noContent().build();
+    }
+    @CrossOrigin(origins = "*")
+    @DeleteMapping("/api/notifications/{employeeId}/markAllAsUnRead")
+    public ResponseEntity<Void> markAllNotificationsAsUnRead(@PathVariable int employeeId) {
+        notificationService.markAllNotificationsAsUnread(employeeId);
+        return ResponseEntity.noContent().build();
+    }
         // New endpoint to get all notifications for a given employeeId
     @CrossOrigin(origins = "*")
     @GetMapping("/api/notifications/{employeeId}")
@@ -76,9 +87,16 @@ public class NotificationController {
     }
 
     @CrossOrigin(origins = "*")
-    @PutMapping("/api/notifications/{employeeId}/{notificationId}")
+    @PutMapping("/api/notifications/{employeeId}/{notificationId}/read")
     public ResponseEntity<Void> markNotificationAsRead(@PathVariable int employeeId, @PathVariable Long notificationId) {
         notificationService.markNotificationAsRead(employeeId, notificationId);
+        return ResponseEntity.ok().build();
+    }
+
+    @CrossOrigin(origins = "*")
+    @PutMapping("/api/notifications/{employeeId}/{notificationId}/unread")
+    public ResponseEntity<Void> markNotificationAsUnRead(@PathVariable int employeeId, @PathVariable Long notificationId) {
+        notificationService.markNotificationAsUnread(employeeId, notificationId);
         return ResponseEntity.ok().build();
     }
 }

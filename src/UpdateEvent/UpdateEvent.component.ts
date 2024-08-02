@@ -135,7 +135,7 @@ presubmit(){
       .then(response => response.json())
       .then(data => {
           // Show the success toast
-        console.log(data);
+        // console.log(data);
 
           this.showsuccessToast = true;
           this.notify();
@@ -160,8 +160,9 @@ presubmit(){
     
 }
 notify() {
-  this.notificationService.sendNotification(Number(localStorage.getItem('ID')), Number(this.eventId), "Event Updated").subscribe(response => {
-    console.log(response); // Handle the response as needed
+const eventName = sessionStorage.getItem('Name') ?? 'Unknown';
+  this.notificationService.sendNotification(Number(localStorage.getItem('ID')), Number(this.eventId), "Event Updated", eventName).subscribe(response => {
+    // console.log(response); // Handle the response as needed
   });
 
 }
@@ -210,7 +211,7 @@ saveInputs() {
   sessionStorage.setItem('agendainputs', JSON.stringify(this.agendainputs.value));
 }
   ngOnInit(): void {
-    this.route.params.subscribe(params => {   // Get the event ID from the URL
+    this.route.params.subscribe(params => {   
       this.prepform = this.fb.group({
         prepinputs: this.fb.array([])
       });
@@ -226,7 +227,7 @@ saveInputs() {
       })
       .then(data => {
         this.myevent = data;
-        console.log(this.myevent);
+        // console.log(this.myevent);
         this.nameInput.nativeElement.value = sessionStorage.setItem('Name', data.title);
         this.descriptionInput.nativeElement.value = sessionStorage.setItem('Description', data.description);
         this.StartTimeInput.nativeElement.value = sessionStorage.setItem('StartTime', data.startTime);

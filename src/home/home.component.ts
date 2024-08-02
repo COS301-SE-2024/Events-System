@@ -63,7 +63,7 @@ export class HomeComponent implements OnInit {
 
     }
 notify() {
-  this.notificationService.sendNotification(Number(localStorage.getItem('ID')), 93, "tesst").subscribe(response => {
+  this.notificationService.sendNotification(Number(localStorage.getItem('ID')), 93, "tesst", "title").subscribe(response => {
     console.log(response); // Handle the response as needed
   });
 

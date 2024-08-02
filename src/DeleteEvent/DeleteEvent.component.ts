@@ -1,6 +1,8 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import { NotificationService } from 'src/app/notification.service';
+
 @Component({
   selector: 'app-delete-event',
   standalone: true,
@@ -15,7 +17,7 @@ export class DeleteEventComponent {
   @ViewChild('nameInput') nameInput!: ElementRef;
   eventId= '';
   myevent: any = {};
-  constructor(private route: ActivatedRoute, private location: Location) { }  
+  constructor(private route: ActivatedRoute, private location: Location, private notificationService: NotificationService) { }  
   goBack(): void {
     window.history.back();
   }
@@ -40,6 +42,7 @@ export class DeleteEventComponent {
       .then(() => {
         // Show the success toast
         this.showsuccessToast = true;
+        this.notify();
         this.isAPILoading = false;
         // Hide the toast after 5 seconds
         setTimeout(() => {
@@ -69,6 +72,13 @@ export class DeleteEventComponent {
       });
 
 
+    });
+  }
+
+  notify() {
+    const eventName = this.myevent.title ?? 'Unknown';
+    this.notificationService.sendNotification(Number(localStorage.getItem('ID')), Number(this.eventId), "Event Deleted", eventName).subscribe(response => {
+      console.log(response); // Handle the response as needed
     });
   }
 }

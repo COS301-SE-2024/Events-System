@@ -57,6 +57,7 @@ public class NotificationService {
             notification.setEmployeeId(rsvp.getEmployeeId().longValue());
             notification.setEventId(notif.getEventId());
             notification.setMessage(notif.getMessage());
+            notification.setEventTitle(notif.getEventTitle());
             notificationRepository.save(notification);
             template.convertAndSend("/topic/notification" + rsvp.getEmployeeId(), notif.getMessage());
 
@@ -77,7 +78,7 @@ public class NotificationService {
         List<Notification> notifications = notificationRepository.findAll();
         int count = 0;
         for (Notification notification : notifications) {
-            if (notification.getEmployeeId().equals(Long.valueOf(employeeId))) {
+            if (notification.getEmployeeId().equals(Long.valueOf(employeeId)) && notification.getReadAt() == null) {
                 count++;
             }
         }
@@ -101,6 +102,15 @@ public class NotificationService {
             }
         }
     }
+    public void markNotificationAsUnread(int employeeId, Long notificationId) {
+        List<Notification> notifications = notificationRepository.findAll();
+        for (Notification notification : notifications) {
+            if (notification.getNotificationId().equals(notificationId) && notification.getEmployeeId().equals(Long.valueOf(employeeId))) {
+                notification.setReadAt(null);
+                notificationRepository.save(notification);
+            }
+        }
+    }
 
     public void deleteAllNotificationsForEmployee(int employeeId) {
         List<Notification> notifications = notificationRepository.findAll();
@@ -110,4 +120,26 @@ public class NotificationService {
             }
         }
     }
+
+    public void markAllNotificationsAsRead(int employeeId) {
+        List<Notification> notifications = notificationRepository.findAll();
+        for (Notification notification : notifications) {
+            if (notification.getEmployeeId().equals(Long.valueOf(employeeId))) {
+                notification.setReadAt(Timestamp.valueOf(LocalDateTime.now()));
+                notificationRepository.save(notification);
+            }
+        }
+    }
+
+        public void markAllNotificationsAsUnread(int employeeId) {
+            List<Notification> notifications = notificationRepository.findAll();
+            for (Notification notification : notifications) {
+                if (notification.getEmployeeId().equals(Long.valueOf(employeeId))) {
+                    notification.setReadAt(null);
+                    notificationRepository.save(notification);
+                }
+            }
+        }
+    
+
 }

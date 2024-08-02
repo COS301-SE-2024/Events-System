@@ -12,7 +12,7 @@ public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer 
 	@Override
 	public void registerStompEndpoints(StompEndpointRegistry stompEndpointRegistry) {
 		stompEndpointRegistry.addEndpoint("/socket")
-				.setAllowedOrigins("http://localhost:4200", "https://localhost:4200", "ws://localhost:4200", "wss://localhost:4200")
+				.setAllowedOrigins("http://localhost:4200", "https://localhost:4200", "ws://localhost:4200", "wss://localhost:4200", "https://events-system.org", "http://events-system.org", "ws://events-system.org","wss://events-system.org", "wss://events-system-back.wn.r.appspot.com", "ws://events-system-back.wn.r.appspot.com" )
 				.withSockJS();
 	}
 

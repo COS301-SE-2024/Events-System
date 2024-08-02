@@ -32,6 +32,9 @@ public class Notification {
     @Column(name = "read_at", nullable = true)
     private Timestamp readAt;
 
+    @Column(name = "event_title")
+    private String eventTitle;
+
     // Getters and setters
     public Long getNotificationId() {
         return notificationId;
@@ -79,5 +82,13 @@ public class Notification {
 
     public void setReadAt(Timestamp readAt) {
         this.readAt = readAt;
+    }
+
+    public String getEventTitle() {
+        return eventTitle;
+    }
+
+    public void setEventTitle(String eventTitle) {
+        this.eventTitle = eventTitle;
     }
 }

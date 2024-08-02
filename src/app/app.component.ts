@@ -127,7 +127,7 @@ export class AppComponent implements OnInit{
     }
   }
   fetchNotificationCount(): Promise<number> {
-    return fetch(`http://localhost:8080/api/notifications/count/${localStorage.getItem('ID')}`, {
+    return fetch(`https://events-system-back.wn.r.appspot.com/api/notifications/count/${localStorage.getItem('ID')}`, {
       credentials: 'include'
     })
     .then(response => {

@@ -11,9 +11,9 @@ import { RouterModule, Router } from '@angular/router';
 })
 export class NotifPopupComponent implements OnInit {
   notifications = [
-    { notificationId: 1, message: 'Notification Title 1', eventId: 'This is the description for notification 1.', read: false },
-    { notificationId: 2, message: 'Notification Title 1', eventId: 'This is the description for notification 1.', read: false },
-    { notificationId: 3, message: 'Notification Title 1', eventId: 'This is the description for notification 1.', read: false },
+    {notificationId: 1, message: 'event deleted', eventTitle: 'This is the description for notification 1.', eventId: "ID 1", read: false },
+    {notificationId: 2, message: 'event updated', eventTitle: 'This is the description for notification 1.', eventId: "ID 2", read: false },
+    {notificationId: 3, message: 'event updated', eventTitle: 'This is the description for notification 1.', eventId: "ID 3", read: false },
   ];
 
   @Output() closePopup: EventEmitter<void> = new EventEmitter<void>();
@@ -27,7 +27,7 @@ export class NotifPopupComponent implements OnInit {
       return;
     }
 
-    fetch(`http://localhost:8080/api/notifications/${employeeId}`, {
+    fetch(`https://events-system-back.wn.r.appspot.com/api/notifications/${employeeId}`, {
       method: "GET",
       credentials: "include",
       headers: {
@@ -41,8 +41,17 @@ export class NotifPopupComponent implements OnInit {
       return response.json();
     })
     .then(data => {
+            // Filter unread notifications
+            const unreadNotifications = data.filter((notification:any) => notification.readAt === null);
+
       // Slice the last three notifications
-      this.notifications = data.slice(-3).reverse();
+      this.notifications = unreadNotifications.slice(-3).reverse();
+
+      // Extract the second part of the message
+      this.notifications.forEach(notification => {
+        const messageParts = notification.message.split(' ');
+        notification.message = messageParts[1];
+      });
     })
     .catch(error => {
       console.error('Error fetching notifications:', error);

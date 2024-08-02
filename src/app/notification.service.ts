@@ -6,14 +6,15 @@ import { Observable, from, Subject } from 'rxjs';
 })
 export class NotificationService {
 
-  private apiUrl = 'http://localhost:8080/notify';
+  private apiUrl = 'https://events-system-back.wn.r.appspot.com/notify';
 
 
-  sendNotification(Number: number, eventId: number, Message: any): Observable<string> {
+  sendNotification(Number: number, eventId: number, Message: string, eventtitle: string): Observable<string> {
     const event = {
       employeeId: Number,
       eventId: eventId,
-      message: Message
+      message: Message,
+      eventTitle: eventtitle,
     };
 
     return from(fetch(this.apiUrl, {

@@ -12,15 +12,21 @@ import { RouterModule, Router } from '@angular/router';
 export class NotificationsComponent implements OnInit {
   notifications = [
 
-    {notificationId: 1, message: 'Notification Title 1', eventId: 'This is the description for notification 1.', read: false },
-    {notificationId: 2, message: 'Notification Title 1', eventId: 'This is the description for notification 1.', read: false },
-    {notificationId: 3, message: 'Notification Title 1', eventId: 'This is the description for notification 1.', read: false },
+    {notificationId: 1, message: 'Notification Title 1', eventTitle: 'This is the description for notification 1.', eventId: "ID 1", read: false },
+    {notificationId: 2, message: 'Notification Title 1', eventTitle: 'This is the description for notification 1.', eventId: "ID 2", read: false },
+    {notificationId: 3, message: 'Notification Title 1', eventTitle: 'This is the description for notification 1.', eventId: "ID 3", read: false },
   ];
 
   selectedNotification: any = null;
 
   constructor(private router: Router) {}
+  get allRead(): boolean {
+    return this.notifications.every(notification => notification.read);
+  }
 
+  get allUnread(): boolean {
+    return this.notifications.every(notification => !notification.read);
+  }
   ngOnInit(): void {
     const employeeId = Number(localStorage.getItem('ID')); // Assuming the employeeId is stored in local storage
     if (!employeeId) {
@@ -28,7 +34,7 @@ export class NotificationsComponent implements OnInit {
       return;
     }
 
-    fetch(`http://localhost:8080/api/notifications/${employeeId}`, {
+    fetch(`https://events-system-back.wn.r.appspot.com/api/notifications/${employeeId}`, {
       method: "GET",
       credentials: "include",
       headers: {
@@ -42,9 +48,10 @@ export class NotificationsComponent implements OnInit {
       return response.json();
     })
     .then(data => {
-      this.notifications = data.map((notification :any)=> ({
+      console.log(data);
+      this.notifications = data.map((notification:any) => ({
         ...notification,
-        read: notification.read_at !== null
+        read: notification.readAt !== null
       }));
     })
     .catch(error => {
@@ -54,13 +61,35 @@ export class NotificationsComponent implements OnInit {
 
   markAllAsRead(): void {
     this.notifications.forEach(notification => notification.read = true);
+    const empliD = Number(localStorage.getItem('ID'));
+  
+    fetch(`https://events-system-back.wn.r.appspot.com/api/notifications/${empliD}/markAllAsRead`, {
+      method: "DELETE",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+  }
+
+  markAllAsUnRead(): void {
+    this.notifications.forEach(notification => notification.read = false);
+    const empliD = Number(localStorage.getItem('ID'));
+  
+    fetch(`https://events-system-back.wn.r.appspot.com/api/notifications/${empliD}/markAllAsUnRead`, {
+      method: "DELETE",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
   }
 
   clearAll(): void {
     this.notifications = [];
     const empliD = Number(localStorage.getItem('ID'));
 
-    fetch(`http://localhost:8080/api/notifications/${empliD}`, {
+    fetch(`https://events-system-back.wn.r.appspot.com/api/notifications/${empliD}/read`, {
       method: "DELETE",
       credentials: "include",
       headers: {
@@ -76,23 +105,37 @@ export class NotificationsComponent implements OnInit {
       notification.read = true;
     }
     const empliD = Number(localStorage.getItem('ID'));
-    console.log(`http://localhost:8080/api/notifications/${empliD}/${notificationId}`);
-    fetch(`http://localhost:8080/api/notifications/${empliD}/${notificationId}`, {
+    // console.log(`http://localhost:8080/api/notifications/${empliD}/${notificationId}`);
+    fetch(`https://events-system-back.wn.r.appspot.com/api/notifications/${empliD}/${notificationId}/read`, {
       method: "PUT",
       credentials: "include",
       headers: {
         "Content-Type": "application/json"
       }
-      
     })
-
   }
   
+  markAsUnread(event: MouseEvent, notificationId: number): void {
+    event.stopPropagation(); // Prevents the click from bubbling up to the notification card
+    const notification = this.notifications.find(n => n.notificationId === notificationId);
+    if (notification) {
+      notification.read = false;
+    }
+    const empliD = Number(localStorage.getItem('ID'));
+    fetch(`https://events-system-back.wn.r.appspot.com/api/notifications/${empliD}/${notificationId}/unread`, {
+      method: "PUT",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+  }
+
   delete(event: MouseEvent, notificationId: number): void {
     event.stopPropagation(); // Prevents the click from bubbling up to the notification card
     const empliD = Number(localStorage.getItem('ID'));
-    console.log(`http://localhost:8080/api/notifications/${empliD}/${notificationId}`);
-    fetch(`http://localhost:8080/api/notifications/${empliD}/${notificationId}`, {
+    // console.log(`http://localhost:8080/api/notifications/${empliD}/${notificationId}`);
+    fetch(`https://events-system-back.wn.r.appspot.com/api/notifications/${empliD}/${notificationId}`, {
       method: "DELETE",
       credentials: "include",
       headers: {
