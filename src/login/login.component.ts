@@ -169,8 +169,15 @@ export class LoginComponent {
     }
   }
 
-  signInWithGoogle() {
-    const googleAuthUrl = `${this.googleAuthEndpoint}?response_type=${this.responseType}&client_id=${this.googleClientId}&redirect_uri=${this.redirectUri}&scope=${this.scope}`;
-    window.location.href = googleAuthUrl;
+  async signInWithGoogle() {
+    /*const googleRespnse = await fetch('http://localhost:8080/api/v1/auth/google', {
+        method: 'POST', // Important for including cookies if needed
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });*/
+
+      window.location.href = `https://accounts.google.com/o/oauth2/auth/oauthchooseaccount?response_type=code&client_id=207465254722-7p4odomht6nnoc2cek9cb0j5jht2faos.apps.googleusercontent.com&scope=profile%20email&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fapi%2Fv1%2Fauth%2Fgoogle&service=lso&o2v=1&ddm=0&flowName=GeneralOAuthFlow`;
   }
 }

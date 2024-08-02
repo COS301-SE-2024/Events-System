@@ -247,7 +247,7 @@
 </dialog> -->
 
 <!-- LOGIN Home -->
-<form (submit)="onLogin()" [formGroup]="loginForm" class="card-body">
+<form [formGroup]="loginForm" class="card-body">
   <div class="flex  items-center justify-center text-gray-600">
     <div class="relative">
       
@@ -294,7 +294,7 @@
               </label>
             </div>
             <div class="mb-4">
-              <button class="grid w-full cursor-pointer select-none rounded-md border border-indigo-500 bg-indigo-500 py-2 px-5 text-center align-middle text-sm text-white shadow hover:border-indigo-600 hover:bg-indigo-600 hover:text-white focus:border-indigo-600 focus:bg-indigo-600 focus:text-white focus:shadow-none" type="submit">
+              <button class="grid w-full cursor-pointer select-none rounded-md border border-indigo-500 bg-indigo-500 py-2 px-5 text-center align-middle text-sm text-white shadow hover:border-indigo-600 hover:bg-indigo-600 hover:text-white focus:border-indigo-600 focus:bg-indigo-600 focus:text-white focus:shadow-none" (click)="onLogin()">
                 Sign in</button>
               <div class="divider">or</div>
   
@@ -531,6 +531,7 @@
     <button class="btn w-96 mb-4">        <img
       src="https://www.material-tailwind.com/logos/logo-google.png"
       alt="google"
+      onclick="signInWithGoogle()"
       
       class="h-6 w-6"
     />Sign in with google</button>

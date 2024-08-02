@@ -4,17 +4,24 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import com.back.demo.repository.TokenRepository;
 import com.back.demo.model.Token;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -60,14 +67,30 @@ public class AuthenticationController {
     }
 
     @PostMapping("/google")
-    public ResponseEntity<AuthenticationResponse> signInWithGoogle(HttpServletResponse response) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication instanceof OAuth2AuthenticationToken) {
-            OAuth2AuthenticationToken authToken = (OAuth2AuthenticationToken) authentication;
-            AuthenticationResponse authResponse = service.signInWithGoogle(authToken, response);
-            return ResponseEntity.ok(authResponse);
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
-    }
+    public String handleGoogleCallback(@RequestParam("code") String authorizationCode) {
+    // Exchange the authorization code for tokens
+    RestTemplate restTemplate = new RestTemplate();
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+    MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
+    map.add("code", authorizationCode);
+    map.add("client_id", "");
+    map.add("client_secret", "");
+    map.add("redirect_uri", "{baseUrl}/api/v1/auth/google");
+    map.add("grant_type", "authorization_code");
+
+    HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, headers);
+
+    ResponseEntity<Map> response = restTemplate.postForEntity(
+        "https://oauth2.googleapis.com/token",
+        request,
+        Map.class
+    );
+
+    // Extract the ID token from the response
+    String idToken = (String) response.getBody().get("id_token");
+
+    return "ID Token: " + idToken;
+}
 }
