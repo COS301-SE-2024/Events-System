@@ -182,7 +182,7 @@ export class LoginComponent {
       const clientId = 'client_id=207465254722-7p4odomht6nnoc2cek9cb0j5jht2faos.apps.googleusercontent.com';
       const scope = 'scope=profile%20email';
       const redirectUri = 'redirect_uri=http%3A%2F%2Flocalhost%3A4200%2Foauth';
-            const service = 'service=lso';
+      const service = 'service=lso';
       const o2v = 'o2v=1';
       const ddm = 'ddm=0';
       const flowName = 'flowName=GeneralOAuthFlow';

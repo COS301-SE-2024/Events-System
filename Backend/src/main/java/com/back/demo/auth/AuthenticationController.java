@@ -75,8 +75,8 @@ public class AuthenticationController {
 
     MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
     map.add("code", authorizationCode);
-    map.add("client_id", "");
-    map.add("client_secret", "");
+    map.add("client_id", "207465254722-7p4odomht6nnoc2cek9cb0j5jht2faos");
+    map.add("client_secret", "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");
     map.add("redirect_uri", "{baseUrl}/oauth");
     map.add("grant_type", "authorization_code");
 
