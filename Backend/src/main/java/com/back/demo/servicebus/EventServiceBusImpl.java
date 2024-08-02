@@ -20,6 +20,11 @@ public class EventServiceBusImpl implements EventServiceBus {
     }
 
     @Override
+    public List<Event> getEventBySocialClubId(Long socialClubId) {
+        return eventService.getEventBySocialClubId(socialClubId);
+    }
+
+    @Override
     public List<Event> getAllEvents() {
         // Additional logic such as logging or notifications can be added here
         return eventService.getAllEvents();

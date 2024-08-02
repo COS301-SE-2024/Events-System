@@ -16,4 +16,5 @@ public interface EventServiceBus {
     Event partialUpdateEvent(Long eventId, Map<String, Object> updates);
     List<Event> getEventsAttended(Long employeeId);
     List<Event> getUpcomingEvents(Long employeeId);
+    List<Event> getEventBySocialClubId(Long socialClubId);
 }

@@ -23,6 +23,11 @@ public class EventController {
         this.eventServiceBus = eventServiceBus;
     }
 
+    @GetMapping("/socialclub/{id}")
+    public List<Event> getEventBySocialClubId(@PathVariable(value = "id") Long socialClubId) {
+        return eventServiceBus.getEventBySocialClubId(socialClubId);
+    }
+
     @GetMapping
     public List<Event> getAllEvents() {
         return eventServiceBus.getAllEvents();
