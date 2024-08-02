@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation, ViewChild, ElementRef, OnInit } from '@angular/core';
-import { RouterModule, Router, NavigationEnd } from '@angular/router';
+import { RouterModule, Router, Event, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { filter } from 'rxjs/operators';
 
@@ -58,12 +58,12 @@ export class AppComponent implements OnInit{
 
     // Subscribe to router events
     this.routerEventsSubscription = this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe((event: NavigationEnd) => {
-        if (event.url !== '/login') {
-          this.fetchNotificationCount();
-        }
-      });
+    .pipe(filter((event: Event): event is NavigationEnd => event instanceof NavigationEnd))
+    .subscribe((event: NavigationEnd) => {
+      if (event.url !== '/login') {
+        this.fetchNotificationCount();
+      }
+    });
   }
 
   get isLoginRoute() {

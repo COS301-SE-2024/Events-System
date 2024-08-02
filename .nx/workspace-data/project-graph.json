@@ -159,6 +159,7 @@
               "cwd": "e2e",
               "command": "playwright test"
             },
+            "parallelism": false,
             "metadata": {
               "technologies": [
                 "playwright"
@@ -188,14 +189,14 @@
               "{workspaceRoot}\\dist\\.playwright\\e2e\\test-output"
             ],
             "executor": "nx:run-commands",
-            "configurations": {},
-            "parallelism": true
+            "configurations": {}
           },
           "e2e-ci--src/events.spec.ts": {
             "options": {
               "cwd": "e2e",
               "command": "playwright test src/events.spec.ts"
             },
+            "parallelism": false,
             "metadata": {
               "technologies": [
                 "playwright"
@@ -225,8 +226,7 @@
               "{workspaceRoot}\\dist\\.playwright\\e2e\\test-output"
             ],
             "executor": "nx:run-commands",
-            "configurations": {},
-            "parallelism": true
+            "configurations": {}
           },
           "e2e-ci": {
             "executor": "nx:noop",
@@ -251,6 +251,7 @@
                 "params": "forward"
               }
             ],
+            "parallelism": false,
             "metadata": {
               "technologies": [
                 "playwright"
@@ -267,13 +268,15 @@
               }
             },
             "configurations": {},
-            "options": {},
-            "parallelism": true
+            "options": {}
           },
           "lint": {
             "cache": true,
             "options": {
               "cwd": "e2e",
+              "env": {
+                "ESLINT_USE_FLAT_CONFIG": "false"
+              },
               "command": "eslint ."
             },
             "inputs": [
