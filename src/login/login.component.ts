@@ -177,7 +177,18 @@ export class LoginComponent {
           'Content-Type': 'application/json'
         }
       });*/
+      const baseUrl = 'https://accounts.google.com/o/oauth2/auth/oauthchooseaccount';
+      const responseType = 'response_type=code';
+      const clientId = 'client_id=207465254722-7p4odomht6nnoc2cek9cb0j5jht2faos.apps.googleusercontent.com';
+      const scope = 'scope=profile%20email';
+      const redirectUri = 'redirect_uri=http%3A%2F%2Flocalhost%3A4200%2Foauth';
+            const service = 'service=lso';
+      const o2v = 'o2v=1';
+      const ddm = 'ddm=0';
+      const flowName = 'flowName=GeneralOAuthFlow';
+      const fullUrl = `${baseUrl}?${responseType}&${clientId}&${scope}&${redirectUri}&${service}&${o2v}&${ddm}&${flowName}`;
 
-      window.location.href = `https://accounts.google.com/o/oauth2/auth/oauthchooseaccount?response_type=code&client_id=207465254722-7p4odomht6nnoc2cek9cb0j5jht2faos.apps.googleusercontent.com&scope=profile%20email&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fapi%2Fv1%2Fauth%2Fgoogle&service=lso&o2v=1&ddm=0&flowName=GeneralOAuthFlow`;
+      console.log(decodeURIComponent(fullUrl));
+      window.location.href = `${baseUrl}?${responseType}&${clientId}&${scope}&${redirectUri}&${service}&${o2v}&${ddm}&${flowName}`;
   }
 }

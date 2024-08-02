@@ -13,6 +13,7 @@ import { UpdateEventComponent } from 'src/UpdateEvent/UpdateEvent.component';
 import { DeleteEventComponent } from 'src/DeleteEvent/DeleteEvent.component';
 import { HelpComponent } from 'src/Help/Help.component';
 import { SocialClubComponent } from 'src/socialClub/socialClub.component';
+import { OauthComponent } from 'src/oauth/oauth.component';
 
 export const appRoutes: Route[] = [
   { path: '', component: HomeComponent }, // Home page
@@ -27,6 +28,8 @@ export const appRoutes: Route[] = [
   { path: 'updateevent/:id', component: UpdateEventComponent },
   { path: 'deleteevent/:id', component: DeleteEventComponent },
   { path: 'socialclub/:id', component: SocialClubComponent},
-  { path: 'help', component: HelpComponent}
+  { path: 'help', component: HelpComponent},
+  { path: 'oauth', component: OauthComponent}
+
   // { path: 'home', component: SettingsComponent },
 ];

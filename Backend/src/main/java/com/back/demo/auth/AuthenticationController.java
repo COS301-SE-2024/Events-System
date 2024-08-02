@@ -77,7 +77,7 @@ public class AuthenticationController {
     map.add("code", authorizationCode);
     map.add("client_id", "");
     map.add("client_secret", "");
-    map.add("redirect_uri", "{baseUrl}/api/v1/auth/google");
+    map.add("redirect_uri", "{baseUrl}/oauth");
     map.add("grant_type", "authorization_code");
 
     HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, headers);
