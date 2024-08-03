@@ -508,7 +508,7 @@
         },
         {
           "file": "src/EventRatings/eventRatings.component.html",
-          "hash": "15003073510622230276"
+          "hash": "1013997835966319517"
         },
         {
           "file": "src/EventRatings/eventRatings.component.spec.ts",
@@ -871,28 +871,6 @@
           "hash": "9763475564647512955"
         }
       ],
-      "e2e": [
-        {
-          "file": "e2e/.eslintrc.json",
-          "hash": "15603494122075574473"
-        },
-        {
-          "file": "e2e/playwright.config.ts",
-          "hash": "9971182091902929953"
-        },
-        {
-          "file": "e2e/project.json",
-          "hash": "5814830115590049490"
-        },
-        {
-          "file": "e2e/src/events.spec.ts",
-          "hash": "17134108875182778158"
-        },
-        {
-          "file": "e2e/tsconfig.json",
-          "hash": "5846556622446948315"
-        }
-      ],
       "backend": [
         {
           "file": "Backend/.gcloudignore",
@@ -1093,6 +1071,28 @@
         {
           "file": "Backend/src/test/java/com/back/demo/EmployeeServiceTest.java",
           "hash": "4130237426376566568"
+        }
+      ],
+      "e2e": [
+        {
+          "file": "e2e/.eslintrc.json",
+          "hash": "15603494122075574473"
+        },
+        {
+          "file": "e2e/playwright.config.ts",
+          "hash": "9971182091902929953"
+        },
+        {
+          "file": "e2e/project.json",
+          "hash": "5814830115590049490"
+        },
+        {
+          "file": "e2e/src/events.spec.ts",
+          "hash": "17134108875182778158"
+        },
+        {
+          "file": "e2e/tsconfig.json",
+          "hash": "5846556622446948315"
         }
       ]
     }
