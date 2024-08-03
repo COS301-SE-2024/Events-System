@@ -28,37 +28,30 @@ export class EventComponent implements OnInit{
     this.imageSource = this.randomHeaderService.getRandomHeaderSource();
     this.route.params.subscribe(params => {
       this.eventId = params['id'];
-
+  
       fetch('https://events-system-back.wn.r.appspot.com/api/events/' + this.eventId)
-      .then(response => {
-        return response.json();
-      })
+      .then(response => response.json())
       .then(data => {
         this.event = data;
-        // console.log(this.event);
         this.event.startTime = this.formatTime(this.event.startTime);
         this.event.endTime = this.formatTime(this.event.endTime);
-        // Get the host information
-        fetch('https://events-system-back.wn.r.appspot.com/api/employees/' + this.event.hostId)
-        .then(response => {
-          return response.json();
-        })
-        .then(data => {
-          this.host = data;
-          fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs/' + this.event.socialClub)
-          .then(response => {
-            return response.json();
-          })
-          .then(data => {
-            this.club = data;
-            this.isLoading = false;
-    
-          });
-
-          // console.log(this.host); // Log the host data
-          this.isLoading = false;
-
-        });
+        // console.log(this.event);
+        return fetch('https://events-system-back.wn.r.appspot.com/api/employees/' + this.event.hostId);
+      })
+      .then(response => response.json())
+      .then(data => {
+        this.host = data;
+  
+        return fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs/' + this.event.socialClub);
+      })
+      .then(response => response.json())
+      .then(data => {
+        this.club = data;
+        this.isLoading = false;
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        this.isLoading = false;
       });
     });
   }
@@ -72,6 +65,7 @@ export class EventComponent implements OnInit{
   }
 
   isAccommodationAvailable(accommodation: string): boolean {
+
     return this.event?.eventDietaryAccommodations.includes(accommodation);
   }
 }

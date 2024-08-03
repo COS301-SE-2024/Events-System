@@ -1,36 +1,21 @@
-<div>
-    <h1 class="lg:text-6xl lg:ml-8 lg:mt-8 text-2xl ml-4">Getting Started</h1>
-    <p class="lg:text-4xl lg:ml-8 text-2xl ml-4 text-slate-500">Learn how to start using our product, Understand the key features</p>
-</div>
+
 <div class="flex lg:flex-row flex-col lg:mt-8 mt-4">
     <select class="select select-bordered w-full max-w-md lg:hidden" [(ngModel)]="selectedSection" (change)="setActiveSection(selectedSection)">
-        <option value="gettingStarted" selected>Getting Started</option>
         <option value="account">Account</option>
-        <option value="faq">Frequently asked Questions</option>
+        <option value="faq" selected>Frequently asked Questions</option>
         <option value="status">Status</option>
         <option value="changelog">Changelog</option>
       </select>
       
       <!-- Menu for larger screens -->
       <ul class="menu bg-base-200 w-80 text h-screen lg:block hidden">
-        <li><a (click)="setActiveSection('gettingStarted')">Getting Started</a></li>
         <li><a (click)="setActiveSection('account')">Account</a></li>
         <li><a (click)="setActiveSection('faq')">Frequently asked Questions</a></li>
         <li><a (click)="setActiveSection('status')">Status</a></li>
         <li><a (click)="setActiveSection('changelog')">Changelog</a></li>
       </ul>
       
-      <div *ngIf="activeSection === 'gettingStarted'" >
-        <div class="flex justify-center">
-            <h1 class="text-7xl lg:mt-0 mt-4">Welcome!</h1>
-        </div>
-          <p class="lg:ml-8 lg:mt-8 mt-8 ml-2 justify-center w-11/12 text-center text-secondary">
-                Welcome to the Help center for all things Events System!<br/>
-                Here you'll find all the guides and information you need to get started with our platform, manage your account, and troubleshoot any issues you may encounter.<br/>
-                If you have any questions or need further assistance, feel free to reach out to our support team for help! Bieber.Capstone&#64;gmail.com<br/>
 
-        </p>
-      </div>
       <div *ngIf="activeSection === 'account'"  >
         <div class="flex justify-center">
             <h1 class="text-7xl lg:mt-0 mt-4">My account</h1>
@@ -95,51 +80,74 @@
       </div>
       <div *ngIf="activeSection === 'faq'"  >
         <div class="flex justify-center w-full">
-            <h1 class="text-7xl lg:mt-0 mt-4">FAQ</h1>
+            <h1 class="text-7xl lg:mt-0 mt-4">FREQUENTLY ASKED QUESTIONS</h1>
         </div>
-        <div>
-            <h2 class="text-5xl mt-8">Q: What's your tech stack?</h2>
-            <p class="text-xl mt-4">
-              A: Our application is built using a modern technology stack to ensure high performance and a great user experience. Here's a brief overview:
-            </p>
-            <ul class="list-disc text-left mt-4 mx-auto w-11/12 lg:w-3/4">
-              <li><strong>Frontend:</strong> Developed with <em>Angular</em>, utilizing <em>Tailwind CSS</em> for styling and <em>DaisyUI</em> for UI components.</li>
-              <li><strong>Backend:</strong> Powered by <em>Spring Boot</em>, with <em>JWT</em> for secure authentication.</li>
-              <li><strong>Deployment:</strong> The frontend is deployed on <em>Cloudflare Pages</em> for fast content delivery, while the backend is hosted on <em>Google Cloud Platform</em> for scalability and reliability.</li>
-              <li><strong>Database:</strong> Our data is securely hosted by <em>AWS</em>, ensuring high availability and performance.</li>
-            </ul>
-        </div>
-        <div>
-            <h2 class="text-5xl mt-8">Q: How do I create an event in the system?</h2>
-            <p class="text-xl mt-4">
-              A: Events can only be created by hosts, so if you happen to be a host! Creating an event in our system is a straightforward process that involves filling out a form on our website and submitting it. Here's how you can do it:
-            </p>
-            <ul class="list-disc text-left mt-4 mx-auto w-11/12 lg:w-3/4">
-              <li><strong>1. Navigate to the Event Creation Page:</strong> First, go to the event creation page on our website. You can find this by clicking on the "Create Event" link in the My Events menu.</li>
-              <li><strong>2. Fill Out the Event Form:</strong> On the event creation page, you will see a form that asks for details about the event you want to create. Fill out all the required fields, which typically include the event name, date, time, location, and a brief description.</li>
-              <li><strong>3. Submit the Form:</strong> After filling out the form, review the information to make sure everything is correct. Then, click the "Submit" button to create your event. The form data is sent to our backend service, specifically the createEvent method in the EventService, which saves the event</li>
-              <li><strong>4. Confirmation:</strong>  Once your event is successfully created, you will receive a confirmation message. This indicates that your event has been added to our system and is now visible to other users.</li>
-            </ul>
-        </div>
-        <div>
-            <h2 class="text-5xl mt-8">Q: What information do I need to provide to create an event?</h2>
-            <p class="text-xl mt-4">
-              A: When creating an event, you will need to provide the following information:
-            </p>
-            <ul class="list-disc text-left mt-4 mx-auto w-11/12 lg:w-3/4">
-              <li><strong>1. Event Name:</strong> A unique name for your event.</li>
-              <li><strong>2. Description:</strong> A brief description of your event.</li>
-              <li><strong>3. Date and Time:</strong> When your event will take place.</li>
-              <li><strong>4. Location:</strong> Where your event will be held.</li>
-              <li><strong>5. Social club:</strong> The club that will be hosting the event.</li>
-              <li><strong>6. Preperation details and agenda details:</strong> any important details attendees should know. </li>            </ul>
-        </div>
-        <div>
-            <h2 class="text-5xl mt-8">Q: Can I edit an event after creating it?</h2>
-            <p class="text-xl mt-4">
-              A: Yes, you can edit an event after it has been created. To do this, navigate to the My Event's page and look for the "Edit" button. Clicking this button will allow you to update the event's details.
-            </p>
-        </div>
+        <p class="lg:ml-8 lg:mt-8 mt-8 ml-2 justify-center w-11/12 text-center text-secondary">
+            Quick answers to questions you may have about SynC and the Events system <br>
+            Can't find what you're looking for? Check out our full documentation.
+
+    </p>
+    <div class="mt-8">
+        <div class="collapse collapse-plus bg-base-200">
+            <input type="radio" name="my-accordion-3" checked="checked" />
+            <div class="collapse-title text-xl font-medium">What's your tech stack?</div>
+            <div class="collapse-content text-secondary">
+                <p class="text-xl mt-4">
+                    Our application is built using a modern technology stack to ensure high performance and a great user experience. Here's a brief overview:
+                  </p>
+                  <ul class="list-disc text-left mt-4 mx-auto w-11/12 lg:w-3/4">
+                    <li><strong>Frontend:</strong> Developed with <em>Angular</em>, utilizing <em>Tailwind CSS</em> for styling and <em>DaisyUI</em> for UI components.</li>
+                    <li><strong>Backend:</strong> Powered by <em>Spring Boot</em>, with <em>JWT</em> for secure authentication.</li>
+                    <li><strong>Deployment:</strong> The frontend is deployed on <em>Cloudflare Pages</em> for fast content delivery, while the backend is hosted on <em>Google Cloud Platform</em> for scalability and reliability.</li>
+                    <li><strong>Database:</strong> Our data is securely hosted by <em>AWS</em>, ensuring high availability and performance.</li>
+                  </ul>
+            </div>
+          </div>
+          <div class="collapse collapse-plus bg-base-200">
+            <input type="radio" name="my-accordion-3" />
+            <div class="collapse-title text-xl font-medium">How do I create an event in the system?</div>
+            <div class="collapse-content text-secondary">
+                <p class="text-xl mt-4">
+                    A: Events can only be created by hosts, so if you happen to be a host! Creating an event in our system is a straightforward process that involves filling out a form on our website and submitting it. Here's how you can do it:
+                  </p>
+                  <ul class="list-disc text-left mt-4 mx-auto w-11/12 lg:w-3/4">
+                    <li><strong>1. Navigate to the Event Creation Page:</strong> First, go to the event creation page on our website. You can find this by clicking on the "Create Event" link in the My Events menu.</li>
+                    <li><strong>2. Fill Out the Event Form:</strong> On the event creation page, you will see a form that asks for details about the event you want to create. Fill out all the required fields, which typically include the event name, date, time, location, and a brief description.</li>
+                    <li><strong>3. Submit the Form:</strong> After filling out the form, review the information to make sure everything is correct. Then, click the "Submit" button to create your event. The form data is sent to our backend service, specifically the createEvent method in the EventService, which saves the event</li>
+                    <li><strong>4. Confirmation:</strong>  Once your event is successfully created, you will receive a confirmation message. This indicates that your event has been added to our system and is now visible to other users.</li>
+                  </ul>
+            </div>
+          </div>
+          <div class="collapse collapse-plus bg-base-200">
+            <input type="radio" name="my-accordion-3" />
+            <div class="collapse-title text-xl font-medium">What information do I need to provide to create an event?</div>
+            <div class="collapse-content  text-secondary">
+                <p class="text-xl mt-4">
+                    A: When creating an event, you will need to provide the following information:
+                  </p>
+                  <ul class="list-disc text-left mt-4 mx-auto w-11/12 lg:w-3/4">
+                    <li><strong>1. Event Name:</strong> A unique name for your event.</li>
+                    <li><strong>2. Description:</strong> A brief description of your event.</li>
+                    <li><strong>3. Date and Time:</strong> When your event will take place.</li>
+                    <li><strong>4. Location:</strong> Where your event will be held.</li>
+                    <li><strong>5. Social club:</strong> The club that will be hosting the event.</li>
+                    <li><strong>6. Preperation details and agenda details:</strong> any important details attendees should know. </li>            
+                  </ul>
+            </div>
+          </div>
+          <div class="collapse collapse-plus bg-base-200">
+            <input type="radio" name="my-accordion-3" />
+            <div class="collapse-title text-xl font-medium">Can I edit an event after creating it?</div>
+            <div class="collapse-content text-secondary">
+                <p class="text-xl mt-4">
+                    A: Yes, you can edit an event after it has been created. To do this, navigate to the My Event's page and look for the "Edit" button. Clicking this button will allow you to update the event's details.
+                  </p>
+            </div>
+          </div>
+
+    </div>
+
+
 
       </div>
       <div *ngIf="activeSection === 'status'" class="w-full"  >
@@ -155,8 +163,77 @@
 
       </div>
       <div *ngIf="activeSection === 'changelog'">
-        <div class="flex justify-center w-full">
-            <h1 class="text-7xl">Changelog!</h1>
-        </div>
-    </div>
+          <div class="flex justify-center w-full">
+              <h1 class="text-7xl lg:mt-0 mt-4">Changelog</h1>
+          </div>
+          <ul class="list-disc">
+              <li>Feat/testing by &#64;SageBoots in #23</li>
+              <li>PR main to develop to begin develop by &#64;ofentse-ramothibe in #24</li>
+              <li>Feat/database by &#64;RXA8 in #18</li>
+              <li>Calender page by &#64;ofentse-ramothibe in #27</li>
+              <li>Redid welcome page by &#64;ofentse-ramothibe in #28</li>
+              <li>Adjusted homepage by &#64;ofentse-ramothibe in #29</li>
+              <li>Rebasing develop to add CI tests and adding new pages to main by &#64;SageBoots in #30</li>
+              <li>Update ci.yml by &#64;SageBoots in #31</li>
+              <li>Updated readMe by &#64;SageBoots in #32</li>
+              <li>Updating develop by &#64;ofentse-ramothibe in #33</li>
+              <li>Feat/database by &#64;RXA8 in #35</li>
+              <li>Feat/welcome by &#64;ofentse-ramothibe in #37</li>
+              <li>Fixed failing tests, fixed linter by &#64;Mathenda in #38</li>
+              <li>Added secret to actions by &#64;Mathenda in #39</li>
+              <li>Feat/docs by &#64;KezlynGovender in #41</li>
+              <li>Feat/settings by &#64;KezlynGovender in #40</li>
+              <li>Feat/profile by &#64;KezlynGovender in #36</li>
+              <li>Demo 1 preparation by &#64;Mathenda in #42</li>
+              <li>Removed buggy action by &#64;Mathenda in #43</li>
+              <li>Removed comments by &#64;Mathenda in #44</li>
+              <li>Fixed tests by &#64;SageBoots in #45</li>
+              <li>Update README.md by &#64;Mathenda in #52</li>
+              <li>Develop added a new workflow for manual jest testing by &#64;Mathenda in #54</li>
+              <li>Removed credentials from repo by &#64;Mathenda in #55</li>
+              <li>Completed implementation of user authentication by &#64;SageBoots in #69</li>
+              <li>Completed implementation of user authentication by &#64;SageBoots in #70</li>
+              <li>Feat/database by &#64;RXA8 in #56</li>
+              <li>Revert "Feat/database" by &#64;Mathenda in #72</li>
+              <li>Feat/backend auth3 by &#64;SageBoots in #75</li>
+              <li>Added events page by &#64;Mathenda in #76</li>
+              <li>Feat/api by &#64;RXA8 in #77</li>
+              <li>Update/auth by &#64;SageBoots in #78</li>
+              <li>Feat/login-integration by &#64;SageBoots in #79</li>
+              <li>Feat/detailed events by &#64;Mathenda in #81</li>
+              <li>Feat/socialclubs by &#64;RXA8 in #82</li>
+              <li>Added HttpOnly web cookies by &#64;SageBoots in #80</li>
+              <li>Feat/profile by &#64;KezlynGovender in #87</li>
+              <li>Feat/codecov by &#64;SageBoots in #86</li>
+              <li>Merging to main for first milestone by &#64;Mathenda in #88</li>
+              <li>Added events hub by &#64;Mathenda in #89</li>
+              <li>Added events hub (#89) by &#64;Mathenda in #90</li>
+              <li>Added codecov.yml to root directory by &#64;SageBoots in #91</li>
+              <li>Added events hub (#89) by &#64;Mathenda in #92</li>
+              <li>Added events hub (#89) by &#64;Mathenda in #93</li>
+              <li>Bug fixes and introduction of e2e testing by &#64;Mathenda in #94</li>
+              <li>Bug fixes and introduction of e2e testing (#94) by &#64;Mathenda in #95</li>
+              <li>Develop by &#64;Mathenda in #96</li>
+              <li>Second demo component by &#64;Mathenda in #97</li>
+              <li>Demo 2 prep by &#64;Mathenda in #98</li>
+              <li>Added new events endpoint to API and integrated MyEvents page accordingly by &#64;SageBoots in #101</li>
+              <li>Finalized help page by &#64;Mathenda in #103</li>
+              <li>Update CreateEvent.component.ts by &#64;Mathenda in #104</li>
+              <li>Feat/profileintegration by &#64;RXA8 in #105</li>
+              <li>Feat/profile testing by &#64;KezlynGovender in #108</li>
+              <li>Feat/home pull request by &#64;ofentse-ramothibe in #109</li>
+              <li>Fixed functionality for role selector on signup card by &#64;SageBoots in #110</li>
+              <li>Update/landing by &#64;SageBoots in #111</li>
+              <li>Hotfix/profile by &#64;KezlynGovender in #112</li>
+              <li>Moving develop branch to main by &#64;Mathenda in #113</li>
+              <li>Adjusted login by &#64;Mathenda in #115</li>
+              <li>Update README.md by &#64;ofentse-ramothibe in #116</li>
+              <li>Update README.md by &#64;KezlynGovender in #119</li>
+              <li>Fixed homepage filter by &#64;Mathenda in #120</li>
+              <li>Pulling from main to develop to start demo 3 sprint by &#64;Mathenda in #121</li>
+              <li>Events hub by &#64;Mathenda in #122</li>
+              <li>Feat/calender page by &#64;Mathenda in #126</li>
+              <li>Develop by &#64;Mathenda in #127</li>
+          </ul>
+      </div>
 </div>
