@@ -1,0 +1,50 @@
+<div>
+    <div >
+      <div class="flex justify-center items-center">
+        
+        <div>
+          
+          <h1 class="lg:text-6xl text-4xl text-center mt-8">Let's Make some changes!</h1>
+          <button class="btn w-[50px] -mt-12 lg:-ml-96 h-[30px] rounded-full"(click)="goBack()"><i class="fa-solid fa-arrow-left"></i></button>
+
+          <div class="mx-auto w-1/2">
+            <div class="label mt-4 flex justify-center">
+              <span class="label-text">Title</span>
+            </div>
+            <input  #nameInput type="text" placeholder="Type here" class="input input-bordered w-full max-w-xl text-lg h-12"  oninput="sessionStorage.setItem('Name', this.value)"/>
+          </div>
+  
+          <div class="label mt-4 flex justify-center">
+            <span class="label-text">Description</span>
+          </div>
+          <textarea  #descriptionInput class="textarea textarea-bordered w-full h-44" placeholder="Bio" oninput="sessionStorage.setItem('Description', this.value)"></textarea>    
+
+          <div class="flex justify-between mt-4">
+            <button class="btn btn-outline btn-warning">back</button>
+            <button (click)="presubmit()" class="btn btn-success">Update Series</button>
+          </div>
+          
+        </div>
+      </div>  
+    </div>
+    <div class="toast" *ngIf="isAPILoading">
+        <div class="alert alert-info flex justify-center">
+            <span class="loading loading-dots loading-md"></span>
+        </div>
+      </div>
+
+
+    <div class="toast" *ngIf="showsuccessToast">
+      <div class="alert alert-success">
+        <span>Event succesfully updated Redirecting...</span>
+      </div>
+    </div>
+  
+    <div class="toast" *ngIf="showfailToast">
+      <div class="alert alert-error">
+        <span>error updating event</span>
+      </div>
+    </div>
+    <!-- <button (click)="previousStep()" class="btn btn-warning" [disabled]="currentStep === 0">Back</button>
+    <button (click)="nextStep()" class="btn btn-success">Next</button> -->
+  </div>

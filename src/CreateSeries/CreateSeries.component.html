@@ -1,0 +1,98 @@
+<div>
+    <div class="mx-auto text-center">
+      <ul class="steps lg:text-md text-sm">
+        <li [class.step-primary]="currentStep >= 0" class="step cursor-pointer" (click)="navigateToStep(0)">Name</li>
+        <li [class.step-primary]="currentStep >= 1" class="step cursor-pointer" (click)="navigateToStep(1)">Description</li>
+        <li [class.step-primary]="currentStep >= 2" class="step cursor-pointer" (click)="navigateToStep(2)">Details</li>
+        <li [class.step-primary]="currentStep >= 3" class="step cursor-pointer" (click)="navigateToStep(3)">Summary</li>
+      </ul>
+  </div>
+  
+    <div [ngSwitch]="currentStep">
+      <button class="btn w-[50px] -mt-12 lg:ml-8 h-[30px] rounded-full"(click)="goBack()"><i class="fa-solid fa-arrow-left"></i></button>
+      <div class="flex justify-center items-center">
+        <div *ngSwitchCase="0" class="mt-8" [@fadeInOut]>
+          <h1 class="lg:text-6xl text-4xl text-center ">Name your series</h1>
+          <div class="tooltip tooltip-open tooltip-error mb-4"  [class.hidden]="!isNameEmpty" data-tip="please enter a Title">
+          </div>
+            <input #nameInput type="text" placeholder="Type here" class="input input-bordered w-full max-w-xl text-lg h-12 mt-8" required/>
+  
+            <div class="flex justify-between mt-4">
+            <button class="btn btn-outline btn-warning" [disabled]="currentStep === 0">Back</button>
+            <button (click)="nextStep()" class="btn btn-success">Next</button>
+          </div>
+         
+        </div>
+      </div>
+      <div class="flex justify-center items-center">
+        <div *ngSwitchCase="1" class="mt-8" [@fadeInOut]>
+          <h1 class="lg:text-6xl text-4xl">What's it about?</h1>
+          <div>
+            <div class="tooltip tooltip-open tooltip-error lg:ml-8 ml-4 -mb-4"  [class.hidden]="!isDescriptionEmpty" data-tip="please enter a Description">
+            </div>
+            <textarea #descriptionInput class="textarea textarea-bordered w-full h-44 mt-4" placeholder="Description" required></textarea>        
+          </div>
+          <div class="flex justify-between mt-4">
+            <button (click)="previousStep()" class="btn btn-outline btn-warning" [disabled]="currentStep === 0">Back</button>
+            <button (click)="nextStep1()" class="btn btn-success">Next</button>
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-center items-center">
+        <div *ngSwitchCase="2" [@fadeInOut]>
+          <h1 class="lg:text-6xl text-4xl text-center mt-8">Add some events!</h1>
+            
+          <div class="flex justify-between mt-4">
+            <button (click)="previousStep()" class="btn btn-outline btn-warning" [disabled]="currentStep === 0">Back</button>
+            <div>
+              <div class="tooltip tooltip-open tooltip-error lg:mt-0 lg:ml-0 ml-4 mb-5"  [class.hidden]="!isstep2Empty" data-tip="empty input(s)">
+              </div>
+              <button (click)="nextStep2()" class="btn btn-success">Next</button>
+            </div>
+          </div>
+        </div>
+      </div>  
+      <div class="flex justify-center items-center">
+        <div *ngSwitchCase="3" [@fadeInOut]>
+          <h1 class="lg:text-6xl text-4xl text-center mt-8">Let's Summarize</h1>
+          <div class="mx-auto w-1/2">
+            <div class="label mt-4 flex justify-center">
+              <span class="label-text">Title</span>
+            </div>
+            <input disabled #nameInput type="text" placeholder="Type here" class="input input-bordered w-full max-w-xl text-lg h-12" required/>
+          </div>
+  
+          <div class="label mt-4 flex justify-center">
+            <span class="label-text">Description</span>
+          </div>
+          <textarea disabled #descriptionInput class="textarea textarea-bordered w-full h-44" placeholder="Bio"required></textarea>    
+
+          <div class="flex justify-between mt-4">
+            <button (click)="previousStep()" class="btn btn-outline btn-warning" [disabled]="currentStep === 0">back</button>
+            <button (click)="presubmit()" class="btn btn-success">Create series</button>
+          </div>
+          
+        </div>
+      </div>  
+    </div>
+  
+    <div class="toast" *ngIf="isAPILoading">
+      <div class="alert alert-info flex justify-center">
+          <span class="loading loading-dots loading-md"></span>
+      </div>
+    </div>
+  
+    <div class="toast" *ngIf="showsuccessToast">
+      <div class="alert alert-success">
+        <span>Event succesfully created Redirecting...</span>
+      </div>
+    </div>
+  
+    <div class="toast" *ngIf="showfailToast">
+      <div class="alert alert-error">
+        <span>error creating event</span>
+      </div>
+    </div>
+    <!-- <button (click)="previousStep()" class="btn btn-warning" [disabled]="currentStep === 0">Back</button>
+    <button (click)="nextStep()" class="btn btn-success">Next</button> -->
+  </div>

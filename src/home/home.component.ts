@@ -7,7 +7,6 @@ import {SocialClubCardComponent} from 'src/Components/SocialClubCard/socialClubC
 import { ChangeDetectorRef } from '@angular/core';
 import { ViewChild, ElementRef } from '@angular/core';
 import { HomeUpcomingSkeletonComponent } from 'src/Components/HomeUpcomingSkeleton/HomeUpcomingSkeleton.component';
-import { Init } from 'v8';
 const myCredentials = {
   username: 'myUsername',
   password: 'myPassword'
