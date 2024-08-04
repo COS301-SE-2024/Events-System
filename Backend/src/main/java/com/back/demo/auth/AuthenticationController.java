@@ -2,6 +2,7 @@ package com.back.demo.auth;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import com.back.demo.service.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -17,8 +18,10 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import com.back.demo.repository.EmployeeRepository;
 import com.back.demo.repository.TokenRepository;
 import com.back.demo.model.Token;
+import com.back.demo.model.Employee;
 
 import java.io.IOException;
 import java.util.Map;
@@ -66,31 +69,16 @@ public class AuthenticationController {
         service.refreshToken(request, response);
     }
 
+    @Autowired
+    private EmployeeRepository employeeRepository;
+    
+    private final JwtService jwtService;
+
     @PostMapping("/google")
-    public String handleGoogleCallback(@RequestParam("code") String authorizationCode) {
-    // Exchange the authorization code for tokens
-    RestTemplate restTemplate = new RestTemplate();
-    HttpHeaders headers = new HttpHeaders();
-    headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-
-    MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-    map.add("code", authorizationCode);
-    map.add("client_id", "207465254722-7p4odomht6nnoc2cek9cb0j5jht2faos");
-    map.add("client_secret", "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");
-    map.add("redirect_uri", "{baseUrl}/oauth");
-    map.add("grant_type", "authorization_code");
-
-    HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, headers);
-
-    ResponseEntity<Map> response = restTemplate.postForEntity(
-        "https://oauth2.googleapis.com/token",
-        request,
-        Map.class
-    );
-
-    // Extract the ID token from the response
-    String idToken = (String) response.getBody().get("id_token");
-
-    return "ID Token: " + idToken;
-}
+    public ResponseEntity<AuthenticationResponse> handleGoogleCallback(
+        @RequestBody OAuth2Response request,
+        HttpServletResponse response
+    ) {
+        return ResponseEntity.ok(service.signInWithGoogle(request, response));
+    }
 }

@@ -29,6 +29,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -151,26 +152,41 @@ public class AuthenticationService {
         }
     }
 
-    public AuthenticationResponse signInWithGoogle(OAuth2AuthenticationToken googleAuthRequest, HttpServletResponse response) {
-        Map<String, Object> attributes = googleAuthRequest.getPrincipal().getAttributes();
+    public AuthenticationResponse signInWithGoogle(OAuth2Response oAuthRequest, HttpServletResponse response) {
 
-        String email = (String) attributes.get("email");
-        String firstName = (String) attributes.get("given_name");
-        String lastName = (String) attributes.get("family_name");
+        String email = oAuthRequest.getEmail();
+        String firstName = oAuthRequest.getGiven_name();
+        String lastName = oAuthRequest.getFamily_name();
 
-        Employee user = repository.findByEmail(email).orElse(
-            Employee.builder()
-                    .firstName(firstName)
-                    .lastName(lastName)
-                    .email(email)
-                    .role(Role.USER) 
-                    .build()
-        );
+        Optional<Employee> optionalEmployee = repository.findByEmail(email);
+        Employee employee;
+        
+        if(optionalEmployee.isPresent())
+        {
+            employee = optionalEmployee.get();
 
-        var savedUser = repository.save(user);
-        var jwtToken = jwtService.generateToken(user);
-        var refreshToken = jwtService.generateRefreshToken(user);
-        saveUserToken(savedUser, jwtToken);
+        }
+        else
+        {
+            employee = Employee.builder()
+            .firstName(firstName)
+            .lastName(lastName)
+            .email(email)
+            .password("")
+            .dietaryRequirements("")
+            .role(Role.USER) 
+            .build();
+            
+            repository.save(employee);
+        }
+        
+        var jwtToken = jwtService.generateToken(employee);
+        var refreshToken = jwtService.generateRefreshToken(employee);
+
+        revokeAllUserTokens(employee);
+        saveUserToken(employee, jwtToken);
+
+        response.setStatus(HttpServletResponse.SC_OK);
 
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
