@@ -1,0 +1,59 @@
+
+<div role="alert" class="alert lg:flex justify-between hidden">
+    <span>Agriculture Series</span>
+    <div>
+        <button class="btn btn-outline btn-primary" [routerLink]="['/series', 1]">More details</button>
+        <button class="btn btn-outline btn-primary" [routerLink]="['/updateseries', 1]" >Edit</button>
+        <button class="btn btn-outline btn-primary" [routerLink]="['/deleteseries', 1]" >delete</button>
+    </div>
+</div>
+
+<div class="lg:hidden block">
+    <div class="collapse collapse-plus bg-base-200">
+      <input type="radio" name="my-accordion-3" checked="checked" /> 
+      <div class="collapse-title text-xl font-medium">
+        Agriculture Series
+      </div>
+      <div class="collapse-content"> 
+        <div>
+            <button class="btn btn-outline btn-primary" [routerLink]="['/series', 1]">More details</button>
+            <button class="btn btn-outline btn-primary" [routerLink]="['/updateseries', 1]">Edit</button>
+            <button class="btn btn-outline btn-primary" [routerLink]="['/deleteseries', 1]" >delete</button>
+          </div>
+      </div>
+    </div>
+
+
+
+</div>
+<input type="checkbox" id="my_modal_6" class="modal-toggle" />
+<div class="modal" role="dialog">
+  <div class="modal-box">
+    <h3 class="font-bold text-lg">Delete Agriculture Series</h3>
+    <p class="py-4">Are you sure you want to delete this Series?<br/> <span class="text-orange-300">this action is not reversible</span></p>
+    <div class="modal-action">
+    </div>
+    <div class="flex justify-between mt-4">
+      <label for="my_modal_6" class="btn btn-warning">Cancel</label>
+      <label for="my_modal_6" class="btn btn-outline btn-error">Delete my Series</label>
+    </div>
+  </div>
+  <label class="modal-backdrop" for="my_modal_6">Close</label>
+</div>
+    <!-- <div class="toast" *ngIf="isAPILoading">
+        <div class="alert alert-info flex justify-center">
+            <span class="loading loading-dots loading-md"></span>
+        </div>
+      </div>
+
+    <div class="toast" *ngIf="showsuccessToast">
+      <div class="alert alert-success">
+        <span>Event succesfully Deleted</span>
+      </div>
+    </div>
+  
+    <div class="toast" *ngIf="showfailToast">
+      <div class="alert alert-error">
+        <span>error Deleting event</span>
+      </div>
+    </div> -->

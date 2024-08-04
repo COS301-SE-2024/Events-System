@@ -7,7 +7,6 @@ import {SocialClubCardComponent} from 'src/Components/SocialClubCard/socialClubC
 import { ChangeDetectorRef } from '@angular/core';
 import { ViewChild, ElementRef } from '@angular/core';
 import { HomeUpcomingSkeletonComponent } from 'src/Components/HomeUpcomingSkeleton/HomeUpcomingSkeleton.component';
-// import { NotificationComponent } from 'src/Components/Notification/notification.component';
 import { WebSocketService } from 'src/app/websocket.service';
 import { NotificationService } from 'src/app/notification.service';
 const myCredentials = {

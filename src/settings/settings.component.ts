@@ -80,7 +80,7 @@ export class SettingsComponent implements OnInit {
 
   async uploadFileToContentful(file: File) {
     const client = createClient({
-      accessToken: 'CMA TOKEN',
+      accessToken: 'CMA_TOKEN',
     });
 
     const space = await client.getSpace('ox5lffnpftbk');
