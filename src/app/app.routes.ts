@@ -13,6 +13,8 @@ import { UpdateEventComponent } from 'src/UpdateEvent/UpdateEvent.component';
 import { DeleteEventComponent } from 'src/DeleteEvent/DeleteEvent.component';
 import { HelpComponent } from 'src/Help/Help.component';
 import { SocialClubComponent } from 'src/socialClub/socialClub.component';
+import { NotificationsComponent } from 'src/notifications/notifications.component';
+import { NotifPopupComponent } from 'src/notif-popup/notif-popup.component';
 import { SeriesCenterComponent } from 'src/seriesCenter/seriesCenter.component';
 import { MyseriesComponent } from 'src/myseries/myseries.component';
 import { CreateSeriesComponent } from 'src/CreateSeries/CreateSeries.component';
@@ -33,12 +35,13 @@ export const appRoutes: Route[] = [
   { path: 'deleteevent/:id', component: DeleteEventComponent },
   { path: 'socialclub/:id', component: SocialClubComponent},
   { path: 'help', component: HelpComponent},
+  { path: 'notifications', component: NotificationsComponent},
+  { path: 'notif-popup', component: NotifPopupComponent}
   { path: 'seriescenter', component: SeriesCenterComponent},
   { path: 'myseries', component: MyseriesComponent},
   { path: 'updateseries/:id', component: UpdateSeriesComponent },
   { path: 'deleteseries/:id', component: DeleteSeriesComponent },
   { path: 'createseries', component: CreateSeriesComponent },
   { path: 'series/:id', component: SeriesComponent },
-
   // { path: 'home', component: SettingsComponent },
 ];

@@ -56,7 +56,10 @@ public class SecurityConfiguration {
             "/api/event-rsvps/**", // Ensure all event-rsvp-related endpoints are accessible
             "/api/employees/**",   // Ensure all employee-related endpoints are accessible
             "/api/socialclubs/**", // Ensure all social-club-related endpoints are accessible
-            "https://events-system.org/events"
+            "/api/notifications/**", // Ensure all notification-related endpoints are accessible
+            "https://events-system.org/events",
+            "/socket/**",
+            "/notify"
     };
 
     private final JwtAuthenticationFilter jwtAuthFilter;
@@ -70,7 +73,6 @@ public class SecurityConfiguration {
                 .cors(corsConfigurer -> {
                 CorsConfigurationSource source = request -> {
                     CorsConfiguration config = new CorsConfiguration();
-                    //config.setAllowedOrigins(List.of("http://localhost:4200", "https://events-system.org"));
                     config.setAllowedOriginPatterns(List.of("http://*", "https://*"));
                     config.setAllowedMethods(List.of("*"));
                     config.setAllowedHeaders(List.of("*"));
