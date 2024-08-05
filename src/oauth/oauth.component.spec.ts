@@ -13,16 +13,16 @@ class MockEventComponent {}
 @Component({
   template: '<app-mock-app-oauth></app-mock-app-oauth>',
 })
-class TestOauthComponent {}
+class TestHostComponent {}
 
 describe('OauthComponent', () => {
-  let component: TestOauthComponent;
-  let fixture: ComponentFixture<OauthComponent>;
+  let component: TestHostComponent;
+  let fixture: ComponentFixture<TestHostComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [OauthComponent],
-      declarations: [TestOauthComponent, MockEventComponent],
+      declarations: [TestHostComponent, MockEventComponent],
       providers: [
         {
           provide: ActivatedRoute,
