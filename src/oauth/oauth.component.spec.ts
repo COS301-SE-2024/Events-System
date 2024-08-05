@@ -5,13 +5,13 @@ import { of } from 'rxjs';
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-mock-app-event',
+  selector: 'app-mock-app-oauth',
   template: '',
 })
 class MockEventComponent {}
 
 @Component({
-  template: '<app-mock-app-event></app-mock-app-event>',
+  template: '<app-mock-app-oauth></app-mock-app-oauth>',
 })
 class TestOauthComponent {}
 
