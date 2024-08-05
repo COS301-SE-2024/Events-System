@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {SearchEventCardComponent} from 'src/Components/SearchEventCard/searchEventCard.component';
 import {SearchHostCardComponent } from 'src/Components/searchHostCard/searchHostCard.component';
+import {SearchSocialClubCardComponent} from 'src/Components/SearchSocialClubCard/searchSocialClubCard.component';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -10,7 +11,7 @@ import { filter } from 'rxjs';
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [CommonModule, SearchEventCardComponent, SearchHostCardComponent, RouterModule, FormsModule],
+  imports: [CommonModule, SearchEventCardComponent, SearchHostCardComponent, RouterModule, FormsModule, SearchSocialClubCardComponent],
   templateUrl: './search.component.html',
   styleUrl: './search.component.css',
 })

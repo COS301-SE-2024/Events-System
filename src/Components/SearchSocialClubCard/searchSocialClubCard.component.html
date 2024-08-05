@@ -1,7 +1,65 @@
-<div routerLink class="w-full h-full flex flex-col items-center justify-center">
+<!-- <div routerLink class="w-full h-full flex flex-col items-center justify-center">
     <div class="socialClubCircle gradient-border border-4 w-48 h-44 box-decoration-slice bg-gradient-to-r from-accent to-secondary bg-green-700">
       <div class="size-full ">
         <img class="size-full rounded-full" src="assets/pexels-rahulp9800-1652361.jpg" alt="Social club image" />
       </div>
     </div>
+</div> -->
+
+<div class="card lg:card-side bg-gradient-to-r from-accent to-primary shadow-xl">
+  <img class="md:w-96 sm:rounded-l-2xl" src="assets/pexels-rahulp9800-1652361.jpg" alt="Social Club profile" /> 
+  <!-- src={{imageSource}} -->
+      
+  <div class="card-body">
+    <div class="flex flex-1 flex-col justify-center text-white">
+      <p class="font-karla font-bold text-xl mb-5"> Games On</p>
+      <!-- {{socialClubName}} -->
+      <p class="font-roboto text-sm font-normal mb-1.5">Connect, compete, and collaborate through regular events, tournaments, and social gatherings. </p>
+      <!-- {{socialClubDescription}} -->
+     
+      <div class="flex gap-3 p-3 flex-wrap ">
+        <!-- <app-tag></app-tag> -->
+      </div>
+    </div>
+      
+    <div class="card-actions justify-end">
+      <button  class="font-roboto cursor-pointer flex h-8 shrink-0 items-center justify-center font-semibold text-white text-sm border-none rounded-xl bg-gradient-to-r from-neutral to-secondary pl-6 pr-7 transition duration-200 hover:bg-gradient-to-r hover:from-neutral hover:to-neutral focus:outline-none disabled:opacity-30 disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80"> 
+        Join Club
+      </button>
+      <button class="font-roboto cursor-pointer flex h-8 shrink-0 items-center justify-center font-semibold text-white text-sm border-none rounded-xl bg-gradient-to-r from-neutral to-secondary pl-4 pr-4 transition duration-200 hover:bg-gradient-to-r hover:from-accent hover:to-accent focus:outline-none disabled:opacity-30 disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80"> 
+        <!-- *ngIf="hasUserRSVPd"  @buttonFade (click)="rsvpToEvent() -->
+        Leave Club
+      </button>
+    </div>
+  </div>
 </div>
+
+<!-- <div class="toast " *ngIf="isAPILoading">
+  <div class="alert alert-info flex justify-center bg-transparent border-none">
+      <span class="loading loading-dots loading-md"></span>
+  </div>
+</div>
+          
+<div class="toast" *ngIf="showrsvpsuccessToast">
+  <div class="alert alert-success">
+    <span>Succesfully Booked</span>
+  </div>
+</div>
+
+<div class="toast" *ngIf="showrsvpfailToast">
+  <div class="alert alert-error">
+    <span>Error Booking for event</span>
+  </div>
+</div>
+
+<div class="toast" *ngIf="showunrsvpsuccessToast">
+  <div class="alert alert-success">
+    <span>Succesfully removed Booking</span>
+  </div>
+</div>
+  
+<div class="toast" *ngIf="showunrsvpfailToast">
+  <div class="alert alert-error">
+    <span>Error Removing Booking for event</span>
+  </div>
+</div> -->
