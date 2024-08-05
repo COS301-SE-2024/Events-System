@@ -124,7 +124,7 @@
             <button class="btn lg:ml-8" [ngClass]="{'btn-outline': isGlutenFreeSelected}" (click)="toggleGlutenFree()">Gluten-free</button>
             </div>
           <div class="flex justify-between mt-4">
-            <button class="btn btn-outline btn-warning">back</button>
+            <button class="btn btn-outline btn-warning" (click)="goBack()">back</button>
             <button (click)="presubmit()" class="btn btn-success">Update event</button>
           </div>
           

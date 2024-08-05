@@ -11,16 +11,67 @@
             <div class="label mt-4 flex justify-center">
               <span class="label-text">Title</span>
             </div>
-            <input  #nameInput type="text" placeholder="Type here" class="input input-bordered w-full max-w-xl text-lg h-12"  oninput="sessionStorage.setItem('Name', this.value)"/>
+            <input  #snameInput type="text" placeholder="Type here" class="input input-bordered w-full max-w-xl text-lg h-12"  oninput="sessionStorage.setItem('Name', this.value)"/>
           </div>
   
           <div class="label mt-4 flex justify-center">
             <span class="label-text">Description</span>
           </div>
-          <textarea  #descriptionInput class="textarea textarea-bordered w-full h-44" placeholder="Bio" oninput="sessionStorage.setItem('Description', this.value)"></textarea>    
-
+          <textarea  #sdescriptionInput class="textarea textarea-bordered w-full h-44" placeholder="Bio" oninput="sessionStorage.setItem('Description', this.value)"></textarea>    
+            
+          <div class="label mt-4 flex justify-center">
+            <span class="label-text">Events</span>
+          </div>  
+          <!-- events table -->
+            <div class="overflow-x-auto">
+              <table class="table">
+                <!-- head -->
+                <thead>
+                  <tr>
+                    <th>
+                      <label>
+                        <input type="checkbox" class="checkbox checkbox-accent" [checked]="allEventsSelected" (change)="onSelectAllChange($event)" />
+                      </label>
+                    </th>
+                    <th>Name</th>
+                    <th>Social club</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let event of events" (click)="onRowClick(event.eventId)" class="cursor-pointer hover:bg-neutral transition-colors duration-400">
+                    <th>
+                      <label>
+                        <input type="checkbox" class="checkbox  checkbox-accent" [checked]="isEventSelected(event.eventId)" (change)="onEventSelectionChange($event, event.eventId)" />
+                      </label>
+                    </th>
+                    <td>
+                      <div class="flex items-center gap-3">
+                        <div>
+                          <div class="font-bold">{{ event.title }}</div>
+                          <div class="text-sm opacity-50">{{ event.location }}</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>{{ event.socialClubName }}</td>
+                    <th>
+                      <button class="btn btn-ghost btn-xs" [routerLink]="['/event', event.eventId]" (click)="$event.stopPropagation()">details</button>
+                    </th>
+                  </tr>
+                </tbody>
+                <!-- foot -->
+                <tfoot>
+                  <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Social club</th>
+                    <th></th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
           <div class="flex justify-between mt-4">
-            <button class="btn btn-outline btn-warning">back</button>
+            <button class="btn btn-outline btn-warning" (click)="goBack()">back</button>
             <button (click)="presubmit()" class="btn btn-success">Update Series</button>
           </div>
           
@@ -36,13 +87,13 @@
 
     <div class="toast" *ngIf="showsuccessToast">
       <div class="alert alert-success">
-        <span>Event succesfully updated Redirecting...</span>
+        <span>Series succesfully updated Redirecting...</span>
       </div>
     </div>
   
     <div class="toast" *ngIf="showfailToast">
       <div class="alert alert-error">
-        <span>error updating event</span>
+        <span>error updating series</span>
       </div>
     </div>
     <!-- <button (click)="previousStep()" class="btn btn-warning" [disabled]="currentStep === 0">Back</button>

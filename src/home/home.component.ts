@@ -137,10 +137,10 @@ notify() {
 }
   ngOnInit() {
 
-    this.webSocketService.connect();
-    this.webSocketService.notifications.subscribe((message:any) => {
-      this.showToast(message);
-    });
+    // this.webSocketService.connect();
+    // this.webSocketService.notifications.subscribe((message:any) => {
+    //   this.showToast(message);
+    // });
     const employeeId = Number(localStorage.getItem('ID')); // Assuming the employeeId is stored in local storage
 
     if (!employeeId) {

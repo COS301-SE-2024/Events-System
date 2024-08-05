@@ -36,7 +36,7 @@ export const appRoutes: Route[] = [
   { path: 'socialclub/:id', component: SocialClubComponent},
   { path: 'help', component: HelpComponent},
   { path: 'notifications', component: NotificationsComponent},
-  { path: 'notif-popup', component: NotifPopupComponent}
+  { path: 'notif-popup', component: NotifPopupComponent},
   { path: 'seriescenter', component: SeriesCenterComponent},
   { path: 'myseries', component: MyseriesComponent},
   { path: 'updateseries/:id', component: UpdateSeriesComponent },

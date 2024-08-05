@@ -5,9 +5,10 @@
         </button>
     </div>
     <div class="mt-4">
-        <app-myseriescard></app-myseriescard>
-        <app-myseriescard></app-myseriescard>
-        <app-myseriescard></app-myseriescard>
+        <app-myseriescard
+        *ngFor="let serie of series"
+        [seriesId]="serie.seriesId"
+        [name]="serie.name"></app-myseriescard>
     </div>
 </div>
 

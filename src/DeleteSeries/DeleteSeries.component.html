@@ -10,7 +10,7 @@
 
           <div class="">
             <div class="label mt-4 flex justify-center">
-              <span class="label-text text-lg">Enter the name of the Series: <span class="text-accent">{{myevent.title}}</span></span>
+              <span class="label-text text-lg">Enter the name of the Series: <span class="text-accent">{{myseries.name}}</span></span>
             </div>
             <input  #nameInput type="text" placeholder="Type here" class="input input-bordered w-full max-w-xl text-lg h-12" required/>
           </div>
@@ -30,13 +30,13 @@
 
     <div class="toast" *ngIf="showsuccessToast">
       <div class="alert alert-success">
-        <span>Event succesfully Deleted Redirecting...</span>
+        <span>Series succesfully Deleted Redirecting...</span>
       </div>
     </div>
   
     <div class="toast" *ngIf="showfailToast">
       <div class="alert alert-error">
-        <span>error Deleting event</span>
+        <span>error Deleting series</span>
       </div>
     </div>
     <!-- <button (click)="previousStep()" class="btn btn-warning" [disabled]="currentStep === 0">Back</button>

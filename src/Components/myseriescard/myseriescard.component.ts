@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, ActivatedRoute } from '@angular/router';
 
@@ -11,5 +11,7 @@ import { RouterModule, ActivatedRoute } from '@angular/router';
   styleUrl: './myseriescard.component.css',
 })
 export class MyseriescardComponent {
+  @Input() seriesId: string | undefined;
+  @Input() name: string | undefined;
 
 }

@@ -1,10 +1,10 @@
 
 <div role="alert" class="alert lg:flex justify-between hidden">
-    <span>Agriculture Series</span>
+    <span>{{name}}</span>
     <div>
-        <button class="btn btn-outline btn-primary" [routerLink]="['/series', 1]">More details</button>
-        <button class="btn btn-outline btn-primary" [routerLink]="['/updateseries', 1]" >Edit</button>
-        <button class="btn btn-outline btn-primary" [routerLink]="['/deleteseries', 1]" >delete</button>
+        <button class="btn btn-outline btn-primary" [routerLink]="['/series', seriesId]">More details</button>
+        <button class="btn btn-outline btn-primary" [routerLink]="['/updateseries', seriesId]" >Edit</button>
+        <button class="btn btn-outline btn-primary" [routerLink]="['/deleteseries', seriesId]" >delete</button>
     </div>
 </div>
 
@@ -12,13 +12,13 @@
     <div class="collapse collapse-plus bg-base-200">
       <input type="radio" name="my-accordion-3" checked="checked" /> 
       <div class="collapse-title text-xl font-medium">
-        Agriculture Series
+        {{name}}
       </div>
       <div class="collapse-content"> 
         <div>
-            <button class="btn btn-outline btn-primary" [routerLink]="['/series', 1]">More details</button>
-            <button class="btn btn-outline btn-primary" [routerLink]="['/updateseries', 1]">Edit</button>
-            <button class="btn btn-outline btn-primary" [routerLink]="['/deleteseries', 1]" >delete</button>
+            <button class="btn btn-outline btn-primary" [routerLink]="['/series', seriesId]">More details</button>
+            <button class="btn btn-outline btn-primary" [routerLink]="['/updateseries', seriesId]">Edit</button>
+            <button class="btn btn-outline btn-primary" [routerLink]="['/deleteseries', seriesId]" >delete</button>
           </div>
       </div>
     </div>

@@ -57,6 +57,8 @@ public class SecurityConfiguration {
             "/api/employees/**",   // Ensure all employee-related endpoints are accessible
             "/api/socialclubs/**", // Ensure all social-club-related endpoints are accessible
             "/api/notifications/**", // Ensure all notification-related endpoints are accessible
+            "/api/eventseries/**", // Ensure all event-series-related endpoints are accessible
+            "/api/eventseriessubscriptions/**", // Ensure all event-series-subscription-related endpoints are accessible
             "https://events-system.org/events",
             "/socket/**",
             "/notify"
