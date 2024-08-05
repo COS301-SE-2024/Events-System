@@ -1,7 +1,6 @@
 package com.back.demo.controller;
 
 import com.back.demo.model.Event;
-import com.back.demo.service.EventService;
 import com.back.demo.servicebus.EventServiceBus;
 
 import org.springframework.beans.factory.annotation.Autowired;
