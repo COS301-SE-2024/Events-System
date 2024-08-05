@@ -66,7 +66,8 @@ export class OauthComponent implements OnInit{
               .then(authData => authData.json())
               .then(authData => {
                 console.log("authData: " + authData.access_token);
-                document.cookie = `jwt=${authData.access_token}; path=/; expires=` + new Date(new Date().getTime() + 15 * 60 * 1000).toUTCString();
+                document.cookie = `jwt=${authData.access_token}; path=/; expires=` + new Date(new Date().getTime() + 15 * 60 * 1000).toUTCString();           // Expiry set to 15 minutes
+                document.cookie = `refresh=${authData.refresh_token}; path=/; expires=` + new Date(new Date().getTime() + 24* 60 * 60 * 1000).toUTCString();  // Expiry set to 24 hours
 
                 this.router.navigate(['']);
               })

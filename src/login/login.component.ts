@@ -179,7 +179,7 @@ export class LoginComponent {
       });*/
       const baseUrl = 'https://accounts.google.com/o/oauth2/auth/oauthchooseaccount';
       const responseType = 'response_type=code';
-      const clientId = 'client_id=';
+      const clientId = 'client_id=207465254722-7p4odomht6nnoc2cek9cb0j5jht2faos.apps.googleusercontent.com';
       const scope = 'scope=profile%20email';
       const redirectUri = 'redirect_uri=http%3A%2F%2Flocalhost%3A4200%2Foauth';
       const service = 'service=lso';
@@ -191,6 +191,6 @@ export class LoginComponent {
       console.log(decodeURIComponent(fullUrl));
       window.location.href = `${baseUrl}?${responseType}&${clientId}&${scope}&${redirectUri}&${service}&${o2v}&${ddm}&${flowName}`;
 
-
+      
   }
 }
