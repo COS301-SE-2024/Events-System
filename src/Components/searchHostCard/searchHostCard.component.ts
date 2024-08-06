@@ -13,6 +13,7 @@ export class SearchHostCardComponent {
   @Input() hostName: string | undefined;
   @Input() hostEmail: string | undefined;
   @Input() hostImage: string | undefined;
+  @Input() hostBio: string | undefined;
 
   getInitials(): string {
     if (!this.hostName) return ''; // Return empty string if hostName is undefined

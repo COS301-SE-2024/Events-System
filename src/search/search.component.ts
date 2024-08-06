@@ -75,7 +75,8 @@ export class SearchComponent {
     this.filteredHosts = this.hosts.filter(host =>
       host.firstName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
       host.lastName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-      host.email.toLowerCase().includes(this.searchTerm.toLowerCase())
+      host.email.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      host.bio.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
   }
 
