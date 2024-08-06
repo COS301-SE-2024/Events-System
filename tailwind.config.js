@@ -340,6 +340,21 @@ module.exports = {
         '"Courier New"',
         'monospace',
       ],
+      poppins:
+      [
+        'Poppins',
+        'sans-serif',
+      ],
+      karla:
+      [
+        'Karla',
+        'sans-serif',
+      ],
+      roboto:
+      [
+        'Roboto',
+        'sans-serif',
+      ],
     },
     fontSize: {
       xs: ['0.75rem', { lineHeight: '1rem' }],

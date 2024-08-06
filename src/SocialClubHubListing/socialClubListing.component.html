@@ -1,18 +1,21 @@
-<div class="relative flex h-screen flex-col bg-transparent overflow-hidden ">
-    <div class="layout-container flex h-full grow flex-col">
-      <div class="px-5 md:px-32 flex flex-1 justify-center py-5 h-full ">
-        <div class="layout-content-container flex flex-col max-w-[2010px] h-full flex-1">
+<div class="relative flex flex-col bg-base-100 overflow-hidden ">
+    <div class="layout-container flex grow flex-col">
+      <div class="px-5 md:px-96 flex flex-1 justify-center py-5 ">
+        <div class="layout-content-container flex flex-col max-w-[2010px] flex-1">
             <!--Page heading-->
-            <div class="flex items-center justify-between md:mx-10 mb-5">
-                <div class="text-white text-center font-bold text-2xl"><p>My Clubs</p></div>
-                <div>
-                    <button  class="btn" routerLink="/socialclubcreate">
+            <div class="flex items-center justify-center md:mx-10 mb-5">
+                <div class="font-poppins text-center text-secondary font-extrabold text-2xl md:text-3xl mb-2">
+                  <p>My Clubs</p>
+                </div>
+                
+                <div class="absolute right-0 mr-10">
+                    <button class="btn font-roboto" routerLink="/socialclubcreate">
                       <a >Create club</a>
                     </button>
                 </div>
             </div>
 
-              <div class="overflow-y-auto h-full flex flex-col gap-10">
+              <div class="h-full flex flex-col gap-10">
                 <app-social-club-listing-card
                 *ngFor="let club of clubs"
                 [clubID]="club.id"

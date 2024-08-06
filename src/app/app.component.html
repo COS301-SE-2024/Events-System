@@ -8,13 +8,11 @@
     </div>
   </div>
 
-  <div class="navbar-center">
-    <a routerLink="/" class="btn btn-ghost text-xl"  *ngIf="!isLoginRoute">Events System</a>
-  </div>
+  <!-- <div class="navbar-center">
+    <a routerLink="/" class="btn btn-ghost text-xl"  *ngIf="!isLoginRoute"></a>
+  </div> -->
 
-  <div class="navbar-end">
-    <button class="btn btn-ghost btn-circle hidden lg:block"  *ngIf="!isLoginRoute">
-      <i class="fa-solid fa-magnifying-glass"></i>    </button>
+  <div class="navbar-end gap-3">
     <div class="dropdown dropdown-end"  *ngIf="!isLoginRoute">
       <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar" >
         <div class="w-10 rounded-full">
@@ -31,7 +29,7 @@
         <li><a  routerLink="/login">Logout</a></li>
       </ul>
     </div>
-    <label class="swap swap-rotate">
+    <label class="swap swap-rotate mr-5">
       <!-- this hidden checkbox controls the state -->
       <input type="checkbox" class="theme-controller" value="corporate" />
       <!-- sun icon -->
