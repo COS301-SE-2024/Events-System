@@ -9,11 +9,11 @@ module.exports = {
     themes: [
       {
         entellect:{
-          "primary": "#341948", //purple
-          "secondary": "#170B3B", //dark blue
-          "accent": "#AB0552", //pink
-          "neutral": "#9388A2", //haze
-          "base-100": "#FDFDFD", //white
+          "primary": "#485970",
+          "secondary": "#767D75",
+          "accent": "#A0BE23",
+          "neutral": "#1c2340",
+          "base-100": "#12192D",
         },
         
       },

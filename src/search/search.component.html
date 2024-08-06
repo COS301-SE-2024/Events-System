@@ -1,9 +1,9 @@
-<div class="relative flex h-screen min-h-screen flex-col bg-gradient-to-b from-fuchsia-900 via-pink-700 to-pink-200 overflow-x-hidden">
+<div class="relative flex flex-col bg-base-100 overflow-x-hidden">
     <div class="layout-container flex h-full grow flex-col">
-      <div class="px-5 sm:px-32 flex flex-1 justify-center h-full">
+      <div class="px-5 sm:px-96 flex flex-1 justify-center h-full">
         <div class="layout-content-container flex flex-col max-w-[2010px] flex-1">
             <!--Page heading-->
-            <div class="font-poppins text-white text-center font-extrabold text-2xl md:text-3xl mb-2">
+            <div class="font-poppins text-center text-secondary font-extrabold text-2xl md:text-3xl mb-2">
               <p>Search and Explore</p>
             </div>
             
@@ -12,18 +12,17 @@
               <div class="px-4 py-3 md:w-[1010px] mb-5 flex gap-5 font-roboto">
                 <label class="flex flex-col min-w-40 h-12 w-full">
                   <div class="flex w-full flex-1 items-stretch rounded-xl h-full">
-                      <div class="text-white flex border-none bg-primary items-center justify-center pl-4 rounded-l-xl border-r-0">
+                      <div class=" text-[#93adc8] flex border-none bg-base-200 items-center justify-center pl-4 rounded-l-xl border-r-0">
                           <div class="fa-solid fa-magnifying-glass"></div>
                       </div>
-                      <input placeholder="Search..." (input)="updateSearchTerm($event)" class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-white focus:outline-0 focus:ring-0 border-none bg-gradient-to-r from-primary to-accent focus:border-none h-full placeholder:text-white px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal" />
+                      <input placeholder="Search for events, hosts and social clubs..." (input)="updateSearchTerm($event)" class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-white focus:outline-0 focus:ring-0 border-none bg-base-200 focus:border-none h-full placeholder:text-[#93adc8] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal" />
                   </div>
                 </label>
 
-                <div class="tooltip tooltip-bottom hover:bg-transparent" data-tip="How to search: 
-                                                                                Search events by: title, host, category,topic, location
-                                                                                Search colleagues by: name, email
-                                                                                Search social clubs by: name, category, creator
-                ">
+                <!-- <div data-tip="Search events by: title, host, category,topic, location
+                              Search colleagues by: name, email
+                              Search social clubs by: name, category, creator"
+                class="tooltip tooltip-bottom hover:bg-transparent data-tip:text-white">
                   <button class="btn bg-transparent text-white border-none">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -37,15 +36,16 @@
                       d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                   </button>
-                </div>
+                </div> -->
               </div>
             </div>
 
-            <div class="overflow-y-auto h-full flex flex-col gap-10">
+            <div class=" h-full flex flex-col gap-10">
               <app-search-event-card   
               *ngFor="let event of filteredEvents"
               [eventID]="event.eventId"
               [eventTitle]="event.title"
+              [eventDescription]="event.description"
               [startTime]="event.startTime"
               [endTime]="event.endTime"
               [startDate]="event.startDate"

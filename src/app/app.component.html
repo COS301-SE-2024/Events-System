@@ -1,8 +1,8 @@
-<div class="navbar bg-fuchsia-900">
+<div class="navbar bg-base-100">
   <div class="navbar-start">
 
 
-    <div class="dropdown text-white">
+    <div class="dropdown">
       <label for="my-drawer-2" class=""  *ngIf="!isLoginRoute">
           <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
             <i class="fa-solid fa-bars"></i>            </div>
@@ -22,7 +22,7 @@
           <img alt="Tailwind CSS Navbar component" [src]="employeeData?.employeePictureLink || 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg'" />
         </div>
       </div>
-      <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[10] p-2 shadow bg-primary text-white rounded-box w-52">
+      <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[10] p-2 shadow bg-base-100 rounded-box w-52">
         <li>
           <a routerLink="/profile" class="justify-between">
             Profile
@@ -33,7 +33,7 @@
       </ul>
     </div>
 
-    <label class="swap swap-rotate text-white mr-5">
+    <label class="swap swap-rotate mr-5">
       <!-- this hidden checkbox controls the state -->
       <input type="checkbox" class="theme-controller" value="corporate" />
       <!-- sun icon -->
@@ -45,7 +45,7 @@
   
 </div>
 
-<div class="drawer bg-base-100 " >
+<div class="drawer bg-base-100" >
   <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
   <div class="drawer-content ">
     <!-- Page content here -->
@@ -60,7 +60,7 @@
   </div> 
   <div class="drawer-side z-50">
     <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label> 
-    <ul class="menu p-4 w-80 min-h-full  text-white bg-gradient-to-b from-fuchsia-900 to-pink-200 ">
+    <ul class="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
       <!-- Sidebar content here -->
       <li><a  routerLink="/"><i class="fa-solid fa-house"></i>Home </a></li>
       <li>
