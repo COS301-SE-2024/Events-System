@@ -59,8 +59,10 @@ public class SecurityConfiguration {
             "/api/notifications/**", // Ensure all notification-related endpoints are accessible
             "/api/eventseries/**", // Ensure all event-series-related endpoints are accessible
             "/api/eventseriessubscriptions/**", // Ensure all event-series-subscription-related endpoints are accessible
+            "/api/reset/**", // Ensure all password-reset-related endpoints are accessible
             "https://events-system.org/events",
             "/socket/**",
+            "/api/reset/**",
             "/notify"
     };
 

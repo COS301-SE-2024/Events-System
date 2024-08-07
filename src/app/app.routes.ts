@@ -21,6 +21,7 @@ import { CreateSeriesComponent } from 'src/CreateSeries/CreateSeries.component';
 import { UpdateSeriesComponent } from 'src/UpdateSeries/UpdateSeries.component';
 import { DeleteSeriesComponent } from 'src/DeleteSeries/DeleteSeries.component';
 import { SeriesComponent } from 'src/series/series.component';
+import { ResetPasswordComponent } from 'src/reset-password/reset-password.component';
 export const appRoutes: Route[] = [
   { path: '', component: HomeComponent }, // Home page
   { path: 'login', component: LoginComponent },
@@ -43,5 +44,6 @@ export const appRoutes: Route[] = [
   { path: 'deleteseries/:id', component: DeleteSeriesComponent },
   { path: 'createseries', component: CreateSeriesComponent },
   { path: 'series/:id', component: SeriesComponent },
+  { path: 'reset-password/:token', component: ResetPasswordComponent },
   // { path: 'home', component: SettingsComponent },
 ];
