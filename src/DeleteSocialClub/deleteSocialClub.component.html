@@ -1,23 +1,23 @@
 <form (submit)="deleteClub()">
-    <div class="relative flex h-screen flex-col bg-transparent overflow-x-hidden">
+    <div class="relative flex h-screen flex-col bg-base-200 overflow-x-hidden">
         <div class="layout-container flex h-full grow flex-col">
           <div class=" px-5 md:px-32 flex flex-1 justify-center py-5 h-full">
             <div class="layout-content-container flex flex-col max-w-[2010px] flex-1 h-full">
                 <!--Page heading-->
-                <div class="flex items-center justify-between mb-6 md:mx-10">
-                    <div class="text-white text-center font-bold text-3xl"><p>Delete {{ clubName }}</p></div>
+                <div class="flex items-center justify-center mb-6 md:mx-10">
+                    <div class="font-poppins text-center text-secondary font-extrabold text-2xl md:text-3xl mb-2"><p>Delete {{ clubName }}</p></div>
                 </div>
     
-                <div class="flex flex-col items-center justify-center h-full">
+                <div class="flex flex-col items-center justify-center h-full bg-red-900">
                     <div>
                         [Delete animation]
                     </div>
     
-                    <p class="text-white text-base font-normal leading-normal pb-3 pt-1 px-4">
+                    <p class="text-base font-roboto font-semibold leading-normal pb-3 pt-1 px-4">
                         This action is permanent and can't be undone. All club members and event history will be deleted.
                     </p>
     
-                    <p class="text-white text-base text-center font-normal leading-normal pb-3 pt-1 px-4">
+                    <p class="text-base font-roboto text-center font-normal leading-normal pb-3 pt-1 px-4">
                         Are you sure you want to delete {{ clubName }}?
                     </p>
     
