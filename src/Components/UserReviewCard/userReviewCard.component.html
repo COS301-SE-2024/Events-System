@@ -8,22 +8,24 @@
             </div>
     
             <div class=" flex flex-col flex-1">
-                <p class="text-white-100 text-base font-medium leading-normal">Polina</p>
-                <p class="text-[#637588] text-sm font-normal leading-normal">May 16, 2023</p>
+                <p class="text-white-100 text-base font-medium leading-normal">{{ firstName }}{{ lastName ? ' ' + lastName : '' }}</p>
+                <p class="text-[#637588] text-sm font-normal leading-normal">{{ createdAt | date:'MMMM d, yyyy' }}</p>
             </div>
         </div>
 
         <div class="rating rating-md gap-0.5">
-            <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-700" />
-            <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-700" checked="checked" />
-            <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-700" />
-            <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-700" />
-            <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-700" />
+            <ng-container *ngFor="let star of getStars(); let i = index">
+                <input 
+                  type="radio" 
+                  [name]="'rating-' + employeeId" 
+                  class="mask mask-star-2 bg-green-700" 
+                  [checked]="rating && rating >= star" 
+                />
+              </ng-container>
         </div>
        
         <p class="text-white-100 text-base font-normal leading-normal">
-            One of the best I've attended in years! The atmosphere was electric, and the competition was fierce. 
-            Highly recommend attending future events by Henry!
+            {{ comments }}
         </p>
     </div>
 </div>

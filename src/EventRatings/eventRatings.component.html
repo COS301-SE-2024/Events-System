@@ -19,58 +19,72 @@
 
                 <div class="flex flex-wrap gap-x-8 gap-y-6 p-4 ">
                     <div class="flex flex-col gap-2">
-                        <p class="text-green-700 text-4xl font-black leading-tight tracking-[-0.033em]">4.3</p>
+                        <p class="text-green-700 text-4xl font-black leading-tight tracking-[-0.033em]">{{ getAverageRating() | number:'1.1-1' }}</p>
 
                         <div class="rating rating-md gap-0.5">
-                            <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-700" />
-                            <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-700" checked="checked" />
-                            <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-700" />
-                            <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-700" />
-                            <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-700" />
+                            <ng-container *ngFor="let star of getStars(); let i = index">
+                                <input 
+                                  type="radio" 
+                                  [name]="'getAverageRating()-' + 1" 
+                                  class="mask mask-star-2 bg-green-700" 
+                                  [checked]="getAverageRating() && getAverageRating() >= star" 
+                                />
+                              </ng-container>
                         </div>
                       
-                        <p class="text-white-100 text-base font-normal leading-normal">20 reviews</p>
+                        <p class="text-white-100 text-base font-normal leading-normal">{{ reviews.length }} reviews</p>
                     </div>
 
                     <div class="grid min-w-[200px] max-w-[400px] flex-1 grid-cols-[20px_1fr_40px] items-center gap-y-3">
                         <p class="text-white-100 text-sm font-normal leading-normal">5</p>
-                        <progress class="progress progress-success w-96" value="100" max="100"></progress>
-                        <p class="text-[#637588] text-sm font-normal leading-normal text-right">100%</p>
+                        <progress class="progress progress-success w-96" [value]="getPercentage(5)*100" max="100"></progress>
+                        <p class="text-[#637588] text-sm font-normal leading-normal text-right">{{ getPercentage(5) | percent:'1.0-0' }}</p>
 
                         <p class="text-white-100 text-sm font-normal leading-normal">4</p>
-                        <progress class="progress progress-success w-96" value="70" max="100"></progress>
-                        <p class="text-[#637588] text-sm font-normal leading-normal text-right">70%</p>
+                        <progress class="progress progress-success w-96" [value]="getPercentage(4)*100" max="100"></progress>
+                        <p class="text-[#637588] text-sm font-normal leading-normal text-right">{{ getPercentage(4) | percent:'1.0-0' }}</p>
 
                         <p class="text-white-100 text-sm font-normal leading-normal">3</p>
-                        <progress class="progress progress-success w-96" value="40" max="100"></progress>
-                        <p class="text-[#637588] text-sm font-normal leading-normal text-right">40%</p>
+                        <progress class="progress progress-success w-96" [value]="getPercentage(3)*100" max="100"></progress>
+                        <p class="text-[#637588] text-sm font-normal leading-normal text-right">{{ getPercentage(3) | percent:'1.0-0' }}</p>
 
                         <p class="text-white-100 text-sm font-normal leading-normal">2</p>
-                        <progress class="progress progress-success w-96" value="10" max="100"></progress>
-                        <p class="text-[#637588] text-sm font-normal leading-normal text-right">10%</p>
+                        <progress class="progress progress-success w-96" [value]="getPercentage(2)*100" max="100"></progress>
+                        <p class="text-[#637588] text-sm font-normal leading-normal text-right">{{ getPercentage(2) | percent:'1.0-0' }}</p>
 
                         <p class="text-white-100 text-sm font-normal leading-normal">1</p>
-                        <progress class="progress progress-success w-96" value="0" max="100"></progress>
-                        <p class="text-[#637588] text-sm font-normal leading-normal text-right">0%</p>
+                        <progress class="progress progress-success w-96" [value]="getPercentage(1)*100" max="100"></progress>
+                        <p class="text-[#637588] text-sm font-normal leading-normal text-right">{{ getPercentage(1) | percent:'1.0-0' }}</p>
                     </div>
                 </div>
 
                 <div class="overflow-y-auto">
+
+
+                    <app-user-review-card
+                    *ngFor="let review of employees"
+                    [employeeId]="review.employeeId"
+                    [firstName]="review.firstName"
+                    [lastName]="review.lastName"
+                    [comments]="review.comments"
+                    [rating]="review.rating"
+                    [createdAt]="review.createdAt">
+                    </app-user-review-card>
+                    <!-- <app-user-review-card></app-user-review-card>
                     <app-user-review-card></app-user-review-card>
                     <app-user-review-card></app-user-review-card>
                     <app-user-review-card></app-user-review-card>
                     <app-user-review-card></app-user-review-card>
                     <app-user-review-card></app-user-review-card>
                     <app-user-review-card></app-user-review-card>
-                    <app-user-review-card></app-user-review-card>
-                    <app-user-review-card></app-user-review-card>
-                    <app-user-review-card></app-user-review-card>
+                    <app-user-review-card></app-user-review-card> -->
                 </div>
           </div>
         </div>
     </div>
 </div>
 
+<form>
 <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
     <div class="modal-box">
         <div class="flex flex-col overflow-hidden" style='font-family: Manrope, "Noto Sans", sans-serif;'>
@@ -81,47 +95,49 @@
                 
                         <div class="flex flex-wrap gap-x-8 gap-y-6 p-6">
                             <div class="flex flex-col gap-2">
-                                <p class="text-green-700 text-4xl font-black leading-tight tracking-[-0.033em]">4.3</p>
+                                <p class="text-green-700 text-4xl font-black leading-tight tracking-[-0.033em]">{{ getAverageRating() | number:'1.1-1' }}</p>
                             
                                 <div class="rating rating-md gap-0.5">
-                                    <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-700" />
-                                    <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-700" checked="checked" />
-                                    <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-700" />
-                                    <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-700" />
-                                    <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-700" />
+                                    <ng-container *ngFor="let star of getStars(); let i = index">
+                                        <input 
+                                          type="radio" 
+                                          [name]="'getAverageRating()-' + 2" 
+                                          class="mask mask-star-2 bg-green-700" 
+                                          [checked]="getAverageRating() && getAverageRating() >= star" 
+                                        />
+                                      </ng-container>
                                 </div>
     
-                                <p class="text-white-100 text-base font-normal leading-normal">20 reviews</p>
+                                <p class="text-white-100 text-base font-normal leading-normal">{{ reviews.length }} reviews</p>
                             </div>
     
                         
                             <div class="grid min-w-[200px] max-w-[400px] flex-1 grid-cols-[20px_1fr_40px] items-center gap-y-3">
                                 <p class="text-white-100 text-sm font-normal leading-normal">5</p>
-                                <progress class="progress progress-success w-56" value="100" max="100"></progress>
-                                <p class="text-[#637588] text-sm font-normal leading-normal text-right">100%</p>
+                                <progress class="progress progress-success w-56" [value]="getPercentage(5)*100" max="100"></progress>
+                                <p class="text-[#637588] text-sm font-normal leading-normal text-right">{{ getPercentage(5) | percent:'1.0-0' }}</p>
         
                                 <p class="text-white-100 text-sm font-normal leading-normal">4</p>
-                                <progress class="progress progress-success w-56" value="70" max="100"></progress>
-                                <p class="text-[#637588] text-sm font-normal leading-normal text-right">70%</p>
+                                <progress class="progress progress-success w-56" [value]="getPercentage(4)*100" max="100"></progress>
+                                <p class="text-[#637588] text-sm font-normal leading-normal text-right">{{ getPercentage(4) | percent:'1.0-0' }}</p>
         
                                 <p class="text-white-100 text-sm font-normal leading-normal">3</p>
-                                <progress class="progress progress-success w-56" value="40" max="100"></progress>
-                                <p class="text-[#637588] text-sm font-normal leading-normal text-right">40%</p>
+                                <progress class="progress progress-success w-56" [value]="getPercentage(3)*100" max="100"></progress>
+                                <p class="text-[#637588] text-sm font-normal leading-normal text-right">{{ getPercentage(3) | percent:'1.0-0' }}</p>
         
                                 <p class="text-white-100 text-sm font-normal leading-normal">2</p>
-                                <progress class="progress progress-success w-56" value="10" max="100"></progress>
-                                <p class="text-[#637588] text-sm font-normal leading-normal text-right">10%</p>
+                                <progress class="progress progress-success w-56" [value]="getPercentage(2)*100" max="100"></progress>
+                                <p class="text-[#637588] text-sm font-normal leading-normal text-right">{{ getPercentage(2) | percent:'1.0-0' }}</p>
         
                                 <p class="text-white-100 text-sm font-normal leading-normal">1</p>
-                                <progress class="progress progress-success w-56" value="0" max="100"></progress>
-                                <p class="text-[#637588] text-sm font-normal leading-normal text-right">0%</p>
+                                <progress class="progress progress-success w-56" [value]="getPercentage(1)*100" max="100"></progress>
+                                <p class="text-[#637588] text-sm font-normal leading-normal text-right">{{ getPercentage(1) | percent:'1.0-0' }}</p>
                             </div>
                         </div>
-    
-                        <div class="flex gap-5 ml-7 mt-8">
-                            <h1 class="text-2xl">My Rate</h1>
-                            <div class="rating rating-md gap-0.5">
-                                <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-700" />
+    <div class="flex gap-5 ml-7 mt-8">
+        <h1 class="text-2xl">My Rating</h1>
+        <div class="rating rating-md gap-0.5">
+            <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-700" />
                                 <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-700" checked="checked" />
                                 <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-700" />
                                 <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-700" />
@@ -142,7 +158,7 @@
                         <div class="modal-action mt-16">
                             <form method="dialog" class="w-full">
                                 <!-- if there is a button in form, it will close the modal -->
-                                 <div class="flex gap-4 items-center justify-between">
+                                <div class="flex gap-4 items-center justify-between">
                                     <button class="btn w-40 ">Cancel</button>
                                     <button class="btn w-40 ">Submit feedback</button>
                                  </div>
@@ -152,5 +168,6 @@
                 </div>
             </div>
         </div>
-  </div>
+    </div>
 </dialog>
+</form>
