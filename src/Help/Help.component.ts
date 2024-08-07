@@ -9,8 +9,8 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './Help.component.css',
 })
 export class HelpComponent {
-  activeSection = 'gettingStarted'; // Default active section
-  selectedSection = 'gettingStarted'; // Initialize selectedSection
+  activeSection = 'faq'; // Default active section
+  selectedSection = 'faq'; // Initialize selectedSection
 
   // Function to change the active section
   setActiveSection(section: string) {
