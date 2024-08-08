@@ -10,7 +10,15 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./host-checkin.component.css'],
 })
 export class HostCheckinComponent implements OnInit {
-  rsvpedEmployees: Array<{ id: number, name: string, surname: string, email: string, showDetails?: boolean }> = [];
+  rsvpedEmployees: Array<{
+    id: number; // Added ID for profile routing
+    name: string;
+    surname: string;
+    email: string;
+    status: string;
+    lastUpdated: Date;
+    showDetails?: boolean;
+  }> = [];
   isDesktop = true;
 
   constructor() {}
@@ -18,11 +26,32 @@ export class HostCheckinComponent implements OnInit {
   ngOnInit(): void {
     this.updateViewMode();
 
-    // Simulated data with unique IDs
+    // Simulated data
     this.rsvpedEmployees = [
-      { id: 1, name: 'John', surname: 'Doe', email: 'john.doe@example.com' },
-      { id: 2, name: 'Jane', surname: 'Smith', email: 'jane.smith@example.com' },
-      { id: 3, name: 'Alice', surname: 'Johnson', email: 'alice.johnson@example.com' }
+      {
+        id: 1,
+        name: 'John',
+        surname: 'Doe',
+        email: 'john.doe@example.com',
+        status: 'RSVPd',
+        lastUpdated: new Date('2024-08-07T10:00:00'),
+      },
+      {
+        id: 2,
+        name: 'Jane',
+        surname: 'Smith',
+        email: 'jane.smith@example.com',
+        status: 'Checked-in',
+        lastUpdated: new Date('2024-08-06T15:30:00'),
+      },
+      {
+        id: 3,
+        name: 'Alice',
+        surname: 'Johnson',
+        email: 'alice.johnson@example.com',
+        status: 'Canceled',
+        lastUpdated: new Date('2024-08-05T09:00:00'),
+      },
     ];
   }
 
