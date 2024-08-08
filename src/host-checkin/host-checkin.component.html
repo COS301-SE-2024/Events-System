@@ -1,34 +1,30 @@
-<div class="container mx-auto p-6 bg-neutral-900 text-white min-h-screen flex items-center justify-center">
-  <!-- Main Content -->
-  <div class="relative w-full max-w-md p-6 bg-neutral-800 rounded-lg shadow-xl">
+<div class="relative w-full max-w-md p-6 bg-base-200 rounded-lg shadow-xl mx-auto mt-10">
     
-    <!-- Event Image -->
-    <div class="relative w-full h-64 bg-cover bg-center rounded-lg overflow-hidden mb-4" 
-         style="background-image: url('path_to_event_image');">
-    </div>
+  <!-- Event Image -->
+  <div class="relative w-full h-64 bg-cover bg-center rounded-lg overflow-hidden mb-4" 
+       style="background-image: url('https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=700&amp;h=400&amp;q=80');">
+  </div>
 
-    <!-- Event Title -->
-    <h2 class="text-2xl font-bold mb-2 text-center">Event Title</h2>
-    <p class="text-center text-sm text-gray-400 mb-4">Brief event description goes here.</p>
+  <!-- Event Title -->
+  <h2 class="text-2xl font-bold mb-2 text-center">Event Title</h2>
+  <p class="text-center text-sm text-gray-400 mb-4">Brief event description goes here.</p>
 
-    <!-- Check-In Button -->
-    <div class="flex justify-center items-center mb-4">
-      <button class="btn bg-accent hover:bg-accent-light text-white rounded-full px-6 py-3"
-              (click)="checkInHost()">
-        Check In
-      </button>
-    </div>
+  <!-- Check-In Button or Attendance Details -->
+  <div class="flex justify-center items-center mb-4">
+    <button *ngIf="!eventStarted" class="btn bg-accent hover:bg-accent-light text-white rounded-full px-6 py-3"
+            (click)="checkInHost()">
+      Check In
+    </button>
 
-    <!-- Attendance Details -->
-    <div class="p-4 bg-neutral-700 rounded-lg mb-4">
-      <p class="text-sm text-center">Number of attendees so far: {{ attendeesCount }}</p>
+    <div *ngIf="eventStarted" class="p-4 bg-neutral-700 rounded-lg mb-4 text-center">
+      <p class="text-sm">Number of attendees so far: {{ attendeesCount }}</p>
     </div>
+  </div>
 
-    <!-- Additional Information -->
-    <div class="flex justify-center items-center">
-      <a routerLink="/event-details" class="text-accent hover:text-accent-light text-sm">
-        View more information
-      </a>
-    </div>
+  <!-- Additional Information -->
+  <div class="flex justify-center items-center">
+    <a routerLink="/event-details" class="text-accent hover:text-accent-light text-sm">
+      View more information
+    </a>
   </div>
 </div>
