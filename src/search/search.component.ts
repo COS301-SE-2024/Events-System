@@ -20,12 +20,17 @@ export class SearchComponent {
   constructor(private router: Router) { }
   events: any[] = [];
   hosts: any[] = [];
+  socialclubs: any[] = [];
   searchTerm = '';
   filteredEvents: any[] = [];
   filteredHosts: any[] = [];
+  filteredSocialClubs: any[] = [];
   searchQuery = '';
   loading = true;
 
+  showEvents = true;
+  showHosts = true;
+  showSocialClubs = true;
   ngOnInit(): void {
     const employeeId = Number(localStorage.getItem('ID'));
 
@@ -33,7 +38,6 @@ export class SearchComponent {
       this.router.navigate(['/login']);
       return;
     }
-
 
     Promise.all([
       fetch('https://events-system-back.wn.r.appspot.com/api/events')
@@ -55,9 +59,18 @@ export class SearchComponent {
           return response.json();
         })
         .then(employees => {
-          // const managers = employees; // if you want to show all users
           const managers = employees.filter((employee: any) => employee.role === "MANAGER");
           this.hosts = managers;
+        }),
+      fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(socialclubs => {
+          this.socialclubs = socialclubs;
         })
     ]).then(() => {
       this.filterEvents();
@@ -66,6 +79,7 @@ export class SearchComponent {
       console.error('Error:', error);
       this.loading = false;
     });
+
   }
 
   filterEvents() {
@@ -74,12 +88,12 @@ export class SearchComponent {
     );
     this.filteredHosts = this.hosts.filter(host =>
       host.firstName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-      host.lastName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-      host.email.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-      host.bio.toLowerCase().includes(this.searchTerm.toLowerCase())
+      host.lastName.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+    this.filteredSocialClubs = this.socialclubs.filter(club =>
+      club.name.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
   }
-
   updateSearchTerm(event: Event) {
     const target = event.target as HTMLInputElement;
     this.searchTerm = target?.value || '';
@@ -88,5 +102,18 @@ export class SearchComponent {
 
   filterByTitle() {
     this.filterEvents();
+  }
+
+  onCheckboxChange(type: string, event: Event) {
+    const target = event.target as HTMLInputElement;
+    const isChecked = target.checked;
+
+    if (type === 'events') {
+      this.showEvents = isChecked;
+    } else if (type === 'hosts') {
+      this.showHosts = isChecked;
+    } else if (type === 'socialclubs') {
+      this.showSocialClubs = isChecked;
+    }
   }
 }

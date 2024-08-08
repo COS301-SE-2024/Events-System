@@ -1,11 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SearchSocialClubCardComponent } from 'src/Components/SearchSocialClubCard/searchSocialClubCard.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-search-host-card',
   standalone: true,
-  imports: [CommonModule, SearchSocialClubCardComponent],
+  imports: [CommonModule, SearchSocialClubCardComponent, RouterModule],
   templateUrl: './searchHostCard.component.html',
   styleUrl: './searchHostCard.component.css',
 })
@@ -14,6 +15,7 @@ export class SearchHostCardComponent {
   @Input() hostEmail: string | undefined;
   @Input() hostImage: string | undefined;
   @Input() hostBio: string | undefined;
+  @Input() hostId: string | undefined;
 
   getInitials(): string {
     if (!this.hostName) return ''; // Return empty string if hostName is undefined

@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TagComponent } from 'src/Components/SearchTag/tag.component';
 import { RouterModule } from '@angular/router';
-import { RandomHeaderService } from '../../app/random-header.service';
+import { RandomImageServiceService } from '../../app/random-image-service.service'; 
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
@@ -32,7 +32,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 })
 export class SearchEventCardComponent implements OnInit{
   imageSource: string;
-  constructor(private randomHeaderService: RandomHeaderService) { 
+  constructor(private randomImageService: RandomImageServiceService) { 
     this.imageSource = '';
   }
   isLoading = true;
@@ -60,26 +60,25 @@ export class SearchEventCardComponent implements OnInit{
   matchingRsvpId: number | null = null; // New property to store the matching rsvpId
 
   ngOnInit(): void {
-    this.imageSource = this.randomHeaderService.getRandomHeaderSource();
+    this.imageSource = this.randomImageService.getRandomImageSource();
     this.checkUserRSVP();
   }
   async checkUserRSVP(): Promise<void> {
     const employeeId = localStorage.getItem('ID');
     if (!employeeId) return;
-    console.log("employeeID", employeeId);
-    console.log("eventID", this.eventID);
-
+    // console.log("employeeID", employeeId);
+    // console.log("eventID", this.eventID);
     try {
       const response = await fetch('https://events-system-back.wn.r.appspot.com/api/event-rsvps');
       const rsvps = await response.json();
       
       const matchingRSVP = rsvps.find((rsvp: any) => parseInt(rsvp.eventId) === parseInt(this.eventID ?? '') && rsvp.employeeId === parseInt(employeeId));
-      this.hasUserRSVPd = !!matchingRSVP.rsvpId;
-
       if (matchingRSVP) {
+        this.hasUserRSVPd = !!matchingRSVP.rsvpId;
         this.matchingEventId = parseInt(matchingRSVP.eventId); // Store the matching eventId
         this.matchingRsvpId = parseInt(matchingRSVP.rsvpId); // Store the matching rsvpId
       } else {
+        this.hasUserRSVPd = false;
         this.matchingEventId = null; // Reset if no match is found
         this.matchingRsvpId = null; // Reset if no match is found
       }

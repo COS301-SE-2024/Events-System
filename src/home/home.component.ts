@@ -6,7 +6,7 @@ import {HomeFeaturedEventComponent} from 'src/Components/HomeFeaturedEvent/HomeF
 import {SocialClubCardComponent} from 'src/Components/SocialClubCard/socialClubCard.component'
 import { ChangeDetectorRef } from '@angular/core';
 import { ViewChild, ElementRef } from '@angular/core';
-import { Init } from 'v8';
+// import { Init } from 'v8';
 const myCredentials = {
   username: 'myUsername',
   password: 'myPassword'

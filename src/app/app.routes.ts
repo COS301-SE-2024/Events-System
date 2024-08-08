@@ -14,6 +14,7 @@ import { DeleteEventComponent } from 'src/DeleteEvent/DeleteEvent.component';
 import { HelpComponent } from 'src/Help/Help.component';
 import { SocialClubComponent } from 'src/socialClub/socialClub.component';
 import { SearchComponent } from 'src/search/search.component';  
+import { SearchProfileComponent } from 'src/searchProfile/searchProfile.component';
 
 export const appRoutes: Route[] = [
   { path: '', component: HomeComponent }, // Home page
@@ -29,6 +30,7 @@ export const appRoutes: Route[] = [
   { path: 'deleteevent/:id', component: DeleteEventComponent },
   { path: 'socialclub/:id', component: SocialClubComponent},
   { path: 'search', component: SearchComponent},
-  { path: 'help', component: HelpComponent}
+  { path: 'help', component: HelpComponent},
+  { path: 'searchProfile/:id', component: SearchProfileComponent}
   // { path: 'home', component: SettingsComponent },
 ];

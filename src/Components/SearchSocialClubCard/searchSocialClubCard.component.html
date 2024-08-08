@@ -7,14 +7,14 @@
 </div> -->
 
 <div class="card lg:card-side bg-base-200 shadow-xl">
-  <img class="rounded-t-2xl h-56 sm:h-64 md:w-96 sm:rounded-l-2xl sm:rounded-r-none" src="assets/pexels-rahulp9800-1652361.jpg" alt="Social Club profile" /> 
+  <img class="rounded-t-2xl h-56 sm:h-64 md:w-96 sm:rounded-l-2xl sm:rounded-r-none" src={{imageSource}}  alt="Social Club profile" /> 
   <!-- src={{imageSource}} -->
       
   <div class="card-body">
     <div class="flex flex-1 flex-col justify-center text-white">
-      <p class="font-karla text-accent font-bold text-xl mb-5"> Games On</p>
+      <p class="font-karla text-accent font-bold text-xl mb-5"> {{clubName}}</p>
       <!-- {{socialClubName}} -->
-      <p class="font-roboto text-primary text-sm font-normal mb-1.5">Connect, compete, and collaborate through regular events, tournaments, and social gatherings. </p>
+      <p class="font-roboto text-primary text-sm font-normal mb-1.5">{{clubDescription}} </p>
       <!-- {{socialClubDescription}} -->
      
       <div class="flex gap-3 p-3 flex-wrap ">
