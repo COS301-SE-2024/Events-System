@@ -19,6 +19,7 @@
           <th class="py-3 px-6 text-left">Name</th>
           <th class="py-3 px-6 text-left">Surname</th>
           <th class="py-3 px-6 text-left hidden md:table-cell">Email</th>
+          <th class="py-3 px-6 text-center hidden md:table-cell">Profile</th> <!-- New column header -->
           <th class="py-3 px-6 text-center hidden md:table-cell">Actions</th>
           <th class="py-3 px-6 text-center md:hidden">More</th>
         </tr>
@@ -29,6 +30,9 @@
             <td class="py-4 px-6">{{ employee.name }}</td>
             <td class="py-4 px-6">{{ employee.surname }}</td>
             <td class="py-4 px-6 hidden md:table-cell">{{ employee.email }}</td>
+            <td class="py-4 px-6 text-center hidden md:table-cell">
+              <a [routerLink]="['/profile', employee.id]" class="btn btn-info btn-sm">View Profile</a> 
+            </td>
             <td class="py-4 px-6 text-center hidden md:table-cell">
               <button (click)="removeEmployee(i)" class="btn btn-error btn-sm">Remove</button>
             </td>
@@ -45,7 +49,10 @@
             <td colspan="2" class="py-4 px-6">
               <div class="text-left">
                 <p><strong>Email:</strong> {{ employee.email }}</p>
-                <button (click)="removeEmployee(i)" class="btn btn-error btn-sm mt-2">Remove</button>
+                <div class="flex space-x-2">
+                  <a [routerLink]="['/profile', employee.id]" class="btn btn-info btn-sm">View Profile</a>
+                  <button (click)="removeEmployee(i)" class="btn btn-error btn-sm">Remove</button>
+                </div>
               </div>
             </td>
           </tr>

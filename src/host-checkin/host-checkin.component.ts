@@ -1,6 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-host-checkin',
@@ -9,9 +9,8 @@ import { RouterModule, Router } from '@angular/router';
   templateUrl: './host-checkin.component.html',
   styleUrls: ['./host-checkin.component.css'],
 })
-
 export class HostCheckinComponent implements OnInit {
-  rsvpedEmployees: Array<{ name: string, surname: string, email: string, showDetails?: boolean }> = [];
+  rsvpedEmployees: Array<{ id: number, name: string, surname: string, email: string, showDetails?: boolean }> = [];
   isDesktop = true;
 
   constructor() {}
@@ -19,11 +18,11 @@ export class HostCheckinComponent implements OnInit {
   ngOnInit(): void {
     this.updateViewMode();
 
-    // Simulated data
+    // Simulated data with unique IDs
     this.rsvpedEmployees = [
-      { name: 'John', surname: 'Doe', email: 'john.doe@example.com' },
-      { name: 'Jane', surname: 'Smith', email: 'jane.smith@example.com' },
-      { name: 'Alice', surname: 'Johnson', email: 'alice.johnson@example.com' }
+      { id: 1, name: 'John', surname: 'Doe', email: 'john.doe@example.com' },
+      { id: 2, name: 'Jane', surname: 'Smith', email: 'jane.smith@example.com' },
+      { id: 3, name: 'Alice', surname: 'Johnson', email: 'alice.johnson@example.com' }
     ];
   }
 
