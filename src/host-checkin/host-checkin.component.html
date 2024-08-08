@@ -1,6 +1,8 @@
 <div class="relative w-full max-w-md p-6 bg-neutral rounded-lg shadow-xl mx-auto mt-10">
   <!-- Heading -->
-  <h1 class="text-center text-2xl text-secondary mb-6">Are you ready to start the event...</h1>
+  <h1 class="text-center text-3xl font-bold text-secondary mb-6 -mx-6 relative z-10">
+    Are you ready to start the event...
+  </h1>
 
   <!-- Event Image -->
   <div class="relative w-64 h-64 bg-cover bg-center rounded-full overflow-hidden mb-6 mx-auto"
@@ -20,17 +22,17 @@
 
     <!-- Display Attendance Details Only After Check-In -->
     <div *ngIf="eventStarted" class="w-full">
-      <div class="p-1 bg-secondary rounded-lg mb-3 justify-middle text-center">
-        <p class="text-sm mb-4">Number of attendees so far: {{ attendeesCount }}</p>
+      <div class="p-4 bg-accent text-base-100 rounded-lg mb-3 flex items-center justify-center text-center">
+        <p class="text-sm mb-0">Number of attendees so far: {{ attendeesCount }}</p>
       </div>
 
       <!-- Attendees Lists -->
       <div class="flex justify-between space-x-4">
         <!-- List of Attendees -->
         <div class="w-1/2 p-4 bg-neutral rounded-lg">
-          <h3 class="text-xl font-bold text-primary mb-4">Checked In</h3>
+          <h3 class="text-lg font-bold  text-primary mb-4">Checked In</h3>
           <ul class="list-disc list-inside space-y-2">
-            <li *ngFor="let attendee of attendees" class="text-sm text-gray-700">
+            <li *ngFor="let attendee of attendees" class="text-sm text-secondary">
               {{ attendee.name }}
             </li>
           </ul>
@@ -38,9 +40,9 @@
 
         <!-- List of RSVPed but Not Attended -->
         <div class="w-1/2 p-4 bg-neutral rounded-lg">
-          <h3 class="text-xl font-bold text-primary mb-4">Needs to Check in</h3>
+          <h3 class="text-lg font-bold text-primary mb-4">Needs to Check in</h3>
           <ul class="list-disc list-inside space-y-2">
-            <li *ngFor="let rsvp of rsvpedNotAttended" class="text-sm text-gray-700">
+            <li *ngFor="let rsvp of rsvpedNotAttended" class="text-sm text-secondary">
               {{ rsvp.name }}
             </li>
           </ul>
