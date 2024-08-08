@@ -2,9 +2,10 @@
 <div role="alert" class="alert lg:flex justify-between hidden">
     <span>{{eventTitle}}</span>
     <div>
+        <button class="btn btn-outline btn-primary" [routerLink]="['/hostcheckin']">Check in</button>
         <button class="btn btn-outline btn-primary" [routerLink]="['/event', eventID]">More details</button>
         <button class="btn btn-outline btn-primary" [routerLink]="['/updateevent', eventID]" >Edit</button>
-        <button class="btn btn-outline btn-primary" [routerLink]="['/deleteevent', eventID]" >delete</button>
+        <button class="btn btn-outline btn-primary" [routerLink]="['/deleteevent', eventID]" >Delete</button>
     </div>
 </div>
 
@@ -16,6 +17,7 @@
       </div>
       <div class="collapse-content"> 
         <div>
+            <button class="btn btn-outline btn-primary" [routerLink]="['/hostcheckin']">Check in</button>
             <button class="btn btn-outline btn-primary" [routerLink]="['/event', eventID]">More details</button>
             <button class="btn btn-outline btn-primary" [routerLink]="['/updateevent', eventID]">Edit</button>
             <button class="btn btn-outline btn-primary" [routerLink]="['/deleteevent', eventID]" >delete</button>
