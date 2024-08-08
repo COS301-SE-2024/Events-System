@@ -11,45 +11,20 @@ import { RouterModule, Router } from '@angular/router';
 })
 
 export class HostCheckinComponent implements OnInit {
-  eventID = '123'; // Example event ID
-  eventStarted = false;
-  attendeesCount = 0;
-  attendees: Array<{ name: string }> = []; // Array to hold attendee names
-  rsvpedNotAttended: Array<{ name: string }> = []; // Array to hold RSVPed but not attended
-
-  // Simulated data
-  private simulatedAttendees: Array<{ name: string }> = [
-    { name: 'John Doe' },
-    { name: 'Jane Smith' },
-    { name: 'Alice Johnson' }
-  ];
-  
-  private simulatedRsvped: Array<{ name: string }> = [
-    { name: 'Mary Brown' },
-    { name: 'David Wilson' }
-  ];
+  rsvpedEmployees: Array<{ name: string, surname: string, email: string }> = [];
 
   constructor() {}
 
-  ngOnInit(): void {}
-
-  // Simulate the check-in process
-  checkInHost(): void {
-      this.eventStarted = true;
-      this.attendees = [...this.simulatedAttendees, { name: 'New Attendee' }];
-      this.attendeesCount = this.attendees.length;
-      this.rsvpedNotAttended = this.simulatedRsvped; // Initially set all RSVPed but not attended
-    
+  ngOnInit(): void {
+    // Simulated data
+    this.rsvpedEmployees = [
+      { name: 'John', surname: 'Doe', email: 'john.doe@example.com' },
+      { name: 'Jane', surname: 'Smith', email: 'jane.smith@example.com' },
+      { name: 'Alice', surname: 'Johnson', email: 'alice.johnson@example.com' }
+    ];
   }
 
-  // Simulate attendance mark
-  markAttendance(name: string): void {
-    // Remove from RSVPed but not attended list
-    this.rsvpedNotAttended = this.rsvpedNotAttended.filter(attendee => attendee.name !== name);
-    // Add to attendees list
-    if (!this.attendees.find(att => att.name === name)) {
-      this.attendees.push({ name });
-      this.attendeesCount = this.attendees.length;
-    }
+  removeEmployee(index: number): void {
+    this.rsvpedEmployees.splice(index, 1);
   }
 }

@@ -1,53 +1,26 @@
-<div class="relative w-full max-w-md p-6 bg-neutral rounded-lg shadow-xl mx-auto mt-10">
-  <!-- Heading -->
-  <h1 class="text-center text-3xl font-bold text-secondary mb-6 -mx-6 relative z-10">
-    Are you ready to start the event...
-  </h1>
+<div class="container mx-auto p-6 mt-10">
+  <h1 class="text-3xl font-bold text-primary mb-6 text-center">RSVPd Employees</h1>
 
-  <!-- Event Image -->
-  <div class="relative w-64 h-64 bg-cover bg-center rounded-full overflow-hidden mb-6 mx-auto"
-       style="background-image: url('https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=700&amp;h=400&amp;q=80');">
-  </div>
-
-  <!-- Event Title -->
-  <h2 class="text-2xl font-bold text-primary mb-4 text-center">Event Title</h2>
-
-  <!-- Check-In Button or Attendance Details -->
-  <div class="flex flex-col justify-center items-center mb-6">
-    <button *ngIf="!eventStarted" 
-            class="btn bg-accent hover:bg-accent-light text-white rounded-full px-6 py-3 mb-4"
-            (click)="checkInHost()">
-      Check In
-    </button>
-
-    <!-- Display Attendance Details Only After Check-In -->
-    <div *ngIf="eventStarted" class="w-full">
-      <div class="p-4 bg-accent text-base-100 rounded-lg mb-3 flex items-center justify-center text-center">
-        <p class="text-sm mb-0">Number of attendees so far: {{ attendeesCount }}</p>
-      </div>
-
-      <!-- Attendees Lists -->
-      <div class="flex justify-between space-x-4">
-        <!-- List of Attendees -->
-        <div class="w-1/2 p-4 bg-neutral rounded-lg">
-          <h3 class="text-lg font-bold  text-primary mb-4">Checked In</h3>
-          <ul class="list-disc list-inside space-y-2">
-            <li *ngFor="let attendee of attendees" class="text-sm text-secondary">
-              {{ attendee.name }}
-            </li>
-          </ul>
-        </div>
-
-        <!-- List of RSVPed but Not Attended -->
-        <div class="w-1/2 p-4 bg-neutral rounded-lg">
-          <h3 class="text-lg font-bold text-primary mb-4">Needs to Check in</h3>
-          <ul class="list-disc list-inside space-y-2">
-            <li *ngFor="let rsvp of rsvpedNotAttended" class="text-sm text-secondary">
-              {{ rsvp.name }}
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
+  <div class="overflow-x-auto">
+    <table class="min-w-full rounded-lg shadow-lg">
+      <thead class="bg-secondary text-neutral">
+        <tr>
+          <th class="py-3 px-6 text-left">Name</th>
+          <th class="py-3 px-6 text-left">Surname</th>
+          <th class="py-3 px-6 text-left">Email</th>
+          <th class="py-3 px-6 text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employee of rsvpedEmployees; let i = index" class="border-b border-secondary hover:bg-primary">
+          <td class="py-4 px-6">{{ employee.name }}</td>
+          <td class="py-4 px-6">{{ employee.surname }}</td>
+          <td class="py-4 px-6">{{ employee.email }}</td>
+          <td class="py-4 px-6 text-center">
+            <button (click)="removeEmployee(i)" class="btn btn-error btn-sm">Remove</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
