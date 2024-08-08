@@ -1,13 +1,13 @@
-<div class="relative w-full max-w-md p-6 bg-base-200 rounded-lg shadow-xl mx-auto mt-10">
-    
+<div class="relative w-full max-w-md p-6 bg-neutral rounded-lg shadow-xl mx-auto mt-10">
+  <h1 class="text-center text-2xl text-secondary mb-4">Are you ready to start the event...</h1>
   <!-- Event Image -->
-  <div class="relative w-full h-64 bg-cover bg-center rounded-lg overflow-hidden mb-4" 
-       style="background-image: url('https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=700&amp;h=400&amp;q=80');">
-  </div>
+  <div class="relative w-64 h-64 bg-cover bg-center rounded-full overflow-hidden mb-4 mx-auto"
+     style="background-image: url('https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=700&amp;h=400&amp;q=80');">
+</div>
+
 
   <!-- Event Title -->
-  <h2 class="text-2xl font-bold mb-2 text-center">Event Title</h2>
-  <p class="text-center text-sm text-gray-400 mb-4">Brief event description goes here.</p>
+  <h2 class="text-2xl font-bold text-primary mb-2 text-center">Event Title</h2>
 
   <!-- Check-In Button or Attendance Details -->
   <div class="flex justify-center items-center mb-4">
@@ -16,15 +16,8 @@
       Check In
     </button>
 
-    <div *ngIf="eventStarted" class="p-4 bg-neutral-700 rounded-lg mb-4 text-center">
+    <div *ngIf="eventStarted" class="p-4 bg-secondary rounded-lg mb-4 text-center">
       <p class="text-sm">Number of attendees so far: {{ attendeesCount }}</p>
     </div>
-  </div>
-
-  <!-- Additional Information -->
-  <div class="flex justify-center items-center">
-    <a routerLink="/event-details" class="text-accent hover:text-accent-light text-sm">
-      View more information
-    </a>
   </div>
 </div>
