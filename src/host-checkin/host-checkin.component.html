@@ -1,16 +1,34 @@
-<div class="container mx-auto p-6">
-  <h1 class="text-3xl font-bold mb-6">{{ eventTitle }}</h1>
+<div class="container mx-auto p-6 bg-neutral-900 text-white min-h-screen flex items-center justify-center">
+  <!-- Main Content -->
+  <div class="relative w-full max-w-md p-6 bg-neutral-800 rounded-lg shadow-xl">
+    
+    <!-- Event Image -->
+    <div class="relative w-full h-64 bg-cover bg-center rounded-lg overflow-hidden mb-4" 
+         style="background-image: url('path_to_event_image');">
+    </div>
 
-  <!-- Check-in button for host -->
-  <div *ngIf="!eventStarted" class="mb-6">
-    <button class="btn btn-primary" (click)="checkInHost()">
-      Check In to Start Event
-    </button>
-  </div>
+    <!-- Event Title -->
+    <h2 class="text-2xl font-bold mb-2 text-center">Event Title</h2>
+    <p class="text-center text-sm text-gray-400 mb-4">Brief event description goes here.</p>
 
-  <!-- Display the number of attendees after the event starts -->
-  <div *ngIf="eventStarted">
-    <h2 class="text-xl font-bold mb-4">Event is Live</h2>
-    <p class="text-lg">Number of Attendees: <span class="text-info">{{ attendeesCount }}</span></p>
+    <!-- Check-In Button -->
+    <div class="flex justify-center items-center mb-4">
+      <button class="btn bg-accent hover:bg-accent-light text-white rounded-full px-6 py-3"
+              (click)="checkInHost()">
+        Check In
+      </button>
+    </div>
+
+    <!-- Attendance Details -->
+    <div class="p-4 bg-neutral-700 rounded-lg mb-4">
+      <p class="text-sm text-center">Number of attendees so far: {{ attendeesCount }}</p>
+    </div>
+
+    <!-- Additional Information -->
+    <div class="flex justify-center items-center">
+      <a routerLink="/event-details" class="text-accent hover:text-accent-light text-sm">
+        View more information
+      </a>
+    </div>
   </div>
 </div>
