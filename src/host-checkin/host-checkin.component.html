@@ -36,7 +36,7 @@
       </thead>
       <tbody>
         <ng-container *ngFor="let employee of rsvpedEmployees; let i = index">
-          <tr [ngClass]="{'bg-neutral text-base-200': employee.status === 'Canceled'}" class="border-b border-secondary hover:bg-primary">
+          <tr [ngClass]="{'bg-base-200 text-secondary': employee.status === 'Canceled'}" class="border-b border-secondary hover:bg-base-200">
             <td class="py-3 px-3">{{ employee.name }}</td>
             <td class="py-3 px-3">{{ employee.surname }}</td>
             <td class="py-3 px-3 hidden md:table-cell">{{ employee.email }}</td>
@@ -45,7 +45,7 @@
             <td class="py-3 px-3 text-center hidden md:table-cell">
               <a [routerLink]="['/profile', employee.id]" 
                  class="btn btn-info btn-sm" 
-                 [ngClass]="{'bg-neutral text-base-200': employee.status === 'Canceled'}">View Profile</a>
+                 [ngClass]="{'bg-base-200 text-secondary': employee.status === 'Canceled'}">View Profile</a>
             </td>
             <td class="py-3 px-3 text-center hidden md:table-cell">
               <button [disabled]="employee.status === 'Canceled'" (click)="removeEmployee(i)" 
@@ -69,7 +69,7 @@
                 <div class="flex space-x-2">
                   <a [routerLink]="['/profile', employee.id]" 
                      class="btn btn-info btn-sm" 
-                     [ngClass]="{'bg-neutral text-base-200': employee.status === 'Canceled'}">View Profile</a>
+                     [ngClass]="{'bg-base-200 text-secondary': employee.status === 'Canceled'}">View Profile</a>
                   <button [disabled]="employee.status === 'Canceled'" 
                           (click)="removeEmployee(i)" 
                           class="btn btn-error btn-sm" 

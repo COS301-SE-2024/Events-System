@@ -11,7 +11,7 @@ import { RouterModule } from '@angular/router';
 })
 export class HostCheckinComponent implements OnInit {
   rsvpedEmployees: Array<{
-    id: number; // Added ID for profile routing
+    id: number; 
     name: string;
     surname: string;
     email: string;
@@ -26,7 +26,7 @@ export class HostCheckinComponent implements OnInit {
   ngOnInit(): void {
     this.updateViewMode();
 
-    // Simulated data
+    
     this.rsvpedEmployees = [
       {
         id: 1,
