@@ -7,19 +7,38 @@
         <tr>
           <th class="py-3 px-6 text-left">Name</th>
           <th class="py-3 px-6 text-left">Surname</th>
-          <th class="py-3 px-6 text-left">Email</th>
-          <th class="py-3 px-6 text-center">Actions</th>
+          <th class="py-3 px-6 text-left hidden md:table-cell">Email</th>
+          <th class="py-3 px-6 text-center hidden md:table-cell">Actions</th>
+          <th class="py-3 px-6 text-center md:hidden">More</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let employee of rsvpedEmployees; let i = index" class="border-b border-secondary hover:bg-primary">
-          <td class="py-4 px-6">{{ employee.name }}</td>
-          <td class="py-4 px-6">{{ employee.surname }}</td>
-          <td class="py-4 px-6">{{ employee.email }}</td>
-          <td class="py-4 px-6 text-center">
-            <button (click)="removeEmployee(i)" class="btn btn-error btn-sm">Remove</button>
-          </td>
-        </tr>
+        <ng-container *ngFor="let employee of rsvpedEmployees; let i = index">
+          <tr class="border-b border-secondary hover:bg-primary">
+            <td class="py-4 px-6">{{ employee.name }}</td>
+            <td class="py-4 px-6">{{ employee.surname }}</td>
+            <td class="py-4 px-6 hidden md:table-cell">{{ employee.email }}</td>
+            <td class="py-4 px-6 text-center hidden md:table-cell">
+              <button (click)="removeEmployee(i)" class="btn btn-error btn-sm">Remove</button>
+            </td>
+            <td class="py-4 px-6 text-center md:hidden">
+              <button (click)="toggleDetails(i)" class="btn btn-primary btn-sm">
+                <span *ngIf="!employee.showDetails">+</span>
+                <span *ngIf="employee.showDetails">-</span>
+              </button>
+            </td>
+          </tr>
+
+          <!-- Additional info for mobile view -->
+          <tr *ngIf="employee.showDetails && !isDesktop" class="border-b border-secondary md:hidden">
+            <td colspan="2" class="py-4 px-6">
+              <div class="text-left">
+                <p><strong>Email:</strong> {{ employee.email }}</p>
+                <button (click)="removeEmployee(i)" class="btn btn-error btn-sm mt-2">Remove</button>
+              </div>
+            </td>
+          </tr>
+        </ng-container>
       </tbody>
     </table>
   </div>
