@@ -1,16 +1,40 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { UpdateSocialClubComponent } from './updateSocialClub.component';
+import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { UpdateSocialClubComponent } from './updateSocialClub.component'; // Import UpdateSocialClubComponent
 
-describe('UpdateSocialClubComponent', () => {
-  let component: UpdateSocialClubComponent;
-  let fixture: ComponentFixture<UpdateSocialClubComponent>;
+// Mock component
+@Component({
+  selector: 'app-mock-update-social-club', // Change this to a unique selector
+  template: '',
+})
+class MockEventComponent {/*...*/}
+
+@Component({
+  template: '<app-mock-update-social-club></app-mock-update-social-club>', // Use the new selector
+})
+class TestHostComponent {/*...*/}
+
+describe('EventComponent', () => {
+  let component: TestHostComponent;
+  let fixture: ComponentFixture<TestHostComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UpdateSocialClubComponent],
+      imports: [UpdateSocialClubComponent], // Move EventComponent to imports
+      declarations: [TestHostComponent, MockEventComponent], // Remove EventComponent from declarations
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            params: of({ id: 'testId' }) // Add your own mock values here
+          }
+        }
+      ]
     }).compileComponents();
-
-    fixture = TestBed.createComponent(UpdateSocialClubComponent);
+  
+    fixture = TestBed.createComponent(TestHostComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
