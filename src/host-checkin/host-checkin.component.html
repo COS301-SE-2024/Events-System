@@ -1,0 +1,16 @@
+<div class="container mx-auto p-6">
+  <h1 class="text-3xl font-bold mb-6">{{ eventTitle }}</h1>
+
+  <!-- Check-in button for host -->
+  <div *ngIf="!eventStarted" class="mb-6">
+    <button class="btn btn-primary" (click)="checkInHost()">
+      Check In to Start Event
+    </button>
+  </div>
+
+  <!-- Display the number of attendees after the event starts -->
+  <div *ngIf="eventStarted">
+    <h2 class="text-xl font-bold mb-4">Event is Live</h2>
+    <p class="text-lg">Number of Attendees: <span class="text-info">{{ attendeesCount }}</span></p>
+  </div>
+</div>
