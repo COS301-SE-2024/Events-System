@@ -1,5 +1,16 @@
 <div class="container mx-auto p-6 mt-10">
-  <h1 class="text-3xl font-bold text-primary mb-6 text-center">RSVPd Employees</h1>
+  <div class="container mx-auto p-6 mt-10 relative">
+    <!-- Main Bubble Indicator for Total Attendees -->
+    <div class="absolute top-0 right-0 mt-4 mr-4">
+      <div class="bg-accent text-center text-white text-sm font-bold rounded-full h-20 w-20 flex items-center justify-center relative">
+        {{ rsvpedEmployees.length }} guests
+  
+        <div class="absolute top-0 right-0 bg-accent shadow-lg rounded-full h-8 w-8 flex items-center justify-center text-xs font-bold"></div>
+
+        <div class="absolute bottom-0 right-0 bg-accent shadow-lg rounded-full h-6 w-6 flex items-center justify-center text-xs font-bold"></div>
+      </div>
+    </div>
+  <h1 class="text-2xl md:text-center font-bold text-primary mb-6 text-left">RSVPd Employees</h1>
 
   <div class="overflow-x-auto">
     <table class="min-w-full rounded-lg shadow-lg">
