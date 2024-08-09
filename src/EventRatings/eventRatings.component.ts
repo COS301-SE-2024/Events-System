@@ -1,9 +1,9 @@
 import { Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import {UserReviewCardComponent} from 'src/Components/UserReviewCard/userReviewCard.component';
 import { response } from 'express';
-
+import { RandomHeaderService } from 'src/app/random-header.service';
 @Component({
   selector: 'app-event-ratings',
   standalone: true,
@@ -12,7 +12,11 @@ import { response } from 'express';
   styleUrl: './eventRatings.component.css',
 })
 export class EventRatingsComponent implements OnInit {
+  isLoading = true;
+  eventId = '';
+  imageSource: string;
   reviews: any[] = [];
+  event: any;
   employees: any[] = [];
   review = {
     employeeId: '',
@@ -24,13 +28,25 @@ export class EventRatingsComponent implements OnInit {
   }
   constructor(
     private router: Router,
+    private randomheaderservice: RandomHeaderService,
+    private route: ActivatedRoute
   )
-  {}
-
+  { 
+   this.imageSource = '';
+  }
   ngOnInit(): void {
+    this.imageSource = this.randomheaderservice.getRandomHeaderSource();
     this.checkCookies();
+    
+    this.route.params.subscribe(params => {
+      this.eventId = params['id'];
+      fetch('https://events-system-back.wn.r.appspot.com/api/events/' + this.eventId)
+      .then(response => response.json())
+      .then(data => {
+        this.event = data;
+      })
 
-    fetch('https://events-system-back.wn.r.appspot.com/api/feedback')
+      fetch('https://events-system-back.wn.r.appspot.com/api/feedback')
     .then(response => {
       return response.json();
     })
@@ -69,6 +85,8 @@ export class EventRatingsComponent implements OnInit {
       // Handle error, possibly set reviews to an empty array
       this.reviews = [];
     });
+    })
+    this.isLoading = false;
   }
 
   getPercentage(stars: number): number{

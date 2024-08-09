@@ -1,19 +1,19 @@
-<div class="hero h-80 min-w-dvw bg-pink-700" ></div> <!-- [style.background-image]="'url(' + imageSource + ')'" -->
+<div class="hero h-80 min-w-dvw bg-pink-700" [style.background-image]="'url(' + imageSource + ')'"></div> <!-- [style.background-image]="'url(' + imageSource + ')'" -->
 <button class="btn w-[50px] -mt-48 lg:ml-8 h-[30px] rounded-full z-40"><i class="fa-solid fa-arrow-left"></i></button> 
 <!-- (click)="goBack()" -->
 
-<div class="flex flex-col overflow-hidden" style='font-family: Manrope, "Noto Sans", sans-serif;'>
+<div *ngIf="!isLoading" class="flex flex-col overflow-hidden" style='font-family: Manrope, "Noto Sans", sans-serif;'>
     <div class="layout-container flex h-full grow flex-col">
         <div class="px-5 md:px-32 flex flex-1 justify-center h-full">
             <div class="layout-content-container flex flex-col max-w-[2010px] h-full flex-1">
                 <div class="flex lg:justify-between lg:flex-row flex-col w-full">
                     <div class="w-full">
                         <div class="flex justify-between w-full">
-                            <h1 class="text-6xl">Chess Tournament</h1>
+                            <h1 class="text-6xl">{{ event.title }}</h1>
                             <button class="btn" onclick="my_modal_5.showModal()">Write a review</button>
                         </div>
                         
-                        <h2 class="mt-4 text-xl text-secondary">Annual chess tournament for employees and their families</h2>
+                        <h2 class="mt-4 text-xl text-secondary">{{ event.description }} </h2>
                     </div>
                 </div>
 
@@ -27,7 +27,7 @@
                                   type="radio" 
                                   [name]="'getAverageRating()-' + 1" 
                                   class="mask mask-star-2 bg-green-700" 
-                                  [checked]="getAverageRating() && getAverageRating() >= star" 
+                                  [checked]="getAverageRating() && getAverageRating() >= star"  disabled
                                 />
                               </ng-container>
                         </div>
