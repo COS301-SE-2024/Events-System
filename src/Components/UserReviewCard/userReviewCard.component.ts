@@ -16,6 +16,7 @@ export class UserReviewCardComponent {
   @Input() comments: string | undefined;
   @Input() rating: number | undefined;
   @Input() createdAt: Date | undefined;
+  @Input() pictureLink: string | undefined;
 
   // Helper to create an array for the rating stars
   getStars(): number[] {

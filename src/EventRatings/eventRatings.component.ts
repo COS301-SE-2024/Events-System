@@ -116,6 +116,7 @@ export class EventRatingsComponent implements OnInit {
         .then(userData => {
           data[i].firstName = userData.firstName;
           data[i].lastName = userData.lastName;
+          data[i].employeePictureLink = userData.employeePictureLink;
           this.employees.push(data[i]);
         })
       }
