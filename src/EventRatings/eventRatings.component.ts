@@ -4,10 +4,11 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import {UserReviewCardComponent} from 'src/Components/UserReviewCard/userReviewCard.component';
 import { response } from 'express';
 import { RandomHeaderService } from 'src/app/random-header.service';
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-event-ratings',
   standalone: true,
-  imports: [CommonModule, UserReviewCardComponent, RouterModule],
+  imports: [CommonModule, UserReviewCardComponent, RouterModule, FormsModule],
   templateUrl: './eventRatings.component.html',
   styleUrl: './eventRatings.component.css',
 })
@@ -18,6 +19,9 @@ export class EventRatingsComponent implements OnInit {
   reviews: any[] = [];
   event: any;
   employees: any[] = [];
+  isAPILoading = false;
+  showsuccessToast = false;
+  showfailToast = false;
   review = {
     employeeId: '',
     firstName: '',
@@ -34,6 +38,50 @@ export class EventRatingsComponent implements OnInit {
   { 
    this.imageSource = '';
   }
+  submitFeedback(): void {
+    console.log('Rating:', this.rating);
+    console.log('Review:', this.review);
+
+    const review = {
+      eventId: Number(this.eventId),
+      employeeId: Number(localStorage.getItem('ID')),
+      rating: this.rating,
+      comments: this.review,
+    };
+    // Implement your logic to handle the form submission
+    fetch('https://events-system-back.wn.r.appspot.com/api/feedback', {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(review)
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Show the success toast
+        this.showsuccessToast = true;
+        this.isAPILoading = false;
+        sessionStorage.clear();
+        // Hide the toast after 5 seconds
+        setTimeout(() => {
+          this.showsuccessToast = false;
+        }, 5000);
+})
+    .catch((error) => {
+      this.showfailToast = true;
+      this.isAPILoading = false;
+
+      setTimeout(() => {
+        this.showfailToast = false;
+      }, 10000);
+      console.error('Error:', error);
+    });
+  }
+
+
+
+  rating = 0;
   ngOnInit(): void {
     this.imageSource = this.randomheaderservice.getRandomHeaderSource();
     this.checkCookies();
@@ -46,11 +94,12 @@ export class EventRatingsComponent implements OnInit {
         this.event = data;
       })
 
-      fetch('https://events-system-back.wn.r.appspot.com/api/feedback')
+      fetch('https://events-system-back.wn.r.appspot.com/api/feedback/event/' + this.eventId)
     .then(response => {
       return response.json();
     })
     .then(data => {
+      console.log(data);
       this.reviews = Array.isArray(data) ? data : [data];
       //console.log(data[0]);
 
