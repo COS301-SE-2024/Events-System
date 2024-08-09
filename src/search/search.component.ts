@@ -4,8 +4,6 @@ import {SearchEventCardComponent} from 'src/Components/SearchEventCard/searchEve
 import {SearchHostCardComponent } from 'src/Components/searchHostCard/searchHostCard.component';
 import {SearchSocialClubCardComponent} from 'src/Components/SearchSocialClubCard/searchSocialClubCard.component';
 import {GhostSearchEventCardComponent} from 'src/Components/GhostSearchEventCard/GhostSearchEventCard.component';
-import {GhostSearchHostCardComponent} from 'src/Components/GhostSearchHostCard/GhostSearchHostCard.component';
-import {GhostSearchClubCardComponent} from 'src/Components/GhostSearchClubCard/GhostSearchClubCard.component';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -14,7 +12,7 @@ import { filter } from 'rxjs';
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [CommonModule, SearchEventCardComponent, SearchHostCardComponent, RouterModule, FormsModule, SearchSocialClubCardComponent, GhostSearchEventCardComponent, GhostSearchHostCardComponent, GhostSearchClubCardComponent],
+  imports: [CommonModule, SearchEventCardComponent, SearchHostCardComponent, RouterModule, FormsModule, SearchSocialClubCardComponent, GhostSearchEventCardComponent],
   templateUrl: './search.component.html',
   styleUrl: './search.component.css',
 })
