@@ -29,6 +29,6 @@ export const appRoutes: Route[] = [
   { path: 'deleteevent/:id', component: DeleteEventComponent },
   { path: 'socialclub/:id', component: SocialClubComponent},
   { path: 'help', component: HelpComponent},
-  { path: 'feedbackandratings', component: EventRatingsComponent}
+  { path: 'feedbackandratings/:id', component: EventRatingsComponent}
   // { path: 'home', component: SettingsComponent },
 ];

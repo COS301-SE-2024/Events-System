@@ -2,7 +2,7 @@
 <button class="btn w-[50px] -mt-48 lg:ml-8 h-[30px] rounded-full z-40"><i class="fa-solid fa-arrow-left"></i></button> 
 <!-- (click)="goBack()" -->
 
-<div class="flex h-screen flex-col overflow-hidden" style='font-family: Manrope, "Noto Sans", sans-serif;'>
+<div class="flex flex-col overflow-hidden" style='font-family: Manrope, "Noto Sans", sans-serif;'>
     <div class="layout-container flex h-full grow flex-col">
         <div class="px-5 md:px-32 flex flex-1 justify-center h-full">
             <div class="layout-content-container flex flex-col max-w-[2010px] h-full flex-1">
@@ -59,8 +59,6 @@
                 </div>
 
                 <div class="overflow-y-auto">
-
-
                     <app-user-review-card
                     *ngFor="let review of employees"
                     [employeeId]="review.employeeId"
