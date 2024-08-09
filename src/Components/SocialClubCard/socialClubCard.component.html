@@ -1,14 +1,13 @@
-<div class="relative"  [routerLink]="['/socialclub', socialClubID]">
-  <img class="h-80 w-80 rounded-full cursor-pointer" src="assets/pexels-rahulp9800-1652361.jpg" alt="Pizza"/>
-  <!-- Overlay -->
-  <div class="absolute inset-0 bg-black opacity-50 h-80 w-80 rounded-full"></div>
-  <div class=" absolute inset-0 flex items-center justify-center">
-    <div class="text-center">
-      <h2 class="font-semibold text-white">{{socialClubName}}</h2>
-      <h2 class="text-white">{{socialClubCreator}}</h2>
-    </div>
-  </div>    
+<div class="relative group rounded-full overflow-hidden w-80 h-80 bg-cover bg-center text-white flex flex-col items-center justify-center"
+     [ngStyle]="{ 'background-image': 'url(assets/pexels-rahulp9800-1652361.jpg)' }">
+     <span class="text-center">Chess Tournament</span>
+     <span class="text-center">Ofentse Ramothibe</span>
+  <div class="absolute bottom-0 left-0 right-0 bg-black text-white flex flex-col items-center justify-center transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out h-full">
+    <h2 class="text-white text-center px-10">A club for sports lovers to play, watch, and discuss various sports activities. Regular events and tournaments are organized.</h2>
+    <div class="btn mt-5 w-1/2" [routerLink]="['/socialclub', socialClubID]">See more</div>
+  </div>
 </div>
+
 
     <!-- <div class="h-80 w-80 rounded-full relative flex items-center justify-center cursor-pointer" [routerLink]="['/socialclub', socialClubID]">    <div class="card w-full h-full bg-base-100 shadow-xl image-full rounded-full overflow-hidden">
       <figure class="absolute inset-0">

@@ -17,6 +17,7 @@ import { SocialClubListingComponent } from 'src/SocialClubHubListing/socialClubL
 import { SocialClubCreateComponent } from 'src/socialClubCreate/socialClubCreate.component';
 import {UpdateSocialClubComponent} from 'src/UpdateSocialClub/updateSocialClub.component';
 import {DeleteSocialClubComponent} from 'src/DeleteSocialClub/deleteSocialClub.component';
+import {SocialClubsComponent} from 'src/SocialClubs/SocialClubs.component';
 
 export const appRoutes: Route[] = [
   { path: '', component: HomeComponent }, // Home page
@@ -35,7 +36,7 @@ export const appRoutes: Route[] = [
   { path: 'socialclubcreate', component: SocialClubCreateComponent},
   { path: 'updatesocialclub/:id', component: UpdateSocialClubComponent},
   { path: 'deletesocialclub/:id', component: DeleteSocialClubComponent},
-  { path: 'help', component: HelpComponent}
-
+  { path: 'help', component: HelpComponent},
+  { path: 'socialclubs', component: SocialClubsComponent}
   // { path: 'home', component: SettingsComponent },
 ];
