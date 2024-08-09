@@ -6,6 +6,9 @@ import {HomeFeaturedEventComponent} from 'src/Components/HomeFeaturedEvent/HomeF
 import {SocialClubCardComponent} from 'src/Components/SocialClubCard/socialClubCard.component'
 import { ChangeDetectorRef } from '@angular/core';
 import { ViewChild, ElementRef } from '@angular/core';
+import { HomeUpcomingSkeletonComponent } from 'src/Components/HomeUpcomingSkeleton/HomeUpcomingSkeleton.component';
+import { WebSocketService } from 'src/app/websocket.service';
+import { NotificationService } from 'src/app/notification.service';
 const myCredentials = {
   username: 'myUsername',
   password: 'myPassword'
@@ -30,14 +33,40 @@ export interface Slide {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule, HomeEventCardComponent, SocialClubCardComponent, HomeFeaturedEventComponent],
+  imports: [CommonModule, RouterModule, HomeEventCardComponent, SocialClubCardComponent, HomeFeaturedEventComponent, HomeUpcomingSkeletonComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
+  providers: [WebSocketService],
 })
 export class HomeComponent implements OnInit {
-  constructor(private cdr: ChangeDetectorRef, private router: Router) { }
+  public notifications = 0;
+  @ViewChild('toastContainer', { static: true }) toastContainer!: ElementRef;
 
 
+
+  constructor(private cdr: ChangeDetectorRef, 
+    private router: Router,
+     private webSocketService: WebSocketService,
+      private notificationService: NotificationService) { 
+	// 	// Open connection with server socket
+  //   const stompClient = this.webSocketService.connect();
+  //   stompClient.connect({}, (frame : any) => {
+
+  // // Subscribe to notification topic
+  //       stompClient.subscribe('/topic/notification', notifications => {
+
+  //   // Update notifications attribute with the recent messsage sent from the server
+  //           this.notifications = JSON.parse(notifications.body).count;
+  //       })
+  //   });
+
+    }
+notify() {
+  this.notificationService.sendNotification(Number(localStorage.getItem('ID')), 93, "tesst", "title").subscribe(response => {
+    console.log(response); // Handle the response as needed
+  });
+
+}
   @Input() eventTitle: string | undefined;
   @Input() eventDescription: string | undefined;
   @Input() hostName: string | undefined;
@@ -71,7 +100,7 @@ export class HomeComponent implements OnInit {
   nextSlideIndex = '';
   previousSlideIndex = '';
 
-
+  index2 = 3;
   currentHomeSlideIndex = 0;
   previousHomeSlideIndex = '';
   nextHomeSlideIndex = '';
@@ -90,10 +119,29 @@ export class HomeComponent implements OnInit {
   @ViewChild('carousel2') carousel2!: ElementRef;
   @ViewChild('carousel3') carousel3!: ElementRef;
   rsvpdSlides: Slide[] = [];
-  ngOnInit() {
-    const employeeId = Number(localStorage.getItem('ID')); // Assuming the employeeId is stored in local storage
+  showToast(message: string) {
+      this.notificationService.notify();
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.innerHTML = `
+      <div class="alert alert-info">
+        <span>${message}</span>
+      </div>
+    `;
+    this.toastContainer.nativeElement.appendChild(toast);
 
-    this.checkCookies();
+    // Remove the toast after a few seconds
+    setTimeout(() => {
+      this.toastContainer.nativeElement.removeChild(toast);
+    }, 3000);
+}
+  ngOnInit() {
+
+    // this.webSocketService.connect();
+    // this.webSocketService.notifications.subscribe((message:any) => {
+    //   this.showToast(message);
+    // });
+    const employeeId = Number(localStorage.getItem('ID')); // Assuming the employeeId is stored in local storage
 
     if (!employeeId) {
       this.router.navigate(['/login']);
@@ -193,6 +241,7 @@ export class HomeComponent implements OnInit {
             const eventIds = rsvps.filter(rsvp => rsvp.employeeId === employeeId).map(rsvp => rsvp.eventId);
             this.rsvpdSlides = this.slides.filter(slide => eventIds.includes(slide.id));
             this.allRsvpdSlides = this.slides.filter(slide => eventIds.includes(slide.id));
+            this.isLoading = false;
 
           });
       })
@@ -262,75 +311,8 @@ export class HomeComponent implements OnInit {
   }
 
 
-  async checkCookies() {
-    // Get all cookies
-    const cookies = document.cookie.split('; ');
-
-    // Find the cookie by name
-    let accessToken = null;
-    let refreshToken = null;
-    for (const cookie of cookies) {
-        const [name, value] = cookie.split('=');
-        if (name === "jwt") {
-            accessToken = decodeURIComponent(value);
-            break;
-        }
-    }
-    for (const cookie of cookies) {
-      const [name, value] = cookie.split('=');
-      if (name === "refresh") {
-          refreshToken = decodeURIComponent(value);
-          break;
-      }
-  }
-    
-    if(!accessToken)        //If access token expired
-    {
-      if(!refreshToken)     //If refresh token expired
-      {
-        this.router.navigate(["/login"]);
-      }
-
-      try {
-        const response = await fetch("https://events-system-back.wn.r.appspot.com/api/v1/auth/refresh-token", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${this.getCookie("refresh")}`
-            },
-            body: JSON.stringify(FormData)
-        });
-
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-
-        const authData = await response.json();
-        document.cookie = `jwt=${authData.access_token}; path=/; expires=` + new Date(new Date().getTime() + 15 * 60 * 1000).toUTCString();
-        document.cookie = `refresh=${authData.refresh_token}; path=/; expires=` + new Date(new Date().getTime() + 24* 60 * 60 * 1000).toUTCString();
-        console.log('Token refresh successful');
-        // Handle the response data as needed
-      } catch (error) {
-          console.error('Error refreshing token');
-          // Handle errors appropriately
-      }
-    }
-  }
 
 
-  getCookie(cookieName: string) {
-    const name = cookieName + '=';
-    const decodedCookie = decodeURIComponent(document.cookie);
-    const cookieArray = decodedCookie.split(';');
-
-    for (let i = 0; i < cookieArray.length; i++) {
-        const cookie = cookieArray[i].trim();
-        if (cookie.indexOf(name) === 0) {
-            return cookie.substring(name.length, cookie.length);
-        }
-    }
-    return null;
-}
 
 
 

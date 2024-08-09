@@ -7,6 +7,8 @@ tmp
 
 # dependencies
 node_modules
+package-lock.json
+
 
 # IDEs and editors
 /.idea
@@ -43,3 +45,11 @@ Thumbs.db
 .env
 
 /Backend/events-system-back-329277c97613.json
+.nx/workspace-data/eslint-4393011795395336301.hash
+.nx/workspace-data/file-map.json
+.nx/workspace-data/lockfile.hash
+.nx/workspace-data/parsed-lock-file.json
+.nx/workspace-data/playwright-5186013267177752385.hash
+.nx/workspace-data/project-graph.json
+.nx/workspace-data/d/daemon.log
+.nx/workspace-data/d/server-process.json

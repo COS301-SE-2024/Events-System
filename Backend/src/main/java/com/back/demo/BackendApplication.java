@@ -34,7 +34,6 @@ public class BackendApplication {
     }
 
 
-    /*With this setup, you can run your Spring Boot application and navigate to http://localhost:8080/tables to get a list of all table names from your PostgreSQL database. */
     @RequestMapping("/tables")
     @ResponseBody
     public List<String> getTableNames() {
