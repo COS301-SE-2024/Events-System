@@ -1,34 +1,50 @@
-<form (submit)="deleteClub()">
-    <div class="relative flex h-screen flex-col bg-base-200 overflow-x-hidden">
-        <div class="layout-container flex h-full grow flex-col">
-          <div class=" px-5 md:px-32 flex flex-1 justify-center py-5 h-full">
-            <div class="layout-content-container flex flex-col max-w-[2010px] flex-1 h-full">
-                <!--Page heading-->
-                <div class="flex items-center justify-center mb-6 md:mx-10">
-                    <div class="font-poppins text-center text-secondary font-extrabold text-2xl md:text-3xl mb-2"><p>Delete {{ clubName }}</p></div>
-                </div>
-    
-                <div class="flex flex-col items-center justify-center h-full bg-red-900">
-                    <div>
-                        [Delete animation]
-                    </div>
-    
-                    <p class="text-base font-roboto font-semibold leading-normal pb-3 pt-1 px-4">
-                        This action is permanent and can't be undone. All club members and event history will be deleted.
-                    </p>
-    
-                    <p class="text-base font-roboto text-center font-normal leading-normal pb-3 pt-1 px-4">
-                        Are you sure you want to delete {{ clubName }}?
-                    </p>
-    
-                    <div class="flex justify-between mt-auto mb-10 w-full md:px-96">
-                        <button class="btn btn-success">Cancel</button>
-                        <button class="btn btn-success" type="submit">Delete Club</button>
-                    </div>
-                </div>
+<div>
+    <div >
+      <div class="flex justify-center items-center">
+        
+        <div>
+          
+          <h1 class="lg:text-6xl text-4xl text-center mt-8">Let's Make sure</h1>
+
+          <button class="btn w-[50px] -mt-12 lg:-ml-96 h-[30px] rounded-full" ><i class="fa-solid fa-arrow-left"></i></button>
+          <!-- (click)="goBack()" -->
+
+          <div class="">
+            <div class="label mt-4 flex justify-center">
+              <span class="label-text text-lg">Enter the name of the club: <span class="text-accent">{{ clubName }}</span></span>
             </div>
+            <input  #nameInput type="text" placeholder="Type here" class="input input-bordered w-full max-w-xl text-lg h-12" required/>
+          </div>
+          <div class="flex justify-between mt-4">
+            <button class="btn  btn-warning">back</button>
+            <button (click)="deleteClub()" class="btn btn-error btn-outline">Delete club</button>
+            <!-- (click)="presubmit()" -->
           </div>
         </div>
+      </div>  
+    </div>
+    <div class="toast" >
+        <!-- *ngIf="isAPILoading" -->
+        <div class="alert alert-info flex justify-center">
+            <span class="loading loading-dots loading-md"></span>
+        </div>
       </div>
-</form>
+
+
+    <div class="toast" >
+        <!-- *ngIf="showsuccessToast" -->
+      <div class="alert alert-success">
+        <span>Club successfully Deleted Redirecting...</span>
+      </div>
+    </div>
+  
+    <div class="toast" >
+        <!-- *ngIf="showfailToast" -->
+      <div class="alert alert-error">
+        <span>Error Deleting club</span>
+      </div>
+    </div>
+    <!-- <button (click)="previousStep()" class="btn btn-warning" [disabled]="currentStep === 0">Back</button>
+    <button (click)="nextStep()" class="btn btn-success">Next</button> -->
+  </div>
   
