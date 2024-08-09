@@ -1,0 +1,61 @@
+<div class="container mx-auto p-4">
+  <div class="card w-full shadow-2xl mb-4 bg-base-100">
+    <div class="card-body">
+      <h2 class="text-2xl font-bold mb-4 text-primary">Notifications</h2>
+      <div class="flex justify-end mb-4">
+        <button class="btn btn-sm btn-outline mr-2"[disabled]="allRead" (click)="markAllAsRead()">Mark All as Read</button>
+        <button class="btn btn-sm btn-outline mr-2"[disabled]="allUnread" (click)="markAllAsUnRead()">Mark All as Unread</button>
+        <button class="btn btn-sm btn-outline btn-error" (click)="clearAll()">Clear All</button>
+      </div>
+      <div id="notifications-list">
+        <!-- Notification Items -->
+        <div *ngFor="let notification of notifications" 
+             class="card p-4 mb-4 shadow-xl"
+             [ngClass]="{'bg-base-100': notification.read, 'bg-base-200': !notification.read, 'border-l-4 border-accent': !notification.read, 'border-none': notification.read}"
+             (click)="openPopover(notification)">
+          <div class="flex justify-between items-center">
+            <div class="flex items-center">
+              <span class="material-icons mr-2 text-info" [ngClass]="{'text-gray-400': notification.read, 'text-info': !notification.read}">notifications</span>
+              <div>
+                <h3 class="text-lg font-bold" [ngClass]="{'text-gray-500': notification.read, 'text-base-content': !notification.read}">
+                  {{ notification.eventTitle }}
+                </h3>
+                <p class="text-sm" [ngClass]="{'text-gray-400': notification.read, 'text-primary': !notification.read}">
+                  {{ notification.message }}
+                </p>
+              </div>
+            </div>
+            <button class="btn btn-sm btn-outline ml-2" 
+                    (click)="notification.read ? markAsUnread($event, notification.notificationId) : markAsRead($event, notification.notificationId)">
+              {{ notification.read ? 'Mark as Unread' : 'Mark as Read' }}
+            </button>
+            
+            <button class="btn btn-sm btn-outline ml-2" 
+                    (click)="markAsRead($event, notification.notificationId)"
+                    [disabled]="notification.read || notification.message.includes('Event Deleted')"
+                    [routerLink]="['/event', notification.eventId]">
+              View More
+            </button>
+            <button class="btn btn-sm btn-outline ml-2 btn-error" 
+            (click)="delete($event, notification.notificationId)"
+            >
+      delete
+    </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Popover -->
+  <div *ngIf="selectedNotification" 
+       class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50"
+       (click)="closePopover()">
+    <div class="bg-white p-4 rounded shadow-xl max-w-sm w-full"
+         (click)="$event.stopPropagation()">
+      <h3 class="text-lg font-bold mb-2">{{ selectedNotification.title }}</h3>
+      <p class="text-sm mb-4">{{ selectedNotification.description }}</p>
+      <button class="btn btn-primary w-full" (click)="closePopover()">Close</button>
+    </div>
+  </div>
+</div>

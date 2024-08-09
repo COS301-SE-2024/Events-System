@@ -1,0 +1,105 @@
+<div class="drawer drawer-end drawer-open">
+    <input id="my-drawer-4" type="checkbox" class="drawer-toggle"  #drawerToggle/>
+    <div class="drawer-content">
+      <!-- Page content here -->
+      <app-seriescentercard></app-seriescentercard>
+
+      <app-seriescentercard></app-seriescentercard>
+
+      <app-seriescentercard></app-seriescentercard>
+
+
+    </div>
+    <div class="drawer-side">
+      <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>
+      <ul class="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+        <!-- Sidebar content here -->
+        <button class="btn w-full no-animation">Refine by social club</button>
+        <ul class="menu bg-base-200 w-full rounded-box">
+            <li class="btn w-full">All Social clubs</li>
+            <li class="btn">Philantropy club</li>
+            <li class="btn">Book club</li>
+            <li class="btn">Health club</li>
+            <li class="btn">Health and Wellness club</li>
+          </ul>  
+
+          <div class="mt-8">
+            <button class="btn w-full no-animation">Filter By:</button>
+      
+            <div class="collapse collapse-plus">
+              <input type="radio" name="my-accordion-3" checked="checked" /> 
+    
+                      <div class="collapse collapse-plus">
+              <input type="radio" name="my-accordion-3" /> 
+              <div class="collapse-title text-xl font-medium">
+                Title
+              </div>
+              <div class="collapse-content"> 
+                <ul class="menu bg-base-200 w-56 rounded-box">
+                  <input type="text" class="input input-bordered w-full max-w-xs" placeholder="Search by title"/>   
+                </ul>
+              </div>
+            </div>
+              
+              <div class="collapse-title text-xl font-medium">
+                Date
+              </div>
+              <div class="collapse-content"> 
+                <form >
+                  <input type="date" id="date-input"  name="date-input" class="bg-gray-400 w-full px-3 py-2 rounded-lg border-2 border-gray-400 focus:border-indigo-500 text-base outline-none text-gray-700 transition-colors duration-200 ease-in-out">
+                  <!-- <button type="submit">Submit</button> -->
+                  <div class="flex w-full">
+                    <button class="btn btn-outline mt-4" (click)=" drawerToggle.checked = false">Clear</button>
+                    <button class="btn btn-primary mt-4 ml-24" (click)="drawerToggle.checked = false" type="submit">Submit</button>                
+                   </div>
+  
+                </form>
+              </div>
+            </div>
+            <div class="collapse collapse-plus bg-base-200">
+              <input type="radio" name="my-accordion-3" /> 
+              <div class="collapse-title text-xl font-medium">
+                Location
+              </div>
+              <div class="collapse-content"> 
+                <ul class="menu bg-base-200 w-56 rounded-box">
+                  <input type="text" class="input input-bordered w-full max-w-xs"  placeholder="Search by Location"/>   
+                </ul>
+              </div>
+            </div>
+    
+            <div class="collapse collapse-plus bg-base-200">
+              <input type="radio" name="my-accordion-3" /> 
+              <div class="collapse-title text-xl font-medium">
+                Dietary Requirements
+              </div>
+              <div class="collapse-content"> 
+                <ul class="menu bg-base-200 w-56 rounded-box">
+                  <label class="label cursor-pointer">
+                    <input type="radio" name="radio-10" class="radio checked:bg-red-500" checked  />
+                    <span class="label-text">None</span> 
+                  </label>
+                  <label class="label cursor-pointer">
+                    <input type="radio" name="radio-10" class="radio checked:bg-red-500" />
+                    <span class="label-text">Vegetarian</span> 
+                  </label>
+                  <label class="label cursor-pointer">
+                    <input type="radio" name="radio-10" class="radio checked:bg-red-500" />
+                    <span class="label-text">Vegan</span> 
+                  </label>
+                  <label class="label cursor-pointer">
+                    <input type="radio" name="radio-10" class="radio checked:bg-red-500" />
+                    <span class="label-text">Halal</span> 
+                  </label>
+                  <label class="label cursor-pointer">
+                    <input type="radio" name="radio-10" class="radio checked:bg-red-500" />
+                    <span class="label-text">Gluten-free</span>
+    
+                  </label>
+                </ul>
+              </div>
+            </div>
+           </div>
+      </ul>
+    </div>
+  </div>
