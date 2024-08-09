@@ -40,6 +40,10 @@ public class EventService {
         return eventRepository.save(event);
     }
 
+    public List<Event> getEventBySocialClubId(Long socialClubId) {
+        return eventRepository.findAllEventsBySocialClub(socialClubId);
+    }
+
     public Event updateEvent(Long eventId, Event eventDetails) {
         Optional<Event> optionalEvent = eventRepository.findById(eventId);
         if (optionalEvent.isPresent()) {
