@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SocialClubListingCardComponent } from 'src/Components/SocialClubListingCard/socialClubListingCard.component';
+import {GhostSocialClubCardComponent} from 'src/Components/GhostSocialClubCard/GhostSocialClubCard.component';
 import { SocialClubComponent } from 'src/socialClub/socialClub.component';
 
 // Define an interface for the cache
@@ -12,7 +13,7 @@ interface Cache {
 @Component({
   selector: 'app-social-club-listing',
   standalone: true,
-  imports: [CommonModule, RouterModule, SocialClubListingCardComponent],
+  imports: [CommonModule, RouterModule, SocialClubListingCardComponent, GhostSocialClubCardComponent],
   templateUrl: './socialClubListing.component.html',
   styleUrl: './socialClubListing.component.css',
 })
