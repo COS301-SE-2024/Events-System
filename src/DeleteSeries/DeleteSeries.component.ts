@@ -13,14 +13,16 @@ export class DeleteSeriesComponent {
   showsuccessToast = false;
   showfailToast = false;
   @ViewChild('nameInput') nameInput!: ElementRef;
-  eventId= '';
-  myevent: any = {};
+  seriesId= '';
+  myseries: any = {};
   constructor(private route: ActivatedRoute, private location: Location) { }  
   goBack(): void {
     window.history.back();
   }
   presubmit(){
-    if(this.nameInput.nativeElement.value === '' || this.nameInput.nativeElement.value !== this.myevent.title){
+    console.log(this.nameInput.nativeElement.value);
+    console.log(this.myseries.title);
+    if(this.nameInput.nativeElement.value === '' || this.nameInput.nativeElement.value !== this.myseries.name){
       alert('Please enter the correct event name');
       return;
     }else{
@@ -30,7 +32,7 @@ export class DeleteSeriesComponent {
   submit(){
     this.isAPILoading = true; // Set isLoading to true at the start of the method
 
-      fetch(`https://events-system-back.wn.r.appspot.com/api/events/${this.eventId}`, {
+      fetch(`https://events-system-back.wn.r.appspot.com/api/eventseries/${this.seriesId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
@@ -58,14 +60,14 @@ export class DeleteSeriesComponent {
 }
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.eventId = params['id'];
+      this.seriesId = params['id'];
 
-      fetch('https://events-system-back.wn.r.appspot.com/api/events/' + this.eventId)
+      fetch('https://events-system-back.wn.r.appspot.com/api/eventseries/' + this.seriesId)
       .then(response => {
         return response.json();
       })
       .then(data => {
-        this.myevent = data;
+        this.myseries = data;
       });
 
 

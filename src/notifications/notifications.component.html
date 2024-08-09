@@ -18,8 +18,8 @@
               <span class="material-icons mr-2 text-info" [ngClass]="{'text-gray-400': notification.read, 'text-info': !notification.read}">notifications</span>
               <div>
                 <h3 class="text-lg font-bold" [ngClass]="{'text-gray-500': notification.read, 'text-base-content': !notification.read}">
-                  {{ notification.eventTitle }}
-                </h3>
+                  {{ notification.eventId ? notification.eventTitle : notification.seriesTitle }}
+                </h3>                
                 <p class="text-sm" [ngClass]="{'text-gray-400': notification.read, 'text-primary': !notification.read}">
                   {{ notification.message }}
                 </p>
@@ -33,8 +33,8 @@
             <button class="btn btn-sm btn-outline ml-2" 
                     (click)="markAsRead($event, notification.notificationId)"
                     [disabled]="notification.read || notification.message.includes('Event Deleted')"
-                    [routerLink]="['/event', notification.eventId]">
-              View More
+                    [routerLink]="notification.eventId ? ['/event', notification.eventId] : ['/series', notification.seriesId]">
+                    View More
             </button>
             <button class="btn btn-sm btn-outline ml-2 btn-error" 
             (click)="delete($event, notification.notificationId)"

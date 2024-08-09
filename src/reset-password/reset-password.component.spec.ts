@@ -2,17 +2,17 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { CreateSeriesComponent } from './CreateSeries.component'; //import oath -------------------------
+import { ResetPasswordComponent} from './reset-password.component'; // Import ResetPasswordComponent
 
 // Mock component
 @Component({
-  selector: 'app-mock-app-oauth',
+  selector: 'app-mock-reset-password',
   template: '',
 })
 class MockEventComponent {/*...*/}
 
 @Component({
-  template: '<app-mock-app-oauth></app-mock-app-oauth>', // Use the correct selector
+  template: '<app-mock-reset-password></app-mock-reset-password>', // Use the correct selector
 })
 class TestHostComponent {/*...*/}
 
@@ -22,7 +22,7 @@ describe('EventComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CreateSeriesComponent], // change to oauth  -----------------------
+      imports: [ResetPasswordComponent], // Move EventComponent to imports
       declarations: [TestHostComponent, MockEventComponent], // Remove EventComponent from declarations
       providers: [
         {

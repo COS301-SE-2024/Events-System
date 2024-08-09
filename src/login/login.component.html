@@ -72,21 +72,21 @@
 
 <div class="toast" *ngIf="isAPILoading">
   <div class="alert alert-info flex justify-center">
-      <span class="loading loading-dots loading-md"></span>
+    <span class="loading loading-dots loading-md"></span>
   </div>
 </div>
 
 
 <div class="toast" *ngIf="showloginsuccessToast">
-<div class="alert alert-success">
-  <span>Login successful Redirecting...</span>
-</div>
+  <div class="alert alert-success">
+    <span>Login successful Redirecting...</span>
+  </div>
 </div>
 
 <div class="toast" *ngIf="showloginfailToast">
-<div class="alert alert-error">
-  <span>Error logging in</span>
-</div>
+  <div class="alert alert-error">
+    <span>Error logging in</span>
+  </div>
 </div>
 
 <!-- FORGOT PASSWORD MODAL HOME -->
@@ -112,7 +112,7 @@
     
           <div class="mt-6">
             <!-- Form -->
-            <form>
+            <form [formGroup]="forgotPasswordForm" (ngSubmit)="onSubmit1()">
               <div class="grid gap-y-4">
                 <!-- Form Group -->
                 <div class="mb-4">
@@ -130,6 +130,8 @@
             <!-- /Form -->
           </div>
         </div>
+
+        
       </div>
     
       <p class="mt-3 flex items-center justify-center divide-x divide-gray-300 text-center">
@@ -146,6 +148,25 @@
   <form method="dialog" class="modal-backdrop">
     <button>close</button>
   </form>
+
+  <div class="toast" *ngIf="isAPILoading">
+    <div class="alert alert-info flex justify-center">
+      <span class="loading loading-dots loading-md"></span>
+    </div>
+  </div>
+  
+  
+  <div class="toast" *ngIf="showemailsuccessToast">
+    <div class="alert alert-success">
+      <span>Reset email sent</span>
+    </div>
+  </div>
+  
+  <div class="toast" *ngIf="showemailfailToast">
+    <div class="alert alert-error">
+      <span>Error sending email</span>
+    </div>
+  </div>
 </dialog>
 
 <!-- CREATE ACCOUNT MODAL HOME -->
