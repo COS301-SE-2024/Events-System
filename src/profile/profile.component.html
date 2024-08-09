@@ -57,9 +57,16 @@
       </div>
     </div>
   
-    <div *ngIf="selectedTab === 'events'" class="card h-[732px] w-full items-center shadow-2xl">
-      <div class=" overflow-y-auto">
+    <div *ngIf="selectedTab === 'events'" class="card w-full items-center shadow-2xl">
+      <div class=" overflow-y-hidden">
         <div class="flex flex-wrap gap-x-20 gap-y-14 pt-6 pl-14">
+          <app-attended-event-card
+          *ngFor="let event of events"  
+              [eventID]="event.eventId"
+              [eventTitle]="event.title"
+              [description]="event.description"
+          ></app-attended-event-card>
+          <!-- <app-attended-event-card></app-attended-event-card>
           <app-attended-event-card></app-attended-event-card>
           <app-attended-event-card></app-attended-event-card>
           <app-attended-event-card></app-attended-event-card>
@@ -75,9 +82,7 @@
           <app-attended-event-card></app-attended-event-card>
           <app-attended-event-card></app-attended-event-card>
           <app-attended-event-card></app-attended-event-card>
-          <app-attended-event-card></app-attended-event-card>
-          <app-attended-event-card></app-attended-event-card>
-          <app-attended-event-card></app-attended-event-card>
+          <app-attended-event-card></app-attended-event-card> -->
           
         </div>
       </div>

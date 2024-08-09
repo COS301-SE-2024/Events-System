@@ -13,18 +13,39 @@ import {AttendedEventCardComponent} from 'src/Components/AttendedEventCard/atten
 export class ProfileComponent implements OnInit {
   selectedTab = 'about';
   employeeData: any; // Define employeeData property
-
+  events: any[] = [];
   constructor(private router: Router) {}
 
   ngOnInit(): void {
+    const employeeID = Number(localStorage.getItem('ID'));
+    
+
+    fetch(`https://events-system-back.wn.r.appspot.com/api/events/employee/${employeeID}/events-attended`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      this.events = data;
+      console.log(this.events);
+      // return Array.isArray(data) ? data : [data];
+    })
+    .catch(error => {
+      console.error('Error fetching attended events:', error);
+      return [];
+    });
     const storedEmployeeData = localStorage.getItem('employeeData');
     if (storedEmployeeData) {
       this.employeeData = JSON.parse(storedEmployeeData);
       console.log(this.employeeData);
     } else {
-      // Handle case where employeeData is not available in localStorage
+
     }
   }
+
+
 
   navigateToSettings() {
     this.router.navigate(['/settings']);
