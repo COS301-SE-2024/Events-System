@@ -1,4 +1,4 @@
-<form (submit)="createClub()" [formGroup]="createForm" class="card-body">
+<form [formGroup]="createForm" class="card-body">
 <div class="relative flex h-screen flex-col bg-transparent">
   <div class="layout-container flex h-full grow flex-col">
     <div class="px-5 md:px-32 flex flex-1 justify-center py-5 h-full ">
@@ -10,18 +10,18 @@
 
           <div class="mx-auto text-center">
             <ul class="steps lg:text-md text-sm">
-              <li class="step cursor-pointer">Image</li>
-              <li class="step cursor-pointer">Name</li>
-              <li class="step cursor-pointer">Description & Category</li>
-              <li class="step cursor-pointer">Summary</li>
+              <li [class.step-primary]="currentStep >= 0" class="step cursor-pointer" (click)="navigateToStep(0)">Image</li>
+              <li [class.step-primary]="currentStep >= 1" class="step cursor-pointer" (click)="navigateToStep(1)">Name</li>
+              <li [class.step-primary]="currentStep >= 2" class="step cursor-pointer" (click)="navigateToStep(2)">Description & Category</li>
+              <li [class.step-primary]="currentStep >= 3" class="step cursor-pointer" (click)="navigateToStep(3)">Summary</li>
             </ul>
           </div>
 
-          <div>
-            <button class="btn w-[50px] -mt-12 lg:ml-8 h-[30px] rounded-full"><i class="fa-solid fa-arrow-left"></i></button>
+          <div [ngSwitch]="currentStep">
+            <button class="btn w-[50px] -mt-12 lg:ml-8 h-[30px] rounded-full" (click)="goBack()"><i class="fa-solid fa-arrow-left"></i></button>
       
             <div class="flex justify-center items-center">
-              <div>
+              <div *ngSwitchCase="0" class="mt-8" [@fadeInOut]>
                 <p>Clubs are communities of people with the same interest</p>
                   <!-- <div class="tooltip tooltip-open tooltip-error mb-4" data-tip="please upload a club profile"></div> -->
                   <div>
@@ -34,32 +34,32 @@
                           </div>
                         </div>
                       </div>
-                      <input type="file" #fileInput class="hidden">
+                      <input type="file" #fileInput formControlName="pictureLink" class="hidden">
                     </div>
                   </div>
 
                   <div class="flex justify-between mt-4">
-                      <button class="btn btn-success">Next</button>
+                      <button (click)="nextStep()" class="btn btn-success">Next</button>
                   </div>
                 </div>
               </div>
       
       
               <div class="flex justify-center items-center">
-                  <div>
+                  <div *ngSwitchCase="1" class="mt-8" [@fadeInOut]>
                       <p>Club  Name</p>
                       <!-- <div class="tooltip tooltip-open tooltip-error mb-4" data-tip="please enter a club name"></div> -->
                       <input #nameInput type="text" formControlName="name" placeholder="Type club name..." class="input input-bordered w-full max-w-xl text-lg h-12 mt-8" required/>
                       <div class="flex justify-between mt-4">
-                          <button class="btn btn-outline btn-warning">Back</button>
-                          <button class="btn btn-success">Next</button>
+                          <button (click)="previousStep()" class="btn btn-outline btn-warning" [disabled]="currentStep === 0">Back</button>
+                          <button (click)="nextStep1()" class="btn btn-success" type="submit">Next</button>
                       </div>
                   </div>
               </div>
       
       
               <div class="flex justify-center items-center">
-                  <div>
+                  <div *ngSwitchCase="2" [@fadeInOut]>
                       <p>Club description & Category</p>
                       <div>
                           <!-- <div class="tooltip tooltip-open tooltip-error lg:ml-8 ml-4 -mb-4" data-tip="please enter a Description"></div> -->
@@ -73,76 +73,82 @@
                           <!-- <div class="tooltip tooltip-open tooltip-error lg:ml-8 ml-4 -mb-4" data-tip="please enter a Description"></div> -->
                           <select formControlName="categories" class="select select-accent w-full max-w-xs focus:border-none mt-4">
                             <option disabled selected>Select ...</option>
-                            <option>Category 1</option>
-                            <option>Category 2</option>
-                            <option>Category 3</option>
+                            <option>Literature</option>
+                            <option>Education</option>
+                            <!-- <option>Category 3</option>
                             <option>Category 4</option>
-                            <option>Category 5</option>
+                            <option>Category 5</option> -->
                           </select>
                       </div>
                       <div class="flex justify-between mt-4">
-                          <button class="btn btn-outline btn-warning">Back</button>
-                          <button class="btn btn-success" type ="submit">Next</button>
+                          <button (click)="previousStep()" class="btn btn-outline btn-warning" [disabled]="currentStep === 0">Back</button>
+                          <button (click)="nextStep2()" class="btn btn-success" type="submit">Next</button>
                       </div>
                   </div>
               </div>
       
       
               <div class="flex justify-center items-center">
-                  <div>
-                      <p>Let's Summarize</p>
-      
-                      <div class="mx-auto w-1/2">
-                        <div class="label mt-4 flex justify-center">
-                            <span class="label-text">Social Club Profile</span>
-                        </div>
-      
-                        <div>
-                          <div class="mb-2 flex flex-col items-center relative">
-                            <div class="btn btn-ghost btn-square avatar p-2 relative" style="width: 240px; height: 240px;" (click)="fileInput.click()">
-                              <div class="w-full relative bg-black bg-opacity-50 rounded-lg">
-                                <img alt="Social Club Image" style="width: 100%; height: 100%;">
-                                
-                              </div>
+                <div *ngSwitchCase="3" [@fadeInOut]>
+                    <p>Let's Summarize</p>
+    
+                    <div class="mx-auto w-1/2">
+                      <div class="label mt-4 flex justify-center">
+                          <span class="label-text">Social Club Profile</span>
+                      </div>
+    
+                      <div>
+                        <div class="mb-2 flex flex-col items-center relative">
+                          <div class="btn btn-ghost btn-square avatar p-2 relative" style="width: 240px; height: 240px;" (click)="fileInput.click()">
+                            <div class="w-full relative bg-black bg-opacity-50 rounded-lg">
+                              <img alt="Social Club Image" style="width: 100%; height: 100%;">
+                              
                             </div>
-                            <input type="file" #fileInput class="hidden">
                           </div>
+                          <input type="file" #fileInput class="hidden">
                         </div>
                       </div>
-      
-                      <div class="mx-auto w-1/2">
-                          <div class="label mt-4 flex justify-center">
-                              <span class="label-text">Social Club Name</span>
-                          </div>
-                          <input disabled #nameInput type="text" placeholder="Type here" class="input input-bordered w-full max-w-xl text-lg h-12" required/>
-                      </div>
-      
-                      <div class="label mt-4 flex justify-center">
-                        <span class="label-text">Summary</span>
-                      </div>
-                      <textarea disabled #descriptionInput class="textarea textarea-bordered w-full h-24" placeholder="Short summary"required></textarea>    
-                    
-        
-                      <div class="label mt-4 flex justify-center">
-                          <span class="label-text">Description</span>
-                      </div>
-                      <textarea disabled #descriptionInput class="textarea textarea-bordered w-full h-44" placeholder="Detailed description"required></textarea>    
-      
-                      <div class="mx-auto w-1/2">
-                        <div class="label mt-4 flex justify-center">
-                            <span class="label-text">Category</span>
-                        </div>
-                        <input disabled #nameInput type="text" placeholder="Select" class="input input-bordered w-full max-w-xl text-lg h-12" required/>
                     </div>
+    
+                    <div class="mx-auto w-1/2">
+                        <div class="label mt-4 flex justify-center">
+                            <span class="label-text">Social Club Name</span>
+                        </div>
+                        <input disabled #nameInput type="text" placeholder="Type here" class="input input-bordered w-full max-w-xl text-lg h-12" required
+                        [value]="createForm.get('name')?.value"/>
+                    </div>
+    
+                    <div class="label mt-4 flex justify-center">
+                      <span class="label-text">Summary</span>
+                    </div>
+                    <textarea disabled #descriptionInput class="textarea textarea-bordered w-full h-24" placeholder="Short summary"required> {{ this.createForm.get('summaryDescription')?.value }} </textarea>    
+                  
+      
+                    <div class="label mt-4 flex justify-center">
+                        <span class="label-text">Description</span>
+                    </div>
+                    <textarea disabled #descriptionInput class="textarea textarea-bordered w-full h-44" placeholder="Detailed description"required>{{ this.createForm.get('description')?.value }}</textarea>    
+    
+                    <div class="mx-auto w-1/2">
+                      <div class="label mt-4 flex justify-center">
+                          <span class="label-text">Category</span>
+                      </div>
+                      <input disabled #nameInput type="text" placeholder="Select" class="input input-bordered w-full max-w-xl text-lg h-12" required
+                      [value]="createForm.get('categories')?.value"/>
+                  </div>
+                  <div class="flex justify-between mt-4">
+                    <button (click)="previousStep()" class="btn btn-outline btn-warning" [disabled]="currentStep === 0">Back</button>
+                    <button (click)="preSubmit()" class="btn btn-success">Create Club</button>
+                  </div>
               </div>
             </div>  
           </div>
         
-          <div class="toast">
+          <!-- <div class="toast">
             <div class="alert alert-info flex justify-center">
                 <span class="loading loading-dots loading-md"></span>
             </div>
-          </div>
+          </div> -->
         
           <!-- <div class="toast">
             <div class="alert alert-success">
@@ -157,6 +163,23 @@
           </div> -->
             
         </div>
+      </div>
+    </div>
+    <div class="toast" *ngIf="isAPILoading">
+      <div class="alert alert-info flex justify-center">
+          <span class="loading loading-dots loading-md"></span>
+      </div>
+    </div>
+  
+    <div class="toast" *ngIf="showsuccessToast">
+      <div class="alert alert-success">
+        <span>Event succesfully created Redirecting...</span>
+      </div>
+    </div>
+  
+    <div class="toast" *ngIf="showfailToast">
+      <div class="alert alert-error">
+        <span>error creating event</span>
       </div>
     </div>
   </div>

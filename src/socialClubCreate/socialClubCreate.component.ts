@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { trigger, transition, style, animate } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms'; 
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -10,10 +11,35 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
   imports: [CommonModule, ReactiveFormsModule, HttpClientModule, RouterModule],
   templateUrl: './socialClubCreate.component.html',
   styleUrl: './socialClubCreate.component.css',
+  animations: [
+    trigger('fadeInOut', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('400ms', style({ opacity: 1 }))
+      ]),
+      transition(':leave', [
+        animate('10ms', style({ opacity: 0 }))
+      ])
+    ]),
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('500ms', style({ opacity: 1 })),
+      ]),
+      transition(':leave', [
+        animate('200ms', style({ opacity: 0 })),
+      ]),
+    ]),
+  ]
 })
 export class SocialClubCreateComponent implements OnInit {
   createForm: FormGroup;
   hostID: any;
+  currentStep = 0;
+  isPictureEmpty = false; isNameEmpty = false; isDescriptionEmpty = false; isCategoriesEmpty = false; isSummaryEmpty = false;
+  showsuccessToast = false;
+  showfailToast = false;
+  isAPILoading = false;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -37,7 +63,7 @@ export class SocialClubCreateComponent implements OnInit {
 
   createClub() {
     if (this.createForm.valid) {
-
+      this.isAPILoading = true;
         try{
           fetch('https://events-system-back.wn.r.appspot.com/api/v1/auth/' + this.getCookie("jwt"), {
             method: 'GET',
@@ -48,52 +74,148 @@ export class SocialClubCreateComponent implements OnInit {
           })
           .then(response => response.json())
           .then(data => {
-              // Show the success toast
-              this.hostID = data;
-              console.log("hostID : " + data);
+            // Show the success toast
+            this.hostID = data;
 
-              const formData = {
-                ownerID: this.hostID,
-                name: this.createForm.get('name')?.value,
-                description: this.createForm.get('description')?.value,
-                pictureLink: this.createForm.get('pictureLink')?.value,
-                summaryDescription: this.createForm.get('summaryDescription')?.value,
-                categories: this.createForm.get('categories')?.value
-              };
-              console.log("Form data: " + formData);
-              
-              try{
-                fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs', {
-                  method: 'POST',
-                  credentials: 'include',
-                  headers: {
-                    'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify(formData)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    // Show the success toast
-                    console.log(data);
-                });
-              }
-              catch (error)
-              {
+            const formData = {
+              ownerID: this.hostID,
+              name: this.createForm.get('name')?.value,
+              description: this.createForm.get('description')?.value,
+              pictureLink: this.createForm.get('pictureLink')?.value,
+              summaryDescription: this.createForm.get('summaryDescription')?.value,
+              categories: [this.createForm.get('categories')?.value]
+            };
+            console.log("Form data: " + JSON.stringify(formData));
+            
+            try {
+              fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs', {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+              })
+              .then(response => response.json())
+              .then(data => {
+                  // Show the success toast
+                  //console.log(data);
+                  this.showsuccessToast = true;
+                  this.isAPILoading = false;
+                  setTimeout(() => {
+                    this.showsuccessToast = false;
+                    window.history.back();
+                  }, 5000);
+              })
+              .catch((error) => {
+                this.showfailToast = true;
+                this.isAPILoading = false;
+
+                setTimeout(() => {
+                  this.showfailToast = false;
+                }, 10000);
                 console.error('Error:', error);
-                console.error('Error during club creation:', error);
-              }
+              });
+            }
+            catch (error)
+            {
+              console.error('Error:', error);
+              console.error('Error during club creation:', error);
+            }
           });
         }
-        catch (error)
-        {
+        catch (error) {
           console.error('Error:', error);
           console.error('Error during ownerID retrieval:', error);
         }
        //this.hostID = localStorage.getItem("ID");
 
  
-     this.router.navigate(['/socialclublisting']);
+     //this.router.navigate(['/socialclublisting']);
        }
+  }
+
+  nextStep() {
+    if (!this.createForm.get('pictureLink') || this.createForm.get('pictureLink')?.value === '') {
+      this.isPictureEmpty = true;
+      return;
+    }
+    if (this.currentStep < 3) {
+      //this.createForm.setValue({ pcitureLink: this.createForm.get('pictureLink')?.value });
+      this.isPictureEmpty = false;
+      ++this.currentStep;
+    }
+  }
+  nextStep1() {
+    if (!this.createForm.get('name') || this.createForm.get('name')?.value === '') {
+      this.isNameEmpty = true;
+      return;
+    }
+    if (this.currentStep < 3)
+      //console.log("Name: " + this.createForm.get('name')?.value);
+      //sessionStorage.setItem(`name`, this.createForm.get('name')?.value)
+      this.isNameEmpty = false;
+      ++this.currentStep;
+  }
+  nextStep2() {
+    if (!this.createForm.get('summaryDescription') || this.createForm.get('summaryDescription')?.value === '' || !this.createForm.get('description') || this.createForm.get('description')?.value === '' || !this.createForm.get('categories') || this.createForm.get('categories')?.value === '') {
+      this.isSummaryEmpty = true;
+      this.isDescriptionEmpty = true;
+      this.isCategoriesEmpty = true;
+      return;
+    }
+    if (this.currentStep < 3) {
+      this.isSummaryEmpty = false;
+      this.isDescriptionEmpty = false;
+      this.isCategoriesEmpty = false;
+      ++this.currentStep;
+    }
+  }
+
+  previousStep() {
+    if (this.currentStep > 0) {
+      --this.currentStep;
+    }
+  }
+  navigateToStep(step: number) {
+    this.currentStep = step;
+  }
+  goBack(): void {
+    window.history.back();
+  }
+  isLiteratureSelected = false;
+  isEducationSelected = false;
+
+  toggleLiterature() {
+    this.isLiteratureSelected = !this.isLiteratureSelected;
+  }
+  toggleEducation() {
+    this.isEducationSelected = !this.isEducationSelected;
+  }
+
+  preSubmit(){
+    const missingDetails = [];
+  
+    if (!this.createForm.get('name') || this.createForm.get('name')?.value === '') {
+      missingDetails.push('Name');
+    }
+    if (!this.createForm.get('description') || this.createForm.get('description')?.value === '') {
+      missingDetails.push('Description');
+    }
+    if (!this.createForm.get('summaryDescription') || this.createForm.get('summaryDescription')?.value === '') {
+      missingDetails.push('Summary');
+    }
+    if (!this.createForm.get('categories') || this.createForm.get('categories')?.value === '') {
+      missingDetails.push('Categories');
+    }
+
+    if (missingDetails.length > 0) {
+      alert('Please fill in the following details: ' + missingDetails.join(', '));
+      return;
+    }
+    else {
+      this.createClub();
+    }
   }
 
   async checkCookies() {
