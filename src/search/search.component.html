@@ -28,6 +28,10 @@
 
             <div class=" h-full flex flex-col gap-10">
 
+              <app-ghost-search-event-card></app-ghost-search-event-card>
+              <app-ghost-search-host-card></app-ghost-search-host-card>
+              <app-ghost-search-club-card></app-ghost-search-club-card>
+
               <ng-container *ngIf="showEvents">
                 <app-search-event-card   
                 *ngFor="let event of filteredEvents"
