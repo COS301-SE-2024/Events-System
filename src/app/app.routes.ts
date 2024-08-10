@@ -13,6 +13,8 @@ import { UpdateEventComponent } from 'src/UpdateEvent/UpdateEvent.component';
 import { DeleteEventComponent } from 'src/DeleteEvent/DeleteEvent.component';
 import { HelpComponent } from 'src/Help/Help.component';
 import { SocialClubComponent } from 'src/socialClub/socialClub.component';
+import { SearchComponent } from 'src/search/search.component';  
+import { SearchProfileComponent } from 'src/searchProfile/searchProfile.component';
 import { NotificationsComponent } from 'src/notifications/notifications.component';
 import { NotifPopupComponent } from 'src/notif-popup/notif-popup.component';
 import { SeriesCenterComponent } from 'src/seriesCenter/seriesCenter.component';
@@ -35,7 +37,9 @@ export const appRoutes: Route[] = [
   { path: 'updateevent/:id', component: UpdateEventComponent },
   { path: 'deleteevent/:id', component: DeleteEventComponent },
   { path: 'socialclub/:id', component: SocialClubComponent},
+  { path: 'search', component: SearchComponent},
   { path: 'help', component: HelpComponent},
+  { path: 'searchProfile/:id', component: SearchProfileComponent},
   { path: 'notifications', component: NotificationsComponent},
   { path: 'notif-popup', component: NotifPopupComponent},
   { path: 'seriescenter', component: SeriesCenterComponent},

@@ -1,0 +1,85 @@
+<div class="relative flex flex-col bg-base-100 overflow-x-hidden">
+    <div class="layout-container flex h-full grow flex-col">
+      <div class="px-5 sm:px-96 flex flex-1 justify-center h-full">
+        <div class="layout-content-container flex flex-col max-w-[2010px] flex-1">
+            <!--Page heading-->
+            <div class="font-poppins text-center text-secondary font-extrabold text-2xl md:text-3xl mb-2">
+              <p>Search and Explore</p>
+            </div>
+            
+             <div class="flex items-center justify-center">
+              <!--Search bar-->
+              <div class="px-4 py-3 md:w-[1010px] mb-5 flex flex-col gap-5 font-roboto">
+                <label class="flex flex-col min-w-40 h-12 w-full">
+                  <div class="flex w-full flex-1 items-stretch rounded-xl h-full">
+                    <div class="text-[#93adc8] flex border-none bg-base-200 items-center justify-center pl-4 rounded-l-xl border-r-0">
+                      <div class="fa-solid fa-magnifying-glass"></div>
+                    </div>
+                    <input placeholder="Search for events, hosts and social clubs..." (input)="updateSearchTerm($event)" class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl focus:outline-0 focus:ring-0 border-none bg-base-200 focus:border-none h-full placeholder:text-[#93adc8] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal" />
+                  </div>
+                </label>
+                <div class="flex mt-2 space-x-2">
+                  <input type="checkbox" aria-label="Events" class="btn btn-sm" (change)="onCheckboxChange('events', $event)" checked />
+                  <input type="checkbox" aria-label="Employees" class="btn btn-sm" (change)="onCheckboxChange('hosts', $event)" checked />
+                  <input type="checkbox" aria-label="Social Clubs" class="btn btn-sm" (change)="onCheckboxChange('socialclubs', $event)" checked />
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="loading; else content">
+              <div class="h-full flex flex-col gap-10">
+                <app-ghost-search-event-card></app-ghost-search-event-card>
+                <app-ghost-search-event-card></app-ghost-search-event-card>
+                <app-ghost-search-event-card></app-ghost-search-event-card>
+                <app-ghost-search-event-card></app-ghost-search-event-card>
+                <app-ghost-search-event-card></app-ghost-search-event-card>
+                <app-ghost-search-event-card></app-ghost-search-event-card>
+                <app-ghost-search-event-card></app-ghost-search-event-card>
+                <app-ghost-search-event-card></app-ghost-search-event-card>
+                <app-ghost-search-event-card></app-ghost-search-event-card>
+              </div>
+            </div>
+
+            
+
+            <ng-template #content>
+              <div class=" h-full flex flex-col gap-10">
+                <ng-container *ngIf="showEvents">
+                  <app-search-event-card   
+                  *ngFor="let event of filteredEvents"
+                  [eventID]="event.eventId"
+                  [eventTitle]="event.title"
+                  [eventDescription]="event.description"
+                  [startTime]="event.startTime"
+                  [endTime]="event.endTime"
+                  [startDate]="event.startDate"
+                  [endDate]="event.endDate"
+                  [location]="event.location"
+                  [socialClub]="event.socialClub">
+                  </app-search-event-card>
+                </ng-container>
+                <ng-container *ngIf="showHosts">
+                  <app-search-host-card
+                  *ngFor="let host of filteredHosts"
+                  [hostName]="host.firstName + ' ' + host.lastName"
+                  [hostEmail]="host.email"
+                  [hostImage]="host.employee_picture_link"
+                  [hostBio]="host.employeeDescription"
+                  [hostId]="host.employeeId"
+                  ></app-search-host-card>
+                </ng-container>
+                <ng-container *ngIf="showSocialClubs">
+                  <app-search-social-club-card
+                  *ngFor="let club of filteredSocialClubs"
+                  [clubID]="club.id"
+                  [clubName]="club.name"
+                  [clubSummary]="club.summaryDescription"
+                  [clubDescription]="club.description">
+                  </app-search-social-club-card>
+                </ng-container>
+              </div>
+            </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>

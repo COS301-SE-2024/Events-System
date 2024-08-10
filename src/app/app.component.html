@@ -9,14 +9,12 @@
           <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
             <i class="fa-solid fa-bars"></i>            </div>
         </label>
-
     </div>
   </div>
+
   <div class="navbar-center">
 
-    <a routerLink="/" class="btn btn-ghost text-xl"  *ngIf="!isLoginRoute">Events System</a>
-    <!-- <button class="btn btn-primary" type="button" (click)="installPwa()">install</button>     -->
-
+    <a routerLink="/" class="btn btn-ghost text-xl hidden"  *ngIf="!isLoginRoute">Events System</a>
   </div>
   <div class="navbar-end">
     <!-- Notification Bell -->
@@ -52,7 +50,8 @@
         <li><a  routerLink="/login">Logout</a></li>
       </ul>
     </div>
-    <label class="swap swap-rotate">
+
+    <label class="swap swap-rotate mr-5">
       <!-- this hidden checkbox controls the state -->
       <input type="checkbox" class="theme-controller" value="nord" />
       <!-- sun icon -->
@@ -63,7 +62,8 @@
   </div>
   
 </div>
-<div class="drawer bg-base-100 " >
+
+<div class="drawer bg-base-100" >
   <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
   <div class="drawer-content ">
     <!-- Page content here -->
@@ -117,7 +117,7 @@
           <li><a routerLink="/myevents"><i class="fa-regular fa-address-book"></i>My events</a></li>
           <li><a routerLink="/myseries"><i class="fa-solid fa-bars"></i>My series</a></li>
           <li><a routerLink="/settings"><i class="fa-solid fa-gear"></i>Settings</a></li>
-          <li><a routerLink=""><i class="fa-solid fa-magnifying-glass"></i>Search</a></li>
+          <li><a routerLink="/search"><i class="fa-solid fa-magnifying-glass"></i>Search</a></li>
           <li><a routerLink="/help"><i class="fa fa-info"></i>Help</a></li>
           <li><a  (click)="installPwa()"><i class="fa fa-download"></i>Download app</a></li>
     </ul>
