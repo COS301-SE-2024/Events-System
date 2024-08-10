@@ -17,6 +17,8 @@ export class UserReviewCardComponent {
   showdeletefailToast = false;
   showupdatesuccessToast = false;
   showupdatefailToast = false;
+  rating1 = 0;
+  comments1 = '';
   @Input() employeeId: string | undefined;
   @Input() reviewId: string | undefined;
   @Input() firstName: string | undefined;
@@ -45,9 +47,13 @@ export class UserReviewCardComponent {
 
 
 
-  deleteComment(): void {
+
+  deleteComment(reviewIds: string | undefined): void {
+    this.isAPILoading = true;
+    if (!reviewIds) return;
+    console.log(reviewIds);
     // Implement your logic to delete the comment
-    fetch(`https://events-system-back.wn.r.appspot.com/api/feedback/${this.reviewId}`, {
+    fetch(`https://events-system-back.wn.r.appspot.com/api/feedback/${reviewIds}`, {
       method: 'DELETE',
       credentials: 'include',
       headers: {
@@ -75,11 +81,7 @@ export class UserReviewCardComponent {
   .catch((error) => {
     this.showdeletefailToast = true;
     this.isAPILoading = false;
-
-
-
-
-    setTimeout(() => {
+  setTimeout(() => {
       this.showdeletefailToast = false;
     }, 10000);
     console.error('Error:', error);
@@ -87,9 +89,9 @@ export class UserReviewCardComponent {
 }
 updateFeedback(): void {
   this.isAPILoading = true;
-  console.log('Rating:', this.rating);
-  console.log('Review:', this.comments);
-
+  console.log('Rating:', this.rating1);
+  console.log('Review:', this.comments1);
+  console.log('Review ID:', this.reviewId);
 
   const review = {
     rating: this.rating,
