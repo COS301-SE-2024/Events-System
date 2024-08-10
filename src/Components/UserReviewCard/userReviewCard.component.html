@@ -18,19 +18,27 @@
             </div>
         </div>
 
-        <div class="rating rating-md gap-0.5">
-            <ng-container *ngFor="let star of getStars(); let i = index">
-                <input 
-                  type="radio" 
-                  [name]="'rating-' + employeeId" 
-                  class="mask mask-star-2 bg-green-700" 
-                  [checked]="rating && rating >= star" 
-                />
-              </ng-container>
+        <div class="flex flex-row">
+            <div class="rating rating-md gap-0.5">
+                <ng-container *ngFor="let star of getStars(); let i = index">
+                    <input 
+                      type="radio" 
+                      [name]="'rating-' + employeeId" 
+                      class="mask mask-star-2 bg-green-700" 
+                      [checked]="rating && rating >= star" 
+                    />
+                  </ng-container>
+            </div>
+            <div class="flex gap-4 ml-4">
+                <button class="btn btn-primary btn-xs  bg-transparent border-none" ><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                <button class="btn btn-danger btn-xs text-red-400 bg-transparent border-none"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+            </div>
+           
         </div>
-       
+
         <p class="text-white-100 text-base font-normal leading-normal">
             {{ comments }}
         </p>
     </div>
+
 </div>

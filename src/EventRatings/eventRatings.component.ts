@@ -22,14 +22,7 @@ export class EventRatingsComponent implements OnInit {
   isAPILoading = false;
   showsuccessToast = false;
   showfailToast = false;
-  review = {
-    employeeId: '',
-    firstName: '',
-    lastName: '',
-    comments: '',
-    rating: '',
-    createdAt: ''
-  }
+  review = '';
   constructor(
     private router: Router,
     private randomheaderservice: RandomHeaderService,
@@ -39,6 +32,7 @@ export class EventRatingsComponent implements OnInit {
    this.imageSource = '';
   }
   submitFeedback(): void {
+    this.isAPILoading = true;
     console.log('Rating:', this.rating);
     console.log('Review:', this.review);
 
@@ -79,6 +73,13 @@ export class EventRatingsComponent implements OnInit {
     });
   }
 
+  closeDialog() {
+    // Logic to close the dialog
+    const dialog: any = document.querySelector('dialog');
+    if (dialog) {
+      dialog.close();
+    }
+  }
 
 
   rating = 0;
@@ -99,9 +100,7 @@ export class EventRatingsComponent implements OnInit {
       return response.json();
     })
     .then(data => {
-      console.log(data);
       this.reviews = Array.isArray(data) ? data : [data];
-      //console.log(data[0]);
 
       for(let i = 0; i < this.reviews.length; ++i)
       {

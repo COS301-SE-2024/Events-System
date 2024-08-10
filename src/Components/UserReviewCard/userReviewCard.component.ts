@@ -11,6 +11,7 @@ import { Timestamp } from 'rxjs';
 })
 export class UserReviewCardComponent {
   @Input() employeeId: string | undefined;
+  @Input() reviewId: string | undefined;
   @Input() firstName: string | undefined;
   @Input() lastName: string | undefined;
   @Input() comments: string | undefined;
