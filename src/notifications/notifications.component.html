@@ -2,10 +2,10 @@
   <div class="card w-full shadow-2xl mb-4 bg-base-100">
     <div class="card-body">
       <h2 class="text-2xl font-bold mb-4 text-primary">Notifications</h2>
-      <div class="flex justify-end mb-4">
-        <button class="btn btn-sm btn-outline mr-1" [disabled]="allRead" (click)="markAllAsRead()">Mark All as Read</button>
-        <button class="btn btn-sm btn-outline mr-1" [disabled]="allUnread" (click)="markAllAsUnRead()">Mark All as Unread</button>
-        <button class="btn btn-sm btn-outline btn-error" (click)="clearAll()">Clear All</button>
+      <div class="flex sm:flex-row flex-col justify-end mb-4 flex-wrap">
+        <button class="btn btn-sm btn-outline mr-1 mb-1" [disabled]="allRead" (click)="markAllAsRead()">Mark All as Read</button>
+        <button class="btn btn-sm btn-outline mr-1 mb-1" [disabled]="allUnread" (click)="markAllAsUnRead()">Mark All as Unread</button>
+        <button class="btn btn-sm btn-outline btn-error mb-1" (click)="clearAll()">Clear All</button>
       </div>
       <div id="notifications-list">
         <!-- Notification Items -->
@@ -13,25 +13,25 @@
              class="card p-4 mb-4 shadow-xl"
              [ngClass]="{'bg-base-100': notification.read, 'bg-base-200': !notification.read, 'border-l-4 border-accent': !notification.read, 'border-none': notification.read}"
              (click)="openPopover(notification)">
-          <div class="flex justify-between items-center">
-            <div class="flex items-center">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center">
+            <div class="flex items-center mb-2 sm:mb-0">
               <span class="material-icons mr-2 text-info" [ngClass]="{'text-gray-400': notification.read, 'text-info': !notification.read}">notifications</span>
               <div>
-                <h3 class="text-lg font-bold truncate max-w-xs" [ngClass]="{'text-gray-500': notification.read, 'text-base-content': !notification.read}">
+                <h3 class="text-lg font-bold truncate sm:max-w-xs max-w-[8rem]" [ngClass]="{'text-gray-500': notification.read, 'text-base-content': !notification.read}">
                   {{ notification.eventTitle }}
                 </h3>
-                <p class="text-sm truncate max-w-xs" [ngClass]="{'text-gray-400': notification.read, 'text-primary': !notification.read}">
+                <p class="text-sm truncate sm:max-w-xs max-w-[8rem]" [ngClass]="{'text-gray-400': notification.read, 'text-primary': !notification.read}">
                   {{ notification.message }}
                 </p>
               </div>
             </div>
-            <div class="flex">
-              <button class="btn btn-sm btn-outline mr-1" 
+            <div class="flex flex-row">
+              <button class="btn btn-sm btn-outline mr-0 sm:mr-1 mb-1 sm:mb-0" 
                       (click)="notification.read ? markAsUnread($event, notification.notificationId) : markAsRead($event, notification.notificationId)">
                 {{ notification.read ? 'Mark as Unread' : 'Mark as Read' }}
               </button>
               
-              <button class="btn btn-sm btn-outline mr-1" 
+              <button class="btn btn-sm btn-outline mr-0 sm:mr-1 mb-1 sm:mb-0" 
                       (click)="markAsRead($event, notification.notificationId)"
                       [disabled]="notification.read || notification.message.includes('Event Deleted')"
                       [routerLink]="['/event', notification.eventId]">
