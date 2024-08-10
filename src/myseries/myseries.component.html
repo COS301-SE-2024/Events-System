@@ -1,0 +1,15 @@
+<div>
+    <div class="flex justify-end mt-4">
+        <button class="btn btn-outline btn-primary" (click)="navigateToCreateSeries()">
+            Create series
+        </button>
+    </div>
+    <div class="mt-4">
+        <app-myseriescard
+        *ngFor="let serie of series"
+        [seriesId]="serie.seriesId"
+        [name]="serie.name"></app-myseriescard>
+    </div>
+</div>
+
+

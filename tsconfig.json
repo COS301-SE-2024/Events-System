@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "types": ["node"],
     "rootDir": ".",
     "sourceMap": true,
     "declaration": false,

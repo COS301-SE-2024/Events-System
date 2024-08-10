@@ -12,6 +12,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
 
 import static com.back.demo.model.Permission.ADMIN_CREATE;
 import static com.back.demo.model.Permission.ADMIN_DELETE;
@@ -28,6 +30,8 @@ import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.http.HttpMethod.PUT;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
+
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -47,11 +51,19 @@ public class SecurityConfiguration {
             "/swagger-ui/**",
             "/webjars/**",
             "/swagger-ui.html",
-            "/api/events/**",      // Ensure all event-related endpoints are accessible
+            "/api/events/**",       // Ensure all event-related endpoints are accessible
+            "/api/feedback/**",    // Ensure all feedback-related endpoints are accessible
             "/api/event-rsvps/**", // Ensure all event-rsvp-related endpoints are accessible
             "/api/employees/**",   // Ensure all employee-related endpoints are accessible
             "/api/socialclubs/**", // Ensure all social-club-related endpoints are accessible
-            "https://events-system.org/events"
+            "/api/notifications/**", // Ensure all notification-related endpoints are accessible
+            "/api/eventseries/**", // Ensure all event-series-related endpoints are accessible
+            "/api/eventseriessubscriptions/**", // Ensure all event-series-subscription-related endpoints are accessible
+            "/api/reset/**", // Ensure all password-reset-related endpoints are accessible
+            "https://events-system.org/events",
+            "/socket/**",
+            "/api/reset/**",
+            "/notify"
     };
 
     private final JwtAuthenticationFilter jwtAuthFilter;
@@ -62,6 +74,17 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
+                .cors(corsConfigurer -> {
+                CorsConfigurationSource source = request -> {
+                    CorsConfiguration config = new CorsConfiguration();
+                    config.setAllowedOriginPatterns(List.of("http://*", "https://*"));
+                    config.setAllowedMethods(List.of("*"));
+                    config.setAllowedHeaders(List.of("*"));
+                    config.setAllowCredentials(true);
+                    return config;
+                };
+                corsConfigurer.configurationSource(source);
+            })
                 .authorizeHttpRequests(req ->
                         req.requestMatchers(WHITE_LIST_URL)
                                 .permitAll()

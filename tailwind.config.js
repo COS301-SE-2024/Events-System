@@ -17,9 +17,7 @@ module.exports = {
         },
         
       },
-      "light",
-      "dark",
-      "corporate"],
+      "nord"],
   },
   presets: [],
   darkMode: 'media', // or 'class'
