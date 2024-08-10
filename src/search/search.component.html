@@ -26,47 +26,59 @@
               </div>
             </div>
 
-            <div class=" h-full flex flex-col gap-10">
-
-              <app-ghost-search-event-card></app-ghost-search-event-card>
-              <app-ghost-search-host-card></app-ghost-search-host-card>
-              <app-ghost-search-club-card></app-ghost-search-club-card>
-
-              <ng-container *ngIf="showEvents">
-                <app-search-event-card   
-                *ngFor="let event of filteredEvents"
-                [eventID]="event.eventId"
-                [eventTitle]="event.title"
-                [eventDescription]="event.description"
-                [startTime]="event.startTime"
-                [endTime]="event.endTime"
-                [startDate]="event.startDate"
-                [endDate]="event.endDate"
-                [location]="event.location"
-                [socialClub]="event.socialClub">
-                </app-search-event-card>
-              </ng-container>
-              <ng-container *ngIf="showHosts">
-                <app-search-host-card
-                *ngFor="let host of filteredHosts"
-                [hostName]="host.firstName + ' ' + host.lastName"
-                [hostEmail]="host.email"
-                [hostImage]="host.employee_picture_link"
-                [hostBio]="host.employeeDescription"
-                [hostId]="host.employeeId"
-                ></app-search-host-card>
-              </ng-container>
-              <ng-container *ngIf="showSocialClubs">
-                <app-search-social-club-card
-                *ngFor="let club of filteredSocialClubs"
-                [clubID]="club.id"
-                [clubName]="club.name"
-                [clubSummary]="club.summaryDescription"
-                [clubDescription]="club.description">
-                </app-search-social-club-card>
-              </ng-container>
+            <div *ngIf="loading; else content">
+              <div class="h-full flex flex-col gap-10">
+                <app-ghost-search-event-card></app-ghost-search-event-card>
+                <app-ghost-search-event-card></app-ghost-search-event-card>
+                <app-ghost-search-event-card></app-ghost-search-event-card>
+                <app-ghost-search-event-card></app-ghost-search-event-card>
+                <app-ghost-search-event-card></app-ghost-search-event-card>
+                <app-ghost-search-event-card></app-ghost-search-event-card>
+                <app-ghost-search-event-card></app-ghost-search-event-card>
+                <app-ghost-search-event-card></app-ghost-search-event-card>
+                <app-ghost-search-event-card></app-ghost-search-event-card>
+              </div>
             </div>
+
             
+
+            <ng-template #content>
+              <div class=" h-full flex flex-col gap-10">
+                <ng-container *ngIf="showEvents">
+                  <app-search-event-card   
+                  *ngFor="let event of filteredEvents"
+                  [eventID]="event.eventId"
+                  [eventTitle]="event.title"
+                  [eventDescription]="event.description"
+                  [startTime]="event.startTime"
+                  [endTime]="event.endTime"
+                  [startDate]="event.startDate"
+                  [endDate]="event.endDate"
+                  [location]="event.location"
+                  [socialClub]="event.socialClub">
+                  </app-search-event-card>
+                </ng-container>
+                <ng-container *ngIf="showHosts">
+                  <app-search-host-card
+                  *ngFor="let host of filteredHosts"
+                  [hostName]="host.firstName + ' ' + host.lastName"
+                  [hostEmail]="host.email"
+                  [hostImage]="host.employee_picture_link"
+                  [hostBio]="host.employeeDescription"
+                  [hostId]="host.employeeId"
+                  ></app-search-host-card>
+                </ng-container>
+                <ng-container *ngIf="showSocialClubs">
+                  <app-search-social-club-card
+                  *ngFor="let club of filteredSocialClubs"
+                  [clubID]="club.id"
+                  [clubName]="club.name"
+                  [clubSummary]="club.summaryDescription"
+                  [clubDescription]="club.description">
+                  </app-search-social-club-card>
+                </ng-container>
+              </div>
+            </ng-template>
         </div>
       </div>
     </div>
