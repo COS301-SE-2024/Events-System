@@ -28,6 +28,14 @@ export class UserReviewCardComponent {
   @Input() createdAt: Date | undefined;
   @Input() pictureLink: string | undefined;
 
+  currentReviewId: string | null = null;
+
+
+  openUpdateModal(rating: number, comments: string, reviewId: string): void {
+    this.currentReviewId = reviewId;
+    console.log(this.currentReviewId)
+    // existing logic to open the modal
+  }
 
   // Helper to create an array for the rating stars
   getStars(): number[] {

@@ -30,7 +30,7 @@
                   </ng-container>
             </div>
             <div class="flex gap-4 ml-4" *ngIf="matchingIDs()">
-                <label for="my_modal_7" class="btn btn-primary btn-xs  bg-transparent border-none"><i class="fa fa-pencil" aria-hidden="true"></i></label>
+                <label for="my_modal_7" class="btn btn-primary btn-xs  bg-transparent border-none"  (click)="openUpdateModal(rating ?? 0, comments ?? '', reviewId ?? '')"><i class="fa fa-pencil" aria-hidden="true"></i></label>
                 <label  class="btn btn-danger btn-xs text-red-400 bg-transparent border-none"  (click)="deleteComment(reviewId)" ><i class="fa fa-trash-o" aria-hidden="true"></i></label>
             </div>
            
@@ -67,11 +67,9 @@
           <div class="layout-container flex h-full grow flex-col ">
             <div class="px-5 md:px-32 flex flex-1 justify-center h-full ">
               <div class="layout-content-container flex flex-col max-w-[2020px] h-full flex-1">
-                <h1 class="text-white-500 text-3xl font-bold leading-tight tracking-[-0.015em] px-4 text-center pb-3 pt-5">Update your rating</h1>
-  
-  
-  
-  
+                <h1 class="text-white-500 text-3xl font-bold leading-tight tracking-[-0.015em] px-4 text-center pb-3 pt-5">Update your rating</h1>  
+                {{ currentReviewId}}
+
                 <div class="flex gap-5 ml-7 mt-8">
                   <h1 class="text-2xl">My Rating</h1>
                   <div class="rating rating-md gap-0.5">
