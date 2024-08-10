@@ -46,26 +46,34 @@ export class UserReviewCardComponent {
         'Content-Type': 'application/json'
       }
     })
-    .then(response => response.json())
-    .then(data => {
-        // Show the success toast
-        this.showdeletesuccessToast = true;
-        this.isAPILoading = false;
-        sessionStorage.clear();
-        // Hide the toast after 5 seconds
-        setTimeout(() => {
-          this.showdeletesuccessToast = false;
-        }, 5000);
-})
-    .catch((error) => {
-      this.showdeletefailToast = true;
-      this.isAPILoading = false;
+    .then(response => {
+      if (response.status === 204) {
+          // No content to parse, handle success
+          this.showdeletesuccessToast = true;
+          this.isAPILoading = false;
+          sessionStorage.clear();
+          // Hide the toast after 5 seconds
+          setTimeout(() => {
+            this.showdeletesuccessToast = false;
+          }, 5000);
+          return; // Ensure a return value
+      } else {
+          return response.json().then(data => {
+              // Handle other success responses if needed
+              return data; // Ensure a return value
+          });
+      }
+  })
+  .catch((error) => {
+    this.showdeletefailToast = true;
+    this.isAPILoading = false;
 
-      setTimeout(() => {
-        this.showdeletefailToast = false;
-      }, 10000);
-      console.error('Error:', error);
-    });
 
-  }
+    setTimeout(() => {
+      this.showdeletefailToast = false;
+    }, 10000);
+    console.error('Error:', error);
+  });
+}
+
 }
