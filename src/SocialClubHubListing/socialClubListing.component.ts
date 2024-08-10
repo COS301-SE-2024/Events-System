@@ -19,6 +19,7 @@ interface Cache {
 })
 export class SocialClubListingComponent implements OnInit {
   clubs: any[] = [];
+  isLoading = true;
   club = {
     clubID: '',
     clubName: '',
@@ -35,6 +36,9 @@ export class SocialClubListingComponent implements OnInit {
       })
       .then(data => {
         this.clubs = Array.isArray(data) ? data : [data];
+      })
+      .then(() => {
+        this.isLoading = false;
       })
   }
 }
