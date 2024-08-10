@@ -18,7 +18,7 @@ export class EventsComponent implements OnInit{
   searchLocation = '';
   searchTerm = '';
   uniqueSocialClubs: string[] = [];
-checkedSocialClubs: string[] = [];
+  checkedSocialClubs: string[] = [];
   filteredEvents = this.events;
   isLoading = true;
   event = {

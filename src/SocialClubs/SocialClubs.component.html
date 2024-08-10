@@ -17,48 +17,21 @@
                     <div class="text-[#93adc8] flex border-none bg-base-200 items-center justify-center pl-4 rounded-l-xl border-r-0">
                       <div class="fa-solid fa-magnifying-glass"></div>
                     </div>
-                    <input placeholder="Search clubs by name, and creator... "  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl focus:outline-0 focus:ring-0 border-none bg-base-200 focus:border-none h-full placeholder:text-[#93adc8] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal" />
+                    <input (input)="updateSearchTerm($event)" placeholder="Search clubs by name, and creator... "  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl focus:outline-0 focus:ring-0 border-none bg-base-200 focus:border-none h-full placeholder:text-[#93adc8] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal" />
                   </div>
                 </label>
               </div>
             </div>
 
               <div class=" flex flex-wrap gap-10">
-                <app-social-club-card></app-social-club-card>
-                <app-social-club-card></app-social-club-card>
-                <app-social-club-card></app-social-club-card>
-                <app-social-club-card></app-social-club-card>
-                <app-social-club-card></app-social-club-card>
-                <app-social-club-card></app-social-club-card>
-                <app-social-club-card></app-social-club-card>
-                <app-social-club-card></app-social-club-card>
-                <app-social-club-card></app-social-club-card>
-                <app-social-club-card></app-social-club-card>
-                <app-social-club-card></app-social-club-card>
-                <app-social-club-card></app-social-club-card>
-                <app-social-club-card></app-social-club-card>
-                <app-social-club-card></app-social-club-card>
-                <app-social-club-card></app-social-club-card>
-                <app-social-club-card></app-social-club-card>
-                <app-social-club-card></app-social-club-card>
-                <app-social-club-card></app-social-club-card>
-                <app-social-club-card></app-social-club-card>
-                <app-social-club-card></app-social-club-card>
+                <app-social-club-card
+                *ngFor="let club of filteredSocialClubs"
+                [socialClubName]="club.name"
+                [socialClubID]="club.id"
+                [socialClubDescription]="club.description"></app-social-club-card>
               </div>
         </div>
       </div>
     </div>
   </div>
-
-
-<!-- <div class="rotating-text">
-  <p>CSS Animation is</p>
-  <p>
-    <span class="word alizarin">awesome.</span>
-    <span class="word wisteria">beautiful.</span>
-    <span class="word peter-river">creative.</span>
-    <span class="word emerald">fabulous.</span>
-    <span class="word sun-flower">interesting.</span>
-  </p>
-</div> -->
   
