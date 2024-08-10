@@ -32,4 +32,21 @@ export class NotificationService {
     notify() {
       this.notificationSubject.next();
     }
-}
+
+    sendSeriesNotification(Number: number, seriesId: number, Message: string, seriesTitle: string): Observable<string> {
+      const event = {
+        employeeId: Number,
+        seriesId: seriesId,
+        message: Message,
+        seriesTitle: seriesTitle,
+      };
+  
+      return from(fetch(this.apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(event)
+      }).then(response => response.text()));  }
+
+    }

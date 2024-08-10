@@ -12,9 +12,9 @@ import { RouterModule, Router } from '@angular/router';
 export class NotificationsComponent implements OnInit {
   notifications = [
 
-    {notificationId: 1, message: 'Notification Title 1', eventTitle: 'This is the description for notification 1.', eventId: "ID 1", read: false },
-    {notificationId: 2, message: 'Notification Title 1', eventTitle: 'This is the description for notification 1.', eventId: "ID 2", read: false },
-    {notificationId: 3, message: 'Notification Title 1', eventTitle: 'This is the description for notification 1.', eventId: "ID 3", read: false },
+    {notificationId: 1, message: 'Notification Title 1', eventTitle: 'This is the description for notification 1.', eventId: "ID 1", read: false, seriesTitle: 'Series Title 1', seriesId: "ID 1" },
+    {notificationId: 2, message: 'Notification Title 2', eventTitle: 'This is the description for notification 2.', eventId: "ID 2", read: false, seriesTitle: 'Series Title 1', seriesId: "ID 1"  },
+    {notificationId: 3, message: 'Notification Title 3', eventTitle: 'This is the description for notification 3.', eventId: "ID 3", read: false, seriesTitle: 'Series Title 1', seriesId: "ID 1"  },
   ];
 
   selectedNotification: any = null;
@@ -48,7 +48,6 @@ export class NotificationsComponent implements OnInit {
       return response.json();
     })
     .then(data => {
-      console.log(data);
       this.notifications = data.map((notification:any) => ({
         ...notification,
         read: notification.readAt !== null
@@ -105,7 +104,7 @@ export class NotificationsComponent implements OnInit {
       notification.read = true;
     }
     const empliD = Number(localStorage.getItem('ID'));
-    // console.log(`http://localhost:8080/api/notifications/${empliD}/${notificationId}`);
+    // console.log(`https://events-system-back.wn.r.appspot.com/api/notifications/${empliD}/${notificationId}`);
     fetch(`https://events-system-back.wn.r.appspot.com/api/notifications/${empliD}/${notificationId}/read`, {
       method: "PUT",
       credentials: "include",
@@ -134,7 +133,7 @@ export class NotificationsComponent implements OnInit {
   delete(event: MouseEvent, notificationId: number): void {
     event.stopPropagation(); // Prevents the click from bubbling up to the notification card
     const empliD = Number(localStorage.getItem('ID'));
-    // console.log(`http://localhost:8080/api/notifications/${empliD}/${notificationId}`);
+    // console.log(`https://events-system-back.wn.r.appspot.com/api/notifications/${empliD}/${notificationId}`);
     fetch(`https://events-system-back.wn.r.appspot.com/api/notifications/${empliD}/${notificationId}`, {
       method: "DELETE",
       credentials: "include",

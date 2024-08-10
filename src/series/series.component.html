@@ -7,42 +7,117 @@
                 <h1 class="skeleton text-6xl lg:ml-64 mt-8 lg:h-14 h-32 w-96"></h1>
                 <h2 class="skeleton mt-4 text-4xl lg:ml-64 text-secondary lg:h-8 h-24 lg:w-[700px] w-80"></h2>
             </div>
+            <div>
+                <div class="card bg-base-100 shadow-xl lg:mt-4 mt-32">
+                    <div class="card-body">
+                      <h2 class="card-title skeleton lg:h-8 h-14 w-64 -ml-2"></h2>
+                      <p class="skeleton lg:h-8 h-24 lg:w-[200px] w-80-ml-4"></p>
+                      <div class="card-actions justify-end">
+                        <!-- <button class="btn btn-primary">Find out More</button> -->
+                      </div>
+                    </div>
+                  </div>
+
+
+            </div>
 
         </div>
         
     </div> 
         <!-- actual content -->
-        <div *ngIf="!isLoading && club">
+        <div *ngIf="!isLoading && series"x>
             <div class="hero h-80 min-w-dvw" [style.background-image]="'url(' + imageSource + ')'">  </div>
             <!-- <div class="absolute top-0 left-8"> -->
                 <button class="btn w-[50px] -mt-12 lg:ml-8 h-[30px] rounded-full"(click)="goBack()"><i class="fa-solid fa-arrow-left"></i></button>
 
             <!-- </div> -->
 
-<!-- title -->
-<div role="tablist" class="tabs tabs-bordered">
-    <a role="tab" class="tab" [class.tab-active]="activeTab === 'tab1'" (click)="activeTab = 'tab1'">description</a>
-    <a role="tab" class="tab" [class.tab-active]="activeTab === 'tab2'" (click)="activeTab = 'tab2'">Event history</a>
-</div>
+                <!-- title -->
+        
+                <div class="flex lg:justify-between lg:flex-row flex-col">
+                    <div>
+                        <h1 class="text-6xl lg:ml-64 mt-8">{{series.name}}</h1>
+                        <h2 class="mt-4 text-4xl lg:ml-64 text-secondary">{{series.description}}</h2>
+                    </div>
+                    <div>
+                        <div class="card bg-base-100 shadow-xl lg:mt-4 mt-32">
+                            <div class="card-body">
+                                <div *ngIf="series.host">
+                                    <h2 class="card-title">Managed by: {{series.host.firstName}} {{series.host.lastName}}</h2>
+                                  </div>
+                              <div class="card-actions justify-end">
+                                <button class="btn btn-primary">Find out More</button>
+                              </div>
+                            </div>
+                          </div>
 
-<!-- Tab 1 content -->
-<div *ngIf="activeTab === 'tab1'" class="flex lg:justify-between lg:flex-row flex-col">
-    <div>
-        <h1 class="text-6xl lg:ml-64 mt-8">Agriulture series</h1>
-        <h2 class="mt-4 text-4xl lg:ml-64 text-secondary">Join a like minded organization with 1 goal, nature preservation, take part in weekly nature drives, and hikes where we explore nature, and endure to make the world a more beautiful place!</h2>
-    </div>
-    <div>
-    </div>
-</div>
 
-<!-- Tab 2 content -->
-<div *ngIf="activeTab === 'tab2'" class="flex lg:justify-between lg:flex-row flex-col">
-    <!-- Add your Tab 2 content here -->
-</div>
+                    </div>
 
-</div>
+                </div>
+                <!-- description -->
 
-        </div>
+                <!-- event details -->
+                 
+                <div class="card bg-base-100 shadow-xl mt-4">
+                    <div class="card-body">
+                      <h2 class="card-title text-4xl flex items-center justify-center mb-6">Subscribe Now!</h2>
+                      <!-- <div class="flex lg:justify-evenly lg:flex-row flex-col">
+                        <div>
+                            <p class="lg:text-4xl text-2xl"> <i class="fa-solid fa-user mr-2"></i> {{host.firstName}} {{host.lastName}} </p>
+                            <p class="lg:text-4xl text-2xl"><i class="fa-solid fa-location-pin mr-4"></i>{{event.location}}</p>
+                        </div>
+                        <div>
+                            <p class="lg:text-4xl text-2xl"><i class="fa-regular fa-clock mr-2"></i> {{event.startTime}} - {{event.endTime}} </p>
+                            <p class="lg:text-4xl text-2xl"><i class="fa-regular fa-calendar-days mr-4"></i>{{event.startDate | date:'d MMM' }} - {{ event.endDate | date:'d MMM'  }} </p>
+                        </div>
+                    </div> -->
+                       <div class="card-actions justify-center">
+                        <button class="btn btn-accent" *ngIf="!hasUserRSVPd"  @buttonFade (click)="rsvpToSeries()">Book Now</button>
+                        <button class="btn btn-outline btn-warning" *ngIf="hasUserRSVPd"  @buttonFade (click)="rsvpToSeries()">Cancel booking</button>
+
+                      </div>
+                    </div>
+                  </div>
+            <!-- Preperation details -->
+            <div class="mt-28">
+                <h2 class="text-4xl flex items-center justify-center">Series events</h2>
+                <div class="flex items-center justify-center mt-6">
+                    <div class="flex justify-center items-center">
+                        <div class="flex justify-center items-center w-full">
+                            <div class="grid md:grid-cols-3 lg:grid-cols-5 grid-cols-1 gap-6">
+                                <div *ngIf="isLoading; else content">
+                                    <!-- Skeleton screen goes here -->
+                                    <app-ghost-event-card></app-ghost-event-card>
+                                    <app-ghost-event-card></app-ghost-event-card>
+                                    <app-ghost-event-card></app-ghost-event-card>
+                                    <app-ghost-event-card></app-ghost-event-card>
+                                    <app-ghost-event-card></app-ghost-event-card>
+                                    <app-ghost-event-card></app-ghost-event-card>
+                                    <app-ghost-event-card></app-ghost-event-card>
+                                    <app-ghost-event-card></app-ghost-event-card>
+                                </div>
+                                <ng-template #content>
+                                    <!-- Actual content goes here -->
+                                    <app-event-card
+                                        *ngFor="let event of events"
+                                        [eventID]="event.eventId"
+                                        [eventTitle]="event.title"
+                                        [description]="event.description"
+                                        [startTime]="event.startTime"
+                                        [endTime]="event.endTime"
+                                        [startDate]="event.startDate"
+                                        [endDate]="event.endDate"
+                                        [location]="event.location"
+                                        [hostedBy]="event.host.firstName + ' ' + event.host.lastName"
+                                        [socialClub]="event.socialClub">
+                                    </app-event-card>
+                                </ng-template>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
     
 
 
@@ -53,5 +128,34 @@
         <p> <i class="fa-solid fa-user mr-2"></i> {{ eventID }}</p> -->
     
 
+</div>
+ <div class="toast" *ngIf="isAPILoading">
+  <div class="alert alert-info flex justify-center">
+      <span class="loading loading-dots loading-md"></span>
+  </div>
+</div>
 
 
+<div class="toast" *ngIf="showrsvpsuccessToast">
+  <div class="alert alert-success">
+    <span>Succesfully Subscribed</span>
+  </div>
+  </div>
+  
+  <div class="toast" *ngIf="showrsvpfailToast">
+  <div class="alert alert-error">
+    <span>Error Subscribing to series</span>
+  </div>
+  </div>
+
+  <div class="toast" *ngIf="showunrsvpsuccessToast">
+    <div class="alert alert-success">
+      <span>Succesfully removed Subscription</span>
+    </div>
+    </div>
+    
+    <div class="toast" *ngIf="showunrsvpfailToast">
+    <div class="alert alert-error">
+      <span>Error Removing Subscription for series</span>
+    </div>
+    </div>

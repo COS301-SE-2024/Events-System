@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { createClient } from 'contentful-management';
 import { FormsModule } from '@angular/forms';
 
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-settings',
@@ -79,14 +80,19 @@ export class SettingsComponent implements OnInit {
   }
 
   async uploadFileToContentful(file: File) {
+    const accessToken: string = environment.CMA_TOKEN;
+    if (!accessToken) {
+      throw new Error('Contentful CMA token is not defined');
+    }
+  
     const client = createClient({
-      accessToken: 'CMA_TOKEN',
+      accessToken: accessToken,
     });
 
     const space = await client.getSpace('ox5lffnpftbk');
-    const environment = await space.getEnvironment('master');
+    const contentfulEnvironment = await space.getEnvironment('master');
 
-    const asset = await environment.createAssetFromFiles({
+    const asset = await contentfulEnvironment.createAssetFromFiles({
       fields: {
         title: {
           'en-US': file.name,

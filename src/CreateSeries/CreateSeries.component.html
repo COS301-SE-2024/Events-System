@@ -10,12 +10,13 @@
   
     <div [ngSwitch]="currentStep">
       <button class="btn w-[50px] -mt-12 lg:ml-8 h-[30px] rounded-full"(click)="goBack()"><i class="fa-solid fa-arrow-left"></i></button>
+        <!-- name -->
       <div class="flex justify-center items-center">
         <div *ngSwitchCase="0" class="mt-8" [@fadeInOut]>
           <h1 class="lg:text-6xl text-4xl text-center ">Name your series</h1>
           <div class="tooltip tooltip-open tooltip-error mb-4"  [class.hidden]="!isNameEmpty" data-tip="please enter a Title">
           </div>
-            <input #nameInput type="text" placeholder="Type here" class="input input-bordered w-full max-w-xl text-lg h-12 mt-8" required/>
+            <input #snameInput type="text" placeholder="Type here" class="input input-bordered w-full max-w-xl text-lg h-12 mt-8" required/>
   
             <div class="flex justify-between mt-4">
             <button class="btn btn-outline btn-warning" [disabled]="currentStep === 0">Back</button>
@@ -24,13 +25,14 @@
          
         </div>
       </div>
+      <!-- description -->
       <div class="flex justify-center items-center">
         <div *ngSwitchCase="1" class="mt-8" [@fadeInOut]>
           <h1 class="lg:text-6xl text-4xl">What's it about?</h1>
           <div>
             <div class="tooltip tooltip-open tooltip-error lg:ml-8 ml-4 -mb-4"  [class.hidden]="!isDescriptionEmpty" data-tip="please enter a Description">
             </div>
-            <textarea #descriptionInput class="textarea textarea-bordered w-full h-44 mt-4" placeholder="Description" required></textarea>        
+            <textarea #sdescriptionInput class="textarea textarea-bordered w-full h-44 mt-4" placeholder="Description" required></textarea>        
           </div>
           <div class="flex justify-between mt-4">
             <button (click)="previousStep()" class="btn btn-outline btn-warning" [disabled]="currentStep === 0">Back</button>
@@ -38,10 +40,61 @@
           </div>
         </div>
       </div>
+      <!-- events -->
       <div class="flex justify-center items-center">
         <div *ngSwitchCase="2" [@fadeInOut]>
           <h1 class="lg:text-6xl text-4xl text-center mt-8">Add some events!</h1>
-            
+          <div class="flex justify-end items-center mt-8 lg:mr-0 mr-2">
+            <button class="btn btn-success btn-outline " routerLink="/createevent">Create New Event</button>
+          </div>
+            <!-- events table -->
+            <div class="overflow-x-auto mt-8">
+              <table class="table">
+                <!-- head -->
+                <thead>
+                  <tr>
+                    <th>
+                      <label>
+                        <input type="checkbox" class="checkbox checkbox-accent" [checked]="allEventsSelected" (change)="onSelectAllChange($event)" />
+                      </label>
+                    </th>
+                    <th>Name</th>
+                    <th>Social club</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let event of events" (click)="onRowClick(event.eventId)" class="cursor-pointer hover:bg-neutral transition-colors duration-400">
+                    <th>
+                      <label>
+                        <input type="checkbox" class="checkbox checkbox-accent" [checked]="isEventSelected(event.eventId)" (change)="onEventSelectionChange($event, event.eventId)" />
+                      </label>
+                    </th>
+                    <td>
+                      <div class="flex items-center gap-3">
+                        <div>
+                          <div class="font-bold">{{ event.title }}</div>
+                          <div class="text-sm opacity-50">{{ event.location }}</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>{{ event.socialClubName }}</td>
+                    <th>
+                      <button class="btn btn-ghost btn-xs" [routerLink]="['/event', event.eventId]" (click)="$event.stopPropagation()">details</button>
+                    </th>
+                  </tr>
+                </tbody>
+                <!-- foot -->
+                <tfoot>
+                  <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Social club</th>
+                    <th></th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
           <div class="flex justify-between mt-4">
             <button (click)="previousStep()" class="btn btn-outline btn-warning" [disabled]="currentStep === 0">Back</button>
             <div>
@@ -52,6 +105,7 @@
           </div>
         </div>
       </div>  
+      <!-- summary  -->
       <div class="flex justify-center items-center">
         <div *ngSwitchCase="3" [@fadeInOut]>
           <h1 class="lg:text-6xl text-4xl text-center mt-8">Let's Summarize</h1>
@@ -59,14 +113,64 @@
             <div class="label mt-4 flex justify-center">
               <span class="label-text">Title</span>
             </div>
-            <input disabled #nameInput type="text" placeholder="Type here" class="input input-bordered w-full max-w-xl text-lg h-12" required/>
+            <input disabled #snameInput type="text" placeholder="Type here" class="input input-bordered w-full max-w-xl text-lg h-12" required/>
           </div>
   
           <div class="label mt-4 flex justify-center">
             <span class="label-text">Description</span>
           </div>
-          <textarea disabled #descriptionInput class="textarea textarea-bordered w-full h-44" placeholder="Bio"required></textarea>    
-
+          <textarea disabled #sdescriptionInput class="textarea textarea-bordered w-full h-44" placeholder="Bio"required></textarea>  
+          <div class="label mt-4 flex justify-center">
+            <span class="label-text">Events</span>
+          </div>  
+            <!-- events table -->
+            <div class="overflow-x-auto">
+              <table class="table">
+                <!-- head -->
+                <thead>
+                  <tr>
+                    <th>
+                      <label>
+                        <input type="checkbox" class="checkbox checkbox-accent" [checked]="allEventsSelected" (change)="onSelectAllChange($event)" />
+                      </label>
+                    </th>
+                    <th>Name</th>
+                    <th>Social club</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let event of events" (click)="onRowClick(event.eventId)" class="cursor-pointer hover:bg-neutral transition-colors duration-400">
+                    <th>
+                      <label>
+                        <input type="checkbox" class="checkbox checkbox-accent" [checked]="isEventSelected(event.eventId)" (change)="onEventSelectionChange($event, event.eventId)" />
+                      </label>
+                    </th>
+                    <td>
+                      <div class="flex items-center gap-3">
+                        <div>
+                          <div class="font-bold">{{ event.title }}</div>
+                          <div class="text-sm opacity-50">{{ event.location }}</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>{{ event.socialClubName }}</td>
+                    <th>
+                      <button class="btn btn-ghost btn-xs" [routerLink]="['/event', event.eventId]" (click)="$event.stopPropagation()">details</button>
+                    </th>
+                  </tr>
+                </tbody>
+                <!-- foot -->
+                <tfoot>
+                  <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Social club</th>
+                    <th></th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
           <div class="flex justify-between mt-4">
             <button (click)="previousStep()" class="btn btn-outline btn-warning" [disabled]="currentStep === 0">back</button>
             <button (click)="presubmit()" class="btn btn-success">Create series</button>
@@ -84,13 +188,13 @@
   
     <div class="toast" *ngIf="showsuccessToast">
       <div class="alert alert-success">
-        <span>Event succesfully created Redirecting...</span>
+        <span>Series succesfully created Redirecting...</span>
       </div>
     </div>
   
     <div class="toast" *ngIf="showfailToast">
       <div class="alert alert-error">
-        <span>error creating event</span>
+        <span>error creating series</span>
       </div>
     </div>
     <!-- <button (click)="previousStep()" class="btn btn-warning" [disabled]="currentStep === 0">Back</button>

@@ -17,31 +17,30 @@
             <div class="flex items-center mb-2 sm:mb-0">
               <span class="material-icons mr-2 text-info" [ngClass]="{'text-gray-400': notification.read, 'text-info': !notification.read}">notifications</span>
               <div>
-                <h3 class="text-lg font-bold truncate sm:max-w-xs max-w-[8rem]" [ngClass]="{'text-gray-500': notification.read, 'text-base-content': !notification.read}">
-                  {{ notification.eventTitle }}
-                </h3>
-                <p class="text-sm truncate sm:max-w-xs max-w-[8rem]" [ngClass]="{'text-gray-400': notification.read, 'text-primary': !notification.read}">
+                <h3 class="text-lg font-bold" [ngClass]="{'text-gray-500': notification.read, 'text-base-content': !notification.read}">
+                  {{ notification.eventId ? notification.eventTitle : notification.seriesTitle }}
+                </h3>                
+                <p class="text-sm" [ngClass]="{'text-gray-400': notification.read, 'text-primary': !notification.read}">
                   {{ notification.message }}
                 </p>
               </div>
             </div>
-            <div class="flex flex-row">
-              <button class="btn btn-sm btn-outline mr-0 sm:mr-1 mb-1 sm:mb-0" 
-                      (click)="notification.read ? markAsUnread($event, notification.notificationId) : markAsRead($event, notification.notificationId)">
-                {{ notification.read ? 'Mark as Unread' : 'Mark as Read' }}
-              </button>
-              
-              <button class="btn btn-sm btn-outline mr-0 sm:mr-1 mb-1 sm:mb-0" 
-                      (click)="markAsRead($event, notification.notificationId)"
-                      [disabled]="notification.read || notification.message.includes('Event Deleted')"
-                      [routerLink]="['/event', notification.eventId]">
-                View More
-              </button>
-              <button class="btn btn-sm btn-outline btn-error" 
-                      (click)="delete($event, notification.notificationId)">
-                Delete
-              </button>
-            </div>
+            <button class="btn btn-sm btn-outline ml-2" 
+                    (click)="notification.read ? markAsUnread($event, notification.notificationId) : markAsRead($event, notification.notificationId)">
+              {{ notification.read ? 'Mark as Unread' : 'Mark as Read' }}
+            </button>
+            
+            <button class="btn btn-sm btn-outline ml-2" 
+                    (click)="markAsRead($event, notification.notificationId)"
+                    [disabled]="notification.read || notification.message.includes('Event Deleted')"
+                    [routerLink]="notification.eventId ? ['/event', notification.eventId] : ['/series', notification.seriesId]">
+                    View More
+            </button>
+            <button class="btn btn-sm btn-outline ml-2 btn-error" 
+            (click)="delete($event, notification.notificationId)"
+            >
+      delete
+    </button>
           </div>
         </div>
       </div>

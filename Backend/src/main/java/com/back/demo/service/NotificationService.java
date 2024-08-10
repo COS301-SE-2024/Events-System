@@ -14,8 +14,10 @@ import com.back.demo.model.Notification;
 import com.back.demo.repository.NotificationRepository;
 import com.back.demo.repository.EmployeeRepository;
 import com.back.demo.repository.EventRSVPRepository;
+import com.back.demo.repository.EventSeriesSubscriptionRepository;
 import com.back.demo.model.Employee;
 import com.back.demo.model.EventRSVP;
+import com.back.demo.model.EventSeriesSubscription;
 
 @Service
 public class NotificationService {
@@ -30,6 +32,10 @@ public class NotificationService {
 
         @Autowired
     private EventRSVPRepository eventRSVPRepository;
+
+    
+    @Autowired
+    private EventSeriesSubscriptionRepository eventSeriesSubscriptionRepository;
 
     public Notification createNotification(Notification notification) {
         Notification savedNotification = notificationRepository.save(notification);
@@ -51,29 +57,38 @@ public class NotificationService {
 
     public void notifyAllEmployees(Notification notif) {
         List<EventRSVP> rsvps = eventRSVPRepository.findByEventId(notif.getEventId());
+        List<EventSeriesSubscription> seriesSubscriptions = new ArrayList<>();
 
+        if (notif.getSeriesId() != null) {
+            seriesSubscriptions = eventSeriesSubscriptionRepository.findBySeriesId(notif.getSeriesId().longValue());
+            System.out.println("Series Subscriptions: " + seriesSubscriptions);
+        }else{
+            System.out.println("Null Series Subscriptions");
+        }
         for (EventRSVP rsvp : rsvps) {
-            Notification notification = new Notification();
-            notification.setEmployeeId(rsvp.getEmployeeId().longValue());
-            notification.setEventId(notif.getEventId());
-            notification.setMessage(notif.getMessage());
-            notification.setEventTitle(notif.getEventTitle());
-            notificationRepository.save(notification);
-            template.convertAndSend("/topic/notification" + rsvp.getEmployeeId(), notif.getMessage());
+            sendNotification(rsvp.getEmployeeId().longValue(), notif);
+        }
 
+        for (EventSeriesSubscription seriesSubscription : seriesSubscriptions) {
+            sendNotification(seriesSubscription.getEmployeeId().longValue(), notif);
         }
     
     }
-    // public void notifyAllEmployees(Notification notif) {
-    //     notificationRepository.save(notif);
-    //     List<Employee> employees = employeeRepository.findAll();
-    //     List<EventRSVP> rsvps = eventRSVPRepository.findByEventId(notif.getEventId());
-    //     for (EventRSVP rsvp : rsvps) {
-    //         template.convertAndSend("/topic/notification" + rsvp.getEmployeeId(), notif.getMessage());
-    //     }
 
-    // }
+    private void sendNotification(Long employeeId, Notification notif) {
+        Notification notification = new Notification();
+        notification.setEmployeeId(employeeId);
+        notification.setEventId(notif.getEventId());
+        notification.setSeriesId(notif.getSeriesId());
+        notification.setMessage(notif.getMessage());
+        notification.setEventTitle(notif.getEventTitle());
+        notification.setSeriesTitle(notif.getSeriesTitle());
+        notificationRepository.save(notification);
+        System.out.println("Notification sent to: /topic/notification" + employeeId);
+        template.convertAndSend("/topic/notification" + employeeId, notif.getMessage());
+    }
 
+    
     public int getNotificationCountForEmployee(int employeeId) {
         List<Notification> notifications = notificationRepository.findAll();
         int count = 0;

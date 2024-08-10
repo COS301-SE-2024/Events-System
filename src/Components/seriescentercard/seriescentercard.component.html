@@ -1,13 +1,15 @@
-<div
-  class="relative h-44 w-full flex-col items-end justify-center overflow-hidden rounded-xl bg-white bg-clip-border text-center text-gray-700 mt-8">
+<a [routerLink]="['/series', seriesId]" class="block">
   <div
-    class="absolute inset-0 m-0 h-full w-full overflow-hidden rounded-none bg-transparent bg-cover bg-clip-border bg-center text-gray-700 shadow-none transition duration-300 ease-in-out hover:bg-black hover:bg-opacity-50"
-    [ngStyle]="{'background-image': 'url(' + imageSource + ')'}">
-    <div class="absolute inset-0 w-full h-full to-bg-black-10 bg-gradient-to-t from-black/80 via-black/50 transition duration-300 ease-in-out hover:bg-black hover:bg-opacity-50"></div>
+    class="relative h-44 w-full flex-col items-end justify-center overflow-hidden rounded-xl bg-white bg-clip-border text-center text-gray-700 mt-8 transition-transform duration-300 ease-in-out transform hover:scale-95">
+    <div
+      class="absolute inset-0 m-0 h-full w-full overflow-hidden rounded-none bg-transparent bg-cover bg-clip-border bg-center text-gray-700 shadow-none transition duration-300 ease-in-out"
+      [ngStyle]="{'background-image': 'url(' + imageSource + ')'}">
+      <div class="absolute inset-0 w-full h-full bg-black opacity-0 transition-opacity duration-300 ease-in-out hover:opacity-50"></div>
+    </div>
+    <div class="relative p-6 px-6 py-14 md:px-12 flex justify-center items-center align-middle">
+      <h2 class="mb-6 block font-sans text-4xl font-medium leading-[1.5] tracking-normal text-white antialiased text-center">
+          {{name}}
+      </h2>
+    </div>
   </div>
-  <div class="relative p-6 px-6 py-14 md:px-12 flex justify-center items-center align-middle">
-    <h2 class="mb-6 block font-sans text-4xl font-medium leading-[1.5] tracking-normal text-white antialiased text-center">
-        Agriculture Series
-    </h2>
-  </div>
-</div>
+</a>

@@ -35,6 +35,12 @@ public class Notification {
     @Column(name = "event_title")
     private String eventTitle;
 
+    @Column(name = "series_id")
+    private Integer seriesId;
+
+    @Column(name = "series_title")
+    private String seriesTitle;
+
     // Getters and setters
     public Long getNotificationId() {
         return notificationId;
@@ -90,5 +96,21 @@ public class Notification {
 
     public void setEventTitle(String eventTitle) {
         this.eventTitle = eventTitle;
+    }
+
+    public Integer getSeriesId() {
+        return seriesId;
+    }
+
+    public void setSeriesId(Integer seriesId) {
+        this.seriesId = seriesId;
+    }
+
+    public String getSeriesTitle() {
+        return seriesTitle;
+    }
+
+    public void setSeriesTitle(String seriesTitle) {
+        this.seriesTitle = seriesTitle;
     }
 }
