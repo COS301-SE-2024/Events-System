@@ -99,10 +99,9 @@
     
                       <div>
                         <div class="mb-2 flex flex-col items-center relative">
-                          <div class="btn btn-ghost btn-square avatar p-2 relative" style="width: 240px; height: 240px;" (click)="fileInput.click()">
+                          <div class="avatar p-2 relative" style="width: 350px; height: 350px;">
                             <div class="w-full relative bg-black bg-opacity-50 rounded-lg">
                               <img [src]="imageSource" alt="Social Club Image" style="width: 100%; height: 100%;">
-                              
                             </div>
                           </div>
                           <input type="file" #fileInput class="hidden">
@@ -110,12 +109,13 @@
                       </div>
                     </div>
     
-                    <div class="mx-auto w-1/2">
-                        <div class="label mt-4 flex justify-center">
+                    <div class="mx-auto w-96">
+                        <div class="label mt-4 flex flex-col items-center justify-center">
                             <span class="label-text">Social Club Name</span>
+                            <input disabled #nameInput type="text" placeholder="Type here" class="input input-bordered mt-2 w-64 max-w-xl text-lg h-12" required
+                            [value]="createForm.get('name')?.value"/>
                         </div>
-                        <input disabled #nameInput type="text" placeholder="Type here" class="input input-bordered w-full max-w-xl text-lg h-12" required
-                        [value]="createForm.get('name')?.value"/>
+                        
                     </div>
     
                     <div class="label mt-4 flex justify-center">
