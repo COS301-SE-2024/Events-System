@@ -22,4 +22,11 @@ export class UserReviewCardComponent {
   getStars(): number[] {
     return Array(5).fill(0).map((x, i) => i + 1);
   }
+
+  getInitials(): string {
+    const firstInitial = this.firstName ? this.firstName.charAt(0) : '';
+    const lastInitial = this.lastName ? this.lastName.charAt(0) : '';
+    return `${firstInitial}${lastInitial}`.toUpperCase();
+  }
+
 }
