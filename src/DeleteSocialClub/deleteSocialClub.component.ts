@@ -63,6 +63,7 @@ export class DeleteSocialClubComponent {
           })
           .then(data => {
             this.showsuccessToast = true;
+            this.isAPILoading = false;
 
             setTimeout(() => {
               this.showsuccessToast = false;
@@ -88,7 +89,7 @@ export class DeleteSocialClubComponent {
           setTimeout(() => {
             this.showfailToast = false;
           }, 10000);
-          console.error("Incorrect club name: " + this.clubName?.toLowerCase())
+          console.error("Incorrect club name")
         }
       }
       else {

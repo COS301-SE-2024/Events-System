@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms'; 
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { RandomImageServiceService } from 'src/app/random-image-service.service';
 
 @Component({
   selector: 'app-social-club-create',
@@ -35,16 +36,19 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 export class SocialClubCreateComponent implements OnInit {
   createForm: FormGroup;
   hostID: any;
-  currentStep = 0;
+  imageSource: string;
+  currentStep = 1;
   isPictureEmpty = false; isNameEmpty = false; isDescriptionEmpty = false; isCategoriesEmpty = false; isSummaryEmpty = false;
   showsuccessToast = false;
   showfailToast = false;
   isAPILoading = false;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private http: HttpClient
+    private http: HttpClient,
+    private randomImageService: RandomImageServiceService
   )
   {
     this.createForm = this.fb.group({
@@ -55,10 +59,12 @@ export class SocialClubCreateComponent implements OnInit {
       summaryDescription: [],
       categories: []
     });
+    this.imageSource = '';
   }
 
   ngOnInit(): void {
     this.checkCookies();
+    this.imageSource = this.randomImageService.getRandomImageSource();
   }
 
   createClub() {
@@ -85,7 +91,7 @@ export class SocialClubCreateComponent implements OnInit {
               summaryDescription: this.createForm.get('summaryDescription')?.value,
               categories: [this.createForm.get('categories')?.value]
             };
-            console.log("Form data: " + JSON.stringify(formData));
+            // console.log("Form data: " + JSON.stringify(formData));
             
             try {
               fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs', {
@@ -97,15 +103,15 @@ export class SocialClubCreateComponent implements OnInit {
                 body: JSON.stringify(formData)
               })
               .then(response => response.json())
-              .then(data => {
-                  // Show the success toast
-                  //console.log(data);
-                  this.showsuccessToast = true;
-                  this.isAPILoading = false;
-                  setTimeout(() => {
-                    this.showsuccessToast = false;
-                    window.history.back();
-                  }, 5000);
+              .then(() => {
+                // Show the success toast
+                //console.log(data);
+                this.showsuccessToast = true;
+                this.isAPILoading = false;
+                setTimeout(() => {
+                  this.showsuccessToast = false;
+                  window.history.back();
+                }, 5000);
               })
               .catch((error) => {
                 this.showfailToast = true;

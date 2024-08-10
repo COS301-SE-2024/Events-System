@@ -36,6 +36,12 @@ export class SocialClubListingComponent implements OnInit {
       })
       .then(data => {
         this.clubs = Array.isArray(data) ? data : [data];
+        
+        for(let i = 0; i < this.clubs.length; ++i) {
+          if(!this.clubs[i].pictureLink || this.clubs[i].pictureLink == '') {
+            this.clubs[i].pictureLink = "assets/pexels-rahulp9800-1652361.jpg";
+          }
+        }
       })
       .then(() => {
         this.isLoading = false;

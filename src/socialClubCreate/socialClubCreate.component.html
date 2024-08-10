@@ -10,10 +10,10 @@
 
           <div class="mx-auto text-center">
             <ul class="steps lg:text-md text-sm">
-              <li [class.step-primary]="currentStep >= 0" class="step cursor-pointer" (click)="navigateToStep(0)">Image</li>
-              <li [class.step-primary]="currentStep >= 1" class="step cursor-pointer" (click)="navigateToStep(1)">Name</li>
-              <li [class.step-primary]="currentStep >= 2" class="step cursor-pointer" (click)="navigateToStep(2)">Description & Category</li>
-              <li [class.step-primary]="currentStep >= 3" class="step cursor-pointer" (click)="navigateToStep(3)">Summary</li>
+              <!-- <li [class.step-primary]="currentStep >= 0" class="step cursor-pointer" (click)="navigateToStep(0)">Image</li> -->
+              <li [class.step-primary]="currentStep >= 1" class="step cursor-pointer" (click)="navigateToStep(1)" type="submit">Name</li>
+              <li [class.step-primary]="currentStep >= 2" class="step cursor-pointer" (click)="navigateToStep(2)" type="submit">Description & Category</li>
+              <li [class.step-primary]="currentStep >= 3" class="step cursor-pointer" (click)="navigateToStep(3)" type="submit">Summary</li>
             </ul>
           </div>
 
@@ -101,7 +101,7 @@
                         <div class="mb-2 flex flex-col items-center relative">
                           <div class="btn btn-ghost btn-square avatar p-2 relative" style="width: 240px; height: 240px;" (click)="fileInput.click()">
                             <div class="w-full relative bg-black bg-opacity-50 rounded-lg">
-                              <img alt="Social Club Image" style="width: 100%; height: 100%;">
+                              <img [src]="imageSource" alt="Social Club Image" style="width: 100%; height: 100%;">
                               
                             </div>
                           </div>
