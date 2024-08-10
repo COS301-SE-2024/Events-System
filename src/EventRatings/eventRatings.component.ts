@@ -31,6 +31,9 @@ export class EventRatingsComponent implements OnInit {
   { 
    this.imageSource = '';
   }
+  goBack(): void {
+    window.history.back();
+  }
   submitFeedback(): void {
     this.isAPILoading = true;
     console.log('Rating:', this.rating);

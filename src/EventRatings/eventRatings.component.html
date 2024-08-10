@@ -1,5 +1,5 @@
 <div class="hero h-80 min-w-dvw bg-pink-700" [style.background-image]="'url(' + imageSource + ')'"></div> <!-- [style.background-image]="'url(' + imageSource + ')'" -->
-<button class="btn w-[50px] -mt-48 lg:ml-8 h-[30px] rounded-full z-40"><i class="fa-solid fa-arrow-left"></i></button> 
+<button class="btn w-[50px] -mt-48 lg:ml-8 h-[30px] rounded-full z-40" (click)="goBack()"><i class="fa-solid fa-arrow-left"></i></button> 
 <!-- (click)="goBack()" -->
 
 <div *ngIf="!isLoading" class="flex flex-col overflow-hidden" style='font-family: Manrope, "Noto Sans", sans-serif;'>
@@ -86,7 +86,106 @@
 
 <form (ngSubmit)="submitFeedback()">
     <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
-      
+      <div class="modal-box">
+        <div class="flex flex-col overflow-hidden" style='font-family: Manrope, "Noto Sans", sans-serif;'>
+          <div class="layout-container flex h-full grow flex-col ">
+            <div class="px-5 md:px-32 flex flex-1 justify-center h-full ">
+              <div class="layout-content-container flex flex-col max-w-[2020px] h-full flex-1">
+                <h1 class="text-white-500 text-3xl font-bold leading-tight tracking-[-0.015em] px-4 text-center pb-3 pt-5">How was your experience at the {{ event.title }} ?</h1>
+               
+                <div class="flex flex-wrap gap-x-8 gap-y-6 p-6">
+                  <div class="flex flex-col gap-2">
+                    <p class="text-green-700 text-4xl font-black leading-tight tracking-[-0.033em]">{{ getAverageRating() | number:'1.1-1' }}</p>
+                   
+                    <div class="rating rating-md gap-0.5">
+                      <ng-container *ngFor="let star of getStars(); let i = index">
+                        <input
+                          type="radio"
+                          [name]="'getAverageRating()-' + 2"
+                          class="mask mask-star-2 bg-green-700"
+                          [checked]="getAverageRating() && getAverageRating() >= star"
+                        />
+                      </ng-container>
+                    </div>
+  
+  
+                    <p class="text-white-100 text-base font-normal leading-normal">{{ reviews.length }} reviews</p>
+                  </div>
+  
+  
+                  <div class="grid min-w-[200px] max-w-[400px] flex-1 grid-cols-[20px_1fr_40px] items-center gap-y-3">
+                    <p class="text-white-100 text-sm font-normal leading-normal">5</p>
+                    <progress class="progress progress-success w-56" [value]="getPercentage(5)*100" max="100"></progress>
+                    <p class="text-[#637588] text-sm font-normal leading-normal text-right">{{ getPercentage(5) | percent:'1.0-0' }}</p>
+  
+  
+                    <p class="text-white-100 text-sm font-normal leading-normal">4</p>
+                    <progress class="progress progress-success w-56" [value]="getPercentage(4)*100" max="100"></progress>
+                    <p class="text-[#637588] text-sm font-normal leading-normal text-right">{{ getPercentage(4) | percent:'1.0-0' }}</p>
+  
+  
+                    <p class="text-white-100 text-sm font-normal leading-normal">3</p>
+                    <progress class="progress progress-success w-56" [value]="getPercentage(3)*100" max="100"></progress>
+                    <p class="text-[#637588] text-sm font-normal leading-normal text-right">{{ getPercentage(3) | percent:'1.0-0' }}</p>
+  
+  
+                    <p class="text-white-100 text-sm font-normal leading-normal">2</p>
+                    <progress class="progress progress-success w-56" [value]="getPercentage(2)*100" max="100"></progress>
+                    <p class="text-[#637588] text-sm font-normal leading-normal text-right">{{ getPercentage(2) | percent:'1.0-0' }}</p>
+  
+  
+                    <p class="text-white-100 text-sm font-normal leading-normal">1</p>
+                    <progress class="progress progress-success w-56" [value]="getPercentage(1)*100" max="100"></progress>
+                    <p class="text-[#637588] text-sm font-normal leading-normal text-right">{{ getPercentage(1) | percent:'1.0-0' }}</p>
+                  </div>
+                </div>
+  
+  
+                <div class="flex gap-5 ml-7 mt-8">
+                  <h1 class="text-2xl">My Rating</h1>
+                  <div class="rating rating-md gap-0.5">
+                    <input type="radio" name="rating" class="mask mask-star-2 bg-green-700" [(ngModel)]="rating" [value]="1" />
+                    <input type="radio" name="rating" class="mask mask-star-2 bg-green-700" [(ngModel)]="rating" [value]="2" />
+                    <input type="radio" name="rating" class="mask mask-star-2 bg-green-700" [(ngModel)]="rating" [value]="3" />
+                    <input type="radio" name="rating" class="mask mask-star-2 bg-green-700" [(ngModel)]="rating" [value]="4" />
+                    <input type="radio" name="rating" class="mask mask-star-2 bg-green-700" [(ngModel)]="rating" [value]="5" />
+                  </div>
+                </div>
+  
+  
+                <div class="flex flex-col max-w-[600px] flex-wrap items-start gap-4 mt-8 px-10 py-3">
+                  <div>Review</div>
+                  <label class="flex flex-col min-w-40 w-96 flex-1">
+                    <textarea
+                      placeholder="Tell us about your experience..."
+                      class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-white  focus:outline-0 focus:ring-0 border-none bg-neutral focus:border-none min-h-36 placeholder:text-white-1000 p-4 text-base font-normal leading-normal"
+                      [(ngModel)]="review"
+                      name="review"
+                    ></textarea>
+                  </label>
+                </div>
+  
+  
+                <div class="modal-action mt-16">
+                  <!-- <form method="dialog" class="w-full"> -->
+                      <!-- if there is a button in form, it will close the modal -->
+                      <div class="flex justify-between mt-4">
+                        
+                            <div class="modal-action">
+                              <button type="button" class="btn w-40 btn-outline btn-warning" (click)="closeDialog()">Cancel</button>
+
+                                <form (ngSubmit)="submitFeedback()">
+                                    <button type="submit" class="btn w-40 btn-accent"  (click)="closeDialog()">Submit feedback</button>
+                                </form>
+                          </div>
+                       </div>
+                  <!-- </form> -->
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </dialog>
   </form>
 

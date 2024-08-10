@@ -2,12 +2,12 @@
     <div class="flex flex-col gap-3 bg-transparent rounded-xl">
         <div class="flex flex-row gap-2">
             <div class="avatar placeholder"  *ngIf="!pictureLink">
-                <div class="w-24 rounded-full bg-base-200 flex items-center justify-center">
+                <div class="w-10 rounded-full bg-base-200 flex items-center justify-center">
                     <span class="text-xl font-bold text-primary">{{ getInitials() }}</span>
                   </div>
             </div>
             <div class="avatar"  *ngIf="pictureLink">
-                  <div class="w-24 rounded-full">
+                  <div class="w-10 rounded-full">
                     <img [src]="pictureLink" />
                   </div>
             </div>
@@ -17,7 +17,6 @@
             </div>
         </div>
 
-        {{ reviewId}}
         <div class="flex flex-row">
             <div class="rating rating-md gap-0.5">
                 <ng-container *ngFor="let star of getStars(); let i = index">
@@ -68,16 +67,15 @@
             <div class="px-5 md:px-32 flex flex-1 justify-center h-full ">
               <div class="layout-content-container flex flex-col max-w-[2020px] h-full flex-1">
                 <h1 class="text-white-500 text-3xl font-bold leading-tight tracking-[-0.015em] px-4 text-center pb-3 pt-5">Update your rating</h1>  
-                {{ this.currentReviewId}}
 
                 <div class="flex gap-5 ml-7 mt-8">
                   <h1 class="text-2xl">My Rating</h1>
                   <div class="rating">
-                    <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-500" />
-                    <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-500" checked="checked" />
-                    <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-500" />
-                    <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-500" />
-                    <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-500" />
+                    <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-500" (click)="setRating(1)" />
+                    <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-500" (click)="setRating(2)"/>
+                    <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-500" (click)="setRating(3)"/>
+                    <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-500" (click)="setRating(4)"/>
+                    <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-500" (click)="setRating(5)"/>
                   </div>
                 </div>
   
@@ -100,7 +98,7 @@
           </div>
         </div>
     <div class="flex justify-between mt-4">
-        <label for="my_modal_7"  class="btn btn-warning">Close</label>
+        <label for="my_modal_7"  class="btn btn-warning btn-outline">Close</label>
       <form method="dialog">
         <label for="my_modal_7" (click)="updateFeedback()" class="btn btn-accent">Submit feedback</label>
       </form>

@@ -17,9 +17,18 @@ export class UserReviewCardComponent {
   showdeletefailToast = false;
   showupdatesuccessToast = false;
   showupdatefailToast = false;
-  rating1 = 0;
+  rating12 = 0;
   comments1 = '';
   review= '';
+  
+
+  rat: number; 
+
+
+  constructor(){
+    this.rat = 0;
+  }
+
   @Input() employeeId: string | undefined;
   @Input() reviewId: string | undefined;
   @Input() firstName: string | undefined;
@@ -56,7 +65,9 @@ export class UserReviewCardComponent {
   }
 
 
-
+  setRating(rating: number): void {
+    this.rat = rating;
+  }
 
 
   deleteComment(reviewIds: string | undefined): void {
@@ -100,16 +111,18 @@ export class UserReviewCardComponent {
 }
 updateFeedback(): void {
   this.isAPILoading = true;
-  console.log('Rating:', this.rating1);
+  console.log('Rating:', this.rat);
   console.log('Review:', this.comments1);
-  console.log('Review ID:', this.reviewId);
+  const reviewId = sessionStorage.getItem('reviewID');
+  console.log('Review ID:', sessionStorage.getItem('reviewID'));
+
 
   const review = {
-    rating: this.rating,
-    comments: this.comments,
+    rating: this.rat,
+    comments: this.comments1,
   };
   // Implement your logic to handle the form submission
-  fetch('https://events-system-back.wn.r.appspot.com/api/feedback/' + this.reviewId, {
+  fetch('https://events-system-back.wn.r.appspot.com/api/feedback/' + reviewId, {
     method: 'PATCH',
     credentials: 'include',
     headers: {
@@ -131,8 +144,6 @@ updateFeedback(): void {
   .catch((error) => {
     this.showupdatefailToast = true;
     this.isAPILoading = false;
-
-
     setTimeout(() => {
       this.showupdatefailToast = false;
     }, 10000);
