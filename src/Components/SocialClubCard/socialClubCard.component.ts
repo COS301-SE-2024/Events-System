@@ -2,6 +2,7 @@ import { Component, Input, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { RandomImageServiceService } from '../../app/random-image-service.service'; 
+import { RandomHeaderService } from 'src/app/random-header.service';
 @Component({
   selector: 'app-social-club-card',
   standalone: true,
@@ -13,13 +14,13 @@ export class SocialClubCardComponent implements OnInit{
 
   imageSource: string;
   // Inject RandomImageService into the constructor
-  constructor(private randomImageService: RandomImageServiceService) {
+  constructor(private randomheaderService: RandomHeaderService) {
     this.imageSource = '';
   }
 
   ngOnInit(): void {
     // Use the injected service
-    this.imageSource = this.randomImageService.getRandomImageSource();
+    this.imageSource = this.randomheaderService.getRandomHeaderSource();
   }
 
   @Input() socialClubName: string | undefined;
