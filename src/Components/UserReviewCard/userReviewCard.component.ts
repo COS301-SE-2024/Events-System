@@ -1,11 +1,13 @@
 import { Component, input, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Timestamp } from 'rxjs';
+import { FormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-user-review-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './userReviewCard.component.html',
   styleUrl: './userReviewCard.component.css',
 })
@@ -13,6 +15,8 @@ export class UserReviewCardComponent {
   isAPILoading = false;
   showdeletesuccessToast = false;
   showdeletefailToast = false;
+  showupdatesuccessToast = false;
+  showupdatefailToast = false;
   @Input() employeeId: string | undefined;
   @Input() reviewId: string | undefined;
   @Input() firstName: string | undefined;
@@ -22,10 +26,12 @@ export class UserReviewCardComponent {
   @Input() createdAt: Date | undefined;
   @Input() pictureLink: string | undefined;
 
+
   // Helper to create an array for the rating stars
   getStars(): number[] {
     return Array(5).fill(0).map((x, i) => i + 1);
   }
+
 
   getInitials(): string {
     const firstInitial = this.firstName ? this.firstName.charAt(0) : '';
@@ -35,6 +41,8 @@ export class UserReviewCardComponent {
   matchingIDs(): boolean {
     return Number(this.employeeId) === Number(localStorage.getItem('ID'));
   }
+
+
 
 
   deleteComment(): void {
@@ -69,11 +77,62 @@ export class UserReviewCardComponent {
     this.isAPILoading = false;
 
 
+
+
     setTimeout(() => {
       this.showdeletefailToast = false;
     }, 10000);
     console.error('Error:', error);
   });
 }
+updateFeedback(): void {
+  this.isAPILoading = true;
+  console.log('Rating:', this.rating);
+  console.log('Review:', this.comments);
 
+
+  const review = {
+    rating: this.rating,
+    comments: this.comments,
+  };
+  // Implement your logic to handle the form submission
+  fetch('https://events-system-back.wn.r.appspot.com/api/feedback/' + this.reviewId, {
+    method: 'PATCH',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(review)
+  })
+  .then(response => response.json())
+  .then(data => {
+      // Show the success toast
+      this.showupdatesuccessToast = true;
+      this.isAPILoading = false;
+      sessionStorage.clear();
+      // Hide the toast after 5 seconds
+      setTimeout(() => {
+        this.showupdatesuccessToast = false;
+      }, 5000);
+})
+  .catch((error) => {
+    this.showupdatefailToast = true;
+    this.isAPILoading = false;
+
+
+    setTimeout(() => {
+      this.showupdatefailToast = false;
+    }, 10000);
+    console.error('Error:', error);
+  });
+}
+
+
+closeDialog() {
+  // Logic to close the dialog
+  const dialog: any = document.querySelector('dialog');
+  if (dialog) {
+    dialog.close();
+  }
+}
 }

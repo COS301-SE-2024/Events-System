@@ -17,28 +17,31 @@
             </div>
         </div>
 
+
         <div class="flex flex-row">
             <div class="rating rating-md gap-0.5">
                 <ng-container *ngFor="let star of getStars(); let i = index">
-                    <input 
-                      type="radio" 
-                      [name]="'rating-' + employeeId" 
-                      class="mask mask-star-2 bg-green-700" 
-                      [checked]="rating && rating >= star" 
+                    <input
+                      type="radio"
+                      [name]="'rating-' + employeeId"
+                      class="mask mask-star-2 bg-green-700"
+                      [checked]="rating && rating >= star"
                     />
                   </ng-container>
             </div>
             <div class="flex gap-4 ml-4" *ngIf="matchingIDs()">
-                <button class="btn btn-primary btn-xs  bg-transparent border-none" ><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                <label for="my_modal_7" class="btn btn-primary btn-xs  bg-transparent border-none"><i class="fa fa-pencil" aria-hidden="true"></i></label>
                 <label for="my_modal_6" class="btn btn-danger btn-xs text-red-400 bg-transparent border-none" ><i class="fa fa-trash-o" aria-hidden="true"></i></label>
             </div>
            
         </div>
 
+
         <p class="text-white-100 text-base font-normal leading-normal">
             {{ comments }}
         </p>
     </div>
+
 
 </div>
 <input type="checkbox" id="my_modal_6" class="modal-toggle" />
@@ -51,37 +54,97 @@
     <div class="flex justify-between mt-4">
         <label for="my_modal_6"  class="btn btn-warning">Close</label>
       <form method="dialog">
-        <button for="my_modal_2" (click)="deleteComment()" class="btn btn-outline btn-error">Delete my comment</button>
+        <button for="my_modal_6" (click)="deleteComment()" class="btn btn-outline btn-error">Delete my comment</button>
       </form>
     </div>
   </div>
 </div>
 
-<dialog id="my_modal_2" class="modal overflow-x-hidden backdrop-blur-sm">
+<input type="checkbox" id="my_modal_7" class="modal-toggle" />
+<div class="modal" role="dialog">
     <div class="modal-box">
-     
+        <div class="flex flex-col overflow-hidden" style='font-family: Manrope, "Noto Sans", sans-serif;'>
+          <div class="layout-container flex h-full grow flex-col ">
+            <div class="px-5 md:px-32 flex flex-1 justify-center h-full ">
+              <div class="layout-content-container flex flex-col max-w-[2020px] h-full flex-1">
+                <h1 class="text-white-500 text-3xl font-bold leading-tight tracking-[-0.015em] px-4 text-center pb-3 pt-5">Update your rating</h1>
+  
+  
+  
+  
+                <div class="flex gap-5 ml-7 mt-8">
+                  <h1 class="text-2xl">My Rating</h1>
+                  <div class="rating rating-md gap-0.5">
+                    <input type="radio" name="rating" class="mask mask-star-2 bg-green-700" [(ngModel)]="rating" [value]="1" />
+                    <input type="radio" name="rating" class="mask mask-star-2 bg-green-700" [(ngModel)]="rating" [value]="2" />
+                    <input type="radio" name="rating" class="mask mask-star-2 bg-green-700" [(ngModel)]="rating" [value]="3" />
+                    <input type="radio" name="rating" class="mask mask-star-2 bg-green-700" [(ngModel)]="rating" [value]="4" />
+                    <input type="radio" name="rating" class="mask mask-star-2 bg-green-700" [(ngModel)]="rating" [value]="5" />
+                  </div>
+                </div>
+  
+  
+  
+  
+                <div class="flex flex-col max-w-[600px] flex-wrap items-start gap-4 mt-8 px-10 py-3">
+                  <div>Review</div>
+                  <label class="flex flex-col min-w-40 w-96 flex-1">
+                    <textarea
+                      placeholder="Tell us about your experience..."
+                      class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-white  focus:outline-0 focus:ring-0 border-none bg-neutral focus:border-none min-h-36 placeholder:text-white-1000 p-4 text-base font-normal leading-normal"
+                      [(ngModel)]="comments"
+                      name="review"
+                    ></textarea>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    <div class="flex justify-between mt-4">
+        <label for="my_modal_7"  class="btn btn-warning">Close</label>
+      <form method="dialog">
+        <label for="my_modal_7" (click)="updateFeedback()" class="btn btn-accent">Submit feedback</label>
+      </form>
     </div>
-    <label class="modal-backdrop" for="my_modal_2">Close</label>
-    <!-- <form method="dialog" class="modal-backdrop">
-      <button>close</button>
-    </form> -->
+  </div>
+</div>
+<form (ngSubmit)="updateFeedback()">
+  <dialog id="my_modal_7" class="modal modal-bottom sm:modal-middle">
+
   </dialog>
+</form>
+
+
+
 
   <div class="toast" *ngIf="isAPILoading">
     <div class="alert alert-info flex justify-center">
         <span class="loading loading-dots loading-md"></span>
     </div>
   </div>
-    
-  
+   
+ 
   <div class="toast" *ngIf="showdeletesuccessToast">
   <div class="alert alert-success">
-    <span>Comment deleted Redirecting...</span>
+    <span>Comment deleted</span>
   </div>
   </div>
-  
+ 
   <div class="toast" *ngIf="showdeletefailToast">
   <div class="alert alert-error">
     <span>Error deleting Comment</span>
   </div>
   </div>
+
+  <div class="toast" *ngIf="showupdatesuccessToast">
+    <div class="alert alert-success">
+      <span>Comment updated </span>
+    </div>
+    </div>
+   
+    <div class="toast" *ngIf="showupdatefailToast">
+    <div class="alert alert-error">
+      <span>Error updating Comment</span>
+    </div>
+    </div>
