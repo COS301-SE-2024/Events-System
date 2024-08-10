@@ -1,40 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ActivatedRoute } from '@angular/router';
-import { of } from 'rxjs';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { CreateSeriesComponent } from './CreateSeries.component'; //import oath -------------------------
+import { By } from '@angular/platform-browser';
+import { CreateSeriesComponent } from './CreateSeries.component';
+import { FormsModule } from '@angular/forms';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-// Mock component
-@Component({
-  selector: 'app-mock-app-oauth',
-  template: '',
-})
-class MockEventComponent {/*...*/}
-
-@Component({
-  template: '<app-mock-app-oauth></app-mock-app-oauth>', // Use the correct selector
-})
-class TestHostComponent {/*...*/}
-
-describe('EventComponent', () => {
-  let component: TestHostComponent;
-  let fixture: ComponentFixture<TestHostComponent>;
+describe('CreateSeriesComponent', () => {
+  let component: CreateSeriesComponent;
+  let fixture: ComponentFixture<CreateSeriesComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CreateSeriesComponent], // change to oauth  -----------------------
-      declarations: [TestHostComponent, MockEventComponent], // Remove EventComponent from declarations
-      providers: [
-        {
-          provide: ActivatedRoute,
-          useValue: {
-            params: of({ id: 'testId' }) // Add your own mock values here
-          }
-        }
-      ]
+      imports: [FormsModule, NoopAnimationsModule, CreateSeriesComponent],
     }).compileComponents();
-  
-    fixture = TestBed.createComponent(TestHostComponent);
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(CreateSeriesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -42,4 +23,13 @@ describe('EventComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should navigate to the correct step when step buttons are clicked', () => {
+    const stepButtons = fixture.debugElement.queryAll(By.css('.step'));
+    stepButtons[1].triggerEventHandler('click', null);
+    fixture.detectChanges();
+    expect(component.currentStep).toBe(1);
+  });
+
+
 });
