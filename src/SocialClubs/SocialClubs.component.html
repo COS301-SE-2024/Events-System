@@ -22,14 +22,31 @@
                 </label>
               </div>
             </div>
+              <div *ngIf="isApiLoading else content">
+                <div class=" flex flex-wrap gap-10">
+                  <app-social-club-card-skeleton></app-social-club-card-skeleton>
+                  <app-social-club-card-skeleton></app-social-club-card-skeleton>
+                  <app-social-club-card-skeleton></app-social-club-card-skeleton>
+                  <app-social-club-card-skeleton></app-social-club-card-skeleton>
 
-              <div class=" flex flex-wrap gap-10">
-                <app-social-club-card
-                *ngFor="let club of filteredSocialClubs"
-                [socialClubName]="club.name"
-                [socialClubID]="club.id"
-                [socialClubDescription]="club.description"></app-social-club-card>
+                  <app-social-club-card-skeleton></app-social-club-card-skeleton>
+                  <app-social-club-card-skeleton></app-social-club-card-skeleton>
+                  <app-social-club-card-skeleton></app-social-club-card-skeleton>
+                  <app-social-club-card-skeleton></app-social-club-card-skeleton>
+                </div>
               </div>
+
+
+              <ng-template #content>
+                <div class=" flex flex-wrap gap-10">
+                  <app-social-club-card
+                  *ngFor="let club of filteredSocialClubs"
+                  [socialClubName]="club.name"
+                  [socialClubID]="club.id"
+                  [socialClubDescription]="club.description"></app-social-club-card>
+                </div>
+              </ng-template>
+
         </div>
       </div>
     </div>

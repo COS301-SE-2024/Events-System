@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {SocialClubCardComponent} from 'src/Components/SocialClubCard/socialClubCard.component';
+import { SocialClubCardSkeletonComponent } from 'src/Components/SocialClubCardSkeleton/SocialClubCardSkeleton.component';
 
 @Component({
   selector: 'app-social-clubs',
   standalone: true,
-  imports: [CommonModule, SocialClubCardComponent],
+  imports: [CommonModule, SocialClubCardComponent, SocialClubCardSkeletonComponent],
   templateUrl: './SocialClubs.component.html',
   styleUrl: './SocialClubs.component.css',
 })
@@ -13,6 +14,7 @@ export class SocialClubsComponent implements OnInit{
   socialclubs: any[] = [];
   filteredSocialClubs = this.socialclubs;
   searchTerm = '';
+  isApiLoading = true;
   ngOnInit(): void {
     fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs')
       .then(response => {
@@ -35,6 +37,7 @@ export class SocialClubsComponent implements OnInit{
       .then(() => {
         this.filteredSocialClubs = [...this.socialclubs]; // Initialize filteredSocialClubs after all fetch requests are completed
         this.filterClubs(); // Call filterClubs after all fetch requests are completed
+        this.isApiLoading = false;
       });
   }
 
