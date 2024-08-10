@@ -3,11 +3,6 @@
   <div class="layout-container flex h-full grow flex-col">
     <div class="px-5 md:px-32 flex flex-1 justify-center py-5 h-full ">
       <div class="layout-content-container flex flex-col max-w-[2010px] h-full flex-1">
-          <!--Page heading-->
-          <div class="flex items-center justify-between md:mx-10 mb-5">
-              <div class="text-white text-center font-bold text-2xl"><p>Create a club</p></div>
-          </div>
-
           <div class="mx-auto text-center">
             <ul class="steps lg:text-md text-sm">
               <!-- <li [class.step-primary]="currentStep >= 0" class="step cursor-pointer" (click)="navigateToStep(0)">Image</li> -->
@@ -71,7 +66,7 @@
                       <p>Category</p>
                       <div>
                           <!-- <div class="tooltip tooltip-open tooltip-error lg:ml-8 ml-4 -mb-4" data-tip="please enter a Description"></div> -->
-                          <select formControlName="categories" class="select select-accent w-full max-w-xs focus:border-none mt-4">
+                          <select formControlName="categories" class="select select-bordered w-96 focus:border-none mt-4">
                             <option disabled selected>Select ...</option>
                             <option>Literature</option>
                             <option>Education</option>
@@ -92,7 +87,7 @@
                 <div *ngSwitchCase="3" [@fadeInOut]>
                     <p>Let's Summarize</p>
     
-                    <div class="mx-auto w-1/2">
+                    <!-- <div class="mx-auto w-1/2">
                       <div class="label mt-4 flex justify-center">
                           <span class="label-text">Social Club Profile</span>
                       </div>
@@ -107,7 +102,7 @@
                           <input type="file" #fileInput class="hidden">
                         </div>
                       </div>
-                    </div>
+                    </div> -->
     
                     <div class="mx-auto w-96">
                         <div class="label mt-4 flex flex-col items-center justify-center">
