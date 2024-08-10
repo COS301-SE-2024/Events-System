@@ -10,6 +10,9 @@ import { Timestamp } from 'rxjs';
   styleUrl: './userReviewCard.component.css',
 })
 export class UserReviewCardComponent {
+  isAPILoading = false;
+  showdeletesuccessToast = false;
+  showdeletefailToast = false;
   @Input() employeeId: string | undefined;
   @Input() reviewId: string | undefined;
   @Input() firstName: string | undefined;
@@ -29,5 +32,40 @@ export class UserReviewCardComponent {
     const lastInitial = this.lastName ? this.lastName.charAt(0) : '';
     return `${firstInitial}${lastInitial}`.toUpperCase();
   }
+  matchingIDs(): boolean {
+    return Number(this.employeeId) === Number(localStorage.getItem('ID'));
+  }
 
+
+  deleteComment(): void {
+    // Implement your logic to delete the comment
+    fetch(`https://events-system-back.wn.r.appspot.com/api/feedback/${this.reviewId}`, {
+      method: 'DELETE',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Show the success toast
+        this.showdeletesuccessToast = true;
+        this.isAPILoading = false;
+        sessionStorage.clear();
+        // Hide the toast after 5 seconds
+        setTimeout(() => {
+          this.showdeletesuccessToast = false;
+        }, 5000);
+})
+    .catch((error) => {
+      this.showdeletefailToast = true;
+      this.isAPILoading = false;
+
+      setTimeout(() => {
+        this.showdeletefailToast = false;
+      }, 10000);
+      console.error('Error:', error);
+    });
+
+  }
 }

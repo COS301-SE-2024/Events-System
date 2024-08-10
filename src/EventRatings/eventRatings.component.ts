@@ -111,11 +111,13 @@ export class EventRatingsComponent implements OnInit {
             'Content-Type': 'application/json'
           }
         })
+        
         .then(response => response.json())
         .then(userData => {
           data[i].firstName = userData.firstName;
           data[i].lastName = userData.lastName;
           data[i].employeePictureLink = userData.employeePictureLink;
+          data[i].ratingId = data[i].feedbackId;
           this.employees.push(data[i]);
         })
       }
