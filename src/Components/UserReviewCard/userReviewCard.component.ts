@@ -19,6 +19,7 @@ export class UserReviewCardComponent {
   showupdatefailToast = false;
   rating1 = 0;
   comments1 = '';
+  review= '';
   @Input() employeeId: string | undefined;
   @Input() reviewId: string | undefined;
   @Input() firstName: string | undefined;
@@ -31,9 +32,11 @@ export class UserReviewCardComponent {
   currentReviewId: string | null = null;
 
 
-  openUpdateModal(rating: number, comments: string, reviewId: string): void {
+  openUpdateModal(rating1: number, comments: string, reviewId: string): void {
+    rating1 = 0;
     this.currentReviewId = reviewId;
-    console.log(this.currentReviewId)
+    sessionStorage.setItem('reviewID', this.currentReviewId);
+    console.log(this.currentReviewId);
     // existing logic to open the modal
   }
 
