@@ -46,7 +46,7 @@
               </label>
             </div>
             <div class="mb-4">
-              <button class="grid w-full cursor-pointer select-none rounded-md border border-primary bg-primary py-2 px-5 text-center ease-in duration-300 align-middle text-sm text-white hover:bg-base-100 shadowfocus:text-secondary" type="submit">
+              <button (click)="onLogin()" class="grid w-full cursor-pointer select-none rounded-md border border-primary bg-primary py-2 px-5 text-center ease-in duration-300 align-middle text-sm text-white hover:bg-base-100 shadowfocus:text-secondary" type="submit">
                 Sign in</button>
               <div class="divider">or</div>
   
@@ -270,7 +270,6 @@
             id="firstName"
             name="firstName"
             formControlName="firstName"
-            
             type="text"
             class="input input-bordered max-w-md w-72"
             required
@@ -393,10 +392,10 @@ I am a
     <button class="btn lg:w-96 w-full mb-4  bg-base-100">        <img
       src="https://www.material-tailwind.com/logos/logo-google.png"
       alt="google"
-      onclick="signInWithGoogle()"
       
       class="h-6 w-6"
-    />Sign in with google</button>
+    />Sign up with google</button>
+    <button class="btn lg:w-96 w-full  bg-base-100"> <i class="fa-brands fa-x-twitter text-xl"></i>Sign up with X</button>
   </div>
 
     </form>
