@@ -1,7 +1,9 @@
 package com.back.demo.controller;
 
 import com.back.demo.model.Employee;
+import com.back.demo.model.EventRSVP;
 import com.back.demo.servicebus.EmployeeServiceBus;
+import com.back.demo.servicebus.EventRSVPServiceBus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,12 +12,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/employees")
 public class EmployeeController {
 
     private final EmployeeServiceBus employeeServiceBus;
+
+    @Autowired
+    private EventRSVPServiceBus eventRSVPServiceBus;
 
     @Autowired
     public EmployeeController(EmployeeServiceBus employeeServiceBus) {
@@ -91,4 +97,26 @@ public class EmployeeController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/event/{eventId}")
+    public ResponseEntity<List<Employee>> getEmployeesByEventId(@PathVariable Integer eventId) {
+        // Fetch RSVPs for the event
+        List<EventRSVP> rsvps = eventRSVPServiceBus.getEventRSVPsByEventId(eventId);
+
+        // Check if there are RSVPs
+        if (rsvps.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        // Extract and convert employee IDs in one step
+        List<Long> employeeIds = rsvps.stream()
+                                    .map(rsvp -> (long) rsvp.getEmployeeId()) // Direct conversion
+                                    .collect(Collectors.toList());
+
+        // Fetch employees by IDs
+        List<Employee> employees = employeeServiceBus.getEmployeesByEmployeeIdIn(employeeIds);
+
+        return ResponseEntity.ok(employees);
+    }
+
 }

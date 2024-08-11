@@ -12,4 +12,5 @@ public interface EmployeeServiceBus {
     Employee updateEmployee(Long employeeId, Employee employeeDetails);
     Employee patchEmployee(Long employeeId, Employee employeeDetails);
     void deleteEmployee(Long employeeId);
+    List<Employee> getEmployeesByEmployeeIdIn(List<Long> employeeIds);
 }
