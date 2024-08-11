@@ -12,15 +12,17 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  
+  forgotPasswordForm: FormGroup;
   errorMessage = '';
   registerForm: FormGroup;
   loginForm: FormGroup;
   isAPILoading = false;
   showloginsuccessToast = false;
   showregistersuccessToast = false;
+  showemailsuccessToast = false;
   showloginfailToast = false;
   showregisterfailToast = false;
+  showemailfailToast = false;
   hidePassword = true;
   hidePassword1 = true;
   hidePassword2 = true;
@@ -42,6 +44,9 @@ export class LoginComponent {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
     });
+    this.forgotPasswordForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]]
+    });
   }
   passwordPattern = '^(?=.*[a-z])(?!.* ).{8,20}$';
   
@@ -56,6 +61,38 @@ export class LoginComponent {
   }
   get passwordMismatchError(): boolean {
     return this.registerForm.errors?.['passwordMismatch'] && this.registerForm.get('confirmPassword')?.touched;
+  }
+  onSubmit1() {
+    this.isAPILoading = true;
+    const email = this.forgotPasswordForm.get('email')?.value;
+    fetch('https://events-system-back.wn.r.appspot.com/api/reset/forgot-password', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email })
+    })
+    .then(response => {
+      if (response.ok) {
+        this.isAPILoading = false;
+        this.showemailsuccessToast = true;
+      } else {
+        this.showemailfailToast = true;
+        this.isAPILoading = false;
+        setTimeout(() => {
+          this.showemailfailToast = false;
+        }, 10000);
+
+      }
+  })
+    .catch(error => {
+      this.showemailfailToast = true;
+      this.isAPILoading = false;
+      setTimeout(() => {
+        this.showemailfailToast = false;
+      }, 10000);
+
+    });
   }
   ngOnInit() {
     localStorage.removeItem('employeeData');
@@ -155,12 +192,11 @@ export class LoginComponent {
         // Store employee ID in local storage
         localStorage.setItem('ID', idData);
         document.cookie = `jwt=${authData.access_token}; path=/; expires=` + new Date(new Date().getTime() + 15 * 60 * 1000).toUTCString();
-        document.cookie = `refresh=${authData.refresh_token}; path=/; expires=` + new Date(new Date().getTime() + 24* 60 * 60 * 1000).toUTCString();
 
         // Fetch employee data using ID
         const employeeId = localStorage.getItem('ID');
         if (employeeId) {
-          const employeeResponse = await this.http.get(`https://events-system-back.wn.r.appspot.com/api/employees/profile/${employeeId}`).toPromise();
+          const employeeResponse = await this.http.get(`https://events-system-back.wn.r.appspot.com/api/employees/${employeeId}`).toPromise();
           localStorage.setItem('employeeData', JSON.stringify(employeeResponse));
           console.log('Employee data:', localStorage.getItem('employeeData'));
         } else {
@@ -180,8 +216,7 @@ export class LoginComponent {
         this.isAPILoading = false;
         setTimeout(() => {
           this.showloginfailToast = false;
-        }, 10000);
-        console.error('Error:', error);
+        }, 5000);
         console.error('Error during login:', error);
         this.errorMessage = 'Invalid credentials. Please try again.'; // Set error message for invalid credentials
         window.location.reload();

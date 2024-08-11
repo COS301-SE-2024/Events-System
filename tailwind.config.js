@@ -15,10 +15,9 @@ module.exports = {
           "neutral": "#1c2340",
           "base-100": "#12192D",
         },
+        
       },
-      "light",
-      "dark",
-      "corporate"],
+      "nord"],
   },
   presets: [],
   darkMode: 'media', // or 'class'
@@ -339,6 +338,21 @@ module.exports = {
         '"Liberation Mono"',
         '"Courier New"',
         'monospace',
+      ],
+      poppins:
+      [
+        'Poppins',
+        'sans-serif',
+      ],
+      karla:
+      [
+        'Karla',
+        'sans-serif',
+      ],
+      roboto:
+      [
+        'Roboto',
+        'sans-serif',
       ],
     },
     fontSize: {

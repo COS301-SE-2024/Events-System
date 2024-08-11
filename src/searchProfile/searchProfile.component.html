@@ -1,0 +1,143 @@
+<!-- Desktop Version -->
+<div class="hidden md:block container mx-auto p-4">
+    <div class="card w-full bg-base-100 shadow-2xl mb-4">
+      <div class="card-body">
+        <div class="flex justify-between items-center">
+          <div class="flex items-center">
+            <div class="w-20">
+              <div  _ngcontent-ng-c907525974="" tabindex="0" role="button" class="btn btn-ghost btn-circle avatar" style="width: 120px; height: 120px;">
+                <div _ngcontent-ng-c907525974="" class="w-full rounded-full">
+                  <img  _ngcontent-ng-c907525974="" alt="Profile Picture" [src]="employeeData?.employeePictureLink || 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg'" style="width: 100%; height: 100%;">
+                </div>
+              </div>
+            </div>
+            <div class="ml-12">
+              <h2 name="name" class="text-2xl">{{ employeeData?.firstName }} {{ employeeData?.lastName }}</h2>
+              <p>{{ employeeData?.email }}</p>
+            </div>
+          </div>          
+        </div>
+        <div class="tabs">
+          <a class="tab tab-bordered rounded-lg hover:bg-blue-200 hover:text-blue-800" (click)="selectTab('about')" [class.tab-active]="selectedTab === 'about'">About</a>
+          <a class="tab tab-bordered rounded-lg hover:bg-blue-200 hver:text-blue-800" (click)="selectTab('events')" [class.tab-active]="selectedTab === 'events'">Events History</a>
+          <a class="tab tab-bordered rounded-lg hover:bg-blue-200 hover:text-blue-800" (click)="selectTab('subscriptions')" [class.tab-active]="selectedTab === 'subscriptions'">Subscriptions</a>
+        </div>
+      </div>
+    </div>
+  
+    <div *ngIf="selectedTab === 'about'" class="card w-full bg-base-100 shadow-2xl mb-4">
+      <div class="card-body flex-row">
+        <div class="w-1/2">
+          <h2 class="card-title">About Me</h2>
+          <p>{{ employeeData?.employeeDescription || 'No description available.' }}</p>
+        </div>
+        <div class="w-1/2">
+          <h3 class="text-xl mt-4">Contact Details</h3>
+          <ul class="flex flex-col">
+            <li class="flex items-center"*ngIf="employeeData?.email" >
+              <i class="far fa-envelope"></i>
+              <a [href]="'mailto:' + employeeData.email" class="ml-2">{{ employeeData.email }}</a>
+            </li>
+            <li class="flex items-center"*ngIf="employeeData?.twitter" >
+              <i class="fab fa-x-twitter"></i>
+              <a [href]="employeeData.twitter" target="_blank" rel="noopener noreferrer" class="ml-2">{{ employeeData.twitter }}</a>
+            </li>
+            <li class="flex items-center"*ngIf="employeeData?.linkedin" >
+              <i class="fab fa-linkedin"></i>
+              <a [href]="employeeData.linkedin" target="_blank" rel="noopener noreferrer" class="ml-2">{{ employeeData.linkedin }}</a>
+            </li>
+            <li class="flex items-center"*ngIf="employeeData?.github" >
+              <i class="fab fa-github"></i>
+              <a  [href]="employeeData.github" target="_blank" rel="noopener noreferrer" class="ml-2">{{ employeeData.github }}</a>
+            </li>
+          </ul>
+                           
+        </div>
+      </div>
+    </div>
+  
+    <div *ngIf="selectedTab === 'events'" class="card w-full bg-base-100 shadow-2xl mb-4">
+      <div class="card-body">
+        <h2 class="card-title">Event Title</h2>
+        <p>Host Name</p>
+        <p>Event Details</p>
+        <button class="btn btn-outline">More details</button>
+      </div>
+    </div>
+  
+    <div *ngIf="selectedTab === 'subscriptions'" class="card w-full bg-base-100 shadow-2xl mb-4">
+      <div class="card-body">
+        <h2 class="card-title">Subscriptions</h2>
+        <p>Details about the user's subscriptions.</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Mobile Version -->
+  <div class="md:hidden container mx-auto p-4">
+    <div class="card w-full bg-base-100 shadow-2xl mb-4">
+      <div class="card-body">
+        <div class="flex flex-col items-center">
+          <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar" style="width: 120px; height: 120px;">
+            <div class="w-full rounded-full"><img alt="Profile Picture" [src]="employeeData?.employeePictureLink || 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg'" style="width: 100%; height: 100%;"></div>
+          </div>
+          <div>
+            <h2 class="text-2xl">{{ employeeData?.firstName }} {{ employeeData?.lastName }}</h2>
+            <p>{{ employeeData?.email }}</p>
+          </div>
+          <button routerLink="/settings" class="btn btn-outline mt-4">Edit Profile</button>
+        </div>
+        <div class="tabs tabs-boxed w-full">
+          <a class="tab tab-bordered rounded-lg hover:bg-blue-200 hover:text-blue-800" (click)="selectTab('about')" [class.tab-active]="selectedTab === 'about'">About</a>
+          <a class="tab tab-bordered rounded-lg hover:bg-blue-200 hover:text-blue-800" (click)="selectTab('events')" [class.tab-active]="selectedTab === 'events'">Events History</a>
+          <a class="tab tab-bordered rounded-lg hover:bg-blue-200 hover:text-blue-800" (click)="selectTab('subscriptions')" [class.tab-active]="selectedTab === 'subscriptions'">Subscriptions</a>
+        </div>
+      </div>
+    </div>
+  
+    <div *ngIf="selectedTab === 'about'" class="card w-full bg-base-100 shadow-2xl mb-4">
+      <div class="card-body">
+        <h2 class="card-title">About Me</h2>
+        <p>{{ employeeData?.employeeDescription || 'No description available.' }}</p>
+        <h3 class="text-xl mt-4">Contact Details</h3>
+        <ul>
+          <li class="flex items-center">
+            <i class="far fa-envelope"></i>
+            <a *ngIf="employeeData?.email" [href]="'mailto:' + employeeData.email" class="ml-2">{{ employeeData.email }}</a>
+            <span *ngIf="!employeeData?.email" class="ml-2">Not available</span>
+          </li>
+          <li class="flex items-center">
+            <i class="fab fa-xing"></i>
+            <a *ngIf="employeeData?.twitter" [href]="employeeData.twitter" target="_blank" rel="noopener noreferrer" class="ml-2">{{ employeeData.twitter }}</a>
+            <span *ngIf="!employeeData?.twitter" class="ml-2">Not available</span>
+          </li>
+          <li class="flex items-center">
+            <i class="fab fa-linkedin"></i>
+            <a *ngIf="employeeData?.linkedin" [href]="employeeData.linkedin" target="_blank" rel="noopener noreferrer" class="ml-2">{{ employeeData.linkedin }}</a>
+            <span *ngIf="!employeeData?.linkedin" class="ml-2">Not available</span>
+          </li>
+          <li class="flex items-center">
+            <i class="fab fa-github"></i>
+            <a *ngIf="employeeData?.github" [href]="employeeData.github" target="_blank" rel="noopener noreferrer" class="ml-2">{{ employeeData.github }}</a>
+            <span *ngIf="!employeeData?.github" class="ml-2">Not available</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  
+    <div *ngIf="selectedTab === 'events'" class="card w-full bg-base-100 shadow-2xl mb-4">
+      <div class="card-body">
+        <h2 class="card-title">Event Title</h2>
+        <p>Host Name</p>
+        <p>Event Details</p>
+        <button class="btn btn-outline">More details</button>
+      </div>
+    </div>
+  
+    <div *ngIf="selectedTab === 'subscriptions'" class="card w-full bg-base-100 shadow-2xl mb-4">
+      <div class="card-body">
+        <h2 class="card-title">Subscriptions</h2>
+        <p>Details about the user's subscriptions.</p>
+      </div>
+    </div>
+  </div>

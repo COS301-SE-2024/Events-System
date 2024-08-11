@@ -52,6 +52,9 @@ public class SocialClubService {
                     case "name":
                         socialClub.setName((String) value);
                         break;
+                    case "ownerID":
+                        socialClub.setOwnerID((Long) value);
+                        break;
                     case "description":
                         socialClub.setDescription((String) value);
                         break;

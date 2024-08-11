@@ -1,0 +1,81 @@
+<div class="relative flex flex-col bg-base-100 overflow-hidden ">
+    <div class="layout-container flex grow flex-col">
+      <div class="px-5 md:px-96 flex flex-1 justify-center py-5 ">
+        <div class="layout-content-container flex flex-col max-w-[2010px] flex-1">
+            <!--Page heading-->
+            <div class="flex items-center justify-center md:mx-10 mb-5">
+                <div class="font-poppins text-center text-secondary font-extrabold text-2xl md:text-3xl mb-2">
+                  <p>My Clubs</p>
+                </div>
+                
+                <div class="absolute right-0 mr-10">
+                    <button class="btn font-roboto" routerLink="/socialclubcreate">
+                      <a >Create club</a>
+                    </button>
+                </div>
+            </div>
+
+            <div *ngIf="isLoading; else content">
+              <div class="h-full flex flex-col gap-10">
+                <app-ghost-social-club-card></app-ghost-social-club-card>
+                <app-ghost-social-club-card></app-ghost-social-club-card>
+                <app-ghost-social-club-card></app-ghost-social-club-card>
+                <app-ghost-social-club-card></app-ghost-social-club-card>
+                <app-ghost-social-club-card></app-ghost-social-club-card>
+                <app-ghost-social-club-card></app-ghost-social-club-card>
+                <app-ghost-social-club-card></app-ghost-social-club-card>
+                <app-ghost-social-club-card></app-ghost-social-club-card>
+                <app-ghost-social-club-card></app-ghost-social-club-card>
+              </div>
+              </div>
+              <ng-template #content>
+                  <div class="h-full flex flex-col gap-10">
+                  <app-social-club-listing-card
+                  *ngFor="let club of clubs"
+                  [clubID]="club.id"
+                  [clubName]="club.name"
+                  [description]="club.description"
+                  [pictureLink]="club.pictureLink"
+                  [summary]="club.summaryDescription"
+                  [categories]="club.categories">
+                  </app-social-club-listing-card>
+                </div>
+                </ng-template>
+
+                <!-- <app-social-club-listing-card></app-social-club-listing-card>
+                <app-social-club-listing-card></app-social-club-listing-card>
+                <app-social-club-listing-card></app-social-club-listing-card>
+                <app-social-club-listing-card></app-social-club-listing-card>
+                <app-social-club-listing-card></app-social-club-listing-card>
+                <app-social-club-listing-card></app-social-club-listing-card>
+                <app-social-club-listing-card></app-social-club-listing-card>
+                <app-social-club-listing-card></app-social-club-listing-card>
+                <app-social-club-listing-card></app-social-club-listing-card>
+                <app-social-club-listing-card></app-social-club-listing-card>
+                <app-social-club-listing-card></app-social-club-listing-card>
+                <app-social-club-listing-card></app-social-club-listing-card>
+                <app-social-club-listing-card></app-social-club-listing-card>
+                <app-social-club-listing-card></app-social-club-listing-card>
+                <app-social-club-listing-card></app-social-club-listing-card>
+                <app-social-club-listing-card></app-social-club-listing-card>
+                <app-social-club-listing-card></app-social-club-listing-card>
+                <app-social-club-listing-card></app-social-club-listing-card> -->
+             
+            
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<!-- <div class="rotating-text">
+  <p>CSS Animation is</p>
+  <p>
+    <span class="word alizarin">awesome.</span>
+    <span class="word wisteria">beautiful.</span>
+    <span class="word peter-river">creative.</span>
+    <span class="word emerald">fabulous.</span>
+    <span class="word sun-flower">interesting.</span>
+  </p>
+</div> -->
+  
