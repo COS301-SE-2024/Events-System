@@ -55,4 +55,9 @@ public class EmployeeServiceBusImpl implements EmployeeServiceBus {
             throw new RuntimeException("Employee not found with id " + employeeId);
         }
     }
+
+    @Override
+    public List<Employee> getEmployeesByEmployeeIdIn(List<Long> employeeIds) {
+        return employeeService.getEmployeesByIds(employeeIds);
+    }
 }

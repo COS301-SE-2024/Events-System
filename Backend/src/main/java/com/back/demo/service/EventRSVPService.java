@@ -38,4 +38,8 @@ public class EventRSVPService {
     public void deleteEventRSVP(Long id) {
         eventRSVPRepository.deleteById(id);
     }
+
+    public List<EventRSVP> getEventRSVPsByEventId(Integer eventId) {
+        return eventRSVPRepository.findByEventId(eventId);
+    }
 }

@@ -11,4 +11,5 @@ public interface EventRSVPServiceBus {
     EventRSVP createEventRSVP(EventRSVP eventRSVP);
     EventRSVP updateEventRSVP(Long id, EventRSVP eventRSVP);
     void deleteEventRSVP(Long id);
+    List<EventRSVP> getEventRSVPsByEventId(Integer eventId);
 }

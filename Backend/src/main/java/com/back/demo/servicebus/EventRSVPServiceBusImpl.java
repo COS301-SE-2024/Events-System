@@ -38,4 +38,9 @@ public class EventRSVPServiceBusImpl implements EventRSVPServiceBus {
     public void deleteEventRSVP(Long id) {
         eventRSVPService.deleteEventRSVP(id);
     }
+
+    @Override
+    public List<EventRSVP> getEventRSVPsByEventId(Integer eventId) {
+        return eventRSVPService.getEventRSVPsByEventId(eventId);
+    }
 }
