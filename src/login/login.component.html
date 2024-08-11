@@ -321,6 +321,7 @@
             <input
               id="password1"
               type="password"
+              name="password1"
               [formControl]="passwordControl2"
               class="input input-bordered max-w-md w-72 transition duration-300 ease-in"
               required
@@ -353,6 +354,7 @@ I am a
     <input
       id="password2"
       type="password"
+      name="password2"
       [formControl]="passwordControl3"
       class="input input-bordered max-w-md w-72 transition duration-300 ease-in"
       required
@@ -380,7 +382,7 @@ I am a
       <div class="flex items-center justify-center">
         <button
         type="submit"
-        [disabled]="registerForm.invalid"
+        
         class=" w-96 mt-4 inline-flex cursor-pointer items-center justify-center rounded-xl border-2 border-primary bg-primary px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:border-primary-accent hover:bg-primary-accent focus:outline-none focus:ring-2 focus:ring-orange-400/80 focus:ring-offset-0 disabled:opacity-30 disabled:hover:border-primary disabled:hover:bg-primary disabled:hover:text-white dark:focus:ring-white/80"
       >
         Create Account
