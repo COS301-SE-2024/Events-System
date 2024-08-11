@@ -36,17 +36,17 @@
         
                 <div class="flex lg:justify-between lg:flex-row flex-col">
                     <div>
-                        <h1 class="text-6xl lg:ml-64 mt-8">{{series.name}}</h1>
-                        <h2 class="mt-4 text-4xl lg:ml-64 text-secondary">{{series.description}}</h2>
+                        <h1 class="font-karla text-6xl lg:ml-64 mt-8">{{series.name}}</h1>
+                        <h2 class="mt-4 font-roboto text-4xl lg:ml-64 text-secondary">{{series.description}}</h2>
                     </div>
                     <div>
                         <div class="card bg-base-100 shadow-xl lg:mt-4 mt-32">
                             <div class="card-body">
                                 <div *ngIf="series.host">
-                                    <h2 class="card-title">Managed by: {{series.host.firstName}} {{series.host.lastName}}</h2>
+                                    <h2 class="card-title font-roboto">Managed by: {{series.host.firstName}} {{series.host.lastName}}</h2>
                                   </div>
                               <div class="card-actions justify-end">
-                                <button class="btn btn-primary">Find out More</button>
+                                <button class="btn btn-primary font-roboto">Find out More</button>
                               </div>
                             </div>
                           </div>
@@ -61,7 +61,7 @@
                  
                 <div class="card bg-base-100 shadow-xl mt-4">
                     <div class="card-body">
-                      <h2 class="card-title text-4xl flex items-center justify-center mb-6">Subscribe Now!</h2>
+                      <h2 class="card-title font-karla text-4xl flex items-center justify-center mb-6">Subscribe Now!</h2>
                       <!-- <div class="flex lg:justify-evenly lg:flex-row flex-col">
                         <div>
                             <p class="lg:text-4xl text-2xl"> <i class="fa-solid fa-user mr-2"></i> {{host.firstName}} {{host.lastName}} </p>
@@ -73,15 +73,15 @@
                         </div>
                     </div> -->
                        <div class="card-actions justify-center">
-                        <button class="btn btn-accent" *ngIf="!hasUserRSVPd"  @buttonFade (click)="rsvpToSeries()">Book Now</button>
-                        <button class="btn btn-outline btn-warning" *ngIf="hasUserRSVPd"  @buttonFade (click)="rsvpToSeries()">Cancel booking</button>
+                        <button class="btn btn-accent font-roboto" *ngIf="!hasUserRSVPd"  @buttonFade (click)="rsvpToSeries()">Book Now</button>
+                        <button class="btn btn-outline font-roboto btn-warning" *ngIf="hasUserRSVPd"  @buttonFade (click)="rsvpToSeries()">Cancel booking</button>
 
                       </div>
                     </div>
                   </div>
             <!-- Preperation details -->
             <div class="mt-28">
-                <h2 class="text-4xl flex items-center justify-center">Series events</h2>
+                <h2 class="font-karla font-medium text-4xl flex items-center justify-center">Series events</h2>
                 <div class="flex items-center justify-center mt-6">
                     <div class="flex justify-center items-center">
                         <div class="flex justify-center items-center w-full">
