@@ -1,6 +1,6 @@
 <main class="flex flex-col content-between">
   <section class="bg-transparent text-center shadow-2xl size-full">
-    <h2 class="lexend-deca-extraLight mb-3.5 pb-3">Featured Events</h2>
+    <h2 class="font-poppins font-medium text-3xl mb-3.5 pb-3">Featured Events</h2>
     <div class="relative lg:h-[430px]">
             <!-- Carousel 1 skeleton -->
 
@@ -57,17 +57,17 @@
     </div>
   </section>
 
-  <section class="bg-transparent text-center shadow-2xl pt-8 h-full"> <!--Featured events section-->
+  <section class="bg-transparent text-center shadow-2xl pt-32 h-full"> <!--Featured events section-->
     <div class="flex flex-col text-center"> <!--lg:flex-row-->
-      <h2 class="lexend-deca-extraLight mb-1.5 pb-3 ">Your Upcoming Events</h2>
+      <h2 class="font-poppins font-medium text-3xl mb-1.5 pb-3 ">Your Upcoming Events</h2>
      
 
-      <div class="flex flex-col lg:flex-row justify-center space-y-2 sm:space-y-0  mr-3.5">
-        <div class="flex justify-center items-center">
-          <input #dateInput type="date" id="date-input" name="date-input" class="bg-gray-400 w-44 px-2 h-12 rounded-lg border-2 border-gray-400 focus:border-accent text-base outline-none text-gray-700 transition-colors duration-200 ease-in-out">
+      <div class="flex flex-col lg:flex-row justify-center space-y-2 sm:space-y-0  gap-x-2 mr-3.5">
+        <div class="flex justify-center items-center font-roboto">
+          <input #dateInput type="date" id="date-input" name="date-input" class="bg-gray-400 w-44 px-2 h-12 rounded-lg border-2 border-gray-400 focus:border-accent text-base text-center outline-none text-gray-700 transition-colors duration-200 ease-in-out">
         </div>
         
-        <div class="flex justify-center sm:justify-start md:justify-center space-x-2">
+        <div class="flex  font-roboto justify-center sm:justify-start md:justify-center space-x-2">
           <button class="btn btn-outline btn-md" (click)="filterByDate(dateInput.value)">Filter</button>
           <button class="btn btn-outline btn-md" (click)="clearDate(dateInput)">Clear</button>
         </div>
@@ -108,8 +108,8 @@
     </div>
   </section>
 
-  <section class="bg-transparent text-center pt-8 shadow-2xl h-full"> <!--Featured events section-->
-    <h2 class="lexend-deca-extraLight mb-1.5 pb-3">Social clubs</h2>
+  <section class="bg-transparent text-center pt-32 shadow-2xl h-full"> <!--Featured events section-->
+    <h2 class="font-poppins font-medium text-3xl mb-1.5 pb-3">Social clubs</h2>
 
     <div class="relative lg:h-[350px] lg:ml-44 ml-12"> 
       <div class="carousel carousel-center lg:w-11/12 p-4 lg:space-x-8 space-x-8 bg-transparent rounded-box h-full" #carousel3>
