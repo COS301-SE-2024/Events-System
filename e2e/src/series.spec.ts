@@ -37,7 +37,10 @@ test.describe('SeriesCenterComponent Tests', () => {
         await expect(page.locator('app-series-center')).toBeVisible();
     });
 
-    test('Viewing availabe Series', async ({ page }) => {
+    test('Viewing available Series', async ({ page }) => {
+        // wait for API response
+        await page.waitForResponse('https://events-system-back.wn.r.appspot.com/api/eventseries');
+
         // Check that the component and its elements are present
         await expect(page.locator('app-seriescentercard').first()).toBeVisible();
     });

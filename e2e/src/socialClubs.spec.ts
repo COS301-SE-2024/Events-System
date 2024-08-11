@@ -38,7 +38,13 @@ test.describe('SocialClubsComponent Tests', () => {
     });
 
     test('Viewing available social clubs', async ({ page }) => {
-        // Locate the 'app-social-club-card' element
+        // Check if skeletons are visible
         await expect(page.locator('app-social-club-card-skeleton').first()).toBeVisible();
+
+        // Wait for response from API
+        await page.waitForResponse('https://events-system-back.wn.r.appspot.com/api/socialclubs');
+
+        // See if there is any social club that is visible
+        await expect(page.locator('app-social-club-card').first()).toBeVisible();
     })
 });

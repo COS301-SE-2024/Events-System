@@ -33,18 +33,24 @@ test.describe('EventsComponent Tests', () => {
     await page.goto(`${BASE_URL}/events`);
   });
 
-  test('Test event page', async ({ page }) => {
-    // Go to the page
-    await page.goto(`${BASE_URL}/events`);
-
-    // Check if the page loaded correctly
+  test('Viewing events page', async ({ page }) => {
     // Check that the component and its elements are present
     await expect(page.locator('app-events')).toBeVisible();
+  });
 
+  test('Viewing available events', async ({ page }) => {
+    // wait for API response
+    await page.waitForResponse('https://events-system-back.wn.r.appspot.com/api/events');
+    // Check that the component and its elements are present
+    await expect(page.locator('app-event-card').first()).toBeVisible();
+  });
+
+  test('Filtering', async ({ page }) => {
     // Test filter options
       await page.click('button:has-text("Refine by social club")');
       await page.click('button:has-text("Filter By:")');
   });
+
 
   test('Test booking for an event', async ({ page }) => {
     await page.click('button:has-text("BOOK")');
