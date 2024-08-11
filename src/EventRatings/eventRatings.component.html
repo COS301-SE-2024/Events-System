@@ -1,15 +1,30 @@
 <div class="hero h-80 min-w-dvw bg-pink-700" [style.background-image]="'url(' + imageSource + ')'"></div> <!-- [style.background-image]="'url(' + imageSource + ')'" -->
 <button class="btn w-[50px] -mt-48 lg:ml-8 h-[30px] rounded-full z-40" (click)="goBack()"><i class="fa-solid fa-arrow-left"></i></button> 
 <!-- (click)="goBack()" -->
+    <!-- skeleton content -->
+    <div *ngIf="isLoading">
+      <div class="flex lg:justify-between lg:flex-row flex-col">
+          <div>
+              <h1 class="skeleton text-6xl lg:ml-64 mt-8 lg:h-14 h-32 w-96"></h1>
+              <h2 class="skeleton mt-4 text-4xl lg:ml-64 text-secondary lg:h-8 h-24 lg:w-[700px] w-80"></h2>
+          </div>
+          <div>
 
-<div *ngIf="!isLoading" class="flex flex-col overflow-hidden" style='font-family: Manrope, "Noto Sans", sans-serif;'>
+
+
+          </div>
+
+      </div>
+      
+  </div> 
+<div *ngIf="!isLoading && event" class="flex flex-col overflow-hidden" style='font-family: Manrope, "Noto Sans", sans-serif;'>
     <div class="layout-container flex h-full grow flex-col">
         <div class="px-5 md:px-32 flex flex-1 justify-center h-full">
             <div class="layout-content-container flex flex-col max-w-[2010px] h-full flex-1">
                 <div class="flex lg:justify-between lg:flex-row flex-col w-full">
                     <div class="w-full">
                         <div class="flex justify-between w-full">
-                            <h1 class="text-6xl">{{ event.title }}</h1>
+                            <h1 class="text-6xl" *ngIf="event">{{ event.title }}</h1>
                             <button class="btn" onclick="my_modal_5.showModal()">Write a review</button>
                         </div>
                         

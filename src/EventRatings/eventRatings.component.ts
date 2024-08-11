@@ -87,61 +87,57 @@ export class EventRatingsComponent implements OnInit {
 
   rating = 0;
   ngOnInit(): void {
-    this.imageSource = this.randomheaderservice.getRandomHeaderSource();
-    this.checkCookies();
-    
-    this.route.params.subscribe(params => {
-      this.eventId = params['id'];
-      fetch('https://events-system-back.wn.r.appspot.com/api/events/' + this.eventId)
-      .then(response => response.json())
-      .then(data => {
-        this.event = data;
-      })
-
-      fetch('https://events-system-back.wn.r.appspot.com/api/feedback/event/' + this.eventId)
-    .then(response => {
-      return response.json();
-    })
-    .then(data => {
-      this.reviews = Array.isArray(data) ? data : [data];
-
-      for(let i = 0; i < this.reviews.length; ++i)
-      {
-        fetch('https://events-system-back.wn.r.appspot.com/api/employees/' + data[i].employeeId, {
-          method: 'GET',
-          credentials: 'include',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        })
+      this.imageSource = this.randomheaderservice.getRandomHeaderSource();
+      this.checkCookies();
+      
+      this.route.params.subscribe(params => {
+        this.eventId = params['id'];
         
-        .then(response => response.json())
-        .then(userData => {
-          data[i].firstName = userData.firstName;
-          data[i].lastName = userData.lastName;
-          data[i].employeePictureLink = userData.employeePictureLink;
-          data[i].ratingId = data[i].feedbackId;
-          this.employees.push(data[i]);
-        })
-      }
-      console.log(this.employees)
-
-      for(let i = 0; i < this.employees.length; ++i)
-      {
-        this.reviews[i].firstName = this.employees[i].firstName;
-        this.reviews[i].lastName = this.employees[i].lastName;
-      }
-
-      //console.log(this.combinedReviews);
-    })
-    .catch(error => {
-      console.error('Error fetching reviews:', error);
-      // Handle error, possibly set reviews to an empty array
-      this.reviews = [];
-    });
-    })
-    this.isLoading = false;
-  }
+        const eventPromise = fetch('https://events-system-back.wn.r.appspot.com/api/events/' + this.eventId)
+          .then(response => response.json())
+          .then(data => {
+            this.event = data;
+          });
+  
+        const feedbackPromise = fetch('https://events-system-back.wn.r.appspot.com/api/feedback/event/' + this.eventId)
+          .then(response => response.json())
+          .then(data => {
+            this.reviews = Array.isArray(data) ? data : [data];
+            const employeePromises = this.reviews.map(review => 
+              fetch('https://events-system-back.wn.r.appspot.com/api/employees/' + review.employeeId, {
+                method: 'GET',
+                credentials: 'include',
+                headers: {
+                  'Content-Type': 'application/json'
+                }
+              })
+              .then(response => response.json())
+              .then(userData => {
+                review.firstName = userData.firstName;
+                review.lastName = userData.lastName;
+                review.employeePictureLink = userData.employeePictureLink;
+                review.ratingId = review.feedbackId;
+                this.employees.push(review);
+              })
+            );
+            return Promise.all(employeePromises);
+          });
+  
+        Promise.all([eventPromise, feedbackPromise])
+          .then(() => {
+            for(let i = 0; i < this.employees.length; ++i) {
+              this.reviews[i].firstName = this.employees[i].firstName;
+              this.reviews[i].lastName = this.employees[i].lastName;
+            }
+            this.isLoading = false;
+          })
+          .catch(error => {
+            console.error('Error fetching data:', error);
+            this.reviews = [];
+            // this.isLoading = false;
+          });
+      });
+    }
 
   getPercentage(stars: number): number{
     let count = 0;
