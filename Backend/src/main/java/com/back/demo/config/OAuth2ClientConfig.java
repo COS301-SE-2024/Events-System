@@ -19,7 +19,6 @@ public class OAuth2ClientConfig {
 
     private ClientRegistration googleClientRegistration() {
         return ClientRegistration.withRegistrationId("google")
-            .clientId("207465254722-7p4odomht6nnoc2cek9cb0j5jht2faos")
             .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
             .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
             .redirectUri("{baseUrl}/oauth")

@@ -3,7 +3,7 @@ import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormControl, ValidationErrors,  FormGroup, Validators, ReactiveFormsModule } from '@angular/forms'; 
 import { HttpClientModule, HttpClient  } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-
+import { environment } from 'src/environments/environment';
 @Component({
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, HttpClientModule, RouterModule], // Import necessary modules here
@@ -24,7 +24,7 @@ export class LoginComponent {
   showregisterfailToast = false;
   showemailfailToast = false;
   hidePassword = true;
-  googleClientId = '207465254722-7p4odomht6nnoc2cek9cb0j5jht2faos.apps.googleusercontent.com';
+  googleClientId = environment.CLIENT_ID;
   redirectUri = 'http://localhost:4200/oauth/callback'; // e.g., http://localhost:4200/oauth/callback
   googleAuthEndpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
   responseType = 'code';

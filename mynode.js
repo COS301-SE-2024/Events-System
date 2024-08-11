@@ -6,6 +6,10 @@ const dotenv = require('dotenv').config({ path: 'src/.env' });
 
 const envFile = `export const environment = {
     CMA_TOKEN: '${process.env.CMA_TOKEN}',
+    CLIENT_ID_FULL: '${process.env.CLIENT_ID_FULL}',
+    CLIENT_SECRET_FULL: '${process.env.CLIENT_SECRET_FULL}',
+    CLIENT_ID: '${process.env.CLIENT_ID}',
+    CLIENT_SECRET: '${process.env.CLIENT_SECRET}',
 };
 `;
 

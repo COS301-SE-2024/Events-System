@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { response } from 'express';
-
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-oauth',
   standalone: true,
@@ -24,8 +24,8 @@ export class OauthComponent implements OnInit{
         console.log('Authorization code:', code);
 
         const baseUrl = 'https://oauth2.googleapis.com/token';
-        const clientId = 'client_id=';
-        const clientSecret = 'client_secret=';
+        const clientId = environment.CLIENT_ID_FULL;
+        const clientSecret = environment.CLIENT_SECRET_FULL;
         const redirectUri = 'redirect_uri=http%3A%2F%2Flocalhost%3A4200%2Foauth';
         const grantType = 'grant_type=authorization_code';
         //const code = 'YOUR_AUTHORIZATION_CODE'; // replace with actual authorization code

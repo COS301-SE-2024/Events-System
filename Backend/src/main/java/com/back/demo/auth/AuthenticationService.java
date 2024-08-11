@@ -157,7 +157,7 @@ public class AuthenticationService {
         String firstName = oAuthRequest.getGiven_name();
         String lastName = oAuthRequest.getFamily_name();
 
-        Optional<Employee> optionalEmployee = repository.findByEmail(email);
+        Optional<Employee> optionalEmployee = repository.findByEmailIgnoreCase(email);
         Employee employee;
         
         if(optionalEmployee.isPresent())
