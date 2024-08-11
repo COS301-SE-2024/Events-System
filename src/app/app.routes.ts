@@ -13,6 +13,7 @@ import { UpdateEventComponent } from 'src/UpdateEvent/UpdateEvent.component';
 import { DeleteEventComponent } from 'src/DeleteEvent/DeleteEvent.component';
 import { HelpComponent } from 'src/Help/Help.component';
 import { SocialClubComponent } from 'src/socialClub/socialClub.component';
+import { HostCheckinComponent } from 'src/host-checkin/host-checkin.component';
 import { SocialClubListingComponent } from 'src/SocialClubHubListing/socialClubListing.component';
 import { SocialClubCreateComponent } from 'src/socialClubCreate/socialClubCreate.component';
 import {UpdateSocialClubComponent} from 'src/UpdateSocialClub/updateSocialClub.component';
@@ -42,6 +43,9 @@ export const appRoutes: Route[] = [
   { path: 'updateevent/:id', component: UpdateEventComponent },
   { path: 'deleteevent/:id', component: DeleteEventComponent },
   { path: 'socialclub/:id', component: SocialClubComponent},
+  { path: 'help', component: HelpComponent},
+  { path: 'hostcheckin', component: HostCheckinComponent},
+  { path: 'hostcheckin/:eventId', component: HostCheckinComponent },
   { path: 'socialclublisting', component: SocialClubListingComponent},
   { path: 'socialclubcreate', component: SocialClubCreateComponent},
   { path: 'updatesocialclub/:id', component: UpdateSocialClubComponent},

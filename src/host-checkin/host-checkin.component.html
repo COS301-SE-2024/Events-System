@@ -1,0 +1,85 @@
+<div class="container mx-auto p-6 mt-10 relative">
+  <!-- Main Bubble Indicator for Total Attendees -->
+  <div class="absolute top-0 right-0 mt-4 mr-4">
+    <div class="bg-accent text-center text-white text-sm font-bold rounded-full h-20 w-20 flex items-center justify-center relative">
+      {{ rsvpedEmployees.length }} guests
+  
+      <!-- Larger Bubble -->
+      <div class="absolute top-0 right-0 bg-accent shadow-lg rounded-full h-8 w-8 flex items-center justify-center text-xs font-bold">
+      
+      </div>
+
+      <!-- Smaller Bubble -->
+      <div class="absolute bottom-0 right-0 bg-accent shadow-lg rounded-full h-6 w-6 flex items-center justify-center text-xs font-bold">
+    
+      </div>
+    </div>
+  </div>
+
+  <!-- Page Heading -->
+  <h1 class="text-2xl md:text-center font-bold text-primary mb-6 text-left">Attendees</h1>
+
+  <!-- Table of RSVPed Employees -->
+  <div class="overflow-x-auto">
+    <table class="min-w-full rounded-lg shadow-lg">
+      <thead class="bg-secondary text-neutral">
+        <tr>
+          <th class="py-2 px-3 text-left">Name</th>
+          <th class="py-2 px-3 text-left">Surname</th>
+          <th class="py-2 px-3 text-left hidden md:table-cell">Email</th>
+          <th class="py-2 px-3 text-center hidden md:table-cell">Status</th>
+          <th class="py-2 px-3 text-center hidden md:table-cell">Last Updated</th>
+          <th class="py-2 px-3 text-center hidden md:table-cell">Profile</th>
+          <th class="py-2 px-3 text-center hidden md:table-cell">Actions</th>
+          <th class="py-2 px-3 text-center md:hidden">More</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let employee of rsvpedEmployees; let i = index">
+          <tr [ngClass]="{'bg-base-200 text-secondary': employee.status === 'Canceled'}" class="border-b border-secondary hover:bg-base-200">
+            <td class="py-3 px-3">{{ employee.name }}</td>
+            <td class="py-3 px-3">{{ employee.surname }}</td>
+            <td class="py-3 px-3 hidden md:table-cell">{{ employee.email }}</td>
+            <td class="py-3 px-3 text-center hidden md:table-cell">{{ employee.status }}</td> 
+            <td class="py-3 px-3 text-center hidden md:table-cell">{{ employee.lastUpdated | date:'short' }}</td>
+            <td class="py-3 px-3 text-center hidden md:table-cell">
+              <a [routerLink]="['/profile', employee.id]" 
+                 class="btn btn-info btn-sm" 
+                 [ngClass]="{'bg-base-200 text-secondary': employee.status === 'Canceled'}">View Profile</a>
+            </td>
+            <td class="py-3 px-3 text-center hidden md:table-cell">
+              <button [disabled]="employee.status === 'Canceled'" (click)="removeEmployee(i)" 
+              class="btn btn-error btn-sm" [ngClass]="{'btn-disabled text-base-200': employee.status === 'Canceled'}">Remove</button>
+            </td> 
+            <td class="py-3 px-3 text-center md:hidden">
+              <button (click)="toggleDetails(i)" class="btn btn-primary btn-sm">
+                <span *ngIf="!employee.showDetails">+</span>
+                <span *ngIf="employee.showDetails">-</span>
+              </button>
+            </td>
+          </tr>
+
+          <!-- Additional info for mobile view -->
+          <tr *ngIf="employee.showDetails && !isDesktop" class="border-b border-secondary md:hidden">
+            <td colspan="2" class="py-3 px-3">
+              <div class="text-left">
+                <p><strong>Email:</strong> {{ employee.email }}</p>
+                <p><strong>Status:</strong> {{ employee.status }}</p>
+                <p><strong>Last Updated:</strong> {{ employee.lastUpdated | date:'short' }}</p>
+                <div class="flex space-x-2">
+                  <a [routerLink]="['/profile', employee.id]" 
+                     class="btn btn-info btn-sm" 
+                     [ngClass]="{'bg-base-200 text-secondary': employee.status === 'Canceled'}">View Profile</a>
+                  <button [disabled]="employee.status === 'Canceled'" 
+                          (click)="removeEmployee(i)" 
+                          class="btn btn-error btn-sm" 
+                          [ngClass]="{'btn-disabled': employee.status === 'Canceled'}">Remove</button>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>
