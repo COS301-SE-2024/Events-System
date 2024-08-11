@@ -27,7 +27,9 @@ describe('OauthComponent', () => {
         {
           provide: ActivatedRoute,
           useValue: {
-            params: of({ code: 'testCode'})
+            params: of({ code: 'testCode'}),
+            queryParams: of({ code: 'testCode' }) // Mock queryParams
+
           }
         }
       ]
