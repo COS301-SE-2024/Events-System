@@ -24,6 +24,11 @@ export class LoginComponent {
   showregisterfailToast = false;
   showemailfailToast = false;
   hidePassword = true;
+  googleClientId = '207465254722-7p4odomht6nnoc2cek9cb0j5jht2faos.apps.googleusercontent.com';
+  redirectUri = 'http://localhost:4200/oauth/callback'; // e.g., http://localhost:4200/oauth/callback
+  googleAuthEndpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
+  responseType = 'code';
+  scope = 'openid email profile';
   hidePassword1 = true;
   hidePassword2 = true;
   constructor(
@@ -224,5 +229,30 @@ export class LoginComponent {
     } else {
       console.log('Form is invalid. Please check the fields.');
     }
+  }
+
+  async signInWithGoogle() {
+    /*const googleRespnse = await fetch('http://localhost:8080/api/v1/auth/google', {
+        method: 'POST', // Important for including cookies if needed
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });*/
+      const baseUrl = 'https://accounts.google.com/o/oauth2/auth/oauthchooseaccount';
+      const responseType = 'response_type=code';
+      const clientId = 'client_id=207465254722-7p4odomht6nnoc2cek9cb0j5jht2faos.apps.googleusercontent.com';
+      const scope = 'scope=profile%20email';
+      const redirectUri = 'redirect_uri=http%3A%2F%2Flocalhost%3A4200%2Foauth';
+      const service = 'service=lso';
+      const o2v = 'o2v=1';
+      const ddm = 'ddm=0';
+      const flowName = 'flowName=GeneralOAuthFlow';
+      const fullUrl = `${baseUrl}?${responseType}&${clientId}&${scope}&${redirectUri}&${service}&${o2v}&${ddm}&${flowName}`;
+
+      console.log(decodeURIComponent(fullUrl));
+      window.location.href = `${baseUrl}?${responseType}&${clientId}&${scope}&${redirectUri}&${service}&${o2v}&${ddm}&${flowName}`;
+
+      
   }
 }

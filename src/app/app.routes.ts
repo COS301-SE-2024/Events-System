@@ -13,6 +13,7 @@ import { UpdateEventComponent } from 'src/UpdateEvent/UpdateEvent.component';
 import { DeleteEventComponent } from 'src/DeleteEvent/DeleteEvent.component';
 import { HelpComponent } from 'src/Help/Help.component';
 import { SocialClubComponent } from 'src/socialClub/socialClub.component';
+import { OauthComponent } from 'src/oauth/oauth.component';
 import { HostCheckinComponent } from 'src/host-checkin/host-checkin.component';
 import { SocialClubListingComponent } from 'src/SocialClubHubListing/socialClubListing.component';
 import { SocialClubCreateComponent } from 'src/socialClubCreate/socialClubCreate.component';
@@ -44,6 +45,7 @@ export const appRoutes: Route[] = [
   { path: 'deleteevent/:id', component: DeleteEventComponent },
   { path: 'socialclub/:id', component: SocialClubComponent},
   { path: 'help', component: HelpComponent},
+  { path: 'oauth', component: OauthComponent},
   { path: 'hostcheckin', component: HostCheckinComponent},
   { path: 'hostcheckin/:eventId', component: HostCheckinComponent },
   { path: 'socialclublisting', component: SocialClubListingComponent},
