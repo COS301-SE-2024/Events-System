@@ -1,6 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, ActivatedRoute  } from '@angular/router';
 
 @Component({
   selector: 'app-host-checkin',
@@ -20,12 +20,16 @@ export class HostCheckinComponent implements OnInit {
     showDetails?: boolean;
   }> = [];
   isDesktop = true;
+  eventId: string | null = null;
 
-  constructor() {}
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.updateViewMode();
-
+    this.route.paramMap.subscribe(params => {
+      this.eventId = params.get('eventId');
+      console.log(this.eventId);  // Log the eventId to the console
+    }); 
     
     this.rsvpedEmployees = [
       {

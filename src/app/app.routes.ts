@@ -15,6 +15,7 @@ import { HelpComponent } from 'src/Help/Help.component';
 import { SocialClubComponent } from 'src/socialClub/socialClub.component';
 import { HostCheckinComponent } from 'src/host-checkin/host-checkin.component';
 
+
 export const appRoutes: Route[] = [
   { path: '', component: HomeComponent }, // Home page
   { path: 'login', component: LoginComponent },
@@ -29,6 +30,7 @@ export const appRoutes: Route[] = [
   { path: 'deleteevent/:id', component: DeleteEventComponent },
   { path: 'socialclub/:id', component: SocialClubComponent},
   { path: 'help', component: HelpComponent},
-  { path: 'hostcheckin', component: HostCheckinComponent}
+  { path: 'hostcheckin', component: HostCheckinComponent},
+  { path: 'hostcheckin/:eventId', component: HostCheckinComponent }
   // { path: 'home', component: SettingsComponent },
 ];
