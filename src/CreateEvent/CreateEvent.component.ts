@@ -57,84 +57,21 @@ export class CreateEventComponent implements AfterViewInit{
   isstep2Empty = false;
   showsuccessToast = false;
   showfailToast = false;
-ngOnInit() {
-  // const prepInputsData = sessionStorage.getItem('PrepInputs');
-  // const agendaInputsData = sessionStorage.getItem('AgendaInputs');
-  this.prepform = this.fb.group({
-    prepinputs: this.fb.array([])
-  });
-  this.agendaform = this.fb.group({
-    agendainputs: this.fb.array([])
-  });
-// Subscribe to changes in the form array if 'prepinputs' exists
-this.prepform.get('prepinputs')?.valueChanges.subscribe(values => {
-  console.log('Form values changed:', values);
-  // Store the values as needed, e.g., in sessionStorage
-  sessionStorage.setItem('prepinputs', JSON.stringify(values));
-});
-
-// Subscribe to changes in the form array if 'agendainputs' exists
-this.prepform.get('agendainputs')?.valueChanges.subscribe(values => {
-  console.log('Form values changed:', values);
-  // Store the values as needed, e.g., in sessionStorage
-  sessionStorage.setItem('agendainputs', JSON.stringify(values));
-});
-
-  const prepsavedInputs = sessionStorage.getItem('prepinputs');
-  if (prepsavedInputs) {
-    const prepinputs = JSON.parse(prepsavedInputs);
-    prepinputs.forEach((input: any) => this.addprepInput(input));
-  }
-  const agendasavedInputs = sessionStorage.getItem('agendainputs');
-  if (agendasavedInputs) {
-    const agendainputs = JSON.parse(agendasavedInputs);
-    agendainputs.forEach((input: any) => this.addagendaInput(input));
-  }
-  // this.Prepinputs = prepInputsData ? JSON.parse(prepInputsData) : [];
-  // this.Agendainputs = agendaInputsData ? JSON.parse(agendaInputsData) : [];
-  this.isVegetarianSelected = sessionStorage.getItem('isVegetarianSelected') === 'false';
-  this.isVeganSelected = sessionStorage.getItem('isVeganSelected') === 'false';
-  this.isHalalSelected = sessionStorage.getItem('isHalalSelected') === 'false';
-  this.isGlutenFreeSelected = sessionStorage.getItem('isGlutenFreeSelected') === 'false';
-}
-
-
-presubmit(){
-  const missingDetails = [];
-
-  if (!sessionStorage.getItem('Name') || sessionStorage.getItem('Name') === '') {
-    missingDetails.push('title');
-  }
-  if (!sessionStorage.getItem('Description') || sessionStorage.getItem('Description') === '') {
-    missingDetails.push('Description');
-  }
-  if (!sessionStorage.getItem('StartTime') || sessionStorage.getItem('StartTime') === '') {
-    missingDetails.push('Start time');
-  }
-  if (!sessionStorage.getItem('EndTime') || sessionStorage.getItem('EndTime') === '') {
-    missingDetails.push('End time');
-  }
-  if (!sessionStorage.getItem('StartDate') || sessionStorage.getItem('StartDate') === '') {
-    missingDetails.push('Start date');
-  }
-  if (!sessionStorage.getItem('EndDate') || sessionStorage.getItem('EndDate') === '') {
-    missingDetails.push('End date');
-  }
-  if (!sessionStorage.getItem('Location') || sessionStorage.getItem('Location') === '') {
-    missingDetails.push('Location');
-  }
-  
-  if (missingDetails.length > 0) {
-    alert('Please fill in the following details: ' + missingDetails.join(', '));
-    return;
-  }else{
-    this.submit();
-  }
-}
-
-submit(){
+  uniqueSocialClubs: any[] = [];
+  checkedSocialClubs: any[] = [];
+  allClubsChecked = false;
+  socialClubs: any[] = [];
+  otherCheckboxes: boolean[] = [];
+  events: any[] = [];
+  filteredEvents: any[] = [];
+  selectedDietaryAccommodation = '';
+  submit(){
     // Create the event object
     this.isAPILoading = true;
+    const getSocialClubIdByName = (name: string): string | null => {
+      const club = this.uniqueSocialClubs.find(club => club.name === name);
+      return club ? club.id : null;
+    };
     const event = {
       title: validator.escape(this.nameInput.nativeElement.value),
       description: validator.escape(this.descriptionInput.nativeElement.value),
@@ -145,7 +82,7 @@ submit(){
       location: validator.escape(this.LocationInput.nativeElement.value),
       hostId: localStorage.getItem('ID'),
       geolocation: "51.507351, -0.127758",
-      socialClub: validator.escape(this.SocialClubInput.nativeElement.value),
+      socialClub: getSocialClubIdByName(validator.escape(this.SocialClubInput.nativeElement.value)),
       eventPictureLink: "https://example.com/soccer-tournament.jpg", // Replace with actual picture link
       eventAgendas: this.agendaform.get('agendainputs')?.value.map((input: any) => validator.escape(input)),
       eventPreparation: this.prepform.get('prepinputs')?.value.map((input: any) => validator.escape(input)),
@@ -188,6 +125,109 @@ submit(){
       console.error('Error:', error);
     });
 }
+ngOnInit() {
+        // Fetch social club information for each unique social club
+        fetch('https://events-system-back.wn.r.appspot.com/api/events')
+        .then(response => response.json())
+        .then(async data => { // Mark this function as async
+  
+          this.events = Array.isArray(data) ? data : [data];
+          this.uniqueSocialClubs = [...new Set(this.events.map(event => event.socialClub))];
+          this.otherCheckboxes = new Array(this.uniqueSocialClubs.length).fill(false);
+
+
+          // Prepare fetch requests for each unique social club
+          const socialClubFetches = this.uniqueSocialClubs.map(socialClubId =>
+            fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs/' + socialClubId)
+              .then(response => response.json())
+          );
+  
+          // Wait for all social club fetches to complete
+          const socialClubsData = await Promise.all(socialClubFetches);
+          socialClubsData.forEach(data => {
+            console.log(data);
+            // Store the social club data in a property of the component
+            this.socialClubs.push(data);
+          });
+          // Update uniqueSocialClubs and otherCheckboxes based on loaded socialClubs
+          this.uniqueSocialClubs = [...new Set(this.socialClubs.map(club => club))];
+          this.otherCheckboxes = new Array(this.uniqueSocialClubs.length).fill(false);
+        });
+  // const prepInputsData = sessionStorage.getItem('PrepInputs');
+  // const agendaInputsData = sessionStorage.getItem('AgendaInputs');
+  this.prepform = this.fb.group({
+    prepinputs: this.fb.array([])
+  });
+  this.agendaform = this.fb.group({
+    agendainputs: this.fb.array([])
+  });
+// Subscribe to changes in the form array if 'prepinputs' exists
+this.prepform.get('prepinputs')?.valueChanges.subscribe(values => {
+  // console.log('Form values changed:', values);
+  // Store the values as needed, e.g., in sessionStorage
+  sessionStorage.setItem('prepinputs', JSON.stringify(values));
+});
+
+// Subscribe to changes in the form array if 'agendainputs' exists
+this.prepform.get('agendainputs')?.valueChanges.subscribe(values => {
+  // console.log('Form values changed:', values);
+  // Store the values as needed, e.g., in sessionStorage
+  sessionStorage.setItem('agendainputs', JSON.stringify(values));
+});
+
+  const prepsavedInputs = sessionStorage.getItem('prepinputs');
+  if (prepsavedInputs) {
+    const prepinputs = JSON.parse(prepsavedInputs);
+    prepinputs.forEach((input: any) => this.addprepInput(input));
+  }
+  const agendasavedInputs = sessionStorage.getItem('agendainputs');
+  if (agendasavedInputs) {
+    const agendainputs = JSON.parse(agendasavedInputs);
+    agendainputs.forEach((input: any) => this.addagendaInput(input));
+  }
+  // this.Prepinputs = prepInputsData ? JSON.parse(prepInputsData) : [];
+  // this.Agendainputs = agendaInputsData ? JSON.parse(agendaInputsData) : [];
+  this.isVegetarianSelected = sessionStorage.getItem('isVegetarianSelected') === 'false';   // Set the default value to false
+  this.isVeganSelected = sessionStorage.getItem('isVeganSelected') === 'false';
+  this.isHalalSelected = sessionStorage.getItem('isHalalSelected') === 'false';
+  this.isGlutenFreeSelected = sessionStorage.getItem('isGlutenFreeSelected') === 'false';
+}
+
+
+presubmit(){
+  const missingDetails = [];
+
+  if (!sessionStorage.getItem('Name') || sessionStorage.getItem('Name') === '') {
+    missingDetails.push('title');
+  }
+  if (!sessionStorage.getItem('Description') || sessionStorage.getItem('Description') === '') {
+    missingDetails.push('Description');
+  }
+  if (!sessionStorage.getItem('StartTime') || sessionStorage.getItem('StartTime') === '') {
+    missingDetails.push('Start time');
+  }
+  if (!sessionStorage.getItem('EndTime') || sessionStorage.getItem('EndTime') === '') {
+    missingDetails.push('End time');
+  }
+  if (!sessionStorage.getItem('StartDate') || sessionStorage.getItem('StartDate') === '') {
+    missingDetails.push('Start date');
+  }
+  if (!sessionStorage.getItem('EndDate') || sessionStorage.getItem('EndDate') === '') {
+    missingDetails.push('End date');
+  }
+  if (!sessionStorage.getItem('Location') || sessionStorage.getItem('Location') === '') {
+    missingDetails.push('Location');
+  }
+  
+  if (missingDetails.length > 0) {
+    alert('Please fill in the following details: ' + missingDetails.join(', '));
+    return;
+  }else{
+    this.submit();
+  }
+}
+
+
 
   // Add a variable to save the input values
   inputValues: string[] = [];
@@ -231,7 +271,7 @@ submit(){
     }
   }
   loadDataFromSessionStorage4() {
-    this.isVegetarianSelected = sessionStorage.getItem('isVegetarianSelected') === 'true';
+    this.isVegetarianSelected = sessionStorage.getItem('isVegetarianSelected') === 'true';    
     this.isVeganSelected = sessionStorage.getItem('isVeganSelected') === 'true';
     this.isHalalSelected = sessionStorage.getItem('isHalalSelected') === 'true';
     this.isGlutenFreeSelected = sessionStorage.getItem('isGlutenFreeSelected') === 'true';
@@ -375,7 +415,6 @@ submit(){
   isHalalSelected = false;
   isGlutenFreeSelected = false;
 
-  // Add these methods
   toggleVegetarian() {
     this.isVegetarianSelected = !this.isVegetarianSelected;
     sessionStorage.setItem('isVegetarianSelected', String(this.isVegetarianSelected));

@@ -113,13 +113,18 @@
             </div>
           </div>
           <div class="flex items-center justify-center mt-4">
+            <!-- <button class="btn" [ngClass]="{'btn-outline': isVegetarianSelected}" (click)="toggleVegetarian()">Vegetarian</button>
+            <button class="btn lg:ml-8" [ngClass]="{'btn-outline': isVeganSelected}" (click)="toggleVegan()">Vegan</button>
+            <button class="btn lg:ml-8" [ngClass]="{'btn-outline': isHalalSelected}" (click)="toggleHalal()">Halal</button>
+            <button class="btn lg:ml-8" [ngClass]="{'btn-outline': isGlutenFreeSelected}" (click)="toggleGlutenFree()">Gluten-free</button> -->
+
             <button class="btn" [ngClass]="{'btn-outline': isVegetarianSelected}" (click)="toggleVegetarian()">Vegetarian</button>
             <button class="btn lg:ml-8" [ngClass]="{'btn-outline': isVeganSelected}" (click)="toggleVegan()">Vegan</button>
             <button class="btn lg:ml-8" [ngClass]="{'btn-outline': isHalalSelected}" (click)="toggleHalal()">Halal</button>
             <button class="btn lg:ml-8" [ngClass]="{'btn-outline': isGlutenFreeSelected}" (click)="toggleGlutenFree()">Gluten-free</button>
             </div>
           <div class="flex justify-between mt-4">
-            <button class="btn btn-outline btn-warning">back</button>
+            <button class="btn btn-outline btn-warning" (click)="goBack()">back</button>
             <button (click)="presubmit()" class="btn btn-success">Update event</button>
           </div>
           

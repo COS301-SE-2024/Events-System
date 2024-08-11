@@ -1,0 +1,78 @@
+<form (submit)="updateClub()" [formGroup]="updateForm" class="card-body">
+  <div class="relative flex size-full min-h-screen flex-col bg-base-100 overflow-hidden">
+    <div class="layout-container flex h-full grow flex-col">
+      <div class="px-5 md:px-32 flex flex-1 justify-center py-5">
+        <div class="layout-content-container flex flex-col max-w-[2010px] flex-1">
+            <!--Page heading-->
+            <button class="absolute btn w-[50px] h-[30px] rounded-full">
+              <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <div class="flex items-center justify-center mb-6 md:mx-10 md:p-4">
+              <div class="font-poppins text-center text-secondary font-extrabold text-2xl md:text-3xl mb-2 mx-auto">
+                <p>{{ this.updateForm.get('name')?.value }}</p>
+              </div>
+            </div>
+            
+
+            <div *ngIf="!isAPILoading;">
+              <!-- <div class="flex flex-col mt-5 gap-10">
+                  <div class="flex flex-col items-center justify-center">
+                      <div class="flex flex-col items-center relative rounded-2xl">
+                        <div class="btn btn-ghost btn-square avatar rounded-2xl relative w-72 h-72 md:w-[400px] md:h-[380px] border-none">
+                          <div class="w-full h-full rounded-2xl border-none">
+                            <img [src]="imageSource" alt="Social Club Image" class="font-roboto w-full h-full rounded-2xl">
+                            <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-lg hover:opacity-70">
+                              <i class="fas fa-pencil-alt text-white text-xl hover:text-accent"></i>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+              </div> -->
+
+              <div class="md:flex md:flex-col md:gap-y-16 px-40">
+
+                <div class="flex flex-col justify-center items-center ">
+                  <p class="font-karla text-xl">Club Name</p>
+                  <div class="font-roboto">
+                    <input id="nameInput" type="text" formControlName="name" placeholder="Type club name..." class="input input-bordered border-secondary max-w-xl text-lg mt-1" required/>
+                  </div>
+                </div>
+
+                <div class="flex flex-col justify-center items-center mt-10 md:mt-0">
+                  <p class="font-karla text-xl">Category</p>
+                  <div class="font-roboto">
+                      <select id="categoryInput" formControlName="categories" class="select border-secondary w-64 focus:border-none mt-1 md:mt-3 overflow-y-auto">
+                        <option disabled selected>Select ...</option>
+                        <option>Literature</option>
+                        <option>Education</option>
+                        <!-- <option>Category 3</option>
+                        <option>Category 4</option>
+                        <option>Category 5</option> -->
+                      </select>
+                  </div>
+                </div>
+
+                <div class="flex flex-col justify-center items-center mt-10 md:mt-0">
+                  <p class="font-karla text-xl">Club summary</p>
+                  <div class="font-roboto">
+                      <textarea id="summaryInput" formControlName="summaryDescription" class="textarea textarea-bordered border-secondary w-80  min-h-48 max-h-48 mt-1 md:mt-0" placeholder="Summary" required></textarea>
+                  </div>
+                </div>
+
+                <div class="flex flex-col justify-center items-center mt-10 md:mt-0">
+                  <p class="font-karla text-xl">Detailed description</p>
+                  <div class="font-roboto">      
+                      <textarea id="descriptionInput" formControlName="description" class="textarea textarea-bordered border-secondary w-80 min-h-48 max-h-48 mt-1 md:mt-3" placeholder="Description" required></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-center justify-center mt-4 font-roboto">
+                <button id="saveButton" class="btn btn-accent" type="submit">Save changes</button>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

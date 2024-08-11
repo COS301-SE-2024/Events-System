@@ -26,6 +26,7 @@ export class SocialClubComponent  implements OnInit{
     this.imageSource = this.randomHeaderService.getRandomHeaderSource();
     this.route.params.subscribe(params => {
       this.clubId = params['id'];
+      console.log("ID: " + this.clubId);
       fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs/' + this.clubId)
       .then(response => {
         return response.json();

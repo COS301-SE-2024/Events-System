@@ -75,8 +75,7 @@ public class AuthenticationService {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             throw e;
         }
-        
-        var user = repository.findByEmail(request.getEmail())
+        var user = repository.findByEmailIgnoreCase(request.getEmail())
                 .orElseThrow();
         var jwtToken = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
@@ -137,7 +136,7 @@ public class AuthenticationService {
         refreshToken = authHeader.substring(7);
         userEmail = jwtService.extractUsername(refreshToken);
         if (userEmail != null) {
-            var user = this.repository.findByEmail(userEmail)
+            var user = this.repository.findByEmailIgnoreCase(userEmail)
                     .orElseThrow();
             if (jwtService.isTokenValid(refreshToken, user)) {
                 var accessToken = jwtService.generateToken(user);

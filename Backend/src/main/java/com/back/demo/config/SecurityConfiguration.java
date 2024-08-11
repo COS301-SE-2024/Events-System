@@ -69,11 +69,19 @@ public class SecurityConfiguration {
             "/swagger-ui/**",
             "/webjars/**",
             "/swagger-ui.html",
-            //"/api/events/**",       // Ensure all event-related endpoints are accessible
+            "/api/events/**",       // Ensure all event-related endpoints are accessible
+            "/api/feedback/**",    // Ensure all feedback-related endpoints are accessible
             "/api/event-rsvps/**", // Ensure all event-rsvp-related endpoints are accessible
             "/api/employees/**",   // Ensure all employee-related endpoints are accessible
             "/api/socialclubs/**", // Ensure all social-club-related endpoints are accessible
-            "https://events-system.org/events"
+            "/api/notifications/**", // Ensure all notification-related endpoints are accessible
+            "/api/eventseries/**", // Ensure all event-series-related endpoints are accessible
+            "/api/eventseriessubscriptions/**", // Ensure all event-series-subscription-related endpoints are accessible
+            "/api/reset/**", // Ensure all password-reset-related endpoints are accessible
+            "https://events-system.org/events",
+            "/socket/**",
+            "/api/reset/**",
+            "/notify"
     };
 
     private final JwtAuthenticationFilter jwtAuthFilter;

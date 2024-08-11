@@ -98,7 +98,11 @@ public class EmployeeService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return employeeRepository.findByEmail(username)
+        return employeeRepository.findByEmailIgnoreCase(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + username));
+    }
+
+    public List<Employee> getEmployeesByIds(List<Long> employeeIds) {
+        return employeeRepository.findByEmployeeIdIn(employeeIds);
     }
 }

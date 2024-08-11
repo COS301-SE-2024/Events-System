@@ -16,13 +16,17 @@ export class ProfileComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    const storedEmployeeData = localStorage.getItem('employeeData');
-    if (storedEmployeeData) {
-      this.employeeData = JSON.parse(storedEmployeeData);
-      console.log(this.employeeData);
-    } else {
-      // Handle case where employeeData is not available in localStorage
-    }
+    const storedEmployeeData = localStorage.getItem('ID');
+    console.log('Stored employee data:', storedEmployeeData);
+    fetch(`https://events-system-back.wn.r.appspot.com/api/employees/${storedEmployeeData}`)
+    .then(response => response.json())
+    .then(data => {
+      this.employeeData = data;
+      console.log('Employee data:', this.employeeData);
+    })
+    .catch(error => {
+      console.error('Error fetching employee data:', error);
+    });
   }
 
   navigateToSettings() {
@@ -55,10 +59,15 @@ function initializeTabs() {
     tabs[0].classList.add('tab-active');
   }
 }
-
 function openTab(tab: HTMLElement, index: number) {
   const tabContents = document.querySelectorAll<HTMLElement>('.tab-content');
   const tabs = document.querySelectorAll<HTMLElement>('.tab');
+
+  // Ensure the index is within bounds
+  if (index >= tabContents.length) {
+    // console.error(`Index ${index} is out of bounds for tabContents`);
+    return;
+  }
 
   tabContents.forEach(content => content.classList.add('hidden'));
   tabs.forEach(tab => tab.classList.remove('tab-active'));
@@ -66,4 +75,3 @@ function openTab(tab: HTMLElement, index: number) {
   tabContents[index].classList.remove('hidden');
   tab.classList.add('tab-active');
 }
-

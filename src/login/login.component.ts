@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms'; 
+import { FormBuilder, FormControl, ValidationErrors,  FormGroup, Validators, ReactiveFormsModule } from '@angular/forms'; 
 import { HttpClientModule, HttpClient  } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 
@@ -12,40 +12,93 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  forgotPasswordForm: FormGroup;
   errorMessage = '';
   registerForm: FormGroup;
   loginForm: FormGroup;
   isAPILoading = false;
   showloginsuccessToast = false;
   showregistersuccessToast = false;
+  showemailsuccessToast = false;
   showloginfailToast = false;
   showregisterfailToast = false;
+  showemailfailToast = false;
   hidePassword = true;
   googleClientId = '207465254722-7p4odomht6nnoc2cek9cb0j5jht2faos.apps.googleusercontent.com';
   redirectUri = 'http://localhost:4200/oauth/callback'; // e.g., http://localhost:4200/oauth/callback
   googleAuthEndpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
   responseType = 'code';
   scope = 'openid email profile';
+  hidePassword1 = true;
+  hidePassword2 = true;
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private http: HttpClient
   ) {
+    // Adjusted registerForm initialization
     this.registerForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      role: ['USER', Validators.required] // Default role is Employee
-    });
+      password: this.passwordControl2,
+      confirmPassword: this.passwordControl3,
+      role: ['USER', Validators.required]
+    }, { validators: this.passwordMatchValidator });
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
     });
+    this.forgotPasswordForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]]
+    });
   }
-
+  passwordPattern = '^(?=.*[a-z])(?!.* ).{8,20}$';
+  
+    passwordControl2 = new FormControl('', [Validators.pattern(this.passwordPattern)]);
+    passwordControl3 = new FormControl('', [Validators.pattern(this.passwordPattern)]);
   //delete employeeData and ID from localStorage if they were already set
   //whenever the login page is loaded
+  private passwordMatchValidator(formGroup: FormGroup): ValidationErrors | null {
+    const password = formGroup.get('password')?.value;
+    const confirmPassword = formGroup.get('confirmPassword')?.value;
+    return password === confirmPassword ? null : { passwordMismatch: true };
+  }
+  get passwordMismatchError(): boolean {
+    return this.registerForm.errors?.['passwordMismatch'] && this.registerForm.get('confirmPassword')?.touched;
+  }
+  onSubmit1() {
+    this.isAPILoading = true;
+    const email = this.forgotPasswordForm.get('email')?.value;
+    fetch('https://events-system-back.wn.r.appspot.com/api/reset/forgot-password', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email })
+    })
+    .then(response => {
+      if (response.ok) {
+        this.isAPILoading = false;
+        this.showemailsuccessToast = true;
+      } else {
+        this.showemailfailToast = true;
+        this.isAPILoading = false;
+        setTimeout(() => {
+          this.showemailfailToast = false;
+        }, 10000);
+
+      }
+  })
+    .catch(error => {
+      this.showemailfailToast = true;
+      this.isAPILoading = false;
+      setTimeout(() => {
+        this.showemailfailToast = false;
+      }, 10000);
+
+    });
+  }
   ngOnInit() {
     localStorage.removeItem('employeeData');
     localStorage.removeItem('ID');
@@ -55,6 +108,16 @@ export class LoginComponent {
     this.hidePassword = !this.hidePassword;
     const passwordInput = document.getElementById('password') as HTMLInputElement;
     passwordInput.type = this.hidePassword ? 'password' : 'text';
+  }
+  togglePasswordVisibility1(): void {
+    this.hidePassword1 = !this.hidePassword1;
+    const passwordInput = document.getElementById('password1') as HTMLInputElement;
+    passwordInput.type = this.hidePassword1 ? 'password' : 'text';
+  }
+  togglePasswordVisibility2(): void {
+    this.hidePassword2 = !this.hidePassword2;
+    const passwordInput = document.getElementById('password2') as HTMLInputElement;
+    passwordInput.type = this.hidePassword2 ? 'password' : 'text';
   }
 
   onRegister(event: Event) {
@@ -158,8 +221,7 @@ export class LoginComponent {
         this.isAPILoading = false;
         setTimeout(() => {
           this.showloginfailToast = false;
-        }, 10000);
-        console.error('Error:', error);
+        }, 5000);
         console.error('Error during login:', error);
         this.errorMessage = 'Invalid credentials. Please try again.'; // Set error message for invalid credentials
         window.location.reload();
