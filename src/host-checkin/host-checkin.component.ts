@@ -19,6 +19,7 @@ export class HostCheckinComponent implements OnInit {
     status: string;
     lastUpdated: Date;
     showDetails?: boolean;
+    rsvpId: number;
   }> = [];
   isDesktop = true;
   eventId: string | null = null;
@@ -29,7 +30,7 @@ export class HostCheckinComponent implements OnInit {
     this.updateViewMode();
     this.route.paramMap.subscribe(params => {
       this.eventId = params.get('eventId');
-      console.log(this.eventId);  // Log the eventId to the console
+      //console.log(this.eventId);  // Log the eventId to the console
       if (this.eventId) {
         this.fetchRsvpedEmployees(this.eventId);
       }
@@ -38,7 +39,7 @@ export class HostCheckinComponent implements OnInit {
 
   fetchRsvpedEmployees(eventId: string): void {
     const url = `https://events-system-back.wn.r.appspot.com/api/employees/event/${eventId}`;
-    console.log(url); // Log the URL for debugging
+    //console.log(url); // Log the URL for debugging
     this.http.get<any[]>(url).subscribe(
       (data) => {
         this.rsvpedEmployees = data.map(item => ({
@@ -48,9 +49,10 @@ export class HostCheckinComponent implements OnInit {
           email: item.employee.email,
           status: item.rsvp.status,
           lastUpdated: new Date(item.rsvp.rsvpAt),
-          showDetails: false
-        }));
-        console.log(this.rsvpedEmployees); // Log the data for debugging
+          showDetails: false,
+          rsvpId: item.rsvp.rsvpId
+        })); 
+        //console.log(this.rsvpedEmployees); // Log the data for debugging
       },
       (error) => {
         console.error('Error fetching rsvped employees:', error);
@@ -72,6 +74,22 @@ export class HostCheckinComponent implements OnInit {
   }
 
   removeEmployee(index: number): void {
-    this.rsvpedEmployees.splice(index, 1);
+    console.log(this.rsvpedEmployees);
+    const eventRSVPId = this.rsvpedEmployees[index].rsvpId;
+
+    //send an http delete request to the server
+    //the endpoint is https://events-system-back.wn.r.appspot.com/api/event-rsvps/${eventRSVPId}
+
+    const url = `https://events-system-back.wn.r.appspot.com/api/event-rsvps/${eventRSVPId}`;
+
+    this.http.delete<any>(url).subscribe(
+      (data) => {
+        console.log(data);
+        this.rsvpedEmployees.splice(index, 1);
+      },
+      (error) => {
+        console.error('Error deleting rsvped employee:', error);
+      }
+    );
   }
 }
