@@ -15,6 +15,7 @@ const refreshTokenCookie = {
     secure: false,
     sameSite: 'Lax' as 'Lax',
     // expires: new Date(new Date().getTime() + 24 * 60 * 60 * 1000).getTime(), // 24 hours
+
   };
 
 test.describe('HomeComponent Tests', () => {
