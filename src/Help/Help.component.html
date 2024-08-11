@@ -8,8 +8,17 @@
         <option value="home">Home</option>
         <option value="profile">Profile</option>
         <option value="events">Events</option>
+        <option value="createevents">Create Events</option>
+        <option value="updateevents">Update Events</option>
+        <option value="deleteevents">Delete Events</option>
         <option value="socialclubs">Social Clubs</option>
+        <option value="createsocialclubs">Create Social Clubs</option>
+        <option value="updatesocialclubs">Update Social Clubs</option>
+        <option value="deletesocialclubs">Delete Social Clubs</option>
         <option value="series">Series</option>
+        <option value="createseries">Create Series</option>
+        <option value="updateseries">Update Series</option>
+        <option value="deleteseries">Delete Series</option>
         <option value="notificatons">Notifications</option>
         <option value="Calender">Calender</option>
         <option value="MyEvents">My Events</option>
@@ -29,8 +38,19 @@
         <li><a (click)="setActiveSection('home')">Home</a></li>
         <li><a (click)="setActiveSection('profile')">Profile</a></li>
         <li><a (click)="setActiveSection('events')">Events</a></li>
+        <li><a (click)="setActiveSection('createevents')">Create Events</a></li>
+        <li><a (click)="setActiveSection('updateevents')">Update Events</a></li>
+        <li><a (click)="setActiveSection('deleteevents')">Delete Events</a></li>
+
+
         <li><a (click)="setActiveSection('socialclubs')">Social Clubs</a></li>
+        <li><a (click)="setActiveSection('createsocialclubs')">Create Social Clubs</a></li>
+        <li><a (click)="setActiveSection('updatesocialclubs')">Update Social Clubs</a></li>
+        <li><a (click)="setActiveSection('deletesocialclubs')">Delete Social Clubs</a></li>
         <li><a (click)="setActiveSection('series')">Series</a></li>
+        <li><a (click)="setActiveSection('createseries')">Create Series</a></li>
+        <li><a (click)="setActiveSection('updateseries')">Update Series</a></li>
+        <li><a (click)="setActiveSection('deleteseries')">Delete Series</a></li>
         <li><a (click)="setActiveSection('notifications')">Notifications</a></li>
         <li><a (click)="setActiveSection('Calender')">Calender</a></li>
         <li><a (click)="setActiveSection('MyEvents')">My Events</a></li>
@@ -241,17 +261,6 @@
             </div>
     
             <div class="shadow-md rounded-lg p-6">
-                <h2 class="text-2xl font-semibold mb-2">Toasts</h2>
-                <ul class="list-disc list-inside">
-                    <li><strong>API Loading:</strong> Notification shown while API requests are in progress.</li>
-                    <li><strong>Login Success:</strong> Notification shown when login is successful.</li>
-                    <li><strong>Login Failure:</strong> Notification shown when login fails.</li>
-                    <li><strong>Registration Success:</strong> Notification shown when registration is successful.</li>
-                    <li><strong>Registration Failure:</strong> Notification shown when registration fails.</li>
-                </ul>
-            </div>
-    
-            <div class="shadow-md rounded-lg p-6">
                 <h2 class="text-2xl font-semibold mb-2">Google Auth Redirect</h2>
                 <p>To sign in using Google Auth, click the "Sign in with Google" button. You will be redirected to Google's authentication page. After successfully signing in, you will be redirected back to the application.</p>
             </div>
@@ -434,6 +443,231 @@
     </div>  
 
 
+    <div *ngIf="activeSection === 'createevents'">
+        <div class="container mx-auto p-4">
+            <h1 class="text-3xl font-bold mb-4">Help Menu - Create Event Component</h1>
+            
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Overview</h2>
+                <p>This component allows users to create an event through a multi-step form. Each step collects different pieces of information about the event, such as the title, description, timings, location, and other details.</p>
+            </div>
+    
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Main Sections</h2>
+                <ul class="list-disc list-inside">
+                    <li><strong>Step 1:</strong> Collects the event title.</li>
+                    <li><strong>Step 2:</strong> Collects the event description.</li>
+                    <li><strong>Step 3:</strong> Collects the event timings and location.</li>
+                    <li><strong>Step 4:</strong> Collects additional details like preparation and agenda.</li>
+                    <li><strong>Step 5:</strong> Summarizes the event details.</li>
+                </ul>
+            </div>
+    
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Step 1: Event Title</h2>
+                <ul class="list-disc list-inside">
+                    <li><strong>Input Field:</strong> Allows users to enter the event title. The input is required.</li>
+                    <li><strong>Next Button:</strong> Proceeds to the next step.</li>
+                    <li><strong>Back Button:</strong> Disabled in this step.</li>
+                </ul>
+            </div>
+    
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Step 2: Event Description</h2>
+                <ul class="list-disc list-inside">
+                    <li><strong>Textarea:</strong> Allows users to enter the event description. The textarea is required.</li>
+                    <li><strong>Next Button:</strong> Proceeds to the next step.</li>
+                    <li><strong>Back Button:</strong> Goes back to the previous step.</li>
+                </ul>
+            </div>
+    
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Step 3: Event Timings and Location</h2>
+                <ul class="list-disc list-inside">
+                    <li><strong>Start Time:</strong> Input field for the event start time.</li>
+                    <li><strong>End Time:</strong> Input field for the event end time.</li>
+                    <li><strong>Start Date:</strong> Input field for the event start date.</li>
+                    <li><strong>End Date:</strong> Input field for the event end date.</li>
+                    <li><strong>Location:</strong> Input field for the event location.</li>
+                    <li><strong>Social Club:</strong> Dropdown to select the associated social club.</li>
+                    <li><strong>Next Button:</strong> Proceeds to the next step.</li>
+                    <li><strong>Back Button:</strong> Goes back to the previous step.</li>
+                </ul>
+            </div>
+    
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Step 4: Additional Details</h2>
+                <ul class="list-disc list-inside">
+                    <li><strong>Preparation Details:</strong> Form to add preparation details.</li>
+                    <li><strong>Agenda Details:</strong> Form to add agenda details.</li>
+                    <li><strong>Dietary Accommodations:</strong> Buttons to select dietary accommodations (Vegetarian, Vegan, Halal, Gluten-free).</li>
+                    <li><strong>Next Button:</strong> Proceeds to the next step.</li>
+                    <li><strong>Back Button:</strong> Goes back to the previous step.</li>
+                </ul>
+            </div>
+    
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Step 5: Summary</h2>
+                <ul class="list-disc list-inside">
+                    <li><strong>Title:</strong> Displays the event title.</li>
+                    <li><strong>Description:</strong> Displays the event description.</li>
+                    <li><strong>Timings:</strong> Displays the event start and end times.</li>
+                    <li><strong>Dates:</strong> Displays the event start and end dates.</li>
+                    <li><strong>Location:</strong> Displays the event location.</li>
+                    <li><strong>Social Club:</strong> Displays the selected social club.</li>
+                    <li><strong>Preparation Details:</strong> Displays the preparation details.</li>
+                    <li><strong>Agenda Details:</strong> Displays the agenda details.</li>
+                    <li><strong>Back Button:</strong> Goes back to the previous step.</li>
+                    <li><strong>Submit Button:</strong> Submits the event details.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <div *ngIf="activeSection === 'updateevents'">
+        <div class="container mx-auto p-4">
+            <h1 class="text-3xl font-bold mb-4">Help Menu - Update Event Component</h1>
+            
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Overview</h2>
+                <p>This component allows users to update an existing event. The form includes fields for the event title, description, timings, location, social club, preparation details, agenda details, and dietary accommodations.</p>
+            </div>
+    
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Main Sections</h2>
+                <ul class="list-disc list-inside">
+                    <li><strong>Title:</strong> Input field for the event title.</li>
+                    <li><strong>Description:</strong> Textarea for the event description.</li>
+                    <li><strong>Timings:</strong> Input fields for start and end times.</li>
+                    <li><strong>Dates:</strong> Input fields for start and end dates.</li>
+                    <li><strong>Location:</strong> Input field for the event location.</li>
+                    <li><strong>Social Club:</strong> Input field for the associated social club.</li>
+                    <li><strong>Preparation Details:</strong> Form to add preparation details.</li>
+                    <li><strong>Agenda Details:</strong> Form to add agenda details.</li>
+                    <li><strong>Dietary Accommodations:</strong> Buttons to select dietary accommodations (Vegetarian, Vegan, Halal, Gluten-free).</li>
+                    <li><strong>Submit Button:</strong> Submits the updated event details.</li>
+                </ul>
+            </div>
+    
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Form Fields</h2>
+                <ul class="list-disc list-inside">
+                    <li><strong>Title:</strong> 
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Input field for the event title.</li>
+                            <li>Stores value in session storage.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Description:</strong> 
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Textarea for the event description.</li>
+                            <li>Stores value in session storage.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Start Time:</strong> 
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Input field for the event start time.</li>
+                            <li>Stores value in session storage.</li>
+                        </ul>
+                    </li>
+                    <li><strong>End Time:</strong> 
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Input field for the event end time.</li>
+                            <li>Stores value in session storage.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Start Date:</strong> 
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Input field for the event start date.</li>
+                            <li>Stores value in session storage.</li>
+                        </ul>
+                    </li>
+                    <li><strong>End Date:</strong> 
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Input field for the event end date.</li>
+                            <li>Stores value in session storage.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Location:</strong> 
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Input field for the event location.</li>
+                            <li>Stores value in session storage.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Social Club:</strong> 
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Input field for the associated social club.</li>
+                            <li>Stores value in session storage.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Preparation Details:</strong> 
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Form to add preparation details.</li>
+                            <li>Allows adding and removing inputs.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Agenda Details:</strong> 
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Form to add agenda details.</li>
+                            <li>Allows adding and removing inputs.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Dietary Accommodations:</strong> 
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Buttons to select dietary accommodations (Vegetarian, Vegan, Halal, Gluten-free).</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+    
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Buttons</h2>
+                <ul class="list-disc list-inside">
+                    <li><strong>Back Button:</strong> Navigates back to the previous page.</li>
+                    <li><strong>Update Event Button:</strong> Submits the updated event details.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <div *ngIf="activeSection === 'deleteevents'">
+        <div class="container mx-auto p-4">
+            <h1 class="text-3xl font-bold mb-4">Help Menu - Delete Event Component</h1>
+            
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Overview</h2>
+                <p>This component allows users to delete an existing event. The form includes a confirmation step where the user must enter the event name to proceed with the deletion.</p>
+            </div>
+    
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Main Sections</h2>
+                <ul class="list-disc list-inside">
+                    <li><strong>Title:</strong> Displays a confirmation message.</li>
+                    <li><strong>Back Button:</strong> Navigates back to the previous page.</li>
+                    <li><strong>Event Name Input:</strong> Input field to enter the event name for confirmation.</li>
+                    <li><strong>Action Buttons:</strong> Buttons to either go back or delete the event.</li>
+                </ul>
+            </div>
+    
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Form Fields</h2>
+                <ul class="list-disc list-inside">
+                    <li><strong>Event Name Input:</strong> 
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Input field to enter the event name for confirmation.</li>
+                            <li>Required field.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+
+
     <div *ngIf="activeSection === 'socialclubs'">
         <div class="container mx-auto p-4">
             <h1 class="text-3xl font-bold mb-4">Help Menu - Social Clubs</h1>
@@ -484,6 +718,148 @@
     </div>
 
 
+    <div *ngIf="activeSection === 'createsocialclubs'">
+        <div class="container mx-auto p-4">
+            <h1 class="text-3xl font-bold mb-4">Help Menu - Social Club Create Component</h1>
+            
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Overview</h2>
+                <p>This component allows users to create a new social club by filling out a multi-step form. Each step collects different information about the club, such as its name, description, and category.</p>
+            </div>
+    
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Main Sections</h2>
+                <ul class="list-disc list-inside">
+                    <li><strong>Step Navigation:</strong> Allows users to navigate between different steps of the form.</li>
+                    <li><strong>Image Upload:</strong> Users can upload an image for the club profile.</li>
+                    <li><strong>Club Name:</strong> Input field for the club name.</li>
+                    <li><strong>Club Description & Category:</strong> Textareas for summary and detailed descriptions, and a dropdown for selecting the category.</li>
+                    <li><strong>Summary:</strong> Displays a summary of the entered information before submission.</li>
+                </ul>
+            </div>
+    
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Form Fields</h2>
+                <ul class="list-disc list-inside">
+                    <li><strong>Club Name Input:</strong> 
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Input field to enter the club name.</li>
+                            <li>Required field.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Summary Description:</strong> 
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Textarea for a short summary of the club.</li>
+                            <li>Required field.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Detailed Description:</strong> 
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Textarea for a detailed description of the club.</li>
+                            <li>Required field.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Category Dropdown:</strong> 
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Dropdown to select the club category.</li>
+                            <li>Options: Literature, Education, etc.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <div *ngIf="activeSection === 'updatesocialclubs'">
+        <div class="container mx-auto p-4">
+            <h1 class="text-3xl font-bold mb-4">Help Menu - Update Social Club Component</h1>
+            
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Overview</h2>
+                <p>This component allows users to update the details of an existing social club. The form includes fields for the club name, category, summary, and detailed description.</p>
+            </div>
+    
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Main Sections</h2>
+                <ul class="list-disc list-inside">
+                    <li><strong>Page Heading:</strong> Displays the current club name.</li>
+                    <li><strong>Back Button:</strong> Navigates back to the previous page.</li>
+                    <li><strong>Form Fields:</strong> Input fields for club name, category, summary, and detailed description.</li>
+                    <li><strong>Save Button:</strong> Submits the form to save changes.</li>
+                </ul>
+            </div>
+    
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Form Fields</h2>
+                <ul class="list-disc list-inside">
+                    <li><strong>Club Name Input:</strong> 
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Input field to enter the club name.</li>
+                            <li>Required field.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Category Dropdown:</strong> 
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Dropdown to select the club category.</li>
+                            <li>Options: Literature, Education, etc.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Summary Description:</strong> 
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Textarea for a short summary of the club.</li>
+                            <li>Required field.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Detailed Description:</strong> 
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Textarea for a detailed description of the club.</li>
+                            <li>Required field.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+    
+
+
+        </div>
+    </div>
+
+
+    <div *ngIf="activeSection === 'deletesocialclubs'">
+        <div class="container mx-auto p-4">
+            <h1 class="text-3xl font-bold mb-4">Help Menu - Delete Social Club Component</h1>
+            
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Overview</h2>
+                <p>This component allows users to delete an existing social club by confirming the club name. The form includes a text input for the club name and buttons to submit the deletion or go back.</p>
+            </div>
+    
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Main Sections</h2>
+                <ul class="list-disc list-inside">
+                    <li><strong>Page Heading:</strong> Displays a confirmation message.</li>
+                    <li><strong>Back Button:</strong> Navigates back to the previous page.</li>
+                    <li><strong>Form Fields:</strong> Input field for confirming the club name.</li>
+                    <li><strong>Submit Button:</strong> Submits the form to delete the club.</li>
+                </ul>
+            </div>
+    
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Form Fields</h2>
+                <ul class="list-disc list-inside">
+                    <li><strong>Club Name Input:</strong> 
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Input field to enter the club name for confirmation.</li>
+                            <li>Required field.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
     <div *ngIf="activeSection === 'series'">
         <div class="container mx-auto p-4">
             <h1 class="text-3xl font-bold mb-4">Help Menu - Series Center Component</h1>
@@ -525,6 +901,146 @@
                 <h2 class="text-2xl font-semibold mb-2">Filter Button</h2>
                 <ul class="list-disc list-inside">
                     <li><strong>Filter Button:</strong> A button to open the filter drawer on mobile devices.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <div *ngIf="activeSection === 'createseries'">
+        <div class="container mx-auto p-4">
+            <h1 class="text-3xl font-bold mb-4">Help Menu - Create Series Component</h1>
+            
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Overview</h2>
+                <p>This component allows users to create a new series by navigating through multiple steps: Name, Description, Details, and Summary. Each step includes specific input fields and buttons to navigate between steps.</p>
+            </div>
+    
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Main Sections</h2>
+                <ul class="list-disc list-inside">
+                    <li><strong>Step Navigation:</strong> Displays the steps and allows navigation between them.</li>
+                    <li><strong>Step Content:</strong> Displays the content for the current step.</li>
+                </ul>
+            </div>
+    
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Step Navigation</h2>
+                <ul class="list-disc list-inside">
+                    <li><strong>Steps:</strong> 
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Each step has a class `step` and a conditional class `step-primary` based on the current step.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+    
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Step Content</h2>
+                <ul class="list-disc list-inside">
+                    <li><strong>Name Step:</strong> 
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Input field for the series name.</li>
+                            <li>Tooltip for empty name warning.</li>
+                            <li>Buttons to navigate to the next step.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Description Step:</strong> 
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Textarea for the series description.</li>
+                            <li>Tooltip for empty description warning.</li>
+                            <li>Buttons to navigate between steps.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Events Step:</strong> 
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Button to create a new event.</li>
+                            <li>Table to display and select events.</li>
+                            <li>Buttons to navigate between steps.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Summary Step:</strong> 
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Displays the entered name, description, and selected events.</li>
+                            <li>Buttons to navigate back and submit the form.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <div *ngIf="activeSection === 'updateseries'">
+        <div class="container mx-auto p-4">
+            <h1 class="text-3xl font-bold mb-4">Help Menu - Update Series Component</h1>
+            
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Overview</h2>
+                <p>This component allows users to update an existing series by modifying its title, description, and associated events. The form includes input fields for the title and description, a table to select events, and buttons to submit the changes or go back.</p>
+            </div>
+    
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Main Sections</h2>
+                <ul class="list-disc list-inside">
+                    <li><strong>Page Heading:</strong> Displays a message indicating the purpose of the page.</li>
+                    <li><strong>Back Button:</strong> Navigates back to the previous page.</li>
+                    <li><strong>Form Fields:</strong> Input fields for the series title and description.</li>
+                    <li><strong>Events Table:</strong> Table to display and select events associated with the series.</li>
+                    <li><strong>Submit Button:</strong> Submits the form to update the series.</li>
+                </ul>
+            </div>
+    
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Form Fields</h2>
+                <ul class="list-disc list-inside">
+                    <li><strong>Title Input:</strong> 
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Input field to enter the series title.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Description Textarea:</strong> 
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Textarea to enter the series description.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <div *ngIf="activeSection === 'deleteseries'">
+        <div class="container mx-auto p-4">
+            <h1 class="text-3xl font-bold mb-4">Help Menu - Delete Series Component</h1>
+            
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Overview</h2>
+                <p>This component allows users to delete an existing series by confirming the series name. The form includes an input field for the series name, a back button, and a delete button. It also displays loading, success, and error messages.</p>
+            </div>
+    
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Main Sections</h2>
+                <ul class="list-disc list-inside">
+                    <li><strong>Page Heading:</strong> Displays a message indicating the purpose of the page.</li>
+                    <li><strong>Back Button:</strong> Navigates back to the previous page.</li>
+                    <li><strong>Form Fields:</strong> Input field for the series name.</li>
+                    <li><strong>Action Buttons:</strong> Buttons to go back or delete the series.</li>
+                    <li><strong>Toasts:</strong> Displays loading, success, and error messages.</li>
+                </ul>
+            </div>
+    
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Form Fields</h2>
+                <ul class="list-disc list-inside">
+                    <li><strong>Series Name Input:</strong> 
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Input field to enter the series name.</li>
+                            <li>Required attribute to ensure the field is filled.</li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -634,15 +1150,6 @@
                     <li><strong>Event Items:</strong> Displays individual event items with details such as title, time, and location.</li>
                     <li><strong>More Details Button:</strong> Navigates to the event details page.</li>
                     <li><strong>RSVP Button:</strong> Allows users to RSVP to events (commented out in the current implementation).</li>
-                </ul>
-            </div>
-    
-            <div class="shadow-md rounded-lg p-6">
-                <h2 class="text-2xl font-semibold mb-2">Toasts</h2>
-                <ul class="list-disc list-inside">
-                    <li><strong>API Loading Toast:</strong> Displays a loading indicator when API calls are in progress.</li>
-                    <li><strong>RSVP Success Toast:</strong> Displays a success message when an event is successfully booked.</li>
-                    <li><strong>RSVP Failure Toast:</strong> Displays an error message when there is an issue booking an event.</li>
                 </ul>
             </div>
         </div>
@@ -992,5 +1499,3 @@
           </ul>
       </div>
 </div>
-
-
