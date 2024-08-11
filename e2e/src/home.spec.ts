@@ -6,21 +6,22 @@ const USERNAME = 'myUsername';
 const PASSWORD = 'myPassword';
 
 // Sample cookie to simulate login
-const authCookie = {
-    name: 'jwt', // Adjust the name to match your app's cookie
-    value: 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aG9tYXNkdWJvaXM0QGdtYWlsLmNvbSIsImlhdCI6MTcyMzMxODEyMiwiZXhwIjoxNzIzNDA0NTIyfQ.5ph1KdavNtFxxtMMJYEsz_Gz9Y2Il3NJ-mNggfM7KfQ', // Replace with a valid token or session ID
-    domain: 'localhost', // Adjust domain if needed
+const refreshTokenCookie = {
+    name: 'refresh',
+    value: 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aG9tYXNkdWJvaXM0QGdtYWlsLmNvbSIsImlhdCI6MTcyMzMxODEyMiwiZXhwIjoxNzIzNDA0NTIyfQ.5ph1KdavNtFxxtMMJYEsz_Gz9Y2Il3NJ-mNggfM7KfQ', // Replace with the actual refresh token value
+    domain: 'localhost',
     path: '/',
     httpOnly: true,
-    secure: false, // Set to true if using HTTPS
+    secure: false,
     sameSite: 'Lax' as 'Lax',
+    // expires: new Date(new Date().getTime() + 24 * 60 * 60 * 1000).getTime(), // 24 hours
   };
 
 test.describe('HomeComponent Tests', () => {
   // Before all tests, navigate to the home page
   test.beforeEach(async ({ page }) => {
     // Set the authentication cookie before each test
-    await page.context().addCookies([authCookie]);
+    await page.context().addCookies([refreshTokenCookie]);
 
     // Navigate to a base page to access local storage
     await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' }); // Ensure the document is fully loaded
