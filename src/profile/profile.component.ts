@@ -77,10 +77,15 @@ function initializeTabs() {
     tabs[0].classList.add('tab-active');
   }
 }
-
 function openTab(tab: HTMLElement, index: number) {
   const tabContents = document.querySelectorAll<HTMLElement>('.tab-content');
   const tabs = document.querySelectorAll<HTMLElement>('.tab');
+
+  // Ensure the index is within bounds
+  if (index >= tabContents.length) {
+    // console.error(`Index ${index} is out of bounds for tabContents`);
+    return;
+  }
 
   tabContents.forEach(content => content.classList.add('hidden'));
   tabs.forEach(tab => tab.classList.remove('tab-active'));
@@ -88,4 +93,3 @@ function openTab(tab: HTMLElement, index: number) {
   tabContents[index].classList.remove('hidden');
   tab.classList.add('tab-active');
 }
-

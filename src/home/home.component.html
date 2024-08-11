@@ -1,9 +1,10 @@
+<!-- <div #toastContainer></div> -->
+
 <main class="flex flex-col content-between">
   <section class="bg-transparent text-center shadow-2xl size-full">
     <h2 class="font-poppins font-medium text-3xl mb-3.5 pb-3">Featured Events</h2>
     <div class="relative lg:h-[430px]">
             <!-- Carousel 1 skeleton -->
-
         <div class="carousel w-11/12 carousel-center max-w-screen space-x-4 left-10" #carousel1>
             <!-- Carousel 1 skeleton -->
           <div *ngIf="isLoading; else content">
@@ -88,6 +89,7 @@
 
         <ng-template #content1>
         <div class="carousel-item relative lg:w-1/3 md:w-1/2" *ngFor="let slide of rsvpdSlides; let i = index" [id]="'slide' + (i + 11)">
+
           <app-home-event-card
             [eventTitle]="slide.title"
             [hostName]="slide.hostId"
