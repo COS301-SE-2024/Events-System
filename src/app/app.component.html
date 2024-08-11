@@ -1,3 +1,4 @@
+
 <div class="navbar bg-base-100 ">
   <div class="navbar-start">
     <div class="dropdown">
@@ -7,12 +8,28 @@
         </label>
     </div>
   </div>
-
   <div class="navbar-center">
+
     <a routerLink="/" class="btn btn-ghost text-xl hidden"  *ngIf="!isLoginRoute">Events System</a>
   </div>
+  <div class="navbar-end">
+    <!-- Notification Bell -->
+    <button class="btn btn-ghost btn-circle relative" (click)="togglePopover()">
+      <div class="relative"  *ngIf="!isLoginRoute" >
+        <!-- DaisyUI Notification Bell Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2 2 0 0118 14V9a6 6 0 00-12 0v5a2 2,0,01-.595,1.195L3,17h5m6 0a3 3 0,01-6 0m6 0h-6" />
+        </svg>
+        <!-- Badge for unread notifications -->
+        <span  class="absolute top-0 right-0 w-4 h-4 text-xs text-white bg-red-500 rounded-full flex items-center justify-center transform translate-x-1/2 -translate-y-1/2"> {{ notificationCount }} </span>
+      </div>
+    </button>
+    <app-notif-popup *ngIf="isPopoverVisible" (closePopup)="closePopup()"></app-notif-popup>
 
-  <div class="navbar-end gap-3">
+    
+
+    <button class="btn btn-ghost btn-circle hidden lg:block"  *ngIf="!isLoginRoute">
+      <i class="fa-solid fa-magnifying-glass"></i>    </button>
     <div class="dropdown dropdown-end"  *ngIf="!isLoginRoute">
       <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar" >
         <div class="w-10 rounded-full">
@@ -31,7 +48,7 @@
     </div>
     <label class="swap swap-rotate mr-5">
       <!-- this hidden checkbox controls the state -->
-      <input type="checkbox" class="theme-controller" value="corporate" />
+      <input type="checkbox" class="theme-controller" value="nord" />
       <!-- sun icon -->
       <svg class="swap-off fill-current w-10 h-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"/></svg>
       <!-- moon icon -->
@@ -39,9 +56,8 @@
     </label> 
   </div>
 </div>
+<div class="drawer bg-base-100" >
 
-
-<div class="drawer bg-base-100 " >
   <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
   <div class="drawer-content ">
     <!-- Page content here -->
@@ -52,6 +68,8 @@
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
         </div>
     </label> -->
+    <div #toastContainer  class="relative z-50"></div>
+
     <router-outlet></router-outlet>
   </div> 
   <div class="drawer-side z-50">
@@ -62,7 +80,7 @@
       <li>
       <li><a routerLink="/events"><i class="fa-solid fa-list"></i>Events</a></li> 
       <li><a routerLink="/socialclubs"><i class="fa-solid fa-people-group"></i>Social Clubs</a></li>
-      <li><a routerLink="/events"><i class="fa-solid fa-grip-lines"></i>Series</a></li> 
+      <li><a routerLink="/seriescenter"><i class="fa-solid fa-grip-lines"></i>Series</a></li> 
       <li>
 
         <details closed>
@@ -76,7 +94,7 @@
         </details>
       </li>
           <li><a><i class="fa-solid fa-inbox"></i>Messages</a></li>
-          <li><a><i class="fa-solid fa-circle"></i>Notifications</a></li>
+          <li><a routerLink="/notifications"><i class="fa-solid fa-circle"></i>Notifications</a></li>
           <li>
 
             <details closed>
@@ -93,10 +111,13 @@
           <li><a routerLink="/calender"><i class="fa-solid fa-calendar"></i>Calender</a></li>
           <li><a routerLink="/myevents"><i class="fa-regular fa-address-book"></i>My events</a></li>
           <li><a routerLink="/socialclublisting"><i class="fa-solid fa-users-rays"></i>My Social Clubs</a>
+          <li><a routerLink="/myseries"><i class="fa-solid fa-bars"></i>My series</a></li>
           <li><a routerLink="/settings"><i class="fa-solid fa-gear"></i>Settings</a></li>
-          <li><a routerLink=""><i class="fa-solid fa-magnifying-glass"></i>Search</a></li>
+          <li><a routerLink="/search"><i class="fa-solid fa-magnifying-glass"></i>Search</a></li>
           <li><a routerLink="/help"><i class="fa fa-info"></i>Help</a></li>
+          <li><a  (click)="installPwa()"><i class="fa fa-download"></i>Download app</a></li>
     </ul>
   
   </div>
 </div>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">

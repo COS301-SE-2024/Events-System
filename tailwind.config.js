@@ -15,10 +15,9 @@ module.exports = {
           "neutral": "#1c2340",
           "base-100": "#12192D",
         },
+        
       },
-      "light",
-      "dark",
-      "corporate"],
+      "nord"],
   },
   presets: [],
   darkMode: 'media', // or 'class'

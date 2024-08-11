@@ -44,7 +44,7 @@ public class AuthenticationController {
     private TokenRepository tokenRepository;
     @GetMapping("/{sessionToken}")
     public ResponseEntity<Long> getEmployeeId(@PathVariable String sessionToken) {
-        Optional<Token> optionalToken = tokenRepository.findByToken(sessionToken);
+        Optional<Token> optionalToken = tokenRepository.findByTokenIgnoreCase(sessionToken);
         if (optionalToken.isPresent()) {
             Token token = optionalToken.get();
             return ResponseEntity.ok(token.getUser().getEmployeeId());
