@@ -165,7 +165,9 @@ export class EventRatingsComponent implements OnInit {
       sum += this.reviews[i].rating;
     }
     
-    return sum/this.reviews.length;
+    const averageRating = sum/this.reviews.length;
+
+    return isFinite(averageRating) ? averageRating : 0;
   }
 
   getStars(): number[] {
