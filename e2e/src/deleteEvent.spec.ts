@@ -1,7 +1,6 @@
-// tests/socialClubDelete.spec.js
+// tests/deleteEvent.spec.js
 import { test, expect } from '@playwright/test';
 const BASE_URL = 'http://localhost:4200'; // Replace with your actual app URL
-
 
 const refreshTokenCookie = {
     name: 'refresh',
@@ -11,37 +10,43 @@ const refreshTokenCookie = {
     httpOnly: false,
     secure: false,
     sameSite: 'Lax' as 'Lax',
-  };
-test.describe('Social Club Delete Page', () => {
+};
+
+test.describe('EVent Delete Page', () => {
     test.beforeEach(async ({ page }) => {
         // Set the authentication cookie before each test
         await page.context().addCookies([refreshTokenCookie]);
-       
+        
         await page.waitForTimeout(1000);
         // Navigate to a base page to access local storage
-        await page.goto(`${BASE_URL}/deletesocialclub/1`, { waitUntil: 'domcontentloaded' }); // Ensure the document is fully loaded
-   
+        await page.goto(`${BASE_URL}/deleteevent/1`, { waitUntil: 'domcontentloaded' }); // Ensure the document is fully loaded
+    
         await page.evaluate(() => {
             localStorage.setItem('ID', '10'); // Set a key-value pair in local storage
             // Add other items as needed
         });
-       
-        // Navigate to the events page
-        await page.goto(`${BASE_URL}/deletesocialclub/1`);
-    });
-    test('should display the social club delete form', async ({ page }) => {
-      // Check if the form is visible
-      const form = await page.locator('form.card-body'); // Use a more specific locator
-      await expect(form).toBeVisible();
+        
+        // Navigate to the social club delete page
+        await page.goto(`${BASE_URL}/deleteevent/1`);
     });
 
+    test('should display the social club delete form', async ({ page }) => {
+        // Check if the heading is visible
+        const heading = await page.locator('h1.text-4xl');
+        await expect(heading).toBeVisible();
+
+        // Check if the input field is visible
+        const inputField = await page.locator('input[placeholder="Type here"]');
+        await expect(inputField).toBeVisible();
+    });
 
     test('should allow user to fill and submit the form', async ({ page }) => {
         // Fill out the name
-        await page.fill('input[formControlName="name"]', 'Test Club');
-       
+        await page.fill('input[placeholder="Type here"]', 'Test Event');
+
         // Submit the form
-        await expect(page.locator('button:has-text("Delete Club")')).toBeVisible();
+        const deleteButton = await page.locator('button.btn-error:has-text("Delete event")');
+        await expect(deleteButton).toBeVisible();
+        //await deleteButton.click();
     });
 });
-
