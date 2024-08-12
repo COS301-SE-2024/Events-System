@@ -12,7 +12,7 @@ const refreshTokenCookie = {
     sameSite: 'Lax' as 'Lax',
 };
 
-test.describe('EVent Delete Page', () => {
+test.describe('Event Delete Page', () => {
     test.beforeEach(async ({ page }) => {
         // Set the authentication cookie before each test
         await page.context().addCookies([refreshTokenCookie]);
@@ -26,7 +26,7 @@ test.describe('EVent Delete Page', () => {
             // Add other items as needed
         });
         
-        // Navigate to the social club delete page
+        // Navigate to the event delete page
         await page.goto(`${BASE_URL}/deleteevent/1`);
     });
 

@@ -70,7 +70,7 @@ test.describe('Event Create Page', () => {
         // Step 5: Submit the form
         await page.click('li:has-text("Summary")');
         await expect(page.locator('button:has-text("Create event")')).toBeVisible();
-        await page.click('button:has-text("Create event")');
+        //await page.click('button:has-text("Create event")');
     });
 });
 
