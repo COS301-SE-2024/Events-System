@@ -1,32 +1,32 @@
-<div class="card bg-base-100 rounded-xl shadow-xl"> 
+<div class="card rounded-xl shadow-xl w-11/12 bg-base-200  "> 
     <div class="md:flex">
-      <div class="md:shrink-0">
-        <img class="h-48 w-full object-cover md:h-full" [src]="imageSource" alt="Album"/>
+      <div class="md:shrink-2 lg:shrink-0">
+        <img class="rounded-l-xl h-48 w-full object-cover md:h-full" [src]="imageSource" alt="Album"/>
       </div>
   
       
       <div class="card-body w-dvw">
-        <h2 class="victor-mono-normal uppercase tracking-wide text-xl text-accent font-semibold text-center">{{ eventTitle }}</h2>
-        <p class=" victor-mono-normal text-primary text-base text-center lg:block hidden">{{ eventDescription }}</p>
+        <h2 class="font-karla text-accent font-bold text-xl text-center">{{ eventTitle }}</h2>
+        <p class="font-roboto text-primary text-base text-center lg:block hidden">{{ eventDescription }}</p>
 
         <div class="">
-          <p class="cutive-mono-regular flex items-center justify-center">
+          <p class="font-roboto flex items-center justify-center">
             <span><i class="fa-solid fa-user translate-y-1"></i> {{ hostName }}</span>
           </p>
-          <p class="cutive-mono-regular flex items-center justify-center">
+          <p class="font-roboto flex items-center justify-center">
             <span><i class="fa-regular fa-envelope translate-y-1"></i> {{ hostEmail }}</span>
           </p>
-          <p class="cutive-mono-regular flex items-center justify-center">
+          <p class="font-roboto flex items-center justify-center">
             <span><i class="fa-regular fa-calendar-days translate-y-1"></i> {{ startDate | date:'dd MMM' }} - {{ endDate | date:'dd MMM' }}</span>
           </p>
-          <p class="cutive-mono-regular flex items-center justify-center">
+          <p class="font-roboto flex items-center justify-center">
             <span><i class="fa-regular fa-clock translate-y-1 "></i> {{ formattedStartTime }} - {{ formattedEndTime }}</span>
           </p>
         </div>
         
         <form action="">
           <div class="card-actions justify-center">
-            <button [routerLink]="['/event', eventID]" type="submit" class="inline-flex cursor-pointer items-center justify-center rounded-xl border-none bg-gradient-to-r from-accent to-secondary px-4 py-2.5 text-sm font-semibold text-white transition duration-200 hover:bg-gradient-to-r hover:from-accent hover:to-accent focus:outline-none focus:ring-2 focus:ring-orange-400/80 focus:ring-offset-0 disabled:opacity-30 disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80">               
+            <button [routerLink]="['/event', eventID]" type="submit" class="font-roboto inline-flex cursor-pointer items-center justify-center rounded-xl border-none bg-gradient-to-r from-accent to-secondary px-4 py-2.5 text-sm font-semibold text-white transition duration-200 hover:bg-gradient-to-r hover:from-accent hover:to-accent focus:outline-none focus:ring-2 focus:ring-orange-400/80 focus:ring-offset-0 disabled:opacity-30 disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80">               
                See More !
             </button>
           </div>

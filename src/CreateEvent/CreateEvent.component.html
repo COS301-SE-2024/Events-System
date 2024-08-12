@@ -1,11 +1,11 @@
 <div>
   <div class="mx-auto text-center">
     <ul class="steps lg:text-md text-sm">
-      <li [class.step-primary]="currentStep >= 0" class="step cursor-pointer" (click)="navigateToStep(0)">Name</li>
-      <li [class.step-primary]="currentStep >= 1" class="step cursor-pointer" (click)="navigateToStep(1)">Description</li>
-      <li [class.step-primary]="currentStep >= 2" class="step cursor-pointer" (click)="navigateToStep(2)">Details</li>
-      <li [class.step-primary]="currentStep >= 3" class="step cursor-pointer" (click)="navigateToStep(3)">Prep & Agenda</li>
-      <li [class.step-primary]="currentStep >= 4" class="step cursor-pointer" (click)="navigateToStep(4)">Summary</li>
+      <li [class.step-primary]="currentStep >= 0" class="step cursor-pointer font-roboto" (click)="navigateToStep(0)">Name</li>
+      <li [class.step-primary]="currentStep >= 1" class="step cursor-pointer font-roboto" (click)="navigateToStep(1)">Description</li>
+      <li [class.step-primary]="currentStep >= 2" class="step cursor-pointer font-roboto" (click)="navigateToStep(2)">Details</li>
+      <li [class.step-primary]="currentStep >= 3" class="step cursor-pointer font-roboto" (click)="navigateToStep(3)">Prep & Agenda</li>
+      <li [class.step-primary]="currentStep >= 4" class="step cursor-pointer font-roboto" (click)="navigateToStep(4)">Summary</li>
     </ul>
 </div>
 
@@ -13,102 +13,114 @@
     <button class="btn w-[50px] -mt-12 lg:ml-8 h-[30px] rounded-full"(click)="goBack()"><i class="fa-solid fa-arrow-left"></i></button>
     <div class="flex justify-center items-center">
       <div *ngSwitchCase="0" class="mt-8" [@fadeInOut]>
-        <h1 class="lg:text-6xl text-4xl text-center ">Name your event</h1>
+        <h1 class="lg:text-6xl text-4xl text-center font-karla">Name your event</h1>
         <div class="tooltip tooltip-open tooltip-error mb-4"  [class.hidden]="!isNameEmpty" data-tip="please enter a Title">
         </div>
-          <input #nameInput type="text" placeholder="Type here" class="input input-bordered w-full max-w-xl text-lg h-12 mt-8" required/>
+          <input #nameInput type="text" placeholder="Type here" class="input input-bordered w-full max-w-xl text-lg h-12 mt-8 font-roboto" required/>
 
           <div class="flex justify-between mt-4">
-          <button class="btn btn-outline btn-warning" [disabled]="currentStep === 0">Back</button>
-          <button (click)="nextStep()" class="btn btn-success">Next</button>
+          <button class="btn btn-outline btn-warning font-roboto" [disabled]="currentStep === 0">Back</button>
+          <button (click)="nextStep()" class="btn btn-success font-roboto">Next</button>
         </div>
        
       </div>
     </div>
     <div class="flex justify-center items-center">
       <div *ngSwitchCase="1" class="mt-8" [@fadeInOut]>
-        <h1 class="lg:text-6xl text-4xl">What's it about?</h1>
+        <h1 class="lg:text-6xl text-4xl font-karla">What's it about?</h1>
         <div>
-          <div class="tooltip tooltip-open tooltip-error lg:ml-8 ml-4 -mb-4"  [class.hidden]="!isDescriptionEmpty" data-tip="please enter a Description">
+          <div class="tooltip tooltip-open tooltip-error lg:ml-8 ml-4 -mb-4 font-roboto"  [class.hidden]="!isDescriptionEmpty" data-tip="Please enter a Description">
           </div>
-          <textarea #descriptionInput class="textarea textarea-bordered w-full h-44 mt-4" placeholder="Description" required></textarea>        
+          <textarea #descriptionInput class="textarea textarea-bordered w-full h-44 mt-4 font-roboto" placeholder="Description" required></textarea>        
         </div>
         <div class="flex justify-between mt-4">
-          <button (click)="previousStep()" class="btn btn-outline btn-warning" [disabled]="currentStep === 0">Back</button>
-          <button (click)="nextStep1()" class="btn btn-success">Next</button>
+          <button (click)="previousStep()" class="btn btn-outline btn-warning font-roboto" [disabled]="currentStep === 0">Back</button>
+          <button (click)="nextStep1()" class="btn btn-success font-roboto">Next</button>
         </div>
       </div>
     </div>
     <div class="flex justify-center items-center">
       <div *ngSwitchCase="2" [@fadeInOut]>
-        <h1 class="lg:text-6xl text-4xl text-center mt-8">Add some details!</h1>
+        <h1 class="lg:text-6xl text-4xl text-center mt-8 font-karla">Add some details!</h1>
           <div class="flex justify-evenly">
-          <div>
-            <div class="label mt-4">
-              <span class="label-text">Start Time</span>
+            <div>
+              <div class="label mt-4">
+                <span class="label-text font-roboto">Start Time</span>
+              </div>
+              <input #StartTimeInput type="time" class="input input-bordered lg:w-96 "required>
             </div>
-            <input #StartTimeInput type="time" class="input input-bordered lg:w-96 "required>
-          </div>
-          <div class="mt-7 lg:ml-8">
-            -
-          </div>
-          <div>
-            <div class="label mt-4 lg:ml-8">
-              <span class="label-text">End Time</span>
-            </div>
-            <input #EndTimeInput type="time" class="input input-bordered lg:w-96 lg:ml-8"required>
-          </div>
 
+            <div class="mt-16 lg:ml-8 font-roboto">
+              -
+            </div>
+
+            <div>
+              <div class="label mt-4 lg:ml-8">
+                <span class="label-text font-roboto">End Time</span>
+              </div>
+              <input #EndTimeInput type="time" class="input input-bordered lg:w-96 max-w-xs lg:ml-8"required>
+            </div>
         </div>
+
         <div class="flex justify-evenly">
           <div>
             <div class="label mt-4">
-              <span class="label-text">Start Date</span>
+              <span class="label-text font-roboto">Start Date</span>
             </div>
-            <input #StartDateInput type="date" class="input input-bordered lg:w-96"required>
+            <input #StartDateInput type="date" class="input input-bordered lg:w-96 font-roboto"required>
           </div>
-          <div class="mt-7 lg:ml-8">
+          <div class="mt-16 lg:ml-8 font-roboto">
             -
           </div>
           <div>
             <div class="label mt-4 lg:ml-8">
-              <span class="label-text">End Date</span>
+              <span class="label-text font-roboto">End Date</span>
             </div>
-            <input #EndDateInput type="date" class="input input-bordered lg:w-96 lg:ml-8"required>
+            <input #EndDateInput type="date" class="input input-bordered lg:w-96 lg:ml-8 font-roboto"required>
           </div>
         </div>
-        <div class="flex justify-evenly lg:flex-row flex-col">
+
+        <div class="flex justify-evenly lg:flex-row flex-col lg:ml-[0.8rem]">
           <div>
-            <input #LocationInput type="text" placeholder="Location" class="input input-bordered mt-8 w-11/12"required>
+            <div class="label mt-4 lg:-ml-4">
+              <span class="label-text font-roboto">Location</span>
+            </div>
+            <input #LocationInput type="text" placeholder="Location" class="input input-bordered w-96 max-w-md lg:-ml-4 font-roboto"required>
           </div>
-          <div class="mt-7">
-          </div>
+
           <div>
-            <input #SocialClubInput type="text"  placeholder="Social club"class="input input-bordered lg:mt-8 w-full"required>
+            <div class="label mt-4 lg:ml-16">
+              <span class="label-text font-roboto">Social club</span>
+            </div>
+            <select  #SocialClubInput placeholder="Social club" class="select select-bordered w-96 max-w-md lg:ml-16 font-roboto">
+              <option disabled selected>Select a social club</option>
+              <option *ngFor="let club of uniqueSocialClubs">{{ club.name }}</option>
+            </select>
           </div>
+
         </div>
         <div class="flex justify-between mt-4">
-          <button (click)="previousStep()" class="btn btn-outline btn-warning" [disabled]="currentStep === 0">Back</button>
+          <button (click)="previousStep()" class="btn btn-outline btn-warning font-roboto" [disabled]="currentStep === 0">Back</button>
           <div>
-            <div class="tooltip tooltip-open tooltip-error lg:mt-0 lg:ml-0 ml-4 mb-5"  [class.hidden]="!isstep2Empty" data-tip="empty input(s)">
+            <div class="tooltip tooltip-open tooltip-error lg:mt-0 lg:ml-0 ml-4 mb-5 font-roboto"  [class.hidden]="!isstep2Empty" data-tip="Empty input(s)">
             </div>
-            <button (click)="nextStep2()" class="btn btn-success">Next</button>
+            <button (click)="nextStep2()" class="btn btn-success font-roboto">Next</button>
           </div>
         </div>
       </div>
     </div>  
     <div class="flex justify-center items-center">
       <div *ngSwitchCase="3" [@fadeInOut]>
-        <h1 class="lg:text-6xl text-4xl text-center mt-8">Add some more details!</h1>
+        <h1 class="lg:text-6xl text-4xl text-center mt-8 font-karla">Add some more details!</h1>
         <div class="flex justify-evenly lg:flex-row flex-col">
           <div>
-            <div class="flex flex-col lg:flex-row justify-evenly items-start">
+            <div class="flex flex-col lg:flex-row justify-evenly items-center">
               <div>
-                <div class="label mt-4  text-center">
+                <div class="label mt-4 text-center font-roboto">
                   <span class="label-text">Preparation Details</span>
                 </div>
                 <form [formGroup]="prepform">
-                  <div formArrayName="prepinputs">
+                  <div formArrayName="prepinputs" class="font-roboto">
                     <div *ngFor="let input of prepinputs.controls; index as i" [@fadeIn] class="flex">
                       <input [formControlName]="i" class="input input-bordered w-full mt-4">
                       <button (click)="removeprepInput(i)" class="btn btn-outline btn-warning mt-4 ml-2 opacity-35">-</button>
@@ -118,14 +130,16 @@
                   <!-- <button (click)="saveInputs()">Next</button> -->
                 </form>
               </div>
+
               <div class="mt-7 ml-8">
               </div>
+
               <div>
                 <div class="label  mt-4">
-                  <span class="label-text">Agenda Details</span>
+                  <span class="label-text font-roboto">Agenda Details</span>
                 </div>
                 <form [formGroup]="agendaform">
-                  <div formArrayName="agendainputs">
+                  <div formArrayName="agendainputs font-roboto">
                     <div *ngFor="let input of agendainputs.controls; index as i" [@fadeIn] class="flex">
                       <input [formControlName]="i"  class="input input-bordered w-full mt-4">
                       <button (click)="removeagendaInput(i)" class="btn btn-outline btn-warning mt-4 ml-2 opacity-35">-</button>
@@ -140,17 +154,18 @@
         </div> <!-- Close the flex container here -->
         <div class="flex items-center justify-center">
           <div class="label mt-4">
-            <span class="label-text">Dietary accomodations</span>
+            <span class="label-text font-roboto">Dietary accomodations</span>
           </div>
         </div>
 
         <div class="flex items-center justify-center mt-4">
-          <button class="btn" [ngClass]="{'btn-outline': !isVegetarianSelected}" (click)="toggleVegetarian()">Vegetarian</button>
-          <button class="btn lg:ml-8" [ngClass]="{'btn-outline': !isVeganSelected}" (click)="toggleVegan()">Vegan</button>
-          <button class="btn lg:ml-8" [ngClass]="{'btn-outline': !isHalalSelected}" (click)="toggleHalal()">Halal</button>
-          <button class="btn lg:ml-8" [ngClass]="{'btn-outline': !isGlutenFreeSelected}" (click)="toggleGlutenFree()">Gluten-free</button>
-          </div>
-        <div class="flex justify-between mt-4">
+          <button class="btn font-roboto" [ngClass]="{'btn-outline': isVegetarianSelected}" (click)="toggleVegetarian()">Vegetarian</button>
+          <button class="btn lg:ml-8 font-roboto" [ngClass]="{'btn-outline': isVeganSelected}" (click)="toggleVegan()">Vegan</button>
+          <button class="btn lg:ml-8 font-roboto" [ngClass]="{'btn-outline': isHalalSelected}" (click)="toggleHalal()">Halal</button>
+          <button class="btn lg:ml-8 font-roboto" [ngClass]="{'btn-outline': isGlutenFreeSelected}" (click)="toggleGlutenFree()">Gluten-free</button>
+        </div>
+
+        <div class="flex justify-between mt-4 font-roboto">
           <button (click)="previousStep()" class="btn btn-outline btn-warning" [disabled]="currentStep === 0">Back</button>
           <button (click)="nextStep3()" class="btn btn-success">Next</button>
         </div>
@@ -158,78 +173,87 @@
     </div>  
     <div class="flex justify-center items-center">
       <div *ngSwitchCase="4" [@fadeInOut]>
-        <h1 class="lg:text-6xl text-4xl text-center mt-8">Let's Summarize</h1>
+        <h1 class="lg:text-6xl text-4xl text-center mt-8 font-karla">Let's Summarize</h1>
         <div class="mx-auto w-1/2">
           <div class="label mt-4 flex justify-center">
-            <span class="label-text">Title</span>
+            <span class="label-text font-roboto">Title</span>
           </div>
-          <input disabled #nameInput type="text" placeholder="Type here" class="input input-bordered w-full max-w-xl text-lg h-12" required/>
+          <input disabled #nameInput type="text" placeholder="Type here" class="input input-bordered w-full max-w-xl text-lg h-12 font-roboto" required/>
         </div>
 
         <div class="label mt-4 flex justify-center">
-          <span class="label-text">Description</span>
+          <span class="label-text font-roboto">Description</span>
         </div>
-        <textarea disabled #descriptionInput class="textarea textarea-bordered w-full h-44" placeholder="Bio"required></textarea>    
+        <textarea disabled #descriptionInput class="textarea textarea-bordered w-full h-44 font-roboto" placeholder="Bio"required></textarea>    
+        
         <div class="flex justify-evenly">
           <div>
             <div class="label mt-4">
-              <span class="label-text">Start Time</span>
+              <span class="label-text font-roboto">Start Time</span>
             </div>
-            <input disabled #StartTimeInput type="time" class="input input-bordered lg:w-96 "required>
+            <input disabled #StartTimeInput type="time" class="input input-bordered lg:w-96 font-roboto"required>
           </div>
-          <div class="mt-7 lg:ml-8">
+          <div class="mt-16 lg:ml-8 font-roboto">
             -
           </div>
           <div>
             <div class="label mt-4 lg:ml-8">
-              <span class="label-text">End Time</span>
+              <span class="label-text font-roboto">End Time</span>
             </div>
-            <input disabled #EndTimeInput type="time" class="input input-bordered lg:w-96 lg:ml-8"required>
+            <input disabled #EndTimeInput type="time" class="input input-bordered lg:w-96 lg:ml-8 font-roboto"required>
           </div>
 
         </div>
         <div class="flex justify-evenly">
           <div>
             <div class="label mt-4">
-              <span  class="label-text">Start Date</span>
+              <span  class="label-text font-roboto">Start Date</span>
             </div>
             <input disabled #StartDateInput type="date" class="input input-bordered lg:w-96"required>
           </div>
-          <div class="mt-7 lg:ml-8">
+          <div class="mt-16 lg:ml-8 font-roboto">
             -
           </div>
           <div>
             <div class="label mt-4 lg:ml-8">
-              <span  class="label-text">End Date</span>
+              <span  class="label-text font-roboto">End Date</span>
             </div>
             <input disabled #EndDateInput type="date" class="input input-bordered lg:w-96 lg:ml-8"required>
           </div>
         </div>
-        <div class="flex justify-evenly lg:flex-row flex-col">
+        <div class="flex justify-evenly lg:flex-row flex-col lg:ml-[0.8rem]">
           <div>
-            <input disabled #LocationInput type="text" placeholder="Location" class="input input-bordered mt-8 w-11/12"required>
+            <div class="label mt-4 lg:-ml-4">
+              <span class="label-text font-roboto">Location</span>
+            </div>
+            <input disabled #LocationInput type="text" placeholder="Location" class="input input-bordered w-96 max-w-md lg:-ml-4 font-roboto"required>
           </div>
-          <div class="mt-7">
-          </div>
+
           <div>
-            <input disabled #SocialClubInput type="text"  placeholder="Social club"class="input input-bordered lg:mt-8 w-full"required>
+            <div class="label mt-4 lg:ml-16">
+              <span class="label-text font-roboto">Social club</span>
+            </div>
+            <select disabled #SocialClubInput placeholder="Social club" class="select select-bordered w-96 max-w-md lg:ml-16 font-roboto">
+              <option disabled selected>Select a social club</option>
+              <option *ngFor="let club of uniqueSocialClubs">{{ club.name }}</option>
+            </select>
           </div>
-          
-        </div>  
+
+        </div>
         <div>
-          <div class="flex flex-col lg:flex-row justify-evenly items-start">
+          <div class="flex flex-col lg:flex-row justify-evenly items-center">
             <div>
               <div class="label  mt-4">
-                <span class="label-text">Preparation Details</span>
+                <span class="label-text font-roboto">Preparation Details</span>
               </div>
               <form [formGroup]="prepform">
                 <div formArrayName="prepinputs">
-                  <div *ngFor="let input of prepinputs.controls; index as i" [@fadeIn] class="flex">
+                  <div *ngFor="let input of prepinputs.controls; index as i" [@fadeIn] class="flex font-roboto">
                     <input [formControlName]="i" class="input input-bordered w-full mt-4" >
                     <button (click)="removeprepInput(i)" class="btn btn-outline btn-warning mt-4 ml-2 opacity-35">-</button>
                   </div>
                 </div>
-                <button (click)="addprepInput()" class="btn btn-accent btn-outline btn-wide mt-4" disabled>+</button>
+                <button (click)="addprepInput()" class="btn btn-accent btn-outline btn-wide mt-4 " disabled>+</button>
                 <!-- <button (click)="saveInputs()">Next</button> -->
               </form>
             </div>
@@ -237,11 +261,11 @@
             </div>
             <div>
               <div class="label  mt-4">
-                <span class="label-text">Agenda Details</span>
+                <span class="label-text font-roboto">Agenda Details</span>
               </div>
               <form [formGroup]="agendaform">
                 <div formArrayName="agendainputs">
-                  <div *ngFor="let input of agendainputs.controls; index as i" [@fadeIn] class="flex">
+                  <div *ngFor="let input of agendainputs.controls; index as i" [@fadeIn] class="flex font-roboto">
                     <input [formControlName]="i"  class="input input-bordered w-full mt-4">
                     <button (click)="removeagendaInput(i)" class="btn btn-outline btn-warning mt-4 ml-2 opacity-35">-</button>
                   </div>
@@ -254,16 +278,16 @@
         </div>
         <div class="flex items-center justify-center">
           <div class="label mt-4">
-            <span class="label-text">Dietary accomodations</span>
+            <span class="label-text font-roboto">Dietary accomodations</span>
           </div>
         </div>
         <div class="flex items-center justify-center mt-4">
-          <button class="btn" [ngClass]="{'btn-outline': !isVegetarianSelected}" (click)="toggleVegetarian()">Vegetarian</button>
-          <button class="btn lg:ml-8" [ngClass]="{'btn-outline': !isVeganSelected}" (click)="toggleVegan()">Vegan</button>
-          <button class="btn lg:ml-8" [ngClass]="{'btn-outline': !isHalalSelected}" (click)="toggleHalal()">Halal</button>
-          <button class="btn lg:ml-8" [ngClass]="{'btn-outline': !isGlutenFreeSelected}" (click)="toggleGlutenFree()">Gluten-free</button>
+          <button class="btn font-roboto" [ngClass]="{'btn-outline': isVegetarianSelected}" (click)="toggleVegetarian()">Vegetarian</button>
+          <button class="btn lg:ml-8 font-roboto" [ngClass]="{'btn-outline': isVeganSelected}" (click)="toggleVegan()">Vegan</button>
+          <button class="btn lg:ml-8 font-roboto" [ngClass]="{'btn-outline': isHalalSelected}" (click)="toggleHalal()">Halal</button>
+          <button class="btn lg:ml-8 font-roboto" [ngClass]="{'btn-outline': isGlutenFreeSelected}" (click)="toggleGlutenFree()">Gluten-free</button>
           </div>
-        <div class="flex justify-between mt-4">
+        <div class="flex justify-between mt-4 font-roboto">
           <button (click)="previousStep()" class="btn btn-outline btn-warning" [disabled]="currentStep === 0">back</button>
           <button (click)="presubmit()" class="btn btn-success">Create event</button>
         </div>
@@ -279,13 +303,13 @@
   </div>
 
   <div class="toast" *ngIf="showsuccessToast">
-    <div class="alert alert-success">
+    <div class="alert alert-success font-roboto">
       <span>Event succesfully created Redirecting...</span>
     </div>
   </div>
 
   <div class="toast" *ngIf="showfailToast">
-    <div class="alert alert-error">
+    <div class="alert alert-error font-roboto">
       <span>error creating event</span>
     </div>
   </div>

@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Location } from '@angular/common';
 import validator from 'validator';
+import { NotificationService } from 'src/app/notification.service';
 
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
@@ -60,7 +61,12 @@ export class UpdateEventComponent implements OnInit, AfterViewChecked{
   showsuccessToast = false;
   eventDietaryAccommodations: string[] = [];
   showfailToast = false;
-  constructor(private route: ActivatedRoute, private location: Location, private fb: FormBuilder) {
+  isVegetarianSelected = false;
+  isVeganSelected = false;
+  isHalalSelected = false;
+  isGlutenFreeSelected = false;
+
+  constructor(private route: ActivatedRoute, private location: Location, private fb: FormBuilder, private notificationService: NotificationService) {
     this.prepform = this.fb.group({
       prepinputs: this.fb.array([])
     });
@@ -129,9 +135,10 @@ presubmit(){
       .then(response => response.json())
       .then(data => {
           // Show the success toast
-        console.log(data);
+        // console.log(data);
 
           this.showsuccessToast = true;
+          this.notify();
           this.isAPILoading = false;
           // Hide the toast after 5 seconds
           setTimeout(() => {
@@ -151,6 +158,13 @@ presubmit(){
 
     // Create the event object
     
+}
+notify() {
+const eventName = sessionStorage.getItem('Name') ?? 'Unknown';
+  this.notificationService.sendNotification(Number(localStorage.getItem('ID')), Number(this.eventId), "Event Updated", eventName).subscribe(response => {
+    // console.log(response); // Handle the response as needed
+  });
+
 }
 get prepinputs() {
   return this.prepform.get('prepinputs') as FormArray;
@@ -197,7 +211,7 @@ saveInputs() {
   sessionStorage.setItem('agendainputs', JSON.stringify(this.agendainputs.value));
 }
   ngOnInit(): void {
-    this.route.params.subscribe(params => {   // Get the event ID from the URL
+    this.route.params.subscribe(params => {   
       this.prepform = this.fb.group({
         prepinputs: this.fb.array([])
       });
@@ -213,7 +227,7 @@ saveInputs() {
       })
       .then(data => {
         this.myevent = data;
-        console.log(this.myevent);
+        // console.log(this.myevent);
         this.nameInput.nativeElement.value = sessionStorage.setItem('Name', data.title);
         this.descriptionInput.nativeElement.value = sessionStorage.setItem('Description', data.description);
         this.StartTimeInput.nativeElement.value = sessionStorage.setItem('StartTime', data.startTime);
@@ -222,6 +236,34 @@ saveInputs() {
         this.EndDateInput.nativeElement.value = sessionStorage.setItem('EndDate', data.endDate);
         this.LocationInput.nativeElement.value = sessionStorage.setItem('Location', data.location);
         this.SocialClubInput.nativeElement.value = sessionStorage.setItem('SocialClub', data.socialClub);
+        if(data.eventDietaryAccommodations.includes('Vegetarian')){
+          sessionStorage.setItem('isVegetarianSelected', 'true');
+          sessionStorage.setItem('updateisVegetarianSelected', 'true');
+        }else{
+          sessionStorage.setItem('isVegetarianSelected', 'false');
+          sessionStorage.setItem('updateisVegetarianSelected', 'false');
+        }
+        if(data.eventDietaryAccommodations.includes('Vegan')){
+          sessionStorage.setItem('isVeganSelected', 'true');
+          sessionStorage.setItem('updateisVeganSelected', 'true');
+        }else{
+          sessionStorage.setItem('isVeganSelected', 'false');
+          sessionStorage.setItem('updateisVeganSelected', 'false');
+        }
+        if(data.eventDietaryAccommodations.includes('Halal')){
+          sessionStorage.setItem('isHalalSelected', 'true');
+          sessionStorage.setItem('updateisHalalSelected', 'true');
+        }else{
+          sessionStorage.setItem('isHalalSelected', 'false');
+          sessionStorage.setItem('updateisHalalSelected', 'false');
+        }
+        if(data.eventDietaryAccommodations.includes('Gluten-free')){
+          sessionStorage.setItem('isGlutenFreeSelected', 'true');
+          sessionStorage.setItem('updateisGlutenFreeSelected', 'true');
+        }else{
+          sessionStorage.setItem('isGlutenFreeSelected', 'false');
+          sessionStorage.setItem('updateisGlutenFreeSelected', 'false');
+        }
         const prepsavedInputs = this.myevent.eventPreparation;
         if (prepsavedInputs) {
           const prepinputs = prepsavedInputs;
@@ -232,21 +274,21 @@ saveInputs() {
           const agendainputs = agendasavedInputs;
           agendainputs.forEach((input: any) => this.addagendaInput(input));
         }
-        if (this.myevent && this.myevent.dietaryAccommodations) {
-          this.isVegetarianSelected = this.myevent.dietaryAccommodations.includes("Vegetarian");
+        if (this.myevent && this.myevent.dietaryAccommodations) {       // Check if the event has dietary accommodations
+          this.isVegetarianSelected = data.dietaryAccommodations.includes("Vegetarian"); 
           sessionStorage.setItem('updateisVegetarianSelected', String(this.isVegetarianSelected));
-          this.isVeganSelected = this.myevent.dietaryAccommodations.includes('Vegan');
+          this.isVeganSelected = data.dietaryAccommodations.includes('Vegan');
           sessionStorage.setItem('updateisVeganSelected', String(this.isVeganSelected));
-          this.isHalalSelected = this.myevent.dietaryAccommodations.includes('Halal');
+          this.isHalalSelected = data.dietaryAccommodations.includes('Halal');
           sessionStorage.setItem('updateisHalalSelected', String(this.isHalalSelected));
-          this.isGlutenFreeSelected = this.myevent.dietaryAccommodations.includes('Gluten-Free');
+          this.isGlutenFreeSelected = data.dietaryAccommodations.includes('Gluten-Free');
           sessionStorage.setItem('updateisGlutenFreeSelected', String(this.isGlutenFreeSelected));
-        } else {
-          sessionStorage.setItem('updateisVegetarianSelected', 'false');
-          sessionStorage.setItem('updateisVeganSelected', 'false');
-          sessionStorage.setItem('updateisHalalSelected', 'false');
-          sessionStorage.setItem('updateisGlutenFreeSelected', 'false');
         }
+
+        this.isVegetarianSelected = sessionStorage.getItem('isVegetarianSelected') === 'true';    
+        this.isVeganSelected = sessionStorage.getItem('isVeganSelected') === 'true';
+        this.isHalalSelected = sessionStorage.getItem('isHalalSelected') === 'true';
+        this.isGlutenFreeSelected = sessionStorage.getItem('isGlutenFreeSelected') === 'true';
               });
     });
     
@@ -286,10 +328,6 @@ saveInputs() {
   isAccommodationAvailable(accommodation: string): boolean {
     return this.myevent.dietaryAccommodations.includes(accommodation);
   }
-  isVegetarianSelected = false;
-  isVeganSelected = false;
-  isHalalSelected = false;
-  isGlutenFreeSelected = false;
 
   // Add these methods
   toggleVegetarian() {

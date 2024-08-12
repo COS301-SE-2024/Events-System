@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
+import {AttendedEventCardComponent} from 'src/Components/AttendedEventCard/attendedEventCard.component'
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, AttendedEventCardComponent],
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
 })
@@ -12,18 +13,37 @@ import { RouterModule, Router } from '@angular/router';
 export class ProfileComponent implements OnInit {
   selectedTab = 'about';
   employeeData: any; // Define employeeData property
-
+  events: any[] = [];
   constructor(private router: Router) {}
 
   ngOnInit(): void {
+    const employeeID = Number(localStorage.getItem('ID'));
+    
+
+    fetch(`https://events-system-back.wn.r.appspot.com/api/events/employee/${employeeID}/events-attended`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      this.events = data;
+      console.log(this.events);
+      // return Array.isArray(data) ? data : [data];
+    })
+    .catch(error => {
+      console.error('Error fetching attended events:', error);
+      return [];
+    });
     const storedEmployeeData = localStorage.getItem('employeeData');
     if (storedEmployeeData) {
       this.employeeData = JSON.parse(storedEmployeeData);
       console.log(this.employeeData);
-    } else {
-      // Handle case where employeeData is not available in localStorage
     }
   }
+
+
 
   navigateToSettings() {
     this.router.navigate(['/settings']);
@@ -55,10 +75,15 @@ function initializeTabs() {
     tabs[0].classList.add('tab-active');
   }
 }
-
 function openTab(tab: HTMLElement, index: number) {
   const tabContents = document.querySelectorAll<HTMLElement>('.tab-content');
   const tabs = document.querySelectorAll<HTMLElement>('.tab');
+
+  // Ensure the index is within bounds
+  if (index >= tabContents.length) {
+    // console.error(`Index ${index} is out of bounds for tabContents`);
+    return;
+  }
 
   tabContents.forEach(content => content.classList.add('hidden'));
   tabs.forEach(tab => tab.classList.remove('tab-active'));
@@ -66,4 +91,3 @@ function openTab(tab: HTMLElement, index: number) {
   tabContents[index].classList.remove('hidden');
   tab.classList.add('tab-active');
 }
-

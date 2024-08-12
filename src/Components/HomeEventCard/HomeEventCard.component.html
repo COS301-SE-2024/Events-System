@@ -1,21 +1,21 @@
 
-<div class="card max-w-md mx-auto bg-neutral rounded-xl overflow-hidden md:max-w-2xl shadow-xl size-full"> 
+<div class="card max-w-md mx-auto bg-base-300 rounded-xl overflow-hidden md:max-w-2xl shadow-xl size-full"> 
   <div class="md:flex">
-    <div class="md:shrink-0">
+    <div class="md:shrink-4 lg:shrink-0">
       <img class="h-48 w-full object-cover md:h-72 md:w-72" [src]="imageSource" alt="Album"/>
     </div>
     
     <div class="lg:card-body">
-      <h1 class="lg:card-title mt-4 lg:victor-mono-normal lg:uppercase leading-7  tracking-wide text-base text-accent font-semibold">{{ eventTitle }}</h1>
+      <h1 class="lg:card-title mt-4 lg:font-karla tracking-wide text-lg text-accent font-bold">{{ eventTitle }}</h1>
   
       <div class="text-secondary">
-        <p class="cutive-mono-regular flex items-center justify-center">
+        <p class="font-roboto text-base flex items-center justify-center">
           <span><i class="fa-solid fa-user translate-y-1"></i> {{ hostName }}</span>
         </p>
-        <p class="cutive-mono-regular flex items-center justify-center">
+        <p class="font-roboto text-base flex items-center justify-center">
           <span><i class="fa-regular fa-calendar-days translate-y-1"></i> {{ startDate | date:'dd MMM' }} - {{ endDate | date:'dd MMM' }}</span>
         </p>
-        <p class="cutive-mono-regular flex items-center justify-center">
+        <p class="font-roboto text-base flex items-center justify-center">
           <span><i class="fa-regular fa-clock translate-y-1 "></i> {{ formattedStartTime }} - {{ formattedEndTime }}</span>
         </p>
       </div>
@@ -23,7 +23,7 @@
 
         <div class="card-actions mt-5 justify-center">
           <button [routerLink]="['/event', eventID]"
-              class=" cursor-pointer mb-4 rounded-xl border-none bg-gradient-to-r from-accent to-secondary px-4 py-2.5 text-sm font-semibold text-white transition duration-200 hover:bg-gradient-to-r hover:from-accent hover:to-accent focus:outline-none focus:ring-2 focus:ring-orange-400/80 focus:ring-offset-0 disabled:opacity-30 disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80">
+              class="font-roboto cursor-pointer mb-4 rounded-xl border-none bg-gradient-to-r from-accent to-secondary px-4 py-2.5 text-sm font-semibold text-white transition duration-200 hover:bg-gradient-to-r hover:from-accent hover:to-accent focus:outline-none focus:ring-2 focus:ring-orange-400/80 focus:ring-offset-0 disabled:opacity-30 disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80">
               See Details
             </button>
         </div>
