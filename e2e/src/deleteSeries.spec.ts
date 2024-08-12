@@ -1,4 +1,4 @@
-// tests/socialClubDelete.spec.js
+// tests/seriesDelete.spec.js
 import { test, expect } from '@playwright/test';
 
 const BASE_URL = 'http://localhost:4200'; // Replace with your actual app URL
