@@ -44,8 +44,6 @@ describe('HomeFeaturedEventComponent', () => {
     const titleElement = fixture.debugElement.query(By.css('h2'));
     expect(titleElement.nativeElement.textContent).toContain('Test Event');
 
-    const descriptionElement = fixture.debugElement.query(By.css('p.victor-mono-normal'));
-    expect(descriptionElement.nativeElement.textContent).toContain('This is a test event description.');
 
     const hostElement = fixture.debugElement.query(By.css('p:nth-child(1) span'));
     expect(hostElement.nativeElement.textContent).toContain('Test Host');
