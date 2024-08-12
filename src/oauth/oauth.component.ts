@@ -64,7 +64,7 @@ export class OauthComponent implements OnInit{
                 body:  JSON.stringify(info)
               })
               .then(authData => authData.json())
-              .then(authData => {
+              .then(async authData => {
                 // Get employee ID using access token
                 const idResponse = await fetch('https://events-system-back.wn.r.appspot.com/api/v1/auth/' + authData.access_token, {
                   method: 'GET',
