@@ -36,14 +36,18 @@ describe('MyEventsCardComponent', () => {
     const titleElement = alertElement.query(By.css('span'));
     expect(titleElement.nativeElement.textContent).toContain('Test Event');
 
-    const moreDetailsButton = alertElement.query(By.css('button:nth-child(1)'));
+    const checkInButton = alertElement.query(By.css('button:nth-child(1)'));
+    expect(checkInButton.nativeElement.getAttribute('ng-reflect-router-link')).toBe('/hostcheckin,testId');
+
+    const moreDetailsButton = alertElement.query(By.css('button:nth-child(2)'));
     expect(moreDetailsButton.nativeElement.getAttribute('ng-reflect-router-link')).toBe('/event,testId');
 
-    const editButton = alertElement.query(By.css('button:nth-child(2)'));
+    const editButton = alertElement.query(By.css('button:nth-child(3)'));
     expect(editButton.nativeElement.getAttribute('ng-reflect-router-link')).toBe('/updateevent,testId');
 
-    const deleteButton = alertElement.query(By.css('button:nth-child(3)'));
+    const deleteButton = alertElement.query(By.css('button:nth-child(4)'));
     expect(deleteButton.nativeElement.getAttribute('ng-reflect-router-link')).toBe('/deleteevent,testId');
+      
   });
 
   it('should display event details in collapse section', () => {
@@ -57,13 +61,16 @@ describe('MyEventsCardComponent', () => {
     const titleElement = collapseElement.query(By.css('.collapse-title'));
     expect(titleElement.nativeElement.textContent).toContain('Test Event');
 
-    const moreDetailsButton = collapseElement.query(By.css('button:nth-child(1)'));
+    const checkInButton = alertElement.query(By.css('button:nth-child(1)'));
+    expect(checkInButton.nativeElement.getAttribute('ng-reflect-router-link')).toBe('/hostcheckin,testId');
+
+    const moreDetailsButton = alertElement.query(By.css('button:nth-child(2)'));
     expect(moreDetailsButton.nativeElement.getAttribute('ng-reflect-router-link')).toBe('/event,testId');
 
-    const editButton = collapseElement.query(By.css('button:nth-child(2)'));
+    const editButton = alertElement.query(By.css('button:nth-child(3)'));
     expect(editButton.nativeElement.getAttribute('ng-reflect-router-link')).toBe('/updateevent,testId');
 
-    const deleteButton = collapseElement.query(By.css('button:nth-child(3)'));
+    const deleteButton = alertElement.query(By.css('button:nth-child(4)'));
     expect(deleteButton.nativeElement.getAttribute('ng-reflect-router-link')).toBe('/deleteevent,testId');
   });
 
