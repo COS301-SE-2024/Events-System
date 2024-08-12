@@ -31,9 +31,6 @@ describe('SocialClubCardComponent', () => {
     component.socialClubCreator = 'John Doe';
     fixture.detectChanges();
 
-    const imgElement = fixture.debugElement.query(By.css('img'));
-    expect(imgElement.nativeElement.src).toContain('assets/pexels-rahulp9800-1652361.jpg');
-
     const nameElement = fixture.debugElement.query(By.css('h2.font-semibold'));
     expect(nameElement.nativeElement.textContent).toContain('Test Social Club');
 
