@@ -1,40 +1,22 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ActivatedRoute } from '@angular/router';
-import { of } from 'rxjs';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { SocialClubCardComponent } from './socialClubCard.component'; // Import EventComponent
+import { By } from '@angular/platform-browser';
+import { SocialClubCardComponent } from './socialClubCard.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
-// Mock component
-@Component({
-  selector: 'app-mock-app-social-club-card',
-  template: '',
-})
-class MockEventComponent {/*...*/}
-
-@Component({
-  template: '<app-mock-app-social-club-card></app-mock-app-social-club-card>', // Use the correct selector
-})
-class TestHostComponent {/*...*/}
-
-describe('EventComponent', () => {
-  let component: TestHostComponent;
-  let fixture: ComponentFixture<TestHostComponent>;
+describe('SocialClubCardComponent', () => {
+  let component: SocialClubCardComponent;
+  let fixture: ComponentFixture<SocialClubCardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SocialClubCardComponent], // Move EventComponent to imports
-      declarations: [TestHostComponent, MockEventComponent], // Remove EventComponent from declarations
-      providers: [
-        {
-          provide: ActivatedRoute,
-          useValue: {
-            params: of({ id: 'testId' }) // Add your own mock values here
-          }
-        }
-      ]
+      imports: [CommonModule, FormsModule, RouterTestingModule, SocialClubCardComponent],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
-  
-    fixture = TestBed.createComponent(TestHostComponent);
+
+    fixture = TestBed.createComponent(SocialClubCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

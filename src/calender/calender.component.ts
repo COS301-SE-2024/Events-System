@@ -1,4 +1,4 @@
-import { Component, signal, ChangeDetectorRef, OnInit } from '@angular/core';
+import { Component, signal, ChangeDetectorRef, OnInit, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {CalenderEventButtonComponent} from "src/Components/Calender-Event-Button/Calender-Event-button.component";
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -12,6 +12,7 @@ import { INITIAL_EVENTS, createEventId } from './event-utils';
 import { Router, RouterModule} from '@angular/router';
 import { CalenderEventsService } from './calender-event.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+
 @Component({
   selector: 'app-calender',
   standalone: true,
@@ -144,7 +145,7 @@ export class CalenderComponent implements OnInit{
   }
 
 
-  calendarVisible = signal(true);
+  calendarVisible: WritableSignal<boolean> = signal(false);
   calendarOptions = signal<CalendarOptions>({
     plugins: [
       interactionPlugin,

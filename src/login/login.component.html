@@ -1,5 +1,5 @@
 <!-- LOGIN Home -->
-<form (submit)="onLogin()" [formGroup]="loginForm" class="card-body">
+<form  [formGroup]="loginForm" class="card-body">
   <div class="flex  items-center justify-center ">
     <div class="relative">
       
@@ -46,7 +46,7 @@
               </label>
             </div>
             <div class="mb-4">
-              <button class="grid w-full cursor-pointer select-none rounded-md border border-primary bg-primary py-2 px-5 text-center ease-in duration-300 align-middle text-sm text-white hover:bg-base-100 shadowfocus:text-secondary" type="submit">
+              <button (click)="onLogin()" class="grid w-full cursor-pointer select-none rounded-md border border-primary bg-primary py-2 px-5 text-center ease-in duration-300 align-middle text-sm text-white hover:bg-base-100 shadowfocus:text-secondary" type="submit">
                 Sign in</button>
               <div class="divider">or</div>
   
@@ -54,8 +54,9 @@
                 <img
                 src="https://www.material-tailwind.com/logos/logo-google.png"
                 alt="google"
-                class="h-6 w-6"/>Sign in with google</button>
-              <button class="btn w-full bg-base-100"> <i class="fa-brands fa-x-twitter text-xl "></i>Sign in with X</button>
+                class="h-6 w-6"
+                onclick="signInWithGoogle()"
+              />Sign in with google</button>
             </div>
   
           <p class="mb-4 text-center">
@@ -269,7 +270,6 @@
             id="firstName"
             name="firstName"
             formControlName="firstName"
-            
             type="text"
             class="input input-bordered max-w-md w-72"
             required

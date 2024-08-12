@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.Properties;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
@@ -24,6 +25,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @RequiredArgsConstructor
 public class ApplicationConfig {
+
+    @Value("${spring.mail.username}")
+    private String mailUsername;
+
+    @Value("${spring.mail.password}")
+    private String mailPassword;
+
 
     private final EmployeeRepository repository;
 
@@ -67,8 +75,8 @@ public class ApplicationConfig {
         mailSender.setHost("smtp.gmail.com"); // Replace with your SMTP host
         mailSender.setPort(587); // Replace with your SMTP port
 
-        mailSender.setUsername("biebercapstone.mail@gmail.com"); // Replace with your email
-        mailSender.setPassword("txrw qihz bxlm qiwz"); // Replace with your email password
+        mailSender.setUsername(mailUsername); // Replace with your email
+        mailSender.setPassword(mailPassword); // Replace with your email password
 
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");

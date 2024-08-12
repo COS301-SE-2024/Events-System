@@ -6,9 +6,11 @@ import {HomeFeaturedEventComponent} from 'src/Components/HomeFeaturedEvent/HomeF
 import {SocialClubCardComponent} from 'src/Components/SocialClubCard/socialClubCard.component'
 import { ChangeDetectorRef } from '@angular/core';
 import { ViewChild, ElementRef } from '@angular/core';
+
 import { HomeUpcomingSkeletonComponent } from 'src/Components/HomeUpcomingSkeleton/HomeUpcomingSkeleton.component';
 import { WebSocketService } from 'src/app/websocket.service';
 import { NotificationService } from 'src/app/notification.service';
+
 const myCredentials = {
   username: 'myUsername',
   password: 'myPassword'
@@ -143,10 +145,11 @@ notify() {
     // });
     const employeeId = Number(localStorage.getItem('ID')); // Assuming the employeeId is stored in local storage
 
-    if (!employeeId) {
+    /*if (!employeeId) {
       this.router.navigate(['/login']);
       return;
-    }
+    }*/
+   this.checkCookies();
   
     fetch('https://events-system-back.wn.r.appspot.com/api/events', {
       method: "GET",
@@ -310,10 +313,73 @@ notify() {
     this.carousel3.nativeElement.scrollLeft -= singleSlideWidth;
   }
 
+  async checkCookies() {
+    // Get all cookies
+    const cookies = document.cookie.split('; ');
+
+    // Find the cookie by name
+    let accessToken = null;
+    let refreshToken = null;
+    for (const cookie of cookies) {
+        const [name, value] = cookie.split('=');
+        if (name === "jwt") {
+            accessToken = decodeURIComponent(value);
+            break;
+        }
+    }
+    for (const cookie of cookies) {
+      const [name, value] = cookie.split('=');
+      if (name === "refresh") {
+          refreshToken = decodeURIComponent(value);
+          break;
+      }
+  }
+    
+    if(!accessToken)        //If access token expired
+    {
+      if(!refreshToken)     //If refresh token expired
+      {
+        this.router.navigate(["/login"]);
+      }
+
+      try {
+        const response = await fetch("https://events-system-back.wn.r.appspot.com/api/v1/auth/refresh-token", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.getCookie("refresh")}`
+            },
+            body: JSON.stringify(FormData)
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const authData = await response.json();
+        document.cookie = `jwt=${authData.access_token}; path=/; expires=` + new Date(new Date().getTime() + 15 * 60 * 1000).toUTCString();
+        document.cookie = `refresh=${authData.refresh_token}; path=/; expires=` + new Date(new Date().getTime() + 24* 60 * 60 * 1000).toUTCString();
+        console.log('Token refresh successful');
+        // Handle the response data as needed
+      } catch (error) {
+          console.error('Error refreshing token');
+          // Handle errors appropriately
+      }
+    }
+  }
 
 
+  getCookie(cookieName: string) {
+    const name = cookieName + '=';
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const cookieArray = decodedCookie.split(';');
 
-
-
-
+    for (let i = 0; i < cookieArray.length; i++) {
+        const cookie = cookieArray[i].trim();
+        if (cookie.indexOf(name) === 0) {
+            return cookie.substring(name.length, cookie.length);
+        }
+    }
+    return null;
+}
 }

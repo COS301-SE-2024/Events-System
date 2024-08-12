@@ -48,4 +48,9 @@ public class EventRSVPController {
         eventRSVPServiceBus.deleteEventRSVP(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/event/{eventId}")
+    public List<EventRSVP> getEventRSVPsByEventId(@PathVariable Integer eventId) { 
+        return eventRSVPServiceBus.getEventRSVPsByEventId(eventId);
+    }
 }

@@ -1,5 +1,5 @@
 <!-- Desktop Version -->
-<div class="hidden md:block container mx-auto p-4">
+<div class="hidden md:block container mx-auto p-4 overflow-hidden mb-5">
     <div class="card w-full bg-base-100 shadow-2xl mb-4">
       <div class="card-body">
         <div class="flex justify-between items-center">
@@ -12,16 +12,16 @@
               </div>
             </div>
             <div class="ml-12">
-              <h2 name="name" class="text-2xl">{{ employeeData?.firstName }} {{ employeeData?.lastName }}</h2>
+              <h2 name="name" class="text-2xl text-primary">{{ employeeData?.firstName }} {{ employeeData?.lastName }}</h2>
               <p>{{ employeeData?.email }}</p>
             </div>
           </div>          
-          <button class="btn btn-outline" (click)="navigateToSettings()">Edit Profile</button>
+          <button class="btn btn-outline border-accent text-accent" (click)="navigateToSettings()">Edit Profile</button>
         </div>
         <div class="tabs">
-          <a class="tab tab-bordered rounded-lg hover:bg-blue-200 hover:text-blue-800" (click)="selectTab('about')" [class.tab-active]="selectedTab === 'about'">About</a>
-          <a class="tab tab-bordered rounded-lg hover:bg-blue-200 hover:text-blue-800" (click)="selectTab('events')" [class.tab-active]="selectedTab === 'events'">Events History</a>
-          <a class="tab tab-bordered rounded-lg hover:bg-blue-200 hover:text-blue-800" (click)="selectTab('subscriptions')" [class.tab-active]="selectedTab === 'subscriptions'">Subscriptions</a>
+          <a class="tab text-secondary tab-bordered rounded-lg hover:bg-neutral" (click)="selectTab('about')" [class.tab-active]="selectedTab === 'about'">About</a>
+          <a class="tab text-secondary tab-bordered rounded-lg hover:bg-neutral" (click)="selectTab('events')" [class.tab-active]="selectedTab === 'events'">Events History</a>
+          <a class="tab text-secondary tab-bordered rounded-lg hover:bg-neutral" (click)="selectTab('subscriptions')" [class.tab-active]="selectedTab === 'subscriptions'">Subscriptions</a>
         </div>
       </div>
     </div>
@@ -29,11 +29,11 @@
     <div *ngIf="selectedTab === 'about'" class="card w-full bg-base-100 shadow-2xl mb-4">
       <div class="card-body flex-row">
         <div class="w-1/2">
-          <h2 class="card-title">About Me</h2>
+          <h2 class="card-title text-primary">About Me</h2>
           <p>{{ employeeData?.employeeDescription || 'No description available.' }}</p>
         </div>
         <div class="w-1/2">
-          <h3 class="text-xl mt-4">Contact Details</h3>
+          <h3 class="text-xl mt-4 text-primary">Contact Details</h3>
           <ul class="flex flex-col">
             <li class="flex items-center"*ngIf="employeeData?.email" >
               <i class="far fa-envelope"></i>
@@ -57,22 +57,27 @@
       </div>
     </div>
   
-    <div *ngIf="selectedTab === 'events'" class="card w-full bg-base-100 shadow-2xl mb-4">
-      <div class="card-body">
-        <h2 class="card-title">Event Title</h2>
-        <p>Host Name</p>
-        <p>Event Details</p>
-        <button class="btn btn-outline">More details</button>
+    <div *ngIf="selectedTab === 'events'" class=" w-full items-center shadow-2xl">
+      <div class=" overflow-y-hidden">
+        <div class="flex flex-wrap gap-x-20 gap-y-14 pt-6 pl-14">
+          <app-attended-event-card
+          *ngFor="let event of events"  
+              [eventID]="event.eventId"
+              [eventTitle]="event.title"
+              [description]="event.description"
+          ></app-attended-event-card>
+          
+        </div>
       </div>
     </div>
   
     <div *ngIf="selectedTab === 'subscriptions'" class="card w-full bg-base-100 shadow-2xl mb-4">
       <div class="card-body">
-        <h2 class="card-title">Subscriptions</h2>
+        <h2 class="card-title text-primary">Subscriptions</h2>
         <p>Details about the user's subscriptions.</p>
       </div>
     </div>
-  </div>
+</div>
   
   <!-- Mobile Version -->
   <div class="md:hidden container mx-auto p-4">
@@ -83,22 +88,22 @@
             <div class="w-full rounded-full"><img alt="Profile Picture" [src]="employeeData?.employeePictureLink || 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg'" style="width: 100%; height: 100%;"></div>
           </div>
           <div>
-            <h2 class="text-2xl">{{ employeeData?.firstName }} {{ employeeData?.lastName }}</h2>
+            <h2 class="text-2xl text-primary">{{ employeeData?.firstName }} {{ employeeData?.lastName }}</h2>
             <p>{{ employeeData?.email }}</p>
           </div>
-          <button routerLink="/settings" class="btn btn-outline mt-4">Edit Profile</button>
+          <button routerLink="/settings" class="btn btn-outline mt-4 text-accent border-accent">Edit Profile</button>
         </div>
         <div class="tabs tabs-boxed w-full">
-          <a class="tab tab-bordered rounded-lg hover:bg-blue-200 hover:text-blue-800" (click)="selectTab('about')" [class.tab-active]="selectedTab === 'about'">About</a>
-          <a class="tab tab-bordered rounded-lg hover:bg-blue-200 hover:text-blue-800" (click)="selectTab('events')" [class.tab-active]="selectedTab === 'events'">Events History</a>
-          <a class="tab tab-bordered rounded-lg hover:bg-blue-200 hover:text-blue-800" (click)="selectTab('subscriptions')" [class.tab-active]="selectedTab === 'subscriptions'">Subscriptions</a>
+          <a class="tab text-secondary tab-bordered rounded-lg hover:bg-neutral" (click)="selectTab('about')" [class.tab-active]="selectedTab === 'about'">About</a>
+          <a class="tab text-secondary tab-bordered rounded-lg hover:bg-neutral" (click)="selectTab('events')" [class.tab-active]="selectedTab === 'events'">Events History</a>
+          <a class="tab text-secondary tab-bordered rounded-lg hover:bg-neutral" (click)="selectTab('subscriptions')" [class.tab-active]="selectedTab === 'subscriptions'">Subscriptions</a>
         </div>
       </div>
     </div>
   
     <div *ngIf="selectedTab === 'about'" class="card w-full bg-base-100 shadow-2xl mb-4">
       <div class="card-body">
-        <h2 class="card-title">About Me</h2>
+        <h2 class="card-title text-primary">About Me</h2>
         <p>{{ employeeData?.employeeDescription || 'No description available.' }}</p>
         <h3 class="text-xl mt-4">Contact Details</h3>
         <ul>
@@ -126,18 +131,24 @@
       </div>
     </div>
   
-    <div *ngIf="selectedTab === 'events'" class="card w-full bg-base-100 shadow-2xl mb-4">
-      <div class="card-body">
-        <h2 class="card-title">Event Title</h2>
-        <p>Host Name</p>
-        <p>Event Details</p>
-        <button class="btn btn-outline">More details</button>
+  
+    <div *ngIf="selectedTab === 'events'" class=" w-full items-center shadow-2xl">
+      <div class=" overflow-y-hidden">
+        <div class="flex flex-wrap gap-x-20 gap-y-14 pt-6 pl-14">
+          <app-attended-event-card
+          *ngFor="let event of events"  
+              [eventID]="event.eventId"
+              [eventTitle]="event.title"
+              [description]="event.description"
+          ></app-attended-event-card>
+          
+        </div>
       </div>
     </div>
   
     <div *ngIf="selectedTab === 'subscriptions'" class="card w-full bg-base-100 shadow-2xl mb-4">
       <div class="card-body">
-        <h2 class="card-title">Subscriptions</h2>
+        <h2 class="card-title text-primary">Subscriptions</h2>
         <p>Details about the user's subscriptions.</p>
       </div>
     </div>

@@ -2,7 +2,7 @@
     <input id="my-drawer-3" type="checkbox" class="drawer-toggle"  #drawerToggle/>
     <div class="drawer-content flex flex-col justify-center">
       <!-- Page content here -->
-      <label for="my-drawer-3" class="btn btn-primary drawer-button lg:hidden w-full">Filter</label>
+      <label for="my-drawer-3" class="btn btn-primary font-roboto drawer-button lg:hidden w-full">Filter</label>
 
       <div class="flex  justify-center items-center">
         <div class="lg:mb-96 mt-2 mb-80 w-11/12 h-96 grid md:grid-cols-3 lg:grid-cols-4 grid-cols-1 lg:gap-6 lg:ml-0 md:ml-0 ml-16 gap-y-12">
@@ -58,8 +58,8 @@
       <label for="my-drawer-3" aria-label="close sidebar" class="drawer-overlay fixed"></label> 
       <ul class="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
         <!-- Sidebar content here -->
-        <button class="btn w-full no-animation">Refine by social club</button>
-        <ul class="menu bg-base-200 w-full rounded-box">
+        <button class="btn w-full font-karla no-animation">Refine by social club</button>
+        <ul class="menu bg-base-200 w-full rounded-box font-roboto">
           <li><input type="checkbox" [checked]="allClubsChecked" (change)="allClubsChecked = !allClubsChecked; onAllClubsClick()" aria-label="All social clubs" class="btn w-full"/></li>
           <li *ngFor="let club of socialClubs; let i = index">
             <input type="checkbox" [checked]="otherCheckboxes[i]" (change)="otherCheckboxes[i] = !otherCheckboxes[i]; onOtherClubClick(i)" (click)="filterEvents()"[attr.aria-label]="club.name" class="btn" />
@@ -67,57 +67,57 @@
         </ul>  
   
         <div class="mt-8">
-          <button class="btn w-full no-animation">Filter By:</button>
+          <button class="btn font-karla w-full no-animation">Filter By:</button>
     
           <div class="collapse collapse-plus">
             <input type="radio" name="my-accordion-3" checked="checked" /> 
-  
-                    <div class="collapse collapse-plus">
-            <input type="radio" name="my-accordion-3" /> 
-            <div class="collapse-title text-xl font-medium">
-              Title
+            <div class="collapse collapse-plus">
+              <input type="radio" name="my-accordion-3" /> 
+              <div class="collapse-title text-xl font-roboto font-medium">
+                Title
+              </div>
+
+              <div class="collapse-content"> 
+                <ul class="menu bg-base-200 w-56 rounded-box">
+                  <input type="text" class="input input-bordered font-roboto w-full max-w-xs" (input)="updateSearchTerm($event)" placeholder="Search by title"/>   
+                </ul>
+              </div>
             </div>
-            <div class="collapse-content"> 
-              <ul class="menu bg-base-200 w-56 rounded-box">
-                <input type="text" class="input input-bordered w-full max-w-xs" (input)="updateSearchTerm($event)" placeholder="Search by title"/>   
-              </ul>
-            </div>
-          </div>
             
-            <div class="collapse-title text-xl font-medium">
+            <div class="collapse-title text-xl font-roboto font-medium">
               Date
             </div>
             <div class="collapse-content"> 
               <form (submit)="onSubmit()">
-                <input type="date" id="date-input"  [value]="selectedDate" (input)="handleInput($event)" name="date-input" class="bg-gray-400 w-full px-3 py-2 rounded-lg border-2 border-gray-400 focus:border-indigo-500 text-base outline-none text-gray-700 transition-colors duration-200 ease-in-out">
+                <input type="date" id="date-input"  [value]="selectedDate" (input)="handleInput($event)" name="date-input" class="bg-gray-400 w-full px-3 py-2 rounded-lg border-2 border-gray-400 font-roboto focus:border-indigo-500 text-base outline-none text-gray-700 transition-colors duration-200 ease-in-out">
                 <!-- <button type="submit">Submit</button> -->
                 <div class="flex w-full">
-                  <button class="btn btn-outline mt-4" (click)="clearDateFilter(); drawerToggle.checked = false">Clear</button>
-                  <button class="btn btn-primary mt-4 ml-24" (click)="drawerToggle.checked = false" type="submit">Submit</button>                
+                  <button class="btn btn-outline font-roboto mt-4" (click)="clearDateFilter(); drawerToggle.checked = false">Clear</button>
+                  <button class="btn btn-primary font-roboto mt-4 ml-24" (click)="drawerToggle.checked = false" type="submit">Submit</button>                
                  </div>
-
               </form>
             </div>
           </div>
+
           <div class="collapse collapse-plus bg-base-200">
             <input type="radio" name="my-accordion-3" /> 
-            <div class="collapse-title text-xl font-medium">
+            <div class="collapse-title text-xl font-roboto font-medium">
               Location
             </div>
             <div class="collapse-content"> 
               <ul class="menu bg-base-200 w-56 rounded-box">
-                <input type="text" class="input input-bordered w-full max-w-xs" (input)="updateSearchLocation($event)" placeholder="Search by Location"/>   
+                <input type="text" class="input input-bordered font-roboto w-full max-w-xs" (input)="updateSearchLocation($event)" placeholder="Search by Location"/>   
               </ul>
             </div>
           </div>
   
           <div class="collapse collapse-plus bg-base-200">
             <input type="radio" name="my-accordion-3" /> 
-            <div class="collapse-title text-xl font-medium">
+            <div class="collapse-title text-xl font-roboto font-medium">
               Dietary Requirements
             </div>
             <div class="collapse-content"> 
-              <ul class="menu bg-base-200 w-56 rounded-box">
+              <ul class="menu bg-base-200 w-56 rounded-box font-roboto">
                 <label class="label cursor-pointer">
                   <input type="radio" name="radio-10" class="radio checked:bg-red-500" checked (change)="updateDietaryAccommodation('')" />
                   <span class="label-text">None</span> 
@@ -144,8 +144,8 @@
           </div>
          </div>
          <div class="flex lg:hidden w-full">
-          <button class="btn btn-outline" (click)="drawerToggle.checked = false">Cancel</button>
-          <button class="btn btn-outline btn-primary ml-28" (click)="drawerToggle.checked = false">Save</button>
+          <button class="btn btn-outline font-roboto" (click)="drawerToggle.checked = false">Cancel</button>
+          <button class="btn btn-outline btn-primary ml-28 font-roboto" (click)="drawerToggle.checked = false">Save</button>
          </div>
       </ul>
     

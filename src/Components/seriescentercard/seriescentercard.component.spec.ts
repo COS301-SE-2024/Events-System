@@ -1,45 +1,40 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ActivatedRoute } from '@angular/router';
-import { of } from 'rxjs';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { SeriescentercardComponent } from './seriescentercard.component'; //import oath -------------------------
+import { By } from '@angular/platform-browser';
+import { SeriescentercardComponent } from './seriescentercard.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
-// Mock component
-@Component({
-  selector: 'app-mock-seriescentercard',
-  template: '',
-})
-class MockEventComponent {/*...*/}
-
-@Component({
-  template: '<app-mock-seriescentercard></app-mock-seriescentercard>', // Use the correct selector
-})
-class TestHostComponent {/*...*/}
-
-describe('EventComponent', () => {
-  let component: TestHostComponent;
-  let fixture: ComponentFixture<TestHostComponent>;
+describe('SeriesCenterCardComponent', () => {
+  let component: SeriescentercardComponent;
+  let fixture: ComponentFixture<SeriescentercardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SeriescentercardComponent], // change to oauth  -----------------------
-      declarations: [TestHostComponent, MockEventComponent], // Remove EventComponent from declarations
-      providers: [
-        {
-          provide: ActivatedRoute,
-          useValue: {
-            params: of({ id: 'testId' }) // Add your own mock values here
-          }
-        }
-      ]
+      imports: [CommonModule, FormsModule, RouterTestingModule, SeriescentercardComponent],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
-  
-    fixture = TestBed.createComponent(TestHostComponent);
+
+    fixture = TestBed.createComponent(SeriescentercardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should display series details correctly', () => {
+    component.seriesId = 'testSeriesId';
+    component.imageSource = 'test-image.jpg';
+    component.name = 'Test Series';
+    fixture.detectChanges();
+
+    const backgroundImageElement = fixture.debugElement.query(By.css('.bg-cover'));
+    expect(backgroundImageElement.nativeElement.style.backgroundImage).toContain('test-image.jpg');
+
+    const nameElement = fixture.debugElement.query(By.css('h2'));
+    expect(nameElement.nativeElement.textContent).toContain('Test Series');
   });
 });
