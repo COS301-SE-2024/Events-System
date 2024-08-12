@@ -46,7 +46,7 @@
                                     <h2 class="card-title font-roboto">Managed by: {{series.host.firstName}} {{series.host.lastName}}</h2>
                                   </div>
                               <div class="card-actions justify-end">
-                                <button class="btn btn-primary font-roboto">Find out More</button>
+                                <button class="btn btn-primary font-roboto"  [routerLink]="['/searchProfile', series.host.employeeId]">Find out More</button>
                               </div>
                             </div>
                           </div>

@@ -18,7 +18,7 @@ export class HostCheckinComponent implements OnInit {
     email: string;
     status: string;
     lastUpdated: Date;
-    showDetails?: boolean;
+    showDetails?: boolean;  
     rsvpId: number;
   }> = [];
   isDesktop = true;

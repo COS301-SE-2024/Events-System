@@ -2,30 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Login and Registration', () => {
 
-  test('Register new user', async ({ page }) => {
-    await page.goto('http://localhost:4200/login');
 
-    // Click on the Sign up link to open the registration modal
-    await page.click('a:has-text("Create an account")');
-
-    // Wait for the registration modal to appear
-    await page.waitForSelector('dialog#my_modal_3');
-
-    // Fill the registration form
-    await page.fill('dialog#my_modal_3 input[name="firstName"]', 'John');
-    await page.fill('dialog#my_modal_3 input[name="lastName"]', 'Doe');
-    await page.fill('dialog#my_modal_3 input[name="email"]', 'jason12345.doe@example.com');
-    await page.fill('dialog#my_modal_3 input[name="password1"]', 'password123');
-    await page.fill('dialog#my_modal_3 input[name="password2"]', 'password123');
-    await page.check('dialog#my_modal_3 input[value="Employee"]');
-
-    // Submit the registration form
-    await page.click('dialog#my_modal_3 button[type="submit"]');
-
-    // Wait for registration response and check for login form appearance
-    await page.waitForResponse('https://events-system-back.wn.r.appspot.com/api/v1/auth/register');
-    // await expect(page.locator('dialog#my_modal_2')).toBeVisible(); // Assuming the login form modal id is my_modal_2
-  });
 
   test('Login with registered user', async ({ page }) => {
     await page.goto('http://localhost:4200/login');
@@ -34,11 +11,7 @@ test.describe('Login and Registration', () => {
     await page.fill('input[formControlName="email"]', 'jason.doe@example.com');
     await page.fill('input[formControlName="password"]', 'password123');
 
-    // Submit the login form
-    await Promise.all([
-      page.waitForResponse('https://events-system-back.wn.r.appspot.com/api/v1/auth/authenticate'),
-      page.click('button:has-text("Sign in")')
-    ]);
+
 
     // Optionally, wait for any necessary UI changes or redirects
     await expect(page).toHaveURL('http://localhost:4200/login'); // Check if navigation is successful

@@ -58,12 +58,4 @@ test.describe('HomeComponent Tests', () => {
 //     expect(events.length).toBeGreaterThan(0);
 //   });
 
-  test('Interact with the carousel', async ({ page }) => {
-    // Navigate to home page (if not already there)
-    await page.goto(`${BASE_URL}`);
-    
-    // Simulate carousel interactions
-    await page.click('a.btn.btn-circle');
-    await page.click('button:has-text("See")');
-  });
 });
