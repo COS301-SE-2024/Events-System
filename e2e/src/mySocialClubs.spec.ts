@@ -9,7 +9,7 @@ const refreshTokenCookie = {
     value: 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aG9tYXNkdWJvaXM0QGdtYWlsLmNvbSIsImlhdCI6MTcyMzMxODEyMiwiZXhwIjoxNzIzNDA0NTIyfQ.5ph1KdavNtFxxtMMJYEsz_Gz9Y2Il3NJ-mNggfM7KfQ', // Replace with the actual refresh token value
     domain: 'localhost',
     path: '/',
-    httpOnly: true,
+    httpOnly: false,
     secure: false,
     sameSite: 'Lax' as 'Lax',
   };
@@ -43,11 +43,12 @@ test.describe('Social Club Listing Page', () => {
     const createClubButton = await page.locator('button.btn[routerLink="/socialclubcreate"]');
     await expect(createClubButton).toBeVisible();
 
-
+    
     // Click the "Create club" button
     await createClubButton.click();
+    await page.context().addCookies([refreshTokenCookie]);
 
-
+    await expect(page).toHaveURL(`${BASE_URL}/socialclubcreate`);
   });
 
 

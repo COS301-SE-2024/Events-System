@@ -9,8 +9,8 @@ const refreshTokenCookie = {
   value: 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aG9tYXNkdWJvaXM0QGdtYWlsLmNvbSIsImlhdCI6MTcyMzMxODEyMiwiZXhwIjoxNzIzNDA0NTIyfQ.5ph1KdavNtFxxtMMJYEsz_Gz9Y2Il3NJ-mNggfM7KfQ', // Replace with the actual refresh token value
   domain: 'localhost',
   path: '/',
-  httpOnly: true,
-  secure: true,
+  httpOnly: false,
+  secure: false,
   sameSite: 'Lax' as 'Lax',
 //   expires: new Date(new Date().getTime() + 24 * 60 * 60 * 1000).getTime(), // 24 hours
 };
