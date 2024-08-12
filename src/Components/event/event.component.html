@@ -1,21 +1,21 @@
 <div class="collapse bg-base-200 z-1">
     <input type="radio" name="my-accordion-1" checked="checked" /> 
-    <div class="collapse-title text-xl font-medium">
+    <div class="font-karla collapse-title text-xl font-medium">
         {{ eventTitle }}
     </div>
     <div class="collapse-content"> 
         <div class="card lg:card-side bg-base-100 shadow-xl">
             <figure><img [src]="imageSource" alt="Album"/></figure>
             <div class="card-body">
-                <h2 class="card-title">{{ eventTitle }}</h2>
-                <p>{{ description }}</p>
-                <p>Dates: {{ startDate | date:'shortDate' }} - {{ endDate | date:'shortDate' }}</p>
-                <p>Times:  {{ endTime | date:'shortTime' }}</p>
-                <p>{{ location }}</p>
-                <p>Hosted BY: {{ hostedBy }}</p>
+                <h2 class="card-title font-karla">{{ eventTitle }}</h2>
+                <p class="font-roboto">{{ description }}</p>
+                <p class="font-roboto">Dates: {{ startDate | date:'shortDate' }} - {{ endDate | date:'shortDate' }}</p>
+                <p class="font-roboto">Times:  {{ endTime | date:'shortTime' }}</p>
+                <p class="font-roboto">{{ location }}</p>
+                <p class="font-roboto">Hosted BY: {{ hostedBy }}</p>
                 <p>Social Club: {{ socialClub }}</p>
               <div class="card-actions justify-end">
-                <button class="btn btn-primary">join Event</button>
+                <button class="btn btn-primary font-roboto">join Event</button>
               </div>
             </div>
           </div>

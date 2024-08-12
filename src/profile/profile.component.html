@@ -1,5 +1,5 @@
 <!-- Desktop Version -->
-<div class="hidden md:block container mx-auto p-4">
+<div class="hidden md:block container mx-auto p-4 overflow-hidden mb-5">
     <div class="card w-full bg-base-100 shadow-2xl mb-4">
       <div class="card-body">
         <div class="flex justify-between items-center">
@@ -57,12 +57,17 @@
       </div>
     </div>
   
-    <div *ngIf="selectedTab === 'events'" class="card w-full bg-base-100 shadow-2xl mb-4">
-      <div class="card-body">
-        <h2 class="card-title text-primary">Event Title</h2>
-        <p>Host Name</p>
-        <p>Event Details</p>
-        <button class="btn btn-outline">More details</button>
+    <div *ngIf="selectedTab === 'events'" class=" w-full items-center shadow-2xl">
+      <div class=" overflow-y-hidden">
+        <div class="flex flex-wrap gap-x-20 gap-y-14 pt-6 pl-14">
+          <app-attended-event-card
+          *ngFor="let event of events"  
+              [eventID]="event.eventId"
+              [eventTitle]="event.title"
+              [description]="event.description"
+          ></app-attended-event-card>
+          
+        </div>
       </div>
     </div>
   
@@ -72,7 +77,7 @@
         <p>Details about the user's subscriptions.</p>
       </div>
     </div>
-  </div>
+</div>
   
   <!-- Mobile Version -->
   <div class="md:hidden container mx-auto p-4">
@@ -126,12 +131,18 @@
       </div>
     </div>
   
-    <div *ngIf="selectedTab === 'events'" class="card w-full bg-base-100 shadow-2xl mb-4">
-      <div class="card-body">
-        <h2 class="card-title text-primary">Event Title</h2>
-        <p>Host Name</p>
-        <p>Event Details</p>
-        <button class="btn btn-outline">More details</button>
+  
+    <div *ngIf="selectedTab === 'events'" class=" w-full items-center shadow-2xl">
+      <div class=" overflow-y-hidden">
+        <div class="flex flex-wrap gap-x-20 gap-y-14 pt-6 pl-14">
+          <app-attended-event-card
+          *ngFor="let event of events"  
+              [eventID]="event.eventId"
+              [eventTitle]="event.title"
+              [description]="event.description"
+          ></app-attended-event-card>
+          
+        </div>
       </div>
     </div>
   
