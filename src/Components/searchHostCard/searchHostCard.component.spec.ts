@@ -1,45 +1,48 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ActivatedRoute } from '@angular/router';
-import { of } from 'rxjs';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { SearchHostCardComponent } from './searchHostCard.component'; // Import SearchHostCardComponent
+import { By } from '@angular/platform-browser';
+import { SearchHostCardComponent } from './searchHostCard.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
-// Mock component
-@Component({
-  selector: 'app-mock-search-host-card', // Change this to a unique selector
-  template: '',
-})
-class MockEventComponent {/*...*/}
-
-@Component({
-  template: '<app-mock-search-host-card></app-mock-search-host-card>', // Use the new selector
-})
-class TestHostComponent {/*...*/}
-
-describe('EventComponent', () => {
-  let component: TestHostComponent;
-  let fixture: ComponentFixture<TestHostComponent>;
+describe('SearchHostCardComponent', () => {
+  let component: SearchHostCardComponent;
+  let fixture: ComponentFixture<SearchHostCardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SearchHostCardComponent], // Move EventComponent to imports
-      declarations: [TestHostComponent, MockEventComponent], // Remove EventComponent from declarations
-      providers: [
-        {
-          provide: ActivatedRoute,
-          useValue: {
-            params: of({ id: 'testId' }) // Add your own mock values here
-          }
-        }
-      ]
+      imports: [CommonModule, FormsModule, RouterTestingModule, SearchHostCardComponent],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
-  
-    fixture = TestBed.createComponent(TestHostComponent);
+
+    fixture = TestBed.createComponent(SearchHostCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should display host details correctly', () => {
+    component.hostName = 'John Doe';
+    component.hostBio = 'This is a test host bio.';
+    component.hostEmail = 'john.doe@example.com';
+    component.hostId = 'testHostId';
+    fixture.detectChanges();
+
+    const initialsElement = fixture.debugElement.query(By.css('.text-3xl'));
+    expect(initialsElement.nativeElement.textContent).toContain(component.getInitials());
+
+    const nameElement = fixture.debugElement.query(By.css('.font-poppins'));
+    expect(nameElement.nativeElement.textContent).toContain('John Doe');
+
+    const bioElement = fixture.debugElement.query(By.css('.font-roboto.text-sm'));
+    expect(bioElement.nativeElement.textContent).toContain('This is a test host bio.');
+
+    const emailElement = fixture.debugElement.query(By.css('.font-roboto.text-base'));
+    expect(emailElement.nativeElement.textContent).toContain('john.doe@example.com');
+
   });
 });
