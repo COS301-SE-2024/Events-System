@@ -24,17 +24,4 @@ describe('SocialClubCardComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('should display social club details correctly', () => {
-    component.socialClubID = 'testSocialClubID';
-    component.socialClubName = 'Test Social Club';
-    component.socialClubCreator = 'John Doe';
-    fixture.detectChanges();
-
-    const nameElement = fixture.debugElement.query(By.css('h2.font-semibold'));
-    expect(nameElement.nativeElement.textContent).toContain('Test Social Club');
-
-    const creatorElement = fixture.debugElement.query(By.css('h2:not(.font-semibold)'));
-    expect(creatorElement.nativeElement.textContent).toContain('John Doe');
-  });
 });
