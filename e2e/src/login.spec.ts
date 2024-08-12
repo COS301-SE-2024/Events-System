@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test.describe('Login and Registration', () => {
 
   test('Register new user', async ({ page }) => {
-    await page.goto('https://events-system.org/login');
+    await page.goto('http://localhost:4200/login');
 
     // Click on the Sign up link to open the registration modal
     await page.click('a:has-text("Create an account")');
@@ -28,7 +28,7 @@ test.describe('Login and Registration', () => {
   });
 
   test('Login with registered user', async ({ page }) => {
-    await page.goto('https://events-system.org/login');
+    await page.goto('http://localhost:4200/login');
 
     // Fill the login form
     await page.fill('input[formControlName="email"]', 'jason.doe@example.com');
@@ -41,7 +41,7 @@ test.describe('Login and Registration', () => {
     ]);
 
     // Optionally, wait for any necessary UI changes or redirects
-    await expect(page).toHaveURL('https://events-system.org/login'); // Check if navigation is successful
+    await expect(page).toHaveURL('http://localhost:4200/login'); // Check if navigation is successful
   });
 
 //   test('simulate login for a registered user', async ({ page }) => {
@@ -57,7 +57,7 @@ test.describe('Login and Registration', () => {
 //     }));
   
 //     // Navigate to the login page
-//     await page.goto('https://events-system.org/login');
+//     await page.goto('http://localhost:4200/login');
   
 //     // Fill in the login form with the credentials of the registered user
 //     await page.fill('input[formControlName="email"]', 'greatsage@gmail.com');
@@ -74,7 +74,7 @@ test.describe('Login and Registration', () => {
 //     await responsePromise;
 
 //     // Add assertions to verify the outcome, such as checking if the user is redirected to a dashboard or home page
-//     await expect(page).toHaveURL('https://events-system.org'); // Adjust the URL to the expected one after successful login
+//     await expect(page).toHaveURL('http://localhost:4200'); // Adjust the URL to the expected one after successful login
 //   });
 
 });

@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 // Constants for the test
-const BASE_URL = 'https://events-system.org'; // Replace with your actual app URL
+const BASE_URL = 'http://localhost:4200'; // Replace with your actual app URL
 
 // Sample cookies to simulate login
 const refreshTokenCookie = {
