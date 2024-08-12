@@ -40,8 +40,6 @@ export class ProfileComponent implements OnInit {
     if (storedEmployeeData) {
       this.employeeData = JSON.parse(storedEmployeeData);
       console.log(this.employeeData);
-    } else {
-
     }
   }
 
