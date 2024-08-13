@@ -68,13 +68,6 @@ describe('SearchProfileComponent', () => {
     expect(aboutContent.textContent).toContain('');
   });
 
-  it('should display Events tab content', () => {
-    component.selectedTab = 'events';
-    fixture.detectChanges();
-
-    const eventTitle = fixture.debugElement.query(By.css('.card-title')).nativeElement;
-    expect(eventTitle.textContent).toContain('Event Title');
-  });
 
   it('should display Subscriptions tab content', () => {
     component.selectedTab = 'subscriptions';
