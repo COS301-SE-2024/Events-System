@@ -6,7 +6,7 @@ import {HomeFeaturedEventComponent} from 'src/Components/HomeFeaturedEvent/HomeF
 import {SocialClubCardComponent} from 'src/Components/SocialClubCard/socialClubCard.component'
 import { ChangeDetectorRef } from '@angular/core';
 import { ViewChild, ElementRef } from '@angular/core';
-
+import { SocialClubCardSkeletonComponent } from 'src/Components/SocialClubCardSkeleton/SocialClubCardSkeleton.component';
 import { HomeUpcomingSkeletonComponent } from 'src/Components/HomeUpcomingSkeleton/HomeUpcomingSkeleton.component';
 import { WebSocketService } from 'src/app/websocket.service';
 import { NotificationService } from 'src/app/notification.service';
@@ -35,7 +35,7 @@ export interface Slide {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule, HomeEventCardComponent, SocialClubCardComponent, HomeFeaturedEventComponent, HomeUpcomingSkeletonComponent],
+  imports: [CommonModule, RouterModule, HomeEventCardComponent, SocialClubCardComponent, HomeFeaturedEventComponent, HomeUpcomingSkeletonComponent, SocialClubCardSkeletonComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   providers: [WebSocketService],

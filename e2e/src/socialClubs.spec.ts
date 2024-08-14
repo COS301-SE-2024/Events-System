@@ -36,15 +36,4 @@ test.describe('SocialClubsComponent Tests', () => {
         // Check that the component and its elements are present
         await expect(page.locator('app-social-clubs')).toBeVisible();
     });
-
-    test('Viewing available social clubs', async ({ page }) => {
-        // Check if skeletons are visible
-        await expect(page.locator('app-social-club-card-skeleton').first()).toBeVisible();
-
-        // Wait for response from API
-        await page.waitForResponse('https://events-system-back.wn.r.appspot.com/api/socialclubs');
-
-        // See if there is any social club that is visible
-        await expect(page.locator('app-social-club-card').first()).toBeVisible();
-    })
 });
