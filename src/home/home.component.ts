@@ -30,6 +30,7 @@ export interface Slide {
   hostId: string;
   geolocation: string;
   socialClub: string;
+  tags: any;
   host: any; // replace 'any' with the actual type of 'host'
 }
 @Component({
@@ -216,6 +217,7 @@ notify() {
             hostId: eventData.hostId,
             geolocation: eventData.geolocation,
             socialClub: eventData.socialClub,
+            tags: eventData.tags,
             host: eventData.host
           };
           this.cdr.detectChanges();

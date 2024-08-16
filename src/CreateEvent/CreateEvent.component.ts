@@ -1,14 +1,15 @@
-import { AfterViewInit, Component, ViewChild, ElementRef, QueryList, ViewChildren, OnInit, ChangeDetectorRef } from '@angular/core';
+import { AfterViewInit, Component, ViewChild, ElementRef, QueryList, ViewChildren, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Location } from '@angular/common';
 import validator from 'validator';
-import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, FormsModule } from '@angular/forms';
+declare var google: any;
 
 @Component({
   selector: 'app-create-event',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './CreateEvent.component.html',
   styleUrl: './CreateEvent.component.css',
   animations: [
@@ -35,7 +36,7 @@ import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular
 export class CreateEventComponent implements AfterViewInit{
   prepform!: FormGroup;
   agendaform!: FormGroup;
-  constructor(private location: Location, private fb: FormBuilder) { }
+  constructor(private location: Location, private fb: FormBuilder, private ngZone: NgZone) { }
   @ViewChildren('stepInput') stepInputs!: QueryList<ElementRef>;
   @ViewChild('nameInput') nameInput!: ElementRef;
   @ViewChild('nameInputs') nameInputs!: ElementRef;
@@ -65,6 +66,9 @@ export class CreateEventComponent implements AfterViewInit{
   events: any[] = [];
   filteredEvents: any[] = [];
   selectedDietaryAccommodation = '';
+  tags: string[] = [];
+  newTag: string = '';
+
   submit(){
     // Create the event object
     this.isAPILoading = true;
@@ -72,6 +76,10 @@ export class CreateEventComponent implements AfterViewInit{
       const club = this.uniqueSocialClubs.find(club => club.name === name);
       return club ? club.id : null;
     };
+
+      // Retrieve tags from session storage
+  const savedTags = sessionStorage.getItem('tags');
+  const tags = savedTags ? JSON.parse(savedTags) : [];
     const event = {
       title: validator.escape(this.nameInput.nativeElement.value),
       description: validator.escape(this.descriptionInput.nativeElement.value),
@@ -91,7 +99,9 @@ export class CreateEventComponent implements AfterViewInit{
         this.isVeganSelected ? "Vegan" : null,
         this.isHalalSelected ? "Halal" : null,
         this.isGlutenFreeSelected ? "Gluten-free" : null
-      ].filter(Boolean) // Remove null values
+      ].filter(Boolean), // Remove null values
+      tags: tags // Add tags to the event object
+
     };
 
     console.log(event);
@@ -126,6 +136,8 @@ export class CreateEventComponent implements AfterViewInit{
     });
 }
 ngOnInit() {
+  this.initializeGooglePlaces();
+
         // Fetch social club information for each unique social club
         fetch('https://events-system-back.wn.r.appspot.com/api/events')
         .then(response => response.json())
@@ -185,6 +197,11 @@ this.prepform.get('agendainputs')?.valueChanges.subscribe(values => {
     const agendainputs = JSON.parse(agendasavedInputs);
     agendainputs.forEach((input: any) => this.addagendaInput(input));
   }
+  // Load tags from session storage
+  const savedTags = sessionStorage.getItem('tags');
+  if (savedTags) {
+    this.tags = JSON.parse(savedTags);
+  }
   // this.Prepinputs = prepInputsData ? JSON.parse(prepInputsData) : [];
   // this.Agendainputs = agendaInputsData ? JSON.parse(agendaInputsData) : [];
   this.isVegetarianSelected = sessionStorage.getItem('isVegetarianSelected') === 'false';   // Set the default value to false
@@ -193,6 +210,16 @@ this.prepform.get('agendainputs')?.valueChanges.subscribe(values => {
   this.isGlutenFreeSelected = sessionStorage.getItem('isGlutenFreeSelected') === 'false';
 }
 
+initializeGooglePlaces() {
+  const input = document.getElementById('location') as HTMLInputElement;
+  if (input) {
+    const autocomplete = new google.maps.places.Autocomplete(input);
+    autocomplete.addListener('place_changed', () => {
+      const place = autocomplete.getPlace();
+      console.log('Place:', place);
+    });
+  }
+}
 
 presubmit(){
   const missingDetails = [];
@@ -228,6 +255,27 @@ presubmit(){
 }
 
 
+addTag(): void {
+  if (this.newTag.trim() && this.tags.length < 5) {
+    this.tags.push(this.newTag.trim());
+    this.newTag = ''; // Clear the input
+    this.saveTagsToSessionStorage();
+
+  }
+}
+
+
+
+removeTag(index: number) {
+  if (index >= 0 && index < this.tags.length) {
+    this.tags.splice(index, 1);
+    this.saveTagsToSessionStorage();
+  }
+}
+
+saveTagsToSessionStorage() {
+  sessionStorage.setItem('tags', JSON.stringify(this.tags));
+}
 
   // Add a variable to save the input values
   inputValues: string[] = [];
@@ -334,6 +382,8 @@ presubmit(){
     sessionStorage.setItem('agendainputs', JSON.stringify(this.agendainputs.value));
   }
   ngAfterViewInit() {
+    this.initializeGooglePlaces();
+
     const namedata = sessionStorage.getItem('Name');
     if (namedata) {
       this.nameInput.nativeElement.value = namedata;
@@ -365,6 +415,12 @@ presubmit(){
     }
   }
   nextStep2(){
+    console.log(this.StartTimeInput.nativeElement.value);
+    console.log(this.EndTimeInput.nativeElement.value);
+    console.log(this.StartDateInput.nativeElement.value);
+    console.log(this.EndDateInput.nativeElement.value);
+  console.log("location: " + this.LocationInput.nativeElement.value);
+  console.log(this.SocialClubInput.nativeElement.value);
     if ( this.StartTimeInput.nativeElement.value === '' || this.EndTimeInput.nativeElement.value === '' || this.StartDateInput.nativeElement.value === '' || this.EndDateInput.nativeElement.value === '' || this.LocationInput.nativeElement.value === '' || this.SocialClubInput.nativeElement.value === '') {
       this.isstep2Empty = true;
       return;
@@ -406,6 +462,9 @@ presubmit(){
   }
   navigateToStep(step: number) {
     this.currentStep = step;
+    setTimeout(() => {
+      this.initializeGooglePlaces();
+    }, 0);
   }
   goBack(): void {
     window.history.back();

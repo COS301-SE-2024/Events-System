@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -8,4 +8,6 @@ import { CommonModule } from '@angular/common';
   templateUrl: './tag.component.html',
   styleUrl: './tag.component.css',
 })
-export class TagComponent {}
+export class TagComponent {
+  @Input() tagName: string | undefined;
+}

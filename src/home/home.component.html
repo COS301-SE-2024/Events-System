@@ -3,9 +3,9 @@
 <main class="flex flex-col content-between">
   <section class="bg-transparent text-center shadow-2xl size-full">
     <h2 class="font-poppins font-medium text-3xl mb-3.5 pb-3">Featured Events</h2>
-    <div class="relative lg:h-[430px]">
+    <div class="relative">
             <!-- Carousel 1 skeleton -->
-        <div class="carousel w-11/12 carousel-center max-w-screen space-x-4 left-10" #carousel1>
+        <div class="carousel w-full carousel-center max-w-screen overflow-y-hidden" #carousel1>
             <!-- Carousel 1 skeleton -->
           <div *ngIf="isLoading; else content">
           <div class="flex flex-col lg:flex-row lg:h-[400px] w-screen">
@@ -34,7 +34,7 @@
         </div>
       <!-- Carousel 1 -->
         <ng-template #content>
-          <div class="carousel-item relative w-full" *ngFor="let slide of Homeslides; let i = index" [id]="'slide' + i">
+          <div class="carousel-item relative w-full -space-x-4" *ngFor="let slide of Homeslides; let i = index" [id]="'slide' + i">
             <app-home-featured-event 
               [eventTitle]="slide.title"
               [eventDescription]="slide.description"
@@ -51,7 +51,7 @@
         </ng-template>
 
       <!-- Carousel 1 navigation -->
-      <div class="absolute top-1/2 left-0 right-0 transform -translate-y-1/2 lg:flex md:flex hidden justify-between px-3">
+      <div class="absolute top-1/2 left-0 right-0 transform -translate-y-1/2 flex justify-between px-3">
         <a (click)="previousHSlide()" class="btn btn-circle">❮</a>
         <a (click)="nextHSlide()" class="btn btn-circle">❯</a>
       </div>
@@ -99,7 +99,8 @@
             [startDate]="slide.startDate"
             [endDate]="slide.endDate"
             [hostName]="slide.host.firstName + ' ' + slide.host.lastName"
-            [eventID]="slide.id">
+            [eventID]="slide.id"
+            [tags]="slide.tags">
           </app-home-event-card>
         </div>
         </ng-template>

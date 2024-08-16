@@ -21,7 +21,7 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2 2 0 0118 14V9a6 6 0 00-12 0v5a2 2,0,01-.595,1.195L3,17h5m6 0a3 3 0,01-6 0m6 0h-6" />
         </svg>
         <!-- Badge for unread notifications -->
-        <span  class="absolute top-0 right-0 w-4 h-4 text-xs text-white bg-red-500 rounded-full flex items-center justify-center transform translate-x-1/2 -translate-y-1/2"> {{ notificationCount }} </span>
+        <span *ngIf="notificationCount < 1" class="absolute top-0 right-0 w-4 h-4 text-xs text-white bg-red-500 rounded-full flex items-center justify-center transform translate-x-1/2 -translate-y-1/2"> {{ notificationCount }} </span>
       </div>
     </button>
     <app-notif-popup *ngIf="isPopoverVisible" (closePopup)="closePopup()"></app-notif-popup>
