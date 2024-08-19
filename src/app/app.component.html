@@ -20,9 +20,11 @@
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2 2 0 0118 14V9a6 6 0 00-12 0v5a2 2,0,01-.595,1.195L3,17h5m6 0a3 3 0,01-6 0m6 0h-6" />
         </svg>
-        <!-- Badge for unread notifications -->
-        <span *ngIf="notificationCount < 1" class="absolute top-0 right-0 w-4 h-4 text-xs text-white bg-red-500 rounded-full flex items-center justify-center transform translate-x-1/2 -translate-y-1/2"> {{ notificationCount }} </span>
-      </div>
+        <!-- Badge for unread notifications -->  
+        <span *ngIf="notificationCount > 0" class="absolute top-0 right-0 w-4 h-4 text-xs text-white bg-red-500 rounded-full flex items-center justify-center transform translate-x-1/2 -translate-y-1/2">
+          {{ notificationCount }}
+        </span>
+        </div>
     </button>
     <app-notif-popup *ngIf="isPopoverVisible" (closePopup)="closePopup()"></app-notif-popup>
 
@@ -31,11 +33,16 @@
     <button class="btn btn-ghost btn-circle hidden lg:block"  *ngIf="!isLoginRoute">
       <i class="fa-solid fa-magnifying-glass"></i>    </button>
     <div class="dropdown dropdown-end"  *ngIf="!isLoginRoute">
-      <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar" >
+      <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar" *ngIf="employeeData?.employeePictureLink" >
         <div class="w-10 rounded-full">
-          <img alt="Tailwind CSS Navbar component" [src]="employeeData?.employeePictureLink || 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg'" />
+          <img alt="Tailwind CSS Navbar component" [src]="employeeData?.employeePictureLink" />
         </div>
       </div>
+      <div tabindex="0" role="button"  class="btn btn-ghost btn-circle avatar placeholder"  *ngIf="!employeeData?.employeePictureLink">
+        <div class="w-10 rounded-full bg-base-200 flex items-center justify-center">
+            <span class="text-xl font-bold text-primary">{{ getInitials() }}</span>
+          </div>
+    </div>
       <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[10] p-2 shadow bg-base-100 rounded-box w-52">
         <li>
           <a routerLink="/profile" class="justify-between">

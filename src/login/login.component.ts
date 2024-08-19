@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, ValidationErrors,  FormGroup, Validators, Rea
 import { HttpClientModule, HttpClient  } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { environment } from 'src/environments/environment';
+import { RefreshService } from 'src/app/refresh.service';
 @Component({
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, HttpClientModule, RouterModule], // Import necessary modules here
@@ -34,7 +35,8 @@ export class LoginComponent {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private http: HttpClient
+    private http: HttpClient,
+    private refreshService: RefreshService
   ) {
     // Adjusted registerForm initialization
     this.registerForm = this.fb.group({
@@ -213,6 +215,7 @@ export class LoginComponent {
         // Hide the toast after 5 seconds
         setTimeout(() => {
           this.showloginsuccessToast = false;
+          this.refreshService.triggerRefreshNavbar();
           this.router.navigate(['']);
         }, 5000);
         // Navigate to profile page

@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Component, ViewEncapsulation, ViewChild, ElementRef, OnInit, ChangeDetectorRef } from '@angular/core';
 import { RouterModule, Router, Event, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { filter } from 'rxjs/operators';
@@ -11,7 +11,7 @@ import { PwaService } from './pwa.service'; // Adjust the path as necessary
 import { Subscription } from 'rxjs';
 import { NotificationService } from './notification.service';
 import { WebSocketService } from './websocket.service';
-
+import { RefreshService } from './refresh.service';
 
 @Component({
   standalone: true,
@@ -44,7 +44,9 @@ export class AppComponent implements OnInit{
   constructor(private router: Router,
      private pwaService: PwaService,
       private notificationService: NotificationService,
-      private webSocketService: WebSocketService
+      private webSocketService: WebSocketService,
+      private cdr: ChangeDetectorRef,
+      private refreshService: RefreshService
 
     ) {
     this.notificationSubscription = this.notificationService.notification$.subscribe(() => {
@@ -70,11 +72,22 @@ export class AppComponent implements OnInit{
     return this.router.url === '/login';
   }
   ngOnInit() {
+    this.refreshService.refreshNavbar$.subscribe(() => {
+      this.refreshNavbar();
+    });
     this.webSocketService.connect();
     this.webSocketService.notifications.subscribe((message: string) => {
       this.showToast(message);
     });
   }
+
+  getInitials(): string {
+    const firstInitial = this.employeeData.firstName ? this.employeeData.firstName.charAt(0) : '';
+    const lastInitial = this.employeeData.lastName ? this.employeeData.lastName.charAt(0) : '';
+    return `${firstInitial}${lastInitial}`.toUpperCase();
+  }
+
+
   showToast(message: string) {
     const toast = document.createElement('div');
     toast.className = 'toast';
@@ -110,7 +123,9 @@ export class AppComponent implements OnInit{
   selectedNotification: any = null;
 
 
-
+  refreshNavbar() {
+    this.cdr.detectChanges();
+  }
 
 
 
