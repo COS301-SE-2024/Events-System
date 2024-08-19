@@ -25,7 +25,7 @@ export class LoginComponent {
   showemailfailToast = false;
   hidePassword = true;
   googleClientId = environment.CLIENT_ID;
-  redirectUri = 'http://localhost:4200/oauth/callback'; // e.g., http://localhost:4200/oauth/callback
+  redirectUri = 'https://events-system.org/oauth/callback'; // e.g., http://localhost:4200/oauth/callback
   googleAuthEndpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
   responseType = 'code';
   scope = 'openid email profile';
@@ -199,15 +199,15 @@ export class LoginComponent {
         document.cookie = `jwt=${authData.access_token}; path=/; expires=` + new Date(new Date().getTime() + 15 * 60 * 1000).toUTCString();
         document.cookie = `refresh=${authData.refresh_token}; path=/; expires=` + new Date(new Date().getTime() + 24* 60 * 60 * 1000).toUTCString();
 
-        // Fetch employee data using ID
-        const employeeId = localStorage.getItem('ID');
-        if (employeeId) {
-          const employeeResponse = await this.http.get(`https://events-system-back.wn.r.appspot.com/api/employees/${employeeId}`).toPromise();
-          localStorage.setItem('employeeData', JSON.stringify(employeeResponse));
-          console.log('Employee data:', localStorage.getItem('employeeData'));
-        } else {
-          console.warn('No ID found in localStorage');
-        }
+          // Fetch employee data using ID
+          const employeeId = localStorage.getItem('ID');
+          if (employeeId) {
+            const employeeResponse = await this.http.get(`https://events-system-back.wn.r.appspot.com/api/employees/${employeeId}`).toPromise();
+            localStorage.setItem('employeeData', JSON.stringify(employeeResponse));
+            console.log('Employee data:', localStorage.getItem('employeeData'));
+          } else {
+            console.warn('No ID found in localStorage');
+          }
         this.showloginsuccessToast = true;
         this.isAPILoading = false;
         // Hide the toast after 5 seconds
@@ -242,9 +242,9 @@ export class LoginComponent {
       });*/
       const baseUrl = 'https://accounts.google.com/o/oauth2/auth/oauthchooseaccount';
       const responseType = 'response_type=code';
-      const clientId = 'client_id=207465254722-7p4odomht6nnoc2cek9cb0j5jht2faos.apps.googleusercontent.com';
+      const clientId = 'client_id=' + environment.CLIENT_ID;
       const scope = 'scope=profile%20email';
-      const redirectUri = 'redirect_uri=http%3A%2F%2Flocalhost%3A4200%2Foauth';
+      const redirectUri = 'redirect_uri=https%3A%2F%2Fevents-system.org%2Foauth';
       const service = 'service=lso';
       const o2v = 'o2v=1';
       const ddm = 'ddm=0';
