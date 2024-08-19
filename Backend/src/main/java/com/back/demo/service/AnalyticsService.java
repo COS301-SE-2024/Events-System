@@ -22,6 +22,12 @@ public class AnalyticsService {
         return analyticsRepository.findById(id);
     }
 
+    //get analytics entry for a particular employee
+    public Optional<Analytics> findByEmployeeId(Integer employeeId) {
+        return analyticsRepository.findByEmployeeId(employeeId);
+    }
+    
+
     public Analytics save(Analytics analytics) {
         return analyticsRepository.save(analytics);
     }
@@ -31,4 +37,5 @@ public class AnalyticsService {
     }
 
     //Will implement patch endpoint code
+    
 }
