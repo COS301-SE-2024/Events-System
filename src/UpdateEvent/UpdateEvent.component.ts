@@ -66,7 +66,7 @@ export class UpdateEventComponent implements OnInit, AfterViewChecked{
   isHalalSelected = false;
   isGlutenFreeSelected = false;
   tags: string[] = [];
-  newTag: string = '';
+  newTag = '';
 
   constructor(private route: ActivatedRoute, private location: Location, private fb: FormBuilder, private notificationService: NotificationService) {
     this.prepform = this.fb.group({

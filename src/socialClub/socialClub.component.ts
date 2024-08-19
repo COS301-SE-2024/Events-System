@@ -20,8 +20,8 @@ export class SocialClubComponent implements OnInit {
   club: any = null;
   events: any[] = [];
   activeTab = 'tab1';
-  ownerName: string = '';
-  ownerSurname: string = '';
+  ownerName = '';
+  ownerSurname = '';
 
   goBack(): void {
     window.history.back();

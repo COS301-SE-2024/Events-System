@@ -4,7 +4,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
 import { Location } from '@angular/common';
 import validator from 'validator';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, FormsModule } from '@angular/forms';
-declare var google: any;
+let google: any;
 
 @Component({
   selector: 'app-create-event',
@@ -67,7 +67,7 @@ export class CreateEventComponent implements AfterViewInit{
   filteredEvents: any[] = [];
   selectedDietaryAccommodation = '';
   tags: string[] = [];
-  newTag: string = '';
+  newTag = '';
 
   submit(){
     // Create the event object
