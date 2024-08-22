@@ -45,7 +45,7 @@ export class AppComponent implements OnInit{
   constructor(private router: Router,
      private pwaService: PwaService,
       private notificationService: NotificationService,
-      private webSocketService: WebSocketService,
+      // private webSocketService: WebSocketService,
       private cdr: ChangeDetectorRef,
       private refreshService: RefreshService
 
@@ -84,10 +84,10 @@ export class AppComponent implements OnInit{
     this.refreshService.refreshNavbar$.subscribe(() => {
       this.refreshNavbar();
     });
-    this.webSocketService.connect();
-    this.webSocketService.notifications.subscribe((message: string) => {
-      this.showToast(message);
-    });
+    // this.webSocketService.connect();
+    // this.webSocketService.notifications.subscribe((message: string) => {
+      // this.showToast(message);
+    // });
   }
 
   getInitials(): string {

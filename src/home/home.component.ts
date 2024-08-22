@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit {
 
   constructor(private cdr: ChangeDetectorRef, 
     private router: Router,
-     private webSocketService: WebSocketService,
+    //  private webSocketService: WebSocketService,
       private notificationService: NotificationService,
       private randomHeaderService: RandomHeaderService) { 
         this.imageSource = '';
