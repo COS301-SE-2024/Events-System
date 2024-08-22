@@ -6,6 +6,7 @@ import com.back.demo.repository.EventRSVPRepository;
 import com.back.demo.repository.EventRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
@@ -24,6 +25,7 @@ public class EventService {
     @Autowired
     private EventRSVPRepository eventRSVPRepository;
 
+    @Cacheable(value = "eventsCache")
     public List<Event> getAllEvents() {
         return eventRepository.findAll();
     }
