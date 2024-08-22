@@ -28,7 +28,8 @@ import { RefreshService } from './refresh.service';
 })
 export class AppComponent implements OnInit{
   @ViewChild('toastContainer', { static: true }) toastContainer!: ElementRef;
-
+  isHost = false;
+  isEmployee = false;
   public notificationCount = 0; // Add a property to store the notification count
 
   title = 'Events-System';
@@ -72,6 +73,14 @@ export class AppComponent implements OnInit{
     return this.router.url === '/login';
   }
   ngOnInit() {
+    console.log(this.employeeData.role);
+    if (this.employeeData.role == 'MANAGER'){
+      this.isEmployee = true;
+      this.isHost = true;
+    }else{
+      this.isEmployee = true;
+      this.isHost = false;
+    }
     this.refreshService.refreshNavbar$.subscribe(() => {
       this.refreshNavbar();
     });

@@ -8,8 +8,8 @@
         <div class="carousel w-full carousel-center max-w-screen overflow-y-hidden" #carousel1>
             <!-- Carousel 1 skeleton -->
           <div *ngIf="isLoading; else content">
-          <div class="flex flex-col lg:flex-row lg:h-[400px] w-screen">
-            <div class="skeleton size-full w-11/12 lg:ml-16 rounded-xl"></div>
+          <div class="flex flex-row h-80 w-screen">
+            <div class="skeleton size-full lg:w-11/12  w-9/12 lg:ml-16 ml-14 rounded-xl"></div>
           </div>
           </div>
 
@@ -58,7 +58,7 @@
       
     </div>
 
-    <div class="relative lg:h-[300px]"> 
+    <div class="relative lg:h-80 "> 
       <div class="carousel carousel-center lg:w-11/12 w-screen p-4 lg:space-x-8 space-x-8 bg-transparent rounded-box h-full" #carousel2>
         
         <div *ngIf="isLoading; else content1" class="grid grid-cols-1 md:grid-cols-3 gap-6 ml-8">
@@ -123,7 +123,7 @@
   <section class="bg-transparent text-center pt-32 shadow-2xl h-full"> <!--Featured events section-->
     <h2 class="font-poppins font-medium text-3xl mb-1.5 pb-3">Social clubs</h2>
 
-    <div class="relative lg:h-[350px] lg:ml-44"> 
+    <div class="relative lg:h-96 lg:ml-44"> 
       <div class="carousel carousel-center w-11/12 p-4 lg:space-x-8 space-x-8 bg-transparent rounded-box h-full" #carousel3>
         <div *ngIf="isLoading; else content2">
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:-ml-14 ml-4 space-x-32">
