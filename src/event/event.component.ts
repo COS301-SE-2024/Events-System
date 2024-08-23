@@ -37,6 +37,7 @@ export class EventComponent implements OnInit{
   host: any = null;
   isLoading = true;
   hasUserRSVPd = false;
+  googleSignIn = false;
   club: any = null;
   constructor(private route: ActivatedRoute, private randomHeaderService: RandomHeaderService) { 
     this.imageSource = '';
@@ -52,6 +53,7 @@ export class EventComponent implements OnInit{
       await this.checkUserRSVP();
       await this.fetchEventDetails();
     });
+    this.googleSignIn = Boolean(localStorage.getItem('googleSignIn'));
   }
   
   async fetchEventDetails(): Promise<void> {
@@ -172,6 +174,85 @@ export class EventComponent implements OnInit{
     
         if (!response.ok) {
           throw new Error('Failed to RSVP to event');
+        }
+
+        if(this.googleSignIn)
+        {
+          // Get all cookies
+          const cookies = document.cookie.split('; ');
+
+          // Find the cookie by name
+          let googleToken = null;
+          for (const cookie of cookies) {
+              const [name, value] = cookie.split('=');
+              if (name === "google") {
+                  googleToken = decodeURIComponent(value);
+                  break;
+              }
+          }
+
+          if(googleToken)
+          {
+            await fetch(`https://events-system-back.wn.r.appspot.com/api/events/${this.eventId}`, {
+              method: 'GET',
+              credentials: "include",
+              headers: {
+                'Content-Type': 'application/json',
+              }
+            })
+            .then(async eventData => {
+              const event = await eventData.json();
+
+              const googleEvent = {
+                summary: event.title,
+                location: event.location,
+                description: `
+                  ${event.description}
+
+                  Agendas:
+                  - ${event.eventAgendas.join("\n    - ")}
+
+                  Preparations:
+                  - ${event.eventPreparation.join("\n    - ")}
+                `,
+                start: {
+                  dateTime: `${event.startDate}T${event.startTime}`,
+                  timeZone: 'Africa/Johannesburg', // Adjust based on your timezone
+                },
+                end: {
+                  dateTime: `${event.endDate}T${event.endTime}`,
+                  timeZone: 'Africa/Johannesburg', // Adjust based on your timezone
+                },
+                /*extendedProperties: {
+                  private: {
+                    eventId: event.eventId.toString(),
+                    hostId: event.hostId.toString(),
+                    socialClub: event.socialClub.toString(),
+                  },
+                },*/
+                source: {
+                  url: event.eventPictureLink,
+                  title: 'Event Picture',
+                },
+                reminders: {
+                  useDefault: false,
+                  overrides: [
+                    { method: 'email', minutes: 24 * 60 },
+                    { method: 'popup', minutes: 10 },
+                  ],
+                },
+              };
+
+              await fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events', {
+                method: 'POST',
+                headers: {
+                  "Authorization": `Bearer ${googleToken}`,
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(googleEvent),
+              })
+            })
+          }
         }
     
         const responseData = await response.json();

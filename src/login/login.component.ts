@@ -144,10 +144,27 @@ export class LoginComponent {
         body: JSON.stringify(formData)
       })
       .then(response => response.json())
-      .then(data => {
+      .then(async data => {
         this.showregistersuccessToast = true;
         this.isAPILoading = false;
-        console.log('Registration successful:', data);
+        // console.log('Registration successful:', data);
+
+        // Get employee ID using access token
+        const idResponse = await fetch('https://events-system-back.wn.r.appspot.com/api/v1/auth/' + data.access_token, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        const idData = await idResponse.json();
+
+        // Store employee ID in local storage
+        localStorage.setItem('ID', idData);
+        localStorage.setItem('googleSignIn', "true");
+        document.cookie = `jwt=${data.access_token}; path=/; expires=` + new Date(new Date().getTime() + 15 * 60 * 1000).toUTCString();
+        document.cookie = `refresh=${data.refresh_token}; path=/; expires=` + new Date(new Date().getTime() + 24* 60 * 60 * 1000).toUTCString();
+
+
         setTimeout(() => {
           this.showregistersuccessToast = false;
           this.router.navigate(['']);
@@ -246,7 +263,7 @@ export class LoginComponent {
       const baseUrl = 'https://accounts.google.com/o/oauth2/auth/oauthchooseaccount';
       const responseType = 'response_type=code';
       const clientId = 'client_id=' + environment.CLIENT_ID;
-      const scope = 'scope=profile%20email';
+      const scope = 'scope=profile%20email%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcalendar';
       const redirectUri = 'redirect_uri=https%3A%2F%2Fevents-system.org%2Foauth';
       const service = 'service=lso';
       const o2v = 'o2v=1';

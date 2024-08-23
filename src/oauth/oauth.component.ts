@@ -47,6 +47,8 @@ export class OauthComponent implements OnInit{
           .then(data => data.json())
           .then(async data => {
             console.log("Access token: " + data.access_token);
+            const ACCESS_TOKEN = data.access_token;
+            
             await fetch('https://www.googleapis.com/userinfo/v2/me', {
               method: 'GET',
               headers: {
@@ -78,6 +80,7 @@ export class OauthComponent implements OnInit{
                 
                 // Store employee ID in local storage
                 localStorage.setItem('ID', idData);
+                localStorage.setItem('googleSignIn', "true");
                 
                 // Fetch employee data using ID
                 const employeeId = localStorage.getItem('ID');
@@ -90,8 +93,36 @@ export class OauthComponent implements OnInit{
                 }
                 document.cookie = `jwt=${authData.access_token}; path=/; expires=` + new Date(new Date().getTime() + 15 * 60 * 1000).toUTCString();           // Expiry set to 15 minutes
                 document.cookie = `refresh=${authData.refresh_token}; path=/; expires=` + new Date(new Date().getTime() + 24* 60 * 60 * 1000).toUTCString();  // Expiry set to 24 hours
+                document.cookie = `google=${ACCESS_TOKEN}; path=/; expires=` + new Date(new Date().getTime() + 1 * 60 * 60 * 1000).toUTCString();  // Expiry set to 1 hour
 
-                this.router.navigate(['']);
+                await fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events?maxResults=10&orderBy=startTime&singleEvents=true', {
+                  method: 'GET',
+                  headers: {
+                    "Authorization": `Bearer ${ACCESS_TOKEN}`,
+                    "Content-Type": "application/json",
+                  },
+                })
+                .then(calendarData => calendarData.json())
+                .then(async calendarData => {
+                  const events = calendarData.items;
+                  if (events.length === 0) {
+                    console.log("No upcoming events found.");
+                    return;
+                  }
+
+                  console.log("Upcoming events:");
+                  events.forEach((event: any) => {
+                    const start = event.start.dateTime || event.start.date;
+                    console.log(`${start} - ${event.summary}`);
+                  });
+                })
+                .then(() => {
+                  this.router.navigate(['']);
+                })
+                .catch((error) => {
+                  throw new Error(`API request failed: ${error}`);
+                })
+
               })
             })
           });
