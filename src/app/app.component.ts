@@ -41,6 +41,7 @@ export class AppComponent implements OnInit{
   private pwaServiceSubscriber?: Subscription;
   private routerEventsSubscription?: Subscription;
   private notificationSubscription?: Subscription;
+  private notificationCountFetched = false; // Flag to ensure notification count is fetched only once
 
   constructor(private router: Router,
      private pwaService: PwaService,
@@ -55,16 +56,19 @@ export class AppComponent implements OnInit{
     });
     // Initialize employeeData from localStorage or any other source
     this.employeeData = JSON.parse(localStorage.getItem('employeeData') || '{}');
-    if (this.employeeData && this.employeeData.id) {
+    if (this.employeeData && this.employeeData.id && !this.notificationCountFetched) {
       this.fetchNotificationCount();
+      this.notificationCountFetched = true;
     }
 
     // Subscribe to router events
     this.routerEventsSubscription = this.router.events
     .pipe(filter((event: Event): event is NavigationEnd => event instanceof NavigationEnd))
     .subscribe((event: NavigationEnd) => {
-      if (event.url !== '/login') {
+      if (event.url !== '/login' && !this.notificationCountFetched) {
         this.fetchNotificationCount();
+      this.notificationCountFetched = true;
+
       }
     });
   }
