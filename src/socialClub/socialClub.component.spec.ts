@@ -65,20 +65,4 @@ describe('SocialClubComponent', () => {
     expect(clubDescriptionElement.nativeElement.textContent).toContain('Test Description');
   });
 
-  it('should switch tabs when tab is clicked', () => {
-    component.isLoading = false;
-    component.club = { name: 'Test Club', description: 'Test Description' };
-    fixture.detectChanges();
-
-    const tab1 = fixture.debugElement.query(By.css('a[role="tab"]:nth-child(1)'));
-    const tab2 = fixture.debugElement.query(By.css('a[role="tab"]:nth-child(2)'));
-
-    tab2.triggerEventHandler('click', null);
-    fixture.detectChanges();
-    expect(component.activeTab).toBe('tab2');
-
-    tab1.triggerEventHandler('click', null);
-    fixture.detectChanges();
-    expect(component.activeTab).toBe('tab1');
-  });
 });

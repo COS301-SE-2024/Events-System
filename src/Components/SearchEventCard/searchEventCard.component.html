@@ -12,6 +12,7 @@
         <span><i class="fa-regular fa-calendar-days translate-y-1"></i> {{ startDate | date:'dd MMM' }} - {{ endDate | date:'dd MMM' }}</span>
       </p>
       <div class="flex gap-3 p-3 flex-wrap ">
+        <app-tag *ngFor="let tag of tags" [tagName]="tag"></app-tag>
         <!-- <app-tag></app-tag> -->
       </div>
     </div>

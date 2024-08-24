@@ -33,9 +33,14 @@ describe('SearchProfileComponent', () => {
       ]
     }).compileComponents();
 
+
     fixture = TestBed.createComponent(SearchProfileComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    component.employeeData = {
+      firstName: 'John',
+      lastName: 'Doe',
+      email: 'john.doe@example.com'
+    };    fixture.detectChanges();
   });
 
   it('should create', () => {

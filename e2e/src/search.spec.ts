@@ -47,7 +47,7 @@ test.describe('Search Component', () => {
 
   test('should display the search bar and checkboxes', async ({ page }) => {
     // Verify the search bar
-    const searchBar = await page.locator('input[placeholder="Search for events, hosts and social clubs..."]');
+    const searchBar = await page.locator('input[placeholder="Search for events, event tags, hosts and social clubs..."]');
     await expect(searchBar).toBeVisible();
 
 

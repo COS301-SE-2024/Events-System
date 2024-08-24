@@ -3,17 +3,19 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { response } from 'express';
 import { environment } from 'src/environments/environment';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 @Component({
   selector: 'app-oauth',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, HttpClientModule],
   templateUrl: './oauth.component.html',
   styleUrl: './oauth.component.css',
 })
 export class OauthComponent implements OnInit{
   constructor(
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private http: HttpClient
   )
   {}
 
@@ -24,9 +26,9 @@ export class OauthComponent implements OnInit{
         console.log('Authorization code:', code);
 
         const baseUrl = 'https://oauth2.googleapis.com/token';
-        const clientId = environment.CLIENT_ID_FULL;
-        const clientSecret = environment.CLIENT_SECRET_FULL;
-        const redirectUri = 'redirect_uri=http%3A%2F%2Flocalhost%3A4200%2Foauth';
+        const clientId = 'client_id=' + environment.CLIENT_ID;
+        const clientSecret = 'client_secret=' + environment.CLIENT_SECRET;
+        const redirectUri = 'redirect_uri=https%3A%2F%2Fevents-system.org%2Foauth';
         const grantType = 'grant_type=authorization_code';
         //const code = 'YOUR_AUTHORIZATION_CODE'; // replace with actual authorization code
         
@@ -56,7 +58,7 @@ export class OauthComponent implements OnInit{
             .then(async info => {
               console.log("User info: " + JSON.stringify(info));
 
-              await fetch('http://localhost:8080/api/v1/auth/google', {
+              await fetch('https://events-system-back.wn.r.appspot.com/api/v1/auth/google', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json'
@@ -64,8 +66,28 @@ export class OauthComponent implements OnInit{
                 body:  JSON.stringify(info)
               })
               .then(authData => authData.json())
-              .then(authData => {
-                console.log("authData: " + authData.access_token);
+              .then(async authData => {
+                // Get employee ID using access token
+                const idResponse = await fetch('https://events-system-back.wn.r.appspot.com/api/v1/auth/' + authData.access_token, {
+                  method: 'GET',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  }
+                });
+                const idData = await idResponse.json();
+                
+                // Store employee ID in local storage
+                localStorage.setItem('ID', idData);
+                
+                // Fetch employee data using ID
+                const employeeId = localStorage.getItem('ID');
+                if (employeeId) {
+                  const employeeResponse = await this.http.get(`https://events-system-back.wn.r.appspot.com/api/employees/${employeeId}`).toPromise();
+                  localStorage.setItem('employeeData', JSON.stringify(employeeResponse));
+                  console.log('Employee data:', localStorage.getItem('employeeData'));
+                } else {
+                  console.warn('No ID found in localStorage');
+                }
                 document.cookie = `jwt=${authData.access_token}; path=/; expires=` + new Date(new Date().getTime() + 15 * 60 * 1000).toUTCString();           // Expiry set to 15 minutes
                 document.cookie = `refresh=${authData.refresh_token}; path=/; expires=` + new Date(new Date().getTime() + 24* 60 * 60 * 1000).toUTCString();  // Expiry set to 24 hours
 
@@ -93,7 +115,7 @@ export class OauthComponent implements OnInit{
   }
 
   private async sendCodeToBackend(code: any): Promise<void> {
-    const backendEndpoint = 'http://localhost:8080/api/v1/auth/google';
+    const backendEndpoint = 'https://events-system-back.wn.r.appspot.com/api/v1/auth/google';
     
     try {
       const response = await fetch(backendEndpoint, {
