@@ -48,11 +48,13 @@ export class SearchProfileComponent implements OnInit {
       console.error('Error fetching attended events:', error);
       return [];
     });
-    const storedEmployeeData = localStorage.getItem('employeeData');
-    if (storedEmployeeData) {
-      this.employeeData = JSON.parse(storedEmployeeData);
-      console.log(this.employeeData);
-    }
   }
     )}
+
+    getInitials(): string {
+      const firstInitial = this.employeeData.firstName ? this.employeeData.firstName.charAt(0) : '';
+      const lastInitial = this.employeeData.lastName ? this.employeeData.lastName.charAt(0) : '';
+      return `${firstInitial}${lastInitial}`.toUpperCase();
+    }
+  
 }

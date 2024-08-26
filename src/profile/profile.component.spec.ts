@@ -3,19 +3,28 @@ import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 import '@testing-library/jest-dom';
 import { ProfileComponent } from './profile.component';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { CommonModule } from '@angular/common';
+import { By } from '@angular/platform-browser';
 
 describe('ProfileComponent', () => {
+  let component: ProfileComponent;
+  let fixture: ComponentFixture<ProfileComponent>;
+
   beforeEach(async () => {
-    await render(ProfileComponent, {
-      providers: [
-        {
-          provide: ActivatedRoute,
-          useValue: {
-            params: of({ id: 'testId' })
-          }
-        }
-      ]
-    });
+    await TestBed.configureTestingModule({
+      imports: [CommonModule, RouterTestingModule, ProfileComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(ProfileComponent);
+    component = fixture.componentInstance;
+    component.employeeData = {
+      firstName: 'John',
+      lastName: 'Doe',
+      email: 'john.doe@example.com'
+    }; // Initialize employeeData
+    fixture.detectChanges();
   });
 
   it('should create', () => {

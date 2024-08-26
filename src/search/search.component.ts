@@ -85,7 +85,8 @@ export class SearchComponent {
 
   filterEvents() {
     this.filteredEvents = this.events.filter(event =>
-      event.title.toLowerCase().includes(this.searchTerm.toLowerCase())
+      event.title.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      event.tags.some((tag: string) => tag.toLowerCase().includes(this.searchTerm.toLowerCase()))
     );
     this.filteredHosts = this.hosts.filter(host =>
       host.firstName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||

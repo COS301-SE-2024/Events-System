@@ -11,6 +11,7 @@
 
   <div [ngSwitch]="currentStep">
     <button class="btn w-[50px] -mt-12 lg:ml-8 h-[30px] rounded-full"(click)="goBack()"><i class="fa-solid fa-arrow-left"></i></button>
+
     <div class="flex justify-center items-center">
       <div *ngSwitchCase="0" class="mt-8" [@fadeInOut]>
         <h1 class="lg:text-6xl text-4xl text-center font-karla">Name your event</h1>
@@ -29,12 +30,17 @@
       <div *ngSwitchCase="1" class="mt-8" [@fadeInOut]>
         <h1 class="lg:text-6xl text-4xl font-karla">What's it about?</h1>
         <div>
-          <div class="tooltip tooltip-open tooltip-error lg:ml-8 ml-4 -mb-4 font-roboto"  [class.hidden]="!isDescriptionEmpty" data-tip="Please enter a Description">
+          <div class="tooltip tooltip-open tooltip-error lg:ml-8 ml-4 -mb-4 font-roboto"
+            [class.hidden]="!isDescriptionEmpty" data-tip="Please enter a Description">
           </div>
-          <textarea #descriptionInput class="textarea textarea-bordered w-full h-44 mt-4 font-roboto" placeholder="Description" required></textarea>        
+          <textarea #descriptionInput class="textarea textarea-bordered w-full h-44 mt-4 font-roboto"
+            placeholder="Description" required></textarea>
         </div>
+
+    
         <div class="flex justify-between mt-4">
-          <button (click)="previousStep()" class="btn btn-outline btn-warning font-roboto" [disabled]="currentStep === 0">Back</button>
+          <button (click)="previousStep()" class="btn btn-outline btn-warning font-roboto"
+            [disabled]="currentStep === 0">Back</button>
           <button (click)="nextStep1()" class="btn btn-success font-roboto">Next</button>
         </div>
       </div>
@@ -58,7 +64,7 @@
               <div class="label mt-4 lg:ml-8">
                 <span class="label-text font-roboto">End Time</span>
               </div>
-              <input #EndTimeInput type="time" class="input input-bordered lg:w-96 max-w-xs lg:ml-8"required>
+              <input #EndTimeInput type="time" class="input input-bordered lg:w-96 lg:ml-8"required>
             </div>
         </div>
 
@@ -81,12 +87,15 @@
         </div>
 
         <div class="flex justify-evenly lg:flex-row flex-col lg:ml-[0.8rem]">
-          <div>
-            <div class="label mt-4 lg:-ml-4">
-              <span class="label-text font-roboto">Location</span>
+          <!-- Add this input field for location -->
+            <div>
+            <div class="label  mt-4 lg:-ml-4" htmlFor="location">
+              <span class="label-text text-secondary">Location</span>
             </div>
-            <input #LocationInput type="text" placeholder="Location" class="input input-bordered w-96 max-w-md lg:-ml-4 font-roboto"required>
-          </div>
+            <input  #LocationInput type="text" id="location" placeholder="Enter your location" class="input input-bordered w-96 max-w-md lg:-ml-4 font-roboto" />
+            </div>
+
+
 
           <div>
             <div class="label mt-4 lg:ml-16">
@@ -94,11 +103,30 @@
             </div>
             <select  #SocialClubInput placeholder="Social club" class="select select-bordered w-96 max-w-md lg:ml-16 font-roboto">
               <option disabled selected>Select a social club</option>
-              <option *ngFor="let club of uniqueSocialClubs">{{ club.name }}</option>
+              <option *ngFor="let club of uniqueSocialClubs">{{ club.name }}</option>   
             </select>
           </div>
 
         </div>
+          <div class="flex justify-center">
+            <div>
+              <div class="label mt-4 flex justify-center">
+                <span class="label-text font-roboto">Tags</span>
+              </div>
+              <div class="tag-input-area">
+                <input [(ngModel)]="newTag" type="text" class="input input-bordered w-96 max-w-md lg:-ml-4 font-roboto" placeholder="Enter a tag" />
+                <button (click)="addTag()" class="btn btn-outline btn-accent mt-4 ml-2" [disabled]="tags.length >= 5">+</button>
+              </div>
+              <div class="tags mt-2 grid grid-cols-3 gap-0 gap-x-0">
+                <button *ngFor="let tag of tags; let i = index"
+                        (click)="removeTag(i)"
+                        class="badge badge-neutral cursor-pointer hover:badge-error relative">
+                  {{ tag }}
+                  <span class="absolute top-0 right-0 mt-1 mr-1 text-xs hidden group-hover:inline">-</span>
+                </button>
+              </div>
+            </div>
+          </div>
         <div class="flex justify-between mt-4">
           <button (click)="previousStep()" class="btn btn-outline btn-warning font-roboto" [disabled]="currentStep === 0">Back</button>
           <div>
@@ -127,7 +155,6 @@
                     </div>
                   </div>
                   <button [disabled]="prepinputs.length === 5" (click)="addprepInput()" class="btn btn-accent btn-outline btn-wide mt-4">+</button>
-                  <!-- <button (click)="saveInputs()">Next</button> -->
                 </form>
               </div>
 
@@ -139,7 +166,7 @@
                   <span class="label-text font-roboto">Agenda Details</span>
                 </div>
                 <form [formGroup]="agendaform">
-                  <div formArrayName="agendainputs font-roboto">
+                  <div formArrayName="agendainputs" class="font-roboto">
                     <div *ngFor="let input of agendainputs.controls; index as i" [@fadeIn] class="flex">
                       <input [formControlName]="i"  class="input input-bordered w-full mt-4">
                       <button (click)="removeagendaInput(i)" class="btn btn-outline btn-warning mt-4 ml-2 opacity-35">-</button>
@@ -286,6 +313,27 @@
           <button class="btn lg:ml-8 font-roboto" [ngClass]="{'btn-outline': isVeganSelected}" (click)="toggleVegan()">Vegan</button>
           <button class="btn lg:ml-8 font-roboto" [ngClass]="{'btn-outline': isHalalSelected}" (click)="toggleHalal()">Halal</button>
           <button class="btn lg:ml-8 font-roboto" [ngClass]="{'btn-outline': isGlutenFreeSelected}" (click)="toggleGlutenFree()">Gluten-free</button>
+          </div>
+
+
+          <div class="flex justify-center">
+            <div>
+              <div class="label mt-4 flex justify-center">
+                <span class="label-text font-roboto">Tags</span>
+              </div>
+              <!-- <div class="tag-input-area">
+                <input [(ngModel)]="newTag" type="text" class="input input-bordered w-96 max-w-md lg:-ml-4 font-roboto" placeholder="Enter a tag" />
+                <button (click)="addTag()" class="btn btn-outline btn-accent mt-4 ml-2" [disabled]="tags.length >= 5">+</button>
+              </div> -->
+              <div class="tags mt-2 grid grid-cols-3 gap-0 gap-x-0">
+                <button *ngFor="let tag of tags; let i = index"
+                        (click)="removeTag(i)"
+                        class="badge badge-neutral cursor-pointer hover:badge-error relative">
+                  {{ tag }}
+                  <span class="absolute top-0 right-0 mt-1 mr-1 text-xs hidden group-hover:inline">-</span>
+                </button>
+              </div>
+            </div>
           </div>
         <div class="flex justify-between mt-4 font-roboto">
           <button (click)="previousStep()" class="btn btn-outline btn-warning" [disabled]="currentStep === 0">back</button>

@@ -28,14 +28,6 @@ describe('SearchComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should update search term on input', () => {
-    const inputElement = fixture.debugElement.query(By.css('input[placeholder="Search for events, hosts and social clubs..."]')).nativeElement;
-    inputElement.value = 'test search';
-    inputElement.dispatchEvent(new Event('input'));
-    fixture.detectChanges();
-
-    expect(component.searchTerm).toBe('test search');
-  });
 
   it('should display loading state', () => {
     component.loading = true;

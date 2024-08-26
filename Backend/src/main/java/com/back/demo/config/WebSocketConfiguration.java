@@ -6,22 +6,22 @@ import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBr
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 
-@Configuration
-@EnableWebSocketMessageBroker
-public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer {
-	@Override
-	public void registerStompEndpoints(StompEndpointRegistry stompEndpointRegistry) {
-		stompEndpointRegistry.addEndpoint("/socket")
-				.setAllowedOrigins("http://localhost:4200", "https://localhost:4200", "ws://localhost:4200", "wss://localhost:4200", "https://events-system.org", "http://events-system.org", "ws://events-system.org","wss://events-system.org", "wss://events-system-back.wn.r.appspot.com", "ws://events-system-back.wn.r.appspot.com" )
-				.withSockJS();
-	}
+// @Configuration
+// @EnableWebSocketMessageBroker
+// public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer {
+// 	@Override
+// 	public void registerStompEndpoints(StompEndpointRegistry stompEndpointRegistry) {
+// 		stompEndpointRegistry.addEndpoint("/socket")
+// 				.setAllowedOrigins("http://localhost:4200", "https://localhost:4200", "ws://localhost:4200", "wss://localhost:4200", "https://events-system.org", "http://events-system.org", "ws://events-system.org","wss://events-system.org", "wss://events-system-back.wn.r.appspot.com", "ws://events-system-back.wn.r.appspot.com" )
+// 				.withSockJS();
+// 	}
 
-	@Override
-	public void configureMessageBroker(MessageBrokerRegistry registry) {
-		registry.enableSimpleBroker("/topic");
-		registry.setApplicationDestinationPrefixes("/app");
-	}
-}
+// 	@Override
+// 	public void configureMessageBroker(MessageBrokerRegistry registry) {
+// 		registry.enableSimpleBroker("/topic");
+// 		registry.setApplicationDestinationPrefixes("/app");
+// 	}
+// }
 
 
 // @Configuration

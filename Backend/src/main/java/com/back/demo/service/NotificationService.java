@@ -24,8 +24,8 @@ public class NotificationService {
     @Autowired
     private NotificationRepository notificationRepository;
 
-    @Autowired
-    private SimpMessagingTemplate template;
+    // @Autowired
+    // private SimpMessagingTemplate template;
 
     @Autowired
     private EmployeeRepository employeeRepository;
@@ -37,11 +37,11 @@ public class NotificationService {
     @Autowired
     private EventSeriesSubscriptionRepository eventSeriesSubscriptionRepository;
 
-    public Notification createNotification(Notification notification) {
-        Notification savedNotification = notificationRepository.save(notification);
-        template.convertAndSend("/topic/notification", savedNotification);
-        return savedNotification;
-    }
+    // public Notification createNotification(Notification notification) {
+    //     Notification savedNotification = notificationRepository.save(notification);
+    //     template.convertAndSend("/topic/notification", savedNotification);
+    //     return savedNotification;
+    // }
 
     public List<Notification> getNotificationsForUser(Integer employeeId) {
         List<Notification> allNotifications = notificationRepository.findAll();
@@ -84,8 +84,8 @@ public class NotificationService {
         notification.setEventTitle(notif.getEventTitle());
         notification.setSeriesTitle(notif.getSeriesTitle());
         notificationRepository.save(notification);
-        System.out.println("Notification sent to: /topic/notification" + employeeId);
-        template.convertAndSend("/topic/notification" + employeeId, notif.getMessage());
+        // System.out.println("Notification sent to: /topic/notification" + employeeId);
+        // template.convertAndSend("/topic/notification" + employeeId, notif.getMessage());
     }
 
     

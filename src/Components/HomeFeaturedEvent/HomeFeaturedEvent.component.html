@@ -1,5 +1,26 @@
-<div class="card rounded-xl shadow-xl w-11/12 bg-base-200  "> 
-    <div class="md:flex">
+<div class="card rounded-xl w-11/12 h-96 lg:ml-12">
+  <div class="card-body w-dvw">
+    <div
+  class="hero h-80 lg:w-[93%] rounded-xl"
+  [style.background-image]="'url(' + imageSource + ')'"
+   >
+  <div class="hero-overlay bg-opacity-80  rounded-xl"></div>
+  <div class="hero-content text-neutral-content text-center">
+    <div class="max-w-md">
+      <h1 class="mb-5 text-5xl font-bold text-secondary  mix-blend-screen">{{ eventTitle }}</h1>
+      <p class="mb-5 truncate-overflow mix-blend-screen">{{ eventDescription }}</p>
+              <form action="">
+          <div class="card-actions justify-center">
+            <button [routerLink]="['/event', eventID]" type="submit" class="btn btn-accent">               
+               See More !
+            </button>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
+    </div> 
+    <!-- <div class="md:flex">
       <div class="md:shrink-2 lg:shrink-0">
         <img class="rounded-l-xl h-48 w-full object-cover md:h-full" [src]="imageSource" alt="Album"/>
       </div>
@@ -32,7 +53,7 @@
           </div>
         </form>
       </div>
-    </div>
+    </div> -->
   </div>
 
 

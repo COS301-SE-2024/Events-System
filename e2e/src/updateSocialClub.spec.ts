@@ -36,7 +36,7 @@ test.describe('Social Club Delete Page', () => {
     });
     test('should allow user to fill and submit the form', async ({ page }) => {
         // Fill out the name
-        await page.fill('input[formControlName="name"]', 'Updated Club Name');
+        await page.fill('input[placeholder="Type club name..."]', 'Updated Club Name');
 
 
         // Select a category

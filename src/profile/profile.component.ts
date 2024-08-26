@@ -15,7 +15,11 @@ export class ProfileComponent implements OnInit {
   employeeData: any; // Define employeeData property
   events: any[] = [];
   constructor(private router: Router) {}
-
+  getInitials(): string {
+    const firstInitial = this.employeeData.firstName ? this.employeeData.firstName.charAt(0) : '';
+    const lastInitial = this.employeeData.lastName ? this.employeeData.lastName.charAt(0) : '';
+    return `${firstInitial}${lastInitial}`.toUpperCase();
+  }
   ngOnInit(): void {
     const employeeID = Number(localStorage.getItem('ID'));
     
@@ -75,6 +79,7 @@ function initializeTabs() {
     tabs[0].classList.add('tab-active');
   }
 }
+
 function openTab(tab: HTMLElement, index: number) {
   const tabContents = document.querySelectorAll<HTMLElement>('.tab-content');
   const tabs = document.querySelectorAll<HTMLElement>('.tab');

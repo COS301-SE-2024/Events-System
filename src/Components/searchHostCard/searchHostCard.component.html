@@ -1,8 +1,11 @@
 
 <div class="card lg:card-side shadow-xl bg-base-200">
     <div class="rounded-t-2xl h-44 sm:h-64 md:w-96 sm:rounded-l-xl sm:rounded-r-none flex items-center justify-center">
-      <div>
-        <span class="text-3xl">{{ getInitials() }}</span>
+      <div *ngIf="!hostImage">
+        <span  class="text-3xl">{{ getInitials() }}</span>
+      </div>
+      <div *ngIf="hostImage">
+        <img class="w-56 h-56 object-cover rounded-full"alt="Profile Picture" [src]="hostImage">
       </div>
     </div>
       

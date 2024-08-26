@@ -49,7 +49,7 @@ test.describe('Event Create Page', () => {
 
         // Step 3: Fill out the details
         await page.click('li:has-text("Details")');
-        await page.fill('input[placeholder="Location"]', 'Test Location');
+        await page.fill('input[placeholder="Enter your location"]', 'Test Location');
         //await page.selectOption('select', { label: 'Literature Club' }); // Adjust this according to your options
         await page.click('button:has-text("Next")');
 

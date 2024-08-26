@@ -4,6 +4,7 @@ import { TagComponent } from 'src/Components/SearchTag/tag.component';
 import { RouterModule } from '@angular/router';
 import { RandomImageServiceService } from '../../app/random-image-service.service'; 
 import { trigger, state, style, transition, animate } from '@angular/animations';
+// import { TagComponent } from 'src/Components/SearchTag/tag.component';
 
 @Component({
   selector: 'app-search-event-card',
@@ -49,6 +50,7 @@ export class SearchEventCardComponent implements OnInit{
   @Input() eventID: string | undefined;
   @Input() location: string | undefined;
   @Input() socialClub: string | undefined;
+  @Input() tags: any | undefined;
   get formattedStartTime() {
     return this.startTime?.slice(0, -3);
   }

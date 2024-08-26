@@ -11,7 +11,7 @@ export class WebSocketService {
   private notificationSubject = new Subject<string>();
 
   constructor() {
-    const socket = new SockJS('https://events-system-back.wn.r.appspot.com/socket');
+    const socket = new SockJS('https://mock-api-url.com/socket');
     this.stompClient = Stomp.over(socket);
     this.stompClient.onConnect = (frame) => {
       console.log('Connected to WebSocket');
