@@ -10,7 +10,7 @@ import { SocialClubCardSkeletonComponent } from 'src/Components/SocialClubCardSk
 import { HomeUpcomingSkeletonComponent } from 'src/Components/HomeUpcomingSkeleton/HomeUpcomingSkeleton.component';
 import { WebSocketService } from 'src/app/websocket.service';
 import { NotificationService } from 'src/app/notification.service';
-
+import { RandomHeaderService } from 'src/app/random-header.service';
 const myCredentials = {
   username: 'myUsername',
   password: 'myPassword'
@@ -30,6 +30,7 @@ export interface Slide {
   hostId: string;
   geolocation: string;
   socialClub: string;
+  tags: any;
   host: any; // replace 'any' with the actual type of 'host'
 }
 @Component({
@@ -43,13 +44,15 @@ export interface Slide {
 export class HomeComponent implements OnInit {
   public notifications = 0;
   @ViewChild('toastContainer', { static: true }) toastContainer!: ElementRef;
-
+  imageSource: string;
 
 
   constructor(private cdr: ChangeDetectorRef, 
     private router: Router,
-     private webSocketService: WebSocketService,
-      private notificationService: NotificationService) { 
+    //  private webSocketService: WebSocketService,
+      private notificationService: NotificationService,
+      private randomHeaderService: RandomHeaderService) { 
+        this.imageSource = '';
 	// 	// Open connection with server socket
   //   const stompClient = this.webSocketService.connect();
   //   stompClient.connect({}, (frame : any) => {
@@ -138,7 +141,7 @@ notify() {
     }, 3000);
 }
   ngOnInit() {
-
+    this.imageSource = this.randomHeaderService.getRandomHeaderSource();
     // this.webSocketService.connect();
     // this.webSocketService.notifications.subscribe((message:any) => {
     //   this.showToast(message);
@@ -216,6 +219,7 @@ notify() {
             hostId: eventData.hostId,
             geolocation: eventData.geolocation,
             socialClub: eventData.socialClub,
+            tags: eventData.tags,
             host: eventData.host
           };
           this.cdr.detectChanges();

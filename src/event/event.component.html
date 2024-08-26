@@ -88,6 +88,16 @@
                       <button class="btn btn-outline btn-secondary  lg:ml-8" [disabled]="!isAccommodationAvailable('Gluten-free')">Gluten-free</button>
                       </div>
                 </div>
+
+
+                <!-- Agenda -->
+                <div class="mt-28">
+                  <h2 class="text-4xl flex items-center justify-center">Tags</h2>
+                  <div class="flex items-center justify-center mt-4">
+                    <button *ngFor="let tag of event?.tags" class="btn btn-outline btn-base-100 lg:ml-8">{{tag}}</button>
+                  </div>
+                
+                </div>
             
             <!-- Preperation details -->
                 <div class="mt-28">

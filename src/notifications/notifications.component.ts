@@ -84,19 +84,6 @@ export class NotificationsComponent implements OnInit {
     });
   }
 
-  clearAll(): void {
-    this.notifications = [];
-    const empliD = Number(localStorage.getItem('ID'));
-
-    fetch(`https://events-system-back.wn.r.appspot.com/api/notifications/${empliD}/read`, {
-      method: "DELETE",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-  }
-
   markAsRead(event: MouseEvent, notificationId: number): void {
     event.stopPropagation(); // Prevents the click from bubbling up to the notification card
     const notification = this.notifications.find(n => n.notificationId === notificationId);
@@ -142,7 +129,19 @@ export class NotificationsComponent implements OnInit {
       }
     })
     this.notifications = this.notifications.filter(n => n.notificationId !== notificationId);
+  }
 
+  clearAll(): void {
+    this.notifications = [];
+    const empliD = Number(localStorage.getItem('ID'));
+
+    fetch(`https://events-system-back.wn.r.appspot.com/api/notifications/${empliD}`, {
+      method: "DELETE",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
   }
 
   openPopover(notification: any): void {

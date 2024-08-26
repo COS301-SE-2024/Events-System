@@ -6,12 +6,12 @@ import { Location } from '@angular/common';
 import validator from 'validator';
 import { NotificationService } from 'src/app/notification.service';
 
-import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-update-event',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './UpdateEvent.component.html',
   styleUrl: './UpdateEvent.component.css',
   animations: [
@@ -65,6 +65,8 @@ export class UpdateEventComponent implements OnInit, AfterViewChecked{
   isVeganSelected = false;
   isHalalSelected = false;
   isGlutenFreeSelected = false;
+  tags: string[] = [];
+  newTag = '';
 
   constructor(private route: ActivatedRoute, private location: Location, private fb: FormBuilder, private notificationService: NotificationService) {
     this.prepform = this.fb.group({
@@ -97,10 +99,10 @@ presubmit(){
 
     this.route.params.subscribe(params => {
       this.eventId = params['id'];
-      console.log('agendaform' + this.agendaform.value);
-      console.log('prepform' + this.prepform.value);
-      console.log('prepInputs' + this.prepinputs.value);
-      console.log('agendaInputs' + this.agendainputs.value);
+  // Retrieve tags from session storage
+  const savedTags = sessionStorage.getItem('tags');
+  const tags = savedTags ? JSON.parse(savedTags) : [];
+
       const event = {
         title: validator.escape(this.nameInput.nativeElement.value),
         description: validator.escape(this.descriptionInput.nativeElement.value),
@@ -122,7 +124,9 @@ presubmit(){
           sessionStorage.getItem('updateisVeganSelected') === 'true' ? "Vegan" : null,
           sessionStorage.getItem('updateisHalalSelected') === 'true' ? "Halal" : null,
           sessionStorage.getItem('updateisGlutenFreeSelected') === 'true' ? "Gluten-free" : null
-        ].filter(Boolean) // Remove null values
+        ].filter(Boolean), // Remove null values
+        tags: tags // Add tags to the event object
+
       };
       // Send the POST request
       fetch('https://events-system-back.wn.r.appspot.com/api/events/' + this.eventId, {
@@ -135,7 +139,7 @@ presubmit(){
       .then(response => response.json())
       .then(data => {
           // Show the success toast
-        // console.log(data);
+        console.log(data);
 
           this.showsuccessToast = true;
           this.notify();
@@ -159,6 +163,29 @@ presubmit(){
     // Create the event object
     
 }
+
+addTag(): void {
+  if (this.newTag.trim() && this.tags.length < 5) {
+    this.tags.push(this.newTag.trim());
+    this.newTag = ''; // Clear the input
+    this.saveTagsToSessionStorage();
+
+  }
+}
+
+
+
+removeTag(index: number) {
+  if (index >= 0 && index < this.tags.length) {
+    this.tags.splice(index, 1);
+    this.saveTagsToSessionStorage();
+  }
+}
+
+saveTagsToSessionStorage() {
+  sessionStorage.setItem('tags', JSON.stringify(this.tags));
+}
+
 notify() {
 const eventName = sessionStorage.getItem('Name') ?? 'Unknown';
   this.notificationService.sendNotification(Number(localStorage.getItem('ID')), Number(this.eventId), "Event Updated", eventName).subscribe(response => {
@@ -289,6 +316,15 @@ saveInputs() {
         this.isVeganSelected = sessionStorage.getItem('isVeganSelected') === 'true';
         this.isHalalSelected = sessionStorage.getItem('isHalalSelected') === 'true';
         this.isGlutenFreeSelected = sessionStorage.getItem('isGlutenFreeSelected') === 'true';
+
+        sessionStorage.setItem('tags', JSON.stringify(data.tags));
+
+                // Load tags from session storage
+        const savedTags = sessionStorage.getItem('tags');
+        if (savedTags) {
+          this.tags = JSON.parse(savedTags);
+        }
+        
               });
     });
     

@@ -18,6 +18,7 @@ describe('HomeEventCardComponent', () => {
 
     fixture = TestBed.createComponent(HomeEventCardComponent);
     component = fixture.componentInstance;
+    component.tags = []; // Initialize tags property
     fixture.detectChanges();
   });
 
