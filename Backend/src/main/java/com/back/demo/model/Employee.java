@@ -1,5 +1,7 @@
 package com.back.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,10 +9,12 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Getter
@@ -19,6 +23,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Employee implements UserDetails {
 
     @Id
@@ -41,6 +46,7 @@ public class Employee implements UserDetails {
     @Column(name = "dietary_requirements")
     private String dietaryRequirements;
 
+    @Column(name = "role")
     @Enumerated(EnumType.STRING)
     private Role role;
 
@@ -90,10 +96,6 @@ public class Employee implements UserDetails {
         this.email = email;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return role != null ? role.getAuthorities() : List.of(); // Return an empty list if role is null
-    }
 
     @Override
     public String getUsername() {
@@ -124,6 +126,10 @@ public class Employee implements UserDetails {
         this.password = password;
     }
 
+    public void setAuthorities(Role role) {
+        this.role = role != null ? role : Role.USER; // Set the role to USER if the role is null
+    }
+
     public void setDietaryRequirements(String dietaryRequirements) {
         this.dietaryRequirements = dietaryRequirements;
     }
@@ -142,6 +148,10 @@ public class Employee implements UserDetails {
 
     public void setUpdatedAt(Timestamp updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public void setTokens(List<Token> tokens) {
+        this.tokens = tokens != null ? tokens : Collections.emptyList();
     }
 
     public void setTwitter(String twitter) {
@@ -202,5 +212,11 @@ public class Employee implements UserDetails {
 
     public Timestamp getUpdatedAt() {
         return updatedAt;
+    }
+
+    @Override
+    @JsonIgnore
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return role != null ? Collections.singletonList(new SimpleGrantedAuthority(role.name())) : Collections.emptyList();
     }
 }
