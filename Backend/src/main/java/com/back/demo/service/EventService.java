@@ -25,7 +25,6 @@ public class EventService {
     @Autowired
     private EventRSVPRepository eventRSVPRepository;
 
-    @Cacheable(value = "eventsCache")
     public List<Event> getAllEvents() {
         return eventRepository.findAll();
     }

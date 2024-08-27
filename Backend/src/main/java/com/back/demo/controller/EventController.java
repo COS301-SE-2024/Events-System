@@ -4,6 +4,7 @@ import com.back.demo.model.Event;
 import com.back.demo.servicebus.EventServiceBus;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +29,7 @@ public class EventController {
     }
 
     @GetMapping
+    @Cacheable(value = "events", key = "#root.methodName") 
     public List<Event> getAllEvents() {
         return eventServiceBus.getAllEvents();
     }
