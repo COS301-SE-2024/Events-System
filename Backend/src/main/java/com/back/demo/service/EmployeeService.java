@@ -31,6 +31,7 @@ public class EmployeeService implements UserDetailsService {
 
         employeeOpt.ifPresent(employee -> {
             employee.setTokens(null);
+            employee.setPassword(null);
         });        
 
         return employeeOpt;
