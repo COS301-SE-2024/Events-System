@@ -137,6 +137,16 @@ export class AppComponent implements OnInit{
 
 
   refreshNavbar() {
+    this.employeeData = JSON.parse(localStorage.getItem('employeeData') || '{}');
+    if(this.employeeData){
+      if (this.employeeData.role == 'MANAGER'){
+        this.isEmployee = true;
+        this.isHost = true;
+      }else{
+        this.isEmployee = true;
+        this.isHost = false;
+      }
+    }
     this.cdr.detectChanges();
   }
 
