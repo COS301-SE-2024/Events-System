@@ -17,7 +17,7 @@ public class RedisConfig {
     @Bean
     public LettuceConnectionFactory redisConnectionFactory() {
         RedisStandaloneConfiguration configuration = new RedisStandaloneConfiguration();
-        configuration.setHostName("redis-19114.c257.us-east-1-3.ec2.redns.redis-cloud.com");
+        configuration.setHostName("${REDIS_HOST}"); // Set the Redis host
         configuration.setPort(19114);
         configuration.setPassword(RedisPassword.of("${REDIS_PASSWORD}")); // Set the Redis password
         configuration.setDatabase(0); // Set the Redis database index
