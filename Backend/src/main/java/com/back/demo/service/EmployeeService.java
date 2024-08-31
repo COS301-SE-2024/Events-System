@@ -23,7 +23,7 @@ public class EmployeeService implements UserDetailsService {
         return employeeRepository.findAll();
     }
 
-    @Cacheable(value = "employee", key = "#root.args[0]")
+    @Cacheable(value = "employee", key = "#root.args[0]", condition = "#root.args[0] != null")
     public Optional<Employee> getEmployeeById(Long employeeId) {
         Optional<Employee> employeeOpt = employeeRepository.findById(employeeId);
         //Remove tokens from the response, as they are sensitive information
