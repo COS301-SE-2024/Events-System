@@ -1,5 +1,6 @@
 package com.back.demo.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,12 +15,19 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 @Configuration
 @EnableCaching
 public class RedisConfig {
+
+    @Value("${spring.redis.host}")
+    private String redisHost;
+
+    @Value("${spring.redis.password}")
+    private String redisPassword;
+
     @Bean
     public LettuceConnectionFactory redisConnectionFactory() {
         RedisStandaloneConfiguration configuration = new RedisStandaloneConfiguration();
-        configuration.setHostName("${REDIS_HOST}"); // Set the Redis host
+        configuration.setHostName(redisHost); // Set the Redis host
         configuration.setPort(19114);
-        configuration.setPassword(RedisPassword.of("${REDIS_PASSWORD}")); // Set the Redis password
+        configuration.setPassword(RedisPassword.of(redisPassword)); // Set the Redis password
         configuration.setDatabase(0); // Set the Redis database index
 
         LettuceConnectionFactory lettuceConnectionFactory = new LettuceConnectionFactory(configuration);
