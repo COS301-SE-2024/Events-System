@@ -27,8 +27,8 @@ export class OauthComponent implements OnInit{
 
         const baseUrl = 'https://oauth2.googleapis.com/token';
         const clientId = 'client_id=' + environment.CLIENT_ID;
-        const clientSecret = 'client_secret=' + environment.CLIENT_SECRET;
-        const redirectUri = 'redirect_uri=https%3A%2F%2Fevents-system.org%2Foauth';
+        const clientSecret = 'client_secret='+ environment.CLIENT_SECRET;
+        const redirectUri = 'redirect_uri=http%3A%2F%2Flocalhost%3A4200%2Foauth';
         const grantType = 'grant_type=authorization_code';
         //const code = 'YOUR_AUTHORIZATION_CODE'; // replace with actual authorization code
         
@@ -94,8 +94,10 @@ export class OauthComponent implements OnInit{
                 document.cookie = `jwt=${authData.access_token}; path=/; expires=` + new Date(new Date().getTime() + 15 * 60 * 1000).toUTCString();           // Expiry set to 15 minutes
                 document.cookie = `refresh=${authData.refresh_token}; path=/; expires=` + new Date(new Date().getTime() + 24* 60 * 60 * 1000).toUTCString();  // Expiry set to 24 hours
                 document.cookie = `google=${ACCESS_TOKEN}; path=/; expires=` + new Date(new Date().getTime() + 1 * 60 * 60 * 1000).toUTCString();  // Expiry set to 1 hour
+                // Get the current UTC time in ISO 8601 format
+                const now = new Date().toISOString();
 
-                await fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events?maxResults=10&orderBy=startTime&singleEvents=true', {
+                await fetch(`https://www.googleapis.com/calendar/v3/calendars/primary/events?maxResults=50&timeMin=${encodeURIComponent(now)}&orderBy=startTime&singleEvents=true`, {
                   method: 'GET',
                   headers: {
                     "Authorization": `Bearer ${ACCESS_TOKEN}`,
@@ -106,15 +108,15 @@ export class OauthComponent implements OnInit{
                 .then(async calendarData => {
                   const events = calendarData.items;
                   if (events.length === 0) {
-                    console.log("No upcoming events found.");
+                    //console.log("No upcoming events found.");
                     return;
                   }
 
-                  console.log("Upcoming events:");
-                  events.forEach((event: any) => {
-                    const start = event.start.dateTime || event.start.date;
-                    console.log(`${start} - ${event.summary}`);
-                  });
+                  // console.log("Upcoming events:");
+                  // events.forEach((event: any) => {
+                  //   const start = event.start.dateTime || event.start.date;
+                  //   console.log(`${start} - ${event.summary}`);
+                  // });
                 })
                 .then(() => {
                   this.router.navigate(['']);

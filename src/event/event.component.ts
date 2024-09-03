@@ -155,6 +155,59 @@ export class EventComponent implements OnInit{
         }, 5000);
         console.error('Error:', error);
       });
+
+      // Get all cookies
+      const cookies = document.cookie.split('; ');
+
+      // Find the cookie by name
+      let googleToken = null;
+      for (const cookie of cookies) {
+          const [name, value] = cookie.split('=');
+          if (name === "google") {
+              googleToken = decodeURIComponent(value);
+              break;
+          }
+      }
+
+      if(googleToken) {
+        const now = new Date().toISOString();
+        await fetch(`https://www.googleapis.com/calendar/v3/calendars/primary/events?maxResults=50&timeMin=${encodeURIComponent(now)}&orderBy=startTime&singleEvents=true`, {
+          method: 'GET',
+          headers: {
+            "Authorization": `Bearer ${googleToken}`,
+            "Content-Type": "application/json",
+          },
+        })
+        .then(response => response.json())
+        .then(async data => {
+          // Find the event with the matching eventId in extendedProperties.private
+          const matchingEvent = data.items.find((event: any) => 
+            event.extendedProperties?.private?.eventId.toString() === this.eventId
+          );
+          
+          if (matchingEvent) {
+            // Proceed to delete the event
+            await fetch(`https://www.googleapis.com/calendar/v3/calendars/primary/events/${matchingEvent.id}`, {
+              method: 'DELETE',
+              headers: {
+                "Authorization": `Bearer ${googleToken}`,
+                "Content-Type": "application/json",
+              },
+            })
+            .then(() => {
+                console.log('Event deleted successfully');
+            })
+            .catch(error => {
+              console.error('Error:', error.message);
+            });
+          } else {
+            //console.log('Event not found');
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error.message);
+        });
+      }
     } else {
       this.isAPILoading = true;
       const requestBody = {
@@ -223,13 +276,13 @@ export class EventComponent implements OnInit{
                   dateTime: `${event.endDate}T${event.endTime}`,
                   timeZone: 'Africa/Johannesburg', // Adjust based on your timezone
                 },
-                /*extendedProperties: {
+                extendedProperties: {
                   private: {
                     eventId: event.eventId.toString(),
                     hostId: event.hostId.toString(),
                     socialClub: event.socialClub.toString(),
                   },
-                },*/
+                },
                 source: {
                   url: event.eventPictureLink,
                   title: 'Event Picture',
