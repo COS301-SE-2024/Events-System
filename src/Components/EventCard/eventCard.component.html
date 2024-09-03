@@ -36,13 +36,13 @@
     <img [src]="imageSource" alt="Album"/>
   </div>
   <div class="p-6">
-    <h5 class="block mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal">
+    <h5 class="block mb-2 font-sans text-xl antialiased font-karla font-semibold leading-snug tracking-normal">
       {{ eventTitle }}
     </h5>
-    <p> <i class="fa-solid fa-user mr-2"></i> {{ hostedBy }}</p>
-    <p><i class="fa-solid fa-location-pin mr-3"></i>{{ location }}</p>
-    <p><i class="fa-regular fa-clock mr-2"></i> {{startTime }} - {{ endTime }} </p>
-    <p *ngIf="isSameDate()">
+    <p class="font-roboto"> <i class="fa-solid fa-user mr-2"></i> {{ hostedBy }}</p>
+    <p class="font-roboto"><i class="fa-solid fa-location-pin mr-3"></i>{{ location }}</p>
+    <p class="font-roboto"><i class="fa-regular fa-clock mr-2"></i> {{startTime }} - {{ endTime }} </p>
+    <p *ngIf="isSameDate()" class="font-roboto">
       <i class="fa-regular fa-calendar-days mr-3"></i>
       {{startDate | date:'d MMM' }} - {{ endDate| date:'d MMM'  }}
     </p>
@@ -50,7 +50,7 @@
   <div class="p-6 pt-0 flex justify-center items-center">
     <button 
       [routerLink]="['/event', eventID]"
-      class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-neutral text-secondary shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
+      class="align-middle select-none font-roboto font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-neutral text-secondary shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
       type="button" >
       Book Now
     </button>

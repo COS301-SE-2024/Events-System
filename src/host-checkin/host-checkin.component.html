@@ -37,17 +37,16 @@
       </thead>
       <tbody class="bg-base-100">
         <ng-container *ngFor="let employee of rsvpedEmployees; let i = index">
-          <tr class="hover:bg-neutral border-b border-neutral">
-            <th class="py-4 px-6">{{ i + 1 }}</th>
-            <td class="py-4 px-6">{{ employee.name }}</td>
-            <td class="py-4 px-6">{{ employee.surname }}</td>
-            <td class="py-4 px-6 hidden md:table-cell">{{ employee.email }}</td>
-            <td class="py-4 px-6 text-center hidden md:table-cell">{{ employee.status }}</td>
-            <td class="py-4 px-6 text-center hidden md:table-cell">{{ employee.lastUpdated | date:'short' }}</td>
-            <td class="py-4 px-6 text-center hidden md:table-cell">
-              <a [routerLink]="['/profile', employee.id]" 
-                 class="text-accent hover:underline"
-                 [ngClass]="{'text-neutral': employee.status === 'Canceled'}">View Profile</a>
+          <tr [ngClass]="{'bg-base-200 text-secondary': employee.status === 'Canceled'}" class="border-b border-secondary hover:bg-base-200">
+            <td class="py-3 px-3">{{ employee.name }}</td>
+            <td class="py-3 px-3">{{ employee.surname }}</td>
+            <td class="py-3 px-3 hidden md:table-cell">{{ employee.email }}</td>
+            <td class="py-3 px-3 text-center hidden md:table-cell">{{ employee.status }}</td> 
+            <td class="py-3 px-3 text-center hidden md:table-cell">{{ employee.lastUpdated | date:'short' }}</td>
+            <td class="py-3 px-3 text-center hidden md:table-cell">
+              <a [routerLink]="['/searchProfile', employee.id]" 
+                 class="btn btn-info btn-sm" 
+                 [ngClass]="{'bg-base-200 text-secondary': employee.status === 'Canceled'}">View Profile</a>
             </td>
             <td class="py-4 px-6 text-center hidden md:table-cell">
               <button [disabled]="employee.status === 'Canceled'" (click)="removeEmployee(i)" 

@@ -1,45 +1,82 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
+import { By } from '@angular/platform-browser';
+
 import { of } from 'rxjs';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { MyEventsComponent } from './MyEvents.component'; // Import EventComponent
+import { Component, Input } from '@angular/core';
+import { MyEventsComponent } from './MyEvents.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
-// Mock component
+// Mock components
 @Component({
-  selector: 'app-mock-my-events',
-  template: '',
+  selector: 'app-my-events-card-skeleton',
+  template: '<div>Skeleton</div>',
 })
-class MockEventComponent {/*...*/}
+class MockMyEventsCardSkeletonComponent {}
 
 @Component({
-  template: '<app-mock-my-events></app-mock-my-events>', // Use the correct selector
+  selector: 'app-my-events-card',
+  template: '<div>Event Card</div>',
 })
-class TestHostComponent {/*...*/}
+class MockMyEventsCardComponent {
+  @Input() eventID!: string;
+  @Input() ID!: string;
+  @Input() eventString!: string;
+  @Input() eventTitle!: string;
+}
 
-describe('EventComponent', () => {
-  let component: TestHostComponent;
-  let fixture: ComponentFixture<TestHostComponent>;
+describe('MyEventsComponent', () => {
+  let component: MyEventsComponent;
+  let fixture: ComponentFixture<MyEventsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MyEventsComponent], // Move EventComponent to imports
-      declarations: [TestHostComponent, MockEventComponent], // Remove EventComponent from declarations
+      imports: [RouterTestingModule, MyEventsComponent],
+      declarations: [
+        MockMyEventsCardSkeletonComponent,
+        MockMyEventsCardComponent,
+      ],
       providers: [
         {
           provide: ActivatedRoute,
           useValue: {
-            params: of({ id: 'testId' }) // Add your own mock values here
-          }
-        }
-      ]
+            params: of({ id: 'testId' }),
+          },
+        },
+      ],
     }).compileComponents();
-  
-    fixture = TestBed.createComponent(TestHostComponent);
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(MyEventsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should display skeletons when loading', () => {
+    component.isLoading = true;
+    fixture.detectChanges();
+    const skeletons = fixture.debugElement.queryAll(By.css('app-my-events-card-skeleton'));
+    expect(skeletons.length).toBe(6);
+  });
+
+  it('should display event cards when not loading', () => {
+    component.isLoading = false;
+    component.events = [
+      { eventId: '1', title: 'Event 1' },
+      { eventId: '2', title: 'Event 2' },
+    ];
+    fixture.detectChanges();
+    const eventCards = fixture.debugElement.queryAll(By.css('app-my-events-card'));
+    expect(eventCards.length).toBe(2);
+  });
+
+  it('should have a create event button', () => {
+    const createEventButton = fixture.debugElement.query(By.css('button[routerLink="/createevent"]'));
+    expect(createEventButton).toBeTruthy();
   });
 });

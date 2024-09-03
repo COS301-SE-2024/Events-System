@@ -123,8 +123,28 @@
             <button class="btn lg:ml-8" [ngClass]="{'btn-outline': isHalalSelected}" (click)="toggleHalal()">Halal</button>
             <button class="btn lg:ml-8" [ngClass]="{'btn-outline': isGlutenFreeSelected}" (click)="toggleGlutenFree()">Gluten-free</button>
             </div>
+
+            <div class="flex justify-center">
+              <div>
+                <div class="label mt-4 flex justify-center">
+                  <span class="label-text font-roboto">Tags</span>
+                </div>
+                <div class="tag-input-area">
+                  <input [(ngModel)]="newTag" type="text" class="input input-bordered w-96 max-w-md lg:-ml-4 font-roboto" placeholder="Enter a tag" />
+                  <button (click)="addTag()" class="btn btn-outline btn-accent mt-4 ml-2" [disabled]="tags.length >= 5">+</button>
+                </div>
+                <div class="tags mt-2 grid grid-cols-3 gap-0 gap-x-0">
+                  <button *ngFor="let tag of tags; let i = index"
+                          (click)="removeTag(i)"
+                          class="badge badge-neutral cursor-pointer hover:badge-error relative">
+                    {{ tag }}
+                    <span class="absolute top-0 right-0 mt-1 mr-1 text-xs hidden group-hover:inline">-</span>
+                  </button>
+                </div>
+              </div>
+            </div>
           <div class="flex justify-between mt-4">
-            <button class="btn btn-outline btn-warning">back</button>
+            <button class="btn btn-outline btn-warning" (click)="goBack()">back</button>
             <button (click)="presubmit()" class="btn btn-success">Update event</button>
           </div>
           

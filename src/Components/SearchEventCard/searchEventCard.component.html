@@ -1,0 +1,96 @@
+<div class="card lg:card-side bg-base-200 shadow-xl sm:h-72 ">
+  <img class="rounded-t-2xl h-56 sm:h-72 md:w-96 sm:rounded-l-2xl sm:rounded-r-none" src={{imageSource}} alt="Social Club profile" />
+      
+  <div class="card-body">
+    <div class="flex flex-1 flex-col justify-center  static">
+      <p class="font-karla text-accent font-bold text-xl mb-5">{{eventTitle}}</p>
+      <p class="font-roboto text-sm text-primary font-normal w-2/3 mb-4">{{eventDescription}}</p>
+      <p class="font-roboto text-base font-normal lg:w-1/2 text-wrap mb-1.5 ">
+        <span><i class="fa-regular fa-clock translate-y-1 "></i> {{ formattedStartTime }} - {{ formattedEndTime }}</span>
+      </p>
+      <p class="font-roboto text-base font-normal mb-1.5">
+        <span><i class="fa-regular fa-calendar-days translate-y-1"></i> {{ startDate | date:'dd MMM' }} - {{ endDate | date:'dd MMM' }}</span>
+      </p>
+      <div class="flex gap-3 p-3 flex-wrap ">
+        <app-tag *ngFor="let tag of tags" [tagName]="tag"></app-tag>
+        <!-- <app-tag></app-tag> -->
+      </div>
+    </div>
+      
+    <div class="card-actions justify-end absolute bottom-0 right-0 mb-8 mr-8">
+      <button onclick="view_more_modal.showModal()" [routerLink]="['/event', eventID]" class="bg-roboto cursor-pointer flex h-8 shrink-0 items-center justify-center font-semibold text-white text-sm border-none rounded-xl bg-gradient-to-r from-accent to-secondary pl-6 pr-7 transition duration-200 hover:bg-gradient-to-r hover:from-accent hover:to-accent focus:outline-none disabled:opacity-30 disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80"> 
+        View More
+      </button>
+      <button class="bg-roboto cursor-pointer flex h-8 shrink-0 items-center justify-center font-semibold text-white text-sm border-none rounded-xl bg-gradient-to-r from-accent to-secondary pl-6 pr-7 transition duration-200 hover:bg-gradient-to-r hover:from-accent hover:to-accent focus:outline-none disabled:opacity-30 disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80" *ngIf="!hasUserRSVPd"  @buttonFade (click)="rsvpToEvent()">
+        Book Now
+      </button>
+      <button class="font-roboto cursor-pointer flex h-8 shrink-0 items-center justify-center font-semibold text-white text-sm border-none rounded-xl bg-gradient-to-r from-accent to-secondary pl-4 pr-4 transition duration-200 hover:bg-gradient-to-r hover:from-accent hover:to-accent focus:outline-none disabled:opacity-30 disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80" *ngIf="hasUserRSVPd"  @buttonFade (click)="rsvpToEvent()"> 
+        Cancel booking
+      </button>
+      <!-- <button class="cutive-mono-regular cursor-pointer flex h-8 shrink-0 items-center justify-center font-semibold text-white text-sm border-none rounded-xl bg-gradient-to-r from-accent to-secondary pl-4 pr-4 transition duration-200 hover:bg-gradient-to-r hover:from-accent hover:to-accent focus:outline-none disabled:opacity-30 disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80"> 
+        Subscribe!
+      </button> -->
+
+      <!-- view more modal -->
+      <!-- <dialog id="view_more_modal" class="modal">
+        <div class="modal-box flex flex-col gap-10">
+            <div>
+                <h3 class="text-lg font-bold">[Host name]'s social clubs</h3>
+            </div>
+            
+            
+            <div routerLink class="w-full h-full flex flex-col items-center justify-center">
+                <div class="socialClubCircle gradient-border from-accent to-secondary">
+                  <div>
+                    <img src="assets/pexels-rahulp9800-1652361.jpg" alt="Social club image" />
+                  </div>
+                </div>
+            </div>
+
+
+          <div class="modal-action">
+            <form method="dialog">
+              <button class="cutive-mono-regular cursor-pointer flex h-8 shrink-0 items-center justify-center font-semibold text-white text-sm border-none rounded-xl bg-gradient-to-r from-accent to-secondary pl-3 pr-3 transition duration-200 hover:bg-gradient-to-r hover:from-accent hover:to-accent focus:outline-none disabled:opacity-30 disabled:opacity-30 disabled:hover:text-white ">Book Now</button>
+            </form>
+          </div>
+        </div>
+      </dialog> -->
+    </div>
+  </div>
+
+
+
+
+
+
+</div>
+
+<div class="toast z-50" *ngIf="isAPILoading">
+  <div class="alert alert-info flex justify-center bg-transparent border-none">
+      <span class="loading loading-dots loading-md"></span>
+  </div>
+</div>
+          
+<div class="toast z-50" *ngIf="showrsvpsuccessToast">
+  <div class="alert alert-success">
+    <span>Succesfully Booked</span>
+  </div>
+</div>
+
+<div class="toast z-50" *ngIf="showrsvpfailToast">
+  <div class="alert alert-error">
+    <span>Error Booking for event</span>
+  </div>
+</div>
+
+<div class="toast z-50" *ngIf="showunrsvpsuccessToast">
+  <div class="alert alert-success">
+    <span>Succesfully removed Booking</span>
+  </div>
+</div>
+  
+<div class="toast z-50" *ngIf="showunrsvpfailToast">
+  <div class="alert alert-error">
+    <span>Error Removing Booking for event</span>
+  </div>
+</div>

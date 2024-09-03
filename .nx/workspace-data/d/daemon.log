@@ -1,0 +1,176 @@
+[NX Daemon Server] - 2024-08-02T08:34:42.427Z - Started listening on: \\.\pipe\nx\C:\Users\mathe\AppData\Local\Temp\1dc38cdf997e09d71d07\d.sock
+[NX Daemon Server] - 2024-08-02T08:34:42.486Z - [WATCHER]: Subscribed to changes within: c:\Users\mathe\OneDrive\Documents\GitHub\Events-System (native)
+[NX Daemon Server] - 2024-08-02T08:34:42.489Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-08-02T08:34:42.491Z - Established a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-08-02T08:34:42.498Z - Closed a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-08-02T08:34:42.501Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-08-02T08:35:06.425Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-08-02T08:35:06.425Z - [REQUEST]: 
+[NX Daemon Server] - 2024-08-02T08:35:06.425Z - [REQUEST]: 
+[NX Daemon Server] - 2024-08-02T08:35:36.136Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-08-02T08:35:36.137Z - Time taken for 'total for creating and serializing project graph' 53634.64079999924ms
+[NX Daemon Server] - 2024-08-02T08:35:36.138Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-08-02T08:35:36.138Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-08-02T08:35:36.138Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-08-02T08:35:36.138Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-08-02T08:35:36.138Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-08-02T08:35:36.138Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-08-02T08:35:36.139Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-08-02T08:35:36.139Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-08-02T08:35:36.139Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-08-02T08:35:36.139Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-08-02T08:35:36.139Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-08-02T08:35:36.139Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-08-02T08:35:36.139Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-08-02T08:35:36.139Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-08-02T08:35:36.139Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-08-02T08:35:36.139Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-08-02T08:35:36.139Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-08-02T08:35:36.139Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-08-02T08:35:36.139Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-08-02T08:35:36.139Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-08-02T08:35:36.139Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-08-02T08:35:36.139Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-08-02T08:35:36.140Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-08-02T08:35:36.140Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-08-02T08:35:36.140Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-08-02T08:35:36.140Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-08-02T08:35:36.140Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-08-02T08:35:36.140Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-08-02T08:35:36.140Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-08-02T08:35:36.140Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-08-02T08:35:36.140Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-08-02T08:35:36.140Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 53635. Response time: 4.
+[NX Daemon Server] - 2024-08-02T08:35:36.142Z - [REQUEST]: Responding to the client. handleContextFileData
+[NX Daemon Server] - 2024-08-02T08:35:36.142Z - Done responding to the client handleContextFileData
+[NX Daemon Server] - 2024-08-02T08:35:36.142Z - Handled GET_CONTEXT_FILE_DATA. Handling time: 0. Response time: 0.
+[NX Daemon Server] - 2024-08-02T08:35:36.145Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-08-02T08:35:49.374Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-08-02T08:35:49.376Z - [WATCHER]: package.json was modified
+[NX Daemon Server] - 2024-08-02T08:35:49.492Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-08-02T08:35:49.492Z - [REQUEST]: package.json
+[NX Daemon Server] - 2024-08-02T08:35:49.492Z - [REQUEST]: 
+[NX Daemon Server] - 2024-08-02T08:35:49.695Z - Time taken for 'hash changed files from watcher' 8.981700003147125ms
+[NX Daemon Server] - 2024-08-02T08:35:50.394Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-08-02T08:35:50.394Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-08-02T08:35:50.394Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-08-02T08:35:50.396Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-08-02T08:35:50.396Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-08-02T08:35:50.396Z - Time taken for 'total for creating and serializing project graph' 0.37540000677108765ms
+[NX Daemon Server] - 2024-08-02T08:35:50.396Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-08-02T08:35:50.396Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 0. Response time: 0.
+[NX Daemon Server] - 2024-08-02T08:35:50.398Z - [REQUEST]: Responding to the client. handleContextFileData
+[NX Daemon Server] - 2024-08-02T08:35:50.398Z - Done responding to the client handleContextFileData
+[NX Daemon Server] - 2024-08-02T08:35:50.398Z - Handled GET_CONTEXT_FILE_DATA. Handling time: 0. Response time: 0.
+[NX Daemon Server] - 2024-08-02T08:35:50.399Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-08-02T08:36:02.054Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-08-02T08:40:46.526Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-08-02T08:45:53.967Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-08-02T08:46:05.612Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-08-02T08:46:05.612Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-08-02T08:46:05.613Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-08-02T08:46:05.623Z - [REQUEST]: Responding to the client with an error. Daemon outdated NX_VERSION_CHANGED
+Error: NX_VERSION_CHANGED
+    at handleMessage (c:\Users\mathe\OneDrive\Documents\GitHub\Events-System\node_modules\nx\src\daemon\server\server.js:78:88)
+    at c:\Users\mathe\OneDrive\Documents\GitHub\Events-System\node_modules\nx\src\daemon\server\server.js:59:15
+    at Socket.<anonymous> (c:\Users\mathe\OneDrive\Documents\GitHub\Events-System\node_modules\nx\src\utils\consume-messages-from-socket.js:13:17)
+    at Socket.emit (node:events:514:28)
+    at addChunk (node:internal/streams/readable:376:12)
+    at readableAddChunk (node:internal/streams/readable:349:9)
+    at Socket.Readable.push (node:internal/streams/readable:286:10)
+    at Pipe.onStreamRead (node:internal/stream_base_commons:190:23)
+[NX Daemon Server] - 2024-08-02T08:46:05.646Z - Done responding to the client null
+[NX Daemon Server] - 2024-08-02T08:46:05.646Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-08-02T08:46:05.647Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-08-02T08:46:05.647Z - Time taken for 'total for creating and serializing project graph' 0.4984000027179718ms
+[NX Daemon Server] - 2024-08-02T08:46:05.647Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-08-02T08:46:05.647Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 1. Response time: 0.
+[NX Daemon Server] - 2024-08-02T08:46:05.648Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-08-02T08:47:47.798Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-08-02T08:47:47.799Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-08-02T08:47:47.800Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-08-02T08:47:47.802Z - [REQUEST]: Responding to the client with an error. Daemon outdated NX_VERSION_CHANGED
+Error: NX_VERSION_CHANGED
+    at handleMessage (c:\Users\mathe\OneDrive\Documents\GitHub\Events-System\node_modules\nx\src\daemon\server\server.js:78:88)
+    at c:\Users\mathe\OneDrive\Documents\GitHub\Events-System\node_modules\nx\src\daemon\server\server.js:59:15
+    at Socket.<anonymous> (c:\Users\mathe\OneDrive\Documents\GitHub\Events-System\node_modules\nx\src\utils\consume-messages-from-socket.js:13:17)
+    at Socket.emit (node:events:514:28)
+    at addChunk (node:internal/streams/readable:376:12)
+    at readableAddChunk (node:internal/streams/readable:349:9)
+    at Socket.Readable.push (node:internal/streams/readable:286:10)
+    at Pipe.onStreamRead (node:internal/stream_base_commons:190:23)
+[NX Daemon Server] - 2024-08-02T08:47:47.802Z - Done responding to the client null
+[NX Daemon Server] - 2024-08-02T08:47:47.803Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-08-02T08:47:47.803Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-08-02T08:47:47.803Z - Time taken for 'total for creating and serializing project graph' 0.3692000210285187ms
+[NX Daemon Server] - 2024-08-02T08:47:47.803Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-08-02T08:47:47.803Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 1. Response time: 0.
+[NX Daemon Server] - 2024-08-02T08:47:47.808Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-08-02T08:48:33.464Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-08-02T08:48:33.465Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-08-02T08:48:33.466Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-08-02T08:48:33.468Z - [REQUEST]: Responding to the client with an error. Daemon outdated NX_VERSION_CHANGED
+Error: NX_VERSION_CHANGED
+    at handleMessage (c:\Users\mathe\OneDrive\Documents\GitHub\Events-System\node_modules\nx\src\daemon\server\server.js:78:88)
+    at c:\Users\mathe\OneDrive\Documents\GitHub\Events-System\node_modules\nx\src\daemon\server\server.js:59:15
+    at Socket.<anonymous> (c:\Users\mathe\OneDrive\Documents\GitHub\Events-System\node_modules\nx\src\utils\consume-messages-from-socket.js:13:17)
+    at Socket.emit (node:events:514:28)
+    at addChunk (node:internal/streams/readable:376:12)
+    at readableAddChunk (node:internal/streams/readable:349:9)
+    at Socket.Readable.push (node:internal/streams/readable:286:10)
+    at Pipe.onStreamRead (node:internal/stream_base_commons:190:23)
+[NX Daemon Server] - 2024-08-02T08:48:33.468Z - Done responding to the client null
+[NX Daemon Server] - 2024-08-02T08:48:33.468Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-08-02T08:48:33.469Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-08-02T08:48:33.469Z - Time taken for 'total for creating and serializing project graph' 0.4778999984264374ms
+[NX Daemon Server] - 2024-08-02T08:48:33.469Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-08-02T08:48:33.469Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 1. Response time: 0.
+[NX Daemon Server] - 2024-08-02T08:48:33.471Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-08-02T08:48:47.453Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-08-02T08:48:47.453Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-08-02T08:48:47.454Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-08-02T08:48:47.457Z - [REQUEST]: Responding to the client with an error. Daemon outdated NX_VERSION_CHANGED
+Error: NX_VERSION_CHANGED
+    at handleMessage (c:\Users\mathe\OneDrive\Documents\GitHub\Events-System\node_modules\nx\src\daemon\server\server.js:78:88)
+    at c:\Users\mathe\OneDrive\Documents\GitHub\Events-System\node_modules\nx\src\daemon\server\server.js:59:15
+    at Socket.<anonymous> (c:\Users\mathe\OneDrive\Documents\GitHub\Events-System\node_modules\nx\src\utils\consume-messages-from-socket.js:13:17)
+    at Socket.emit (node:events:514:28)
+    at addChunk (node:internal/streams/readable:376:12)
+    at readableAddChunk (node:internal/streams/readable:349:9)
+    at Socket.Readable.push (node:internal/streams/readable:286:10)
+    at Pipe.onStreamRead (node:internal/stream_base_commons:190:23)
+[NX Daemon Server] - 2024-08-02T08:48:47.458Z - Done responding to the client null
+[NX Daemon Server] - 2024-08-02T08:48:47.458Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-08-02T08:48:47.459Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-08-02T08:48:47.459Z - Time taken for 'total for creating and serializing project graph' 0.5286999940872192ms
+[NX Daemon Server] - 2024-08-02T08:48:47.459Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-08-02T08:48:47.459Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 1. Response time: 0.
+[NX Daemon Server] - 2024-08-02T08:48:47.460Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-08-02T08:48:56.955Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-08-02T08:49:05.217Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-08-02T08:49:05.218Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-08-02T08:49:05.219Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-08-02T08:49:05.221Z - [REQUEST]: Responding to the client with an error. Daemon outdated NX_VERSION_CHANGED
+Error: NX_VERSION_CHANGED
+    at handleMessage (c:\Users\mathe\OneDrive\Documents\GitHub\Events-System\node_modules\nx\src\daemon\server\server.js:78:88)
+    at c:\Users\mathe\OneDrive\Documents\GitHub\Events-System\node_modules\nx\src\daemon\server\server.js:59:15
+    at Socket.<anonymous> (c:\Users\mathe\OneDrive\Documents\GitHub\Events-System\node_modules\nx\src\utils\consume-messages-from-socket.js:13:17)
+    at Socket.emit (node:events:514:28)
+    at addChunk (node:internal/streams/readable:376:12)
+    at readableAddChunk (node:internal/streams/readable:349:9)
+    at Socket.Readable.push (node:internal/streams/readable:286:10)
+    at Pipe.onStreamRead (node:internal/stream_base_commons:190:23)
+[NX Daemon Server] - 2024-08-02T08:49:05.222Z - Done responding to the client null
+[NX Daemon Server] - 2024-08-02T08:49:05.222Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-08-02T08:49:05.223Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-08-02T08:49:05.223Z - Time taken for 'total for creating and serializing project graph' 0.4693000018596649ms
+[NX Daemon Server] - 2024-08-02T08:49:05.223Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-08-02T08:49:05.223Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 1. Response time: 0.
+[NX Daemon Server] - 2024-08-02T08:49:05.225Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-08-02T08:49:11.100Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-08-02T08:49:11.106Z - [WATCHER]: Stopping the watcher for c:\Users\mathe\OneDrive\Documents\GitHub\Events-System (sources)
+[NX Daemon Server] - 2024-08-02T08:49:11.106Z - [WATCHER]: Stopping the watcher for c:\Users\mathe\OneDrive\Documents\GitHub\Events-System (outputs)
+[NX Daemon Server] - 2024-08-02T08:49:11.106Z - Server stopped because: "NX_VERSION_CHANGED"
+
+ NX   ENOENT: no such file or directory, open 'c:\Users\mathe\OneDrive\Documents\GitHub\Events-System\.nx\cache\d\server-process.json'
+

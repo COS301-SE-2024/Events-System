@@ -6,6 +6,7 @@ import com.back.demo.repository.EventRSVPRepository;
 import com.back.demo.repository.EventRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
@@ -38,6 +39,10 @@ public class EventService {
 
     public Event createEvent(Event event) {
         return eventRepository.save(event);
+    }
+
+    public List<Event> getEventBySocialClubId(Long socialClubId) {
+        return eventRepository.findAllEventsBySocialClub(socialClubId);
     }
 
     public Event updateEvent(Long eventId, Event eventDetails) {

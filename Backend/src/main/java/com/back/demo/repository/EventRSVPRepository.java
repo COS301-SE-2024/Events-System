@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface EventRSVPRepository extends JpaRepository<EventRSVP, Long> {
     List<EventRSVP> findByEmployeeIdAndStatus(Long employeeId, String status);
+    List<EventRSVP> findByEventId(Integer eventId); // Add this method
 }

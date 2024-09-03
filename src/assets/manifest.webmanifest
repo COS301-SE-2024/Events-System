@@ -1,0 +1,73 @@
+{
+  "name": "Events system",
+  "short_name": "SynC",
+  "display": "minimal-ui",
+  "background_color": "#12192C",
+  "description": "Collaborate with your colleagues and friends today, with the Entelect events System",
+  "screenshots" : [
+    {
+      "src": "assets/screenshots/1.png",
+      "sizes": "796X840",
+      "type": "image/png",
+      "label": "login screenshot"
+    },
+    {
+      "src": "assets/screenshots/2.png",
+      "sizes": "782X742",
+      "type": "image/png",
+      "label": "home screenshot"
+    }
+  ],
+  "scope": "./",
+  "start_url": "./",
+  "icons": [
+    {
+      "src": "icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ]
+}

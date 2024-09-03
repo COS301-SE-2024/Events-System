@@ -1,0 +1,35 @@
+
+<div class="card lg:card-side shadow-xl bg-base-200">
+    <div class="rounded-t-2xl h-44 sm:h-64 md:w-96 sm:rounded-l-xl sm:rounded-r-none flex items-center justify-center">
+      <div *ngIf="!hostImage">
+        <span  class="text-3xl">{{ getInitials() }}</span>
+      </div>
+      <div *ngIf="hostImage">
+        <img class="w-56 h-56 object-cover rounded-full"alt="Profile Picture" [src]="hostImage">
+      </div>
+    </div>
+      
+  <div class="card-body">
+    <div class="flex flex-1 flex-col justify-center">
+      <p class="font-poppins  tracking-wide text-accent font-semibold text-lg mb-5">{{hostName}}</p>
+      <p class="font-roboto text-sm text-primary font-normal w-2/3">{{hostBio}}</p>
+      <p class="font-roboto  text-base font-normal mb-1.5">{{hostEmail}}</p>
+      
+      <div class="flex gap-3 p-3 flex-wrap ">
+        <!-- <app-tag></app-tag> -->
+      </div>
+    </div>
+      
+    <div class="card-actions justify-end">
+      <button  [routerLink]="['/searchProfile', hostId]" class="bg-roboto cursor-pointer flex h-8 shrink-0 items-center justify-center font-semibold text-white text-sm border-none rounded-xl bg-gradient-to-r from-accent to-secondary pl-6 pr-7 transition duration-200 hover:bg-gradient-to-r hover:from-accent hover:to-accent focus:outline-none disabled:opacity-30 disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80"> 
+        View Profile
+      </button>
+    </div>
+  </div>
+</div>
+ 
+
+
+
+
+

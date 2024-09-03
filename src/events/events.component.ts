@@ -17,8 +17,8 @@ export class EventsComponent implements OnInit{
   selectedDate = '';
   searchLocation = '';
   searchTerm = '';
-  uniqueSocialClubs: string[] = [];
-checkedSocialClubs: string[] = [];
+  uniqueSocialClubs: any[] = [];
+checkedSocialClubs: any[] = [];
   filteredEvents = this.events;
   isLoading = true;
   event = {
@@ -55,6 +55,7 @@ checkedSocialClubs: string[] = [];
         return response.json();
       })
       .then(data => {
+      
         this.events = Array.isArray(data) ? data : [data];
         this.uniqueSocialClubs = [...new Set(this.events.map(event => event.socialClub))];
         this.otherCheckboxes = new Array(this.uniqueSocialClubs.length).fill(false);
@@ -101,9 +102,42 @@ checkedSocialClubs: string[] = [];
         this.checkedSocialClubs.splice(index, 1);
       }
     }
+    console.log(this.checkedSocialClubs);
     this.filterEvents();
     if (this.otherCheckboxes[i]) {
       this.allClubsChecked = false;
+    }
+  }
+  onAllClubsClick() {
+    if (this.allClubsChecked) {
+      this.otherCheckboxes = this.otherCheckboxes.map(() => false);
+      this.checkedSocialClubs = [];
+    } else {
+      this.checkedSocialClubs = [...this.uniqueSocialClubs];     
+    }
+    this.filterEvents();
+  }
+
+  filterEvents() {  
+    // Step 1: Extract IDs from checkedSocialClubs
+    const checkedSocialClubsIds = this.checkedSocialClubs.map(club => club.id);
+  
+    if (checkedSocialClubsIds.length > 0) {
+      this.filteredEvents = this.events.filter(event => 
+        // Step 2: Use the extracted IDs for comparison
+        checkedSocialClubsIds.includes(event.socialClub) &&
+        (!this.selectedDate || new Date(event.startDate).toDateString() === new Date(this.selectedDate).toDateString()) &&
+        event.title.toLowerCase().includes(this.searchTerm.toLowerCase()) &&
+        event.location.toLowerCase().includes(this.searchLocation.toLowerCase()) &&
+        (!this.selectedDietaryAccommodation || event.eventDietaryAccommodations.includes(this.selectedDietaryAccommodation))
+      );  
+    } else {
+      this.filteredEvents = this.events.filter(event => 
+        (!this.selectedDate || new Date(event.startDate).toDateString() === new Date(this.selectedDate).toDateString()) &&
+        event.title.toLowerCase().includes(this.searchTerm.toLowerCase()) &&
+        event.location.toLowerCase().includes(this.searchLocation.toLowerCase()) &&
+        (!this.selectedDietaryAccommodation || event.eventDietaryAccommodations.includes(this.selectedDietaryAccommodation))
+      );
     }
   }
   handleInput(event: Event) {
@@ -113,30 +147,11 @@ checkedSocialClubs: string[] = [];
       this.onDateChange();
     }
   }
-
-
-  selectSocialClub(socialClub: string) {
-    this.filteredEvents = this.events.filter(event => event.socialClub === socialClub);
-  }
+  // selectSocialClub(socialClub: string) {
+  //   this.filteredEvents = this.events.filter(event => event.socialClub === socialClub);
+  // }
   
-  filterEvents() {
-    if (this.checkedSocialClubs.length > 0) {
-      this.filteredEvents = this.events.filter(event => 
-        this.checkedSocialClubs.includes(event.socialClub) &&
-        (!this.selectedDate || new Date(event.startDate).toDateString() === new Date(this.selectedDate).toDateString()) &&
-        event.title.toLowerCase().includes(this.searchTerm.toLowerCase()) &&
-        event.location.toLowerCase().includes(this.searchLocation.toLowerCase()) &&
-        (!this.selectedDietaryAccommodation || event.eventDietaryAccommodations.includes(this.selectedDietaryAccommodation))
-      );
-    } else {
-      this.filteredEvents = this.events.filter(event => 
-        (!this.selectedDate || new Date(event.startDate).toDateString() === new Date(this.selectedDate).toDateString()) &&
-        event.title.toLowerCase().includes(this.searchTerm.toLowerCase()) &&
-        event.location.toLowerCase().includes(this.searchLocation.toLowerCase())  &&
-        (!this.selectedDietaryAccommodation || event.eventDietaryAccommodations.includes(this.selectedDietaryAccommodation))
-      );
-    }
-  }
+
   updateSearchTerm(event: Event) {
     const target = event.target as HTMLInputElement;
     this.searchTerm = target?.value || '';
@@ -151,15 +166,7 @@ checkedSocialClubs: string[] = [];
     this.selectedDietaryAccommodation = accommodation;
     this.filterEvents();
   }
-  onAllClubsClick() {
-    if (this.allClubsChecked) {
-      this.otherCheckboxes = this.otherCheckboxes.map(() => false);
-      this.checkedSocialClubs = [];
-    } else {
-      this.checkedSocialClubs = [...this.uniqueSocialClubs];
-    }
-    this.filterEvents();
-  }
+
 
   clearDateFilter() {
     this.selectedDate = '';

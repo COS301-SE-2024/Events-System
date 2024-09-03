@@ -1,11 +1,12 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, ActivatedRoute } from '@angular/router';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-host-checkin',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, HttpClientModule],
   templateUrl: './host-checkin.component.html',
   styleUrls: ['./host-checkin.component.css'],
 })
@@ -17,42 +18,46 @@ export class HostCheckinComponent implements OnInit {
     email: string;
     status: string;
     lastUpdated: Date;
-    showDetails?: boolean;
+    showDetails?: boolean;  
+    rsvpId: number;
   }> = [];
   isDesktop = true;
+  eventId: string | null = null;
 
-  constructor() {}
+  constructor(private route: ActivatedRoute, private http: HttpClient) {}
 
   ngOnInit(): void {
     this.updateViewMode();
+    this.route.paramMap.subscribe(params => {
+      this.eventId = params.get('eventId');
+      //console.log(this.eventId);  // Log the eventId to the console
+      if (this.eventId) {
+        this.fetchRsvpedEmployees(this.eventId);
+      }
+    }); 
+  }
 
-    
-    this.rsvpedEmployees = [
-      {
-        id: 1,
-        name: 'John',
-        surname: 'Doe',
-        email: 'john.doe@example.com',
-        status: 'RSVPd',
-        lastUpdated: new Date('2024-08-07T10:00:00'),
+  fetchRsvpedEmployees(eventId: string): void {
+    const url = `https://events-system-back.wn.r.appspot.com/api/employees/event/${eventId}`;
+    //console.log(url); // Log the URL for debugging
+    this.http.get<any[]>(url).subscribe(
+      (data) => {
+        this.rsvpedEmployees = data.map(item => ({
+          id: item.employee.employeeId,
+          name: item.employee.firstName,
+          surname: item.employee.lastName,
+          email: item.employee.email,
+          status: item.rsvp.status,
+          lastUpdated: new Date(item.rsvp.rsvpAt),
+          showDetails: false,
+          rsvpId: item.rsvp.rsvpId
+        })); 
+        //console.log(this.rsvpedEmployees); // Log the data for debugging
       },
-      {
-        id: 2,
-        name: 'Jane',
-        surname: 'Smith',
-        email: 'jane.smith@example.com',
-        status: 'Checked-in',
-        lastUpdated: new Date('2024-08-06T15:30:00'),
-      },
-      {
-        id: 3,
-        name: 'Alice',
-        surname: 'Johnson',
-        email: 'alice.johnson@example.com',
-        status: 'Canceled',
-        lastUpdated: new Date('2024-08-05T09:00:00'),
-      },
-    ];
+      (error) => {
+        console.error('Error fetching rsvped employees:', error);
+      }
+    );
   }
 
   @HostListener('window:resize', ['$event'])
@@ -69,6 +74,22 @@ export class HostCheckinComponent implements OnInit {
   }
 
   removeEmployee(index: number): void {
-    this.rsvpedEmployees.splice(index, 1);
+    console.log(this.rsvpedEmployees);
+    const eventRSVPId = this.rsvpedEmployees[index].rsvpId;
+
+    //send an http delete request to the server
+    //the endpoint is https://events-system-back.wn.r.appspot.com/api/event-rsvps/${eventRSVPId}
+
+    const url = `https://events-system-back.wn.r.appspot.com/api/event-rsvps/${eventRSVPId}`;
+
+    this.http.delete<any>(url).subscribe(
+      (data) => {
+        console.log(data);
+        this.rsvpedEmployees.splice(index, 1);
+      },
+      (error) => {
+        console.error('Error deleting rsvped employee:', error);
+      }
+    );
   }
 }

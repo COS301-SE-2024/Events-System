@@ -1,0 +1,29 @@
+#toastContainer {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: column-reverse; /* Stack toasts from bottom to top */
+    align-items: flex-end;
+  }
+  
+  .toast-container {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    z-index: 1000;
+  }
+
+  .truncate-overflow {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* Adjust the number of lines to show before truncating */
+    -webkit-line-clamp: 3; /* Change this number to the desired number of lines */
+    max-height: 1.3em; /* Adjust based on the line height and number of lines */
+    line-height: 1.5em; /* Adjust based on your font size */
+}
