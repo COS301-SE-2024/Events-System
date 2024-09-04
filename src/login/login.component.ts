@@ -5,6 +5,9 @@ import { HttpClientModule, HttpClient  } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { environment } from 'src/environments/environment';
 import { RefreshService } from 'src/app/refresh.service';
+import { DomSanitizer } from '@angular/platform-browser';
+import { SanitizePipe } from 'src/app/sanitization.pipe';
+
 @Component({
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, HttpClientModule, RouterModule], // Import necessary modules here
@@ -26,6 +29,7 @@ export class LoginComponent {
   showemailfailToast = false;
   hidePassword = true;
   googleClientId = environment.CLIENT_ID;
+  sanitizePipe: SanitizePipe;
   redirectUri = 'https://events-system.org/oauth/callback'; // e.g., http://localhost:4200/oauth/callback
   googleAuthEndpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
   responseType = 'code';
@@ -36,7 +40,8 @@ export class LoginComponent {
     private router: Router,
     private fb: FormBuilder,
     private http: HttpClient,
-    private refreshService: RefreshService
+    private refreshService: RefreshService,
+    private sanitizer: DomSanitizer
   ) {
     // Adjusted registerForm initialization
     this.registerForm = this.fb.group({
@@ -54,6 +59,8 @@ export class LoginComponent {
     this.forgotPasswordForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]]
     });
+
+    this.sanitizePipe = new SanitizePipe(this.sanitizer);
   }
   passwordPattern = '^(?=.*[a-z])(?!.* ).{8,20}$';
   
@@ -71,7 +78,7 @@ export class LoginComponent {
   }
   onSubmit1() {
     this.isAPILoading = true;
-    const email = this.forgotPasswordForm.get('email')?.value;
+    const email = this.sanitizePipe.transform(this.forgotPasswordForm.get('email')?.value);
     fetch('https://events-system-back.wn.r.appspot.com/api/reset/forgot-password', {
         method: 'POST',
         headers: {

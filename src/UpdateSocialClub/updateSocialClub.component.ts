@@ -4,7 +4,8 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms'; 
 import { HttpClientModule, HttpClient  } from '@angular/common/http';
 import { RandomImageServiceService } from 'src/app/random-image-service.service';
-
+import { DomSanitizer } from '@angular/platform-browser';
+import { SanitizePipe } from 'src/app/sanitization.pipe';
 @Component({
   selector: 'app-update-social-club',
   standalone: true,
@@ -20,14 +21,18 @@ export class UpdateSocialClubComponent implements OnInit{
   isAPILoading = false;
   showsuccessToast = false;
   showfailToast = false;
+  sanitizePipe: SanitizePipe;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private http: HttpClient,
-    private randomImageService: RandomImageServiceService
+    private randomImageService: RandomImageServiceService,
+    private sanitizer: DomSanitizer
   )
   {
+    this.sanitizePipe = new SanitizePipe(this.sanitizer);
+
     this.updateForm = this.fb.group({
       name: [],
       description: [],
@@ -97,11 +102,11 @@ export class UpdateSocialClubComponent implements OnInit{
     
         this.clubID = params['id'];
         const formData = {
-          name: this.updateForm.get('name')?.value,
-          description: this.updateForm.get('description')?.value,
-          pictureLink: this.updateForm.get('pictureLink')?.value,
-          summaryDescription: this.updateForm.get('summaryDescription')?.value,
-          categories: [this.updateForm.get('categories')?.value]
+          name: this.sanitizePipe.transform(this.updateForm.get('name')?.value),
+          description: this.sanitizePipe.transform(this.updateForm.get('description')?.value),
+          pictureLink: this.sanitizePipe.transform(this.updateForm.get('pictureLink')?.value),
+          summaryDescription: this.sanitizePipe.transform(this.updateForm.get('summaryDescription')?.value),
+          categories: [this.sanitizePipe.transform(this.updateForm.get('categories')?.value)]
         };
         // console.log("Form data: " + formData);
         

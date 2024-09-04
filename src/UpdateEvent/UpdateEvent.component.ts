@@ -7,7 +7,8 @@ import validator from 'validator';
 import { NotificationService } from 'src/app/notification.service';
 
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, FormsModule } from '@angular/forms';
-
+import { DomSanitizer } from '@angular/platform-browser';
+import { SanitizePipe } from 'src/app/sanitization.pipe';
 @Component({
   selector: 'app-update-event',
   standalone: true,
@@ -38,6 +39,7 @@ import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, FormsModule } f
 export class UpdateEventComponent implements OnInit, AfterViewChecked{
   prepform!: FormGroup;
   agendaform!: FormGroup;
+  sanitizePipe: SanitizePipe;
 
   @ViewChildren('stepInput') stepInputs!: QueryList<ElementRef>;
   @ViewChild('nameInput') nameInput!: ElementRef;
@@ -68,7 +70,9 @@ export class UpdateEventComponent implements OnInit, AfterViewChecked{
   tags: string[] = [];
   newTag = '';
 
-  constructor(private route: ActivatedRoute, private location: Location, private fb: FormBuilder, private notificationService: NotificationService) {
+  constructor(private route: ActivatedRoute, private location: Location, private fb: FormBuilder, private notificationService: NotificationService, private sanitizer: DomSanitizer) {
+    this.sanitizePipe = new SanitizePipe(this.sanitizer);
+
     this.prepform = this.fb.group({
       prepinputs: this.fb.array([])
     });
@@ -104,20 +108,20 @@ presubmit(){
   const tags = savedTags ? JSON.parse(savedTags) : [];
 
       const event = {
-        title: validator.escape(this.nameInput.nativeElement.value),
-        description: validator.escape(this.descriptionInput.nativeElement.value),
-        startTime: validator.escape(this.StartTimeInput.nativeElement.value+':00'),
-        endTime: validator.escape(this.EndTimeInput.nativeElement.value+':00'),
-        startDate: validator.escape(this.StartDateInput.nativeElement.value),
-        endDate: validator.escape(this.EndDateInput.nativeElement.value),
-        location: validator.escape(this.LocationInput.nativeElement.value),
+        title: this.sanitizePipe.transform(this.nameInput.nativeElement.value),
+        description: this.sanitizePipe.transform(this.descriptionInput.nativeElement.value),
+        startTime: this.sanitizePipe.transform(this.StartTimeInput.nativeElement.value+':00'),
+        endTime: this.sanitizePipe.transform(this.EndTimeInput.nativeElement.value+':00'),
+        startDate: this.sanitizePipe.transform(this.StartDateInput.nativeElement.value),
+        endDate: this.sanitizePipe.transform(this.EndDateInput.nativeElement.value),
+        location: this.sanitizePipe.transform(this.LocationInput.nativeElement.value),
 
         hostId: localStorage.getItem('ID'),
         geolocation: "51.507351, -0.127758",
-        socialClub: validator.escape(this.SocialClubInput.nativeElement.value),
+        socialClub: this.sanitizePipe.transform(this.SocialClubInput.nativeElement.value),
         eventPictureLink: "https://example.com/soccer-tournament.jpg", // Replace with actual picture link
-        eventAgendas: this.agendainputs?.value.map((input: any) => validator.escape(input)),
-        eventPreparation: this.prepinputs?.value.map((input: any) => validator.escape(input)),
+        eventAgendas: this.agendainputs?.value.map((input: any) => this.sanitizePipe.transform(input)),
+        eventPreparation: this.prepinputs?.value.map((input: any) => this.sanitizePipe.transform(input)),
         
         eventDietaryAccommodations: [
           sessionStorage.getItem('updateisVegetarianSelected') === 'true' ? "Vegetarian" : null,
