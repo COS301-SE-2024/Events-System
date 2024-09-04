@@ -3,6 +3,7 @@ package com.back.demo.controller;
 import com.back.demo.model.EventRSVP;
 import com.back.demo.servicebus.EventRSVPServiceBus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +18,7 @@ public class EventRSVPController {
     private EventRSVPServiceBus eventRSVPServiceBus;
 
     @GetMapping
+    @Cacheable(value = "event-rsvps", key = "#root.methodName")
     public List<EventRSVP> getAllEventRSVPs() {
         return eventRSVPServiceBus.getAllEventRSVPs();
     }

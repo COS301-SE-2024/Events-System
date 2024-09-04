@@ -81,7 +81,9 @@ public class SecurityConfiguration {
             "https://events-system.org/events",
             "/socket/**",
             "/api/reset/**",
-            "/notify"
+            "/notify",
+            "/test-redis-connection",
+            "events/employee/165/upcoming-events"
     };
 
     private final JwtAuthenticationFilter jwtAuthFilter;

@@ -3,6 +3,7 @@ package com.back.demo.service;
 import com.back.demo.model.Employee;
 import com.back.demo.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -22,8 +23,18 @@ public class EmployeeService implements UserDetailsService {
         return employeeRepository.findAll();
     }
 
+    @Cacheable(value = "employee", key = "#root.args[0]", condition = "#root.args[0] != null")
     public Optional<Employee> getEmployeeById(Long employeeId) {
-        return employeeRepository.findById(employeeId);
+        Optional<Employee> employeeOpt = employeeRepository.findById(employeeId);
+        //Remove tokens from the response, as they are sensitive information
+        //Also, they result in lazy loading exceptions when the response is serialized for caching
+
+        employeeOpt.ifPresent(employee -> {
+            employee.setTokens(null);
+            employee.setPassword(null);
+        });        
+
+        return employeeOpt;
     }
 
     public Employee createEmployee(Employee employee) {
