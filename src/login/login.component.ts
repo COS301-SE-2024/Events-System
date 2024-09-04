@@ -135,13 +135,12 @@ export class LoginComponent {
 
     if (this.registerForm.valid) {
       const formData = {
-      firstName: this.registerForm.get('firstName')?.value,
-      lastName: this.registerForm.get('lastName')?.value,
-      email: this.registerForm.get('email')?.value,
-      password: this.registerForm.get('password')?.value,
-      role: this.registerForm.get('role')?.value
+      firstName:  this.sanitizePipe.transform(this.registerForm.get('firstName')?.value),
+      lastName:  this.sanitizePipe.transform(this.registerForm.get('lastName')?.value),
+      email:  this.sanitizePipe.transform(this.registerForm.get('email')?.value),
+      password:  this.sanitizePipe.transform(this.registerForm.get('password')?.value),
+      role:  this.sanitizePipe.transform(this.registerForm.get('role')?.value)
     };
-    console.log('Form data:', formData);
       // Assuming API endpoint for registration
       fetch('https://events-system-back.wn.r.appspot.com/api/v1/auth/register', {
         method: 'POST',
@@ -179,8 +178,8 @@ export class LoginComponent {
     this.isAPILoading = true;
     if (this.loginForm.valid) {
       const formData = {
-        email: this.loginForm.get('email')?.value,
-        password: this.loginForm.get('password')?.value
+        email:  this.sanitizePipe.transform(this.loginForm.get('email')?.value),
+        password:  this.sanitizePipe.transform(this.loginForm.get('password')?.value)
       };
       try {
         // Authenticate user and get access token
