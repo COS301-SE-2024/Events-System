@@ -46,6 +46,7 @@ public class SocialClubService {
         }
     }
 
+    @CacheEvict(value = "socialclubs", key = "'getAllSocialClubs'")
     public SocialClub partialUpdateSocialClub(Long socialClubId, Map<String, Object> updates) {
         Optional<SocialClub> optionalSocialClub = socialClubRepository.findById(socialClubId);
         if (optionalSocialClub.isPresent()) {
