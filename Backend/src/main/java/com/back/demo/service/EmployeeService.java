@@ -3,6 +3,7 @@ package com.back.demo.service;
 import com.back.demo.model.Employee;
 import com.back.demo.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -41,6 +42,7 @@ public class EmployeeService implements UserDetailsService {
         return employeeRepository.save(employee);
     }
 
+    @CachePut(value = "employee", key = "#root.args[0]", condition = "#root.args[0] != null")
     public Employee updateEmployee(Long employeeId, Employee employeeDetails) {
         Optional<Employee> optionalEmployee = employeeRepository.findById(employeeId);
         if (optionalEmployee.isPresent()) {
