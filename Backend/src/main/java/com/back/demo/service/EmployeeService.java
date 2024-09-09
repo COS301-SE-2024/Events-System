@@ -63,6 +63,7 @@ public class EmployeeService implements UserDetailsService {
         }
     }
 
+    @CachePut(value = "employee", key = "#root.args[0]", condition = "#root.args[0] != null")
     public Employee patchEmployee(Long employeeId, Employee employeeDetails) {
         Optional<Employee> optionalEmployee = employeeRepository.findById(employeeId);
         if (optionalEmployee.isPresent()) {
