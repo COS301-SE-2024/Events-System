@@ -46,6 +46,7 @@ public class EventService {
         return eventRepository.findAllEventsBySocialClub(socialClubId);
     }
 
+    @CacheEvict(value = "events", key = "'getAllEvents'")
     public Event updateEvent(Long eventId, Event eventDetails) {
         Optional<Event> optionalEvent = eventRepository.findById(eventId);
         if (optionalEvent.isPresent()) {
