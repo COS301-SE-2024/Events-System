@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.cache.annotation.CacheEvict;
 
 import java.util.List;
 import java.util.Optional;
@@ -106,6 +107,7 @@ public class EmployeeService implements UserDetailsService {
         }
     }
 
+    @CacheEvict(value = "employee", key = "#root.args[0]", condition = "#root.args[0] != null")
     public void deleteEmployee(Long employeeId) {
         employeeRepository.deleteById(employeeId);
     }
