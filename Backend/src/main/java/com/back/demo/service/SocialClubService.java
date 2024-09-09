@@ -92,6 +92,7 @@ public class SocialClubService {
         }
     }
 
+    @CacheEvict(value = "socialclubs", key = "'getAllSocialClubs'")
     public void deleteSocialClub(Long socialClubId) {
         socialClubRepository.deleteById(socialClubId);
     }
