@@ -3,6 +3,7 @@ package com.back.demo.service;
 import com.back.demo.model.SocialClub;
 import com.back.demo.repository.SocialClubRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class SocialClubService {
         return socialClubRepository.findById(socialClubId);
     }
 
+    @CacheEvict(value = "socialclubs", key = "'getAllSocialClubs'")
     public SocialClub createSocialClub(SocialClub socialClub) {
         return socialClubRepository.save(socialClub);
     }
