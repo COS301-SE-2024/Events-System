@@ -29,6 +29,7 @@ public class SocialClubService {
         return socialClubRepository.save(socialClub);
     }
 
+    @CacheEvict(value = "socialclubs", key = "'getAllSocialClubs'")
     public SocialClub updateSocialClub(Long socialClubId, SocialClub socialClubDetails) {
         Optional<SocialClub> optionalSocialClub = socialClubRepository.findById(socialClubId);
         if (optionalSocialClub.isPresent()) {
