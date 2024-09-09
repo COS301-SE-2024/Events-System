@@ -28,6 +28,7 @@ public class EventRSVPService {
         return eventRSVPRepository.save(eventRSVP);
     }
 
+    @CacheEvict(value = "event-rsvps", key = "'getAllEventRSVPs'")
     public EventRSVP updateEventRSVP(Long id, EventRSVP eventRSVP) {
         if (eventRSVPRepository.existsById(id)) {
             eventRSVP.setRsvpId(id);
