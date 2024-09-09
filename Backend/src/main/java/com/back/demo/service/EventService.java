@@ -73,6 +73,7 @@ public class EventService {
         }
     }
 
+    @CacheEvict(value = "events", key = "'getAllEvents'")
     public void deleteEvent(Long eventId) {
         eventRepository.deleteById(eventId);
     }
