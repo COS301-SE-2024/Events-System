@@ -38,6 +38,7 @@ public class EventRSVPService {
         }
     }
 
+    @CacheEvict(value = "event-rsvps", key = "'getAllEventRSVPs'")
     public void deleteEventRSVP(Long id) {
         eventRSVPRepository.deleteById(id);
     }
