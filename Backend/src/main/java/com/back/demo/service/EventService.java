@@ -6,6 +6,7 @@ import com.back.demo.repository.EventRSVPRepository;
 import com.back.demo.repository.EventRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -74,6 +75,7 @@ public class EventService {
         eventRepository.deleteById(eventId);
     }
 
+    @CacheEvict(value = "events", key = "'getAllEvents'")
     public Event partialUpdateEvent(Long eventId, Map<String, Object> updates) {
         Optional<Event> optionalEvent = eventRepository.findById(eventId);
         if (optionalEvent.isPresent()) {
