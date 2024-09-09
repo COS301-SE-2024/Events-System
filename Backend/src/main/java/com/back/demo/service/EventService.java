@@ -38,6 +38,7 @@ public class EventService {
         return eventRepository.findAllHostEvents(hostId);
     }
 
+    @CacheEvict(value = "events", key = "'getAllEvents'")
     public Event createEvent(Event event) {
         return eventRepository.save(event);
     }
