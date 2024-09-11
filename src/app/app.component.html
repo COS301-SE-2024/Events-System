@@ -80,25 +80,23 @@
     <router-outlet></router-outlet>
   </div> 
   <div class="drawer-side z-50">
-    <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label> 
+    <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label>
     <ul class="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
       <!-- Sidebar content here -->
-      <li><a  routerLink="/"><i class="fa-solid fa-house"></i>Home </a></li>
-      <li>
-      <li><a routerLink="/events"><i class="fa-solid fa-list"></i>Events</a></li> 
-      <li><a routerLink="/socialclubs"><i class="fa-solid fa-people-group"></i>Social Clubs</a></li>
-      <li><a routerLink="/seriescenter"><i class="fa-solid fa-grip-lines"></i>Series</a></li> 
-          <li><a routerLink="/notifications"><i class="fa-solid fa-circle"></i>Notifications</a></li>
-          <li><a routerLink="/calender"><i class="fa-solid fa-calendar"></i>Calendar</a></li>
-          <li *ngIf="isHost"><a routerLink="/myevents"><i class="fa-regular fa-address-book"></i>My events</a></li>
-          <li *ngIf="isHost"><a routerLink="/socialclublisting"><i class="fa-solid fa-users-rays"></i>My Social Clubs</a>
-          <li *ngIf="isHost"><a routerLink="/myseries"><i class="fa-solid fa-bars"></i>My series</a></li>
-          <li><a routerLink="/settings"><i class="fa-solid fa-gear"></i>Settings</a></li>
-          <li><a routerLink="/search"><i class="fa-solid fa-magnifying-glass"></i>Search</a></li>
-          <li><a routerLink="/help"><i class="fa fa-info"></i>Help</a></li>
-          <li><a  (click)="installPwa()"><i class="fa fa-download"></i>Download app</a></li>
+      <li><a routerLink="/" (click)="closeDrawer()"><i class="fa-solid fa-house"></i> Home </a></li>
+      <li><a routerLink="/events" (click)="closeDrawer()"><i class="fa-solid fa-list"></i> Events</a></li> 
+      <li><a routerLink="/socialclubs" (click)="closeDrawer()"><i class="fa-solid fa-people-group"></i> Social Clubs</a></li>
+      <li><a routerLink="/seriescenter" (click)="closeDrawer()"><i class="fa-solid fa-grip-lines"></i> Series</a></li>
+      <li><a routerLink="/notifications" (click)="closeDrawer()"><i class="fa-solid fa-circle"></i> Notifications</a></li>
+      <li><a routerLink="/calender" (click)="closeDrawer()"><i class="fa-solid fa-calendar"></i> Calendar</a></li>
+      <li *ngIf="isHost"><a routerLink="/myevents" (click)="closeDrawer()"><i class="fa-regular fa-address-book"></i> My Events</a></li>
+      <li *ngIf="isHost"><a routerLink="/socialclublisting" (click)="closeDrawer()"><i class="fa-solid fa-users-rays"></i> My Social Clubs</a></li>
+      <li *ngIf="isHost"><a routerLink="/myseries" (click)="closeDrawer()"><i class="fa-solid fa-bars"></i> My Series</a></li>
+      <li><a routerLink="/settings" (click)="closeDrawer()"><i class="fa-solid fa-gear"></i> Settings</a></li>
+      <li><a routerLink="/search" (click)="closeDrawer()"><i class="fa-solid fa-magnifying-glass"></i> Search</a></li>
+      <li><a routerLink="/help" (click)="closeDrawer()"><i class="fa fa-info"></i> Help</a></li>
+      <li><a (click)="installPwa(); closeDrawer()"><i class="fa fa-download"></i> Download App</a></li>
     </ul>
-  
   </div>
 </div>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
