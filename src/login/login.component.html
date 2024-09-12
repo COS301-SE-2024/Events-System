@@ -118,7 +118,7 @@
 
 <div class="toast" *ngIf="showloginfailToast">
   <div class="alert alert-error">
-    <span>Error logging in</span>
+    <span>Invalid credentials. Please try again.</span>
   </div>
 </div>
 
@@ -196,16 +196,16 @@
 </div>
 
 
-<div class="toast" *ngIf="showloginsuccessToast">
-<div class="alert alert-success">
-  <span>Login successful Redirecting...</span>
-</div>
+<div class="toast" *ngIf="showemailsuccessToast">
+  <div class="alert alert-success text-wrap">
+    <span>Password reset link has been sent to your email address. Please check your inbox </span>
+  </div>
 </div>
 
-<div class="toast" *ngIf="showloginfailToast">
-<div class="alert alert-error">
-  <span>Error logging in</span>
-</div>
+<div class="toast" *ngIf="showemailfailToast">
+  <div class="alert alert-error">
+    <span>Email address does not exist. Please try again</span>
+  </div>
 </div>
 
 </dialog>

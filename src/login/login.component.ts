@@ -115,7 +115,7 @@ export class LoginComponent {
         this.isAPILoading = false;
         setTimeout(() => {
           this.showemailfailToast = false;
-        }, 10000);
+        }, 6000);
 
       }
   })
@@ -124,8 +124,7 @@ export class LoginComponent {
       this.isAPILoading = false;
       setTimeout(() => {
         this.showemailfailToast = false;
-      }, 10000);
-
+      }, 6000)
     });
   }
   ngOnInit() {
@@ -251,7 +250,7 @@ export class LoginComponent {
         this.isAPILoading = false;
         setTimeout(() => {
           this.showloginfailToast = false;
-        }, 5000);
+        }, 6000);
         console.error('Error during login:', error);
         this.errorMessage = 'Invalid credentials. Please try again.'; // Set error message for invalid credentials
         window.location.reload();
