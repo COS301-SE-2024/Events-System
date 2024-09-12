@@ -21,23 +21,53 @@
           <!-- /Logo -->
           <h4 class="mb-2 font-medium text-secondary xl:text-xl text-center">Enter your email and password to sign in</h4>
   
+          <!-- Email -->
             <div class="mb-4">
               <div class="label" htmlFor="email">
                 <span class="label-text text-secondary">Email</span>
               </div>            
-              <input type="email" id="email" formControlName="email" placeholder="name@mail.com" class="input input-bordered w-full max-w-md" />
+            <input 
+              type="email" 
+              id="email" 
+              formControlName="email" 
+              placeholder="name@mail.com" 
+              class="input input-bordered w-full max-w-md"
+               required
+               [ngClass]="{'input-error': loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched), 
+                            'input-success': loginForm.get('email')?.valid}"
+               />
+          
+            <div *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)" class="text-red-500 text-sm mt-1">
+              <div *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</div>
+              <div *ngIf="loginForm.get('email')?.errors?.['email'] || loginForm.get('email')?.errors?.['pattern']">Email must be valid.</div>
             </div>
+          </div>
+
+          <!-- Password -->
             <div class="mb-4">
               <div class="label" htmlFor="password">
                 <span class="label-text text-secondary">Password</span>
                 <span class="label-text-alt text-accent cursor-pointer hover:underline"  onclick="my_modal_2.showModal()" >Forgot Password</span>
               </div>
               <div class="relative inline-flex w-full max-w-md">
-                <input type="password" id="password" formControlName="password" placeholder="*******" class="input input-bordered w-full max-w-md " />
+              <input 
+                type="password" 
+                id="password" 
+                formControlName="password" 
+                placeholder="*******" 
+                class="input input-bordered w-full max-w-md"
+                [ngClass]="{'input-error': loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched), 
+                            'input-success': loginForm.get('password')?.valid}"
+                />
                 <i [class]="hidePassword ? 'cursor-pointer absolute right-2 top-[40%] fas fa-eye' : 'cursor-pointer absolute right-2 top-[40%] fas fa-eye-slash'" (click)="togglePasswordVisibility()"></i>
               </div>
 
+            <div *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)" class="text-red-500 text-sm mt-1">
+              <div *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</div>
+              <!-- <div *ngIf="loginForm.get('password')?.errors?.['pattern']">Password must be valid</div> -->
             </div>
+          </div>
+
             <div class="mb-4 w-32">
               <label class="label cursor-pointer">
                 <input type="checkbox" checked="checked" class="checkbox checkbox-accent" />
@@ -46,8 +76,10 @@
               </label>
             </div>
             <div class="mb-4">
-              <button (click)="onLogin()" class="grid w-full cursor-pointer select-none rounded-md border border-primary bg-primary py-2 px-5 text-center ease-in duration-300 align-middle text-sm text-white hover:bg-base-100 shadowfocus:text-secondary" type="submit">
-                Sign in</button>
+              <button (click)="onLogin()" [disabled]="loginForm.invalid" class="grid w-full cursor-pointer select-none rounded-md border border-primary bg-primary py-2 px-5 text-center ease-in duration-300 align-middle text-sm text-white hover:bg-base-100 shadowfocus:text-secondary disabled:opacity-30 disabled:hover:border-primary disabled:hover:bg-primary disabled:hover:text-white" type="submit">
+                Sign in
+              </button>
+
               <div class="divider">or</div>
   
               <button class="btn w-full mb-4 bg-base-100" (click)="signInWithGoogle()">
@@ -116,16 +148,25 @@
             <form [formGroup]="forgotPasswordForm" (ngSubmit)="onSubmit1()">
               <div class="grid gap-y-4">
                 <!-- Form Group -->
-                <div class="mb-4">
+                <div class="">
                   <div class="label" htmlFor="email">
                     <span class="label-text text-slate-400">Email address</span>
                   </div>            
-                  <input type="email" id="email" formControlName="email" placeholder="name@mail.com" class="input input-bordered w-full max-w-md" />
+                  <input type="email" id="email" formControlName="email"  
+                        class="input input-bordered w-full max-w-md" 
+                        [ngClass]="{'input-error': forgotPasswordForm.get('email')?.invalid && (forgotPasswordForm.get('email')?.dirty || forgotPasswordForm.get('email')?.touched), 
+                                      'input-success': forgotPasswordForm.get('email')?.valid}"
+                  />
                 </div>
-                <!-- /Form Group -->
+                <!-- /Form Group error messages-->
+                <div *ngIf="forgotPasswordForm.get('email')?.invalid && (forgotPasswordForm.get('email')?.dirty || forgotPasswordForm.get('email')?.touched)" class="text-red-500 text-sm">
+                  <div *ngIf="forgotPasswordForm.get('email')?.errors?.['required']">Email is required.</div>
+                  <div *ngIf="forgotPasswordForm.get('email')?.errors?.['email'] || forgotPasswordForm.get('email')?.errors?.['pattern']">Email must be valid.</div>
+                </div>
     
-                <button type="submit" class="grid w-full cursor-pointer select-none rounded-md border border-primary bg-primary py-2 px-5 text-center ease-in duration-300 align-middle text-sm text-white hover:bg-base-100 shadowfocus:text-secondary">
-                  Reset password</button>
+                <button type="submit" [disabled]="forgotPasswordForm.invalid" class="grid w-full cursor-pointer select-none rounded-md border border-primary bg-primary py-2 px-5 text-center ease-in duration-300 align-middle text-sm text-white hover:bg-base-100 shadowfocus:text-secondary disabled:opacity-30 disabled:hover:border-primary disabled:hover:bg-primary disabled:hover:text-white">
+                  Reset password
+                </button>
               </div>
             </form>
             <!-- /Form -->
@@ -171,9 +212,8 @@
 
 <!-- CREATE ACCOUNT MODAL HOME -->
 <dialog id="my_modal_3" class="modal modal-middle backdrop-blur-sm ">
-  
   <div class="modal-box w-3/4 max-w-3xl bg-base-200 ">
-    <form method="dialog">
+    <form method="dialog" autocomplete="off">
       <button class="btn btn-sm btn-circle btn-ghost absolute right-5 top-2">
         ✕
       </button>
@@ -181,155 +221,169 @@
         <h4 class="sm:text-3xl text-2xl font-bold  text-primary">Create your account</h4>
         <h4 class="mb-2 font-medium text-slate-400 xl:text-xl">Enter your information to register</h4>
       </div>
-  <div class="shrink-0 w-full  ">
-    <form (submit)="onRegister($event)" [formGroup]="registerForm" class="">
-      
-      <div class="flex  justify-center items-center  ">
-      <div  class="grid md:grid-cols-2 gap-x-32 gap-y-6  ">
-        <!-- First name -->
-        <div>
-          <div class="label" htmlFor="firstName">
-            <span class="label-text text-slate-400">First Name</span>
-          </div>         
-          <input
-            id="firstName"
-            name="firstName"
-            formControlName="firstName"
-            type="text"
-            class="input input-bordered max-w-md w-72"
-            required
-          />
-          <div *ngIf="registerForm.get('firstName')?.invalid && (registerForm.get('firstName')?.dirty || registerForm.get('firstName')?.touched)" class="text-red-500 text-sm mt-1">
-            First Name is required
-          </div>
-        </div>
-        <!-- Second name -->
-        <div>
-          <div class="label" htmlFor="lastName">
-            <span class="label-text text-slate-400">last Name</span>
-          </div> 
-          <input
-            id="lastName"
-            name="lastName"
-            formControlName="lastName"
-            type="text"
-            class="input input-bordered  max-w-md  w-72"
-            required
-          />
-          <div *ngIf="registerForm.get('lastName')?.invalid && (registerForm.get('lastName')?.dirty || registerForm.get('lastName')?.touched)" class="text-red-500 text-sm mt-1">
-            Last Name is required
-          </div>
-        </div>
-        <!-- Email -->
-        <div>
-          <label htmlFor="email" class="block text-sm font-semibold text-heading text-slate-400">
-            Email
-          </label>
-          <input
-            id="email"
-            name="email"
-            formControlName="email"
-            type="email"
-            class="input input-bordered max-w-md  w-72"
-            required
-          />
-          <div *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)" class="text-red-500 text-sm mt-1">
-            Email is required and must be valid
-          </div>
-        </div>
-        <!-- Password -->
-        <div>
-          <label htmlFor="password" class="block text-sm font-semibold text-heading text-slate-400">
-            Password
-          </label>
-          <div class="relative inline-flex w-full max-w-md">
-            <input
-              id="password1"
-              type="password"
-              name="password1"
-              [formControl]="passwordControl2"
-              class="input input-bordered max-w-md w-72 transition duration-300 ease-in"
-              required
-              [ngClass]="{'input-error': passwordControl2.invalid && (passwordControl2.dirty || passwordControl2.touched), 'input-success': passwordControl2.valid}"
-            />
-            <i [class]="hidePassword1 ? 'cursor-pointer absolute right-2 top-[40%] fas fa-eye' : 'cursor-pointer absolute right-2 top-[40%] fas fa-eye-slash'" (click)="togglePasswordVisibility1()"></i>
-          </div>
-          <div *ngIf="passwordControl2.invalid && (passwordControl2.dirty || passwordControl2.touched)" class="text-red-500 text-sm mt-1">
-            Password is required and must be at least 8 characters
-          </div>
-        </div>
+      <div class="shrink-0 w-full  ">
+        <form (submit)="onRegister($event)" [formGroup]="registerForm" class="">
+          <div class="shrink-0 w-full  ">
+            <form (submit)="onRegister($event)" [formGroup]="registerForm" class="" autocomplete="off">
+              <div class="flex  justify-center items-center  ">
+                <div  class="grid md:grid-cols-2 gap-x-32 gap-y-6  ">
+              
+                  <!-- First name -->
+                  <div>
+                    <div class="label" htmlFor="firstName">
+                      <span class="label-text text-slate-400">First Name</span>
+                    </div>         
+                    <input
+                      id="firstName"
+                      name="firstName"
+                      formControlName="firstName"
+                      type="text"
+                      class="input input-bordered max-w-md w-72"
+                      required
+                            [ngClass]="{'input-error': registerForm.get('firstName')?.invalid && (registerForm.get('firstName')?.dirty || registerForm.get('firstName')?.touched), 
+                                      'input-success': registerForm.get('firstName')?.valid}"
+                    />
+                    <div *ngIf="registerForm.get('firstName')?.invalid && (registerForm.get('firstName')?.dirty || registerForm.get('firstName')?.touched)" class="text-red-500 text-sm mt-1">
+                              <div *ngIf="registerForm.get('firstName')?.errors?.['required']">First Name is required.</div>
+                              <div *ngIf="registerForm.get('firstName')?.errors?.['pattern']">First Name must contain only alphabets.</div>
+                    </div>
+                  </div>
 
-<!-- Host selection -->
-<div class="w-28 text-slate-400">
-I am a
-<label class="label cursor-pointer">
-  <input type="radio" class="radio radio-primary" formControlName="role" value="Employee" required /> Employee
-</label>
-<label class="label cursor-pointer">
-  <input type="radio" class="radio radio-primary" formControlName="role" value="Host" /> Host
-</label>
-</div>
+                  <!-- Second name -->
+                  <div>
+                    <div class="label" htmlFor="lastName">
+                      <span class="label-text text-slate-400">Last Name</span>
+                    </div> 
+                    <input
+                      id="lastName"
+                      name="lastName"
+                      formControlName="lastName"
+                      type="text"
+                      class="input input-bordered  max-w-md  w-72"
+                      required
+                            [ngClass]="{'input-error': registerForm.get('lastName')?.invalid && (registerForm.get('lastName')?.dirty || registerForm.get('lastName')?.touched), 
+                                      'input-success': registerForm.get('lastName')?.valid}"
+                    />
+                    <div *ngIf="registerForm.get('lastName')?.invalid && (registerForm.get('lastName')?.dirty || registerForm.get('lastName')?.touched)" class="text-red-500 text-sm mt-1">
+                      Last Name is required
+                    </div>
+                  </div>
+                
+                  <!-- Email -->
+                  <div>
+                    <label htmlFor="email" class="block text-sm font-semibold text-heading text-slate-400">
+                      Email
+                    </label>
+                    <input
+                      id="email"
+                      name="email"
+                      formControlName="email"
+                      type="email"
+                      class="input input-bordered max-w-md  w-72"
+                      required
+                            [ngClass]="{'input-error': registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched), 
+                                      'input-success': registerForm.get('email')?.valid}"
+                    />
+                    <div *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)" class="text-red-500 text-sm mt-1">
+                            <div *ngIf="registerForm.get('email')?.errors?.['required']">Email is required.</div>
+                            <div *ngIf="registerForm.get('email')?.errors?.['email'] || registerForm.get('email')?.errors?.['pattern']">Email must be valid.</div>
+                    </div>
+                  </div>
 
-<!-- Confirm Password -->
-<div>
-  <label htmlFor="confirmPassword" class="block text-sm font-semibold text-heading text-slate-400">
-    Confirm Password
-  </label>
-  <div class="relative inline-flex w-full max-w-md">
-    <input
-      id="password2"
-      type="password"
-      name="password2"
-      [formControl]="passwordControl3"
-      class="input input-bordered max-w-md w-72 transition duration-300 ease-in"
-      required
-      [ngClass]="{
-        'input-error': passwordControl3.invalid && (passwordControl3.dirty || passwordControl3.touched) || passwordMismatchError, 
-        'input-success': passwordControl3.valid && !passwordMismatchError
-      }"
-    />
-    <i [class]="hidePassword2 ? 'cursor-pointer absolute right-2 top-[40%] fas fa-eye' : 'cursor-pointer absolute right-2 top-[40%] fas fa-eye-slash'" (click)="togglePasswordVisibility2()"></i>
-  </div>
+                  <!-- Password -->
+                  <div>
+                    <label htmlFor="password" class="block text-sm font-semibold text-heading text-slate-400">
+                      Password
+                    </label>
+                    <div class="relative inline-flex w-full max-w-md">
+                            <input  autocomplete="off"  id="password1" type="password" name="password1"  autocomplete="off"  formControlName="password"
+                        class="input input-bordered max-w-md w-72 transition duration-300 ease-in"
+                        required
+                              [ngClass]="{'input-error': registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched), 
+                                          'input-success': registerForm.get('password')?.valid}"
+                      />
+                      <i [class]="hidePassword1 ? 'cursor-pointer absolute right-2 top-[40%] fas fa-eye' : 'cursor-pointer absolute right-2 top-[40%] fas fa-eye-slash'" (click)="togglePasswordVisibility1()"></i>
+                    </div>
 
-  <div *ngIf="passwordControl3.errors?.['required'] && (passwordControl3.dirty || passwordControl3.touched)" class="text-red-500 text-sm mt-1">
-    Confirm Password is required
-  </div>
-  <div *ngIf="passwordMismatchError" class="text-red-500 text-sm mt-1">
-    Passwords do not match
-  </div>
-</div>
+                    <div *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)" class="text-red-500 text-sm mt-1">
+                      <div *ngIf="registerForm.get('password')?.errors?.['required']">Password is required.</div>
+                      <div *ngIf="registerForm.get('password')?.errors?.['pattern']">Password must be at least 8 characters, have at least one lowercase and uppercase letter, number and symbol *$!#&.</div> <!--need to add @-->
+                    </div>
+                  </div>
+
+                  <!-- Host selection -->
+                  <div class="w-28 text-slate-400">
+                    I am a
+                    <label class="label cursor-pointer">
+                      <input type="radio" class="radio radio-primary" formControlName="role" value="Employee" required /> Employee
+                    </label>
+                    <label class="label cursor-pointer">
+                      <input type="radio" class="radio radio-primary" formControlName="role" value="Host" /> Host
+                    </label>
+
+                    <div *ngIf="registerForm.get('role')?.invalid && (registerForm.get('role')?.dirty || registerForm.get('role')?.touched)" class="text-red-500 text-sm mt-1">
+                      <div *ngIf="registerForm.get('role')?.errors?.['required']">Please make a selection</div>
+                    </div>
+                  </div>
+
+                  <!-- Confirm Password -->
+                  <div>
+                    <label htmlFor="confirmPassword" class="block text-sm font-semibold text-heading text-slate-400">
+                      Confirm Password
+                    </label>
+                    <div class="relative inline-flex w-full max-w-md">
+                      <input id="password2" type="password" name="password2" formControlName="confirmPassword" class="input input-bordered max-w-md w-72 transition duration-300 ease-in"
+                            required
+                            [ngClass]="{'input-error': registerForm.get('confirmPassword')?.invalid && (registerForm.get('confirmPassword')?.dirty || registerForm.get('confirmPassword')?.touched ) || registerForm.errors?.['passwordMismatch'], 
+                                        'input-success': registerForm.get('confirmPassword')?.valid && !registerForm.errors?.['passwordMismatch']}" 
+                      />
+                      <i [class]="hidePassword2 ? 'cursor-pointer absolute right-2 top-[40%] fas fa-eye' : 'cursor-pointer absolute right-2 top-[40%] fas fa-eye-slash'" (click)="togglePasswordVisibility2()"></i>
+                    </div>
+
+                    <div *ngIf="registerForm.get('confirmPassword')?.invalid && (registerForm.get('confirmPassword')?.dirty || registerForm.get('confirmPassword')?.touched)" class="text-red-500 text-sm mt-1"> <!--if one of the validators fail && the form control has been touched or dirty, output any of the following errors-->
+                        <div *ngIf="registerForm.get('confirmPassword')?.errors?.['required']" class="text-red-500 text-sm mt-1">
+                          Confirm Password is required
+                        </div>
+                    </div> 
+                                  
+                    <div *ngIf="registerForm?.errors?.['passwordMismatch']" class="text-red-500 text-sm mt-1">
+                      Passwords do not match
+                    </div>
+                  </div>
 
 
+                </div>
+              </div> 
+
+
+              <div class="flex items-center justify-center">
+                <button type="submit"  [disabled]="registerForm.invalid" class=" w-96 mt-4 inline-flex cursor-pointer items-center justify-center rounded-xl border-2 border-primary bg-primary px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:border-primary-accent hover:bg-primary-accent focus:outline-none focus:ring-2 focus:ring-orange-400/80 focus:ring-offset-0 disabled:opacity-30 disabled:hover:border-primary disabled:hover:bg-primary disabled:hover:text-white dark:focus:ring-white/80">
+                  Create Account
+                </button>
+              </div>
+
+              <div class="divider">or</div>
+
+              <div class="flex flex-col justify-center items-center">
+                <button class="btn lg:w-96 w-full mb-4  bg-base-100"  (click)="signInWithGoogle()">        
+                  <img src="https://www.material-tailwind.com/logos/logo-google.png"
+                        alt="google"
+                        class="h-6 w-6"
+                  />
+                  Sign up with google
+                </button>
+              </div>
+
+            </form>
+          </div>
+        </form>
       </div>
-      </div> 
 
-
-      <div class="flex items-center justify-center">
-        <button
-        type="submit"
-        
-        class=" w-96 mt-4 inline-flex cursor-pointer items-center justify-center rounded-xl border-2 border-primary bg-primary px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:border-primary-accent hover:bg-primary-accent focus:outline-none focus:ring-2 focus:ring-orange-400/80 focus:ring-offset-0 disabled:opacity-30 disabled:hover:border-primary disabled:hover:bg-primary disabled:hover:text-white dark:focus:ring-white/80"
-      >
-        Create Account
-      </button>
-      
-      </div>
-      <div class="divider">or</div>
-  <div class="flex flex-col justify-center items-center">
-    <button class="btn lg:w-96 w-full mb-4  bg-base-100"  (click)="signInWithGoogle()">        
-      <img src="https://www.material-tailwind.com/logos/logo-google.png"
-      alt="google"
-      class="h-6 w-6"
-    />Sign up with google</button>
-  </div>
-
+      <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+      </form>
     </form>
   </div>
-</form>
-  </div>
-  <form method="dialog" class="modal-backdrop">
-    <button>close</button>
-  </form>
 </dialog>
 
 <div class="toast" *ngIf="showregistersuccessToast">

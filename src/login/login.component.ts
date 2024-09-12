@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { FormBuilder, FormControl, ValidationErrors,  FormGroup, Validators, ReactiveFormsModule } from '@angular/forms'; 
+import { FormBuilder, ValidationErrors,  FormGroup, Validators, ReactiveFormsModule, ValidatorFn, AbstractControl } from '@angular/forms'; 
 import { HttpClientModule, HttpClient  } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { environment } from 'src/environments/environment';
@@ -44,38 +44,58 @@ export class LoginComponent {
     private sanitizer: DomSanitizer
   ) {
     // Adjusted registerForm initialization
+
+    //"Create an account" form validation
     this.registerForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: this.passwordControl2,
-      confirmPassword: this.passwordControl3,
-      role: ['USER', Validators.required]
-    }, { validators: this.passwordMatchValidator });
+      firstName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
+      lastName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
+      email: ['', [Validators.required, Validators.email, Validators.pattern(/^[\w.]+@([\w-]+.)+[\w-]{2,4}$/)]], 
+      password: ['', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[&*^%$#!"'.])[a-zA-Z\d&*^%$#!"'.]{8,}$/)]], 
+      confirmPassword: ['', [Validators.required]],
+      role: ['', Validators.required]}, 
+    { validators: this.passwordMatchValidator()});
+
+    //"Login" form validation
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]]
+      email: ['', [Validators.required, Validators.email, Validators.pattern(/^[\w.]+@([\w-]+.)+[\w-]{2,4}$/)]], 
+      password: ['', [Validators.required]] //Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[&*^%$#!"'.])[a-zA-Z\d&*^%$#!"'.]{8,}$/)
     });
+
+    //"Forgot password" form validation
     this.forgotPasswordForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]]
+      email: ['', [Validators.required, Validators.email, Validators.pattern(/^[\w.]+@([\w-]+.)+[\w-]{2,4}$/)]]
     });
 
     this.sanitizePipe = new SanitizePipe(this.sanitizer);
   }
   passwordPattern = '^(?=.*[a-z])(?!.* ).{8,20}$';
   
-    passwordControl2 = new FormControl('', [Validators.pattern(this.passwordPattern)]);
-    passwordControl3 = new FormControl('', [Validators.pattern(this.passwordPattern)]);
+  // passwordPattern = '^(?=.*[a-z])(?!.* ).{1,2}$';
+  // passwordControl2 = new FormControl('', [Validators.pattern(this.passwordPattern)]);
+  // passwordControl3 = new FormControl('');
   //delete employeeData and ID from localStorage if they were already set
   //whenever the login page is loaded
-  private passwordMatchValidator(formGroup: FormGroup): ValidationErrors | null {
+  // private passwordMatchValidator(formGroup: FormGroup): ValidationErrors | null {
+  //   const password = formGroup.get('password')?.value;
+  //   const confirmPassword = formGroup.get('confirmPassword')?.value;
+  //   return password === confirmPassword ? null : { passwordMismatch: true };
+  // }
+
+  passwordMatchValidator(): ValidatorFn {
+    return (formGroup: AbstractControl): ValidationErrors | null => {
     const password = formGroup.get('password')?.value;
     const confirmPassword = formGroup.get('confirmPassword')?.value;
-    return password === confirmPassword ? null : { passwordMismatch: true };
+  
+      return password && confirmPassword && password !== confirmPassword
+        ? { passwordMismatch: true }
+        : null;
+    };
   }
-  get passwordMismatchError(): boolean {
-    return this.registerForm.errors?.['passwordMismatch'] && this.registerForm.get('confirmPassword')?.touched;
-  }
+
+  //  get passwordMismatchError(): boolean {
+  //    return this.registerForm.errors?.['passwordMismatch'] && this.registerForm.get('confirmPassword')?.touched;
+  //  }
+
   onSubmit1() {
     this.isAPILoading = true;
     const email = this.sanitizePipe.transform(this.forgotPasswordForm.get('email')?.value);
