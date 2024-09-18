@@ -1,21 +1,10 @@
-<!-- <div routerLink class="w-full h-full flex flex-col items-center justify-center">
-    <div class="socialClubCircle gradient-border border-4 w-48 h-44 box-decoration-slice bg-gradient-to-r from-accent to-secondary bg-green-700">
-      <div class="size-full ">
-        <img class="size-full rounded-full" src="assets/pexels-rahulp9800-1652361.jpg" alt="Social club image" />
-      </div>
-    </div>
-</div> -->
-
 <div class="card lg:card-side bg-base-200 shadow-xl">
   <img class="rounded-t-2xl h-56 sm:h-64 md:w-96 sm:rounded-l-2xl sm:rounded-r-none" src={{imageSource}}  alt="Social Club profile" /> 
-  <!-- src={{imageSource}} -->
       
   <div class="card-body">
     <div class="flex flex-1 flex-col justify-center text-white">
       <p class="font-karla text-accent font-bold text-xl mb-5"> {{clubName}}</p>
-      <!-- {{socialClubName}} -->
       <p class="font-roboto text-primary text-sm font-normal mb-1.5">{{clubDescription}} </p>
-      <!-- {{socialClubDescription}} -->
      
       <div class="flex gap-3 p-3 flex-wrap ">
         <!-- <app-tag></app-tag> -->
@@ -23,10 +12,10 @@
     </div>
       
     <div class="card-actions justify-end">
-      <button  class="bg-roboto cursor-pointer flex h-8 shrink-0 items-center justify-center font-semibold text-white text-sm border-none rounded-xl bg-gradient-to-r from-accent to-secondary pl-6 pr-7 transition duration-200 hover:bg-gradient-to-r hover:from-accent hover:to-accent focus:outline-none disabled:opacity-30 disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80"> 
+      <button  class="bg-roboto cursor-pointer flex h-8 shrink-0 items-center justify-center font-semibold text-white text-sm border-none rounded-xl bg-gradient-to-r from-accent to-secondary pl-6 pr-7 transition duration-200 hover:bg-gradient-to-r hover:from-accent hover:to-accent focus:outline-none  disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80"> 
         Join Club
       </button>
-      <button class="bg-roboto cursor-pointer flex h-8 shrink-0 items-center justify-center font-semibold text-white text-sm border-none rounded-xl bg-gradient-to-r from-accent to-secondary pl-6 pr-7 transition duration-200 hover:bg-gradient-to-r hover:from-accent hover:to-accent focus:outline-none disabled:opacity-30 disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80"> 
+      <button class="bg-roboto cursor-pointer flex h-8 shrink-0 items-center justify-center font-semibold text-white text-sm border-none rounded-xl bg-gradient-to-r from-accent to-secondary pl-6 pr-7 transition duration-200 hover:bg-gradient-to-r hover:from-accent hover:to-accent focus:outline-none  disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80"> 
         <!-- *ngIf="hasUserRSVPd"  @buttonFade (click)="rsvpToEvent() -->
         Leave Club
       </button>
