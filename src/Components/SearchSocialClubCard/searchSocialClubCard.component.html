@@ -12,12 +12,8 @@
     </div>
       
     <div class="card-actions justify-end">
-      <button  class="bg-roboto cursor-pointer flex h-8 shrink-0 items-center justify-center font-semibold text-white text-sm border-none rounded-xl bg-gradient-to-r from-accent to-secondary pl-6 pr-7 transition duration-200 hover:bg-gradient-to-r hover:from-accent hover:to-accent focus:outline-none  disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80"> 
-        Join Club
-      </button>
-      <button class="bg-roboto cursor-pointer flex h-8 shrink-0 items-center justify-center font-semibold text-white text-sm border-none rounded-xl bg-gradient-to-r from-accent to-secondary pl-6 pr-7 transition duration-200 hover:bg-gradient-to-r hover:from-accent hover:to-accent focus:outline-none  disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80"> 
-        <!-- *ngIf="hasUserRSVPd"  @buttonFade (click)="rsvpToEvent() -->
-        Leave Club
+      <button [routerLink]="['/socialclub', clubID]"  class="bg-roboto cursor-pointer flex h-8 shrink-0 items-center justify-center font-semibold text-white text-sm border-none rounded-xl bg-gradient-to-r from-accent to-secondary pl-6 pr-7 transition duration-200 hover:bg-gradient-to-r hover:from-accent hover:to-accent focus:outline-none  disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80"> 
+        View Club
       </button>
     </div>
   </div>

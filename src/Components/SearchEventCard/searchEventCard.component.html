@@ -17,7 +17,7 @@
     </div>
       
     <div class="card-actions justify-start lg:justify-end lg:absolute bottom-0 right-0 lg:mb-8 lg:mr-8">
-      <button onclick="view_more_modal.showModal()" [routerLink]="['/event', eventID]" class="bg-roboto cursor-pointer flex h-8 shrink-0 items-center justify-center font-semibold text-white text-sm border-none rounded-xl bg-gradient-to-r from-accent to-secondary pl-6 pr-7 transition duration-200 hover:bg-gradient-to-r hover:from-accent hover:to-accent focus:outline-none  disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80"> 
+      <button [routerLink]="['/event', eventID]" class="bg-roboto cursor-pointer flex h-8 shrink-0 items-center justify-center font-semibold text-white text-sm border-none rounded-xl bg-gradient-to-r from-accent to-secondary pl-6 pr-7 transition duration-200 hover:bg-gradient-to-r hover:from-accent hover:to-accent focus:outline-none  disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80"> 
         View More
       </button>
       <button class="bg-roboto cursor-pointer flex h-8 shrink-0 items-center justify-center font-semibold text-white text-sm border-none rounded-xl bg-gradient-to-r from-accent to-secondary pl-6 pr-7 transition duration-200 hover:bg-gradient-to-r hover:from-accent hover:to-accent focus:outline-none  disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80" *ngIf="!hasUserRSVPd"  @buttonFade (click)="rsvpToEvent()">
