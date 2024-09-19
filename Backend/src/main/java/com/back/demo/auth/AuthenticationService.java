@@ -81,21 +81,7 @@ public class AuthenticationService {
         var refreshToken = jwtService.generateRefreshToken(user);
         revokeAllUserTokens(user);
         saveUserToken(user, jwtToken);
-
-        Cookie jwtCookie = new Cookie("jwt", jwtToken);
-        jwtCookie.setHttpOnly(true);
-        jwtCookie.setSecure(true); 
-        jwtCookie.setPath("/");
-        jwtCookie.setMaxAge(60 * 60); 
-
-        Cookie refreshTokenCookie = new Cookie("refreshToken", refreshToken);
-        refreshTokenCookie.setHttpOnly(true);
-        refreshTokenCookie.setSecure(true); 
-        refreshTokenCookie.setPath("/");
-        refreshTokenCookie.setMaxAge(7 * 12 * 60 * 60); 
-
-        response.addCookie(jwtCookie);
-        response.addCookie(refreshTokenCookie);
+        
         response.setStatus(HttpServletResponse.SC_OK);
 
         return AuthenticationResponse.builder()

@@ -268,8 +268,8 @@ export class SocialClubCreateComponent implements OnInit {
         }
 
         const authData = await response.json();
-        document.cookie = `jwt=${authData.access_token}; path=/; expires=` + new Date(new Date().getTime() + 15 * 60 * 1000).toUTCString();
-        document.cookie = `refresh=${authData.refresh_token}; path=/; expires=` + new Date(new Date().getTime() + 24* 60 * 60 * 1000).toUTCString();
+        document.cookie = `jwt=${authData.access_token}; path=/; expires=` + new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toUTCString();            // Expiry set to 24 hours
+        document.cookie = `refresh=${authData.refresh_token}; path=/; expires=` + new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000).toUTCString();   // Expiry set to 1 week
         console.log('Token refresh successful');
         // Handle the response data as needed
       } catch (error) {

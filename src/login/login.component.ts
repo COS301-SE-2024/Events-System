@@ -198,8 +198,8 @@ export class LoginComponent {
         
         // Store employee ID in local storage
         localStorage.setItem('ID', idData);
-        document.cookie = `jwt=${authData.access_token}; path=/; expires=` + new Date(new Date().getTime() + 15 * 60 * 1000).toUTCString();
-        document.cookie = `refresh=${authData.refresh_token}; path=/; expires=` + new Date(new Date().getTime() + 24* 60 * 60 * 1000).toUTCString();
+        document.cookie = `jwt=${authData.access_token}; path=/; expires=` + new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toUTCString();            // Expiry set to 24 hours
+        document.cookie = `refresh=${authData.refresh_token}; path=/; expires=` + new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000).toUTCString();   // Expiry set to 1 week
 
           // Fetch employee data using ID
           const employeeId = localStorage.getItem('ID');

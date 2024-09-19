@@ -88,8 +88,8 @@ export class OauthComponent implements OnInit{
                 } else {
                   console.warn('No ID found in localStorage');
                 }
-                document.cookie = `jwt=${authData.access_token}; path=/; expires=` + new Date(new Date().getTime() + 15 * 60 * 1000).toUTCString();           // Expiry set to 15 minutes
-                document.cookie = `refresh=${authData.refresh_token}; path=/; expires=` + new Date(new Date().getTime() + 24* 60 * 60 * 1000).toUTCString();  // Expiry set to 24 hours
+                document.cookie = `jwt=${authData.access_token}; path=/; expires=` + new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toUTCString();           // Expiry set to 24 hours
+                document.cookie = `refresh=${authData.refresh_token}; path=/; expires=` + new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000).toUTCString();  // Expiry set to 1 week
 
                 this.router.navigate(['']);
               })
