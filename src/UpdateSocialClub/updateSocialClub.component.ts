@@ -44,7 +44,6 @@ export class UpdateSocialClubComponent implements OnInit{
 
     this.route.params.subscribe(params => {   // Get the event ID from the URL
       this.clubID = params['id'];
-      console.log('ID: ' + this.clubID);
 
       try {
         fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs/' + this.clubID, {
@@ -74,7 +73,6 @@ export class UpdateSocialClubComponent implements OnInit{
           setTimeout(() => {
             this.showfailToast = false;
           }, 10000);
-          console.error('Error:', error);
         });
       }
       catch (error)
@@ -85,7 +83,6 @@ export class UpdateSocialClubComponent implements OnInit{
         setTimeout(() => {
           this.showfailToast = false;
         }, 10000);
-        console.error('Error:', error);
       }
     });
   }
@@ -103,7 +100,6 @@ export class UpdateSocialClubComponent implements OnInit{
           summaryDescription: this.updateForm.get('summaryDescription')?.value,
           categories: [this.updateForm.get('categories')?.value]
         };
-        // console.log("Form data: " + formData);
         
         try{
           fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs/' + this.clubID, {
@@ -132,7 +128,6 @@ export class UpdateSocialClubComponent implements OnInit{
             setTimeout(() => {
               this.showfailToast = false;
             }, 10000);
-            console.error('Error:', error);
           });
         }
         catch (error) {
@@ -142,7 +137,6 @@ export class UpdateSocialClubComponent implements OnInit{
           setTimeout(() => {
             this.showfailToast = false;
           }, 10000);
-          console.error('Error:', error);
         }
       }
     );

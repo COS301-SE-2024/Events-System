@@ -91,7 +91,6 @@ export class SocialClubCreateComponent implements OnInit {
               summaryDescription: this.createForm.get('summaryDescription')?.value,
               categories: [this.createForm.get('categories')?.value]
             };
-            // console.log("Form data: " + JSON.stringify(formData));
             
             try {
               fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs', {
@@ -105,7 +104,6 @@ export class SocialClubCreateComponent implements OnInit {
               .then(response => response.json())
               .then(() => {
                 // Show the success toast
-                //console.log(data);
                 this.showsuccessToast = true;
                 this.isAPILoading = false;
                 setTimeout(() => {
@@ -120,19 +118,16 @@ export class SocialClubCreateComponent implements OnInit {
                 setTimeout(() => {
                   this.showfailToast = false;
                 }, 10000);
-                console.error('Error:', error);
               });
             }
             catch (error)
             {
-              console.error('Error:', error);
-              console.error('Error during club creation:', error);
+              window.location.reload();
             }
           });
         }
         catch (error) {
-          console.error('Error:', error);
-          console.error('Error during ownerID retrieval:', error);
+          window.location.reload();
         }
        //this.hostID = localStorage.getItem("ID");
 
@@ -147,7 +142,6 @@ export class SocialClubCreateComponent implements OnInit {
       return;
     }
     if (this.currentStep < 3) {
-      //this.createForm.setValue({ pcitureLink: this.createForm.get('pictureLink')?.value });
       this.isPictureEmpty = false;
       ++this.currentStep;
     }
@@ -158,8 +152,6 @@ export class SocialClubCreateComponent implements OnInit {
       return;
     }
     if (this.currentStep < 3)
-      //console.log("Name: " + this.createForm.get('name')?.value);
-      //sessionStorage.setItem(`name`, this.createForm.get('name')?.value)
       this.isNameEmpty = false;
       ++this.currentStep;
   }
@@ -270,11 +262,10 @@ export class SocialClubCreateComponent implements OnInit {
         const authData = await response.json();
         document.cookie = `jwt=${authData.access_token}; path=/; expires=` + new Date(new Date().getTime() + 15 * 60 * 1000).toUTCString();
         document.cookie = `refresh=${authData.refresh_token}; path=/; expires=` + new Date(new Date().getTime() + 24* 60 * 60 * 1000).toUTCString();
-        console.log('Token refresh successful');
         // Handle the response data as needed
-      } catch (error) {
-          console.error('Error refreshing token');
-          // Handle errors appropriately
+      }
+      catch (error) {
+        this.router.navigate(["/login"]);
       }
     }
   }
