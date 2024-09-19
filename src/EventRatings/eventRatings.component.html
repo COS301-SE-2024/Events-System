@@ -2,25 +2,50 @@
     <!-- skeleton content -->
     <div *ngIf="isLoading">
       <div class="skeleton h-80 min-w-dvw"></div>
-      <div class="flex lg:justify-between lg:flex-row flex-col">
+      <div class="flex lg:justify-between lg:flex-row flex-col px-5 lg:px-0">
           <div>
-              <h1 class="skeleton text-6xl lg:ml-64 mt-8 lg:h-14 h-32 w-96"></h1>
-              <h2 class="skeleton mt-4 text-4xl lg:ml-64 text-secondary lg:h-8 h-24 lg:w-[700px] w-80"></h2>
-          </div>
-          <div>
-              <div class="card bg-base-100 shadow-xl lg:mt-4 mt-32">
-                  <div class="card-body">
-                    <h2 class="card-title skeleton lg:h-8 h-14 w-64 -ml-2"></h2>
-                    <p class="skeleton lg:h-8 h-24 lg:w-[200px] w-80-ml-4"></p>
-                    <div class="card-actions justify-end">
-                      <!-- <button class="btn btn-primary">Find out More</button> -->
+              <h1 class="skeleton text-6xl lg:ml-32 mt-8 lg:h-14 h-20 w-60 lg:w-96"></h1>
+              <h2 class="skeleton mt-4 text-4xl lg:ml-32 text-secondary lg:h-8 h-14 w-80"></h2>
+              <div class="flex flex-wrap gap-x-8 gap-y-6 p-4 lg:ml-32">
+                <div class="flex flex-col gap-2">
+                    <p class="skeleton text-green-700 text-4xl w-20 h-10 font-black leading-tight tracking-[-0.033em]"></p>
+
+                    <div class="rating rating-md gap-0.5">
+                      <input type="radio" [name]="'getAverageRating()-' + 1" class="skeleton mask mask-star-2"/>
+                      <input type="radio" [name]="'getAverageRating()-' + 1" class="skeleton mask mask-star-2"/>
+                      <input type="radio" [name]="'getAverageRating()-' + 1" class="skeleton mask mask-star-2"/>
+                      <input type="radio" [name]="'getAverageRating()-' + 1" class="skeleton mask mask-star-2"/>
+                      <input type="radio" [name]="'getAverageRating()-' + 1" class="skeleton mask mask-star-2"/>
                     </div>
-                  </div>
+                  
+                    <p class="skeleton text-white-100 w-16 h-4 text-base font-normal leading-normal"></p>
                 </div>
 
+                <div class="grid min-w-[200px] max-w-[400px] flex-1  items-center gap-y-6 ">
+                    <div class="skeleton w-64 lg:w-96 h-3"></div>
+                    <div class="skeleton w-64 lg:w-96 h-3" ></div>
+                    <div class="skeleton w-64 lg:w-96 h-3"></div>
+                    <div class="skeleton w-64 lg:w-96 h-3"></div>
+                    <div class="skeleton w-64 lg:w-96 h-3"></div>
+                </div>
+            </div>
 
+            <div class="flex flex-row gap-2 lg:ml-36 mt-5">
+              <div class="skeleton avatar placeholder ">
+                  <div class=" skeleton w-10 rounded-full bg-base-200 flex items-center justify-center">
+                      <span class="text-xl font-bold text-primary"></span>
+                  </div>
+              </div>
+
+              <div class=" flex flex-col flex-1">
+                  <p class="skeleton h-4 w-28 mb-2"></p>
+                  <p class="skeleton h-3 w-32"></p>
+              </div>
+            </div>
           </div>
-
+          <div>
+            <button class="skeleton btn mt-8 w-32 lg:mr-36 hidden lg:block"></button>
+          </div>
       </div>
   </div> 
 
