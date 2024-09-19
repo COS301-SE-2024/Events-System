@@ -66,5 +66,7 @@ export const appRoutes: Route[] = [
   { path: 'deleteseries/:id', component: DeleteSeriesComponent, canActivate: [AuthGuard] },
   { path: 'createseries', component: CreateSeriesComponent, canActivate: [AuthGuard] },
   { path: 'series/:id', component: SeriesComponent, canActivate: [AuthGuard] },
-  { path: 'reset-password/:token', component: ResetPasswordComponent }
+  { path: 'reset-password/:token', component: ResetPasswordComponent },
+  {path: 'eventratings/:id', component: EventRatingsComponent, canActivate: [AuthGuard]}
+
 ];
