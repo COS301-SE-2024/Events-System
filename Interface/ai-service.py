@@ -15,7 +15,7 @@ CORS(app)  # Enable CORS for all routes
 
 # Initialize OpenAI client
 client = OpenAI(
-    api_key="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"
+    api_key="API_KEY"
 )
 
 def get_db_connection():
