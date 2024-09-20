@@ -29,6 +29,7 @@ export class EventCardComponent implements OnChanges, OnInit{
   @Input() location: string | undefined;
   @Input() hostedBy: string | undefined;
   @Input() socialClub: string | undefined;
+  @Input() isRecommended= false; // Add this line
 
   formatTime(time: string | undefined): string | undefined {
     if (time) {

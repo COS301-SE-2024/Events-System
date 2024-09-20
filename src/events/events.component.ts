@@ -16,6 +16,7 @@ export class EventsComponent implements OnInit{
   host: any = null;
   selectedDate = '';
   searchLocation = '';
+  loading = false;
   searchTerm = '';
   uniqueSocialClubs: any[] = [];
 checkedSocialClubs: any[] = [];
@@ -186,5 +187,20 @@ checkedSocialClubs: any[] = [];
       (!this.selectedDietaryAccommodation || event.eventDietaryAccommodations.includes(this.selectedDietaryAccommodation))
     );
   }
-  
+  recommendedEventIds: string[] = [];
+
+  highlightRecommendedEvents() {
+    this.loading = true;
+    const employeeId = localStorage.getItem('ID');
+    fetch(`http://localhost:5000/recommend?employee_id=${employeeId}`, {
+      method: 'GET'
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        this.recommendedEventIds = data;
+        this.filterEvents();
+        this.loading = false;
+      });
+  }
 }

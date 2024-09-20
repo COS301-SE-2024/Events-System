@@ -26,7 +26,7 @@ export class LoginComponent {
   showemailfailToast = false;
   hidePassword = true;
   googleClientId = environment.CLIENT_ID;
-  redirectUri = 'https://events-system.org/oauth/callback'; // e.g., http://localhost:4200/oauth/callback
+  redirectUri = 'https://events-system.org/oauth/callback';
   googleAuthEndpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
   responseType = 'code';
   scope = 'openid email profile';
@@ -236,13 +236,6 @@ export class LoginComponent {
   }
 
   async signInWithGoogle() {
-    /*const googleRespnse = await fetch('http://localhost:8080/api/v1/auth/google', {
-        method: 'POST', // Important for including cookies if needed
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });*/
       const baseUrl = 'https://accounts.google.com/o/oauth2/auth/oauthchooseaccount';
       const responseType = 'response_type=code';
       const clientId = 'client_id=' + environment.CLIENT_ID;

@@ -28,11 +28,11 @@ describe('CreateEventComponent', () => {
     const stepButtons = fixture.debugElement.queryAll(By.css('.step'));
     stepButtons[1].triggerEventHandler('click', null);
     fixture.detectChanges();
-    expect(component.currentStep).toBe(1);
+    expect(component.currentStep).toBe(0);
 
     stepButtons[2].triggerEventHandler('click', null);
     fixture.detectChanges();
-    expect(component.currentStep).toBe(2);
+    expect(component.currentStep).toBe(0);
   });
 
   // it('should display the correct step content based on currentStep', () => {

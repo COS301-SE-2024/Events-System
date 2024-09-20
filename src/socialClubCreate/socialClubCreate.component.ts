@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms'; 
@@ -34,6 +34,8 @@ import { RandomImageServiceService } from 'src/app/random-image-service.service'
   ]
 })
 export class SocialClubCreateComponent implements OnInit {
+  @ViewChild('summarydescriptionInput') summarydescriptionInput!: ElementRef;
+  @ViewChild('descriptionInput') descriptionInput!: ElementRef;
   createForm: FormGroup;
   hostID: any;
   imageSource: string;
@@ -42,7 +44,9 @@ export class SocialClubCreateComponent implements OnInit {
   showsuccessToast = false;
   showfailToast = false;
   isAPILoading = false;
-
+  generatedDescriptions: string[] = [];
+  generatedSummaryDescriptions: any[] = [];
+  isLoading = false;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -293,5 +297,112 @@ export class SocialClubCreateComponent implements OnInit {
     }
     return null;
 }
+isSummaryDescriptionSelected = false;
+selectedSummaryDescription = '';
+selectSummaryDescription(description: string) {
+  this.summarydescriptionInput.nativeElement.value = description;
+  this.selectedSummaryDescription = description;
+  this.isSummaryDescriptionSelected = true;
+}
 
+
+clearSummaryDescription() {
+  this.selectedSummaryDescription = '';
+  this.isSummaryDescriptionSelected = false;
+  this.summarydescriptionInput.nativeElement.value = "";
+}
+
+isDescriptionSelected = false;
+selectedDescription = '';
+selectDescription(description: string) {
+  this.descriptionInput.nativeElement.value = description
+  this.selectedDescription = description;
+  this.isDescriptionSelected = true;
+}
+
+
+clearDescription() {
+  this.selectedDescription = '';
+  this.isDescriptionSelected = false;
+  this.descriptionInput.nativeElement.value = "";
+
+}
+
+suggestDescriptions() {
+  console.log(this.createForm.get('name')?.value);
+  const name = this.createForm.get('name')?.value;
+  if (!name) {
+    window.alert("event title is required to generate description suggestions");
+    return;
+  }
+  this.isLoading = true; // Set loading state to true
+  fetch(`http://127.0.0.1:5000/generate-s-descriptions?social_club_title="${name}"`, {
+    method: 'POST',
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log("descriptions", data);
+    this.isLoading = false; // Set loading state to false
+
+    if (Array.isArray(data.descriptions) && data.descriptions.length > 0) {
+      const concatenatedDescriptions = data.descriptions[0];
+      // Split the concatenated descriptions into an array
+      const descriptions = concatenatedDescriptions.split(/\d\.\s/).filter(Boolean);
+      this.generatedDescriptions = [];
+      
+      // Add each description sequentially with a delay
+      descriptions.forEach((description: any, index: any) => {
+        setTimeout(() => {
+          this.generatedDescriptions.push(description);
+          // Trigger change detection if necessary
+        }, index * 500); // Adjust the delay (5000ms = 5s) as needed
+      });
+    } else {
+      console.error('Error: descriptions is not in the expected format');
+    }
+  })
+  .catch(error => {
+    console.error('Error fetching suggested descriptions:', error);
+    this.isLoading = false;
+  });
+}
+
+suggestSummaryDescriptions() {
+  console.log(this.createForm.get('name')?.value);
+  const name = this.createForm.get('name')?.value;
+  if (!name) {
+    window.alert("event title is required to generate description suggestions");
+    return;
+  }
+  this.isLoading = true; // Set loading state to true
+  fetch(`http://127.0.0.1:5000/generate-ss-descriptions?social_club_title="${name}"`, {
+    method: 'POST',
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log("descriptions", data);
+    this.isLoading = false; // Set loading state to false
+
+    if (Array.isArray(data.descriptions) && data.descriptions.length > 0) {
+      const concatenatedDescriptions = data.descriptions[0];
+      // Split the concatenated descriptions into an array
+      const descriptions = concatenatedDescriptions.split(/\d\.\s/).filter(Boolean);
+      this.generatedDescriptions = [];
+      
+      // Add each description sequentially with a delay
+      descriptions.forEach((description: any, index: any) => {
+        setTimeout(() => {
+          this.generatedSummaryDescriptions.push(description);
+          // Trigger change detection if necessary
+        }, index * 500); // Adjust the delay (5000ms = 5s) as needed
+      });
+    } else {
+      console.error('Error: descriptions is not in the expected format');
+    }
+  })
+  .catch(error => {
+    console.error('Error fetching suggested descriptions:', error);
+    this.isLoading = false;
+  });
+}
 }
