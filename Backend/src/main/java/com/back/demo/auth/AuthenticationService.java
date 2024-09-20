@@ -71,7 +71,6 @@ public class AuthenticationService {
                     )
             );
         } catch (AuthenticationException e) {
-            System.out.println("Authentication failed: " + e.getMessage());
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             throw e;
         }
@@ -81,7 +80,7 @@ public class AuthenticationService {
         var refreshToken = jwtService.generateRefreshToken(user);
         revokeAllUserTokens(user);
         saveUserToken(user, jwtToken);
-        
+
         response.setStatus(HttpServletResponse.SC_OK);
 
         return AuthenticationResponse.builder()
