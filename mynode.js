@@ -10,6 +10,7 @@ const envFile = `export const environment = {
     CLIENT_SECRET_FULL: '${process.env.CLIENT_SECRET_FULL}',
     CLIENT_ID: '${process.env.CLIENT_ID}',
     CLIENT_SECRET: '${process.env.CLIENT_SECRET}',
+    GOOGLE_API_KEY: '${process.env.GOOGLE_API_KEY}',
 };
 `;
 
