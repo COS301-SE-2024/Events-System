@@ -27,7 +27,7 @@ export default defineConfig({
   webServer: {
     command: 'npx nx serve Events-System',
     url: 'http://localhost:4200',
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: !process.env['CI'],
     cwd: workspaceRoot,
   },
   projects: [
@@ -35,11 +35,11 @@ export default defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
-    
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
+    // uncomment for firefox testing
+    // {
+    //   name: 'firefox',
+    //   use: { ...devices['Desktop Firefox'] },
+    // },
 
     {
       name: 'webkit',
