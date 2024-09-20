@@ -134,7 +134,6 @@ export class LoginComponent {
       password: this.registerForm.get('password')?.value,
       role: this.registerForm.get('role')?.value
     };
-    console.log('Form data:', formData);
       // Assuming API endpoint for registration
       fetch('https://events-system-back.wn.r.appspot.com/api/v1/auth/register', {
         method: 'POST',
@@ -147,7 +146,6 @@ export class LoginComponent {
       .then(data => {
         this.showregistersuccessToast = true;
         this.isAPILoading = false;
-        console.log('Registration successful:', data);
         setTimeout(() => {
           this.showregistersuccessToast = false;
           this.router.navigate(['']);
@@ -161,10 +159,9 @@ export class LoginComponent {
         setTimeout(() => {
           this.showregisterfailToast = false;
         }, 10000);
-        console.error('Error:', error);
       });
     } else {
-      console.log('Form is invalid. Please check the fields.');
+      window.location.reload();
     }
   }
 
@@ -206,9 +203,8 @@ export class LoginComponent {
           if (employeeId) {
             const employeeResponse = await this.http.get(`https://events-system-back.wn.r.appspot.com/api/employees/${employeeId}`).toPromise();
             localStorage.setItem('employeeData', JSON.stringify(employeeResponse));
-            console.log('Employee data:', localStorage.getItem('employeeData'));
           } else {
-            console.warn('No ID found in localStorage');
+            window.location.reload();
           }
         this.showloginsuccessToast = true;
         this.isAPILoading = false;
@@ -226,12 +222,10 @@ export class LoginComponent {
         setTimeout(() => {
           this.showloginfailToast = false;
         }, 5000);
-        console.error('Error during login:', error);
-        this.errorMessage = 'Invalid credentials. Please try again.'; // Set error message for invalid credentials
         window.location.reload();
       }
     } else {
-      console.log('Form is invalid. Please check the fields.');
+      window.location.reload();
     }
   }
 
@@ -254,7 +248,6 @@ export class LoginComponent {
       const flowName = 'flowName=GeneralOAuthFlow';
       const fullUrl = `${baseUrl}?${responseType}&${clientId}&${scope}&${redirectUri}&${service}&${o2v}&${ddm}&${flowName}`;
 
-      console.log(decodeURIComponent(fullUrl));
       window.location.href = `${baseUrl}?${responseType}&${clientId}&${scope}&${redirectUri}&${service}&${o2v}&${ddm}&${flowName}`;
 
       
