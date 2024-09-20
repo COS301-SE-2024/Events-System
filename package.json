@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node -r dotenv/config mynode.js && nx serve --no-cloud",
-    "build": "nx build --no-cloud",
+    "build": "nx build --no-cloud --include=optional",
     "test": "nx test --no-cloud",
     "lint": "nx lint --no-cloud",
     "e2e": "npx playwright test e2e/",
@@ -110,5 +110,11 @@
   },
   "nx": {
     "includedScripts": []
+  },
+  "optionalDependencies": {
+    "@nx/nx-darwin-arm64": "19.0.4",
+    "@nx/nx-darwin-x64": "19.0.4",
+    "@nx/nx-linux-x64-gnu": "19.0.4",
+    "@nx/nx-win32-x64-msvc": "19.0.4"
   }
 }
