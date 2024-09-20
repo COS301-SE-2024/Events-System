@@ -2,7 +2,8 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-
+import { DomSanitizer } from '@angular/platform-browser';
+import { SanitizePipe } from 'src/app/sanitization.pipe';
 @Component({
   selector: 'app-delete-social-club',
   standalone: true,
@@ -19,15 +20,19 @@ export class DeleteSocialClubComponent {
   isAPILoading = false;
   showsuccessToast = false;
   showfailToast = false;
+  sanitizePipe: SanitizePipe;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private sanitizer: DomSanitizer
   )
   {
     this.deleteForm = this.fb.group({
       name: ['', Validators.required]
     });
+    this.sanitizePipe = new SanitizePipe(this.sanitizer);
+
   }
 
   ngOnInit(): void {

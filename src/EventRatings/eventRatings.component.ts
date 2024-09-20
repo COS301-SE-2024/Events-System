@@ -5,6 +5,8 @@ import {UserReviewCardComponent} from 'src/Components/UserReviewCard/userReviewC
 import { response } from 'express';
 import { RandomHeaderService } from 'src/app/random-header.service';
 import { FormsModule } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
+import { SanitizePipe } from 'src/app/sanitization.pipe';
 @Component({
   selector: 'app-event-ratings',
   standalone: true,
@@ -22,13 +24,17 @@ export class EventRatingsComponent implements OnInit {
   isAPILoading = false;
   showsuccessToast = false;
   showfailToast = false;
+  sanitizePipe: SanitizePipe;
   review = '';
   constructor(
     private router: Router,
     private randomheaderservice: RandomHeaderService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private sanitizer: DomSanitizer
   )
   { 
+    this.sanitizePipe = new SanitizePipe(this.sanitizer);
+
    this.imageSource = '';
   }
   goBack(): void {
@@ -42,8 +48,8 @@ export class EventRatingsComponent implements OnInit {
     const review = {
       eventId: Number(this.eventId),
       employeeId: Number(localStorage.getItem('ID')),
-      rating: this.rating,
-      comments: this.review,
+      rating: Number(this.rating),
+      comments: this.sanitizePipe.transform(this.review),
     };
     // Implement your logic to handle the form submission
     fetch('https://events-system-back.wn.r.appspot.com/api/feedback', {

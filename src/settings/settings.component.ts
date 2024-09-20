@@ -7,7 +7,8 @@ import { createClient } from 'contentful-management';
 import { FormsModule } from '@angular/forms';
 
 import { environment } from 'src/environments/environment';
-
+import { DomSanitizer } from '@angular/platform-browser';
+import { SanitizePipe } from 'src/app/sanitization.pipe';
 @Component({
   selector: 'app-settings',
   standalone: true,
@@ -37,12 +38,15 @@ export class SettingsComponent implements OnInit {
   showchangesuccessToast = false;
   showdeletefailToast = false;
   showchangefailToast = false;
-
+  sanitizePipe: SanitizePipe;
   avatar: File | null = null;
   file: any;
   pictureChanged = false;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private sanitizer: DomSanitizer) {
+    this.sanitizePipe = new SanitizePipe(this.sanitizer);
+
+  }
 
   selectTab(tab: string) {
     this.selectedTab = tab;
@@ -118,13 +122,13 @@ export class SettingsComponent implements OnInit {
     this.isAPILoading = true;
     const updatedData: any = {};
   
-    if (this.name) updatedData.firstName = this.name;
-    if (this.surname) updatedData.lastName = this.surname;
-    if (this.description) updatedData.employeeDescription = this.description;
-    if (this.email) updatedData.email = this.email;
-    if (this.x) updatedData.twitter = this.x;
-    if (this.linkedIn) updatedData.linkedin = this.linkedIn;
-    if (this.gitHub) updatedData.github = this.gitHub;
+    if (this.name) updatedData.firstName = this.sanitizePipe.transform(this.name);
+    if (this.surname) updatedData.lastName = this.sanitizePipe.transform(this.surname);
+    if (this.description) updatedData.employeeDescription = this.sanitizePipe.transform(this.description);
+    if (this.email) updatedData.email = this.sanitizePipe.transform(this.email);
+    if (this.x) updatedData.twitter = this.sanitizePipe.transform(this.x);
+    if (this.linkedIn) updatedData.linkedin = this.sanitizePipe.transform(this.linkedIn);
+    if (this.gitHub) updatedData.github = (this.gitHub);
   
     const uploadFile = async () => {
       if (this.pictureChanged && this.file) {

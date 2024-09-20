@@ -5,6 +5,8 @@ import { Location } from '@angular/common';
 import validator from 'validator';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule  } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
+import { SanitizePipe } from 'src/app/sanitization.pipe';
 @Component({
   selector: 'app-create-series',
   standalone: true,
@@ -35,7 +37,11 @@ import { RouterModule } from '@angular/router';
 export class CreateSeriesComponent {
   prepform!: FormGroup;
   agendaform!: FormGroup;
-  constructor(private location: Location, private fb: FormBuilder) { }
+  sanitizePipe: SanitizePipe;
+  constructor(private location: Location, private fb: FormBuilder, private sanitizer: DomSanitizer) { 
+    this.sanitizePipe = new SanitizePipe(this.sanitizer);
+
+  }
   @ViewChildren('stepInput') stepInputs!: QueryList<ElementRef>;
   @ViewChild('snameInput') snameInput!: ElementRef;
   @ViewChild('sdescriptionInput') sdescriptionInput!: ElementRef;
@@ -61,8 +67,8 @@ export class CreateSeriesComponent {
     this.isAPILoading = true;
 
     const eventSeries = {
-      name: validator.escape(this.snameInput.nativeElement.value),
-      description: validator.escape(this.sdescriptionInput.nativeElement.value),
+      name: this.sanitizePipe.transform(this.snameInput.nativeElement.value),
+      description: this.sanitizePipe.transform(this.sdescriptionInput.nativeElement.value),
       seriesEventIds: JSON.parse(sessionStorage.getItem('selectedEventIds') || '[]'),
       hostId: localStorage.getItem('ID')
     };
