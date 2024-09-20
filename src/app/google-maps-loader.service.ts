@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class GoogleMapsLoaderService {
-  private apiKey = environment.GOOGLE_API_KEY;
+  apiKey =  `${environment.GOOGLE_API_KEY}`;
   private apiLoaded = false;
 
   load(): Promise<void> {
