@@ -336,7 +336,7 @@ suggestDescriptions() {
     return;
   }
   this.isLoading = true; // Set loading state to true
-  fetch(`http://127.0.0.1:5000/generate-s-descriptions?social_club_title="${name}"`, {
+  fetch(`https://safe-dawn-94912-2365567c9819.herokuapp.com/generate-s-descriptions?social_club_title="${name}"`, {
     method: 'POST',
   })
   .then(response => response.json())
@@ -375,7 +375,7 @@ suggestSummaryDescriptions() {
     return;
   }
   this.isLoading = true; // Set loading state to true
-  fetch(`http://127.0.0.1:5000/generate-ss-descriptions?social_club_title="${name}"`, {
+  fetch(`https://safe-dawn-94912-2365567c9819.herokuapp.com/generate-ss-descriptions?social_club_title="${name}"`, {
     method: 'POST',
   })
   .then(response => response.json())

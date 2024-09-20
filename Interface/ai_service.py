@@ -15,7 +15,7 @@ CORS(app)  # Enable CORS for all routes
 
 # Initialize OpenAI client
 client = OpenAI(
-    api_key="API_KEY"
+api_key=os.getenv("OPENAI_API_KEY")
 )
 
 def get_db_connection():
@@ -280,7 +280,10 @@ def recommend():
     
     return jsonify(recommended_event_ids)
 
+@app.route('/health', methods=['GET'])
+def health_check():
+    return jsonify({'status': 'healthy'}), 200
 
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+if __name__ == "__main__":
+    port = int(os.getenv("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)

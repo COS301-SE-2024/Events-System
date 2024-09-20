@@ -192,7 +192,7 @@ checkedSocialClubs: any[] = [];
   highlightRecommendedEvents() {
     this.loading = true;
     const employeeId = localStorage.getItem('ID');
-    fetch(`http://localhost:5000/recommend?employee_id=${employeeId}`, {
+    fetch(`https://safe-dawn-94912-2365567c9819.herokuapp.com/recommend?employee_id=${employeeId}`, {
       method: 'GET'
     })
       .then(response => response.json())

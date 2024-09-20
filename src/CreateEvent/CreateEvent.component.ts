@@ -584,7 +584,7 @@ saveTagsToSessionStorage() {
     this.isLoading = true; // Set loading state to true
 
     // Retrieve the recommended start and end times
-    fetch('http://127.0.0.1:5000/suggest-times', {
+    fetch('https://safe-dawn-94912-2365567c9819.herokuapp.com/suggest-times', {
       method: 'GET'
     })
     .then(response => response.json())
@@ -610,7 +610,7 @@ saveTagsToSessionStorage() {
       return;
     }
     this.isLoading = true; // Set loading state to true
-    fetch(`http://127.0.0.1:5000/generate-descriptions?event_title="${name}"`, {
+    fetch(`https://safe-dawn-94912-2365567c9819.herokuapp.com/generate-descriptions?event_title="${name}"`, {
       method: 'POST',
     })
     .then(response => response.json())
@@ -663,7 +663,7 @@ saveTagsToSessionStorage() {
       return;
     }
     this.isLoading = true; // Set loading state to true
-    fetch(`http://127.0.0.1:5000/generate-tags?event_title="${name}"`, {
+    fetch(`https://safe-dawn-94912-2365567c9819.herokuapp.com/generate-tags?event_title="${name}"`, {
       method: 'POST',
     })
     .then(response => response.json())
@@ -701,7 +701,7 @@ saveTagsToSessionStorage() {
     }
   
     this.isLoading = true;
-    fetch(`http://localhost:5000/generate-prep?event_title="${eventTitle}"`, {
+    fetch(`https://safe-dawn-94912-2365567c9819.herokuapp.com/generate-prep?event_title="${eventTitle}"`, {
       method: 'POST',
     })
     .then(response => response.json())
@@ -735,7 +735,7 @@ saveTagsToSessionStorage() {
     }
 
     this.isLoading = true;
-    fetch(`http://localhost:5000/generate-agenda?event_title="${eventTitle}"`, {
+    fetch(`https://safe-dawn-94912-2365567c9819.herokuapp.com/generate-agenda?event_title="${eventTitle}"`, {
       method: 'POST',
     })
     .then(response => response.json())
