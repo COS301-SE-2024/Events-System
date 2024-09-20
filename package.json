@@ -9,7 +9,7 @@
     "lint": "nx lint --no-cloud",
     "e2e": "npx playwright test e2e/",
     "ci:test": "start-server-and-test start http://localhost:4200 e2e",
-    "postinstall": "node ./scripts/postinstall.js"
+    "postinstall": "node scripts/postinstall.js"
   },
   "private": true,
   "dependencies": {
