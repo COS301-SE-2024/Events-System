@@ -51,7 +51,7 @@ export class CreateEventComponent implements AfterViewInit, OnInit{
   prepform!: FormGroup;
   agendaform!: FormGroup;
   sanitizePipe: SanitizePipe;
-  constructor(private location: Location, private fb: FormBuilder, private ngZone: NgZone, private sanitizer: DomSanitize, private googleMapsLoader: GoogleMapsLoaderServicer) { 
+  constructor(private location: Location, private fb: FormBuilder, private ngZone: NgZone, private sanitizer: DomSanitizer, private googleMapsLoader: GoogleMapsLoaderService) { 
     this.sanitizePipe = new SanitizePipe(this.sanitizer);
 
   }
