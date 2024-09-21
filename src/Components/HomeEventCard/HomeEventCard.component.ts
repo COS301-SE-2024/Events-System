@@ -40,7 +40,7 @@ export class HomeEventCardComponent implements OnInit{
     // Use the injected service
     this.imageSource = this.randomImageService.getRandomImageSource();
   }
-  getFirstThreeTags(): string[] {
-    return this.tags.slice(0, 3);
-  }
+  // getFirstThreeTags(): string[] {
+  //   return this.tags.slice(0, 3);
+  // }
 }

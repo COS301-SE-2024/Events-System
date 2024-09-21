@@ -7,6 +7,8 @@ import validator from 'validator';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { GoogleMapsLoaderService } from 'src/app/google-maps-loader.service';
 import { GoogleMapsModule } from '@angular/google-maps'
+import { DomSanitizer } from '@angular/platform-browser';
+import { SanitizePipe } from 'src/app/sanitization.pipe';
 
 @Component({
   selector: 'app-create-event',
@@ -48,7 +50,12 @@ import { GoogleMapsModule } from '@angular/google-maps'
 export class CreateEventComponent implements AfterViewInit, OnInit{
   prepform!: FormGroup;
   agendaform!: FormGroup;
-  constructor(private location: Location, private fb: FormBuilder, private ngZone: NgZone, private googleMapsLoader: GoogleMapsLoaderService) { }
+  sanitizePipe: SanitizePipe;
+  constructor(private location: Location, private fb: FormBuilder, private ngZone: NgZone, private sanitizer: DomSanitize, private googleMapsLoader: GoogleMapsLoaderServicer) { 
+    this.sanitizePipe = new SanitizePipe(this.sanitizer);
+
+  }
+
   @ViewChildren('stepInput') stepInputs!: QueryList<ElementRef>;
   @ViewChild('nameInput') nameInput!: ElementRef;
   @ViewChild('nameInputs') nameInputs!: ElementRef;
@@ -108,19 +115,19 @@ export class CreateEventComponent implements AfterViewInit, OnInit{
   const savedTags = sessionStorage.getItem('tags');
   const tags = savedTags ? JSON.parse(savedTags) : [];
     const event = {
-      title: validator.escape(this.nameInput.nativeElement.value),
-      description: validator.escape(this.descriptionInput.nativeElement.value),
-      startTime: validator.escape(this.StartTimeInput.nativeElement.value+':00'),
-      endTime: validator.escape(this.EndTimeInput.nativeElement.value+':00'),
-      startDate: validator.escape(this.StartDateInput.nativeElement.value),
-      endDate: validator.escape(this.EndDateInput.nativeElement.value),
-      location: validator.escape(this.LocationInput.nativeElement.value),
+      title: this.sanitizePipe.transform(this.nameInput.nativeElement.value),
+      description: this.sanitizePipe.transform(this.descriptionInput.nativeElement.value),
+      startTime: this.sanitizePipe.transform(this.StartTimeInput.nativeElement.value+':00'),
+      endTime: this.sanitizePipe.transform(this.EndTimeInput.nativeElement.value+':00'),
+      startDate: this.sanitizePipe.transform(this.StartDateInput.nativeElement.value),
+      endDate: this.sanitizePipe.transform(this.EndDateInput.nativeElement.value),
+      location: this.sanitizePipe.transform(this.LocationInput.nativeElement.value),
       hostId: localStorage.getItem('ID'),
       geolocation: this.latitude + ', ' + this.longitude,
       socialClub: getSocialClubIdByName(validator.escape(this.SocialClubInput.nativeElement.value)),
       eventPictureLink: "https://example.com/soccer-tournament.jpg", // Replace with actual picture link
-      eventAgendas: this.agendaform.get('agendainputs')?.value.map((input: any) => validator.escape(input)),
-      eventPreparation: this.prepform.get('prepinputs')?.value.map((input: any) => validator.escape(input)),
+      eventAgendas: this.agendaform.get('agendainputs')?.value.map((input: any) => this.sanitizePipe.transform(input)),
+      eventPreparation: this.prepform.get('prepinputs')?.value.map((input: any) => this.sanitizePipe.transform(input)),
       eventDietaryAccommodations: [
         this.isVegetarianSelected ? "Vegetarian" : null,
         this.isVeganSelected ? "Vegan" : null,
