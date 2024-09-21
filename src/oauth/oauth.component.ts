@@ -27,8 +27,8 @@ export class OauthComponent implements OnInit{
 
         const baseUrl = 'https://oauth2.googleapis.com/token';
         const clientId = 'client_id=' + environment.CLIENT_ID;
-        const clientSecret = 'client_secret=' + environment.CLIENT_SECRET;
-        const redirectUri = 'redirect_uri=http%3A%2F%2Flocalhost%3A4200%2Foauth';
+        const clientSecret = 'client_secret='+ environment.CLIENT_SECRET;
+        const redirectUri = 'redirect_uri=https%3A%2F%2Fevents-system.org%2Foauth';
         const grantType = 'grant_type=authorization_code';
         //const code = 'YOUR_AUTHORIZATION_CODE'; // replace with actual authorization code
         
@@ -160,18 +160,20 @@ export class OauthComponent implements OnInit{
                       }
                 
                       // Compare the events
+                      const agendas = `<ul>${event.eventAgendas.map((agenda: any) => `<li>${agenda}</li>`).join("")}</ul>`
+                      const preps = `<ul>${event.eventPreparation.map((preparation: any) => `<li>${preparation}</li>`).join("")}</ul>`
                       const googleEvent = {
                         summary: event.title,
                         location: event.location,
                         description: `
                           ${event.description}
-                
-                          Agendas:
-                          - ${event.eventAgendas.join("\n    - ")}
-                
-                          Preparations:
-                          - ${event.eventPreparation.join("\n    - ")}
-                        `,
+                          <h3>Agendas:</h3>  ${agendas}
+
+
+
+                      <h3>Preparations:</h3>  ${preps}
+
+                        `,
                         start: {
                           dateTime: `${event.startDate}T${event.startTime}`,
                           timeZone: 'Africa/Johannesburg',

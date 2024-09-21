@@ -264,7 +264,7 @@ export class LoginComponent {
       const responseType = 'response_type=code';
       const clientId = 'client_id=' + environment.CLIENT_ID;
       const scope = 'scope=profile%20email%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcalendar';
-      const redirectUri = 'redirect_uri=http%3A%2F%2Flocalhost%3A4200%2Foauth';
+      const redirectUri = 'redirect_uri=https%3A%2F%2Fevents-system.org%2Foauth';
       const service = 'service=lso';
       const o2v = 'o2v=1';
       const ddm = 'ddm=0';

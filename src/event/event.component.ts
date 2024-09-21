@@ -255,19 +255,20 @@ export class EventComponent implements OnInit{
             })
             .then(async eventData => {
               const event = await eventData.json();
-
+              const agendas = `<ul>${event.eventAgendas.map((agenda: any) => `<li>${agenda}</li>`).join("")}</ul>`
+              const preps = `<ul>${event.eventPreparation.map((preparation: any) => `<li>${preparation}</li>`).join("")}</ul>`
               const googleEvent = {
                 summary: event.title,
                 location: event.location,
                 description: `
                   ${event.description}
+                  <h3>Agendas:</h3>  ${agendas}
 
-                  Agendas:
-                  - ${event.eventAgendas.join("\n    - ")}
 
-                  Preparations:
-                  - ${event.eventPreparation.join("\n    - ")}
-                `,
+
+              <h3>Preparations:</h3>  ${preps}
+
+                `,
                 start: {
                   dateTime: `${event.startDate}T${event.startTime}`,
                   timeZone: 'Africa/Johannesburg', // Adjust based on your timezone
