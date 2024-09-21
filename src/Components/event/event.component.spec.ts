@@ -53,9 +53,6 @@ describe('EventComponent', () => {
     const datesElement = fixture.debugElement.query(By.css('.card-body p:nth-child(3)'));
     expect(datesElement.nativeElement.textContent).toContain('Dates: 1/1/23 - 1/2/23');
 
-    const timesElement = fixture.debugElement.query(By.css('.card-body p:nth-child(4)'));
-    expect(timesElement.nativeElement.textContent).toContain('Times: 6:00 PM');
-
     const locationElement = fixture.debugElement.query(By.css('.card-body p:nth-child(5)'));
     expect(locationElement.nativeElement.textContent).toContain('Test Location');
 

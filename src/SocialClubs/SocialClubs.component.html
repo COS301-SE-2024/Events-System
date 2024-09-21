@@ -1,7 +1,7 @@
 <div class="relative flex flex-col bg-base-100 overflow-hidden">
     <div class="layout-container flex grow flex-col">
       <div class="px-5 md:px-56 flex flex-1 justify-center py-5 ">
-        <div class="layout-content-container flex flex-col max-w-[2010px] flex-1">
+        <div class="layout-content-container flex flex-col  flex-1">
             <!--Page heading-->
             <div class="flex items-center justify-center md:mx-10 mb-5">
                 <div class="font-poppins text-center text-secondary font-extrabold text-2xl md:text-3xl mb-2">
@@ -38,7 +38,7 @@
 
 
               <ng-template #content>
-                <div class=" flex flex-wrap gap-10">
+                <div class=" flex flex-wrap gap-5">
                   <app-social-club-card
                   *ngFor="let club of filteredSocialClubs"
                   [socialClubName]="club.name"
