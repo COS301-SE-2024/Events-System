@@ -295,6 +295,8 @@ notify() {
 
 
   }
+
+
   nextUSlide() {
     const singleSlideWidth = this.carousel2.nativeElement.offsetWidth / 3;
     this.carousel2.nativeElement.scrollLeft += singleSlideWidth;

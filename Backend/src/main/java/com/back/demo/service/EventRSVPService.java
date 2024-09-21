@@ -3,6 +3,7 @@ package com.back.demo.service;
 import com.back.demo.model.EventRSVP;
 import com.back.demo.repository.EventRSVPRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,10 +23,12 @@ public class EventRSVPService {
         return eventRSVPRepository.findById(id);
     }
 
+    @CacheEvict(value = "event-rsvps", key = "'getAllEventRSVPs'")
     public EventRSVP createEventRSVP(EventRSVP eventRSVP) {
         return eventRSVPRepository.save(eventRSVP);
     }
 
+    @CacheEvict(value = "event-rsvps", key = "'getAllEventRSVPs'")
     public EventRSVP updateEventRSVP(Long id, EventRSVP eventRSVP) {
         if (eventRSVPRepository.existsById(id)) {
             eventRSVP.setRsvpId(id);
@@ -35,6 +38,7 @@ public class EventRSVPService {
         }
     }
 
+    @CacheEvict(value = "event-rsvps", key = "'getAllEventRSVPs'")
     public void deleteEventRSVP(Long id) {
         eventRSVPRepository.deleteById(id);
     }

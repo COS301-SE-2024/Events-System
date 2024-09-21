@@ -3,7 +3,8 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormControl, ValidationErrors,  FormGroup, Validators, ReactiveFormsModule } from '@angular/forms'; 
 import { HttpClientModule, HttpClient  } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-
+import { DomSanitizer } from '@angular/platform-browser';
+import { SanitizePipe } from 'src/app/sanitization.pipe';
 @Component({
   selector: 'app-reset-password',
   standalone: true,
@@ -23,8 +24,11 @@ export class ResetPasswordComponent implements OnInit{
   isAPILoading = false;
   showresetsuccessToast = false;
   showresetfailToast = false;
+  sanitizePipe: SanitizePipe;
   constructor(private route: ActivatedRoute,
-    private fb: FormBuilder, private router: Router) {
+    private fb: FormBuilder, private router: Router, private sanitizer: DomSanitizer) {
+      this.sanitizePipe = new SanitizePipe(this.sanitizer);
+
     this.registerForm = this.fb.group({
       password: this.passwordControl2,
       confirmPassword: this.passwordControl3,
@@ -67,7 +71,7 @@ export class ResetPasswordComponent implements OnInit{
     event.preventDefault();
 
     if (this.registerForm.valid) {
-      const password = this.registerForm.get('password')?.value;
+      const password = this.sanitizePipe.transform(this.registerForm.get('password')?.value);
 
       fetch('https://events-system-back.wn.r.appspot.com/api/reset/reset-password', {
         method: 'POST',

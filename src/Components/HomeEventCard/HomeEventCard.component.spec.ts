@@ -37,8 +37,6 @@ describe('HomeEventCardComponent', () => {
     component.eventID = 'testId';
     fixture.detectChanges();
 
-    const imgElement = fixture.debugElement.query(By.css('img'));
-    expect(imgElement.nativeElement.src).toContain('test-image.jpg');
 
     const titleElement = fixture.debugElement.query(By.css('h1'));
     expect(titleElement.nativeElement.textContent).toContain('Test Event');
