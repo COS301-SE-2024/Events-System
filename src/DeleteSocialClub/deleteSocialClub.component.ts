@@ -73,7 +73,6 @@ export class DeleteSocialClubComponent {
             setTimeout(() => {
               this.showsuccessToast = false;
               window.history.back();
-              // this.router.navigate(['/socialclublisting']);
             }, 5000);
           })
           .catch ((error) => {
@@ -83,7 +82,6 @@ export class DeleteSocialClubComponent {
             setTimeout(() => {
               this.showfailToast = false;
             }, 10000);
-            console.error('Error:', error);
           });
         }
         else
@@ -94,7 +92,6 @@ export class DeleteSocialClubComponent {
           setTimeout(() => {
             this.showfailToast = false;
           }, 10000);
-          console.error("Incorrect club name")
         }
       }
       else {
@@ -104,7 +101,6 @@ export class DeleteSocialClubComponent {
         setTimeout(() => {
           this.showfailToast = false;
         }, 10000);
-        console.error("Please enter a name")
       }
     });
   }

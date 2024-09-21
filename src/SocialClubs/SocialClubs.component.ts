@@ -29,7 +29,6 @@ export class SocialClubsComponent implements OnInit{
             })
             .then(data => {
               club.host = data.firstName + " "+  data.lastName; // Add host data to the event
-              console.log(club);
             });
         });
         return Promise.all(hostFetches); // Wait for all hostFetches to complete
