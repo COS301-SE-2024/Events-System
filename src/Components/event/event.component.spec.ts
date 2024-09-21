@@ -38,7 +38,6 @@ describe('EventComponent', () => {
     component.description = 'Test Description';
     component.startDate = '2023-01-01'; // Use valid date string
     component.endDate = '2023-01-02'; // Use valid date string
-    component.endTime = '2023-01-02T18:00:00Z'; // Use valid date-time string
     component.location = 'Test Location';
     component.hostedBy = 'Test Host';
     component.socialClub = 'Test Club';
@@ -52,6 +51,8 @@ describe('EventComponent', () => {
 
     const datesElement = fixture.debugElement.query(By.css('.card-body p:nth-child(3)'));
     expect(datesElement.nativeElement.textContent).toContain('Dates: 1/1/23 - 1/2/23');
+
+
 
     const locationElement = fixture.debugElement.query(By.css('.card-body p:nth-child(5)'));
     expect(locationElement.nativeElement.textContent).toContain('Test Location');

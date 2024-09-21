@@ -1,18 +1,19 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, QueryList, ViewChildren, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, QueryList, ViewChildren, AfterViewChecked, NgZone } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Location } from '@angular/common';
 import validator from 'validator';
 import { NotificationService } from 'src/app/notification.service';
-
+import { GoogleMapsLoaderService } from 'src/app/google-maps-loader.service';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { GoogleMapsModule } from '@angular/google-maps'
 import { DomSanitizer } from '@angular/platform-browser';
 import { SanitizePipe } from 'src/app/sanitization.pipe';
 @Component({
   selector: 'app-update-event',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, GoogleMapsModule],
   templateUrl: './UpdateEvent.component.html',
   styleUrl: './UpdateEvent.component.css',
   animations: [
@@ -36,11 +37,11 @@ import { SanitizePipe } from 'src/app/sanitization.pipe';
     ]),
   ]
 })
-export class UpdateEventComponent implements OnInit, AfterViewChecked{
+export class UpdateEventComponent implements OnInit{
   prepform!: FormGroup;
   agendaform!: FormGroup;
+  isAPILoaded = false;
   sanitizePipe: SanitizePipe;
-
   @ViewChildren('stepInput') stepInputs!: QueryList<ElementRef>;
   @ViewChild('nameInput') nameInput!: ElementRef;
   @ViewChild('nameInputs') nameInputs!: ElementRef;
@@ -69,8 +70,20 @@ export class UpdateEventComponent implements OnInit, AfterViewChecked{
   isGlutenFreeSelected = false;
   tags: string[] = [];
   newTag = '';
+  latitude: number | undefined;
+  longitude: number | undefined;
+  location = '';
+  mapOptions: google.maps.MapOptions = {
+    center: { lat: -25.7552742, lng: 28.2337029 },
+    zoomControl: true,
+    mapTypeControl: false,
+    streetViewControl: false,
+    fullscreenControl: false,
+  };
 
-  constructor(private route: ActivatedRoute, private location: Location, private fb: FormBuilder, private notificationService: NotificationService, private sanitizer: DomSanitizer) {
+  markerPosition = { lat: 48.8634286, lng: 2.3114617 };
+
+  constructor(private route: ActivatedRoute, private fb: FormBuilder, private notificationService: NotificationService, private sanitizer: DomSanitizer, private ngZone: NgZone, private googleMapsLoader: GoogleMapsLoaderService) {
     this.sanitizePipe = new SanitizePipe(this.sanitizer);
 
     this.prepform = this.fb.group({
@@ -104,7 +117,7 @@ presubmit(){
     this.route.params.subscribe(params => {
       this.eventId = params['id'];
   // Retrieve tags from session storage
-  const savedTags = sessionStorage.getItem('tags');
+  const savedTags = sessionStorage.getItem('utags');
   const tags = savedTags ? JSON.parse(savedTags) : [];
 
       const event = {
@@ -117,17 +130,17 @@ presubmit(){
         location: this.sanitizePipe.transform(this.LocationInput.nativeElement.value),
 
         hostId: localStorage.getItem('ID'),
-        geolocation: "51.507351, -0.127758",
+        geolocation: this.latitude + ', ' + this.longitude,
         socialClub: this.sanitizePipe.transform(this.SocialClubInput.nativeElement.value),
         eventPictureLink: "https://example.com/soccer-tournament.jpg", // Replace with actual picture link
         eventAgendas: this.agendainputs?.value.map((input: any) => this.sanitizePipe.transform(input)),
         eventPreparation: this.prepinputs?.value.map((input: any) => this.sanitizePipe.transform(input)),
         
         eventDietaryAccommodations: [
-          sessionStorage.getItem('updateisVegetarianSelected') === 'true' ? "Vegetarian" : null,
-          sessionStorage.getItem('updateisVeganSelected') === 'true' ? "Vegan" : null,
-          sessionStorage.getItem('updateisHalalSelected') === 'true' ? "Halal" : null,
-          sessionStorage.getItem('updateisGlutenFreeSelected') === 'true' ? "Gluten-free" : null
+          sessionStorage.getItem('uuupdateisVegetarianSelected') === 'true' ? "Vegetarian" : null,
+          sessionStorage.getItem('uuupdateisVeganSelected') === 'true' ? "Vegan" : null,
+          sessionStorage.getItem('uuuupdateisHalalSelected') === 'true' ? "Halal" : null,
+          sessionStorage.getItem('uuupdateisGlutenFreeSelected') === 'true' ? "Gluten-free" : null
         ].filter(Boolean), // Remove null values
         tags: tags // Add tags to the event object
 
@@ -187,11 +200,11 @@ removeTag(index: number) {
 }
 
 saveTagsToSessionStorage() {
-  sessionStorage.setItem('tags', JSON.stringify(this.tags));
+  sessionStorage.setItem('utags', JSON.stringify(this.tags));
 }
 
 notify() {
-const eventName = sessionStorage.getItem('Name') ?? 'Unknown';
+const eventName = sessionStorage.getItem('uName') ?? 'Unknown';
   this.notificationService.sendNotification(Number(localStorage.getItem('ID')), Number(this.eventId), "Event Updated", eventName).subscribe(response => {
     // console.log(response); // Handle the response as needed
   });
@@ -208,29 +221,60 @@ addprepInput(value = '') {
   if (this.prepinputs.length < 5) {
     this.prepinputs.push(this.fb.control(value));
   }
-  this.nameInput.nativeElement.value = sessionStorage.getItem('Name');
-  this.descriptionInput.nativeElement.value = sessionStorage.getItem('Description');
-  this.StartTimeInput.nativeElement.value = sessionStorage.getItem('StartTime');
-  this.EndTimeInput.nativeElement.value = sessionStorage.getItem('EndTime');
-  this.StartDateInput.nativeElement.value = sessionStorage.getItem('StartDate');
-  this.EndDateInput.nativeElement.value = sessionStorage.getItem('EndDate');
-  this.LocationInput.nativeElement.value = sessionStorage.getItem('Location');
-  this.SocialClubInput.nativeElement.value = sessionStorage.getItem('SocialClub');
+  this.nameInput.nativeElement.value = sessionStorage.getItem('uName');
+  this.descriptionInput.nativeElement.value = sessionStorage.getItem('uDescription');
+  this.StartTimeInput.nativeElement.value = sessionStorage.getItem('uStartTime');
+  this.EndTimeInput.nativeElement.value = sessionStorage.getItem('uEndTime');
+  this.StartDateInput.nativeElement.value = sessionStorage.getItem('uStartDate');
+  this.EndDateInput.nativeElement.value = sessionStorage.getItem('uEndDate');
+  this.LocationInput.nativeElement.value = sessionStorage.getItem('uLocation');
+  this.SocialClubInput.nativeElement.value = sessionStorage.getItem('uSocialClub');
 }
 
 addagendaInput(value = '') {
   if (this.agendainputs.length < 5) {
     this.agendainputs.push(this.fb.control(value));
   }
-  this.nameInput.nativeElement.value = sessionStorage.getItem('Name');
-  this.descriptionInput.nativeElement.value = sessionStorage.getItem('Description');
-  this.StartTimeInput.nativeElement.value = sessionStorage.getItem('StartTime');
-  this.EndTimeInput.nativeElement.value = sessionStorage.getItem('EndTime');
-  this.StartDateInput.nativeElement.value = sessionStorage.getItem('StartDate');
-  this.EndDateInput.nativeElement.value = sessionStorage.getItem('EndDate');
-  this.LocationInput.nativeElement.value = sessionStorage.getItem('Location');
-  this.SocialClubInput.nativeElement.value = sessionStorage.getItem('SocialClub');
+  this.nameInput.nativeElement.value = sessionStorage.getItem('uName');
+  this.descriptionInput.nativeElement.value = sessionStorage.getItem('uDescription');
+  this.StartTimeInput.nativeElement.value = sessionStorage.getItem('uStartTime');
+  this.EndTimeInput.nativeElement.value = sessionStorage.getItem('uEndTime');
+  this.StartDateInput.nativeElement.value = sessionStorage.getItem('uStartDate');
+  this.EndDateInput.nativeElement.value = sessionStorage.getItem('uEndDate');
+  this.LocationInput.nativeElement.value = sessionStorage.getItem('uLocation');
+  this.SocialClubInput.nativeElement.value = sessionStorage.getItem('uSocialClub');
 }
+
+initializeGooglePlaces() {
+  const input = this.LocationInput.nativeElement as HTMLInputElement;
+  const autocomplete = new google.maps.places.Autocomplete(input, {
+    // types: ['geocode']
+  });
+
+  autocomplete.addListener('place_changed', () => {
+    this.ngZone.run(() => {
+      const place = autocomplete.getPlace();
+      if (place.geometry && place.geometry.location) {
+        this.latitude = place.geometry.location.lat();
+        this.longitude = place.geometry.location.lng();
+        this.location = place.formatted_address || '';
+        sessionStorage.setItem('Location', this.location); // Store the selected location in sessionStorage
+        this.updateMapCenter(); // Update the map center
+      }
+    });
+  });
+}
+
+updateMapCenter() {
+  if (this.latitude !== undefined && this.longitude !== undefined) {
+    this.mapOptions = {
+      ...this.mapOptions,
+      center: { lat: this.latitude, lng: this.longitude }
+    };
+    this.markerPosition = { lat: this.latitude, lng: this.longitude };
+  }
+}
+
 removeprepInput(index: number) {
   this.prepinputs.removeAt(index);
 }
@@ -238,8 +282,8 @@ removeagendaInput(index: number) {
   this.agendainputs.removeAt(index);
 }
 saveInputs() {
-  sessionStorage.setItem('prepinputs', JSON.stringify(this.prepinputs.value));
-  sessionStorage.setItem('agendainputs', JSON.stringify(this.agendainputs.value));
+  sessionStorage.setItem('uprepinputs', JSON.stringify(this.prepinputs.value));
+  sessionStorage.setItem('uagendainputs', JSON.stringify(this.agendainputs.value));
 }
   ngOnInit(): void {
     this.route.params.subscribe(params => {   
@@ -259,41 +303,41 @@ saveInputs() {
       .then(data => {
         this.myevent = data;
         // console.log(this.myevent);
-        this.nameInput.nativeElement.value = sessionStorage.setItem('Name', data.title);
-        this.descriptionInput.nativeElement.value = sessionStorage.setItem('Description', data.description);
-        this.StartTimeInput.nativeElement.value = sessionStorage.setItem('StartTime', data.startTime);
-        this.EndTimeInput.nativeElement.value = sessionStorage.setItem('EndTime', data.endTime);
-        this.StartDateInput.nativeElement.value = sessionStorage.setItem('StartDate', data.startDate);
-        this.EndDateInput.nativeElement.value = sessionStorage.setItem('EndDate', data.endDate);
-        this.LocationInput.nativeElement.value = sessionStorage.setItem('Location', data.location);
-        this.SocialClubInput.nativeElement.value = sessionStorage.setItem('SocialClub', data.socialClub);
+        this.nameInput.nativeElement.value = sessionStorage.setItem('uName', data.title);
+        this.descriptionInput.nativeElement.value = sessionStorage.setItem('uDescription', data.description);
+        this.StartTimeInput.nativeElement.value = sessionStorage.setItem('uStartTime', data.startTime);
+        this.EndTimeInput.nativeElement.value = sessionStorage.setItem('uEndTime', data.endTime);
+        this.StartDateInput.nativeElement.value = sessionStorage.setItem('uStartDate', data.startDate);
+        this.EndDateInput.nativeElement.value = sessionStorage.setItem('uEndDate', data.endDate);
+        this.LocationInput.nativeElement.value = sessionStorage.setItem('uLocation', data.location);
+        this.SocialClubInput.nativeElement.value = sessionStorage.setItem('uSocialClub', data.socialClub);
         if(data.eventDietaryAccommodations.includes('Vegetarian')){
-          sessionStorage.setItem('isVegetarianSelected', 'true');
-          sessionStorage.setItem('updateisVegetarianSelected', 'true');
+          sessionStorage.setItem('uisVegetarianSelected', 'true');
+          sessionStorage.setItem('uupdateisVegetarianSelected', 'true');
         }else{
-          sessionStorage.setItem('isVegetarianSelected', 'false');
-          sessionStorage.setItem('updateisVegetarianSelected', 'false');
+          sessionStorage.setItem('uisVegetarianSelected', 'false');
+          sessionStorage.setItem('uupdateisVegetarianSelected', 'false');
         }
         if(data.eventDietaryAccommodations.includes('Vegan')){
-          sessionStorage.setItem('isVeganSelected', 'true');
-          sessionStorage.setItem('updateisVeganSelected', 'true');
+          sessionStorage.setItem('uisVeganSelected', 'true');
+          sessionStorage.setItem('uupdateisVeganSelected', 'true');
         }else{
-          sessionStorage.setItem('isVeganSelected', 'false');
-          sessionStorage.setItem('updateisVeganSelected', 'false');
+          sessionStorage.setItem('uisVeganSelected', 'false');
+          sessionStorage.setItem('uupdateisVeganSelected', 'false');
         }
         if(data.eventDietaryAccommodations.includes('Halal')){
-          sessionStorage.setItem('isHalalSelected', 'true');
-          sessionStorage.setItem('updateisHalalSelected', 'true');
+          sessionStorage.setItem('uisHalalSelected', 'true');
+          sessionStorage.setItem('uupdateisHalalSelected', 'true');
         }else{
-          sessionStorage.setItem('isHalalSelected', 'false');
-          sessionStorage.setItem('updateisHalalSelected', 'false');
+          sessionStorage.setItem('uisHalalSelected', 'false');
+          sessionStorage.setItem('uupdateisHalalSelected', 'false');
         }
         if(data.eventDietaryAccommodations.includes('Gluten-free')){
-          sessionStorage.setItem('isGlutenFreeSelected', 'true');
-          sessionStorage.setItem('updateisGlutenFreeSelected', 'true');
+          sessionStorage.setItem('uisGlutenFreeSelected', 'true');
+          sessionStorage.setItem('uupdateisGlutenFreeSelected', 'true');
         }else{
-          sessionStorage.setItem('isGlutenFreeSelected', 'false');
-          sessionStorage.setItem('updateisGlutenFreeSelected', 'false');
+          sessionStorage.setItem('uisGlutenFreeSelected', 'false');
+          sessionStorage.setItem('uupdateisGlutenFreeSelected', 'false');
         }
         const prepsavedInputs = this.myevent.eventPreparation;
         if (prepsavedInputs) {
@@ -307,31 +351,37 @@ saveInputs() {
         }
         if (this.myevent && this.myevent.dietaryAccommodations) {       // Check if the event has dietary accommodations
           this.isVegetarianSelected = data.dietaryAccommodations.includes("Vegetarian"); 
-          sessionStorage.setItem('updateisVegetarianSelected', String(this.isVegetarianSelected));
+          sessionStorage.setItem('uupdateisVegetarianSelected', String(this.isVegetarianSelected));
           this.isVeganSelected = data.dietaryAccommodations.includes('Vegan');
-          sessionStorage.setItem('updateisVeganSelected', String(this.isVeganSelected));
+          sessionStorage.setItem('uupdateisVeganSelected', String(this.isVeganSelected));
           this.isHalalSelected = data.dietaryAccommodations.includes('Halal');
-          sessionStorage.setItem('updateisHalalSelected', String(this.isHalalSelected));
+          sessionStorage.setItem('uupdateisHalalSelected', String(this.isHalalSelected));
           this.isGlutenFreeSelected = data.dietaryAccommodations.includes('Gluten-Free');
-          sessionStorage.setItem('updateisGlutenFreeSelected', String(this.isGlutenFreeSelected));
+          sessionStorage.setItem('uupdateisGlutenFreeSelected', String(this.isGlutenFreeSelected));
         }
 
-        this.isVegetarianSelected = sessionStorage.getItem('isVegetarianSelected') === 'true';    
-        this.isVeganSelected = sessionStorage.getItem('isVeganSelected') === 'true';
-        this.isHalalSelected = sessionStorage.getItem('isHalalSelected') === 'true';
-        this.isGlutenFreeSelected = sessionStorage.getItem('isGlutenFreeSelected') === 'true';
+        this.isVegetarianSelected = sessionStorage.getItem('uisVegetarianSelected') === 'true';    
+        this.isVeganSelected = sessionStorage.getItem('uisVeganSelected') === 'true';
+        this.isHalalSelected = sessionStorage.getItem('uisHalalSelected') === 'true';
+        this.isGlutenFreeSelected = sessionStorage.getItem('uisGlutenFreeSelected') === 'true';
 
-        sessionStorage.setItem('tags', JSON.stringify(data.tags));
+        sessionStorage.setItem('utags', JSON.stringify(data.tags));
 
                 // Load tags from session storage
-        const savedTags = sessionStorage.getItem('tags');
+        const savedTags = sessionStorage.getItem('utags');
         if (savedTags) {
           this.tags = JSON.parse(savedTags);
         }
         
               });
     });
-    
+    setTimeout(() => {
+          this.googleMapsLoader.load().then(() => {
+            this.isAPILoaded = true;
+            this.initializeGooglePlaces();
+          }).catch(error => {
+            console.error('Error loading Google Maps API:', error);
+          });      }, 100);
 
   }
 
@@ -345,18 +395,24 @@ saveInputs() {
       this.eventDietaryAccommodations.push(accommodation);
     }
   }
-  ngAfterViewChecked(): void {
-    if (this.myevent) {
-      this.nameInput.nativeElement.value = this.myevent.title;
-      this.descriptionInput.nativeElement.value = this.myevent.description;
-      this.StartTimeInput.nativeElement.value = this.formatTime(this.myevent.startTime);
-      this.EndTimeInput.nativeElement.value = this.formatTime(this.myevent.endTime);
-      this.StartDateInput.nativeElement.value = this.myevent.startDate;
-      this.EndDateInput.nativeElement.value = this.myevent.endDate;
-      this.LocationInput.nativeElement.value = this.myevent.location;
-      this.SocialClubInput.nativeElement.value = this.myevent.socialClub;
-    }
-  }
+  // ngAfterViewChecked(): void {
+  //   setTimeout(() => {
+  //     this.googleMapsLoader.load().then(() => {
+  //       this.initializeGooglePlaces();
+  //     }).catch(error => {
+  //       console.error('Error loading Google Maps API:', error);
+  //     });      }, 100);
+  //   if (this.myevent) {
+  //     this.nameInput.nativeElement.value = this.myevent.title;
+  //     this.descriptionInput.nativeElement.value = this.myevent.description;
+  //     this.StartTimeInput.nativeElement.value = this.formatTime(this.myevent.startTime);
+  //     this.EndTimeInput.nativeElement.value = this.formatTime(this.myevent.endTime);
+  //     this.StartDateInput.nativeElement.value = this.myevent.startDate;
+  //     this.EndDateInput.nativeElement.value = this.myevent.endDate;
+  //     this.LocationInput.nativeElement.value = this.myevent.location;
+  //     this.SocialClubInput.nativeElement.value = this.myevent.socialClub;
+  //   }
+  // }
   formatTime(time: string | undefined): string | undefined {
     if (time) {
       const parts = time.split(':');
@@ -372,25 +428,51 @@ saveInputs() {
   // Add these methods
   toggleVegetarian() {
     this.isVegetarianSelected = !this.isVegetarianSelected;
-    sessionStorage.setItem('updateisVegetarianSelected', String(this.isVegetarianSelected));
+    sessionStorage.setItem('uupdateisVegetarianSelected', String(this.isVegetarianSelected));
 
   }
 
   toggleVegan() {
     this.isVeganSelected = !this.isVeganSelected;
-    sessionStorage.setItem('updateisVeganSelected', String(this.isVeganSelected));
+    sessionStorage.setItem('uupdateisVeganSelected', String(this.isVeganSelected));
 
   }
 
   toggleHalal() {
     this.isHalalSelected = !this.isHalalSelected;
-    sessionStorage.setItem('updateisHalalSelected', String(this.isHalalSelected));
+    sessionStorage.setItem('uupdateisHalalSelected', String(this.isHalalSelected));
 
   }
 
   toggleGlutenFree() {
-    this.isGlutenFreeSelected = !this.isGlutenFreeSelected;  sessionStorage.setItem('isGlutenFreeSelected', String(this.isGlutenFreeSelected));
-    sessionStorage.setItem('updateisGlutenFreeSelected', String(this.isGlutenFreeSelected));
+    this.isGlutenFreeSelected = !this.isGlutenFreeSelected;  sessionStorage.setItem('uisGlutenFreeSelected', String(this.isGlutenFreeSelected));
+    sessionStorage.setItem('uupdateisGlutenFreeSelected', String(this.isGlutenFreeSelected));
 
   }
+
+  openInMaps() {
+    const location = sessionStorage.getItem('Location');
+    if (location) {
+      const encodedLocation = encodeURIComponent(location);
+      const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedLocation}`;
+      window.open(mapsUrl, '_blank');
+    } else {
+      alert('Please enter a location first.');
+    }
+  }
+
+  updateMarkerPosition(location: string) {
+    if (location) {
+      sessionStorage.setItem('Location', location);
+      const geocoder = new google.maps.Geocoder();
+      geocoder.geocode({ address: location }, (results:any, status:any) => {
+        if (status === 'OK' && results[0].geometry.location) {
+          this.latitude = results[0].geometry.location.lat();
+          this.longitude = results[0].geometry.location.lng();
+          this.updateMapCenter(); // Update the map center
+        }
+      });
+    }
+  }
+  
 }

@@ -128,7 +128,16 @@
 
         </div>
     
-
+        <div class="map mt-8 rounded-lg" *ngIf="isAPILoaded">
+          <google-map height="24rem" width="100%" [options]="mapOptions">
+            <map-marker [position]="markerPosition"></map-marker>
+          </google-map>
+          <!-- Add this button where you want it to appear, for example, after the location input -->
+        <div class="flex justify-center mt-4">
+          <button (click)="openInMaps()" class="btn btn-outline btn-primary font-roboto">
+            Open in Maps
+          </button>
+        </div>
 
         <!-- <p> <i class="fa-solid fa-user mr-2"></i> {{ hostedBy }}</p>
         <p><i class="fa-solid fa-location-pin mr-3"></i>{{ location }}</p>

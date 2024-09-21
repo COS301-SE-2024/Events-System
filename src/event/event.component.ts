@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RandomHeaderService } from '../app/random-header.service';
 import { RouterModule } from '@angular/router';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-
+import { GoogleMapsLoaderService } from 'src/app/google-maps-loader.service';
+import { GoogleMapsModule } from '@angular/google-maps'
 @Component({
   selector: 'app-event',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, GoogleMapsModule],
   templateUrl: './event.component.html',
   styleUrl: './event.component.css',
   animations: [
@@ -38,21 +39,40 @@ export class EventComponent implements OnInit{
   isLoading = true;
   hasUserRSVPd = false;
   club: any = null;
-  constructor(private route: ActivatedRoute, private randomHeaderService: RandomHeaderService) { 
+  mapOptions: google.maps.MapOptions = {
+    center: { lat: -25.7552742, lng: 28.2337029 },
+    zoomControl: true,
+    mapTypeControl: false,
+    streetViewControl: false,
+    fullscreenControl: false,
+  };
+  markerPosition = { lat: 48.8634286, lng: 2.3114617 };
+  latitude: number | undefined;
+  longitude: number | undefined;
+  isAPILoaded = false;
+  constructor(private route: ActivatedRoute, private randomHeaderService: RandomHeaderService, private googleMapsLoader: GoogleMapsLoaderService, private ngZone: NgZone) { 
     this.imageSource = '';
   }
   goBack(): void {
     window.history.back();
   }
   ngOnInit(): void {
-    this.imageSource = this.randomHeaderService.getRandomHeaderSource();
-    this.route.params.subscribe(async params => { // Step 1: Make this an async function
-      this.eventId = params['id'];
+      this.imageSource = this.randomHeaderService.getRandomHeaderSource();
+      this.route.params.subscribe(async params => { // Step 1: Make this an async function
+        this.eventId = params['id'];
+    
+        await this.checkUserRSVP();
+        await this.fetchEventDetails();
+      });
   
-      await this.checkUserRSVP();
-      await this.fetchEventDetails();
-    });
-  }
+      setTimeout(() => {
+        this.googleMapsLoader.load().then(() => {
+          this.isAPILoaded = true;
+        }).catch(error => {
+          console.error('Error loading Google Maps API:', error);
+        });
+      }, 100);
+    }
   
   async fetchEventDetails(): Promise<void> {
     try {
@@ -62,6 +82,14 @@ export class EventComponent implements OnInit{
       this.event.startTime = this.formatTime(this.event.startTime);
       this.event.endTime = this.formatTime(this.event.endTime);
   
+          // Parse the geolocation string and update map center and marker position
+    if (this.event.geolocation) {
+      const [lat, lng] = this.event.geolocation.split(',').map(Number);
+      this.latitude = lat;
+      this.longitude = lng;
+      this.updateMapCenter();
+    }
+
       const hostResponse = await fetch('https://events-system-back.wn.r.appspot.com/api/employees/' + this.event.hostId);
       const hostData = await hostResponse.json();
       this.host = hostData;
@@ -194,5 +222,22 @@ export class EventComponent implements OnInit{
     }
     this.hasUserRSVPd = !this.hasUserRSVPd; // Toggle the RSVP state
   }
+  updateMapCenter() {
+    if (this.latitude !== undefined && this.longitude !== undefined) {
+      this.mapOptions.center = { lat: this.latitude, lng: this.longitude };
+      this.markerPosition = { lat: this.latitude, lng: this.longitude };
+    }
+  }
 
+  openInMaps() {
+    const location = this.event.location;
+    if (location) {
+      const encodedLocation = encodeURIComponent(location);
+      const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedLocation}`;
+      window.open(mapsUrl, '_blank');
+    } else {
+      alert('Please enter a location first.');
+    }
+  }
+  
 }

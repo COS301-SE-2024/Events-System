@@ -1,0 +1,108 @@
+<div class="flex flex-col items-center justify-center">
+  <div>
+    <h1 class="text-5xl font-bold text-center text-secondary">Schedule</h1>    
+    <p class="py-6  text-primary">
+      Make sure you're up to date with all your upcoming events.
+    </p>
+  </div>
+
+  <div role="tablist" class="tabs w-96 relative bg-base-200 rounded-lg">
+    <div 
+    class="tab-slider h-full rounded-lg absolute left-0 bottom-0 bg-neutral" 
+    [ngClass]="{'w-1/3': userRole === 'MANAGER', 'w-1/2': userRole !== 'MANAGER'}" 
+    [ngStyle]="{'left': getTabPosition()}">
+  </div>
+    <a role="tab" class="tab text-secondary" [class.tab-active]="activeTab === 1" (click)="selectTab(1)">Upcoming</a>
+    <a *ngIf="userRole === 'MANAGER'" role="tab" class="tab text-secondary" [class.tab-active]="activeTab === 2" (click)="selectTab(2)">Hosting</a>
+    <a role="tab" class="tab text-secondary" [class.tab-active]="activeTab === (userRole === 'MANAGER' ? 3 : 2)" (click)="selectTab(userRole === 'MANAGER' ? 3 : 2)">History</a>
+  </div>
+</div>
+
+<!-- Skeletons for loading state -->
+<div *ngIf="loading">
+  <div class="skeleton w-24 h-12 ml-4"></div>
+  <div class="skeleton w-[98%] h-32 mt-4 ml-4"></div>
+  <div class="skeleton w-[98%] h-32 mt-4 ml-4"></div>
+
+  <div class="skeleton w-24 h-12 mt-4 ml-4"></div>
+  <div class="skeleton w-[98%] h-32 mt-4 ml-4"></div>
+  <div class="skeleton w-[98%] h-32 mt-4 ml-4"></div>
+</div>
+
+<!-- Content for Tab 1 -->
+<div *ngIf="!loading && activeTab === 1">
+  <div *ngFor="let monthYear of getGroupedEventKeys()">
+    <ng-container *ngIf="getUpcomingEvents()[monthYear]?.length">
+      <h2 class="text-3xl font-semibold mt-4 text-primary ml-8">{{ getFormattedTime(monthYear) }}</h2>
+      <app-myschedule-card 
+        *ngFor="let event of getUpcomingEvents()[monthYear]"
+        [eventID]="event.id"
+        [eventTitle]="event.title"
+        [eventDescription]="event.description"
+        [eventStartTime]="event.startTime"
+        [eventEndTime]="event.endTime"
+        [eventStartDate]="event.startDate"
+        [eventEndDate]="event.endDate"
+        [eventLocation]="event.location"
+        [eventHost]="event.host"
+        [eventHostId]="event.host.hostId"
+        [eventAgenda]="event.eventAgendas"
+        [eventDietaryAccommodations]="event.eventDietaryAccommodations"
+        [eventPreperationDetails]="event.eventPreparation"
+        [eventTags]="event.tags"
+        [eventSocialClub]="event.socialClub"></app-myschedule-card>
+    </ng-container>
+  </div>
+</div>
+
+<!-- Content for Tab 2 -->
+<div *ngIf="!loading && activeTab === 2">
+  <div *ngFor="let monthYear of getGroupedEventKeys()">
+    <ng-container *ngIf="getHostedEvents()[monthYear]?.length">
+      <h2 class="text-3xl font-semibold mt-4 text-primary  ml-8">{{ getFormattedTime(monthYear) }}</h2>
+      <app-myschedule-card 
+        *ngFor="let event of getHostedEvents()[monthYear]"
+        [eventID]="event.eventId"
+        [eventTitle]="event.title"
+        [eventDescription]="event.description"
+        [eventStartTime]="event.startTime"
+        [eventEndTime]="event.endTime"
+        [eventStartDate]="event.startDate"
+        [eventEndDate]="event.endDate"
+        [eventLocation]="event.location"
+        [eventHost]="event.host"
+        [eventHostId]="event.host.hostId"
+        [eventDietaryAccommodations]="event.eventDietaryAccommodations"
+        [eventAgenda]="event.eventAgendas"
+        [eventPreperationDetails]="event.eventPreparation"
+        [eventTags]="event.tags"
+        [eventSocialClub]="event.socialClub"></app-myschedule-card>
+    </ng-container>
+  </div>
+</div>
+
+<!-- Content for Tab 3 -->
+<div *ngIf="!loading && activeTab === 3">
+  <div *ngFor="let monthYear of getGroupedEventKeys()">
+    <ng-container *ngIf="getPastEvents()[monthYear]?.length">
+      <h2 class="text-3xl font-semibold mt-4 text-primary  ml-8">{{ getFormattedTime(monthYear) }}</h2>
+      <app-myschedule-card 
+        *ngFor="let event of getPastEvents()[monthYear]"
+        [eventID]="event.eventId"
+        [eventTitle]="event.title"
+        [eventDescription]="event.description"
+        [eventStartTime]="event.startTime"
+        [eventEndTime]="event.endTime"
+        [eventStartDate]="event.startDate"
+        [eventEndDate]="event.endDate"
+        [eventLocation]="event.location"
+        [eventHost]="event.host"
+        [eventHostId]="event.host.hostId"
+        [eventDietaryAccommodations]="event.eventDietaryAccommodations"
+        [eventAgenda]="event.eventAgendas"
+        [eventPreperationDetails]="event.eventPreparation"
+        [eventTags]="event.tags"
+        [eventSocialClub]="event.socialClub"></app-myschedule-card>
+    </ng-container>
+  </div>
+</div>

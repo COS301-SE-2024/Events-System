@@ -1,0 +1,1 @@
+web: gunicorn ai_service:app

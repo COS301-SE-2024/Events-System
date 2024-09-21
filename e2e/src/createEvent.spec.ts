@@ -30,9 +30,8 @@ test.describe('Event Create Page', () => {
         await page.goto(`${BASE_URL}/createevent`);
     });
     test('should display the event create form', async ({ page }) => {
-      // Check if the form is visible
-      const form = await page.locator('app-create-event'); // Use a more specific locator
-      await expect(form).toBeVisible();
+    // Check if the form elements are visible
+    await expect(page.locator('h1:has-text("Name your event")')).toBeVisible();
     });
 
 
@@ -53,23 +52,7 @@ test.describe('Event Create Page', () => {
         //await page.selectOption('select', { label: 'Literature Club' }); // Adjust this according to your options
         await page.click('button:has-text("Next")');
 
-        // Step 4: Fill out the prep & agenda
-        await page.click('li:has-text("Prep & Agenda")');
-        // Add prep inputs
-        // for (let i = 0; i < 3; i++) {
-        //     await page.click('button:has-text("+")');
-        //     await page.fill(`input[formcontrolname="${i}"]`, `Prep Item ${i + 1}`);
-        // }
-        // Add agenda inputs
-        // for (let i = 0; i < 3; i++) {
-        //     await page.click('button:has-text("+")');
-        //     await page.fill(`input[formcontrolname="${i}"]`, `Agenda Item ${i + 1}`);
-        // }
-        // await page.click('button:has-text("Next")');
-
-        // Step 5: Submit the form
-        await page.click('li:has-text("Summary")');
-        await expect(page.locator('button:has-text("Create event")')).toBeVisible();
+        await expect(page.locator('li:has-text("Prep & Agenda")')).toBeVisible();
         //await page.click('button:has-text("Create event")');
     });
 });

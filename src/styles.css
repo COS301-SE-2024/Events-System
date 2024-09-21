@@ -1,11 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
-
-
 @import 'tailwindcss/base' layer(tailwindcss);
 @import 'tailwindcss/components' layer(tailwindcss);
 @import 'tailwindcss/utilities' layer(tailwindcss);
 
-  .app-wrapper1 {
+.app-wrapper1 {
     min-height: 100vh; /* Full viewport height */
     overflow-y: auto; /* Enables vertical scrolling */
     overflow-x: hidden; /* Prevents horizontal scrolling */

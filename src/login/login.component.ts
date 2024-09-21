@@ -256,13 +256,7 @@ export class LoginComponent {
   }
 
   async signInWithGoogle() {
-    /*const googleRespnse = await fetch('https://events-system-back.wn.r.appspot.com/api/v1/auth/google', {
-        method: 'POST', // Important for including cookies if needed
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });*/
+
       const baseUrl = 'https://accounts.google.com/o/oauth2/auth/oauthchooseaccount';
       const responseType = 'response_type=code';
       const clientId = 'client_id=' + environment.CLIENT_ID;

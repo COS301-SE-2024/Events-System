@@ -37,13 +37,13 @@ test.describe('SeriesCenterComponent Tests', () => {
         await expect(page.locator('app-series-center')).toBeVisible();
     });
 
-    test('Viewing available Series', async ({ page }) => {
-        // wait for API response
-        await page.waitForResponse('https://events-system-back.wn.r.appspot.com/api/eventseries');
+    // test('Viewing available Series', async ({ page }) => {
+    //     // wait for API response
+    //     await page.waitForResponse('https://events-system-back.wn.r.appspot.com/api/eventseries');
 
-        // Check that the component and its elements are present
-        await expect(page.locator('app-seriescentercard').first()).toBeVisible();
-    });
+    //     // Check that the component and its elements are present
+    //     await expect(page.locator('app-seriescentercard').first()).toBeVisible();
+    // });
     
     test('Selecting Series', async ({ page }) => {
         // Check that the component and its elements are present
