@@ -261,7 +261,7 @@ export class LoginComponent {
   }
 
   async signInWithGoogle() {
-    /*const googleRespnse = await fetch('http://localhost:8080/api/v1/auth/google', {
+    /*const googleRespnse = await fetch('https://events-system-back.wn.r.appspot.com/api/v1/auth/google', {
         method: 'POST', // Important for including cookies if needed
         credentials: 'include',
         headers: {
