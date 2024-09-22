@@ -23,7 +23,7 @@
               </div>
             </div>
               <div *ngIf="isApiLoading else content">
-                <div class=" flex flex-wrap gap-10">
+                <div class=" flex flex-wrap gap-10 items-center justify-center lg:justify-start">
                   <app-social-club-card-skeleton></app-social-club-card-skeleton>
                   <app-social-club-card-skeleton></app-social-club-card-skeleton>
                   <app-social-club-card-skeleton></app-social-club-card-skeleton>
@@ -38,7 +38,7 @@
 
 
               <ng-template #content>
-                <div class=" flex flex-wrap gap-10">
+                <div class=" flex flex-wrap gap-10 bg-red-700 items-center justify-center lg:justify-start">
                   <app-social-club-card
                   *ngFor="let club of filteredSocialClubs"
                   [socialClubName]="club.name"
