@@ -166,13 +166,11 @@ export class OauthComponent implements OnInit{
                         summary: event.title,
                         location: event.location,
                         description: `
-                          ${event.description}
-                          <h3>Agenda:</h3>  ${agendas}
-
-
-
-                      <h3>Preparation Details:</h3>  ${preps}
-
+                          
+                        ${event.description}
+                          <hr><h3>Agenda:</h3>${agendas}
+                      <h3>Preparation Details:</h3>${preps}
+        
                         `,
                         start: {
                           dateTime: `${event.startDate}T${event.startTime}`,
