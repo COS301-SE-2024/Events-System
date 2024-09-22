@@ -27,16 +27,42 @@
       </div>
       <!-- description -->
       <div class="flex justify-center items-center">
-        <div *ngSwitchCase="1" class="mt-8" [@fadeInOut]>
-          <h1 class="lg:text-6xl text-4xl">What's it about?</h1>
+        <div class="flex flex-col items-center mt-8" *ngSwitchCase="1" [@fadeInOut]>
           <div>
-            <div class="tooltip tooltip-open tooltip-error lg:ml-8 ml-4 -mb-4"  [class.hidden]="!isDescriptionEmpty" data-tip="please enter a Description">
+            <h1 class="lg:text-6xl text-4xl font-karla">What's it about?</h1>
+            <div>
+              <div class="tooltip tooltip-open tooltip-error lg:ml-8 ml-4 -mb-4 font-roboto"
+                [class.hidden]="!isDescriptionEmpty" data-tip="Please enter a Description">
+              </div>
+              <textarea #sdescriptionInput class="textarea textarea-bordered w-full h-44 mt-4 font-roboto"
+                placeholder="Description" required></textarea>
             </div>
-            <textarea #sdescriptionInput class="textarea textarea-bordered w-full h-44 mt-4" placeholder="Description" required></textarea>        
+            <div class="tooltip mt-12" data-tip="Optimize the event start time based on the most popular events in the system">
+              <button (click)="suggestseriesDescriptions()" class="btn btn-outline btn-accent ml-2 w-96">
+                <ng-container *ngIf="!isLoading; else loading">
+                  <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+                </ng-container>
+                <ng-template #loading>
+                  <span class="loading loading-dots loading-md"></span>
+                </ng-template>
+              </button>
+              <button (click)="clearseriesDescription()" [disabled]="!isseriesDescriptionSelected" class="btn btn-outline btn-error mt-4 ml-2">
+                <i class="fa fa-times" aria-hidden="true"></i>
+              </button>
+  
+            </div>
           </div>
-          <div class="flex justify-between mt-4">
-            <button (click)="previousStep()" class="btn btn-outline btn-warning" [disabled]="currentStep === 0">Back</button>
-            <button (click)="nextStep1()" class="btn btn-success">Next</button>
+      
+          <!-- Generated descriptions -->
+          <div *ngIf="generatedseriesDescriptions.length > 0" class="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4">
+            <div *ngFor="let desc of generatedseriesDescriptions" class="p-4 border border-neutral rounded-lg cursor-pointer hover:bg-neutral hover:border-accent transition-all duration-300 ease-in-out"  @fadeIn (click)="selectseriesDescription(desc)">
+              {{ desc }}
+            </div>
+          </div>
+          <div class="flex justify-between mt-4 w-full">
+            <button (click)="previousStep()" class="btn btn-outline btn-warning font-roboto"
+              [disabled]="currentStep === 0">Back</button>
+            <button (click)="nextStep1()" class="btn btn-success font-roboto">Next</button>
           </div>
         </div>
       </div>

@@ -2,6 +2,7 @@ package com.back.demo.controller;
 
 import com.back.demo.model.SocialClub;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.back.demo.servicebus.SocialClubServiceBus;
@@ -18,6 +19,7 @@ public class SocialClubController {
     private SocialClubServiceBus socialClubServiceBus;
 
     @GetMapping
+    @Cacheable(value = "socialclubs", key = "#root.methodName")
     public List<SocialClub> getAllSocialClubs() {
         return socialClubServiceBus.getAllSocialClubs();
     }

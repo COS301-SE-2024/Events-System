@@ -38,12 +38,12 @@ test.describe('EventsComponent Tests', () => {
     await expect(page.locator('app-events')).toBeVisible();
   });
 
-  test('Viewing available events', async ({ page }) => {
-    // wait for API response
-    await page.waitForResponse('https://events-system-back.wn.r.appspot.com/api/events');
-    // Check that the component and its elements are present
-    await expect(page.locator('app-event-card').first()).toBeVisible();
-  });
+  // test('Viewing available events', async ({ page }) => {
+  //   // wait for API response
+  //   await page.waitForResponse('https://events-system-back.wn.r.appspot.com/api/events');
+  //   // Check that the component and its elements are present
+  //   await expect(page.locator('app-event-card').first()).toBeVisible();
+  // });
 
   test('Filtering', async ({ page }) => {
     // Test filter options

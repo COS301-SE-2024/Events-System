@@ -2,7 +2,8 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { NotificationService } from 'src/app/notification.service';
-
+import { DomSanitizer } from '@angular/platform-browser';
+import { SanitizePipe } from 'src/app/sanitization.pipe';
 @Component({
   selector: 'app-delete-event',
   standalone: true,
@@ -14,10 +15,14 @@ export class DeleteEventComponent {
   isAPILoading = false;
   showsuccessToast = false;
   showfailToast = false;
+  sanitizePipe: SanitizePipe;
   @ViewChild('nameInput') nameInput!: ElementRef;
   eventId= '';
   myevent: any = {};
-  constructor(private route: ActivatedRoute, private location: Location, private notificationService: NotificationService) { }  
+  constructor(private route: ActivatedRoute, private location: Location, private notificationService: NotificationService, private sanitizer: DomSanitizer) {
+    this.sanitizePipe = new SanitizePipe(this.sanitizer);
+
+   }  
   goBack(): void {
     window.history.back();
   }

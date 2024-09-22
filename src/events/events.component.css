@@ -1,4 +1,21 @@
 .hide-scrollbar::-webkit-scrollbar {
-    @apply w-0;  /* Remove scrollbar space */
-    @apply bg-transparent;  /* Optional: just make scrollbar invisible */
+  @apply w-0;  /* Remove scrollbar space */
+  @apply bg-transparent;  /* Optional: just make scrollbar invisible */
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 10px 2px rgba(255, 255, 0, 0.8);
   }
+  50% {
+    box-shadow: 0 0 20px 4px rgba(255, 255, 0, 1);
+  }
+  100% {
+    box-shadow: 0 0 10px 2px rgba(255, 255, 0, 0.8);
+  }
+}
+
+.glow {
+  animation: pulse 2s infinite;
+  border-radius: 7px;
+}

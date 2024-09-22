@@ -34,7 +34,11 @@
               [endDate]="event.endDate"
               [location]="event.location"
               [hostedBy]="event.host.firstName + ' ' + event.host.lastName"
-              [socialClub]="event.socialClub">
+              [socialClub]="event.socialClub"
+              [isRecommended]="recommendedEventIds.includes(event.eventId)">
+
+              
+              
               </app-event-card>
           </ng-template>
 
@@ -54,9 +58,9 @@
       
     
     </div> 
-    <div class="drawer-side hide-scrollbar">
-      <label for="my-drawer-3" aria-label="close sidebar" class="drawer-overlay fixed"></label> 
-      <ul class="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+    <div class="drawer-side h-full hide-scrollbar">
+      <label for="my-drawer-3" aria-label="close sidebar" class="drawer-overlay"></label> 
+      <ul class="menu h-full p-4 w-80 bg-base-200 text-base-content">
         <!-- Sidebar content here -->
         <button class="btn w-full font-karla no-animation">Refine by social club</button>
         <ul class="menu bg-base-200 w-full rounded-box font-roboto">
@@ -151,10 +155,13 @@
     
     </div>
   </div>
-  <!-- <div class="lg:block hidden fixed right-0 w-96 h-full"> -->
-    <!-- Add your navbar content here -->
-     <!-- <div class="bg-transparent"> -->
 
-     <!-- </div> -->
+  <button class="fixed bottom-4 right-4 bg-blue-500 text-white font-bold w-16 h-16 rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300 ease-in"  (click)="highlightRecommendedEvents()">
+    <ng-container *ngIf="!loading; else loadin">
+      <i class="fa fa-lightbulb-o ml-1 mt-1" aria-hidden="true"></i>
+    </ng-container>
+    <ng-template #loadin>
+      <span class="loading loading-dots loading-md"></span>
+    </ng-template>
 
-  <!-- </div> -->
+  </button>

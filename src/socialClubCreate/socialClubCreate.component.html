@@ -53,15 +53,56 @@
                 </div>
             </div>
       
-            <!-- Descriptions (step 2) -->
-            <div class="flex items-center justify-center">
-                <div *ngSwitchCase="2" class="mt-8" [@fadeInOut]>
-                  <h1 class="lg:text-6xl text-4xl font-karla">What's it about?</h1>
-                  <div class="flex flex-col items-center justify-center">
-                      <!-- <div class="tooltip tooltip-open tooltip-error lg:ml-8 ml-4 -mb-4" data-tip="please enter a Description"></div> -->
-                      <textarea #descriptionInput formControlName="summaryDescription" class="textarea textarea-bordered w-64 md:w-full h-20 mt-2" placeholder="Short summary (description)..." required></textarea>        
-                      <textarea #descriptionInput formControlName="description" class="textarea textarea-bordered w-64 md:w-full h-44 mt-4" placeholder="Detailed description..." required></textarea>      
-                      
+      
+              <div class="flex items-center justify-center">
+                  <div *ngSwitchCase="2" [@fadeInOut]>
+                      <p class="text-center mt-7">Club description & Category</p>
+                      <div class="flex flex-col items-center justify-center">
+                          <!-- <div class="tooltip tooltip-open tooltip-error lg:ml-8 ml-4 -mb-4" data-tip="please enter a Description"></div> -->
+                          <textarea #summarydescriptionInput formControlName="summaryDescription" class="textarea textarea-bordered w-64 md:w-full h-20 mt-2" placeholder="Summary" required></textarea>     
+                          <div class="tooltip mt-12" data-tip="Optimize the event start time based on the most popular events in the system">
+                            <button (click)="suggestSummaryDescriptions()" class="btn btn-outline btn-accent ml-2 w-96">
+                              <ng-container *ngIf="!isLoading; else loading">
+                                <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+                              </ng-container>
+                              <ng-template #loading>
+                                <span class="loading loading-dots loading-md"></span>
+                              </ng-template>
+                            </button>
+                            <button (click)="clearSummaryDescription()" [disabled]="!isSummaryDescriptionSelected" class="btn btn-outline btn-error mt-4 ml-2">
+                              <i class="fa fa-times" aria-hidden="true"></i>
+                            </button>
+                
+                          </div>
+                          <!-- Generated Summary descriptions -->
+                          <div *ngIf="generatedSummaryDescriptions.length > 0" class="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4">
+                            <div *ngFor="let desc of generatedSummaryDescriptions" class="p-4 border border-neutral rounded-lg cursor-pointer hover:bg-neutral hover:border-accent transition-all duration-300 ease-in-out"  @fadeIn (click)="selectSummaryDescription(desc)">
+                              {{ desc }}
+                            </div>
+                          </div>
+                          <textarea #descriptionInput formControlName="description" class="textarea textarea-bordered w-64 md:w-full h-44 mt-4" placeholder="Description" required></textarea>        
+                          <div class="tooltip mt-12" data-tip="Optimize the event start time based on the most popular events in the system">
+                            <button (click)="suggestDescriptions()" class="btn btn-outline btn-accent ml-2 w-96">
+                              <ng-container *ngIf="!isLoading; else loading">
+                                <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+                              </ng-container>
+                              <ng-template #loading>
+                                <span class="loading loading-dots loading-md"></span>
+                              </ng-template>
+                            </button>
+                            <button (click)="clearDescription()" [disabled]="!isDescriptionSelected" class="btn btn-outline btn-error mt-4 ml-2">
+                              <i class="fa fa-times" aria-hidden="true"></i>
+                            </button>
+                
+                          </div>
+                          <!-- Generated descriptions -->
+                          <div *ngIf="generatedDescriptions.length > 0" class="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4">
+                            <div *ngFor="let desc of generatedDescriptions" class="p-4 border border-neutral rounded-lg cursor-pointer hover:bg-neutral hover:border-accent transition-all duration-300 ease-in-out"  @fadeIn (click)="selectDescription(desc)">
+                              {{ desc }}
+                            </div>
+                          </div>
+                      </div>
+      
                       <p class="text-center mt-7">Category</p>
                       <div class="w-full">
                           <!-- <div class="tooltip tooltip-open tooltip-error lg:ml-8 ml-4 -mb-4" data-tip="please enter a Description"></div> -->
