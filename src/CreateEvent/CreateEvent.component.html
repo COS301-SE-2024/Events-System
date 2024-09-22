@@ -1,11 +1,18 @@
-<div>
+
+<div >
   <div class="mx-auto text-center">
     <ul class="steps lg:text-md text-sm">
-      <li [class.step-primary]="currentStep >= 0" class="step cursor-pointer font-roboto" (click)="navigateToStep(0)">Name</li>
+      <!-- <li [class.step-primary]="currentStep >= 0" class="step cursor-pointer font-roboto" (click)="navigateToStep(0)">Name</li>
       <li [class.step-primary]="currentStep >= 1" class="step cursor-pointer font-roboto" (click)="navigateToStep(1)">Description</li>
       <li [class.step-primary]="currentStep >= 2" class="step cursor-pointer font-roboto" (click)="navigateToStep(2)">Details</li>
       <li [class.step-primary]="currentStep >= 3" class="step cursor-pointer font-roboto" (click)="navigateToStep(3)">Prep & Agenda</li>
-      <li [class.step-primary]="currentStep >= 4" class="step cursor-pointer font-roboto" (click)="navigateToStep(4)">Summary</li>
+      <li [class.step-primary]="currentStep >= 4" class="step cursor-pointer font-roboto" (click)="navigateToStep(4)">Summary</li> -->
+
+      <li [class.step-primary]="currentStep >= 0" class="step cursor-pointer font-roboto">Name</li>
+      <li [class.step-primary]="currentStep >= 1" class="step cursor-pointer font-roboto">Description</li>
+      <li [class.step-primary]="currentStep >= 2" class="step cursor-pointer font-roboto">Details</li>
+      <li [class.step-primary]="currentStep >= 3" class="step cursor-pointer font-roboto">Prep & Agenda</li>
+      <li [class.step-primary]="currentStep >= 4" class="step cursor-pointer font-roboto">Summary</li>
     </ul>
 </div>
 
@@ -27,18 +34,39 @@
       </div>
     </div>
     <div class="flex justify-center items-center">
-      <div *ngSwitchCase="1" class="mt-8" [@fadeInOut]>
-        <h1 class="lg:text-6xl text-4xl font-karla">What's it about?</h1>
+      <div class="flex flex-col items-center mt-8" *ngSwitchCase="1" [@fadeInOut]>
         <div>
-          <div class="tooltip tooltip-open tooltip-error lg:ml-8 ml-4 -mb-4 font-roboto"
-            [class.hidden]="!isDescriptionEmpty" data-tip="Please enter a Description">
+          <h1 class="lg:text-6xl text-4xl font-karla">What's it about?</h1>
+          <div>
+            <div class="tooltip tooltip-open tooltip-error lg:ml-8 ml-4 -mb-4 font-roboto"
+              [class.hidden]="!isDescriptionEmpty" data-tip="Please enter a Description">
+            </div>
+            <textarea #descriptionInput class="textarea textarea-bordered w-full h-44 mt-4 font-roboto"
+              placeholder="Description" required></textarea>
           </div>
-          <textarea #descriptionInput class="textarea textarea-bordered w-full h-44 mt-4 font-roboto"
-            placeholder="Description" required></textarea>
-        </div>
+          <div class="tooltip mt-12" data-tip="Optimize the event start time based on the most popular events in the system">
+            <button (click)="suggestDescriptions()" class="btn btn-outline btn-accent ml-2 w-96">
+              <ng-container *ngIf="!isLoading; else loading">
+                <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+              </ng-container>
+              <ng-template #loading>
+                <span class="loading loading-dots loading-md"></span>
+              </ng-template>
+            </button>
+            <button (click)="clearDescription()" [disabled]="!isDescriptionSelected" class="btn btn-outline btn-error mt-4 ml-2">
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </button>
 
+          </div>
+        </div>
     
-        <div class="flex justify-between mt-4">
+        <!-- Generated descriptions -->
+        <div *ngIf="generatedDescriptions.length > 0" class="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4">
+          <div *ngFor="let desc of generatedDescriptions" class="p-4 border border-neutral rounded-lg cursor-pointer hover:bg-neutral hover:border-accent transition-all duration-300 ease-in-out"  @fadeIn (click)="selectDescription(desc)">
+            {{ desc }}
+          </div>
+        </div>
+        <div class="flex justify-between mt-4 w-full">
           <button (click)="previousStep()" class="btn btn-outline btn-warning font-roboto"
             [disabled]="currentStep === 0">Back</button>
           <button (click)="nextStep1()" class="btn btn-success font-roboto">Next</button>
@@ -48,24 +76,35 @@
     <div class="flex justify-center items-center">
       <div *ngSwitchCase="2" [@fadeInOut]>
         <h1 class="lg:text-6xl text-4xl text-center mt-8 font-karla">Add some details!</h1>
-          <div class="flex justify-evenly">
-            <div>
-              <div class="label mt-4">
-                <span class="label-text font-roboto">Start Time</span>
-              </div>
-              <input #StartTimeInput type="time" class="input input-bordered lg:w-96 "required>
+        <div class="flex justify-evenly">
+          <div>
+            <div class="label mt-4">
+              <span class="label-text font-roboto">Start Time</span>
             </div>
+            <input #StartTimeInput type="time" class="input input-bordered lg:w-96" required [@smoothChange]>
+          </div>
+        
+          <div class="mt-16 lg:ml-8 font-roboto">
+            -
+          </div>
+        
+          <div>
+            <div class="label mt-4 lg:ml-8">
+              <span class="label-text font-roboto">End Time</span>
+            </div>
+            <input #EndTimeInput type="time" class="input input-bordered lg:w-96 lg:ml-8" required [@smoothChange]>
+          </div>
+          <div class="tooltip mt-12 " data-tip="Optimize the event start time based on the most popular events in the system">
+            <button (click)="suggestTime()" class="btn btn-outline btn-accent ml-2">
+              <ng-container *ngIf="!isLoading; else loading">
+                <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+              </ng-container>
+              <ng-template #loading>
+                <span class="loading loading-dots loading-md"></span>
+              </ng-template>
+            </button>
+          </div>
 
-            <div class="mt-16 lg:ml-8 font-roboto">
-              -
-            </div>
-
-            <div>
-              <div class="label mt-4 lg:ml-8">
-                <span class="label-text font-roboto">End Time</span>
-              </div>
-              <input #EndTimeInput type="time" class="input input-bordered lg:w-96 lg:ml-8"required>
-            </div>
         </div>
 
         <div class="flex justify-evenly">
@@ -88,13 +127,12 @@
 
         <div class="flex justify-evenly lg:flex-row flex-col lg:ml-[0.8rem]">
           <!-- Add this input field for location -->
-            <div>
-            <div class="label  mt-4 lg:-ml-4" htmlFor="location">
+          <div>
+            <div class="label mt-4 lg:-ml-4" htmlFor="location">
               <span class="label-text text-secondary">Location</span>
             </div>
-            <input  #LocationInput type="text" id="location" placeholder="Enter your location" class="input input-bordered w-96 max-w-md lg:-ml-4 font-roboto" />
-            </div>
-
+            <input #LocationInput type="text" id="location" placeholder="Enter your location" class="input input-bordered w-96 max-w-md lg:-ml-4 font-roboto" />
+          </div>
 
 
           <div>
@@ -116,11 +154,13 @@
               <div class="tag-input-area">
                 <input [(ngModel)]="newTag" type="text" class="input input-bordered w-96 max-w-md lg:-ml-4 font-roboto" placeholder="Enter a tag" />
                 <button (click)="addTag()" class="btn btn-outline btn-accent mt-4 ml-2" [disabled]="tags.length >= 5">+</button>
+                <button  (click)="suggestTags()"   class="btn btn-outline btn-accent mt-12 ml-2"><i class="fa fa-lightbulb-o" aria-hidden="true"></i></button>
+
               </div>
               <div class="tags mt-2 grid grid-cols-3 gap-0 gap-x-0">
                 <button *ngFor="let tag of tags; let i = index"
                         (click)="removeTag(i)"
-                        class="badge badge-neutral cursor-pointer hover:badge-error relative">
+                        class="badge badge-neutral cursor-pointer hover:badge-error relative"  [@fadeIn] >
                   {{ tag }}
                   <span class="absolute top-0 right-0 mt-1 mr-1 text-xs hidden group-hover:inline">-</span>
                 </button>
@@ -151,10 +191,11 @@
                   <div formArrayName="prepinputs" class="font-roboto">
                     <div *ngFor="let input of prepinputs.controls; index as i" [@fadeIn] class="flex">
                       <input [formControlName]="i" class="input input-bordered w-full mt-4">
-                      <button (click)="removeprepInput(i)" class="btn btn-outline btn-warning mt-4 ml-2 opacity-35">-</button>
+                      <button (click)="removeprepInput(i)" class="btn btn-outline btn-warning mt-4 ml-2">-</button>
                     </div>
                   </div>
                   <button [disabled]="prepinputs.length === 5" (click)="addprepInput()" class="btn btn-accent btn-outline btn-wide mt-4">+</button>
+                  <button  (click)="suggestPrep()"   class="btn btn-outline btn-neutral ml-2"><i class="fa fa-lightbulb-o" aria-hidden="true"></i></button>
                 </form>
               </div>
 
@@ -169,10 +210,12 @@
                   <div formArrayName="agendainputs" class="font-roboto">
                     <div *ngFor="let input of agendainputs.controls; index as i" [@fadeIn] class="flex">
                       <input [formControlName]="i"  class="input input-bordered w-full mt-4">
-                      <button (click)="removeagendaInput(i)" class="btn btn-outline btn-warning mt-4 ml-2 opacity-35">-</button>
+                      <button (click)="removeagendaInput(i)" class="btn btn-outline btn-warning mt-4 ml-2">-</button>
                     </div>
                   </div>
                   <button [disabled]="agendainputs.length === 5" (click)="addagendaInput()" class="btn btn-accent btn-outline btn-wide mt-4">+</button>
+                  <button  (click)="suggestAgenda()"   class="btn btn-outline btn-neutral ml-2"><i class="fa fa-lightbulb-o" aria-hidden="true"></i></button>
+
                   <!-- <button (click)="saveInputs()">Next</button> -->
                 </form>
               </div>
@@ -253,7 +296,7 @@
             <div class="label mt-4 lg:-ml-4">
               <span class="label-text font-roboto">Location</span>
             </div>
-            <input disabled #LocationInput type="text" placeholder="Location" class="input input-bordered w-96 max-w-md lg:-ml-4 font-roboto"required>
+            <input #LocationInput type="text" placeholder="Location" class="input input-bordered w-96 max-w-md lg:-ml-4 font-roboto"required>
           </div>
 
           <div>
@@ -334,6 +377,17 @@
                 </button>
               </div>
             </div>
+          </div>
+          <div class="map mt-8">
+            <google-map height="24rem" width="100%" [options]="mapOptions">
+              <map-marker [position]="markerPosition"></map-marker>
+            </google-map>
+            <!-- Add this button where you want it to appear, for example, after the location input -->
+          <div class="flex justify-center mt-4">
+            <button (click)="openInMaps()" class="btn btn-outline btn-primary font-roboto">
+              Open in Maps
+            </button>
+          </div>
           </div>
         <div class="flex justify-between mt-4 font-roboto">
           <button (click)="previousStep()" class="btn btn-outline btn-warning" [disabled]="currentStep === 0">back</button>

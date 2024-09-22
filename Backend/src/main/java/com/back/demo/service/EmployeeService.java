@@ -3,11 +3,14 @@ package com.back.demo.service;
 import com.back.demo.model.Employee;
 import com.back.demo.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.cache.annotation.CacheEvict;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,14 +25,25 @@ public class EmployeeService implements UserDetailsService {
         return employeeRepository.findAll();
     }
 
+    @Cacheable(value = "employee", key = "#root.args[0]", condition = "#root.args[0] != null")
     public Optional<Employee> getEmployeeById(Long employeeId) {
-        return employeeRepository.findById(employeeId);
+        Optional<Employee> employeeOpt = employeeRepository.findById(employeeId);
+        //Remove tokens from the response, as they are sensitive information
+        //Also, they result in lazy loading exceptions when the response is serialized for caching
+
+        employeeOpt.ifPresent(employee -> {
+            employee.setTokens(null);
+            employee.setPassword(null);
+        });        
+
+        return employeeOpt;
     }
 
     public Employee createEmployee(Employee employee) {
         return employeeRepository.save(employee);
     }
 
+    @CachePut(value = "employee", key = "#root.args[0]", condition = "#root.args[0] != null")
     public Employee updateEmployee(Long employeeId, Employee employeeDetails) {
         Optional<Employee> optionalEmployee = employeeRepository.findById(employeeId);
         if (optionalEmployee.isPresent()) {
@@ -50,6 +64,7 @@ public class EmployeeService implements UserDetailsService {
         }
     }
 
+    @CachePut(value = "employee", key = "#root.args[0]", condition = "#root.args[0] != null")
     public Employee patchEmployee(Long employeeId, Employee employeeDetails) {
         Optional<Employee> optionalEmployee = employeeRepository.findById(employeeId);
         if (optionalEmployee.isPresent()) {
@@ -92,6 +107,7 @@ public class EmployeeService implements UserDetailsService {
         }
     }
 
+    @CacheEvict(value = "employee", key = "#root.args[0]", condition = "#root.args[0] != null")
     public void deleteEmployee(Long employeeId) {
         employeeRepository.deleteById(employeeId);
     }
