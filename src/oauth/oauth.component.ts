@@ -167,11 +167,11 @@ export class OauthComponent implements OnInit{
                         location: event.location,
                         description: `
                           ${event.description}
-                          <h3>Agendas:</h3>  ${agendas}
+                          <h3>Agenda:</h3>  ${agendas}
 
 
 
-                      <h3>Preparations:</h3>  ${preps}
+                      <h3>Preparation Details:</h3>  ${preps}
 
                         `,
                         start: {
