@@ -179,7 +179,7 @@ export class SocialClubCreateComponent implements OnInit {
   }
 
   previousStep() {
-    if (this.currentStep > 0) {
+    if (this.currentStep > 1) {
       --this.currentStep;
     }
   }
