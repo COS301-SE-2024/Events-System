@@ -53,10 +53,13 @@ export class SettingsComponent implements OnInit {
   }
 
   toggleContactInfoPrivate() {
+    const id = localStorage.getItem('ID');
     this.makeContactInfoPrivate = !this.makeContactInfoPrivate;
   }
 
   toggleSurnamePrivate() {
+    const id = localStorage.getItem('ID');
+    //this.http.patch(`https://events-system-back.wn.r.appspot.com/api/employees/${id}`, updatedData)
     this.makeSurnamePrivate = !this.makeSurnamePrivate;
   }
 
