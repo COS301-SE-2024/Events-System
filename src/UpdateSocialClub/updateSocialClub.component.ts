@@ -42,7 +42,9 @@ export class UpdateSocialClubComponent implements OnInit{
     });
     this.imageSource = '';
   }
-
+  goBack(){
+    window.history.back();
+  }
   ngOnInit(): void{
     this.isAPILoading = true;
     this.imageSource = this.randomImageService.getRandomImageSource();
