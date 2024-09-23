@@ -305,7 +305,7 @@ onRowClick(eventId: number): void {
       return;
     }
     this.isLoading = true; // Set loading state to true
-    fetch(`https://safe-dawn-94912-2365567c9819.herokuapp.com/generate-series-descriptions?series_title="${name}"`, {
+    fetch(` https://capstone-middleware-178c57c6a187.herokuapp.com/generate-series-descriptions?series_title="${name}"`, {
       method: 'POST',
     })
     .then(response => response.json())

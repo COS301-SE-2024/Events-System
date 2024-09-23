@@ -12,6 +12,8 @@ import { GhostEventCardComponent } from 'src/Components/GhostEventCard/GhostEven
 })
 
 export class EventsComponent implements OnInit{
+  @ViewChild('eventContainer') eventContainer!: ElementRef;
+
   events: any[] = [];
   host: any = null;
   selectedDate = '';
@@ -19,7 +21,7 @@ export class EventsComponent implements OnInit{
   loading = false;
   searchTerm = '';
   uniqueSocialClubs: any[] = [];
-checkedSocialClubs: any[] = [];
+  checkedSocialClubs: any[] = [];
   filteredEvents = this.events;
   isLoading = true;
   event = {
@@ -37,11 +39,13 @@ checkedSocialClubs: any[] = [];
     host: '',
     eventAgendas: '',
     eventDietaryAccommodations: ''
-  };  
+  };
   allClubsChecked = false;
   otherCheckboxes: boolean[] = [];
   selectedDietaryAccommodation = '';
   socialClubs: any[] = [];
+  recommendedEventIds: string[] = [];
+  showClearButton = false;
   onSubmit() {
     const dateInput = (<HTMLInputElement>document.getElementById('date-input')).value;
     // console.log(dateInput);
@@ -187,20 +191,35 @@ checkedSocialClubs: any[] = [];
       (!this.selectedDietaryAccommodation || event.eventDietaryAccommodations.includes(this.selectedDietaryAccommodation))
     );
   }
-  recommendedEventIds: string[] = [];
 
   highlightRecommendedEvents() {
     this.loading = true;
     const employeeId = localStorage.getItem('ID');
-    fetch(`https://safe-dawn-94912-2365567c9819.herokuapp.com/recommend?employee_id=${employeeId}`, {
+    fetch(`https://capstone-middleware-178c57c6a187.herokuapp.com/recommend?user_id=${employeeId}`, {
       method: 'GET'
     })
       .then(response => response.json())
       .then(data => {
-        console.log(data);
         this.recommendedEventIds = data;
         this.filterEvents();
         this.loading = false;
+        this.scrollToFirstRecommendedEvent();
+        this.showClearButton = true; // Show the "X" button
       });
+  }
+
+  scrollToFirstRecommendedEvent() {
+    setTimeout(() => {
+      const firstRecommendedEvent = this.eventContainer.nativeElement.querySelector('.recommended');
+      if (firstRecommendedEvent) {
+        firstRecommendedEvent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 0);
+  }
+
+  clearRecommendedEvents() {
+    this.recommendedEventIds = [];
+    this.filterEvents();
+    this.showClearButton = false; // Hide the "X" button
   }
 }
