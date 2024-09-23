@@ -20,11 +20,11 @@ api_key=os.getenv("OPENAI_API_KEY")
 
 def get_db_connection():
     conn = psycopg2.connect(
-        dbname='postgres',
-        user='Bieber_Fever',
-        password='Bieber-Fever1234',
-        host='events-system.c7eeu2g6ctsw.us-east-1.rds.amazonaws.com',
-        port='5432'
+        dbname=os.getenv('DB_NAME'),
+        user=os.getenv('DB_USER'),
+        password=os.getenv('DB_PASSWORD'),
+        host=os.getenv('DB_HOST'),
+        port=os.getenv('DB_PORT')
     )
     return conn
 
