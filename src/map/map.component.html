@@ -1,0 +1,39 @@
+<div class="drawer drawer-end">
+  <input id="my-drawer-4" type="checkbox" class="drawer-toggle" (change)="toggleDrawer()" />
+  <div class="drawer-content">
+    <!-- Page content here -->
+    <div class="relative">
+      <div class="absolute top-0 left-0 w-full p-4 flex items-center space-x-4 lg:justify-center justify-end">
+        <label class="input input-bordered flex items-center gap-1 lg:w-96 z-[21]">
+          <i class="fa fa-search" aria-hidden="true"></i>
+          <input type="text" class="grow" placeholder="Search for an event" (input)="onSearch($event)" />
+        </label>
+        <label id="filter-button" for="my-drawer-4" class="btn btn-accent px-4 py-2 z-[500]" (click)="toggleFilter()">
+          <i class="fa" [ngClass]="isFilterOpen ? 'fa-times' : 'fa-filter'" aria-hidden="true"></i>
+        </label>
+      </div>
+      <div id="map" class="w-full h-screen"></div>
+    </div>
+    <app-map-card></app-map-card>
+  </div>
+
+  <div class="drawer-side z-[21]">
+    <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>
+    <div class="flex flex-col" (click)="$event.stopPropagation()">
+      <ul class="menu bg-base-200 text-base-content w-80 p-4 z-[21] rounded-xl mr-6 mb-4">
+        <button class="btn w-full font-karla no-animation">Refine by social club</button>
+        <li><input type="checkbox" [checked]="allClubsChecked" (change)="allClubsChecked = !allClubsChecked; onAllClubsClick()" aria-label="All social clubs" class="btn w-full"/></li>
+        <li *ngFor="let club of socialClubs; let i = index">
+          <input type="checkbox" [checked]="otherCheckboxes[i]" (change)="otherCheckboxes[i] = !otherCheckboxes[i]; onOtherClubClick(i)" [attr.aria-label]="club.name" class="btn" />
+        </li>
+      </ul>  
+      <ul class="menu bg-base-200 text-base-content w-80 p-4 z-[21] rounded-xl mr-6">
+        <button class="btn w-full font-karla no-animation">Refine by series</button>
+        <li><input type="checkbox" [checked]="allSeriesChecked" (change)="allSeriesChecked = !allSeriesChecked; onAllSeriesClick()" aria-label="All series" class="btn w-full"/></li>
+        <li *ngFor="let series of series; let i = index">
+          <input type="checkbox" [checked]="otherSeriesCheckboxes[i]" (change)="otherSeriesCheckboxes[i] = !otherSeriesCheckboxes[i]; onOtherSeriesClick(i)" [attr.aria-label]="series.name" class="btn" />
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

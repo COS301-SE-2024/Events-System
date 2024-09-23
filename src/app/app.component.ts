@@ -1,3 +1,5 @@
+import { MbscModule } from '@mobiscroll/angular';
+import { FormsModule } from '@angular/forms';
 import { Component, ViewEncapsulation, ViewChild, ElementRef, OnInit, ChangeDetectorRef } from '@angular/core';
 import { RouterModule, Router, Event, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -15,7 +17,7 @@ import { RefreshService } from './refresh.service';
 
 @Component({
   standalone: true,
-  imports: [RouterModule, CommonModule, FullCalendarModule, NotifPopupComponent, ProfileComponent],
+  imports: [MbscModule, FormsModule, RouterModule, CommonModule, FullCalendarModule, NotifPopupComponent, ProfileComponent],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
@@ -41,6 +43,7 @@ export class AppComponent implements OnInit{
   private pwaServiceSubscriber?: Subscription;
   private routerEventsSubscription?: Subscription;
   private notificationSubscription?: Subscription;
+  private notificationCountFetched = false; // Flag to ensure notification count is fetched only once
 
   constructor(private router: Router,
      private pwaService: PwaService,
@@ -55,16 +58,19 @@ export class AppComponent implements OnInit{
     });
     // Initialize employeeData from localStorage or any other source
     this.employeeData = JSON.parse(localStorage.getItem('employeeData') || '{}');
-    if (this.employeeData && this.employeeData.id) {
+    if (this.employeeData && this.employeeData.id && !this.notificationCountFetched) {
       this.fetchNotificationCount();
+      this.notificationCountFetched = true;
     }
 
     // Subscribe to router events
     this.routerEventsSubscription = this.router.events
     .pipe(filter((event: Event): event is NavigationEnd => event instanceof NavigationEnd))
     .subscribe((event: NavigationEnd) => {
-      if (event.url !== '/login') {
+      if (event.url !== '/login' && !this.notificationCountFetched) {
         this.fetchNotificationCount();
+      this.notificationCountFetched = true;
+
       }
     });
   }
@@ -133,6 +139,16 @@ export class AppComponent implements OnInit{
 
 
   refreshNavbar() {
+    this.employeeData = JSON.parse(localStorage.getItem('employeeData') || '{}');
+    if(this.employeeData){
+      if (this.employeeData.role == 'MANAGER'){
+        this.isEmployee = true;
+        this.isHost = true;
+      }else{
+        this.isEmployee = true;
+        this.isHost = false;
+      }
+    }
     this.cdr.detectChanges();
   }
 

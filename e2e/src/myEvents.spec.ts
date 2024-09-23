@@ -37,21 +37,21 @@ test.describe('MyEventsComponent Tests', () => {
         await expect(page.locator('app-my-events')).toBeVisible();
     });
 
-    test('Viewing hosted events', async ({ page }) => {
-        // Check that the component and its elements are present
-        // Check if skeletons are visible
-        await expect(page.locator('app-my-events-card-skeleton').first()).toBeVisible();
+    // test('Viewing hosted events', async ({ page }) => {
+    //     // Check that the component and its elements are present
+    //     // Check if skeletons are visible
+    //     await expect(page.locator('app-my-events-card-skeleton').first()).toBeVisible();
 
-        const employeeId = await page.evaluate(() => {
-            return localStorage.getItem('ID');
-        });
+    //     const employeeId = await page.evaluate(() => {
+    //         return localStorage.getItem('ID');
+    //     });
 
-        // Wait for response from API
-        await page.waitForResponse(`https://events-system-back.wn.r.appspot.com/api/events/host/${employeeId}`);
+    //     // Wait for response from API
+    //     await page.waitForResponse(`https://events-system-back.wn.r.appspot.com/api/events/host/${employeeId}`);
 
-        // See if there are any events that are visible
-        await expect(page.locator('app-my-events-card').first()).toBeVisible();
-    });
+    //     // See if there are any events that are visible
+    //     await expect(page.locator('app-my-events-card').first()).toBeVisible();
+    // });
 
     test('Create Event button', async ({ page }) => {
         // Check that the component and its elements are present

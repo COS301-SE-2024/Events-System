@@ -3,7 +3,6 @@ import { LoginComponent } from 'src/login/login.component';
 import { SettingsComponent } from 'src/settings/settings.component';
 import { HomeComponent } from 'src/home/home.component';
 import { ProfileComponent } from 'src/profile/profile.component';
-import { AppComponent } from './app.component';
 import { CalenderComponent } from 'src/calender/calender.component';
 import { EventsComponent } from 'src/events/events.component';
 import { EventComponent } from 'src/event/event.component';
@@ -26,13 +25,16 @@ import { NotificationsComponent } from 'src/notifications/notifications.componen
 import { NotifPopupComponent } from 'src/notif-popup/notif-popup.component';
 import { SeriesCenterComponent } from 'src/seriesCenter/seriesCenter.component';
 import { MyseriesComponent } from 'src/myseries/myseries.component';
+import { MyScheduleComponent } from 'src/MySchedule/MySchedule.component';
 import { CreateSeriesComponent } from 'src/CreateSeries/CreateSeries.component';
 import { UpdateSeriesComponent } from 'src/UpdateSeries/UpdateSeries.component';
 import { DeleteSeriesComponent } from 'src/DeleteSeries/DeleteSeries.component';
 import { SeriesComponent } from 'src/series/series.component';
 import { ResetPasswordComponent } from 'src/reset-password/reset-password.component';
+import { MapComponent } from 'src/map/map.component';
 import { EventRatingsComponent } from 'src/EventRatings/eventRatings.component';
 import { AuthGuard } from './authguard.guard';
+import { LeaderboardComponent } from 'src/Leaderboard/Leaderboard.component';
 
 export const appRoutes: Route[] = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] }, // Home page
@@ -62,9 +64,13 @@ export const appRoutes: Route[] = [
   { path: 'notif-popup', component: NotifPopupComponent, canActivate: [AuthGuard] },
   { path: 'seriescenter', component: SeriesCenterComponent, canActivate: [AuthGuard] },
   { path: 'myseries', component: MyseriesComponent, canActivate: [AuthGuard] },
+  { path: 'myschedule', component: MyScheduleComponent, canActivate: [AuthGuard] },
   { path: 'updateseries/:id', component: UpdateSeriesComponent, canActivate: [AuthGuard] },
   { path: 'deleteseries/:id', component: DeleteSeriesComponent, canActivate: [AuthGuard] },
   { path: 'createseries', component: CreateSeriesComponent, canActivate: [AuthGuard] },
   { path: 'series/:id', component: SeriesComponent, canActivate: [AuthGuard] },
-  { path: 'reset-password/:token', component: ResetPasswordComponent }
+  { path: 'map', component: MapComponent, canActivate: [AuthGuard] },
+  { path: 'reset-password/:token', component: ResetPasswordComponent },
+  { path: 'feedbackandratings/:id', component: EventRatingsComponent, canActivate: [AuthGuard] },
+  { path: 'leaderboard', component: LeaderboardComponent, canActivate: [AuthGuard] }
 ];

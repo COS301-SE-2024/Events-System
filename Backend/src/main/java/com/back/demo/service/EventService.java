@@ -6,6 +6,8 @@ import com.back.demo.repository.EventRSVPRepository;
 import com.back.demo.repository.EventRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
@@ -36,6 +38,7 @@ public class EventService {
         return eventRepository.findAllHostEvents(hostId);
     }
 
+    @CacheEvict(value = "events", key = "'getAllEvents'")
     public Event createEvent(Event event) {
         return eventRepository.save(event);
     }
@@ -44,6 +47,7 @@ public class EventService {
         return eventRepository.findAllEventsBySocialClub(socialClubId);
     }
 
+    @CacheEvict(value = "events", key = "'getAllEvents'")
     public Event updateEvent(Long eventId, Event eventDetails) {
         Optional<Event> optionalEvent = eventRepository.findById(eventId);
         if (optionalEvent.isPresent()) {
@@ -69,10 +73,12 @@ public class EventService {
         }
     }
 
+    @CacheEvict(value = "events", key = "'getAllEvents'")
     public void deleteEvent(Long eventId) {
         eventRepository.deleteById(eventId);
     }
 
+    @CacheEvict(value = "events", key = "'getAllEvents'")
     public Event partialUpdateEvent(Long eventId, Map<String, Object> updates) {
         Optional<Event> optionalEvent = eventRepository.findById(eventId);
         if (optionalEvent.isPresent()) {

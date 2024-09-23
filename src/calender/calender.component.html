@@ -6,7 +6,7 @@
     <div class="drawer-content">
       <label for="my-drawer" class="btn btn-primary drawer-button lg:hidden w-full font-roboto">Filter</label>
       <!-- Page content here -->
-      <div class='demo-app-main'>
+      <div class='demo-app-main h-full'>
 
         <full-calendar class="font-karla" *ngIf='calendarVisible()' [options]='calendarOptions()'>
           <ng-template #eventContent let-arg  >
@@ -23,12 +23,12 @@
                 
                 <div class="flex flex-row">
                   <div class="flex flex-col mt-4">
-                    <p *ngIf="isSingleDayEvent(event)" class="text-xs font-roboto font-light leading-3 text-gray-500 dark:text-gray-300">{{ event.start | date:'HH:mm' }} </p>
-                    <p *ngIf="isSingleDayEvent(event)" class="text-xs font-roboto font-light leading-3 text-gray-500 dark:text-gray-300 mt-12">{{ event.end | date:'HH:mm' }} </p>
+                    <p *ngIf="isSingleDayEvent(event)" class="text-xs font-roboto font-light leading-3 text-secondary">{{ event.start | date:'HH:mm' }} </p>
+                    <p *ngIf="isSingleDayEvent(event)" class="text-xs font-roboto font-light leading-3 text-secondary mt-12">{{ event.end | date:'HH:mm' }} </p>
                   </div>
                   <div class=" rounded-xl bg-base-100  px-4 py-4 ml-4">
                     <div>
-                      <span class="mt-8"><a tabindex="0" class="focus:outline-none text-lg font-karla font-medium leading-5 text-gray-800 dark:text-gray-100 mt-2">{{ event.title }}</a></span>
+                      <span class="mt-8"><a tabindex="0" class="focus:outline-none text-lg font-karla font-medium leading-5 text-secondary mt-2">{{ event.title }}</a></span>
                     </div>
                     <p class="flex items-center justify-center">
                       <span><i class="fa-solid fa-location-pin mr-3 mt-2 font-roboto"></i> {{event.extendedProps.location }}</span>

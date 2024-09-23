@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms'; 
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { RandomImageServiceService } from 'src/app/random-image-service.service';
-
+import { DomSanitizer } from '@angular/platform-browser';
+import { SanitizePipe } from 'src/app/sanitization.pipe';
 @Component({
   selector: 'app-social-club-create',
   standalone: true,
@@ -34,6 +35,8 @@ import { RandomImageServiceService } from 'src/app/random-image-service.service'
   ]
 })
 export class SocialClubCreateComponent implements OnInit {
+  @ViewChild('summarydescriptionInput') summarydescriptionInput!: ElementRef;
+  @ViewChild('descriptionInput') descriptionInput!: ElementRef;
   createForm: FormGroup;
   hostID: any;
   imageSource: string;
@@ -42,15 +45,21 @@ export class SocialClubCreateComponent implements OnInit {
   showsuccessToast = false;
   showfailToast = false;
   isAPILoading = false;
-
+  generatedDescriptions: string[] = [];
+  generatedSummaryDescriptions: any[] = [];
+  isLoading = false;
+  sanitizePipe: SanitizePipe;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private http: HttpClient,
-    private randomImageService: RandomImageServiceService
+    private randomImageService: RandomImageServiceService,
+    private sanitizer: DomSanitizer
   )
   {
+    this.sanitizePipe = new SanitizePipe(this.sanitizer);
+
     this.createForm = this.fb.group({
       ownerID: [],
       name: [],
@@ -85,13 +94,12 @@ export class SocialClubCreateComponent implements OnInit {
 
             const formData = {
               ownerID: this.hostID,
-              name: this.createForm.get('name')?.value,
-              description: this.createForm.get('description')?.value,
-              pictureLink: this.createForm.get('pictureLink')?.value,
-              summaryDescription: this.createForm.get('summaryDescription')?.value,
-              categories: [this.createForm.get('categories')?.value]
+              name: this.sanitizePipe.transform(this.createForm.get('name')?.value),
+              description: this.sanitizePipe.transform(this.createForm.get('description')?.value),
+              pictureLink: this.sanitizePipe.transform(this.createForm.get('pictureLink')?.value),
+              summaryDescription: this.sanitizePipe.transform(this.createForm.get('summaryDescription')?.value),
+              categories: [this.sanitizePipe.transform(this.createForm.get('categories')?.value)]
             };
-            // console.log("Form data: " + JSON.stringify(formData));
             
             try {
               fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs', {
@@ -105,7 +113,6 @@ export class SocialClubCreateComponent implements OnInit {
               .then(response => response.json())
               .then(() => {
                 // Show the success toast
-                //console.log(data);
                 this.showsuccessToast = true;
                 this.isAPILoading = false;
                 setTimeout(() => {
@@ -120,19 +127,16 @@ export class SocialClubCreateComponent implements OnInit {
                 setTimeout(() => {
                   this.showfailToast = false;
                 }, 10000);
-                console.error('Error:', error);
               });
             }
             catch (error)
             {
-              console.error('Error:', error);
-              console.error('Error during club creation:', error);
+              window.location.reload();
             }
           });
         }
         catch (error) {
-          console.error('Error:', error);
-          console.error('Error during ownerID retrieval:', error);
+          window.location.reload();
         }
        //this.hostID = localStorage.getItem("ID");
 
@@ -147,7 +151,6 @@ export class SocialClubCreateComponent implements OnInit {
       return;
     }
     if (this.currentStep < 3) {
-      //this.createForm.setValue({ pcitureLink: this.createForm.get('pictureLink')?.value });
       this.isPictureEmpty = false;
       ++this.currentStep;
     }
@@ -158,8 +161,6 @@ export class SocialClubCreateComponent implements OnInit {
       return;
     }
     if (this.currentStep < 3)
-      //console.log("Name: " + this.createForm.get('name')?.value);
-      //sessionStorage.setItem(`name`, this.createForm.get('name')?.value)
       this.isNameEmpty = false;
       ++this.currentStep;
   }
@@ -270,11 +271,10 @@ export class SocialClubCreateComponent implements OnInit {
         const authData = await response.json();
         document.cookie = `jwt=${authData.access_token}; path=/; expires=` + new Date(new Date().getTime() + 15 * 60 * 1000).toUTCString();
         document.cookie = `refresh=${authData.refresh_token}; path=/; expires=` + new Date(new Date().getTime() + 24* 60 * 60 * 1000).toUTCString();
-        console.log('Token refresh successful');
         // Handle the response data as needed
-      } catch (error) {
-          console.error('Error refreshing token');
-          // Handle errors appropriately
+      }
+      catch (error) {
+        this.router.navigate(["/login"]);
       }
     }
   }
@@ -293,5 +293,112 @@ export class SocialClubCreateComponent implements OnInit {
     }
     return null;
 }
+isSummaryDescriptionSelected = false;
+selectedSummaryDescription = '';
+selectSummaryDescription(description: string) {
+  this.summarydescriptionInput.nativeElement.value = description;
+  this.selectedSummaryDescription = description;
+  this.isSummaryDescriptionSelected = true;
+}
 
+
+clearSummaryDescription() {
+  this.selectedSummaryDescription = '';
+  this.isSummaryDescriptionSelected = false;
+  this.summarydescriptionInput.nativeElement.value = "";
+}
+
+isDescriptionSelected = false;
+selectedDescription = '';
+selectDescription(description: string) {
+  this.descriptionInput.nativeElement.value = description
+  this.selectedDescription = description;
+  this.isDescriptionSelected = true;
+}
+
+
+clearDescription() {
+  this.selectedDescription = '';
+  this.isDescriptionSelected = false;
+  this.descriptionInput.nativeElement.value = "";
+
+}
+
+suggestDescriptions() {
+  console.log(this.createForm.get('name')?.value);
+  const name = this.createForm.get('name')?.value;
+  if (!name) {
+    window.alert("event title is required to generate description suggestions");
+    return;
+  }
+  this.isLoading = true; // Set loading state to true
+  fetch(`https://safe-dawn-94912-2365567c9819.herokuapp.com/generate-s-descriptions?social_club_title="${name}"`, {
+    method: 'POST',
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log("descriptions", data);
+    this.isLoading = false; // Set loading state to false
+
+    if (Array.isArray(data.descriptions) && data.descriptions.length > 0) {
+      const concatenatedDescriptions = data.descriptions[0];
+      // Split the concatenated descriptions into an array
+      const descriptions = concatenatedDescriptions.split(/\d\.\s/).filter(Boolean);
+      this.generatedDescriptions = [];
+      
+      // Add each description sequentially with a delay
+      descriptions.forEach((description: any, index: any) => {
+        setTimeout(() => {
+          this.generatedDescriptions.push(description);
+          // Trigger change detection if necessary
+        }, index * 500); // Adjust the delay (5000ms = 5s) as needed
+      });
+    } else {
+      console.error('Error: descriptions is not in the expected format');
+    }
+  })
+  .catch(error => {
+    console.error('Error fetching suggested descriptions:', error);
+    this.isLoading = false;
+  });
+}
+
+suggestSummaryDescriptions() {
+  console.log(this.createForm.get('name')?.value);
+  const name = this.createForm.get('name')?.value;
+  if (!name) {
+    window.alert("event title is required to generate description suggestions");
+    return;
+  }
+  this.isLoading = true; // Set loading state to true
+  fetch(`https://safe-dawn-94912-2365567c9819.herokuapp.com/generate-ss-descriptions?social_club_title="${name}"`, {
+    method: 'POST',
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log("descriptions", data);
+    this.isLoading = false; // Set loading state to false
+
+    if (Array.isArray(data.descriptions) && data.descriptions.length > 0) {
+      const concatenatedDescriptions = data.descriptions[0];
+      // Split the concatenated descriptions into an array
+      const descriptions = concatenatedDescriptions.split(/\d\.\s/).filter(Boolean);
+      this.generatedDescriptions = [];
+      
+      // Add each description sequentially with a delay
+      descriptions.forEach((description: any, index: any) => {
+        setTimeout(() => {
+          this.generatedSummaryDescriptions.push(description);
+          // Trigger change detection if necessary
+        }, index * 500); // Adjust the delay (5000ms = 5s) as needed
+      });
+    } else {
+      console.error('Error: descriptions is not in the expected format');
+    }
+  })
+  .catch(error => {
+    console.error('Error fetching suggested descriptions:', error);
+    this.isLoading = false;
+  });
+}
 }

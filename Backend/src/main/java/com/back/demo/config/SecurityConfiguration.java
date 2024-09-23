@@ -81,7 +81,9 @@ public class SecurityConfiguration {
             "https://events-system.org/events",
             "/socket/**",
             "/api/reset/**",
-            "/notify"
+            "/notify",
+            "/test-redis-connection",
+            "events/employee/165/upcoming-events"
     };
 
     private final JwtAuthenticationFilter jwtAuthFilter;
@@ -121,15 +123,6 @@ public class SecurityConfiguration {
                 logout.logoutUrl("/api/v1/auth/logout")
                     .addLogoutHandler(logoutHandler)
                     .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext())
-            )
-            .oauth2Login(withDefaults()/*oauth2 -> oauth2
-                .defaultSuccessUrl("/api/v1/auth/google", true)
-                .userInfoEndpoint(userInfo -> userInfo
-                    .oidcUserService(customOidcUserService())
-                )
-                .loginPage("/api/v1/auth/google")*/
-                /*.redirectionEndpoint()
-                .baseUri("/")*/
             );
 
         return http.build();
