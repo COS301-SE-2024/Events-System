@@ -295,7 +295,7 @@ export class EventComponent implements OnInit{
                   <hr><h3>Agenda:</h3>${agendas}
               <h3>Preparation Details:</h3>${preps}
 
-                `,
+                `,
                 start: {
                   dateTime: `${event.startDate}T${event.startTime}`,
                   timeZone: 'Africa/Johannesburg', // Adjust based on your timezone
