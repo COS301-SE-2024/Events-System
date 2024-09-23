@@ -31,7 +31,6 @@
     "@fullcalendar/list": "^6.1.14",
     "@fullcalendar/timegrid": "^6.1.14",
     "@material-tailwind/html": "^2.2.2",
-    "@mobiscroll/angular": "npm:@mobiscroll/angular-ivy-trial@^5.31.2",
     "@ng-icons/core": "^27.5.2",
     "@ng-icons/feather-icons": "^27.5.2",
     "@ng-icons/heroicons": "^27.5.2",
