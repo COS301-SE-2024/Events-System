@@ -48,8 +48,10 @@ export class SearchProfileComponent implements OnInit {
       console.error('Error fetching attended events:', error);
       return [];
     });
-  }
-    )}
+  })
+  this.logUserAnalytics('viewed_profile: ' + this.employeeData.id);
+
+}
 
     getInitials(): string {
       const firstInitial = this.employeeData.firstName ? this.employeeData.firstName.charAt(0) : '';

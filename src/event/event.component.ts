@@ -72,7 +72,8 @@ export class EventComponent implements OnInit{
           console.error('Error loading Google Maps API:', error);
         });
       }, 100);
-      this.logUserAnalytics("view_event");
+      this.logUserAnalytics("view_event: " + this.eventId);
+
 
     }
   
@@ -183,7 +184,7 @@ export class EventComponent implements OnInit{
         }, 5000);
         console.error('Error:', error);
       });
-      this.logUserAnalytics("unrsvp_event");
+      this.logUserAnalytics("unrsvp_event: "  + this.eventId);
     } else {
       this.isAPILoading = true;
       const requestBody = {
@@ -222,7 +223,7 @@ export class EventComponent implements OnInit{
         console.error('Error RSVPing to event:', error);
         // Handle error
       }
-      this.logUserAnalytics("rsvp_event");
+      this.logUserAnalytics("rsvp_event: " + this.eventId);
     }
     this.hasUserRSVPd = !this.hasUserRSVPd; // Toggle the RSVP state
 
