@@ -26,24 +26,24 @@
               </div>
             </div>
             <div class="flex flex-row">
-              <button class="btn btn-sm btn-outline mr-0 sm:mr-1 mb-1 sm:mb-0" 
+              <button class="btn btn-sm btn-outline mx-1 mb-1 sm:mb-0" 
                       (click)="notification.read ? markAsUnread($event, notification.notificationId) : markAsRead($event, notification.notificationId)">
                 {{ notification.read ? 'Mark as Unread' : 'Mark as Read' }}
               </button>
-              
-              <button class="btn btn-sm btn-outline mr-0 sm:mr-1 mb-1 sm:mb-0" 
+            
+              <button class="btn btn-sm btn-outline mx-1 mb-1 sm:mb-0" 
                       (click)="markAsRead($event, notification.notificationId)"
                       [disabled]="notification.read || notification.message.includes('Event Deleted')"
                       [routerLink]="notification.eventId ? ['/event', notification.eventId] : ['/series', notification.seriesId]">
                 View More
               </button>
-              <button class="btn btn-sm btn-outline ml-2 btn-error" 
+            
+              <button class="btn btn-sm btn-outline mx-1 btn-error" 
                       (click)="delete($event, notification.notificationId)">
                 Delete
               </button>
             </div>
-          </div>
-        </div>
+            
       </div>
     </div>
   </div>
