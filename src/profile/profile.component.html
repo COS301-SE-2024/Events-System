@@ -23,14 +23,14 @@
           </div>          
           <button class="btn btn-outline border-accent text-accent" (click)="navigateToSettings()">Edit Profile</button>
         </div>
-        <div class="tabs">
-          <a class="tab text-secondary tab-bordered rounded-lg hover:bg-neutral" (click)="selectTab('about')" [class.tab-active]="selectedTab === 'about'">About</a>
-          <a class="tab text-secondary tab-bordered rounded-lg hover:bg-neutral" (click)="selectTab('events')" [class.tab-active]="selectedTab === 'events'">Events History</a>
-          <a class="tab text-secondary tab-bordered rounded-lg hover:bg-neutral" (click)="selectTab('subscriptions')" [class.tab-active]="selectedTab === 'subscriptions'">Subscriptions</a>
-        </div>
+        
       </div>
     </div>
-  
+    <div class="tabs tabs-boxed w-full">
+      <a class="tab text-secondary text-lg tab-bordered rounded-lg hover:bg-neutral" (click)="selectTab('about')" [class.tab-active]="selectedTab === 'about'">About</a>
+      <a class="tab text-secondary text-lg tab-bordered rounded-lg hover:bg-neutral" (click)="selectTab('events')" [class.tab-active]="selectedTab === 'events'">Events History</a>
+      <a class="tab text-secondary text-lg tab-bordered rounded-lg hover:bg-neutral" (click)="selectTab('subscriptions')" [class.tab-active]="selectedTab === 'subscriptions'">Subscriptions</a>
+    </div>
     <div *ngIf="selectedTab === 'about'" class="card w-full bg-base-100 shadow-2xl mb-4">
       <div class="card-body flex-row">
         <div class="w-1/2">
@@ -98,14 +98,14 @@
           </div>
           <button routerLink="/settings" class="btn btn-outline mt-4 text-accent border-accent">Edit Profile</button>
         </div>
-        <div class="tabs tabs-boxed w-full">
-          <a class="tab text-secondary tab-bordered rounded-lg hover:bg-neutral" (click)="selectTab('about')" [class.tab-active]="selectedTab === 'about'">About</a>
-          <a class="tab text-secondary tab-bordered rounded-lg hover:bg-neutral" (click)="selectTab('events')" [class.tab-active]="selectedTab === 'events'">Events History</a>
-          <a class="tab text-secondary tab-bordered rounded-lg hover:bg-neutral" (click)="selectTab('subscriptions')" [class.tab-active]="selectedTab === 'subscriptions'">Subscriptions</a>
-        </div>
+        
       </div>
     </div>
-  
+    <div class="tabs tabs-boxed w-full">
+      <a class="tab text-secondary text-lg tab-bordered rounded-lg hover:bg-neutral" (click)="selectTab('about')" [class.tab-active]="selectedTab === 'about'">About</a>
+      <a class="tab text-secondary text-lg tab-bordered rounded-lg hover:bg-neutral" (click)="selectTab('events')" [class.tab-active]="selectedTab === 'events'">Events History</a>
+      <a class="tab text-secondary text-lg tab-bordered rounded-lg hover:bg-neutral" (click)="selectTab('subscriptions')" [class.tab-active]="selectedTab === 'subscriptions'">Subscriptions</a>
+    </div>
     <div *ngIf="selectedTab === 'about'" class="card w-full bg-base-100 shadow-2xl mb-4">
       <div class="card-body">
         <h2 class="card-title text-primary">About Me</h2>
