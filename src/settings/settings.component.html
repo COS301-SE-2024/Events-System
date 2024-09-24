@@ -34,8 +34,15 @@
                   class="hidden"
                   (change)="onAvatarChange($event)"
                 >
+                <!-- Remove Profile Picture Button -->
+                <button
+                class="btn btn-error btn-sm mt-2"
+                (click)="removeProfilePicture()"
+              >
+                Remove Profile Picture
+              </button>
+
               </div>
-            </div>
 
             <!-- Container for Name -->
             <div class="lg:ml-16 items-center justify-around lg:grid grid-cols-2 gap-4">

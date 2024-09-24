@@ -70,6 +70,10 @@ export class SettingsComponent implements OnInit {
     }
   }
 
+  removeProfilePicture() {
+    this.employeeData.employeePictureLink = '';  // Reset or remove the profile picture
+  }
+
   ngOnInit(): void {
     const storedEmployeeData = localStorage.getItem('employeeData');
     if (storedEmployeeData) {
