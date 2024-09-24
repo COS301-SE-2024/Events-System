@@ -55,8 +55,8 @@
        (click)="closePopover()">
     <div class="bg-white p-4 rounded shadow-xl max-w-sm w-full"
          (click)="$event.stopPropagation()">
-      <h3 class="text-lg font-bold mb-2 font-karla">{{ selectedNotification.title }}</h3>
-      <p class="text-sm mb-4 font-roboto">{{ selectedNotification.description }}</p>
+      <h3 class="text-lg font-bold mb-2 font-karla">{{ selectedNotification.eventTitle }}</h3>
+      <p class="text-sm mb-4 font-roboto">{{ selectedNotification.message }}</p>
       <button class="btn btn-primary w-full font-roboto" (click)="closePopover()">Close</button>
     </div>
   </div>
