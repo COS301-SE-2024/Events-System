@@ -269,9 +269,9 @@ def generate_tags():
     return jsonify({'tags': agendas})
 
 # Process user actions
-def process_user_actions(df, events_df):
+def process_user_actions(df, events_df):        # Ensure all values in 'action_type' column are strings
     # Ensure all values in 'action_type' column are strings
-    df['action_type'] = df['action_type'].astype(str)
+    df['action_type'] = df['action_type'].astype(str)       
     
     # print("Original action_type column:\n", df['action_type'].to_string(index=False))
 
@@ -323,39 +323,39 @@ def process_user_actions(df, events_df):
 # Adjust create_user_profiles function
 def create_user_profiles(df):
     user_profiles = df.groupby('user_id').agg({
-        'event_id': lambda x: list(x.dropna()),
-        'social_club_id': lambda x: list(x.dropna()),
-        'rating': 'mean',
+        'event_id': lambda x: list(x.dropna()),  # Aggregate event IDs into a list
+        'social_club_id': lambda x: list(x.dropna()),   # Aggregate social club IDs into a list
+        'rating': 'mean',   # Calculate average rating
         'weight': lambda x: list(x),  # Aggregate weights into a list
         'timestamp': 'max'  # Use the most recent timestamp for each user
     }).reset_index()
     return user_profiles
 
 # Calculate Jaccard similarity
-def jaccard_similarity(set1, set2):
-    intersection = len(set1 & set2)
-    union = len(set1 | set2)
-    return intersection / union if union != 0 else 0
+def jaccard_similarity(set1, set2):   # Calculate intersection and union of two sets
+    intersection = len(set1 & set2)   # Calculate Jaccard similarity
+    union = len(set1 | set2)    # Return Jaccard similarity
+    return intersection / union if union != 0 else 0    
 
 # Adjust common actions similarity function
-def common_actions_similarity(actions1, actions2):
-    common_actions = len(actions1 & actions2)
-    total_actions = len(actions1 | actions2)
+def common_actions_similarity(actions1, actions2):  # Calculate the number of common actions
+    common_actions = len(actions1 & actions2)       # Calculate the total number of actions
+    total_actions = len(actions1 | actions2)        # Return the ratio of common actions to total actions
     return common_actions / total_actions if total_actions != 0 else 0
 
 # Update recommend_events_bias function
-def recommend_events_bias(user_id, user_profiles, events_df, top_n=3):
-    user_profile = user_profiles[user_profiles['user_id'] == user_id]
+def recommend_events_bias(user_id, user_profiles, events_df, top_n=3):  # Fetch user profile
+    user_profile = user_profiles[user_profiles['user_id'] == user_id]   # Return empty list if user profile is empty
     if user_profile.empty:
         return []
 
-    user_events = set(user_profile['event_id'].values[0])
-    user_actions = set(user_profile['weight'].values[0])
-    similar_users = user_profiles[user_profiles['user_id'] != user_id].copy()
+    user_events = set(user_profile['event_id'].values[0])   # Fetch user actions
+    user_actions = set(user_profile['weight'].values[0])    # Filter out the user from the user profiles
+    similar_users = user_profiles[user_profiles['user_id'] != user_id].copy()       
 
     # Calculate Jaccard similarity
-    similar_users.loc[:, 'jaccard_similarity'] = similar_users.apply(
-        lambda row: jaccard_similarity(set(row['event_id']), user_events), axis=1
+    similar_users.loc[:, 'jaccard_similarity'] = similar_users.apply(    # Calculate Jaccard similarity
+        lambda row: jaccard_similarity(set(row['event_id']), user_events), axis=1   # Calculate cosine similarity
     )
 
     # Calculate cosine similarity

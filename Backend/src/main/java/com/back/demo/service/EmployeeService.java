@@ -121,4 +121,10 @@ public class EmployeeService implements UserDetailsService {
     public List<Employee> getEmployeesByIds(List<Long> employeeIds) {
         return employeeRepository.findByEmployeeIdIn(employeeIds);
     }
+
+    public String getEmployeeEmailById(Long employeeId) {
+        return employeeRepository.findById(employeeId)
+                .map(Employee::getEmail)
+                .orElse("Email not found");
+    }
 }

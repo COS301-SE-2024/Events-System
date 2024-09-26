@@ -80,4 +80,9 @@ public class EventServiceBusImpl implements EventServiceBus {
         // Additional logic such as logging or notifications can be added here
         return eventService.getUpcomingEvents(employeeId);
     }
+
+    @Override
+    public List<Event> getEventsByTitle(String title) {
+        return eventService.getEventsByTitle(title);
+    }
 }

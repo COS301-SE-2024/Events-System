@@ -23,4 +23,10 @@ public interface EventRepository extends JpaRepository<Event, Long> {
       where e.socialClub = :socialClubId
       """)
     List<Event> findAllEventsBySocialClub(@Param("socialClubId") Long socialClubId);
+
+    @Query(value = """
+      select e from Event e
+      where LOWER(e.title) like LOWER(CONCAT('%', :title, '%'))
+      """)
+    List<Event> findEventsByTitle(@Param("title") String title);
 }

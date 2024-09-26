@@ -2,6 +2,7 @@ package com.back.demo.service;
 
 import com.back.demo.model.Event;
 import com.back.demo.model.EventRSVP;
+import com.back.demo.model.EventWithDistance;
 import com.back.demo.repository.EventRSVPRepository;
 import com.back.demo.repository.EventRepository;
 
@@ -9,9 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import java.time.ZoneId;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -180,5 +185,81 @@ public class EventService {
         events.removeIf(event -> event.getStartDate().before(currentDate));
 
         return events;
+    }
+    
+    public List<Event> getEventsByTitle(String title) {
+        return eventRepository.findEventsByTitle(title);
+    }
+
+    public List<Event> getAllEventsForUser(Long userId) {
+        List<Event> hostedEvents = eventRepository.findAllHostEvents(userId);
+        List<Event> attendedEvents = getUpcomingEvents(userId);
+        hostedEvents.addAll(attendedEvents);
+        return hostedEvents.stream()
+                .distinct()
+                .collect(Collectors.toList());
+    }
+
+    public List<Event> getHostedEvents(Long userId) {
+        return eventRepository.findAllHostEvents(userId);
+    }
+    
+    public List<Event> getAttendingEvents(Long userId) {
+        return getUpcomingEvents(userId);
+    }
+
+    private double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
+        final int R = 6371; // Radius of the earth in km
+        double latDistance = Math.toRadians(lat2 - lat1);
+        double lonDistance = Math.toRadians(lon2 - lon1);
+        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
+                + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
+                * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return R * c; // Distance in km
+    }
+
+    public List<EventWithDistance> getEventsNearUser(double userLat, double userLon, double radiusKm) {
+        List<Event> allEvents = eventRepository.findAll();
+        return allEvents.stream()
+                .map(event -> {
+                    String[] geo = event.getGeolocation().split(", ");
+                    double eventLat = Double.parseDouble(geo[0]);
+                    double eventLon = Double.parseDouble(geo[1]);
+                    double distance = calculateDistance(userLat, userLon, eventLat, eventLon);
+                    return new EventWithDistance(event, distance);
+                })
+                .filter(eventWithDistance -> eventWithDistance.getDistance() <= radiusKm)
+                .collect(Collectors.toList());
+    }
+
+    public Event getUpcomingEvent(Long userId) {
+        List<Event> hostedEvents = getHostedEvents(userId);
+        List<Event> attendedEvents = getUpcomingEvents(userId);
+        hostedEvents.addAll(attendedEvents);
+    
+        Date currentDate = new Date(System.currentTimeMillis());
+    
+        return hostedEvents.stream()
+                .filter(event -> event.getStartDate().after(currentDate) || 
+                                 (event.getStartDate().equals(currentDate) && event.getStartTime().after(new Time(System.currentTimeMillis()))))
+                .min(Comparator.comparing(Event::getStartDate).thenComparing(Event::getStartTime)) // Find the event with the closest start date and time
+                .orElse(null); // Return null if no events are found
+    }
+
+    public List<Event> getEventsByDate(LocalDate date) {
+        return eventRepository.findAll().stream()
+                .filter(event -> event.getStartDate().toLocalDate().equals(date))
+                .collect(Collectors.toList());
+    }
+    
+    public List<Event> getEventsByDateRange(LocalDateTime startDate, LocalDateTime endDate) {
+        return eventRepository.findAll().stream()
+                .filter(event -> {
+                    LocalDateTime eventStartDate = event.getStartDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+                    LocalDateTime eventEndDate = event.getEndDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+                    return !eventStartDate.isBefore(startDate) && !eventEndDate.isAfter(endDate);
+                })
+                .collect(Collectors.toList());
     }
 }
