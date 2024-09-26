@@ -80,6 +80,8 @@ export class EventRatingsComponent implements OnInit {
       }, 10000);
       console.error('Error:', error);
     });
+
+    this.logUserAnalytics('submitted_feedback: ' + Number(this.eventId) + ' : ' + Number(this.rating));
   }
 
   closeDialog() {
@@ -143,6 +145,7 @@ export class EventRatingsComponent implements OnInit {
             // this.isLoading = false;
           });
       });
+      this.logUserAnalytics('viewed_event_ratings: ' + this.eventId);
     }
 
   getPercentage(stars: number): number{
@@ -244,5 +247,33 @@ export class EventRatingsComponent implements OnInit {
         }
     }
     return null;
+}
+
+async logUserAnalytics(action: string): Promise<void> {
+  const userId = localStorage.getItem('ID');
+  if (!userId) return;
+
+  const requestBody = {
+    userId: parseInt(userId),
+    actionType: action
+  };
+
+  try {
+    const response = await fetch('https://events-system-back.wn.r.appspot.com/api/user-analytics', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(requestBody),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to log user analytics');
+    }
+
+    console.log('User analytics logged successfully');
+  } catch (error) {
+    console.error('Error logging user analytics:', error);
+  }
 }
 }

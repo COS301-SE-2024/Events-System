@@ -75,6 +75,9 @@ export class EventComponent implements OnInit{
           console.error('Error loading Google Maps API:', error);
         });
       }, 100);
+      this.logUserAnalytics("view_event: " + this.eventId);
+
+
     }
   
   async fetchEventDetails(): Promise<void> {
@@ -215,6 +218,8 @@ export class EventComponent implements OnInit{
           );
           
           if (matchingEvent) {
+            this.logUserAnalytics("unrsvp_event: "  + this.eventId);
+
             // Proceed to delete the event
             await fetch(`https://www.googleapis.com/calendar/v3/calendars/primary/events/${matchingEvent.id}`, {
               method: 'DELETE',
@@ -348,8 +353,10 @@ export class EventComponent implements OnInit{
         console.error('Error RSVPing to event:', error);
         // Handle error
       }
+      this.logUserAnalytics("rsvp_event: " + this.eventId);
     }
     this.hasUserRSVPd = !this.hasUserRSVPd; // Toggle the RSVP state
+
   }
   updateMapCenter() {
     if (this.latitude !== undefined && this.longitude !== undefined) {
@@ -366,6 +373,34 @@ export class EventComponent implements OnInit{
       window.open(mapsUrl, '_blank');
     } else {
       alert('Please enter a location first.');
+    }
+  }
+
+  async logUserAnalytics(action: string): Promise<void> {
+    const userId = localStorage.getItem('ID');
+    if (!userId) return;
+  
+    const requestBody = {
+      userId: parseInt(userId),
+      actionType: action
+    };
+  
+    try {
+      const response = await fetch('https://events-system-back.wn.r.appspot.com/api/user-analytics', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to log user analytics');
+      }
+  
+      console.log('User analytics logged successfully');
+    } catch (error) {
+      console.error('Error logging user analytics:', error);
     }
   }
   

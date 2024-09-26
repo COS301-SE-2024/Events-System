@@ -30,7 +30,9 @@
     </div>
 </div> -->
 
-<div class="relative flex flex-col mt-6  h-96 text-secondary bg-base-200 shadow-md bg-clip-border rounded-xl w-72" >
+<div 
+  class="relative flex flex-col mt-6 h-96 text-secondary bg-base-200 shadow-md bg-clip-border rounded-xl w-72 card" 
+  [ngClass]="{'bg-neutral': isRecommended, 'bg-base-200': !isRecommended}">
   <div
     class="relative h-32 mx-4 -mt-6 overflow-hidden shadow-lg bg-clip-border rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40">
     <img [src]="imageSource" alt="Album"/>
@@ -51,9 +53,8 @@
     <button 
       [routerLink]="['/event', eventID]"
       class="align-middle select-none font-roboto font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-neutral text-secondary shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
-      [ngClass]="{'glow-button': isRecommended}"
-      type="button" >
+      type="button" [ngClass]="{'bg-accent': isRecommended, 'bg-neutral': !isRecommended, 'text-secondary': !isRecommended, 'text-base-100': isRecommended}">
       Book Now
     </button>
   </div>
-</div>  
+</div>

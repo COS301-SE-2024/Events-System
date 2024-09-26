@@ -72,5 +72,5 @@ export const appRoutes: Route[] = [
   { path: 'map', component: MapComponent, canActivate: [AuthGuard] },
   { path: 'reset-password/:token', component: ResetPasswordComponent },
   { path: 'feedbackandratings/:id', component: EventRatingsComponent, canActivate: [AuthGuard] },
-  { path: 'leaderboard', component: LeaderboardComponent, canActivate: [AuthGuard] }
+  { path: 'leaderboard', component: LeaderboardComponent, canActivate: [AuthGuard] },
 ];

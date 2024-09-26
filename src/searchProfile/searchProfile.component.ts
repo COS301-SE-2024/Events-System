@@ -48,13 +48,41 @@ export class SearchProfileComponent implements OnInit {
       console.error('Error fetching attended events:', error);
       return [];
     });
-  }
-    )}
+  })
+  this.logUserAnalytics('viewed_profile: ' + this.employeeData.id);
+
+}
 
     getInitials(): string {
       const firstInitial = this.employeeData.firstName ? this.employeeData.firstName.charAt(0) : '';
       const lastInitial = this.employeeData.lastName ? this.employeeData.lastName.charAt(0) : '';
       return `${firstInitial}${lastInitial}`.toUpperCase();
     }
-  
+    async logUserAnalytics(action: string): Promise<void> {
+      const userId = localStorage.getItem('ID');
+      if (!userId) return;
+    
+      const requestBody = {
+        userId: parseInt(userId),
+        actionType: action
+      };
+    
+      try {
+        const response = await fetch('https://events-system-back.wn.r.appspot.com/api/user-analytics', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(requestBody),
+        });
+    
+        if (!response.ok) {
+          throw new Error('Failed to log user analytics');
+        }
+    
+        console.log('User analytics logged successfully');
+      } catch (error) {
+        console.error('Error logging user analytics:', error);
+      }
+    }
 }

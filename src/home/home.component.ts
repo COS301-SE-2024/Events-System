@@ -11,6 +11,7 @@ import { HomeUpcomingSkeletonComponent } from 'src/Components/HomeUpcomingSkelet
 import { WebSocketService } from 'src/app/websocket.service';
 import { NotificationService } from 'src/app/notification.service';
 import { RandomHeaderService } from 'src/app/random-header.service';
+import { ChatbotComponent } from 'src/Components/chatbot/chatbot.component';
 const myCredentials = {
   username: 'myUsername',
   password: 'myPassword'
@@ -36,7 +37,7 @@ export interface Slide {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule, HomeEventCardComponent, SocialClubCardComponent, HomeFeaturedEventComponent, HomeUpcomingSkeletonComponent, SocialClubCardSkeletonComponent],
+  imports: [CommonModule, RouterModule, HomeEventCardComponent, SocialClubCardComponent, HomeFeaturedEventComponent, HomeUpcomingSkeletonComponent, SocialClubCardSkeletonComponent, ChatbotComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   providers: [WebSocketService],
