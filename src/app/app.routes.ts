@@ -50,7 +50,7 @@ export const appRoutes: Route[] = [
   { path: 'deleteevent/:id', component: DeleteEventComponent, canActivate: [AuthGuard] },
   { path: 'socialclub/:id', component: SocialClubComponent, canActivate: [AuthGuard] },
   { path: 'help', component: HelpComponent, canActivate: [AuthGuard] },
-  { path: 'oauth', component: OauthComponent, canActivate: [AuthGuard] },
+  { path: 'oauth', component: OauthComponent },
   { path: 'hostcheckin', component: HostCheckinComponent, canActivate: [AuthGuard] },
   { path: 'hostcheckin/:eventId', component: HostCheckinComponent, canActivate: [AuthGuard] },
   { path: 'socialclublisting', component: SocialClubListingComponent, canActivate: [AuthGuard] },

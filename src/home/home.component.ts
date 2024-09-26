@@ -340,7 +340,7 @@ notify() {
           refreshToken = decodeURIComponent(value);
           break;
       }
-  }
+    }
     
     if(!accessToken)        //If access token expired
     {
