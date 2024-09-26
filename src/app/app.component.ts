@@ -189,6 +189,8 @@ export class AppComponent implements OnInit{
   }
   
   logout() {
+    this.checkCookies();
+
     fetch('https://events-system-back.wn.r.appspot.com/api/v1/auth/logout', {
         method: 'POST',
         headers: {
@@ -197,18 +199,19 @@ export class AppComponent implements OnInit{
         }
     })
     .then(response => {
-      console.log(response)
-        if (response.ok) {
-            // Successfully logged out
-            localStorage.removeItem('ID');
-            document.cookie = `jwt=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-            document.cookie = `refresh=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-            window.location.href = '/login'; // Redirect to login page or show logout success message
-        } else {
-            console.error('Logout failed');
-        }
-    }).catch(error => {
-        console.error('Error during logout:', error);
+      if (response.ok) {
+          // Successfully logged out
+          localStorage.removeItem('ID');
+          document.cookie = `jwt=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+          document.cookie = `refresh=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+          window.location.href = '/login'; // Redirect to login page or show logout success message
+      }
+      else {
+        window.location.href = '/login';
+      }
+    })
+    .catch(() => {
+        window.location.reload();
     });
   }
 
