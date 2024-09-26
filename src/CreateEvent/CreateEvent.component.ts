@@ -591,7 +591,7 @@ saveTagsToSessionStorage() {
     this.isLoading = true; // Set loading state to true
 
     // Retrieve the recommended start and end times
-    fetch('https://safe-dawn-94912-2365567c9819.herokuapp.com/suggest-times', {
+    fetch(' https://capstone-middleware-178c57c6a187.herokuapp.com/suggest-times', {
       method: 'GET'
     })
     .then(response => response.json())
@@ -617,7 +617,7 @@ saveTagsToSessionStorage() {
       return;
     }
     this.isLoading = true; // Set loading state to true
-    fetch(`https://safe-dawn-94912-2365567c9819.herokuapp.com/generate-descriptions?event_title="${name}"`, {
+    fetch(` https://capstone-middleware-178c57c6a187.herokuapp.com/generate-descriptions?event_title="${name}"`, {
       method: 'POST',
     })
     .then(response => response.json())
@@ -670,7 +670,7 @@ saveTagsToSessionStorage() {
       return;
     }
     this.isLoading = true; // Set loading state to true
-    fetch(`https://safe-dawn-94912-2365567c9819.herokuapp.com/generate-tags?event_title="${name}"`, {
+    fetch(` https://capstone-middleware-178c57c6a187.herokuapp.com/generate-tags?event_title="${name}"`, {
       method: 'POST',
     })
     .then(response => response.json())
@@ -708,7 +708,7 @@ saveTagsToSessionStorage() {
     }
   
     this.isLoading = true;
-    fetch(`https://safe-dawn-94912-2365567c9819.herokuapp.com/generate-prep?event_title="${eventTitle}"`, {
+    fetch(` https://capstone-middleware-178c57c6a187.herokuapp.com/generate-prep?event_title="${eventTitle}"`, {
       method: 'POST',
     })
     .then(response => response.json())
@@ -742,7 +742,7 @@ saveTagsToSessionStorage() {
     }
 
     this.isLoading = true;
-    fetch(`https://safe-dawn-94912-2365567c9819.herokuapp.com/generate-agenda?event_title="${eventTitle}"`, {
+    fetch(` https://capstone-middleware-178c57c6a187.herokuapp.com/generate-agenda?event_title="${eventTitle}"`, {
       method: 'POST',
     })
     .then(response => response.json())

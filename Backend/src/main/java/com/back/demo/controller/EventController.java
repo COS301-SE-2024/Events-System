@@ -103,4 +103,9 @@ public class EventController {
         return eventServiceBus.getUpcomingEvents(employeeId);
     }
 
+    @GetMapping("/search")
+    public List<Event> searchEventsByTitle(@RequestParam String title) {
+        return eventServiceBus.getEventsByTitle(title);
+    }
+
 }

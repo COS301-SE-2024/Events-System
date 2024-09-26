@@ -1,0 +1,42 @@
+<button class="btn btn-accent chatbot-button fixed bottom-12 right-4 z-50" (click)="toggleChat()">
+  <i class="fa fa-comment" aria-hidden="true"></i>
+</button>
+
+<div *ngIf="isOpen" #chatContainer class="chat-container fixed bottom-4 right-4 w-96 sm:w-80 lg:w-96 h-[40rem] sm:h-96 lg:h-[40rem] bg-neutral shadow-lg rounded-lg flex flex-col z-50">
+  <div class="chat-header p-2 bg-base-100 text-primary flex justify-between items-center">
+    <span>Eve</span>
+    <button class="close-button text-primary" (click)="toggleChat()"><i class="fa fa-chevron-down" aria-hidden="true"></i>
+    </button>
+  </div>
+  <div class="chat-content flex-1 overflow-y-auto p-2" #chatContent>
+    <div *ngFor="let message of messages; let i = index">
+      <div [ngClass]="{'justify-end': isUserMessage(i), 'justify-start': !isUserMessage(i)}" class="flex mb-2">
+        <div *ngIf="!message.isEvent" class="chat-bubble" [ngClass]="{'bg-secondary text-white': isUserMessage(i), 'bg-primary text-black': !isUserMessage(i), 'chat-end': isUserMessage(i), 'chat-start': !isUserMessage(i)}">
+          {{ message.text }}
+        </div>
+        <div *ngIf="message.isEvent">
+          <app-chatbot-event-card
+            [title]="message.eventData.title"
+            [description]="message.eventData.description"
+            [location]="message.eventData.location"
+            [startDate]="message.eventData.startDate"
+            [startTime]="message.eventData.startTime"
+            [eventId]="message.eventData.eventId">
+          </app-chatbot-event-card>
+        </div>
+      </div>
+    </div>
+    <!-- Typing indicator -->
+    <div *ngIf="typing" class="flex justify-start mb-2">
+      <div class="chat-bubble bg-primary text-base-100">
+          <span class="loading loading-ring loading-sm"></span>
+      </div>
+    </div>
+  </div>
+  <div class="input-container flex items-center">
+    <input #messageInput type="text" class="input input-bordered h-12 w-full" (keyup.enter)="sendMessage(messageInput.value); messageInput.value=''" />
+    <button class="submit-button ml-2 h-10 p-2 w-32 bg-accent text-white rounded" (click)="sendMessage(messageInput.value); messageInput.value=''">
+      <i class="fas fa-paper-plane"></i>
+    </button>
+  </div>
+</div>

@@ -1,4 +1,3 @@
-import { MbscModule } from '@mobiscroll/angular';
 import { FormsModule } from '@angular/forms';
 import { Component, ViewEncapsulation, ViewChild, ElementRef, OnInit, ChangeDetectorRef } from '@angular/core';
 import { RouterModule, Router, Event, NavigationEnd } from '@angular/router';
@@ -17,7 +16,7 @@ import { RefreshService } from './refresh.service';
 
 @Component({
   standalone: true,
-  imports: [MbscModule, FormsModule, RouterModule, CommonModule, FullCalendarModule, NotifPopupComponent, ProfileComponent],
+  imports: [FormsModule, RouterModule, CommonModule, FullCalendarModule, NotifPopupComponent, ProfileComponent],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],

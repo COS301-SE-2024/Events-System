@@ -17,4 +17,5 @@ public interface EventServiceBus {
     List<Event> getEventsAttended(Long employeeId);
     List<Event> getUpcomingEvents(Long employeeId);
     List<Event> getEventBySocialClubId(Long socialClubId);
+    List<Event> getEventsByTitle(String title);
 }

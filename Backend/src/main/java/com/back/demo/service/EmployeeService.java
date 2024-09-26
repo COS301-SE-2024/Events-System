@@ -58,6 +58,8 @@ public class EmployeeService implements UserDetailsService {
             employee.setTwitter(employeeDetails.getTwitter());
             employee.setGithub(employeeDetails.getGithub());
             employee.setLinkedin(employeeDetails.getLinkedin());
+            employee.setPublicContacts(employeeDetails.getPublicContacts());
+            employee.setPublicSurname(employeeDetails.getPublicSurname());
             return employeeRepository.save(employee);
         } else {
             throw new RuntimeException("Employee not found with id " + employeeId);
@@ -100,6 +102,12 @@ public class EmployeeService implements UserDetailsService {
             if (employeeDetails.getLinkedin() != null) {
                 employee.setLinkedin(employeeDetails.getLinkedin());
             }
+            if (employeeDetails.getPublicContacts() != null) {
+                employee.setPublicContacts(employeeDetails.getPublicContacts());
+            }
+            if (employeeDetails.getPublicSurname() != null) { 
+                employee.setPublicSurname(employeeDetails.getPublicSurname());
+            }
 
             return employeeRepository.save(employee);
         } else {
@@ -120,5 +128,11 @@ public class EmployeeService implements UserDetailsService {
 
     public List<Employee> getEmployeesByIds(List<Long> employeeIds) {
         return employeeRepository.findByEmployeeIdIn(employeeIds);
+    }
+
+    public String getEmployeeEmailById(Long employeeId) {
+        return employeeRepository.findById(employeeId)
+                .map(Employee::getEmail)
+                .orElse("Email not found");
     }
 }

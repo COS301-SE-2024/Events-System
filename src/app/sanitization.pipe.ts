@@ -27,8 +27,7 @@ export class SanitizePipe implements PipeTransform {
     // Remove common SQL injection patterns
     const sqlInjectionPatterns = [
         /--/g, /;/g, /\/\*/g, /\*\//g, /char/g, /nchar/g, /varchar/g, /nvarchar/g,
-        /alter/g, /begin/g, /cast/g, /declare/g, /delete/g, /drop/g,
-        /end/g, /exec/g, /execute/g, /insert/g, /kill/g,
+        /alter/g, /begin/g, /cast/g, /declare/g, /delete/g, /drop/g, /exec/g, /execute/g, /insert/g, /kill/g,
         /sys/g, /sysobjects/g, /syscolumns/g, /table/g,
     ];
     sqlInjectionPatterns.forEach(pattern => {
