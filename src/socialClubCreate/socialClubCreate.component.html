@@ -27,7 +27,20 @@
                         <button (click)="nextStep1()" class="btn btn-success font-roboto" type="submit">Next</button>
                     </div>
                 </div>
-            </div>
+              </div>
+      
+      
+              <div class="flex justify-center items-center">
+                  <div *ngSwitchCase="1" class="mt-8" [@fadeInOut]>
+                      <p>Club  Name</p>
+                      <!-- <div class="tooltip tooltip-open tooltip-error mb-4" data-tip="please enter a club name"></div> -->
+                      <input #nameInput type="text" formControlName="name" placeholder="Type club name..." class="input input-bordered w-full max-w-xl text-lg h-12 mt-8" required/>
+                      <div class="flex justify-between mt-4">
+                          <button class="btn btn-outline btn-warning" [disabled]="currentStep === 1">Back</button>
+                          <button (click)="nextStep1()" class="btn btn-success" type="submit">Next</button>
+                      </div>
+                  </div>
+              </div>
       
       
               <div class="flex items-center justify-center">
@@ -93,9 +106,9 @@
                       </div>
                                           
                       <div class="flex justify-between mt-4">
-                        <button (click)="previousStep()" class="btn btn-outline btn-warning font-roboto" [disabled]="currentStep === 0">Back</button>
-                        <button (click)="nextStep2()" class="btn btn-success font-roboto" type="submit">Next</button>
-                    </div>
+                          <button (click)="previousStep()" class="btn btn-outline btn-warning" [disabled]="currentStep === 1">Back</button>
+                          <button (click)="nextStep2()" class="btn btn-success" type="submit">Next</button>
+                      </div>
                   </div>
 
                 </div>
@@ -141,18 +154,10 @@
                     <textarea disabled #descriptionInput class="textarea textarea-bordered mt-2 w-64 md:w-full h-44" placeholder="" required>{{ this.createForm.get('description')?.value }}</textarea>    
                 </div>
 
-                <div class="mx-auto w-1/2">
-                  <div class="label mt-4 flex flex-col items-center justify-center">
-                      <span class="label-text">Category</span>
-                      <input disabled #nameInput type="text" placeholder="" class="input input-bordered mt-2 w-64 md:w-96 max-w-xl text-lg h-12" required
-                        [value]="createForm.get('categories')?.value"/>
-                  </div>
-                </div>
-
-                <div class="flex justify-between mt-4 mx-7 lg:mx-0 px-10 md:px-0">
-                  <button (click)="previousStep()" class="btn btn-outline btn-warning font-roboto" [disabled]="currentStep === 0">Back</button>
-                  <button (click)="preSubmit()" class="btn btn-success font-roboto">Create Club</button>
-                </div>
+                    <div class="flex justify-between mt-4 px-10 md:px-0">
+                      <button (click)="previousStep()" class="btn btn-outline btn-warning" [disabled]="currentStep === 1">Back</button>
+                      <button (click)="preSubmit()" class="btn btn-success">Create Club</button>
+                    </div>
               </div>
             </div>  
             </div>
