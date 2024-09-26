@@ -23,8 +23,6 @@ export class OauthComponent implements OnInit{
     this.route.queryParams.subscribe(async params => {
       const code = params['code'];
       if (code) {
-        console.log('Authorization code:', code);
-
         const baseUrl = 'https://oauth2.googleapis.com/token';
         const clientId = 'client_id=' + environment.CLIENT_ID;
         const clientSecret = 'client_secret='+ environment.CLIENT_SECRET;
@@ -33,9 +31,6 @@ export class OauthComponent implements OnInit{
         //const code = 'YOUR_AUTHORIZATION_CODE'; // replace with actual authorization code
         
         const fullUrl = `code=${code}&${clientId}&${clientSecret}&${grantType}&${redirectUri}`;
-        
-        console.log(decodeURIComponent(fullUrl));
-        
         try {
           const response = await fetch(baseUrl, {
             method: 'POST',
@@ -46,7 +41,6 @@ export class OauthComponent implements OnInit{
           })
           .then(data => data.json())
           .then(async data => {
-            console.log("Access token: " + data.access_token);
             const ACCESS_TOKEN = data.access_token;
             
             await fetch('https://www.googleapis.com/userinfo/v2/me', {
@@ -58,8 +52,6 @@ export class OauthComponent implements OnInit{
             })
             .then(info => info.json())
             .then(async info => {
-              console.log("User info: " + JSON.stringify(info));
-
               await fetch('https://events-system-back.wn.r.appspot.com/api/v1/auth/google', {
                 method: 'POST',
                 headers: {
@@ -87,17 +79,17 @@ export class OauthComponent implements OnInit{
                 if (employeeId) {
                   const employeeResponse = await this.http.get(`https://events-system-back.wn.r.appspot.com/api/employees/${employeeId}`).toPromise();
                   localStorage.setItem('employeeData', JSON.stringify(employeeResponse));
-                  console.log('Employee data:', localStorage.getItem('employeeData'));
-                } else {
-                  console.warn('No ID found in localStorage');
                 }
-                document.cookie = `jwt=${authData.access_token}; path=/; expires=` + new Date(new Date().getTime() + 15 * 60 * 1000).toUTCString();           // Expiry set to 15 minutes
-                document.cookie = `refresh=${authData.refresh_token}; path=/; expires=` + new Date(new Date().getTime() + 24* 60 * 60 * 1000).toUTCString();  // Expiry set to 24 hours
+                else {
+                  this.router.navigate(["/login"]);
+                }
+                document.cookie = `jwt=${authData.access_token}; path=/; expires=` + new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toUTCString();           // Expiry set to 24 hours
+                document.cookie = `refresh=${authData.refresh_token}; path=/; expires=` + new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000).toUTCString();  // Expiry set to 1 week
                 document.cookie = `google=${ACCESS_TOKEN}; path=/; expires=` + new Date(new Date().getTime() + 1 * 60 * 60 * 1000).toUTCString();  // Expiry set to 1 hour
                 // Get the current UTC time in ISO 8601 format
                 const now = new Date().toISOString();
 
-                await fetch(`https://www.googleapis.com/calendar/v3/calendars/primary/events?maxResults=50&timeMin=${encodeURIComponent(now)}&orderBy=startTime&singleEvents=true`, {
+                await fetch(`https://www.googleapis.com/calendar/v3/calendars/primary/events?maxResults=100&timeMin=${encodeURIComponent(now)}&orderBy=startTime&singleEvents=true`, {
                   method: 'GET',
                   headers: {
                     "Authorization": `Bearer ${ACCESS_TOKEN}`,
@@ -123,9 +115,7 @@ export class OauthComponent implements OnInit{
                 
                     // Extract the event IDs for the filtered RSVPs
                     const eventIds = filteredRsvps.map(rsvp => rsvp.eventId);
-                
-                    console.log("Rsvp'd events for employeeId " + employeeId + ": " + eventIds);
-                
+
                     // Iterate through each eventId and perform the comparison and update logic
                     for (const eventId of eventIds) {
                       // Fetch the event data for the current eventId
@@ -155,7 +145,6 @@ export class OauthComponent implements OnInit{
                       );
                 
                       if (!matchingGoogleEvent) {
-                        console.log(`No matching Google Calendar event found for eventId: ${googleEventId}`);
                         continue; // Skip to the next eventId
                       }
                 
@@ -201,17 +190,6 @@ export class OauthComponent implements OnInit{
                       };
                 
                       // Check for discrepancies
-                      // const discrepancies = JSON.stringify(googleEvent) !== JSON.stringify(matchingGoogleEvent);
-                      console.log("Event with ID: " + googleEventId + " and " + matchingGoogleEvent.extendedProperties?.private?.eventId);
-                      console.log(JSON.stringify(googleEvent.summary) == JSON.stringify(matchingGoogleEvent.summary));
-                      console.log(googleEvent.location == matchingGoogleEvent.location);
-                      console.log(googleEvent.description == matchingGoogleEvent.description);
-                      console.log(JSON.stringify(googleEvent.start.dateTime) == JSON.stringify(matchingGoogleEvent.start.dateTime).split('+')[0] + "\"");
-                      console.log(JSON.stringify(googleEvent.end.dateTime) == JSON.stringify(matchingGoogleEvent.end.dateTime).split('+')[0] + "\"");
-                      console.log(JSON.stringify(googleEvent.extendedProperties) == JSON.stringify(matchingGoogleEvent.extendedProperties));
-                      console.log(JSON.stringify(googleEvent.source) == JSON.stringify(matchingGoogleEvent.source));
-                      console.log(JSON.stringify(googleEvent.reminders) == JSON.stringify(matchingGoogleEvent.reminders));
-
                       const discrepancies = JSON.stringify(googleEvent.summary) !== JSON.stringify(matchingGoogleEvent.summary) ||
                                             JSON.stringify(googleEvent.location) !== JSON.stringify(matchingGoogleEvent.location) || 
                                             JSON.stringify(googleEvent.description) !== JSON.stringify(matchingGoogleEvent.description) ||
@@ -222,9 +200,7 @@ export class OauthComponent implements OnInit{
                                             JSON.stringify(googleEvent.reminders) !== JSON.stringify(matchingGoogleEvent.reminders);
                 
                       if (discrepancies) {
-                        console.log(`Discrepancies found, updating Google Calendar event with eventId: ${googleEventId}`);
-                
-                        // Step 5: Update the Google Calendar event
+                        // Update the Google Calendar event
                         await fetch(`https://www.googleapis.com/calendar/v3/calendars/primary/events/${matchingGoogleEvent.id}`, {
                           method: 'PATCH',
                           headers: {
@@ -233,20 +209,15 @@ export class OauthComponent implements OnInit{
                           },
                           body: JSON.stringify(googleEvent),
                         });
-                        console.log('Google Calendar event updated successfully');
-                        // console.log("Upcoming events:");
-                        // events.forEach((event: any) => {
-                        //   const start = event.start.dateTime || event.start.date;
-                        //   console.log(`${start} - ${event.summary}`);
-                        // });
-                      } else {
-                        console.log('No discrepancies found for eventId: ' + googleEventId);
+                      }
+                      else {
+                        continue;
                       }
                     }
-                  } catch (error) {
-                    console.error('Error fetching, comparing, or updating events:');
                   }
-
+                  catch (error) {
+                    window.location.reload();
+                  }
                 })
                 .then(() => {
                   this.router.navigate(['']);
@@ -264,41 +235,18 @@ export class OauthComponent implements OnInit{
 
 
           //this.sendCodeToBackend(data);
-        } catch (error) {
-          console.error('Error:', error);
+        }
+        catch (error) {
+          window.location.reload();
         }
       //console.log("Google tokens: " + response);
       //window.location.href = `${baseUrl}?$${clientId}&${clientSecret}&${redirectUri}&${code}&${o2v}&${ddm}&${flowName}`;
 
 
-        } else {
-        console.error('Authorization code not found in the URL');
+        }
+        else {
+        this.router.navigate(["/login"]);
       }
     });
-  }
-
-  private async sendCodeToBackend(code: any): Promise<void> {
-    const backendEndpoint = 'https://events-system-back.wn.r.appspot.com/api/v1/auth/google';
-    
-    try {
-      const response = await fetch(backendEndpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(code)
-      });
-  
-      if (!response.ok) {
-        throw new Error(`Error: ${response.statusText}`);
-      }
-  
-      const data = await response.json();
-      console.log('Token received from backend:', data);
-      // Handle the response, store the token, and navigate to the desired page
-      localStorage.setItem('access_token', data.access_token);
-    } catch (error) {
-      console.error('Error sending code to backend:', error);
-    }
   }
 }

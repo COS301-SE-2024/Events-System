@@ -200,7 +200,7 @@ export class EventComponent implements OnInit{
 
       if(googleToken) {
         const now = new Date().toISOString();
-        await fetch(`https://www.googleapis.com/calendar/v3/calendars/primary/events?maxResults=50&timeMin=${encodeURIComponent(now)}&orderBy=startTime&singleEvents=true`, {
+        await fetch(`https://www.googleapis.com/calendar/v3/calendars/primary/events?maxResults=100&timeMin=${encodeURIComponent(now)}&orderBy=startTime&singleEvents=true`, {
           method: 'GET',
           headers: {
             "Authorization": `Bearer ${googleToken}`,
@@ -223,18 +223,13 @@ export class EventComponent implements OnInit{
                 "Content-Type": "application/json",
               },
             })
-            .then(() => {
-                console.log('Event deleted successfully');
-            })
-            .catch(error => {
-              console.error('Error:', error.message);
+            .catch(() => {
+              window.location.reload();
             });
-          } else {
-            //console.log('Event not found');
           }
         })
-        .catch(error => {
-          console.error('Error:', error.message);
+        .catch(() => {
+          window.location.reload();
         });
       }
     } else {
