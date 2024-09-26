@@ -87,7 +87,7 @@ def get_peak_times():
     LIMIT 5;
     """
     df = pd.read_sql(query, conn)
-    conn.close()
+    conn.dispose()
     peak_start_time = df['start_time'].mode()[0]
     peak_end_time = df['end_time'].mode()[0]
     return peak_start_time, peak_end_time

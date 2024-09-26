@@ -9,6 +9,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -75,12 +77,11 @@ public class DialogflowService {
             
             //event recommender intent
             if(queryResult.getIntent().getDisplayName().equals("Recommend Events")) {
-                List<Double> temp = getRecommendedEvents(userID);
-                String eventsString = temp.stream()
-                .map(String::valueOf)
-                .reduce((a, b) -> a + ", " + b)
-                .orElse("");
-                return queryResult.getFulfillmentText() + " " + eventsString;
+                List<Event> recommendedEvents = getRecommendedEvents(userID);
+                String eventsString = recommendedEvents.stream()
+                    .map(this::formatEventDetails)
+                    .collect(Collectors.joining("\n"));
+                return queryResult.getFulfillmentText() + "\n" + eventsString;
             }
     
             //event details intent
@@ -637,29 +638,39 @@ public class DialogflowService {
     }
 
     private String formatEventDetails(Event event) {
+        String eventId = event.getEventId() != null ? event.getEventId().toString() : "";
         String title = event.getTitle() != null ? event.getTitle() : "";
         String location = event.getLocation() != null ? event.getLocation() : "";
         String startDate = event.getStartDate() != null ? event.getStartDate().toString() : "";
         String startTime = event.getStartTime() != null ? event.getStartTime().toString() : "";
-
-        return String.format("Title: %s, Location: %s, Start Date: %s, Start Time: %s", title, location, startDate, startTime);
+    
+        return String.format("ID: %s, Title: %s, Location: %s, Start Date: %s, Start Time: %s", eventId, title, location, startDate, startTime);
     }
-
+    
     private String formatEventDetailswithDistance(Event event, Double distance) {
+        String eventId = event.getEventId() != null ? event.getEventId().toString() : "";
         String distanceStr = distance != null ? String.format(" (%.2f km away)", distance) : "";
         String title = event.getTitle() != null ? event.getTitle() + distanceStr : "";
         String location = event.getLocation() != null ? event.getLocation() : "";
         String startDate = event.getStartDate() != null ? event.getStartDate().toString() : "";
         String startTime = event.getStartTime() != null ? event.getStartTime().toString() : "";
-
-        return String.format("Title: %s, Location: %s, Start Date: %s, Start Time: %s", title, location, startDate, startTime);
+    
+        return String.format("ID: %s, Title: %s, Location: %s, Start Date: %s, Start Time: %s", eventId, title, location, startDate, startTime);
     }
 
-    public List<Double> getRecommendedEvents(int userID) {
+    public List<Event> getRecommendedEvents(int userID) {
         String url = String.format(RECOMMEND_EVENTS_URL_TEMPLATE, userID);
         RestTemplate restTemplate = new RestTemplate();
         Double[] response = restTemplate.getForObject(url, Double[].class);
-        return Arrays.asList(response);
+        List<Double> eventIds = Arrays.asList(response);
+    
+        // Fetch event details for each event ID and handle Optional<Event>
+        List<Event> events = eventIds.stream()
+            .map(eventId -> eventService.getEventById(eventId.longValue()))
+            .flatMap(Optional::stream) // Filter out empty Optional values
+            .collect(Collectors.toList());
+    
+        return events;
     }
 
     // Method to sanitize input

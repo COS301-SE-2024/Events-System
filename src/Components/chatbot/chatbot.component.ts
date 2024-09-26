@@ -52,13 +52,14 @@ export class ChatbotComponent implements OnInit {
     }).catch(error => {
       console.error('Error:', error);
       this.typing = false; // Set typing to false
-    });
+    });``
   }
 
   async handleResponse(response: string): Promise<void> {
       const helpMessageFirstLine = "Here are the things I can help you with:";
       const prepareKeyword = "prepare";
       const agendaKeyword = "agenda";
+      console.log(response);
       if (response.startsWith(helpMessageFirstLine)) {
           const helpMessages = response.split('\n');
           for (const helpMessage of helpMessages) {
@@ -69,46 +70,42 @@ export class ChatbotComponent implements OnInit {
           return;
       }
   
-
-      
-
       if (response.includes(prepareKeyword)) {
-        const [firstLine, ...preparationDetails] = response.split('\n');
-        this.messages.push({ text: firstLine, isUser: false });
-        preparationDetails.forEach(detail => {
-            const cleanedDetail = detail.replace(/^- /, '').trim(); // Remove leading hyphens and trim
-            this.messages.push({ text: `o ${cleanedDetail}`, isUser: false });
-        });
-        return;
-    }
-
-    if (response.includes(agendaKeyword)) {
-      const [firstLine, ...agendaDetails] = response.split('\n');
-      this.messages.push({ text: firstLine, isUser: false });
-      agendaDetails.forEach(detail => {
-          const cleanedDetail = detail.replace(/^- /, '').trim(); // Remove leading hyphens and trim
-          this.messages.push({ text: `o ${cleanedDetail}`, isUser: false });
-      });
-      return;
-  }
-
-
-
-      const eventPattern = /Title:\s*(.*?),\s*Location:\s*(.*?),\s*Start Date:\s*(\d{4}-\d{2}-\d{2}),\s*Start Time:\s*(\d{2}:\d{2}:\d{2})/g;
+          const [firstLine, ...preparationDetails] = response.split('\n');
+          this.messages.push({ text: firstLine, isUser: false });
+          preparationDetails.forEach(detail => {
+              const cleanedDetail = detail.replace(/^- /, '').trim(); // Remove leading hyphens and trim
+              this.messages.push({ text: `o ${cleanedDetail}`, isUser: false });
+          });
+          return;
+      }
+  
+      if (response.includes(agendaKeyword)) {
+          const [firstLine, ...agendaDetails] = response.split('\n');
+          this.messages.push({ text: firstLine, isUser: false });
+          agendaDetails.forEach(detail => {
+              const cleanedDetail = detail.replace(/^- /, '').trim(); // Remove leading hyphens and trim
+              this.messages.push({ text: `o ${cleanedDetail}`, isUser: false });
+          });
+          return;
+      }
+  
+      const eventPattern = /ID:\s*(\d+),\s*Title:\s*(.*?),\s*Location:\s*(.*?),\s*Start Date:\s*(\d{4}-\d{2}-\d{2}),\s*Start Time:\s*(\d{2}:\d{2}:\d{2})/g;
       let match;
       const events = [];
       const uniqueEvents = new Set<string>();
   
       // Extract multiple events
       while ((match = eventPattern.exec(response)) !== null) {
-          const eventIdentifier = `${match[1]}_${match[3]}_${match[4]}`;
+          const eventIdentifier = `${match[2]}_${match[4]}_${match[5]}`;
           if (!uniqueEvents.has(eventIdentifier)) {
               uniqueEvents.add(eventIdentifier);
               events.push({
-                  title: match[1],
-                  location: match[2],
-                  startDate: match[3],
-                  startTime: match[4]
+                  eventId: match[1],
+                  title: match[2],
+                  location: match[3],
+                  startDate: match[4],
+                  startTime: match[5]
               });
           }
       }

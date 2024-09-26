@@ -224,8 +224,17 @@ public class EventService {
         return allEvents.stream()
                 .map(event -> {
                     String[] geo = event.getGeolocation().split(", ");
-                    double eventLat = Double.parseDouble(geo[0]);
-                    double eventLon = Double.parseDouble(geo[1]);
+                    if (geo.length != 2) {
+                        throw new IllegalArgumentException("Invalid geolocation format for event: " + event.getEventId());
+                    }
+                    double eventLat;
+                    double eventLon;
+                    try {
+                        eventLat = Double.parseDouble(geo[0]);
+                        eventLon = Double.parseDouble(geo[1]);
+                    } catch (NumberFormatException e) {
+                        throw new IllegalArgumentException("Invalid geolocation values for event: " + event.getEventId(), e);
+                    }
                     double distance = calculateDistance(userLat, userLon, eventLat, eventLon);
                     return new EventWithDistance(event, distance);
                 })
