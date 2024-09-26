@@ -58,7 +58,9 @@
               <div class="label mt-4">
                 <span class="label-text">Location</span>
               </div>
-              <input #LocationInput type="text" placeholder="Location" class="input input-bordered w-11/12"  oninput="sessionStorage.setItem('Location', this.value)">
+              <input #LocationInput type="text" placeholder="Location" class="input input-bordered w-11/12" 
+                     [(ngModel)]="location" (ngModelChange)="updateMarkerPosition($event)" 
+                     onkeyup="sessionStorage.setItem('Location', this.value)">
             </div>
             <div class="mt-7">
             </div>
@@ -142,6 +144,17 @@
                   </button>
                 </div>
               </div>
+            </div>
+
+            <div class="map mt-8" *ngIf="isAPILoaded">
+              <google-map height="24rem" width="100%" [options]="mapOptions">
+                <map-marker [position]="markerPosition"></map-marker>
+              </google-map>
+              <!-- Add this button where you want it to appear, for example, after the location input -->
+            <div class="flex justify-center mt-4">
+              <button (click)="openInMaps()" class="btn btn-outline btn-primary font-roboto">
+                Open in Maps
+              </button>
             </div>
           <div class="flex justify-between mt-4">
             <button class="btn btn-outline btn-warning" (click)="goBack()">back</button>

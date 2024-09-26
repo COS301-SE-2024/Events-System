@@ -1,0 +1,29 @@
+<div class="group relative flex flex-col my-6 bg-base-200 shadow-sm rounded-lg w-full hover:shadow-lg transition-shadow duration-300 search-card">
+  <div class="relative h-20 m-2.5 overflow-hidden text-secondary rounded-md">
+    <img class="transition-transform duration-500 ease-[cubic-bezier(0.25, 1, 0.5, 1)] transform group-hover:scale-110" 
+    [src]="imageSource" alt="event-image" />
+  </div>
+  <div class="p-4">
+    <h6 class="mb-2 text-secondary text-xl font-semibold">
+      {{ title }}
+    </h6>
+    <p class="text-secondary leading-normal font-light">
+      {{ description }}
+    </p>
+    <p *ngIf="location" class="text-secondary leading-normal font-light">
+      Location: {{ location }}
+    </p>
+    <p  *ngIf="startDate" class="text-secondary leading-normal font-light">
+      Date: {{ startDate | date: ' d MMM'}}
+    </p>
+    <p  *ngIf="startTime" class="text-secondary leading-normal font-light">
+      Time: {{ formatTime(startTime) }}
+    </p>
+  </div>
+  <div class="px-4 pb-4 pt-0 mt-2">
+    <button class="rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button"
+    [routerLink]="['/event', eventId]">
+      Book Now
+    </button>
+  </div>
+</div>

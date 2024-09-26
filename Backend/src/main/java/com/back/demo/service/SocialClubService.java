@@ -3,6 +3,7 @@ package com.back.demo.service;
 import com.back.demo.model.SocialClub;
 import com.back.demo.repository.SocialClubRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,10 +24,12 @@ public class SocialClubService {
         return socialClubRepository.findById(socialClubId);
     }
 
+    @CacheEvict(value = "socialclubs", key = "'getAllSocialClubs'")
     public SocialClub createSocialClub(SocialClub socialClub) {
         return socialClubRepository.save(socialClub);
     }
 
+    @CacheEvict(value = "socialclubs", key = "'getAllSocialClubs'")
     public SocialClub updateSocialClub(Long socialClubId, SocialClub socialClubDetails) {
         Optional<SocialClub> optionalSocialClub = socialClubRepository.findById(socialClubId);
         if (optionalSocialClub.isPresent()) {
@@ -43,6 +46,7 @@ public class SocialClubService {
         }
     }
 
+    @CacheEvict(value = "socialclubs", key = "'getAllSocialClubs'")
     public SocialClub partialUpdateSocialClub(Long socialClubId, Map<String, Object> updates) {
         Optional<SocialClub> optionalSocialClub = socialClubRepository.findById(socialClubId);
         if (optionalSocialClub.isPresent()) {
@@ -88,6 +92,7 @@ public class SocialClubService {
         }
     }
 
+    @CacheEvict(value = "socialclubs", key = "'getAllSocialClubs'")
     public void deleteSocialClub(Long socialClubId) {
         socialClubRepository.deleteById(socialClubId);
     }

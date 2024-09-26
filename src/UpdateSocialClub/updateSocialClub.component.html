@@ -4,16 +4,11 @@
       <div class="px-5 md:px-32 flex flex-1 justify-center py-5">
         <div class="layout-content-container flex flex-col max-w-[2010px] flex-1">
             <!--Page heading-->
-            <button class="absolute btn w-[50px] h-[30px] rounded-full" [routerLink]="['/socialclublisting']">
+
+            <h1 class="lg:text-6xl text-4xl text-center mt-8 mb-6">Let's Make some changes!</h1>
+            <button (click)="goBack()" class="btn lg:w-[50px] lg:h-[30px] rounded-full">
               <i class="fa-solid fa-arrow-left"></i>
             </button>
-            <div class="flex items-center justify-center mb-6 md:mx-10 md:p-4">
-              <div class="font-poppins text-center text-secondary font-extrabold text-2xl md:text-3xl mb-2 mx-auto">
-                <p>{{ this.updateForm.get('name')?.value }}</p>
-              </div>
-            </div>
-            
-
             <div *ngIf="!isAPILoading;">
               <!-- <div class="flex flex-col mt-5 gap-10">
                   <div class="flex flex-col items-center justify-center">
@@ -30,17 +25,21 @@
                   </div>
               </div> -->
 
-              <div class="md:flex md:flex-col md:gap-y-16 px-40">
+              <div class="lg:flex lg:flex-col lg:gap-y-16 lg:px-40 px-10 ">
 
                 <div class="flex flex-col justify-center items-center ">
-                  <p class="font-karla text-xl">Club Name</p>
+                  <div class="label mt-4 flex justify-center">
+                    <span class="label-text">Club Name</span>
+                  </div>
                   <div class="font-roboto">
                     <input id="nameInput" type="text" formControlName="name" placeholder="Type club name..." class="input input-bordered border-secondary max-w-xl text-lg mt-1" required/>
                   </div>
                 </div>
 
                 <div class="flex flex-col justify-center items-center mt-10 md:mt-0">
-                  <p class="font-karla text-xl">Category</p>
+                  <div class="label mt-4 flex justify-center">
+                    <span class="label-text">Category</span>
+                  </div>
                   <div class="font-roboto">
                       <select id="categoryInput" formControlName="categories" class="select border-secondary w-64 focus:border-none mt-1 md:mt-3 overflow-y-auto">
                         <option disabled selected>Select ...</option>
@@ -54,14 +53,18 @@
                 </div>
 
                 <div class="flex flex-col justify-center items-center mt-10 md:mt-0">
-                  <p class="font-karla text-xl">Club summary</p>
+                  <div class="label mt-4 flex justify-center">
+                    <span class="label-text">Club Summary </span>
+                  </div>
                   <div class="font-roboto">
                       <textarea id="summaryInput" formControlName="summaryDescription" class="textarea textarea-bordered border-secondary w-80  min-h-48 max-h-48 mt-1 md:mt-0" placeholder="Summary" required></textarea>
                   </div>
                 </div>
 
                 <div class="flex flex-col justify-center items-center mt-10 md:mt-0">
-                  <p class="font-karla text-xl">Detailed description</p>
+                  <div class="label mt-4 flex justify-center">
+                    <span class="label-text">Description</span>
+                  </div>     
                   <div class="font-roboto">      
                       <textarea id="descriptionInput" formControlName="description" class="textarea textarea-bordered border-secondary w-80 min-h-48 max-h-48 mt-1 md:mt-3" placeholder="Description" required></textarea>
                   </div>

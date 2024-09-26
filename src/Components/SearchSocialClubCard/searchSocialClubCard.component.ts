@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { RandomHeaderService } from '../../app/random-header.service'; 
 @Component({
   selector: 'app-search-social-club-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './searchSocialClubCard.component.html',
   styleUrl: './searchSocialClubCard.component.css',
 })
