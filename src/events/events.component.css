@@ -19,3 +19,11 @@
   animation: pulse 2s infinite;
   border-radius: 7px;
 }
+/* Add this to your global styles.css or component-specific styles */
+button.translate-x-full {
+  transform: translateX(-100%);
+}
+
+button.translate-x-0 {
+  transform: translateX(0);
+}
