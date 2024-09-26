@@ -52,14 +52,11 @@ export class SettingsComponent implements OnInit {
     this.selectedTab = tab;
   }
 
-  toggleContactInfoPrivate() {
-    const id = localStorage.getItem('ID');
+  async toggleContactInfoPrivate() {
     this.makeContactInfoPrivate = !this.makeContactInfoPrivate;
   }
 
-  toggleSurnamePrivate() {
-    const id = localStorage.getItem('ID');
-    //this.http.patch(`https://events-system-back.wn.r.appspot.com/api/employees/${id}`, updatedData)
+  async toggleSurnamePrivate() {
     this.makeSurnamePrivate = !this.makeSurnamePrivate;
   }
 
@@ -81,6 +78,8 @@ export class SettingsComponent implements OnInit {
     const storedEmployeeData = localStorage.getItem('employeeData');
     if (storedEmployeeData) {
       this.employeeData = JSON.parse(storedEmployeeData);
+      this.makeContactInfoPrivate = !this.employeeData.publicContacts;
+      this.makeSurnamePrivate = !this.employeeData.publicSurname;
     } else {
       // Handle case where employeeData is not available in localStorage
     }
@@ -132,6 +131,8 @@ export class SettingsComponent implements OnInit {
     if (this.x) updatedData.twitter = this.sanitizePipe.transform(this.x);
     if (this.linkedIn) updatedData.linkedin = this.sanitizePipe.transform(this.linkedIn);
     if (this.gitHub) updatedData.github = (this.gitHub);
+    updatedData.publicContacts = !this.makeContactInfoPrivate;
+    updatedData.publicSurname = !this.makeSurnamePrivate;
   
     const uploadFile = async () => {
       if (this.pictureChanged && this.file) {
