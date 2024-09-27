@@ -10,6 +10,8 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.cache.annotation.Cacheable;
+
 @Service
 public class EventSeriesService {
 
@@ -19,6 +21,7 @@ public class EventSeriesService {
     @Autowired
     private NotificationService notificationService;
 
+    @Cacheable(value = "eventSeriesCache", key = "#root.methodName")
     public List<EventSeries> getAllEventSeries() {
         return eventSeriesRepository.findAll();
     }
