@@ -10,6 +10,7 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 
 @Service
@@ -30,6 +31,7 @@ public class EventSeriesService {
         return eventSeriesRepository.findById(seriesId);
     }
 
+    @CacheEvict(value = "eventSeriesCache", key = "'getAllEventSeries'")
     public EventSeries createEventSeries(EventSeries eventSeries) {
         eventSeries.setCreatedAt(new Timestamp(System.currentTimeMillis()));
         return eventSeriesRepository.save(eventSeries);
