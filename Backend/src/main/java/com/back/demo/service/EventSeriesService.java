@@ -50,6 +50,7 @@ public class EventSeriesService {
 
     }
 
+    @CacheEvict(value = "eventSeriesCache", key = "'getAllEventSeries'")
     public void deleteEventSeries(Long seriesId) {
         eventSeriesRepository.deleteById(seriesId);
     }
