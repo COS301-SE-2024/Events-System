@@ -37,6 +37,7 @@ public class EventSeriesService {
         return eventSeriesRepository.save(eventSeries);
     }
 
+    @CacheEvict(value = "eventSeriesCache", key = "'getAllEventSeries'")
     public EventSeries updateEventSeries(Long seriesId, EventSeries eventSeriesDetails) {
         EventSeries eventSeries = eventSeriesRepository.findById(seriesId)
                 .orElseThrow(() -> new RuntimeException("EventSeries not found"));
