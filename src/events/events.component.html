@@ -1,4 +1,4 @@
-<div class="drawer lg:drawer-open drawer-end">
+<div class="drawer lg:drawer-open drawer-end"  [ngClass]="{'blur-lg transition duration-1000': showRecommended}">
   <input id="my-drawer-3" type="checkbox" class="drawer-toggle" #drawerToggle />
   <div class="drawer-content flex flex-col justify-center">
     <label for="my-drawer-3" class="btn btn-primary font-roboto drawer-button lg:hidden w-full">Filter</label>
@@ -30,9 +30,7 @@
             [endDate]="event.endDate"
             [location]="event.location"
             [hostedBy]="event.host.firstName + ' ' + event.host.lastName"
-            [socialClub]="event.socialClub"
-            [isRecommended]="recommendedEventIds.includes(event.eventId)"
-            [ngClass]="{'recommended': recommendedEventIds.includes(event.eventId)}">
+            [socialClub]="event.socialClub">
           </app-event-card>
         </ng-template>
       </div>
@@ -128,22 +126,63 @@
     </ul>
   </div>
 </div>
+<!-- Recommended Events Overlay -->
+<div *ngIf="showRecommended" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+  <div class="p-4 md:p-8 rounded-lg w-full h-full md:w-auto md:h-auto overflow-y-auto md:overflow-visible">
+    <h2 class="text-2xl font-bold mb-4">Recommended Events</h2>
+    <div class="flex flex-col md:flex-row gap-4 overflow-y-auto md:overflow-y-visible max-h-full md:max-h-full items-center justify-center">
+      <!-- Skeleton Loaders -->
+      <ng-container *ngIf="loading; else eventCards">
+        <div class="relative flex flex-col mt-6  h-96 bg-transparent shadow-md bg-clip-border rounded-xl w-72"></div>  
+        <div class="relative flex flex-col mt-6  h-96 bg-transparent shadow-md bg-clip-border rounded-xl w-72"></div>  
+        <div class="relative flex flex-col mt-6  h-96 bg-transparent shadow-md bg-clip-border rounded-xl w-72"></div>  
+      </ng-container>
+      <!-- Event Cards -->
+      <ng-template #eventCards>
+        <ng-container *ngIf="recommendedEvents.length > 0; else noEvents">
+          <app-event-card
+            *ngFor="let event of recommendedEvents; let i = index"
+            [eventID]="event.eventId"
+            [eventTitle]="event.title"
+            [description]="event.description"
+            [startTime]="event.startTime"
+            [endTime]="event.endTime"
+            [startDate]="event.startDate"
+            [endDate]="event.endDate"
+            [location]="event.location"
+            [hostedBy]="event.host.firstName + ' ' + event.host.lastName"
+            [socialClub]="event.socialClub"
+            [isRecommended]="true"
+            [ngClass]="['fade-in-stagger', 'delay-' + i * 200]">
+          </app-event-card>
+        </ng-container>
+        <ng-template #noEvents>
+          <div class="relative flex flex-col mt-6 h-96 bg-transparent shadow-md bg-clip-border rounded-xl w-72 items-center justify-center">
+            <p class="text-xl font-bold text-gray-700">No events to recommend</p>
+          </div>
+        </ng-template>
+      </ng-template>
 
-<button class="fixed bottom-4 right-4 bg-blue-500 text-white font-bold w-16 h-16 rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300 ease-in" 
-  [disabled]="showClearButton" 
+      
+    </div>
+        <!-- "X" button -->
+        <button *ngIf="showClearButton"  
+        class="fixed bottom-4 right-4 bg-red-500 text-white font-bold w-16 h-16 rounded-full shadow-lg hover:bg-red-700 transition-transform duration-300 ease-in" 
+        [ngClass]="{'translate-x-0': showClearButton, 'translate-x-full': !showClearButton}"
+        (click)="clearRecommendedEvents()">
+        <i class="fa fa-times ml-1 mt-1" aria-hidden="true"></i>
+        </button>
+
+  </div>
+</div>
+<button *ngIf="!showClearButton"   class="fixed bottom-4 right-4 bg-accent font-bold py-2 px-4 rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300 ease-in" 
+  
+[disabled]="showClearButton" 
   (click)="highlightRecommendedEvents()">
   <ng-container *ngIf="!loading; else loadin">
-    <i class="fa fa-lightbulb-o ml-1 mt-1" aria-hidden="true"></i>
+    Suggest some events
   </ng-container>
   <ng-template #loadin>
     <span class="loading loading-dots loading-md"></span>
   </ng-template>
-</button>
-
-<!-- "X" button -->
-<button *ngIf="showClearButton" 
-  class="fixed bottom-4 right-4 bg-red-500 text-white font-bold w-16 h-16 rounded-full shadow-lg hover:bg-red-700 transition-transform duration-300 ease-in" 
-  [ngClass]="{'translate-x-0': showClearButton, 'translate-x-full': !showClearButton}"
-  (click)="clearRecommendedEvents()">
-  <i class="fa fa-times ml-1 mt-1" aria-hidden="true"></i>
 </button>

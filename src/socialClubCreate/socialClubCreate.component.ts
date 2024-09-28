@@ -72,77 +72,48 @@ export class SocialClubCreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.checkCookies();
     this.imageSource = this.randomImageService.getRandomImageSource();
   }
 
   createClub() {
     if (this.createForm.valid) {
       this.isAPILoading = true;
-        try{
-          fetch('https://events-system-back.wn.r.appspot.com/api/v1/auth/' + this.getCookie("jwt"), {
-            method: 'GET',
-            credentials: 'include',
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          })
-          .then(response => response.json())
-          .then(data => {
-            // Show the success toast
-            this.hostID = data;
-
-            const formData = {
-              ownerID: this.hostID,
-              name: this.sanitizePipe.transform(this.createForm.get('name')?.value),
-              description: this.sanitizePipe.transform(this.createForm.get('description')?.value),
-              pictureLink: this.sanitizePipe.transform(this.createForm.get('pictureLink')?.value),
-              summaryDescription: this.sanitizePipe.transform(this.createForm.get('summaryDescription')?.value),
-              categories: [this.sanitizePipe.transform(this.createForm.get('categories')?.value)]
-            };
-            
-            try {
-              fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs', {
-                method: 'POST',
-                credentials: 'include',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-              })
-              .then(response => response.json())
-              .then(() => {
-                // Show the success toast
-                this.showsuccessToast = true;
-                this.isAPILoading = false;
-                setTimeout(() => {
-                  this.showsuccessToast = false;
-                  window.history.back();
-                }, 5000);
-              })
-              .catch((error) => {
-                this.showfailToast = true;
-                this.isAPILoading = false;
-
-                setTimeout(() => {
-                  this.showfailToast = false;
-                }, 10000);
-              });
-            }
-            catch (error)
-            {
-              window.location.reload();
-            }
-          });
-        }
-        catch (error) {
-          window.location.reload();
-        }
-       //this.hostID = localStorage.getItem("ID");
-
- 
-     //this.router.navigate(['/socialclublisting']);
-       }
+      this.hostID = Number(localStorage.getItem('ID'));
+      const formData = {
+        ownerID: this.hostID, // Assuming hostID is already available
+        name: this.sanitizePipe.transform(this.createForm.get('name')?.value),
+        description: this.sanitizePipe.transform(this.createForm.get('description')?.value),
+        pictureLink: "pictureLink",
+        summaryDescription: this.sanitizePipe.transform(this.createForm.get('summaryDescription')?.value),
+        categories: [this.sanitizePipe.transform(this.createForm.get('categories')?.value)]
+      };
+  
+      fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs', {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(response => response.json())
+      .then(() => {
+        // Show the success toast
+        this.showsuccessToast = true;
+        this.isAPILoading = false;
+        setTimeout(() => {
+          this.showsuccessToast = false;
+          window.history.back();
+        }, 5000);
+      })
+      .catch((error) => {
+        this.showfailToast = true;
+        this.isAPILoading = false;
+        setTimeout(() => {
+          this.showfailToast = false;
+        }, 10000);
+      });
+    }
   }
 
   nextStep() {
@@ -225,74 +196,6 @@ export class SocialClubCreateComponent implements OnInit {
     }
   }
 
-  async checkCookies() {
-    // Get all cookies
-    const cookies = document.cookie.split('; ');
-
-    // Find the cookie by name
-    let accessToken = null;
-    let refreshToken = null;
-    for (const cookie of cookies) {
-        const [name, value] = cookie.split('=');
-        if (name === "jwt") {
-            accessToken = decodeURIComponent(value);
-            break;
-        }
-    }
-    for (const cookie of cookies) {
-      const [name, value] = cookie.split('=');
-      if (name === "refresh") {
-          refreshToken = decodeURIComponent(value);
-          break;
-      }
-  }
-    
-    if(!accessToken)        //If access token expired
-    {
-      if(!refreshToken)     //If refresh token expired
-      {
-        this.router.navigate(["/login"]);
-      }
-
-      try {
-        const response = await fetch("https://events-system-back.wn.r.appspot.com/api/v1/auth/refresh-token", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${this.getCookie("refresh")}`
-            },
-            body: JSON.stringify(FormData)
-        });
-
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-
-        const authData = await response.json();
-        document.cookie = `jwt=${authData.access_token}; path=/; expires=` + new Date(new Date().getTime() + 15 * 60 * 1000).toUTCString();
-        document.cookie = `refresh=${authData.refresh_token}; path=/; expires=` + new Date(new Date().getTime() + 24* 60 * 60 * 1000).toUTCString();
-        // Handle the response data as needed
-      }
-      catch (error) {
-        this.router.navigate(["/login"]);
-      }
-    }
-  }
-
-
-  getCookie(cookieName: string) {
-    const name = cookieName + '=';
-    const decodedCookie = decodeURIComponent(document.cookie);
-    const cookieArray = decodedCookie.split(';');
-
-    for (let i = 0; i < cookieArray.length; i++) {
-        const cookie = cookieArray[i].trim();
-        if (cookie.indexOf(name) === 0) {
-            return cookie.substring(name.length, cookie.length);
-        }
-    }
-    return null;
-}
 isSummaryDescriptionSelected = false;
 selectedSummaryDescription = '';
 selectSummaryDescription(description: string) {

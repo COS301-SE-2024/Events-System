@@ -383,9 +383,9 @@ saveTagsToSessionStorage() {
     if (EndDatedata) {
       this.EndDateInput.nativeElement.value = EndDatedata;
     }
-    // if (Locationdata) {
-    //   this.LocationInput.nativeElement.value = Locationdata;
-    // }
+    if (this.currentStep !== 2 && Locationdata) {
+      this.LocationInput.nativeElement.value = Locationdata;
+    }
     if (SocialClubdata) {
       this.SocialClubInput.nativeElement.value = SocialClubdata;
     }
@@ -454,15 +454,9 @@ saveTagsToSessionStorage() {
     sessionStorage.setItem('agendainputs', JSON.stringify(this.agendainputs.value));
   }
   ngAfterViewInit() {
-
-
     const namedata = sessionStorage.getItem('Name');
     if (namedata) {
       this.nameInput.nativeElement.value = namedata;
-    }
-    const locationData = sessionStorage.getItem('Location');
-    if (locationData) {
-      this.locationValue = locationData;
     }
   }
 
@@ -544,12 +538,16 @@ saveTagsToSessionStorage() {
       this.currentStep--;
     }
   }
+  private googleMapsLoaded = false; // Flag to track if Google Maps has been loaded
+
   navigateToStep(step: number) {
     this.currentStep = step;
-    if(this.currentStep === 2){
+    if(this.currentStep === 2 &&  !this.googleMapsLoaded){
       setTimeout(() => {
         this.googleMapsLoader.load().then(() => {
           this.initializeGooglePlaces();
+          this.googleMapsLoaded = true; // Set the flag to true after loading
+
         }).catch(error => {
           console.error('Error loading Google Maps API:', error);
         });      }, 1);

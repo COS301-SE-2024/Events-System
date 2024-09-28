@@ -10,6 +10,9 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+
 @Service
 public class EventSeriesService {
 
@@ -19,6 +22,7 @@ public class EventSeriesService {
     @Autowired
     private NotificationService notificationService;
 
+    @Cacheable(value = "eventSeriesCache", key = "#root.methodName")
     public List<EventSeries> getAllEventSeries() {
         return eventSeriesRepository.findAll();
     }
@@ -27,11 +31,13 @@ public class EventSeriesService {
         return eventSeriesRepository.findById(seriesId);
     }
 
+    @CacheEvict(value = "eventSeriesCache", key = "'getAllEventSeries'")
     public EventSeries createEventSeries(EventSeries eventSeries) {
         eventSeries.setCreatedAt(new Timestamp(System.currentTimeMillis()));
         return eventSeriesRepository.save(eventSeries);
     }
 
+    @CacheEvict(value = "eventSeriesCache", key = "'getAllEventSeries'")
     public EventSeries updateEventSeries(Long seriesId, EventSeries eventSeriesDetails) {
         EventSeries eventSeries = eventSeriesRepository.findById(seriesId)
                 .orElseThrow(() -> new RuntimeException("EventSeries not found"));
@@ -44,6 +50,7 @@ public class EventSeriesService {
 
     }
 
+    @CacheEvict(value = "eventSeriesCache", key = "'getAllEventSeries'")
     public void deleteEventSeries(Long seriesId) {
         eventSeriesRepository.deleteById(seriesId);
     }

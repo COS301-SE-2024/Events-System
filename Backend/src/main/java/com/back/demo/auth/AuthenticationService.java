@@ -9,6 +9,9 @@ import com.back.demo.config.TokenType;
 import com.back.demo.model.Role;
 import com.back.demo.repository.EmployeeRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -41,6 +44,9 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
+    @PersistenceContext
+    private EntityManager entityManager;
+
     public AuthenticationResponse register(RegisterRequest request) {
         Role role = "Host".equals(request.getRole()) ? Role.MANAGER : Role.USER;
         var user = Employee.builder()
@@ -71,7 +77,6 @@ public class AuthenticationService {
                     )
             );
         } catch (AuthenticationException e) {
-            System.out.println("Authentication failed: " + e.getMessage());
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             throw e;
         }
@@ -80,22 +85,10 @@ public class AuthenticationService {
         var jwtToken = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
         revokeAllUserTokens(user);
+        // Call the method to delete expired and revoked tokens
+        tokenRepository.deleteAllRevokedAndExpiredTokens(user.getEmployeeId());
         saveUserToken(user, jwtToken);
 
-        Cookie jwtCookie = new Cookie("jwt", jwtToken);
-        jwtCookie.setHttpOnly(true);
-        jwtCookie.setSecure(true); 
-        jwtCookie.setPath("/");
-        jwtCookie.setMaxAge(60 * 60); 
-
-        Cookie refreshTokenCookie = new Cookie("refreshToken", refreshToken);
-        refreshTokenCookie.setHttpOnly(true);
-        refreshTokenCookie.setSecure(true); 
-        refreshTokenCookie.setPath("/");
-        refreshTokenCookie.setMaxAge(7 * 12 * 60 * 60); 
-
-        response.addCookie(jwtCookie);
-        response.addCookie(refreshTokenCookie);
         response.setStatus(HttpServletResponse.SC_OK);
 
         return AuthenticationResponse.builder()
@@ -128,13 +121,20 @@ public class AuthenticationService {
 
     private void revokeAllUserTokens(Employee user) {
         var validUserTokens = tokenRepository.findAllValidTokenByEmployeeId(user.getEmployeeId());
-        if (validUserTokens.isEmpty())
+        if (validUserTokens.isEmpty()) {
             return;
+        }
+    
         validUserTokens.forEach(token -> {
             token.setExpired(true);
             token.setRevoked(true);
         });
+    
+        // Save the updated tokens
         tokenRepository.saveAll(validUserTokens);
+
+        // Flush the changes to the database to make sure the updates are applied
+        entityManager.flush();
     }
 
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
