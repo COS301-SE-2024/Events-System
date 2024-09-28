@@ -43,7 +43,7 @@ describe('MyseriesComponent', () => {
   });
 
   it('should display the create series button', () => {
-    const createButton = fixture.debugElement.query(By.css('.btn-outline.btn-primary'));
+    const createButton = fixture.debugElement.query(By.css('.btn.btn-accent'));
     expect(createButton).toBeTruthy();
   });
 

@@ -31,7 +31,7 @@
     
 
     <button class="btn btn-ghost btn-circle hidden lg:block"  *ngIf="!isLoginRoute">
-      <i class="fa-solid fa-magnifying-glass"></i>    </button>
+      <i class="fa-solid fa-magnifying-glass"  routerLink="/search"></i>    </button>
     <div class="dropdown dropdown-end"  *ngIf="!isLoginRoute">
       <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar" *ngIf="employeeData?.employeePictureLink" >
         <div class="w-10 rounded-full">
@@ -83,7 +83,7 @@
     <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label>
     <ul class="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
       <!-- Sidebar content here -->
-      <li><a  routerLink="/"><i class="fa-solid fa-house"></i>Home </a></li>
+      <li><a  routerLink="/"><i class="fa-solid fa-house" ></i>Home </a></li>
       <li>
       <li><a routerLink="/events"><i class="fa-solid fa-list"></i>Events</a></li> 
       <li><a routerLink="/socialclubs"><i class="fa-solid fa-people-group"></i>Social Clubs</a></li>

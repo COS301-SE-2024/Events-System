@@ -44,10 +44,9 @@ test.describe('Social Club Create Page', () => {
 
 
       // Step 2: Fill out the description and category
-      await page.click('li:has-text("Description & Category")');
+      await page.click('li:has-text("Description")');
       await page.fill('textarea[formControlName="summaryDescription"]', 'This is a summary.');
       await page.fill('textarea[formControlName="description"]', 'This is a detailed description.');
-      await page.selectOption('select[formControlName="categories"]', 'Literature');
       await page.click('button:has-text("Next")');
 
 

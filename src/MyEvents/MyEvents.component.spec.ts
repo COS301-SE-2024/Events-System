@@ -9,7 +9,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 // Mock components
 @Component({
-  selector: 'app-my-events-card-skeleton',
+  selector: 'app-ghost-social-club-card',
   template: '<div>Skeleton</div>',
 })
 class MockMyEventsCardSkeletonComponent {}
@@ -60,8 +60,8 @@ describe('MyEventsComponent', () => {
   it('should display skeletons when loading', () => {
     component.isLoading = true;
     fixture.detectChanges();
-    const skeletons = fixture.debugElement.queryAll(By.css('app-my-events-card-skeleton'));
-    expect(skeletons.length).toBe(6);
+    const skeletons = fixture.debugElement.queryAll(By.css('app-ghost-social-club-card'));
+    expect(skeletons.length).toBe(9);
   });
 
   it('should display event cards when not loading', () => {

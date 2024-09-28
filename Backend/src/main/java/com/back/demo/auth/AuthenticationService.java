@@ -194,6 +194,7 @@ public class AuthenticationService {
         var jwtToken = jwtService.generateToken(employee);
 
         revokeAllUserTokens(employee);
+        tokenRepository.deleteAllRevokedAndExpiredTokens(employee.getEmployeeId());
         saveUserToken(employee, jwtToken);
         
         if(refreshToken != null && !tokenRepository.hasGoogleToken(employee.getEmployeeId())) {
