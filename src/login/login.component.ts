@@ -128,7 +128,7 @@ export class LoginComponent {
     });
   }
   ngOnInit() {
-    if(this.getCookie('jwt') || this.getCookie('refresh') || this.getCookie('google')) {
+    if(this.getCookie('jwt') || this.getCookie('refresh')) {
       this.logout();
     }
     
