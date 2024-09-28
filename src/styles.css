@@ -4,7 +4,7 @@
 @import 'tailwindcss/utilities' layer(tailwindcss);
 
 * {
-  transition: all 0.3s ease-in-out;
+  transition: all 0.1s ease-in-out;
 }
 .app-wrapper1 {
     min-height: 100vh; /* Full viewport height */
