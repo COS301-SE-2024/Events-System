@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.OAuth2AccessToken.TokenType;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
@@ -80,5 +81,27 @@ public class AuthenticationController {
         HttpServletResponse response
     ) {
         return ResponseEntity.ok(service.signInWithGoogle(request, response));
+    }
+
+    @GetMapping("/google/refresh")
+    public ResponseEntity<String> getGoogleRefreshToken(@RequestBody String email) {
+        // Fetch the employee by email or another unique identifier
+        Optional<Employee> optionalEmployee = employeeRepository.findByEmailIgnoreCase(email);
+        if (optionalEmployee.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
+        Employee employee = optionalEmployee.get();
+
+        // Fetch the Google refresh token from the database
+        Optional<Token> googleToken = tokenRepository.findByUserIdAndTokenType(employee.getEmployeeId(), "GOOGLE");
+
+        if (googleToken.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Google token not found.");
+        }
+
+        // Return the refresh token
+        String refreshToken = googleToken.get().getToken();
+        return ResponseEntity.ok(refreshToken);
     }
 }

@@ -8,4 +8,5 @@ public class OAuth2Response {
     private String family_name;
     private String email;
     private String picture;
+    private String refresh_token;
 }
