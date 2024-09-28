@@ -96,7 +96,7 @@ export class SocialClubCreateComponent implements OnInit {
               ownerID: this.hostID,
               name: this.sanitizePipe.transform(this.createForm.get('name')?.value),
               description: this.sanitizePipe.transform(this.createForm.get('description')?.value),
-              pictureLink: this.sanitizePipe.transform(this.createForm.get('pictureLink')?.value),
+              pictureLink: "pictureLink",
               summaryDescription: this.sanitizePipe.transform(this.createForm.get('summaryDescription')?.value),
               categories: [this.sanitizePipe.transform(this.createForm.get('categories')?.value)]
             };

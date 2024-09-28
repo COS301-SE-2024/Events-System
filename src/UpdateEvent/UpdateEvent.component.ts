@@ -42,6 +42,7 @@ export class UpdateEventComponent implements OnInit{
   agendaform!: FormGroup;
   isAPILoaded = false;
   sanitizePipe: SanitizePipe;
+  selectedSocialClubId: number | null = null;
   @ViewChildren('stepInput') stepInputs!: QueryList<ElementRef>;
   @ViewChild('nameInput') nameInput!: ElementRef;
   @ViewChild('nameInputs') nameInputs!: ElementRef;
@@ -70,6 +71,12 @@ export class UpdateEventComponent implements OnInit{
   isGlutenFreeSelected = false;
   tags: string[] = [];
   newTag = '';
+  events: any[] = [];
+  uniqueSocialClubs: any[] = [];
+  checkedSocialClubs: any[] = [];
+  allClubsChecked = false;
+  socialClubs: any[] = [];
+  otherCheckboxes: boolean[] = [];
   latitude: number | undefined;
   longitude: number | undefined;
   location = '';
@@ -123,8 +130,8 @@ presubmit(){
       const event = {
         title: this.sanitizePipe.transform(this.nameInput.nativeElement.value),
         description: this.sanitizePipe.transform(this.descriptionInput.nativeElement.value),
-        startTime: this.sanitizePipe.transform(this.StartTimeInput.nativeElement.value+':00'),
-        endTime: this.sanitizePipe.transform(this.EndTimeInput.nativeElement.value+':00'),
+        startTime: this.sanitizePipe.transform(this.StartTimeInput.nativeElement.value),
+        endTime: this.sanitizePipe.transform(this.EndTimeInput.nativeElement.value),
         startDate: this.sanitizePipe.transform(this.StartDateInput.nativeElement.value),
         endDate: this.sanitizePipe.transform(this.EndDateInput.nativeElement.value),
         location: this.sanitizePipe.transform(this.LocationInput.nativeElement.value),
@@ -295,6 +302,14 @@ saveInputs() {
       });
 
       this.eventId = params['id'];
+    // Fetch all social clubs
+    fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs')
+      .then(response => response.json())
+      .then(data => {
+        this.socialClubs = data;
+        this.uniqueSocialClubs = [...new Set(this.socialClubs.map(club => club.name))];
+        this.otherCheckboxes = new Array(this.uniqueSocialClubs.length).fill(false);
+      });
 
       fetch('https://events-system-back.wn.r.appspot.com/api/events/' + this.eventId)
       .then(response => {
@@ -310,7 +325,7 @@ saveInputs() {
         this.StartDateInput.nativeElement.value = sessionStorage.setItem('uStartDate', data.startDate);
         this.EndDateInput.nativeElement.value = sessionStorage.setItem('uEndDate', data.endDate);
         this.LocationInput.nativeElement.value = sessionStorage.setItem('uLocation', data.location);
-        this.SocialClubInput.nativeElement.value = sessionStorage.setItem('uSocialClub', data.socialClub);
+        this.SocialClubInput.nativeElement.value = sessionStorage.setItem('uSocialClub', this.getSocialClubNameById(this.myevent.socialClub));
         if(data.eventDietaryAccommodations.includes('Vegetarian')){
           sessionStorage.setItem('uisVegetarianSelected', 'true');
           sessionStorage.setItem('uupdateisVegetarianSelected', 'true');
@@ -384,6 +399,18 @@ saveInputs() {
           });      }, 100);
 
   }
+
+  getSocialClubNameById(id: number): string {
+    const club = this.socialClubs.find(club => club.id === id);
+    return club ? club.name : '';
+  }
+  
+  onSocialClubChange(event: Event) {
+    const selectElement = event.target as HTMLSelectElement;
+    const selectedId = selectElement.value;
+    sessionStorage.setItem('uSocialClub', selectedId);
+  }
+
 
   toggleDietaryAccommodation(accommodation: string) {
     const index = this.eventDietaryAccommodations.indexOf(accommodation);

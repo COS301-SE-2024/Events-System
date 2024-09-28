@@ -1,6 +1,7 @@
 package com.back.demo.controller;
 
 import com.back.demo.model.Event;
+import com.back.demo.service.EventRSVPService;
 import com.back.demo.servicebus.EventServiceBus;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +18,13 @@ import java.util.Optional;
 public class EventController {
 
     private final EventServiceBus eventServiceBus;
+    private final EventRSVPService eventRSVPService;
 
     @Autowired
-    public EventController(EventServiceBus eventServiceBus) {
+    public EventController(EventServiceBus eventServiceBus, EventRSVPService eventRSVPService) {
         this.eventServiceBus = eventServiceBus;
+        this.eventRSVPService = eventRSVPService;
     }
-
     @GetMapping("/socialclub/{id}")
     public List<Event> getEventBySocialClubId(@PathVariable(value = "id") Long socialClubId) {
         return eventServiceBus.getEventBySocialClubId(socialClubId);
@@ -106,6 +108,12 @@ public class EventController {
     @GetMapping("/search")
     public List<Event> searchEventsByTitle(@RequestParam String title) {
         return eventServiceBus.getEventsByTitle(title);
+    }
+
+    @GetMapping("/{eventId}/rsvps")
+    public ResponseEntity<List<Map<String, Object>>> getRSVPsWithEmployeeDetailsByEventId(@PathVariable Integer eventId) {
+        List<Map<String, Object>> rsvpsWithEmployeeDetails = eventRSVPService.getRSVPsWithEmployeeDetailsByEventId(eventId);
+        return ResponseEntity.ok(rsvpsWithEmployeeDetails);
     }
 
 }

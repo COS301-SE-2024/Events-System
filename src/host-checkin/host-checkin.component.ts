@@ -38,7 +38,7 @@ export class HostCheckinComponent implements OnInit {
   }
 
   fetchRsvpedEmployees(eventId: string): void {
-    const url = `https://events-system-back.wn.r.appspot.com/api/employees/event/${eventId}`;
+    const url = `https://events-system-back.wn.r.appspot.com/api/events/${eventId}/rsvps`;
     //console.log(url); // Log the URL for debugging
     this.http.get<any[]>(url).subscribe(
       (data) => {
@@ -48,7 +48,7 @@ export class HostCheckinComponent implements OnInit {
           surname: item.employee.lastName,
           email: item.employee.email,
           status: item.rsvp.status,
-          lastUpdated: new Date(item.rsvp.rsvpAt),
+          lastUpdated: new Date(item.employee.updatedAt),
           showDetails: false,
           rsvpId: item.rsvp.rsvpId
         })); 

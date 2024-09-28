@@ -35,7 +35,7 @@ export class AppComponent implements OnInit{
 
   title = 'Events-System';
   isDrawerThin = false;
-
+  isDarkTheme = false;
   employeeData: any;
   isPopoverVisible = false;
 
@@ -93,6 +93,9 @@ export class AppComponent implements OnInit{
     // this.webSocketService.notifications.subscribe((message: string) => {
       // this.showToast(message);
     // });
+    // Apply the theme based on localStorage
+    this.isDarkTheme = localStorage.getItem('theme') === 'dark';
+    this.applyTheme();
   }
 
   getInitials(): string {
@@ -187,5 +190,17 @@ export class AppComponent implements OnInit{
     });
   }
 
+  onThemeChange() {
+    this.applyTheme();
+    localStorage.setItem('theme', this.isDarkTheme ? 'dark' : 'light');
+  }
+
+  applyTheme() {
+    if (this.isDarkTheme) {
+      document.body.classList.add('dark-theme');
+    } else {
+      document.body.classList.remove('dark-theme');
+    }
+  }
 }
 
