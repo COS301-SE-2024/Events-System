@@ -134,7 +134,7 @@ public class AuthenticationService {
         tokenRepository.saveAll(validUserTokens);
 
         // Flush the changes to the database to make sure the updates are applied
-        entityManager.flush();
+        // entityManager.flush();
     }
 
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
