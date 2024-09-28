@@ -5,6 +5,8 @@ import {UserReviewCardComponent} from 'src/Components/UserReviewCard/userReviewC
 import { response } from 'express';
 import { RandomHeaderService } from 'src/app/random-header.service';
 import { FormsModule } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
+import { SanitizePipe } from 'src/app/sanitization.pipe';
 @Component({
   selector: 'app-event-ratings',
   standalone: true,
@@ -22,13 +24,17 @@ export class EventRatingsComponent implements OnInit {
   isAPILoading = false;
   showsuccessToast = false;
   showfailToast = false;
+  sanitizePipe: SanitizePipe;
   review = '';
   constructor(
     private router: Router,
     private randomheaderservice: RandomHeaderService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private sanitizer: DomSanitizer
   )
   { 
+    this.sanitizePipe = new SanitizePipe(this.sanitizer);
+
    this.imageSource = '';
   }
   goBack(): void {
@@ -42,8 +48,8 @@ export class EventRatingsComponent implements OnInit {
     const review = {
       eventId: Number(this.eventId),
       employeeId: Number(localStorage.getItem('ID')),
-      rating: this.rating,
-      comments: this.review,
+      rating: Number(this.rating),
+      comments: this.sanitizePipe.transform(this.review),
     };
     // Implement your logic to handle the form submission
     fetch('https://events-system-back.wn.r.appspot.com/api/feedback', {
@@ -74,6 +80,8 @@ export class EventRatingsComponent implements OnInit {
       }, 10000);
       console.error('Error:', error);
     });
+
+    this.logUserAnalytics('submitted_feedback: ' + Number(this.eventId) + ' : ' + Number(this.rating));
   }
 
   closeDialog() {
@@ -137,6 +145,7 @@ export class EventRatingsComponent implements OnInit {
             // this.isLoading = false;
           });
       });
+      this.logUserAnalytics('viewed_event_ratings: ' + this.eventId);
     }
 
   getPercentage(stars: number): number{
@@ -238,5 +247,33 @@ export class EventRatingsComponent implements OnInit {
         }
     }
     return null;
+}
+
+async logUserAnalytics(action: string): Promise<void> {
+  const userId = localStorage.getItem('ID');
+  if (!userId) return;
+
+  const requestBody = {
+    userId: parseInt(userId),
+    actionType: action
+  };
+
+  try {
+    const response = await fetch('https://events-system-back.wn.r.appspot.com/api/user-analytics', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(requestBody),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to log user analytics');
+    }
+
+    console.log('User analytics logged successfully');
+  } catch (error) {
+    console.error('Error logging user analytics:', error);
+  }
 }
 }

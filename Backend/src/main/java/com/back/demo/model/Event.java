@@ -1,13 +1,15 @@
 package com.back.demo.model;
 
 import jakarta.persistence.*;
+
+import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
 
 @Entity
 @Table(name = "events")
-public class Event {
+public class Event implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

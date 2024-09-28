@@ -78,10 +78,17 @@ public class SecurityConfiguration {
             "/api/eventseries/**", // Ensure all event-series-related endpoints are accessible
             "/api/eventseriessubscriptions/**", // Ensure all event-series-subscription-related endpoints are accessible
             "/api/reset/**", // Ensure all password-reset-related endpoints are accessible
+            "/api/user-analytics/**", // Ensure all user-analytics-related endpoints are accessible
+            "/api/user-analytics", // Ensure all user-analytics-related endpoints are accessible
+            "/api/dialogflow/**", // Ensure all chatbot-related endpoints are accessible
+            "/api/dialogflow/detectIntent", // Ensure all chatbot-related endpoints are accessible
+            "/api/**",
             "https://events-system.org/events",
             "/socket/**",
             "/api/reset/**",
-            "/notify"
+            "/notify",
+            "/test-redis-connection",
+            "events/employee/165/upcoming-events"
     };
 
     private final JwtAuthenticationFilter jwtAuthFilter;

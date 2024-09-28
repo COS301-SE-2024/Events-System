@@ -1,6 +1,8 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
+import { SanitizePipe } from 'src/app/sanitization.pipe';
 @Component({
   selector: 'app-delete-series',
   standalone: true,
@@ -12,10 +14,14 @@ export class DeleteSeriesComponent {
   isAPILoading = false;
   showsuccessToast = false;
   showfailToast = false;
+  sanitizePipe: SanitizePipe;
   @ViewChild('nameInput') nameInput!: ElementRef;
   seriesId= '';
   myseries: any = {};
-  constructor(private route: ActivatedRoute, private location: Location) { }  
+  constructor(private route: ActivatedRoute, private location: Location, private sanitizer: DomSanitizer) {
+    this.sanitizePipe = new SanitizePipe(this.sanitizer);
+
+   }  
   goBack(): void {
     window.history.back();
   }
@@ -31,7 +37,7 @@ export class DeleteSeriesComponent {
   }
   submit(){
     this.isAPILoading = true; // Set isLoading to true at the start of the method
-
+    console.log('Deleting series with id: ' + this.seriesId);
       fetch(`https://events-system-back.wn.r.appspot.com/api/eventseries/${this.seriesId}`, {
         method: 'DELETE',
         headers: {

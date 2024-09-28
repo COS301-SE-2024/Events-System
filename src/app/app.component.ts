@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { Component, ViewEncapsulation, ViewChild, ElementRef, OnInit, ChangeDetectorRef } from '@angular/core';
 import { RouterModule, Router, Event, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -13,9 +14,10 @@ import { NotificationService } from './notification.service';
 import { WebSocketService } from './websocket.service';
 import { RefreshService } from './refresh.service';
 
+
 @Component({
   standalone: true,
-  imports: [RouterModule, CommonModule, FullCalendarModule, NotifPopupComponent, ProfileComponent],
+  imports: [FormsModule, RouterModule, CommonModule, FullCalendarModule, NotifPopupComponent, ProfileComponent],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
@@ -31,10 +33,10 @@ export class AppComponent implements OnInit{
   isHost = false;
   isEmployee = false;
   public notificationCount = 0; // Add a property to store the notification count
-
+ 
   title = 'Events-System';
   isDrawerThin = false;
-
+  isDarkTheme = false;
   employeeData: any;
   isPopoverVisible = false;
 
@@ -92,6 +94,10 @@ export class AppComponent implements OnInit{
     // this.webSocketService.notifications.subscribe((message: string) => {
       // this.showToast(message);
     // });
+    this.checkCookies();
+    // Apply the theme based on localStorage
+    this.isDarkTheme = localStorage.getItem('theme') === 'dark';
+    this.applyTheme();
   }
 
   getInitials(): string {
@@ -121,6 +127,13 @@ export class AppComponent implements OnInit{
     this.notificationService.notify();
   }
 
+  closeDrawer() {
+    const drawerCheckbox = document.getElementById('my-drawer-2') as HTMLInputElement;
+    if (drawerCheckbox) {
+      drawerCheckbox.checked = false;
+    }
+  }
+
   toggleDrawer() {
     this.isDrawerThin = !this.isDrawerThin;
   }
@@ -137,6 +150,16 @@ export class AppComponent implements OnInit{
 
 
   refreshNavbar() {
+    this.employeeData = JSON.parse(localStorage.getItem('employeeData') || '{}');
+    if(this.employeeData){
+      if (this.employeeData.role == 'MANAGER'){
+        this.isEmployee = true;
+        this.isHost = true;
+      }else{
+        this.isEmployee = true;
+        this.isHost = false;
+      }
+    }
     this.cdr.detectChanges();
   }
 
@@ -175,6 +198,112 @@ export class AppComponent implements OnInit{
       return 0; // Return a default value in case of error
     });
   }
+  
+  logout() {
+    this.checkCookies();
 
+    fetch('https://events-system-back.wn.r.appspot.com/api/v1/auth/logout', {
+        method: 'POST',
+        headers: {
+            'Authorization': 'Bearer ' + this.getCookie('jwt'), // Ensure the token is passed
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+      if (response.ok) {
+          // Successfully logged out
+          localStorage.removeItem('ID');
+          document.cookie = `jwt=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+          document.cookie = `refresh=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+          window.location.href = '/login'; // Redirect to login page or show logout success message
+      }
+      else {
+        window.location.href = '/login';
+      }
+    })
+    .catch(() => {
+        window.location.reload();
+    });
+  }
+
+  getCookie(cookieName: string) {
+    const name = cookieName + '=';
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const cookieArray = decodedCookie.split(';');
+
+    for (let i = 0; i < cookieArray.length; i++) {
+        const cookie = cookieArray[i].trim();
+        if (cookie.indexOf(name) === 0) {
+            return cookie.substring(name.length, cookie.length);
+        }
+    }
+    return null;
+  }
+
+  async checkCookies() {
+    // Get all cookies
+    const cookies = document.cookie.split('; ');
+
+    // Find the cookie by name
+    let accessToken = null;
+    let refreshToken = null;
+    for (const cookie of cookies) {
+        const [name, value] = cookie.split('=');
+        if (name === "jwt") {
+            accessToken = decodeURIComponent(value);
+            break;
+        }
+    }
+    for (const cookie of cookies) {
+      const [name, value] = cookie.split('=');
+      if (name === "refresh") {
+          refreshToken = decodeURIComponent(value);
+          break;
+      }
+    }
+    
+    if(!accessToken)        //If access token expired
+    {
+      if(!refreshToken)     //If refresh token expired
+      {
+        this.router.navigate(["/login"]);
+      }
+
+      try {
+        const response = await fetch("https://events-system-back.wn.r.appspot.com/api/v1/auth/refresh-token", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.getCookie("refresh")}`
+            },
+            body: JSON.stringify(FormData)
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const authData = await response.json();
+        document.cookie = `jwt=${authData.access_token}; path=/; expires=` + new Date(new Date().getTime() + 15 * 60 * 1000).toUTCString();
+        document.cookie = `refresh=${authData.refresh_token}; path=/; expires=` + new Date(new Date().getTime() + 24* 60 * 60 * 1000).toUTCString();
+        console.log('Token refresh successful');
+        // Handle the response data as needed
+      } catch (error) {
+          console.error('Error refreshing token');
+          // Handle errors appropriately
+      }
+    }
+  }
+  onThemeChange() {
+    this.applyTheme();
+    localStorage.setItem('theme', this.isDarkTheme ? 'dark' : 'light');
+  }
+
+  applyTheme() {
+    if (this.isDarkTheme) {
+      document.body.classList.add('dark-theme');
+    } else {
+      document.body.classList.remove('dark-theme');
+    }
+  }
 }
-

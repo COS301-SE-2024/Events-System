@@ -4,5 +4,5 @@ export const environment = {
     CLIENT_SECRET_FULL: '',
     CLIENT_ID: '',
     CLIENT_SECRET: '',
-    GOOGLE_API_KEY: ''
+    GOOGLE_API_KEY: '',
 };

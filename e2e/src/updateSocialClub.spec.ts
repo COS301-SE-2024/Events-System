@@ -39,9 +39,6 @@ test.describe('Social Club Delete Page', () => {
         await page.fill('input[placeholder="Type club name..."]', 'Updated Club Name');
 
 
-        // Select a category
-        await page.selectOption('select[formControlName="categories"]', 'Literature');
-
 
         // Fill out the summary description
         await page.fill('textarea[formControlName="summaryDescription"]', 'This is an updated summary.');

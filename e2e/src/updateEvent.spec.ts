@@ -55,12 +55,6 @@ test.describe('Event Update Page', () => {
         await page.fill('input[type="date"]', '2024-08-15'); // Start Date
         await page.fill('input[type="date"]', '2024-08-16'); // End Date
 
-        // Fill out the location
-        await page.fill('input[placeholder="Location"]', 'New Location');
-
-        // Fill out the event
-        await page.fill('input[placeholder="Social club"]', 'Updated event');
-
         // Submit the form
         const updateButton = await page.locator('button.btn-success:has-text("Update event")');
         await expect(updateButton).toBeVisible();

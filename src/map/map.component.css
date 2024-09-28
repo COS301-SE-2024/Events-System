@@ -1,0 +1,24 @@
+
+#map {
+  z-index: 20; /* Set a lower z-index value */
+}
+
+/* .drawer-overlay {
+  @apply bg-transparent;
+} */
+
+/* Ensure the drawer opens within the bounds of the menu */
+.drawer-side {
+  position: fixed;
+  top: 5rem; /* Adjust this value based on the height of your navbar */
+  right: 0;
+  height: calc(100% - 5rem); /* Adjust this value based on the height of your navbar */
+  z-index: 21;
+}
+
+.drawer-overlay {
+  @apply bg-transparent;
+  top: 5rem; /* Adjust this value based on the height of your navbar */
+  height: calc(100% - 5rem); /* Adjust this value based on the height of your navbar */
+}
+

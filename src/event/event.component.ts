@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RandomHeaderService } from '../app/random-header.service';
 import { RouterModule } from '@angular/router';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-
+import { GoogleMapsLoaderService } from 'src/app/google-maps-loader.service';
+import { GoogleMapsModule } from '@angular/google-maps'
 @Component({
   selector: 'app-event',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, GoogleMapsModule],
   templateUrl: './event.component.html',
   styleUrl: './event.component.css',
   animations: [
@@ -37,22 +38,47 @@ export class EventComponent implements OnInit{
   host: any = null;
   isLoading = true;
   hasUserRSVPd = false;
+  googleSignIn = false;
   club: any = null;
-  constructor(private route: ActivatedRoute, private randomHeaderService: RandomHeaderService) { 
+  mapOptions: google.maps.MapOptions = {
+    center: { lat: -25.7552742, lng: 28.2337029 },
+    zoomControl: true,
+    mapTypeControl: false,
+    streetViewControl: false,
+    fullscreenControl: false,
+  };
+  markerPosition = { lat: 48.8634286, lng: 2.3114617 };
+  latitude: number | undefined;
+  longitude: number | undefined;
+  isAPILoaded = false;
+  constructor(private route: ActivatedRoute, private randomHeaderService: RandomHeaderService, private googleMapsLoader: GoogleMapsLoaderService, private ngZone: NgZone) { 
     this.imageSource = '';
   }
   goBack(): void {
     window.history.back();
   }
   ngOnInit(): void {
-    this.imageSource = this.randomHeaderService.getRandomHeaderSource();
-    this.route.params.subscribe(async params => { // Step 1: Make this an async function
-      this.eventId = params['id'];
+      this.imageSource = this.randomHeaderService.getRandomHeaderSource();
+      this.route.params.subscribe(async params => { // Step 1: Make this an async function
+        this.eventId = params['id'];
+    
+        await this.checkUserRSVP();
+        await this.fetchEventDetails();
+      });
   
-      await this.checkUserRSVP();
-      await this.fetchEventDetails();
-    });
-  }
+    this.googleSignIn = Boolean(localStorage.getItem('googleSignIn'));
+    
+      setTimeout(() => {
+        this.googleMapsLoader.load().then(() => {
+          this.isAPILoaded = true;
+        }).catch(error => {
+          console.error('Error loading Google Maps API:', error);
+        });
+      }, 100);
+      this.logUserAnalytics("view_event: " + this.eventId);
+
+
+    }
   
   async fetchEventDetails(): Promise<void> {
     try {
@@ -62,6 +88,14 @@ export class EventComponent implements OnInit{
       this.event.startTime = this.formatTime(this.event.startTime);
       this.event.endTime = this.formatTime(this.event.endTime);
   
+          // Parse the geolocation string and update map center and marker position
+    if (this.event.geolocation) {
+      const [lat, lng] = this.event.geolocation.split(',').map(Number);
+      this.latitude = lat;
+      this.longitude = lng;
+      this.updateMapCenter();
+    }
+
       const hostResponse = await fetch('https://events-system-back.wn.r.appspot.com/api/employees/' + this.event.hostId);
       const hostData = await hostResponse.json();
       this.host = hostData;
@@ -153,6 +187,56 @@ export class EventComponent implements OnInit{
         }, 5000);
         console.error('Error:', error);
       });
+
+      // Get all cookies
+      const cookies = document.cookie.split('; ');
+
+      // Find the cookie by name
+      let googleToken = null;
+      for (const cookie of cookies) {
+          const [name, value] = cookie.split('=');
+          if (name === "google") {
+              googleToken = decodeURIComponent(value);
+              break;
+          }
+      }
+
+      if(googleToken) {
+        const now = new Date().toISOString();
+        await fetch(`https://www.googleapis.com/calendar/v3/calendars/primary/events?maxResults=100&timeMin=${encodeURIComponent(now)}&orderBy=startTime&singleEvents=true`, {
+          method: 'GET',
+          headers: {
+            "Authorization": `Bearer ${googleToken}`,
+            "Content-Type": "application/json",
+          },
+        })
+        .then(response => response.json())
+        .then(async data => {
+          // Find the event with the matching eventId in extendedProperties.private
+          const matchingEvent = data.items.find((event: any) => 
+            event.extendedProperties?.private?.eventId.toString() === this.eventId
+          );
+          
+          if (matchingEvent) {
+            this.logUserAnalytics("unrsvp_event: "  + this.eventId);
+
+            // Proceed to delete the event
+            await fetch(`https://www.googleapis.com/calendar/v3/calendars/primary/events/${matchingEvent.id}`, {
+              method: 'DELETE',
+              headers: {
+                "Authorization": `Bearer ${googleToken}`,
+                "Content-Type": "application/json",
+              },
+            })
+            .catch(() => {
+              window.location.reload();
+            });
+          }
+        })
+        .catch(() => {
+          window.location.reload();
+        });
+      }
     } else {
       this.isAPILoading = true;
       const requestBody = {
@@ -173,6 +257,84 @@ export class EventComponent implements OnInit{
         if (!response.ok) {
           throw new Error('Failed to RSVP to event');
         }
+
+        if(this.googleSignIn)
+        {
+          // Get all cookies
+          const cookies = document.cookie.split('; ');
+
+          // Find the cookie by name
+          let googleToken = null;
+          for (const cookie of cookies) {
+              const [name, value] = cookie.split('=');
+              if (name === "google") {
+                  googleToken = decodeURIComponent(value);
+                  break;
+              }
+          }
+
+          if(googleToken)
+          {
+            await fetch(`https://events-system-back.wn.r.appspot.com/api/events/${this.eventId}`, {
+              method: 'GET',
+              credentials: "include",
+              headers: {
+                'Content-Type': 'application/json',
+              }
+            })
+            .then(async eventData => {
+              const event = await eventData.json();
+              const agendas = `<ul>${event.eventAgendas.map((agenda: any) => `<li>${agenda}</li>`).join("")}</ul>`
+              const preps = `<ul>${event.eventPreparation.map((preparation: any) => `<li>${preparation}</li>`).join("")}</ul>`
+              const googleEvent = {
+                summary: event.title,
+                location: event.location,
+                description: `
+                  
+                ${event.description}
+                  <hr><h3>Agenda:</h3>${agendas}
+              <h3>Preparation Details:</h3>${preps}
+
+                `,
+                start: {
+                  dateTime: `${event.startDate}T${event.startTime}`,
+                  timeZone: 'Africa/Johannesburg', // Adjust based on your timezone
+                },
+                end: {
+                  dateTime: `${event.endDate}T${event.endTime}`,
+                  timeZone: 'Africa/Johannesburg', // Adjust based on your timezone
+                },
+                extendedProperties: {
+                  private: {
+                    eventId: event.eventId.toString(),
+                    hostId: event.hostId.toString(),
+                    socialClub: event.socialClub.toString(),
+                  },
+                },
+                source: {
+                  url: event.eventPictureLink,
+                  title: 'Event Picture',
+                },
+                reminders: {
+                  useDefault: false,
+                  overrides: [
+                    { method: 'email', minutes: 24 * 60 },
+                    { method: 'popup', minutes: 10 },
+                  ],
+                },
+              };
+
+              await fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events', {
+                method: 'POST',
+                headers: {
+                  "Authorization": `Bearer ${googleToken}`,
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(googleEvent),
+              })
+            })
+          }
+        }
     
         const responseData = await response.json();
         this.showrsvpsuccessToast = true;
@@ -191,8 +353,55 @@ export class EventComponent implements OnInit{
         console.error('Error RSVPing to event:', error);
         // Handle error
       }
+      this.logUserAnalytics("rsvp_event: " + this.eventId);
     }
     this.hasUserRSVPd = !this.hasUserRSVPd; // Toggle the RSVP state
+
+  }
+  updateMapCenter() {
+    if (this.latitude !== undefined && this.longitude !== undefined) {
+      this.mapOptions.center = { lat: this.latitude, lng: this.longitude };
+      this.markerPosition = { lat: this.latitude, lng: this.longitude };
+    }
   }
 
+  openInMaps() {
+    const location = this.event.location;
+    if (location) {
+      const encodedLocation = encodeURIComponent(location);
+      const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedLocation}`;
+      window.open(mapsUrl, '_blank');
+    } else {
+      alert('Please enter a location first.');
+    }
+  }
+
+  async logUserAnalytics(action: string): Promise<void> {
+    const userId = localStorage.getItem('ID');
+    if (!userId) return;
+  
+    const requestBody = {
+      userId: parseInt(userId),
+      actionType: action
+    };
+  
+    try {
+      const response = await fetch('https://events-system-back.wn.r.appspot.com/api/user-analytics', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to log user analytics');
+      }
+  
+      console.log('User analytics logged successfully');
+    } catch (error) {
+      console.error('Error logging user analytics:', error);
+    }
+  }
+  
 }

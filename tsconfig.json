@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "types": ["node"],
+    "types": ["node", "google.maps"],
     "rootDir": ".",
     "sourceMap": true,
     "declaration": false,

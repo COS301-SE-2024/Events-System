@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node -r dotenv/config mynode.js && nx serve --no-cloud",
-    "build": "nx build --no-cloud",
+    "build": "nx build --no-cloud --verbose",
     "test": "nx test --no-cloud",
     "lint": "nx lint --no-cloud",
     "e2e": "npx playwright test e2e/",
@@ -17,6 +17,7 @@
     "@angular/compiler": "~17.3.0",
     "@angular/core": "~17.3.0",
     "@angular/forms": "~17.3.0",
+    "@angular/google-maps": "^17.3.10",
     "@angular/platform-browser": "~17.3.0",
     "@angular/platform-browser-dynamic": "~17.3.0",
     "@angular/platform-server": "~17.3.0",
@@ -40,9 +41,11 @@
     "dotenv": "^16.4.5",
     "express": "~4.18.2",
     "fullcalendar": "^6.1.14",
+    "leaflet": "^1.9.4",
     "rxjs": "~7.8.0",
     "sockjs-client": "^1.6.1",
     "tslib": "^2.3.0",
+    "uuid": "^10.0.0",
     "validator": "^13.12.0",
     "zone.js": "~0.14.3"
   },
@@ -57,15 +60,15 @@
     "@angular/cli": "~17.3.0",
     "@angular/compiler-cli": "~17.3.0",
     "@angular/language-service": "~17.3.0",
-    "@nrwl/angular": "^19.5.7",
+    "@nrwl/angular": "^19.6.4",
     "@nx/devkit": "19.0.4",
     "@nx/eslint": "19.0.4",
     "@nx/eslint-plugin": "19.0.4",
     "@nx/jest": "19.0.4",
     "@nx/js": "19.0.4",
-    "@nx/playwright": "19.0.4",
+    "@nx/playwright": "^19.0.4",
     "@nx/workspace": "19.0.4",
-    "@playwright/test": "^1.36.0",
+    "@playwright/test": "^1.47.2",
     "@schematics/angular": "~17.3.0",
     "@swc-node/register": "~1.8.0",
     "@swc/core": "^1.5.7",
@@ -73,9 +76,12 @@
     "@testing-library/angular": "^16.0.0",
     "@testing-library/jest-dom": "^6.4.6",
     "@types/express": "4.17.14",
+    "@types/google.maps": "^3.58.0",
     "@types/jest": "^29.5.12",
+    "@types/leaflet": "^1.9.12",
     "@types/node": "^18.16.9",
     "@types/sockjs-client": "^1.5.4",
+    "@types/uuid": "^10.0.0",
     "@types/validator": "^13.12.0",
     "@typescript-eslint/eslint-plugin": "^7.3.0",
     "@typescript-eslint/parser": "^7.3.0",
@@ -104,5 +110,8 @@
   },
   "nx": {
     "includedScripts": []
+  },
+  "optionalDependencies": {
+    "@nx/nx-linux-x64-gnu": "19.0.4"
   }
 }

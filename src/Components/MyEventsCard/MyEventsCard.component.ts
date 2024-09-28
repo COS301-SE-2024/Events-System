@@ -1,9 +1,8 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { RouterModule, ActivatedRoute } from '@angular/router';
 import {  } from '@angular/router';
-import { consumerPollProducersForChange } from '@angular/core/primitives/signals';
-
+import { RandomImageServiceService } from 'src/app/random-image-service.service';
 @Component({
   selector: 'app-my-events-card',
   standalone: true,
@@ -11,24 +10,31 @@ import { consumerPollProducersForChange } from '@angular/core/primitives/signals
   templateUrl: './MyEventsCard.component.html',
   styleUrl: './MyEventsCard.component.css',
 })
-export class MyEventsCardComponent implements OnChanges {
-  constructor(private route: ActivatedRoute, private location: Location) { }  goBack(): void {
+export class MyEventsCardComponent implements OnChanges, OnInit {
+  imageSource: string;
+  constructor(private route: ActivatedRoute, private location: Location, private randomImageService: RandomImageServiceService) { 
+    this.imageSource = '';
+  } 
+  goBack(): void {
     window.history.back();
   }
   eventId= '';
   isAPILoading = false;
   showsuccessToast = false;
   showfailToast = false;
+  ngOnInit(): void {
+    this.imageSource = this.randomImageService.getRandomImageSource();
+  }
   submit(){
     this.isAPILoading = true; // Set isLoading to true at the start of the method
 
 
       // this.eventID = params['id'];
       // Send the POST request
-      console.log(this.eventId);
-      console.log(Number(this.ID));
-      console.log(this.eventID);
-      console.log(this.eventString);
+      // console.log(this.eventId);
+      // console.log(Number(this.ID));
+      // console.log(this.eventID);
+      // console.log(this.eventString);
       const eventIds = this.eventString.split('/')[0]; // splits the string into an array and takes the first element
       console.log(eventIds)
       fetch(`https://events-system-back.wn.r.appspot.com/api/events/${eventIds}+12121`, {
@@ -60,6 +66,7 @@ export class MyEventsCardComponent implements OnChanges {
   @Input() eventString: any | undefined;
   @Input() eventTitle: any | undefined;
   @Input() ID: number | undefined;
+  @Input() Description: any | undefined;
   ngOnChanges(changes: SimpleChanges) {
     if (changes['eventID']) {
       console.log(changes['eventID'].currentValue); // Should log the updated eventID

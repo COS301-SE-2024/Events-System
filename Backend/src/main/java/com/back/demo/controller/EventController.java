@@ -1,9 +1,11 @@
 package com.back.demo.controller;
 
 import com.back.demo.model.Event;
+import com.back.demo.service.EventRSVPService;
 import com.back.demo.servicebus.EventServiceBus;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,18 +18,20 @@ import java.util.Optional;
 public class EventController {
 
     private final EventServiceBus eventServiceBus;
+    private final EventRSVPService eventRSVPService;
 
     @Autowired
-    public EventController(EventServiceBus eventServiceBus) {
+    public EventController(EventServiceBus eventServiceBus, EventRSVPService eventRSVPService) {
         this.eventServiceBus = eventServiceBus;
+        this.eventRSVPService = eventRSVPService;
     }
-
     @GetMapping("/socialclub/{id}")
     public List<Event> getEventBySocialClubId(@PathVariable(value = "id") Long socialClubId) {
         return eventServiceBus.getEventBySocialClubId(socialClubId);
     }
 
     @GetMapping
+    @Cacheable(value = "events", key = "#root.methodName") 
     public List<Event> getAllEvents() {
         return eventServiceBus.getAllEvents();
     }
@@ -99,6 +103,17 @@ public class EventController {
     @GetMapping("/employee/{employeeId}/upcoming-events")
     public List<Event> getUpcomingEvents(@PathVariable Long employeeId) {
         return eventServiceBus.getUpcomingEvents(employeeId);
+    }
+
+    @GetMapping("/search")
+    public List<Event> searchEventsByTitle(@RequestParam String title) {
+        return eventServiceBus.getEventsByTitle(title);
+    }
+
+    @GetMapping("/{eventId}/rsvps")
+    public ResponseEntity<List<Map<String, Object>>> getRSVPsWithEmployeeDetailsByEventId(@PathVariable Integer eventId) {
+        List<Map<String, Object>> rsvpsWithEmployeeDetails = eventRSVPService.getRSVPsWithEmployeeDetailsByEventId(eventId);
+        return ResponseEntity.ok(rsvpsWithEmployeeDetails);
     }
 
 }

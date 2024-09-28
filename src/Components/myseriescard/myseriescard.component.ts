@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, ActivatedRoute } from '@angular/router';
-
+import { RandomImageServiceService } from 'src/app/random-image-service.service';
 
 @Component({
   selector: 'app-myseriescard',
@@ -10,8 +10,16 @@ import { RouterModule, ActivatedRoute } from '@angular/router';
   templateUrl: './myseriescard.component.html',
   styleUrl: './myseriescard.component.css',
 })
-export class MyseriescardComponent {
+export class MyseriescardComponent implements OnInit {
   @Input() seriesId: string | undefined;
   @Input() name: string | undefined;
+  @Input() description: string | undefined;
+  imageSource: string;
+  constructor(private route: ActivatedRoute, private randomImageService: RandomImageServiceService) {
+    this.imageSource = '';
+  }
+  ngOnInit(): void {
+      this.imageSource = this.randomImageService.getRandomImageSource();
+  }
 
 }

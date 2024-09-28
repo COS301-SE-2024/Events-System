@@ -162,10 +162,11 @@ export class CalenderComponent implements OnInit{
     initialView: 'dayGridMonth',
     initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
     weekends: true,
-    editable: true,
+    editable: false,
+    nowIndicator: true,
     // defaultAllDay: true,
     selectable: true,
-    selectMirror: true,
+    selectMirror: false,
     fixedWeekCount: false,
     moreLinkClick: this.handleMoreLinkClick.bind(this),
     eventTimeFormat: { // like '14:30:00'
@@ -291,16 +292,17 @@ export class CalenderComponent implements OnInit{
             center: '',
             right: 'prev,next'
           },
-          // initialView: 'dayGridMonth',
+          initialView: 'listWeek',
           initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
           weekends: true,
-          editable: true,
+          editable: false,
+          nowIndicator: true,
           selectable: true,
-          selectMirror: true,
+          selectMirror: false,
           showNonCurrentDates: true,
           dayMaxEvents: true,
           fixedWeekCount: false,
-          
+          contentHeight: '90dvh', // Full height of the viewport
           select: this.handleDateSelect.bind(this),
           eventClick: this.handleEventClick.bind(this),
           eventsSet: this.handleEvents.bind(this)
@@ -317,9 +319,9 @@ export class CalenderComponent implements OnInit{
           // initialView: 'dayGridMonth',
           initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
           weekends: true,
-          editable: true,
+          editable: false,
           selectable: true,
-          selectMirror: true,
+          selectMirror: false,
           dayMaxEvents: true,
           showNonCurrentDates: true,
           fixedWeekCount: false,

@@ -9,16 +9,21 @@ import { GhostEventCardComponent } from 'src/Components/GhostEventCard/GhostEven
   imports: [CommonModule, EventComponent, EventCardComponent, GhostEventCardComponent],
   templateUrl: './events.component.html',
   styleUrl: './events.component.css',
+  
 })
 
 export class EventsComponent implements OnInit{
+  @ViewChild('eventContainer') eventContainer!: ElementRef;
+  showRecommended = false;
+  recommendedEvents: any[] = [];
   events: any[] = [];
   host: any = null;
   selectedDate = '';
   searchLocation = '';
+  loading = false;
   searchTerm = '';
   uniqueSocialClubs: any[] = [];
-checkedSocialClubs: any[] = [];
+  checkedSocialClubs: any[] = [];
   filteredEvents = this.events;
   isLoading = true;
   event = {
@@ -36,11 +41,15 @@ checkedSocialClubs: any[] = [];
     host: '',
     eventAgendas: '',
     eventDietaryAccommodations: ''
-  };  
+  };
   allClubsChecked = false;
   otherCheckboxes: boolean[] = [];
   selectedDietaryAccommodation = '';
   socialClubs: any[] = [];
+  recommendedEventIds: string[] = [];
+  showClearButton = false;
+  showSuggestButton = false; // New property
+
   onSubmit() {
     const dateInput = (<HTMLInputElement>document.getElementById('date-input')).value;
     // console.log(dateInput);
@@ -55,41 +64,54 @@ checkedSocialClubs: any[] = [];
         return response.json();
       })
       .then(data => {
-      
-        this.events = Array.isArray(data) ? data : [data];
+        const now = new Date();
+        now.setHours(0, 0, 0, 0); // Set the time to the start of the day
+  
+        this.events = (Array.isArray(data) ? data : [data]).filter(event => {
+          const eventDate = new Date(event.startDate);
+          eventDate.setHours(0, 0, 0, 0); // Set the time to the start of the day
+          return eventDate >= now;
+        });
+  
         this.uniqueSocialClubs = [...new Set(this.events.map(event => event.socialClub))];
         this.otherCheckboxes = new Array(this.uniqueSocialClubs.length).fill(false);
         this.filterEvents();
-
-      // Fetch host information for each event
-      const hostFetches = this.events.map(event => {
-        return fetch('https://events-system-back.wn.r.appspot.com/api/employees/' + event.hostId)
-          .then(response => {
-            return response.json();
-          })
-          .then(data => {
-            event.host = data; // Add host data to the event
-          });
-      });
-
+  
+        // Fetch host information for each event
+        const hostFetches = this.events.map(event => {
+          return fetch('https://events-system-back.wn.r.appspot.com/api/employees/' + event.hostId)
+            .then(response => {
+              return response.json();
+            })
+            .then(data => {
+              event.host = data; // Add host data to the event
+            });
+        });
+  
         // Fetch social club information for each unique social club
-      const socialClubFetches = this.uniqueSocialClubs.map(socialClubId => {
-        return fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs/' + socialClubId)
-          .then(response => {
-            return response.json();
-          })
-          .then(data => {
-            // Store the social club data in a property of the component
-            this.socialClubs.push(data);
-            this.uniqueSocialClubs = [...new Set(this.socialClubs.map(club => club))];
-            this.otherCheckboxes = new Array(this.uniqueSocialClubs.length).fill(false);
-          });
+        const socialClubFetches = this.uniqueSocialClubs.map(socialClubId => {
+          return fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs/' + socialClubId)
+            .then(response => {
+              return response.json();
+            })
+            .then(data => {
+              // Store the social club data in a property of the component
+              this.socialClubs.push(data);
+              this.uniqueSocialClubs = [...new Set(this.socialClubs.map(club => club))];
+              this.otherCheckboxes = new Array(this.uniqueSocialClubs.length).fill(false);
+            });
+        });
+  
+        // Wait for all host fetches to complete before ending the loading state
+        Promise.all([...hostFetches, ...socialClubFetches]).then(() => {
+          this.isLoading = false;
+        });
       });
-      // Wait for all host fetches to complete before ending the loading state
-      Promise.all(hostFetches).then(() => {
-        this.isLoading = false;
-      });
-      });
+  
+    // Slide in the "Suggest some events" button after a delay
+    setTimeout(() => {
+      this.showSuggestButton = true;
+    }, 2000); // 2 seconds delay
   }
 
   onOtherClubClick(i: number) {
@@ -186,5 +208,39 @@ checkedSocialClubs: any[] = [];
       (!this.selectedDietaryAccommodation || event.eventDietaryAccommodations.includes(this.selectedDietaryAccommodation))
     );
   }
-  
+
+  highlightRecommendedEvents() {
+    this.showRecommended = true; // Show the recommended events overlay
+    this.loading = true;
+    this.showClearButton = true; // Show the "X" button
+
+    const employeeId = localStorage.getItem('ID');
+    fetch(`https://capstone-middleware-178c57c6a187.herokuapp.com/recommend?user_id=${employeeId}`, {
+      method: 'GET'
+    })
+      .then(response => response.json())
+      .then(data => {
+        this.recommendedEventIds = data;
+        this.recommendedEvents = this.events.filter(event => this.recommendedEventIds.includes(event.eventId));
+        // this.filterEvents();
+        this.loading = false;
+        // this.scrollToFirstRecommendedEvent();
+      });
+  }
+
+  scrollToFirstRecommendedEvent() {
+    setTimeout(() => {
+      const firstRecommendedEvent = this.eventContainer.nativeElement.querySelector('.recommended');
+      if (firstRecommendedEvent) {
+        firstRecommendedEvent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 0);
+  }
+
+  clearRecommendedEvents() {
+    this.recommendedEventIds = [];
+    this.filterEvents();
+    this.showRecommended = false; // Hide the recommended events overlay
+    this.showClearButton = false; // Hide the "X" button
+  }
 }
