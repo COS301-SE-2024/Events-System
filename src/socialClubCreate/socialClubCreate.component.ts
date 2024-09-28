@@ -78,78 +78,42 @@ export class SocialClubCreateComponent implements OnInit {
   createClub() {
     if (this.createForm.valid) {
       this.isAPILoading = true;
+      this.hostID = Number(localStorage.getItem('ID'));
+      const formData = {
+        ownerID: this.hostID, // Assuming hostID is already available
+        name: this.sanitizePipe.transform(this.createForm.get('name')?.value),
+        description: this.sanitizePipe.transform(this.createForm.get('description')?.value),
+        pictureLink: "pictureLink",
+        summaryDescription: this.sanitizePipe.transform(this.createForm.get('summaryDescription')?.value),
+        categories: [this.sanitizePipe.transform(this.createForm.get('categories')?.value)]
+      };
+  
+      fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs', {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(response => response.json())
+      .then(() => {
         // Show the success toast
-        this.hostID = localStorage.getItem("ID");
-
-        const formData = {
-          ownerID: this.hostID,
-          name: this.sanitizePipe.transform(this.createForm.get('name')?.value),
-          description: this.sanitizePipe.transform(this.createForm.get('description')?.value),
-          pictureLink: this.sanitizePipe.transform(this.createForm.get('pictureLink')?.value),
-          summaryDescription: this.sanitizePipe.transform(this.createForm.get('summaryDescription')?.value),
-          categories: [this.sanitizePipe.transform(this.createForm.get('categories')?.value)]
-        };
-        
-        try {
-          fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs', {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
-          })
-          .then(response => response.json())
-          .then(() => {
-            // Show the success toast
-            this.hostID = data;
-
-            const formData = {
-              ownerID: this.hostID,
-              name: this.sanitizePipe.transform(this.createForm.get('name')?.value),
-              description: this.sanitizePipe.transform(this.createForm.get('description')?.value),
-              pictureLink: "pictureLink",
-              summaryDescription: this.sanitizePipe.transform(this.createForm.get('summaryDescription')?.value),
-              categories: [this.sanitizePipe.transform(this.createForm.get('categories')?.value)]
-            };
-            
-            try {
-              fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs', {
-                method: 'POST',
-                credentials: 'include',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-              })
-              .then(response => response.json())
-              .then(() => {
-                // Show the success toast
-                this.showsuccessToast = true;
-                this.isAPILoading = false;
-                setTimeout(() => {
-                  this.showsuccessToast = false;
-                  window.history.back();
-                }, 5000);
-              })
-              .catch((error) => {
-                this.showfailToast = true;
-                this.isAPILoading = false;
-
-            setTimeout(() => {
-              this.showfailToast = false;
-            }, 10000);
-          });
-        }
-        catch (error)
-        {
-          window.location.reload();
-        }
-       //this.hostID = localStorage.getItem("ID");
-
- 
-     //this.router.navigate(['/socialclublisting']);
-       }
+        this.showsuccessToast = true;
+        this.isAPILoading = false;
+        setTimeout(() => {
+          this.showsuccessToast = false;
+          window.history.back();
+        }, 5000);
+      })
+      .catch((error) => {
+        this.showfailToast = true;
+        this.isAPILoading = false;
+        setTimeout(() => {
+          this.showfailToast = false;
+        }, 10000);
+      });
+    }
   }
 
   nextStep() {
