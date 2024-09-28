@@ -8,6 +8,8 @@ import { RouterModule } from '@angular/router';
 import { NotificationService } from 'src/app/notification.service';
 
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
+import { SanitizePipe } from 'src/app/sanitization.pipe';
 @Component({
   selector: 'app-update-series',
   standalone: true,
@@ -50,13 +52,17 @@ export class UpdateSeriesComponent {
   showfailToast = false;
   selectedEventIds: number[] = [];
   allEventsSelected = false;
+  sanitizePipe: SanitizePipe;
+
   events: any[] = [];
   uniqueSocialClubs: any[] = [];
   checkedSocialClubs: any[] = [];
   allClubsChecked = false;
   socialClubs: any[] = [];
   otherCheckboxes: boolean[] = [];
-  constructor(private route: ActivatedRoute, private location: Location, private fb: FormBuilder, private notificationService: NotificationService) {
+  constructor(private route: ActivatedRoute, private location: Location, private fb: FormBuilder, private notificationService: NotificationService, private sanitizer: DomSanitizer) {
+    this.sanitizePipe = new SanitizePipe(this.sanitizer);
+
    }  goBack(): void {
     window.history.back();
   }
@@ -83,8 +89,8 @@ presubmit(){
     this.route.params.subscribe(params => {
       this.seriesId = params['id'];
       const series = {
-        name: validator.escape(this.snameInput.nativeElement.value),
-        description: validator.escape(this.sdescriptionInput.nativeElement.value),
+        name: this.sanitizePipe.transform(this.snameInput.nativeElement.value),
+        description: this.sanitizePipe.transform(this.sdescriptionInput.nativeElement.value),
         seriesEventIds: JSON.parse(sessionStorage.getItem('sselectedEventIds') || '[]'),
       };
       // Send the POST request

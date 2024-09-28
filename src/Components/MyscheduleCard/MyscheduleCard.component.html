@@ -1,0 +1,73 @@
+<div class="flex items-center justify-center  cursor-pointer"  (click)="toggleDropdown()">
+    <a class="block w-[98%]">
+        <div class="relative w-full flex-col items-end justify-center overflow-hidden rounded-xl bg-neutral bg-clip-border mt-8 border border-base-200">
+            <!-- Background Image -->
+            <div class="absolute inset-0 m-0 h-full w-full overflow-hidden rounded-none bg-transparent bg-cover bg-clip-border bg-center text-gray-700 shadow-none transition duration-300 ease-in-out"
+                [ngStyle]="{'background-image': 'url(' + imageSource + ')', 'opacity': '0.5', 'filter': 'blur(5px)'}">
+                <div class="absolute inset-0 w-full h-full bg-neutral opacity-65"></div>
+            </div>
+            <!-- Main Card Content -->
+            <div class="relative flex justify-center items-center align-middle py-3">
+                <div class="grid grid-cols-4 gap-4 w-full order">
+                    <!-- Column 1: Event Date -->
+                    <div class="col-span-1 flex flex-col justify-center items-center text-center w-4/6 border-r-4 border-primary transition-all duration-300"
+                    [ngClass]="{'border-transparent': isDropdownOpen}">
+                    <span [ngClass]="{'text-accent': isToday(eventStartDate), 'text-slate-300': !isToday(eventStartDate)}" class="text-xl">{{ getFormattedDate(eventStartDate).weekday }}</span>
+                    <span [ngClass]="{'text-accent': isToday(eventStartDate), 'text-slate-300': !isToday(eventStartDate)}" class="text-4xl">{{ getFormattedDate(eventStartDate).day }}</span>
+                </div>
+                    <!-- Column 2: Time and Location -->
+                    <div class="col-span-1 flex-col justify-center items-center text-center hidden md:flex">
+                        <div class="flex items-center text-slate-300 text-lg">
+                            <i class="fa-regular fa-clock mr-2"></i>
+                            <span>{{ getFormattedTime(eventStartTime) }} - {{ getFormattedTime(eventEndTime) }}</span>
+                        </div>
+                        <div class="flex items-center text-slate-300 text-lg truncate-overflow">
+                            <i class="fa-solid fa-location-pin mr-2"></i>
+                            <span>{{ eventLocation }}</span>
+                        </div>
+                    </div>
+                    <!-- Column 3: Title -->
+                    <div class="col-span-2 md:col-span-1 flex justify-center items-center text-center">
+                        <h2 class="font-karla text-2xl md:text-4xl font-medium leading-[1.5] tracking-normal text-slate-300 antialiased truncate-overflow">
+                            {{ eventTitle }}
+                        </h2>
+                    </div>
+                    <!-- Column 4: Dropdown Icon -->
+                    <div class="col-span-1 md:col-span-1 flex justify-center items-center text-center">
+                        <i class="fas fa-chevron-down text-slate-300 text-lg" [@chevronAnimation]="isDropdownOpen ? 'up' : 'down'"></i>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Dropdown Content -->
+            <div class="relative flex items-center justify-center">
+                <div [@dropdownAnimation]="isDropdownOpen ? 'open' : 'closed'" class="text-slate-300 w-full">
+                    <div class="">
+                        <div class="divider divider-primary"> </div>
+                        <!-- Dietary accomodations -->
+                      <h2 class="text-2xl flex items-center justify-center text-slate-300">Dietary accomodations</h2>
+                      <div class="flex items-center justify-center mt-4">
+                        <button class="btn btn-outline" [ngClass]="{'btn-accent': isDietaryAccommodationSelected('Vegetarian'), 'btn-disabled': !isDietaryAccommodationSelected('Vegetarian')}">Vegetarian</button>
+                        <button class="btn btn-outline lg:ml-8" [ngClass]="{'btn-accent': isDietaryAccommodationSelected('Vegan'), 'btn-disabled': !isDietaryAccommodationSelected('Vegan')}">Vegan</button>
+                        <button class="btn btn-outline lg:ml-8" [ngClass]="{'btn-accent': isDietaryAccommodationSelected('Halal'), 'btn-disabled': !isDietaryAccommodationSelected('Halal')}">Halal</button>
+                        <button class="btn btn-outline lg:ml-8" [ngClass]="{'btn-accent': isDietaryAccommodationSelected('Gluten-free'), 'btn-disabled': !isDietaryAccommodationSelected('Gluten-free')}">Gluten-free</button>
+                        </div>
+                    </div>
+                    <!-- Preperation details -->
+                    <div class="mt-16 mb-8">
+                      <h2 class="text-2xl flex items-center justify-center text-slate-300">Preperation details</h2>
+                      <div class="flex items-center justify-center mt-6">
+                        <ul class="steps steps-vertical lg:steps-horizontal lg:text-xl text-md">
+                          <li class="step step-primary step-large text-slate-300" *ngFor="let preparation of eventPreperationDetails">{{preparation}}</li>
+                        </ul>
+                      </div>
+                    </div>
+
+                      <div class="flex justify-center items-center mb-8">
+                        <button class="btn btn-accent" [routerLink]="['/event', eventID]">View More</button>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>

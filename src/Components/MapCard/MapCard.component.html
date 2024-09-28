@@ -1,0 +1,28 @@
+<div class="flex justify-center">
+  <div id="info-card" class="ml-2 relative flex flex-col my-1 bg-base-100 shadow-sm border border-base-100 rounded-lg w-96 h-72 info-card">
+    <div class="relative h-32 lg:h-52 m-2.5 overflow-hidden text-secondary rounded-md">
+      <img src="{{this.imageSource}}" alt="card-image" />
+      <button class="absolute top-2 right-2 bg-black bg-opacity-50 text-white rounded-full w-6 h-6 flex items-center justify-center" (click)="closeCard()">✖</button>
+    </div>
+    <div class="p-4">
+      <h6 class="-mb-4 text-xl lg:text-4xl font-semibold -bottom-px" id="info-card-title">{{ title}}</h6>
+      <p class="text-lg lg:text-xl text-primary leading-normal font-bold -ml-5 truncate" id="info-card-content">{{description}}</p>
+      <p class="lg:flex hidden mt-4 text-lg lg:text-xl text-primary" id="info-card-extras"> <i class="fa-solid fa-user mr-2"></i> {{formatTime(startTime)}} - {{ formatTime(endTime) }}</p>
+      <p class="lg:flex hidden text-lg lg:text-xl text-primary mt-2" id="info-card-extras"><i class="fa-regular fa-clock mr-2"></i>{{startDate  | date:'d MMM'}} - {{ endDate  | date:'d MMM' }}</p>
+      <div class="lg:flex hidden mt-4">
+        <h2 class="text-2xl flex items-center justify-center">Preperation details</h2>
+        <div class="flex items-center justify-center mt-2">
+          <ul class="steps steps-vertical lg:text-xl text-xl">
+            <li class="step step-primary step-large" *ngFor="let preparation of PreperationDetails">{{preparation}}</li>
+          </ul>
+        </div>
+    </div>
+    </div>
+    <div class="px-4 pb-4 pt-0 mt-2 bottom-3">
+      <button class="rounded-md bg-accent py-2 px-4 border border-transparent text-center text-sm text-base-100 transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button"
+            [routerLink]="['/event', eventID]">
+        Read more
+      </button>
+    </div>
+  </div>
+</div>

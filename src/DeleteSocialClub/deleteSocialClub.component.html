@@ -1,23 +1,23 @@
 <div>
-  <form (submit)="deleteClub()" [formGroup]="deleteForm" class="card-body">
+  <form [formGroup]="deleteForm" class="card-body">
     <div >
       <div class="flex justify-center items-center">
         <div>
           
           <h1 class="lg:text-6xl text-4xl text-center mt-8">Let's Make sure</h1>
 
-          <button class="btn w-[50px] -mt-12 lg:-ml-96 h-[30px] rounded-full" ><i class="fa-solid fa-arrow-left"></i></button>
+          <button class="btn w-[50px] -mt-12 lg:-ml-96 h-[30px] rounded-full" [routerLink]="['/socialclublisting']"><i class="fa-solid fa-arrow-left"></i></button>
           <!-- (click)="goBack()" -->
 
           <div class="">
             <div class="label mt-4 flex justify-center">
               <span class="label-text text-lg">Enter the name of the club: <span class="text-accent">{{ clubName }}</span></span>
             </div>
-            <input formControlName="name" #nameInput type="text" placeholder="Type here" class="input input-bordered w-full max-w-xl text-lg h-12" required/>
+            <input formControlName="name" #nameInput type="text" placeholder="Type here" class="input input-bordered w-full max-w-xl h-12 font-roboto" required/>
           </div>
           <div class="flex justify-between mt-4">
             <button [routerLink]="['/socialclublisting']" class="btn  btn-warning">Back</button>
-            <button class="btn btn-error btn-outline" type="submit">Delete club</button>
+            <button class="btn btn-error btn-outline" (click)="deleteClub()">Delete club</button>
             <!-- (click)="presubmit()" -->
           </div>
         </div>

@@ -1,10 +1,11 @@
 <form [formGroup]="createForm" class="card-body">
-<div class="relative flex h-screen flex-col bg-transparent">
-  <div class="layout-container flex h-full grow flex-col">
-    <div class="px-5 md:px-32 flex flex-1 justify-center py-5 h-full">
-      <div class="layout-content-container flex flex-col max-w-[2010px] h-full flex-1">
-
-        <button class="btn w-[30px] md:w-[50px] -mt-12 lg:ml-8 h-[30px] rounded-full" (click)="goBack()"><i class="fa-solid fa-arrow-left"></i></button>
+  <div class="relative flex h-screen flex-col bg-transparent">
+    <div class="layout-container flex h-full grow flex-col">
+      <div class="px-5 md:px-32 flex flex-1 justify-center py-5 h-full">
+        <div class="layout-content-container flex flex-col max-w-[2010px] h-full flex-1">
+          <button class="btn w-[50px] -mt-12 lg:ml-8 h-[30px] rounded-full"(click)="goBack()"><i class="fa-solid fa-arrow-left"></i></button>
+          
+          <!-- Steps -->
           <div class="mx-auto text-center">
             <ul class="steps lg:text-md text-sm">
               <!-- <li [class.step-primary]="currentStep >= 0" class="step cursor-pointer" (click)="navigateToStep(0)">Image</li> -->
@@ -15,60 +16,72 @@
           </div>
 
           <div [ngSwitch]="currentStep">
-           
       
+            <!-- Naming club (step 1) -->
             <div class="flex justify-center items-center">
-              <div *ngSwitchCase="0" class="mt-8" [@fadeInOut]>
-                <p>Clubs are communities of people with the same interest</p>
-                  <!-- <div class="tooltip tooltip-open tooltip-error mb-4" data-tip="please upload a club profile"></div> -->
-                  <div>
-                    <div class="mb-2 flex flex-col items-center relative">
-                      <div class="btn btn-ghost btn-square avatar p-2 relative" style="width: 240px; height: 240px;" (click)="fileInput.click()">
-                        <div class="w-full relative">
-                          <img alt="Social Club Image" style="width: 100%; height: 100%;">
-                          <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-lg">
-                            <i class="fas fa-pencil-alt text-white text-xl"></i>
-                          </div>
-                        </div>
-                      </div>
-                      <input type="file" #fileInput formControlName="pictureLink" class="hidden">
+                <div *ngSwitchCase="1" class="mt-8" [@fadeInOut]>
+                  <h1 class="lg:text-6xl text-4xl text-center font-karla">Name your club</h1>
+                    <input #nameInput type="text" formControlName="name" placeholder="Type club name..." class="input input-bordered w-full max-w-xl h-12 mt-8 font-roboto" required/>
+                    <div class="flex justify-between mt-4">
+                        <button (click)="previousStep()" class="btn btn-outline btn-warning font-roboto" [disabled]="currentStep === 1">Back</button>
+                        <button (click)="nextStep1()" class="btn btn-success font-roboto" type="submit">Next</button>
                     </div>
-                  </div>
-
-                  <div class="flex justify-between mt-4">
-                      <button (click)="nextStep()" class="btn btn-success">Next</button>
-                  </div>
                 </div>
               </div>
-      
-      
-              <div class="flex justify-center items-center">
-                  <div *ngSwitchCase="1" class="mt-8" [@fadeInOut]>
-                      <p>Club  Name</p>
-                      <!-- <div class="tooltip tooltip-open tooltip-error mb-4" data-tip="please enter a club name"></div> -->
-                      <input #nameInput type="text" formControlName="name" placeholder="Type club name..." class="input input-bordered w-full max-w-xl text-lg h-12 mt-8" required/>
-                      <div class="flex justify-between mt-4">
-                          <button (click)="previousStep()" class="btn btn-outline btn-warning" [disabled]="currentStep === 0">Back</button>
-                          <button (click)="nextStep1()" class="btn btn-success" type="submit">Next</button>
-                      </div>
-                  </div>
-              </div>
-      
       
               <div class="flex items-center justify-center">
                   <div *ngSwitchCase="2" [@fadeInOut]>
                       <p class="text-center mt-7">Club description & Category</p>
                       <div class="flex flex-col items-center justify-center">
                           <!-- <div class="tooltip tooltip-open tooltip-error lg:ml-8 ml-4 -mb-4" data-tip="please enter a Description"></div> -->
-                          <textarea #descriptionInput formControlName="summaryDescription" class="textarea textarea-bordered w-64 md:w-full h-20 mt-2" placeholder="Summary" required></textarea>        
+                          <textarea #summarydescriptionInput formControlName="summaryDescription" class="textarea textarea-bordered w-64 md:w-full h-20 mt-2" placeholder="Summary" required></textarea>     
+                          <div class="tooltip mt-12" data-tip="Optimize the event start time based on the most popular events in the system">
+                            <button (click)="suggestSummaryDescriptions()" class="btn btn-outline btn-accent ml-2 w-96">
+                              <ng-container *ngIf="!isLoading; else loading">
+                                <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+                              </ng-container>
+                              <ng-template #loading>
+                                <span class="loading loading-dots loading-md"></span>
+                              </ng-template>
+                            </button>
+                            <button (click)="clearSummaryDescription()" [disabled]="!isSummaryDescriptionSelected" class="btn btn-outline btn-error mt-4 ml-2">
+                              <i class="fa fa-times" aria-hidden="true"></i>
+                            </button>
+                
+                          </div>
+                          <!-- Generated Summary descriptions -->
+                          <div *ngIf="generatedSummaryDescriptions.length > 0" class="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4">
+                            <div *ngFor="let desc of generatedSummaryDescriptions" class="p-4 border border-neutral rounded-lg cursor-pointer hover:bg-neutral hover:border-accent transition-all duration-300 ease-in-out"  @fadeIn (click)="selectSummaryDescription(desc)">
+                              {{ desc }}
+                            </div>
+                          </div>
                           <textarea #descriptionInput formControlName="description" class="textarea textarea-bordered w-64 md:w-full h-44 mt-4" placeholder="Description" required></textarea>        
-      
+                          <div class="tooltip mt-12" data-tip="Optimize the event start time based on the most popular events in the system">
+                            <button (click)="suggestDescriptions()" class="btn btn-outline btn-accent ml-2 w-96">
+                              <ng-container *ngIf="!isLoading; else loading">
+                                <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+                              </ng-container>
+                              <ng-template #loading>
+                                <span class="loading loading-dots loading-md"></span>
+                              </ng-template>
+                            </button>
+                            <button (click)="clearDescription()" [disabled]="!isDescriptionSelected" class="btn btn-outline btn-error mt-4 ml-2">
+                              <i class="fa fa-times" aria-hidden="true"></i>
+                            </button>
+                
+                          </div>
+                          <!-- Generated descriptions -->
+                          <div *ngIf="generatedDescriptions.length > 0" class="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4">
+                            <div *ngFor="let desc of generatedDescriptions" class="p-4 border border-neutral rounded-lg cursor-pointer hover:bg-neutral hover:border-accent transition-all duration-300 ease-in-out"  @fadeIn (click)="selectDescription(desc)">
+                              {{ desc }}
+                            </div>
+                          </div>
                       </div>
       
                       <p class="text-center mt-7">Category</p>
-                      <div>
+                      <div class="w-full">
                           <!-- <div class="tooltip tooltip-open tooltip-error lg:ml-8 ml-4 -mb-4" data-tip="please enter a Description"></div> -->
-                          <select formControlName="categories" class="select select-bordered w-64 md:w-96 focus:border-none mt-2">
+                          <select formControlName="categories" class="select select-bordered w-64 md:w-full focus:border-none mt-2">
                             <option disabled selected>Select ...</option>
                             <option>Literature</option>
                             <option>Education</option>
@@ -77,17 +90,19 @@
                             <option>Category 5</option> -->
                           </select>
                       </div>
+                                          
                       <div class="flex justify-between mt-4">
-                          <button (click)="previousStep()" class="btn btn-outline btn-warning" [disabled]="currentStep === 0">Back</button>
+                          <button (click)="previousStep()" class="btn btn-outline btn-warning" [disabled]="currentStep === 1">Back</button>
                           <button (click)="nextStep2()" class="btn btn-success" type="submit">Next</button>
                       </div>
                   </div>
-              </div>
-      
-      
-              <div class="flex justify-center items-center">
-                <div *ngSwitchCase="3" [@fadeInOut]>
-                    <p class="text-center mt-7">Let's Summarize</p>
+
+                </div>
+
+                            <!-- Summary (step 3) -->
+            <div class="flex justify-center items-center">
+              <div *ngSwitchCase="3" [@fadeInOut]>
+                <h1 class="lg:text-6xl text-4xl text-center mt-8 font-karla">Let's Summarize</h1>
     
                     <!-- <div class="mx-auto w-1/2">
                       <div class="label mt-4 flex justify-center">
@@ -106,59 +121,35 @@
                       </div>
                     </div> -->
     
-                    <div class="mx-auto w-96">
-                        <div class="label mt-4 flex flex-col items-center justify-center">
-                            <span class="label-text">Social Club Name</span>
-                            <input disabled #nameInput type="text" placeholder="Type here" class="input input-bordered mt-2 w-64 max-w-xl text-lg h-12" required
-                            [value]="createForm.get('name')?.value"/>
-                        </div>
-                    </div>
-    
+                <div class="mx-auto w-96">
                     <div class="label mt-4 flex flex-col items-center justify-center">
-                      <span class="label-text">Summary</span>
-                      <textarea disabled #descriptionInput class="textarea textarea-bordered mt-2 w-64 md:w-full h-24" placeholder="Short summary"required> {{ this.createForm.get('summaryDescription')?.value }} </textarea>    
+                        <span class="label-text">Social Club Name</span>
+                        <input disabled #nameInput type="text" placeholder="" class="input input-bordered w-full max-w-xl h-12 mt-8 font-roboto" required
+                        [value]="createForm.get('name')?.value"/>
                     </div>
-                  
-      
-                    <div class="label mt-4 flex flex-col items-center justify-center">
-                        <span class="label-text">Description</span>
-                        <textarea disabled #descriptionInput class="textarea textarea-bordered mt-2 w-64 md:w-full h-44" placeholder="Detailed description"required>{{ this.createForm.get('description')?.value }}</textarea>    
-                    </div>
+                </div>
     
-                    <div class="mx-auto w-1/2">
-                      <div class="label mt-4 flex flex-col items-center justify-center">
-                          <span class="label-text">Category</span>
-                          <input disabled #nameInput type="text" placeholder="Select" class="input input-bordered mt-2 w-64 md:w-96 max-w-xl text-lg h-12" required
-                            [value]="createForm.get('categories')?.value"/>
-                      </div>
-                    </div>
+                <div class="label mt-4 flex flex-col items-center justify-center">
+                  <span class="label-text">Summary</span>
+                  <textarea disabled #descriptionInput class="textarea textarea-bordered mt-2 w-64 md:w-full h-24" placeholder="" required> {{ this.createForm.get('summaryDescription')?.value }} </textarea>    
+                </div>
+              
+  
+                <div class="label mt-4 flex flex-col items-center justify-center">
+                    <span class="label-text">Description</span>
+                    <textarea disabled #descriptionInput class="textarea textarea-bordered mt-2 w-64 md:w-full h-44" placeholder="" required>{{ this.createForm.get('description')?.value }}</textarea>    
+                </div>
 
                     <div class="flex justify-between mt-4 px-10 md:px-0">
-                      <button (click)="previousStep()" class="btn btn-outline btn-warning" [disabled]="currentStep === 0">Back</button>
+                      <button (click)="previousStep()" class="btn btn-outline btn-warning" [disabled]="currentStep === 1">Back</button>
                       <button (click)="preSubmit()" class="btn btn-success">Create Club</button>
                     </div>
               </div>
             </div>  
+            </div>
+      
+
           </div>
-        
-          <!-- <div class="toast">
-            <div class="alert alert-info flex justify-center">
-                <span class="loading loading-dots loading-md"></span>
-            </div>
-          </div> -->
-        
-          <!-- <div class="toast">
-            <div class="alert alert-success">
-              <span>Event succesfully created Redirecting...</span>
-            </div>
-          </div>
-        
-          <div class="toast">
-            <div class="alert alert-error">
-              <span>error creating event</span>
-            </div>
-          </div> -->
-            
         </div>
       </div>
     </div>
@@ -176,9 +167,8 @@
   
     <div class="toast" *ngIf="showfailToast">
       <div class="alert alert-error">
-        <span>error creating club</span>
+        <span>Error creating club</span>
       </div>
     </div>
-  </div>
 </form>
   

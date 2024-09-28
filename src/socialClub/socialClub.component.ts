@@ -35,7 +35,6 @@ export class SocialClubComponent implements OnInit {
     this.imageSource = this.randomHeaderService.getRandomHeaderSource();
     this.route.params.subscribe(params => {
       this.clubId = params['id'];
-      console.log("ID: " + this.clubId);
 
       const fetchClub = fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs/' + this.clubId)
         .then(response => response.json())
@@ -48,8 +47,6 @@ export class SocialClubComponent implements OnInit {
             .then(ownerData => {
               this.ownerName = ownerData.firstName;
               this.ownerSurname = ownerData.lastName;
-              console.log("Owner Name: ", this.ownerName);
-              console.log("Owner Surname: ", this.ownerSurname);
             });
         });
 
@@ -60,17 +57,20 @@ export class SocialClubComponent implements OnInit {
           const hostFetches = this.events.map(event => {
             return fetch('https://events-system-back.wn.r.appspot.com/api/employees/' + event.hostId)
               .then(response => {
-                if (!response.ok) {
-                  throw new Error(`HTTP error! status: ${response.status}`);
+                if (response.ok) {
+                  // throw new Error(`HTTP error! status: ${response.status}`);
+                  return response.json(); // Parse the response as JSON
                 }
-                return response.json(); // Parse the response as JSON
+                else {
+                  window.location.reload();
+                  return null;
+                }
               })
               .then(data => {
-                console.log("host:", data); // Log the parsed data
                 event.host = data; // Add host data to the event
               })
-              .catch(error => {
-                console.error('Error fetching host data:', error);
+              .catch(() => {
+                window.location.reload();
               });
           });
           return Promise.all(hostFetches);
@@ -81,9 +81,38 @@ export class SocialClubComponent implements OnInit {
           this.isLoading = false;
         })
         .catch(error => {
-          console.error('Error loading data:', error);
           this.isLoading = false; // Set isLoading to false even if there is an error
         });
     });
+
+    this.logUserAnalytics('viewed_social_club: ' + this.clubId);
+  }
+
+  async logUserAnalytics(action: string): Promise<void> {
+    const userId = localStorage.getItem('ID');
+    if (!userId) return;
+  
+    const requestBody = {
+      userId: parseInt(userId),
+      actionType: action
+    };
+  
+    try {
+      const response = await fetch('https://events-system-back.wn.r.appspot.com/api/user-analytics', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to log user analytics');
+      }
+  
+      console.log('User analytics logged successfully');
+    } catch (error) {
+      console.error('Error logging user analytics:', error);
+    }
   }
 }

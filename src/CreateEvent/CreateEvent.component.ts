@@ -1,15 +1,19 @@
+
 import { AfterViewInit, Component, ViewChild, ElementRef, QueryList, ViewChildren, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Location } from '@angular/common';
 import validator from 'validator';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, FormsModule } from '@angular/forms';
-let google: any;
+import { GoogleMapsLoaderService } from 'src/app/google-maps-loader.service';
+import { GoogleMapsModule } from '@angular/google-maps'
+import { DomSanitizer } from '@angular/platform-browser';
+import { SanitizePipe } from 'src/app/sanitization.pipe';
 
 @Component({
   selector: 'app-create-event',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, GoogleMapsModule],
   templateUrl: './CreateEvent.component.html',
   styleUrl: './CreateEvent.component.css',
   animations: [
@@ -31,12 +35,27 @@ let google: any;
         animate('200ms', style({ opacity: 0 })),
       ]),
     ]),
+    trigger('smoothChange', [
+      transition(':increment', [
+        style({ opacity: 0.5 }),
+        animate('300ms ease-in', style({ opacity: 1 }))
+      ]),
+      transition(':decrement', [
+        style({ opacity: 0.5 }),
+        animate('300ms ease-out', style({ opacity: 1 }))
+      ])
+    ])
   ]
 })
-export class CreateEventComponent implements AfterViewInit{
+export class CreateEventComponent implements AfterViewInit, OnInit{
   prepform!: FormGroup;
   agendaform!: FormGroup;
-  constructor(private location: Location, private fb: FormBuilder, private ngZone: NgZone) { }
+  sanitizePipe: SanitizePipe;
+  constructor(private location: Location, private fb: FormBuilder, private ngZone: NgZone, private sanitizer: DomSanitizer, private googleMapsLoader: GoogleMapsLoaderService) { 
+    this.sanitizePipe = new SanitizePipe(this.sanitizer);
+
+  }
+
   @ViewChildren('stepInput') stepInputs!: QueryList<ElementRef>;
   @ViewChild('nameInput') nameInput!: ElementRef;
   @ViewChild('nameInputs') nameInputs!: ElementRef;
@@ -47,7 +66,7 @@ export class CreateEventComponent implements AfterViewInit{
   @ViewChild('EndDateInput') EndDateInput!: ElementRef;
   @ViewChild('LocationInput') LocationInput!: ElementRef;
   @ViewChild('SocialClubInput') SocialClubInput!: ElementRef;
-  
+  @ViewChild('mapContainer') mapContainer!: ElementRef;
   @ViewChildren('PrepInput') PrepInputs!: QueryList<ElementRef>;
   @ViewChildren('AgendaInput') AgendaInputs!: QueryList<ElementRef>;
   eventName= '';
@@ -55,8 +74,11 @@ export class CreateEventComponent implements AfterViewInit{
   isAPILoading = false;
   isNameEmpty = false;
   isDescriptionEmpty = false;
+  generatedDescriptions: string[] = [];
   isstep2Empty = false;
   showsuccessToast = false;
+  suggestedStart: any;
+  suggestedEnd: any;
   showfailToast = false;
   uniqueSocialClubs: any[] = [];
   checkedSocialClubs: any[] = [];
@@ -66,9 +88,21 @@ export class CreateEventComponent implements AfterViewInit{
   events: any[] = [];
   filteredEvents: any[] = [];
   selectedDietaryAccommodation = '';
+  locationValue = '';
   tags: string[] = [];
   newTag = '';
+  isLoading = false;
+  latitude: number | undefined;
+  longitude: number | undefined;
+  mapOptions: google.maps.MapOptions = {
+    center: { lat: -25.7552742, lng: 28.2337029 },
+    zoomControl: true,
+    mapTypeControl: false,
+    streetViewControl: false,
+    fullscreenControl: false,
+  };
 
+  markerPosition = { lat: 48.8634286, lng: 2.3114617 };
   submit(){
     // Create the event object
     this.isAPILoading = true;
@@ -77,23 +111,23 @@ export class CreateEventComponent implements AfterViewInit{
       return club ? club.id : null;
     };
 
-      // Retrieve tags from session storage
+  // Retrieve tags from session storage
   const savedTags = sessionStorage.getItem('tags');
   const tags = savedTags ? JSON.parse(savedTags) : [];
     const event = {
-      title: validator.escape(this.nameInput.nativeElement.value),
-      description: validator.escape(this.descriptionInput.nativeElement.value),
-      startTime: validator.escape(this.StartTimeInput.nativeElement.value+':00'),
-      endTime: validator.escape(this.EndTimeInput.nativeElement.value+':00'),
-      startDate: validator.escape(this.StartDateInput.nativeElement.value),
-      endDate: validator.escape(this.EndDateInput.nativeElement.value),
-      location: validator.escape(this.LocationInput.nativeElement.value),
+      title: this.sanitizePipe.transform(this.nameInput.nativeElement.value),
+      description: this.sanitizePipe.transform(this.descriptionInput.nativeElement.value),
+      startTime: this.sanitizePipe.transform(this.StartTimeInput.nativeElement.value+':00'),
+      endTime: this.sanitizePipe.transform(this.EndTimeInput.nativeElement.value+':00'),
+      startDate: this.sanitizePipe.transform(this.StartDateInput.nativeElement.value),
+      endDate: this.sanitizePipe.transform(this.EndDateInput.nativeElement.value),
+      location: this.sanitizePipe.transform(this.LocationInput.nativeElement.value),
       hostId: localStorage.getItem('ID'),
-      geolocation: "51.507351, -0.127758",
+      geolocation: this.latitude + ', ' + this.longitude,
       socialClub: getSocialClubIdByName(validator.escape(this.SocialClubInput.nativeElement.value)),
       eventPictureLink: "https://example.com/soccer-tournament.jpg", // Replace with actual picture link
-      eventAgendas: this.agendaform.get('agendainputs')?.value.map((input: any) => validator.escape(input)),
-      eventPreparation: this.prepform.get('prepinputs')?.value.map((input: any) => validator.escape(input)),
+      eventAgendas: this.agendaform.get('agendainputs')?.value.map((input: any) => this.sanitizePipe.transform(input)),
+      eventPreparation: this.prepform.get('prepinputs')?.value.map((input: any) => this.sanitizePipe.transform(input)),
       eventDietaryAccommodations: [
         this.isVegetarianSelected ? "Vegetarian" : null,
         this.isVeganSelected ? "Vegan" : null,
@@ -135,8 +169,14 @@ export class CreateEventComponent implements AfterViewInit{
       console.error('Error:', error);
     });
 }
+updateMapCenter() {
+  if (this.latitude !== undefined && this.longitude !== undefined) {
+    this.mapOptions.center = { lat: this.latitude, lng: this.longitude };
+    this.markerPosition = { lat: this.latitude, lng: this.longitude };
+  }
+}
 ngOnInit() {
-  this.initializeGooglePlaces();
+  // this.initializeGooglePlaces();
 
         // Fetch social club information for each unique social club
         fetch('https://events-system-back.wn.r.appspot.com/api/events')
@@ -208,16 +248,40 @@ this.prepform.get('agendainputs')?.valueChanges.subscribe(values => {
   this.isVeganSelected = sessionStorage.getItem('isVeganSelected') === 'false';
   this.isHalalSelected = sessionStorage.getItem('isHalalSelected') === 'false';
   this.isGlutenFreeSelected = sessionStorage.getItem('isGlutenFreeSelected') === 'false';
+
+
 }
 
 initializeGooglePlaces() {
-  const input = document.getElementById('location') as HTMLInputElement;
-  if (input) {
-    const autocomplete = new google.maps.places.Autocomplete(input);
-    autocomplete.addListener('place_changed', () => {
+  const input = this.LocationInput.nativeElement as HTMLInputElement;
+
+  const autocomplete = new google.maps.places.Autocomplete(input, {
+    // types: ['geocode']
+  });
+
+  autocomplete.addListener('place_changed', () => {
+    this.ngZone.run(() => {
+
       const place = autocomplete.getPlace();
-      console.log('Place:', place);
+      if (place.geometry) {
+        this.latitude = place.geometry.location?.lat();
+        this.longitude = place.geometry.location?.lng();
+        console.log('Latitude:', this.latitude);
+        console.log('Longitude:', this.longitude);
+        this.updateMapCenter();
+      }
     });
+  });
+}
+
+openInMaps() {
+  const location = sessionStorage.getItem('Location');
+  if (location) {
+    const encodedLocation = encodeURIComponent(location);
+    const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedLocation}`;
+    window.open(mapsUrl, '_blank');
+  } else {
+    alert('Please enter a location first.');
   }
 }
 
@@ -264,6 +328,14 @@ addTag(): void {
   }
 }
 
+addTag1(tag: string): void {
+  if (tag.trim() && this.tags.length < 5) {
+    this.tags.push(tag.trim());
+    this.newTag = ''; // Clear the input
+    this.saveTagsToSessionStorage();
+
+  }
+}
 
 
 removeTag(index: number) {
@@ -311,7 +383,7 @@ saveTagsToSessionStorage() {
     if (EndDatedata) {
       this.EndDateInput.nativeElement.value = EndDatedata;
     }
-    if (Locationdata) {
+    if (this.currentStep !== 2 && Locationdata) {
       this.LocationInput.nativeElement.value = Locationdata;
     }
     if (SocialClubdata) {
@@ -382,8 +454,6 @@ saveTagsToSessionStorage() {
     sessionStorage.setItem('agendainputs', JSON.stringify(this.agendainputs.value));
   }
   ngAfterViewInit() {
-    this.initializeGooglePlaces();
-
     const namedata = sessionStorage.getItem('Name');
     if (namedata) {
       this.nameInput.nativeElement.value = namedata;
@@ -412,6 +482,14 @@ saveTagsToSessionStorage() {
       sessionStorage.setItem(`Description`, descriptioninput);
       this.isDescriptionEmpty = false;
       this.currentStep++;
+      if (this.currentStep === 2) {
+        setTimeout(() => {
+          this.googleMapsLoader.load().then(() => {
+            this.initializeGooglePlaces();
+          }).catch(error => {
+            console.error('Error loading Google Maps API:', error);
+          });      }, 1);
+      }
     }
   }
   nextStep2(){
@@ -419,8 +497,8 @@ saveTagsToSessionStorage() {
     console.log(this.EndTimeInput.nativeElement.value);
     console.log(this.StartDateInput.nativeElement.value);
     console.log(this.EndDateInput.nativeElement.value);
-  console.log("location: " + this.LocationInput.nativeElement.value);
-  console.log(this.SocialClubInput.nativeElement.value);
+    console.log("location: " + this.LocationInput.nativeElement.value);
+    console.log(this.SocialClubInput.nativeElement.value);
     if ( this.StartTimeInput.nativeElement.value === '' || this.EndTimeInput.nativeElement.value === '' || this.StartDateInput.nativeElement.value === '' || this.EndDateInput.nativeElement.value === '' || this.LocationInput.nativeElement.value === '' || this.SocialClubInput.nativeElement.value === '') {
       this.isstep2Empty = true;
       return;
@@ -460,11 +538,21 @@ saveTagsToSessionStorage() {
       this.currentStep--;
     }
   }
+  private googleMapsLoaded = false; // Flag to track if Google Maps has been loaded
+
   navigateToStep(step: number) {
     this.currentStep = step;
-    setTimeout(() => {
-      this.initializeGooglePlaces();
-    }, 0);
+    if(this.currentStep === 2 &&  !this.googleMapsLoaded){
+      setTimeout(() => {
+        this.googleMapsLoader.load().then(() => {
+          this.initializeGooglePlaces();
+          this.googleMapsLoaded = true; // Set the flag to true after loading
+
+        }).catch(error => {
+          console.error('Error loading Google Maps API:', error);
+        });      }, 1);
+    }
+
   }
   goBack(): void {
     window.history.back();
@@ -497,4 +585,186 @@ saveTagsToSessionStorage() {
     sessionStorage.setItem('isGlutenFreeSelected', String(this.isGlutenFreeSelected));
 
   }
+  suggestTime() {
+    this.isLoading = true; // Set loading state to true
+
+    // Retrieve the recommended start and end times
+    fetch(' https://capstone-middleware-178c57c6a187.herokuapp.com/suggest-times', {
+      method: 'GET'
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log("recommended", data);
+
+      this.StartTimeInput.nativeElement.value = data.peak_start_time.split(':').slice(0, 2).join(':');
+      this.EndTimeInput.nativeElement.value = data.peak_end_time.split(':').slice(0, 2).join(':');
+
+      this.isLoading = false; // Set loading state to false
+    })
+    .catch(error => {
+      console.error('Error fetching suggested times:', error);
+      this.isLoading = false; // Set loading state to false in case of error
+    });
+  }
+
+  suggestDescriptions() {
+    console.log(sessionStorage.getItem('Name'));
+    const name = sessionStorage.getItem('Name');
+    if (!name) {
+      window.alert("event title is required to generate description suggestions");
+      return;
+    }
+    this.isLoading = true; // Set loading state to true
+    fetch(` https://capstone-middleware-178c57c6a187.herokuapp.com/generate-descriptions?event_title="${name}"`, {
+      method: 'POST',
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log("descriptions", data);
+      this.isLoading = false; // Set loading state to false
+  
+      if (Array.isArray(data.descriptions) && data.descriptions.length > 0) {
+        const concatenatedDescriptions = data.descriptions[0];
+        // Split the concatenated descriptions into an array
+        const descriptions = concatenatedDescriptions.split(/\d\.\s/).filter(Boolean);
+        this.generatedDescriptions = [];
+        
+        // Add each description sequentially with a delay
+        descriptions.forEach((description:any, index:any) => {
+          setTimeout(() => {
+            this.generatedDescriptions.push(description);
+            // Trigger change detection if necessary
+          }, index * 500); // Adjust the delay (1000ms = 1s) as needed
+        });
+      } else {
+        console.error('Error: descriptions is not in the expected format');
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching suggested descriptions:', error);
+      this.isLoading = false;
+    });
+  }
+  isDescriptionSelected = false;
+  selectedDescription = '';
+  selectDescription(description: string) {
+    this.descriptionInput.nativeElement.value = description;
+    this.selectedDescription = description;
+    this.isDescriptionSelected = true;
+  }
+
+  
+  clearDescription() {
+    this.selectedDescription = '';
+    this.isDescriptionSelected = false;
+    this.descriptionInput.nativeElement.value = '';
+  }
+
+  suggestTags() {
+    console.log(sessionStorage.getItem('Name'));
+    const name = sessionStorage.getItem('Name');
+    if (!name) {
+      window.alert("Event title is required to generate tag suggestions");
+      return;
+    }
+    this.isLoading = true; // Set loading state to true
+    fetch(` https://capstone-middleware-178c57c6a187.herokuapp.com/generate-tags?event_title="${name}"`, {
+      method: 'POST',
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log("tags", data);
+      this.isLoading = false; // Set loading state to false
+  
+      // Split the single string into individual tags
+      if (data.tags && data.tags.length > 0) {
+        const tagsArray = data.tags[0].split('\n').map((tag: any) => tag.trim().replace(/^\d+\.\s*#?/, ''));
+
+        // Add each tag sequentially with a delay
+        tagsArray.forEach(( tag: any, index:any) => {
+          setTimeout(() => {
+            this.addTag1(tag);
+          }, index * 500); // Adjust the delay (1000ms = 1s) as needed
+        });
+      } else {
+        this.tags = [];
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching suggested descriptions:', error);
+      this.isLoading = false;
+    });
+  }
+  generatedPrepDetails: string[] = [];
+  generatedAgendaDetails: string[] = [];
+
+  suggestPrep() {
+    const eventTitle = sessionStorage.getItem('Name');
+    if (!eventTitle) {
+      alert('Event title is required');
+      return;
+    }
+  
+    this.isLoading = true;
+    fetch(` https://capstone-middleware-178c57c6a187.herokuapp.com/generate-prep?event_title="${eventTitle}"`, {
+      method: 'POST',
+    })
+    .then(response => response.json())
+    .then(data => {
+      this.isLoading = false;
+  
+      // Split the single string into individual preparation details
+      if (data.prep && data.prep.length > 0) {
+        this.generatedPrepDetails = data.prep[0].split('\n').map((detail: any) => detail.trim().replace(/^\d+\.\s*/, ''));
+        // Add each detail sequentially with a delay
+        this.generatedPrepDetails.forEach((detail, index) => {
+          setTimeout(() => {
+            this.addprepInput(detail);
+          }, index * 500); // Adjust the delay (1000ms = 1s) as needed
+        });
+      } else {
+        this.generatedPrepDetails = [];
+      }
+    })
+    .catch(error => {
+      console.error('Error generating preparation details:', error);
+      this.isLoading = false;
+    });
+  }
+
+  suggestAgenda() {
+    const eventTitle = sessionStorage.getItem('Name');
+    if (!eventTitle) {
+      alert('Event title is required');
+      return;
+    }
+
+    this.isLoading = true;
+    fetch(` https://capstone-middleware-178c57c6a187.herokuapp.com/generate-agenda?event_title="${eventTitle}"`, {
+      method: 'POST',
+    })
+    .then(response => response.json())
+    .then(data => {
+      this.isLoading = false;
+
+      // Split the single string into individual agenda details
+      if (data.agendas && data.agendas.length > 0) {
+        this.generatedAgendaDetails = data.agendas[0].split('\n').map((detail: any) => detail.trim().replace(/^\d+\.\s*/, ''));
+        // Add each detail sequentially with a delay
+        this.generatedAgendaDetails.forEach((detail, index) => {
+          setTimeout(() => {
+            this.addagendaInput(detail);
+          }, index * 500); // Adjust the delay (1000ms = 1s) as needed
+        });
+      } else {
+        this.generatedAgendaDetails = [];
+      }
+    })
+    .catch(error => {
+      console.error('Error generating agenda details:', error);
+      this.isLoading = false;
+    });
+  }
+
+  
 }

@@ -9,16 +9,21 @@ import { GhostEventCardComponent } from 'src/Components/GhostEventCard/GhostEven
   imports: [CommonModule, EventComponent, EventCardComponent, GhostEventCardComponent],
   templateUrl: './events.component.html',
   styleUrl: './events.component.css',
+  
 })
 
 export class EventsComponent implements OnInit{
+  @ViewChild('eventContainer') eventContainer!: ElementRef;
+  showRecommended = false;
+  recommendedEvents: any[] = [];
   events: any[] = [];
   host: any = null;
   selectedDate = '';
   searchLocation = '';
+  loading = false;
   searchTerm = '';
   uniqueSocialClubs: any[] = [];
-checkedSocialClubs: any[] = [];
+  checkedSocialClubs: any[] = [];
   filteredEvents = this.events;
   isLoading = true;
   event = {
@@ -36,11 +41,15 @@ checkedSocialClubs: any[] = [];
     host: '',
     eventAgendas: '',
     eventDietaryAccommodations: ''
-  };  
+  };
   allClubsChecked = false;
   otherCheckboxes: boolean[] = [];
   selectedDietaryAccommodation = '';
   socialClubs: any[] = [];
+  recommendedEventIds: string[] = [];
+  showClearButton = false;
+  showSuggestButton = false; // New property
+
   onSubmit() {
     const dateInput = (<HTMLInputElement>document.getElementById('date-input')).value;
     // console.log(dateInput);
@@ -90,6 +99,11 @@ checkedSocialClubs: any[] = [];
         this.isLoading = false;
       });
       });
+
+          // Slide in the "Suggest some events" button after a delay
+    setTimeout(() => {
+      this.showSuggestButton = true;
+    }, 2000); // 2 seconds delay
   }
 
   onOtherClubClick(i: number) {
@@ -186,5 +200,39 @@ checkedSocialClubs: any[] = [];
       (!this.selectedDietaryAccommodation || event.eventDietaryAccommodations.includes(this.selectedDietaryAccommodation))
     );
   }
-  
+
+  highlightRecommendedEvents() {
+    this.showRecommended = true; // Show the recommended events overlay
+    this.loading = true;
+    this.showClearButton = true; // Show the "X" button
+
+    const employeeId = localStorage.getItem('ID');
+    fetch(`https://capstone-middleware-178c57c6a187.herokuapp.com/recommend?user_id=${employeeId}`, {
+      method: 'GET'
+    })
+      .then(response => response.json())
+      .then(data => {
+        this.recommendedEventIds = data;
+        this.recommendedEvents = this.events.filter(event => this.recommendedEventIds.includes(event.eventId));
+        // this.filterEvents();
+        this.loading = false;
+        // this.scrollToFirstRecommendedEvent();
+      });
+  }
+
+  scrollToFirstRecommendedEvent() {
+    setTimeout(() => {
+      const firstRecommendedEvent = this.eventContainer.nativeElement.querySelector('.recommended');
+      if (firstRecommendedEvent) {
+        firstRecommendedEvent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 0);
+  }
+
+  clearRecommendedEvents() {
+    this.recommendedEventIds = [];
+    this.filterEvents();
+    this.showRecommended = false; // Hide the recommended events overlay
+    this.showClearButton = false; // Hide the "X" button
+  }
 }

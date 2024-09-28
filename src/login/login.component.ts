@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { FormBuilder, FormControl, ValidationErrors,  FormGroup, Validators, ReactiveFormsModule } from '@angular/forms'; 
+import { FormBuilder, ValidationErrors,  FormGroup, Validators, ReactiveFormsModule, ValidatorFn, AbstractControl } from '@angular/forms'; 
 import { HttpClientModule, HttpClient  } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { environment } from 'src/environments/environment';
 import { RefreshService } from 'src/app/refresh.service';
+import { DomSanitizer } from '@angular/platform-browser';
+import { SanitizePipe } from 'src/app/sanitization.pipe';
+
 @Component({
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, HttpClientModule, RouterModule], // Import necessary modules here
@@ -26,6 +29,7 @@ export class LoginComponent {
   showemailfailToast = false;
   hidePassword = true;
   googleClientId = environment.CLIENT_ID;
+  sanitizePipe: SanitizePipe;
   redirectUri = 'https://events-system.org/oauth/callback'; // e.g., http://localhost:4200/oauth/callback
   googleAuthEndpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
   responseType = 'code';
@@ -36,42 +40,65 @@ export class LoginComponent {
     private router: Router,
     private fb: FormBuilder,
     private http: HttpClient,
-    private refreshService: RefreshService
+    private refreshService: RefreshService,
+    private sanitizer: DomSanitizer
   ) {
     // Adjusted registerForm initialization
+
+    //"Create an account" form validation
     this.registerForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: this.passwordControl2,
-      confirmPassword: this.passwordControl3,
-      role: ['USER', Validators.required]
-    }, { validators: this.passwordMatchValidator });
+      firstName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
+      lastName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
+      email: ['', [Validators.required, Validators.email, Validators.pattern(/^[\w.]+@([\w-]+.)+[\w-]{2,4}$/)]], 
+      password: ['', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[&*^%$#!"'.])[a-zA-Z\d&*^%$#!"'.]{8,}$/)]], 
+      confirmPassword: ['', [Validators.required]],
+      role: ['', Validators.required]}, 
+    { validators: this.passwordMatchValidator()});
+
+    //"Login" form validation
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]]
+      email: ['', [Validators.required, Validators.email, Validators.pattern(/^[\w.]+@([\w-]+.)+[\w-]{2,4}$/)]], 
+      password: ['', [Validators.required]] //Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[&*^%$#!"'.])[a-zA-Z\d&*^%$#!"'.]{8,}$/)
     });
+
+    //"Forgot password" form validation
     this.forgotPasswordForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]]
+      email: ['', [Validators.required, Validators.email, Validators.pattern(/^[\w.]+@([\w-]+.)+[\w-]{2,4}$/)]]
     });
+
+    this.sanitizePipe = new SanitizePipe(this.sanitizer);
   }
   passwordPattern = '^(?=.*[a-z])(?!.* ).{8,20}$';
   
-    passwordControl2 = new FormControl('', [Validators.pattern(this.passwordPattern)]);
-    passwordControl3 = new FormControl('', [Validators.pattern(this.passwordPattern)]);
+  // passwordPattern = '^(?=.*[a-z])(?!.* ).{1,2}$';
+  // passwordControl2 = new FormControl('', [Validators.pattern(this.passwordPattern)]);
+  // passwordControl3 = new FormControl('');
   //delete employeeData and ID from localStorage if they were already set
   //whenever the login page is loaded
-  private passwordMatchValidator(formGroup: FormGroup): ValidationErrors | null {
+  // private passwordMatchValidator(formGroup: FormGroup): ValidationErrors | null {
+  //   const password = formGroup.get('password')?.value;
+  //   const confirmPassword = formGroup.get('confirmPassword')?.value;
+  //   return password === confirmPassword ? null : { passwordMismatch: true };
+  // }
+
+  passwordMatchValidator(): ValidatorFn {
+    return (formGroup: AbstractControl): ValidationErrors | null => {
     const password = formGroup.get('password')?.value;
     const confirmPassword = formGroup.get('confirmPassword')?.value;
-    return password === confirmPassword ? null : { passwordMismatch: true };
+  
+      return password && confirmPassword && password !== confirmPassword
+        ? { passwordMismatch: true }
+        : null;
+    };
   }
-  get passwordMismatchError(): boolean {
-    return this.registerForm.errors?.['passwordMismatch'] && this.registerForm.get('confirmPassword')?.touched;
-  }
+
+  //  get passwordMismatchError(): boolean {
+  //    return this.registerForm.errors?.['passwordMismatch'] && this.registerForm.get('confirmPassword')?.touched;
+  //  }
+
   onSubmit1() {
     this.isAPILoading = true;
-    const email = this.forgotPasswordForm.get('email')?.value;
+    const email = this.sanitizePipe.transform(this.forgotPasswordForm.get('email')?.value);
     fetch('https://events-system-back.wn.r.appspot.com/api/reset/forgot-password', {
         method: 'POST',
         headers: {
@@ -88,7 +115,7 @@ export class LoginComponent {
         this.isAPILoading = false;
         setTimeout(() => {
           this.showemailfailToast = false;
-        }, 10000);
+        }, 6000);
 
       }
   })
@@ -97,8 +124,7 @@ export class LoginComponent {
       this.isAPILoading = false;
       setTimeout(() => {
         this.showemailfailToast = false;
-      }, 10000);
-
+      }, 6000)
     });
   }
   ngOnInit() {
@@ -128,13 +154,12 @@ export class LoginComponent {
 
     if (this.registerForm.valid) {
       const formData = {
-      firstName: this.registerForm.get('firstName')?.value,
-      lastName: this.registerForm.get('lastName')?.value,
-      email: this.registerForm.get('email')?.value,
-      password: this.registerForm.get('password')?.value,
-      role: this.registerForm.get('role')?.value
+      firstName:  this.sanitizePipe.transform(this.registerForm.get('firstName')?.value),
+      lastName:  this.sanitizePipe.transform(this.registerForm.get('lastName')?.value),
+      email:  this.sanitizePipe.transform(this.registerForm.get('email')?.value),
+      password:  this.sanitizePipe.transform(this.registerForm.get('password')?.value),
+      role:  this.sanitizePipe.transform(this.registerForm.get('role')?.value)
     };
-    console.log('Form data:', formData);
       // Assuming API endpoint for registration
       fetch('https://events-system-back.wn.r.appspot.com/api/v1/auth/register', {
         method: 'POST',
@@ -144,10 +169,27 @@ export class LoginComponent {
         body: JSON.stringify(formData)
       })
       .then(response => response.json())
-      .then(data => {
+      .then(async data => {
         this.showregistersuccessToast = true;
         this.isAPILoading = false;
-        console.log('Registration successful:', data);
+        // console.log('Registration successful:', data);
+
+        // Get employee ID using access token
+        const idResponse = await fetch('https://events-system-back.wn.r.appspot.com/api/v1/auth/' + data.access_token, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        const idData = await idResponse.json();
+
+        // Store employee ID in local storage
+        localStorage.setItem('ID', idData);
+        localStorage.setItem('googleSignIn', "true");
+        document.cookie = `jwt=${data.access_token}; path=/; expires=` + new Date(new Date().getTime() + 15 * 60 * 1000).toUTCString();
+        document.cookie = `refresh=${data.refresh_token}; path=/; expires=` + new Date(new Date().getTime() + 24* 60 * 60 * 1000).toUTCString();
+
+
         setTimeout(() => {
           this.showregistersuccessToast = false;
           this.router.navigate(['']);
@@ -161,10 +203,9 @@ export class LoginComponent {
         setTimeout(() => {
           this.showregisterfailToast = false;
         }, 10000);
-        console.error('Error:', error);
       });
     } else {
-      console.log('Form is invalid. Please check the fields.');
+      window.location.reload();
     }
   }
 
@@ -172,8 +213,8 @@ export class LoginComponent {
     this.isAPILoading = true;
     if (this.loginForm.valid) {
       const formData = {
-        email: this.loginForm.get('email')?.value,
-        password: this.loginForm.get('password')?.value
+        email:  this.sanitizePipe.transform(this.loginForm.get('email')?.value),
+        password:  this.sanitizePipe.transform(this.loginForm.get('password')?.value)
       };
       try {
         // Authenticate user and get access token
@@ -206,9 +247,8 @@ export class LoginComponent {
           if (employeeId) {
             const employeeResponse = await this.http.get(`https://events-system-back.wn.r.appspot.com/api/employees/${employeeId}`).toPromise();
             localStorage.setItem('employeeData', JSON.stringify(employeeResponse));
-            console.log('Employee data:', localStorage.getItem('employeeData'));
           } else {
-            console.warn('No ID found in localStorage');
+            window.location.reload();
           }
         this.showloginsuccessToast = true;
         this.isAPILoading = false;
@@ -226,27 +266,19 @@ export class LoginComponent {
         setTimeout(() => {
           this.showloginfailToast = false;
         }, 5000);
-        console.error('Error during login:', error);
-        this.errorMessage = 'Invalid credentials. Please try again.'; // Set error message for invalid credentials
         window.location.reload();
       }
     } else {
-      console.log('Form is invalid. Please check the fields.');
+      window.location.reload();
     }
   }
 
   async signInWithGoogle() {
-    /*const googleRespnse = await fetch('http://localhost:8080/api/v1/auth/google', {
-        method: 'POST', // Important for including cookies if needed
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });*/
+
       const baseUrl = 'https://accounts.google.com/o/oauth2/auth/oauthchooseaccount';
       const responseType = 'response_type=code';
       const clientId = 'client_id=' + environment.CLIENT_ID;
-      const scope = 'scope=profile%20email';
+      const scope = 'scope=profile%20email%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcalendar';
       const redirectUri = 'redirect_uri=https%3A%2F%2Fevents-system.org%2Foauth';
       const service = 'service=lso';
       const o2v = 'o2v=1';
@@ -254,7 +286,6 @@ export class LoginComponent {
       const flowName = 'flowName=GeneralOAuthFlow';
       const fullUrl = `${baseUrl}?${responseType}&${clientId}&${scope}&${redirectUri}&${service}&${o2v}&${ddm}&${flowName}`;
 
-      console.log(decodeURIComponent(fullUrl));
       window.location.href = `${baseUrl}?${responseType}&${clientId}&${scope}&${redirectUri}&${service}&${o2v}&${ddm}&${flowName}`;
 
       

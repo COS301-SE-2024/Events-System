@@ -5,6 +5,8 @@ import { Location } from '@angular/common';
 import validator from 'validator';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule  } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
+import { SanitizePipe } from 'src/app/sanitization.pipe';
 @Component({
   selector: 'app-create-series',
   standalone: true,
@@ -35,16 +37,22 @@ import { RouterModule } from '@angular/router';
 export class CreateSeriesComponent {
   prepform!: FormGroup;
   agendaform!: FormGroup;
-  constructor(private location: Location, private fb: FormBuilder) { }
+  sanitizePipe: SanitizePipe;
+  constructor(private location: Location, private fb: FormBuilder, private sanitizer: DomSanitizer) { 
+    this.sanitizePipe = new SanitizePipe(this.sanitizer);
+
+  }
   @ViewChildren('stepInput') stepInputs!: QueryList<ElementRef>;
   @ViewChild('snameInput') snameInput!: ElementRef;
   @ViewChild('sdescriptionInput') sdescriptionInput!: ElementRef;
   eventName= '';
   currentStep = 0;
   isAPILoading = false;
+  isLoading = false;
   isNameEmpty = false;
   isDescriptionEmpty = false;
   isstep2Empty = false;
+  generatedseriesDescriptions: string[] = [];
   showsuccessToast = false;
   showfailToast = false;
   uniqueSocialClubs: any[] = [];
@@ -61,8 +69,8 @@ export class CreateSeriesComponent {
     this.isAPILoading = true;
 
     const eventSeries = {
-      name: validator.escape(this.snameInput.nativeElement.value),
-      description: validator.escape(this.sdescriptionInput.nativeElement.value),
+      name: this.sanitizePipe.transform(this.snameInput.nativeElement.value),
+      description: this.sanitizePipe.transform(this.sdescriptionInput.nativeElement.value),
       seriesEventIds: JSON.parse(sessionStorage.getItem('selectedEventIds') || '[]'),
       hostId: localStorage.getItem('ID')
     };
@@ -275,6 +283,56 @@ onRowClick(eventId: number): void {
   goBack(): void {
     window.history.back();
   }
+  isseriesDescriptionSelected = false;
+  selectedseriesDescription = '';
+  selectseriesDescription(description: string) {
+    this.sdescriptionInput.nativeElement.value = description;
+    this.selectedseriesDescription = description;
+    this.isseriesDescriptionSelected = true;
+  }
 
-
+  
+  clearseriesDescription() {
+    this.selectedseriesDescription = '';
+    this.isseriesDescriptionSelected = false;
+    this.sdescriptionInput.nativeElement.value = '';
+  }
+  suggestseriesDescriptions() {
+    console.log(sessionStorage.getItem('sName'));
+    const name = sessionStorage.getItem('sName');
+    if (!name) {
+      window.alert("series title is required to generate description suggestions");
+      return;
+    }
+    this.isLoading = true; // Set loading state to true
+    fetch(` https://capstone-middleware-178c57c6a187.herokuapp.com/generate-series-descriptions?series_title="${name}"`, {
+      method: 'POST',
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log("descriptions", data);
+      this.isLoading = false; // Set loading state to false
+  
+      if (Array.isArray(data.descriptions) && data.descriptions.length > 0) {
+        const concatenatedDescriptions = data.descriptions[0];
+        // Split the concatenated descriptions into an array
+        const descriptions = concatenatedDescriptions.split(/\d\.\s/).filter(Boolean);
+        this.generatedseriesDescriptions = [];
+        
+        // Add each description sequentially with a delay
+        descriptions.forEach((description: any, index: any) => {
+          setTimeout(() => {
+            this.generatedseriesDescriptions.push(description);
+            // Trigger change detection if necessary
+          }, index * 500); // Adjust the delay (5000ms = 5s) as needed
+        });
+      } else {
+        console.error('Error: descriptions is not in the expected format');
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching suggested descriptions:', error);
+      this.isLoading = false;
+    });
+  }
 }

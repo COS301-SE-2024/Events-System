@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { Component, ViewEncapsulation, ViewChild, ElementRef, OnInit, ChangeDetectorRef } from '@angular/core';
 import { RouterModule, Router, Event, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -15,7 +16,7 @@ import { RefreshService } from './refresh.service';
 
 @Component({
   standalone: true,
-  imports: [RouterModule, CommonModule, FullCalendarModule, NotifPopupComponent, ProfileComponent],
+  imports: [FormsModule, RouterModule, CommonModule, FullCalendarModule, NotifPopupComponent, ProfileComponent],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
@@ -34,7 +35,7 @@ export class AppComponent implements OnInit{
 
   title = 'Events-System';
   isDrawerThin = false;
-
+  isDarkTheme = false;
   employeeData: any;
   isPopoverVisible = false;
 
@@ -92,6 +93,9 @@ export class AppComponent implements OnInit{
     // this.webSocketService.notifications.subscribe((message: string) => {
       // this.showToast(message);
     // });
+    // Apply the theme based on localStorage
+    this.isDarkTheme = localStorage.getItem('theme') === 'dark';
+    this.applyTheme();
   }
 
   getInitials(): string {
@@ -144,6 +148,16 @@ export class AppComponent implements OnInit{
 
 
   refreshNavbar() {
+    this.employeeData = JSON.parse(localStorage.getItem('employeeData') || '{}');
+    if(this.employeeData){
+      if (this.employeeData.role == 'MANAGER'){
+        this.isEmployee = true;
+        this.isHost = true;
+      }else{
+        this.isEmployee = true;
+        this.isHost = false;
+      }
+    }
     this.cdr.detectChanges();
   }
 
@@ -183,5 +197,17 @@ export class AppComponent implements OnInit{
     });
   }
 
+  onThemeChange() {
+    this.applyTheme();
+    localStorage.setItem('theme', this.isDarkTheme ? 'dark' : 'light');
+  }
+
+  applyTheme() {
+    if (this.isDarkTheme) {
+      document.body.classList.add('dark-theme');
+    } else {
+      document.body.classList.remove('dark-theme');
+    }
+  }
 }
 

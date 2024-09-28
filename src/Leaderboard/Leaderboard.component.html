@@ -1,0 +1,198 @@
+<div class="flex flex-col items-center justify-center">
+  <!-- Existing content -->
+  <div>
+    <h1 class="text-5xl font-bold text-center text-secondary">Leaderboards</h1>
+    <p class="py-6 text-primary">
+      See who our top achievers are, notable for going above and beyond!
+    </p>
+  </div>
+
+  <div role="tablist" class="tabs w-96 relative bg-base-200 rounded-lg">
+    <div class="tab-slider h-full w-1/2 rounded-lg absolute left-0 bottom-0 bg-neutral" [ngStyle]="{'left': getTabPosition()}"></div>
+    <a role="tab" class="tab text-secondary" [class.tab-active]="activeTab === 1" (click)="selectTab(1)">Events hosted</a>
+    <a role="tab" class="tab text-secondary" [class.tab-active]="activeTab === 2" (click)="selectTab(2)">Events attended</a>
+  </div>
+</div>
+
+<!-- Row number select and pagination controls -->
+<div class="flex justify-center items-center my-4">
+  <div class="flex items-center">
+    <label for="rowsPerPage" class="mr-4 whitespace-nowrap">Rows per page:</label>
+    <select class="select w-full max-w-xs" id="rowsPerPage" [(ngModel)]="rowsPerPage" (change)="updatePagination()">
+      <option *ngFor="let option of rowsPerPageOptions" [value]="option">{{ option }}</option>
+    </select>
+  </div>
+</div>
+
+<!-- Content for Tab 1 -->
+<div *ngIf="activeTab === 1">
+  <div class="overflow-x-auto">
+    <table class="table">
+      <!-- head -->
+      <thead>
+        <tr>
+          <th class="text-xl">Rank</th>
+          <th class="text-xl">Name</th>
+          <th class="text-xl">Events</th>
+          <th class="text-xl hidden sm:table-cell">Diff</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngIf="!isLoading; else loadingSkeleton">
+        <tr *ngFor="let user of paginatedUsers; let i = index">
+          <th>
+            <ng-container *ngIf="currentPage === 1">
+              <ng-container *ngIf="i === 0">
+                <i class="fa fa-trophy text-yellow-500" aria-hidden="true"></i>
+              </ng-container>
+              <ng-container *ngIf="i === 1">
+                <i class="fa fa-trophy text-gray-500" aria-hidden="true"></i>
+              </ng-container>
+              <ng-container *ngIf="i === 2">
+                <i class="fa fa-trophy text-yellow-700" aria-hidden="true"></i>
+              </ng-container>
+            </ng-container>
+            <ng-container *ngIf="i > 2 || currentPage !== 1">
+              {{ (currentPage - 1) * rowsPerPage + i + 1 }}
+            </ng-container>
+          </th>
+          <!-- employee image -->
+          <td>
+            <div class="flex items-center gap-3">
+              <div class="avatar">
+                <div *ngIf="user?.employeePictureLink">
+                  <div class="mask mask-squircle h-12 w-12">
+                    <img [src]="user.employeePictureLink" alt="Avatar Tailwind CSS Component" />
+                  </div>
+                </div>
+                <div *ngIf="!user?.employeePictureLink">
+                  <div class="mask mask-squircle avatar placeholder h-12 w-12">
+                    <span class="text-xl font-bold text-primary text-center">{{ getInitials(user.firstName, user.lastName) }}</span>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div class="font-bold">{{ user.firstName }} {{ user.lastName }}</div>
+              </div>
+            </div>
+          </td>
+          <td>
+            <span class="badge badge-ghost badge-sm text-xl">{{ user.eventsHosted }}</span>
+          </td>
+          <td class="text-red-500 text-xl hidden sm:table-cell"><i class="fa fa-chevron-down" aria-hidden="true"></i>{{ user.Hostdiff }}</td>
+        </tr>
+        </ng-container>
+      </tbody>
+      <!-- foot -->
+      <tfoot>
+        <tr>
+          <th class="text-xl">Rank</th>
+          <th class="text-xl">Name</th>
+          <th class="text-xl">Events</th>
+          <th class="text-xl hidden sm:table-cell">Diff</th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+
+<!-- Content for Tab 2 -->
+<div *ngIf="activeTab === 2">
+  <!-- Content for Events attended tab -->
+  <div class="overflow-x-auto">
+    <table class="table">
+      <!-- head -->
+      <thead>
+        <tr>
+          <th class="text-xl">Rank</th>
+          <th class="text-xl">Name</th>
+          <th class="text-xl">Events</th>
+          <th class="text-xl hidden sm:table-cell">Diff</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngIf="!isLoading; else loadingSkeleton">
+          <tr *ngFor="let user of paginatedUsers; let i = index">
+            <th>
+              <ng-container *ngIf="currentPage === 1">
+                <ng-container *ngIf="i === 0">
+                  <i class="fa fa-trophy text-yellow-500" aria-hidden="true"></i>
+                </ng-container>
+                <ng-container *ngIf="i === 1">
+                  <i class="fa fa-trophy text-gray-500" aria-hidden="true"></i>
+                </ng-container>
+                <ng-container *ngIf="i === 2">
+                  <i class="fa fa-trophy text-yellow-800" aria-hidden="true"></i>
+                </ng-container>
+              </ng-container>
+              <ng-container *ngIf="i > 2 || currentPage !== 1">
+                {{ (currentPage - 1) * rowsPerPage + i + 1 }}
+              </ng-container>
+            </th>
+            <!-- employee image -->
+            <td>
+              <div class="flex items-center gap-3">
+                <div class="avatar">
+                  <div *ngIf="user?.employeePictureLink">
+                    <div class="mask mask-squircle h-12 w-12">
+                      <img [src]="user.employeePictureLink" alt="Avatar Tailwind CSS Component" />
+                    </div>
+                  </div>
+                  <div *ngIf="!user?.employeePictureLink">
+                    <div class="mask mask-squircle avatar placeholder h-12 w-12">
+                      <span class="text-xl font-bold text-primary text-center">{{ getInitials(user.firstName, user.lastName) }}</span>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div class="font-bold">{{ user.firstName }} {{ user.lastName }}</div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <span class="badge badge-ghost badge-sm text-xl">{{ user.eventsAttended }}</span>
+            </td>
+            <td class="text-red-500 text-xl hidden sm:table-cell"><i class="fa fa-chevron-down" aria-hidden="true"></i>{{ user.Attenddiff }}</td>
+          </tr>
+        </ng-container>
+
+      </tbody>
+      <!-- foot -->
+      <tfoot>
+        <tr>
+          <th class="text-xl">Rank</th>
+          <th class="text-xl">Name</th>
+          <th class="text-xl">Events</th>
+          <th class="text-xl hidden sm:table-cell">Diff</th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+
+<!-- Skeleton Loader Template -->
+<ng-template #loadingSkeleton>
+  <tr *ngFor="let i of [1, 2, 3, 4, 5]">
+    <th>
+      <div class="skeleton h-6 w-12"></div>
+    </th>
+    <td>
+      <div class="skeleton h-6 w-24"></div>
+    </td>
+    <td>
+      <div class="skeleton h-6 w-16"></div>
+    </td>
+    <td>
+      <div class="skeleton h-6 w-16 hidden sm:table-cell  "></div>
+    </td>
+  </tr>
+</ng-template>
+
+
+<div class="flex justify-center items-center my-4">
+  <div class="join">
+    <button (click)="prevPage()" [disabled]="currentPage === 1" class="join-item btn">«</button>
+    <button class="join-item btn">Page {{ currentPage }} of {{ totalPages }}</button>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="join-item btn">»</button>
+  </div>
+</div>

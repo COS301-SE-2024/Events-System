@@ -3,12 +3,14 @@ package com.back.demo.service;
 import com.back.demo.model.Employee;
 import com.back.demo.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.cache.annotation.CacheEvict;
 
 import java.util.List;
 import java.util.Optional;
@@ -41,6 +43,7 @@ public class EmployeeService implements UserDetailsService {
         return employeeRepository.save(employee);
     }
 
+    @CachePut(value = "employee", key = "#root.args[0]", condition = "#root.args[0] != null")
     public Employee updateEmployee(Long employeeId, Employee employeeDetails) {
         Optional<Employee> optionalEmployee = employeeRepository.findById(employeeId);
         if (optionalEmployee.isPresent()) {
@@ -55,12 +58,15 @@ public class EmployeeService implements UserDetailsService {
             employee.setTwitter(employeeDetails.getTwitter());
             employee.setGithub(employeeDetails.getGithub());
             employee.setLinkedin(employeeDetails.getLinkedin());
+            employee.setPublicContacts(employeeDetails.getPublicContacts());
+            employee.setPublicSurname(employeeDetails.getPublicSurname());
             return employeeRepository.save(employee);
         } else {
             throw new RuntimeException("Employee not found with id " + employeeId);
         }
     }
 
+    @CachePut(value = "employee", key = "#root.args[0]", condition = "#root.args[0] != null")
     public Employee patchEmployee(Long employeeId, Employee employeeDetails) {
         Optional<Employee> optionalEmployee = employeeRepository.findById(employeeId);
         if (optionalEmployee.isPresent()) {
@@ -96,6 +102,12 @@ public class EmployeeService implements UserDetailsService {
             if (employeeDetails.getLinkedin() != null) {
                 employee.setLinkedin(employeeDetails.getLinkedin());
             }
+            if (employeeDetails.getPublicContacts() != null) {
+                employee.setPublicContacts(employeeDetails.getPublicContacts());
+            }
+            if (employeeDetails.getPublicSurname() != null) { 
+                employee.setPublicSurname(employeeDetails.getPublicSurname());
+            }
 
             return employeeRepository.save(employee);
         } else {
@@ -103,6 +115,7 @@ public class EmployeeService implements UserDetailsService {
         }
     }
 
+    @CacheEvict(value = "employee", key = "#root.args[0]", condition = "#root.args[0] != null")
     public void deleteEmployee(Long employeeId) {
         employeeRepository.deleteById(employeeId);
     }
@@ -115,5 +128,11 @@ public class EmployeeService implements UserDetailsService {
 
     public List<Employee> getEmployeesByIds(List<Long> employeeIds) {
         return employeeRepository.findByEmployeeIdIn(employeeIds);
+    }
+
+    public String getEmployeeEmailById(Long employeeId) {
+        return employeeRepository.findById(employeeId)
+                .map(Employee::getEmail)
+                .orElse("Email not found");
     }
 }

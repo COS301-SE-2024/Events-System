@@ -75,6 +75,14 @@ public class Employee implements UserDetails {
     @Column(name = "updated_at", nullable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Timestamp updatedAt;
 
+    @Builder.Default
+    @Column(name = "public_contacts")
+    private Boolean publicContacts = true;
+
+    @Builder.Default
+    @Column(name = "public_last_name")
+    private Boolean publicSurname = true;
+
     // Getters and Setters
     public Long getEmployeeId() {
         return employeeId;
@@ -166,6 +174,14 @@ public class Employee implements UserDetails {
         this.linkedin = linkedin;
     }
 
+    public void setPublicContacts(Boolean publicContacts) {
+        this.publicContacts = publicContacts;
+    }
+
+    public void setPublicSurname(Boolean publicSurname) {
+        this.publicSurname = publicSurname;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -212,6 +228,14 @@ public class Employee implements UserDetails {
 
     public Timestamp getUpdatedAt() {
         return updatedAt;
+    }
+
+    public Boolean getPublicContacts() {
+        return publicContacts;
+    }
+
+    public Boolean getPublicSurname() {
+        return publicSurname;
     }
 
     @Override
