@@ -15,47 +15,11 @@
           </ng-template>
         </full-calendar>
       </div>
-    
-      <div class="block lg:hidden bg-neutral min-h-screen mobile-specific">
-        <div class="md:py-8 py-5 md:px-16 px-5 rounded-b">
-          <div class="px-4">
-              <div class="pb-4 flex flex-row justify-between" *ngFor="let event of filterEvents">
-                
-                <div class="flex flex-row">
-                  <div class="flex flex-col mt-4">
-                    <p *ngIf="isSingleDayEvent(event)" class="text-xs font-roboto font-light leading-3 text-secondary">{{ event.start | date:'HH:mm' }} </p>
-                    <p *ngIf="isSingleDayEvent(event)" class="text-xs font-roboto font-light leading-3 text-secondary mt-12">{{ event.end | date:'HH:mm' }} </p>
-                  </div>
-                  <div class=" rounded-xl bg-base-100  px-4 py-4 ml-4">
-                    <div>
-                      <span class="mt-8"><a tabindex="0" class="focus:outline-none text-lg font-karla font-medium leading-5 text-secondary mt-2">{{ event.title }}</a></span>
-                    </div>
-                    <p class="flex items-center justify-center">
-                      <span><i class="fa-solid fa-location-pin mr-3 mt-2 font-roboto"></i> {{event.extendedProps.location }}</span>
-                    </p>
-                    <div>
-                      <button class="btn btn-outline btn-secondaryfont-roboto" [routerLink]="['/event', event.id]">More details</button>
-                      
-                      <!-- <button class="btn btn-outline btn-accent" (click)="rsvpToEvent(event.id, 'reserved')">RSVP</button> -->
-                      <!-- <button class="btn btn-accent" *ngIf="!hasUserRSVPd"  @buttonFade (click)="rsvpToEvent()">Book Now</button> -->
-                      <!-- <button class="btn btn-outline btn-warning" *ngIf="hasUserRSVPd"  @buttonFade (click)="rsvpToEvent()">Cancel booking</button> -->
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-    
-          </div>
-      </div>
-      </div>
+  
     </div>
     <div class="drawer-side z-20">
       <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
       <ul class="menu bg-base-200 text-base-content min-h-full w-80 p-4">
-        <label class="input input-bordered flex items-center gap-2">
-          <input type="text" class="grow" placeholder="Search for an event" />
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </label>
         <!-- Sidebar content here -->
         <button class="btn w-full no-animation font-karla">Refine by social club</button>
         <ul class="menu bg-base-200 w-full rounded-box font-roboto">

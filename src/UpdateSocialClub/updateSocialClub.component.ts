@@ -103,9 +103,9 @@ export class UpdateSocialClubComponent implements OnInit{
         const formData = {
           name: this.sanitizePipe.transform(this.updateForm.get('name')?.value),
           description: this.sanitizePipe.transform(this.updateForm.get('description')?.value),
-          pictureLink: this.sanitizePipe.transform(this.updateForm.get('pictureLink')?.value),
+          pictureLink: "Picture Link",
           summaryDescription: this.sanitizePipe.transform(this.updateForm.get('summaryDescription')?.value),
-          categories: [this.sanitizePipe.transform(this.updateForm.get('categories')?.value)]
+          categories: ["Literature"]
         };
         
         try{

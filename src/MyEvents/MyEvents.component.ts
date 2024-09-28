@@ -3,12 +3,11 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MyEventsCardComponent } from 'src/Components/MyEventsCard/MyEventsCard.component';
 import { MyEventsCardSkeletonComponent } from 'src/Components/MyEventsCardSkeleton/MyEventsCardSkeleton.component';
-
-
+import { GhostSocialClubCardComponent } from 'src/Components/GhostSocialClubCard/GhostSocialClubCard.component';
 @Component({
   selector: 'app-my-events',
   standalone: true,
-  imports: [CommonModule, RouterModule, MyEventsCardComponent, MyEventsCardSkeletonComponent],
+  imports: [CommonModule, RouterModule, MyEventsCardComponent, MyEventsCardSkeletonComponent, GhostSocialClubCardComponent],
   templateUrl: './MyEvents.component.html',
   styleUrl: './MyEvents.component.css',
 })

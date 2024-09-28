@@ -37,7 +37,7 @@
               <textarea #sdescriptionInput class="textarea textarea-bordered w-full h-44 mt-4 font-roboto"
                 placeholder="Description" required></textarea>
             </div>
-            <div class="tooltip mt-12" data-tip="Optimize the event start time based on the most popular events in the system">
+            <div class="tooltip mt-12" data-tip="Generate potential descriptions based on your series title">
               <button (click)="suggestseriesDescriptions()" class="btn btn-outline btn-accent ml-2 w-96">
                 <ng-container *ngIf="!isLoading; else loading">
                   <i class="fa fa-lightbulb-o" aria-hidden="true"></i>

@@ -73,8 +73,15 @@ export class MapComponent implements OnInit, AfterViewInit {
     fetch('https://events-system-back.wn.r.appspot.com/api/events') // Replace with your actual API endpoint
       .then((response) => response.json())
       .then((events) => {
-        this.events = events; // Store events for later use in search
-        console.log('Fetched events:', events);
+        const now = new Date();
+        now.setHours(0, 0, 0, 0); // Set the time to the start of the day
+  
+        // Filter events to include only current or future events
+        this.events = events.filter((event: any) => {
+          const eventDate = new Date(event.startDate);
+          eventDate.setHours(0, 0, 0, 0); // Set the time to the start of the day
+          return eventDate >= now;
+        });
 
         // Extract unique social clubs
         this.uniqueSocialClubs = [...new Set(this.events.map((event) => event.socialClub))];

@@ -15,7 +15,7 @@
             <input  #nameInput type="text" placeholder="Type here" class="input input-bordered w-full max-w-xl text-lg h-12" required/>
           </div>
           <div class="flex justify-between mt-4">
-            <button class="btn  btn-warning">back</button>
+            <button class="btn  btn-warning" (click)="goBack()">back</button>
             <button (click)="presubmit()" class="btn btn-error btn-outline">Delete Series</button>
           </div>
         </div>

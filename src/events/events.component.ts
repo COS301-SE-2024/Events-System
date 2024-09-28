@@ -64,43 +64,51 @@ export class EventsComponent implements OnInit{
         return response.json();
       })
       .then(data => {
-      
-        this.events = Array.isArray(data) ? data : [data];
+        const now = new Date();
+        now.setHours(0, 0, 0, 0); // Set the time to the start of the day
+  
+        this.events = (Array.isArray(data) ? data : [data]).filter(event => {
+          const eventDate = new Date(event.startDate);
+          eventDate.setHours(0, 0, 0, 0); // Set the time to the start of the day
+          return eventDate >= now;
+        });
+  
         this.uniqueSocialClubs = [...new Set(this.events.map(event => event.socialClub))];
         this.otherCheckboxes = new Array(this.uniqueSocialClubs.length).fill(false);
         this.filterEvents();
-
-      // Fetch host information for each event
-      const hostFetches = this.events.map(event => {
-        return fetch('https://events-system-back.wn.r.appspot.com/api/employees/' + event.hostId)
-          .then(response => {
-            return response.json();
-          })
-          .then(data => {
-            event.host = data; // Add host data to the event
-          });
-      });
-
+  
+        // Fetch host information for each event
+        const hostFetches = this.events.map(event => {
+          return fetch('https://events-system-back.wn.r.appspot.com/api/employees/' + event.hostId)
+            .then(response => {
+              return response.json();
+            })
+            .then(data => {
+              event.host = data; // Add host data to the event
+            });
+        });
+  
         // Fetch social club information for each unique social club
-      const socialClubFetches = this.uniqueSocialClubs.map(socialClubId => {
-        return fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs/' + socialClubId)
-          .then(response => {
-            return response.json();
-          })
-          .then(data => {
-            // Store the social club data in a property of the component
-            this.socialClubs.push(data);
-            this.uniqueSocialClubs = [...new Set(this.socialClubs.map(club => club))];
-            this.otherCheckboxes = new Array(this.uniqueSocialClubs.length).fill(false);
-          });
+        const socialClubFetches = this.uniqueSocialClubs.map(socialClubId => {
+          return fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs/' + socialClubId)
+            .then(response => {
+              return response.json();
+            })
+            .then(data => {
+              // Store the social club data in a property of the component
+              this.socialClubs.push(data);
+              this.uniqueSocialClubs = [...new Set(this.socialClubs.map(club => club))];
+              this.otherCheckboxes = new Array(this.uniqueSocialClubs.length).fill(false);
+            });
+        });
+  
+        // Wait for all host fetches to complete before ending the loading state
+        Promise.all([...hostFetches, ...socialClubFetches]).then(() => {
+          this.isLoading = false;
+        });
       });
-      // Wait for all host fetches to complete before ending the loading state
-      Promise.all(hostFetches).then(() => {
-        this.isLoading = false;
-      });
-      });
-
-          // Slide in the "Suggest some events" button after a delay
+  
+    // Slide in the "Suggest some events" button after a delay
     setTimeout(() => {
       this.showSuggestButton = true;
     }, 2000); // 2 seconds delay

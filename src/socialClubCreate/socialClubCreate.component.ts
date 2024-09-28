@@ -41,7 +41,7 @@ export class SocialClubCreateComponent implements OnInit {
   hostID: any;
   imageSource: string;
   currentStep = 1;
-  isPictureEmpty = false; isNameEmpty = false; isDescriptionEmpty = false; isCategoriesEmpty = false; isSummaryEmpty = false;
+  isPictureEmpty = false; isNameEmpty = false; isDescriptionEmpty = false; isSummaryEmpty = false;
   showsuccessToast = false;
   showfailToast = false;
   isAPILoading = false;
@@ -85,9 +85,8 @@ export class SocialClubCreateComponent implements OnInit {
         description: this.sanitizePipe.transform(this.createForm.get('description')?.value),
         pictureLink: "pictureLink",
         summaryDescription: this.sanitizePipe.transform(this.createForm.get('summaryDescription')?.value),
-        categories: [this.sanitizePipe.transform(this.createForm.get('categories')?.value)]
-      };
-  
+        categories: ["Literature"]      };
+      console
       fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs', {
         method: 'POST',
         credentials: 'include',
@@ -136,16 +135,14 @@ export class SocialClubCreateComponent implements OnInit {
       ++this.currentStep;
   }
   nextStep2() {
-    if (!this.createForm.get('summaryDescription') || this.createForm.get('summaryDescription')?.value === '' || !this.createForm.get('description') || this.createForm.get('description')?.value === '' || !this.createForm.get('categories') || this.createForm.get('categories')?.value === '') {
+    if (!this.createForm.get('summaryDescription') || this.createForm.get('summaryDescription')?.value === '' || !this.createForm.get('description') || this.createForm.get('description')?.value === '' ) {
       this.isSummaryEmpty = true;
       this.isDescriptionEmpty = true;
-      this.isCategoriesEmpty = true;
       return;
     }
     if (this.currentStep < 3) {
       this.isSummaryEmpty = false;
       this.isDescriptionEmpty = false;
-      this.isCategoriesEmpty = false;
       ++this.currentStep;
     }
   }
@@ -183,9 +180,6 @@ export class SocialClubCreateComponent implements OnInit {
     if (!this.createForm.get('summaryDescription') || this.createForm.get('summaryDescription')?.value === '') {
       missingDetails.push('Summary');
     }
-    if (!this.createForm.get('categories') || this.createForm.get('categories')?.value === '') {
-      missingDetails.push('Categories');
-    }
 
     if (missingDetails.length > 0) {
       alert('Please fill in the following details: ' + missingDetails.join(', '));
@@ -202,6 +196,7 @@ selectSummaryDescription(description: string) {
   this.summarydescriptionInput.nativeElement.value = description;
   this.selectedSummaryDescription = description;
   this.isSummaryDescriptionSelected = true;
+  this.createForm.get('summaryDescription')?.setValue(description); // Update form control
 }
 
 
@@ -209,6 +204,7 @@ clearSummaryDescription() {
   this.selectedSummaryDescription = '';
   this.isSummaryDescriptionSelected = false;
   this.summarydescriptionInput.nativeElement.value = "";
+  this.createForm.get('summaryDescription')?.setValue(''); // Update form control
 }
 
 isDescriptionSelected = false;
@@ -217,6 +213,8 @@ selectDescription(description: string) {
   this.descriptionInput.nativeElement.value = description
   this.selectedDescription = description;
   this.isDescriptionSelected = true;
+  this.createForm.get('description')?.setValue(description); // Update form control
+
 }
 
 
@@ -224,6 +222,7 @@ clearDescription() {
   this.selectedDescription = '';
   this.isDescriptionSelected = false;
   this.descriptionInput.nativeElement.value = "";
+  this.createForm.get('description')?.setValue(''); // Update form control
 
 }
 

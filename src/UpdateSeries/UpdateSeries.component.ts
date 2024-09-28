@@ -60,6 +60,7 @@ export class UpdateSeriesComponent {
   allClubsChecked = false;
   socialClubs: any[] = [];
   otherCheckboxes: boolean[] = [];
+  loading = true;
   constructor(private route: ActivatedRoute, private location: Location, private fb: FormBuilder, private notificationService: NotificationService, private sanitizer: DomSanitizer) {
     this.sanitizePipe = new SanitizePipe(this.sanitizer);
 
@@ -136,66 +137,69 @@ notify() {
     });
   
   }
-ngOnInit(): void {
-  this.route.params.subscribe(params => {
-    this.seriesId = params['id'];
-    fetch('https://events-system-back.wn.r.appspot.com/api/eventseries/' + this.seriesId)
-      .then(response => response.json())
-      .then(data => {
-        this.myseries = data;
-        this.snameInput.nativeElement.value = sessionStorage.setItem('sName', data.name);
-        this.sdescriptionInput.nativeElement.value = sessionStorage.setItem('sDescription', data.description);
-        this.selectedEventIds = data.seriesEventIds;
-        this.allEventsSelected = this.selectedEventIds.length === this.events.length;
-        sessionStorage.setItem('sselectedEventIds', JSON.stringify(data.seriesEventIds));
-
-      });
-    // Fetch social club information for each unique social club
-    fetch('https://events-system-back.wn.r.appspot.com/api/events')
-    .then(response => response.json())
-    .then(async data => { // Mark this function as async
-
-      this.events = Array.isArray(data) ? data : [data];
-      this.uniqueSocialClubs = [...new Set(this.events.map(event => event.socialClub))];
-      this.otherCheckboxes = new Array(this.uniqueSocialClubs.length).fill(false);
-
-      // Prepare fetch requests for each unique social club
-      const socialClubFetches = this.uniqueSocialClubs.map(socialClubId =>
-        fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs/' + socialClubId)
-          .then(response => response.json())
-      );
-
-      // Wait for all social club fetches to complete
-      const socialClubsData: { id: number, name: string }[] = await Promise.all(socialClubFetches);
-
-      // Create a dictionary to map social club IDs to names
-      const socialClubNames: { [key: number]: string } = {};
-      socialClubsData.forEach(data => {
-        socialClubNames[data.id] = data.name;
-      });
-
-      // Map the social club names to the events
-      this.events = this.events.map(event => ({
-        ...event,
-        socialClubName: socialClubNames[event.socialClub]
-      }));
-
-      // Store the social club data in a property of the component
-      this.socialClubs = socialClubsData;
-
-      // Update uniqueSocialClubs and otherCheckboxes based on loaded socialClubs
-      this.uniqueSocialClubs = [...new Set(this.socialClubs.map(club => club))];
-      this.otherCheckboxes = new Array(this.uniqueSocialClubs.length).fill(false);
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.seriesId = params['id'];
+      fetch('https://events-system-back.wn.r.appspot.com/api/eventseries/' + this.seriesId)
+        .then(response => response.json())
+        .then(data => {
+          this.myseries = data;
+          console.log(data);
+          sessionStorage.setItem('sName', data.name);
+          sessionStorage.setItem('sDescription', data.description);
+          this.selectedEventIds = data.seriesEventIds;
+          this.allEventsSelected = this.selectedEventIds.length === this.events.length;
+          sessionStorage.setItem('sselectedEventIds', JSON.stringify(data.seriesEventIds));
+  
+          // Set the values of snameInput and sdescriptionInput
+          if (this.snameInput && this.snameInput.nativeElement) {
+            this.snameInput.nativeElement.value = data.name;
+          }
+          if (this.sdescriptionInput && this.sdescriptionInput.nativeElement) {
+            this.sdescriptionInput.nativeElement.value = data.description;
+          }
+        });
+  
+      // Fetch social club information for each unique social club
+      fetch('https://events-system-back.wn.r.appspot.com/api/events')
+        .then(response => response.json())
+        .then(async data => { // Mark this function as async
+          this.events = Array.isArray(data) ? data : [data];
+          this.uniqueSocialClubs = [...new Set(this.events.map(event => event.socialClub))];
+          this.otherCheckboxes = new Array(this.uniqueSocialClubs.length).fill(false);
+  
+          // Prepare fetch requests for each unique social club
+          const socialClubFetches = this.uniqueSocialClubs.map(socialClubId =>
+            fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs/' + socialClubId)
+              .then(response => response.json())
+          );
+  
+          // Wait for all social club fetches to complete
+          const socialClubsData: { id: number, name: string }[] = await Promise.all(socialClubFetches);
+  
+          // Create a dictionary to map social club IDs to names
+          const socialClubNames: { [key: number]: string } = {};
+          socialClubsData.forEach(data => {
+            socialClubNames[data.id] = data.name;
+          });
+  
+          // Map the social club names to the events
+          this.events = this.events.map(event => ({
+            ...event,
+            socialClubName: socialClubNames[event.socialClub]
+          }));
+  
+          // Store the social club data in a property of the component
+          this.socialClubs = socialClubsData;
+  
+          // Update uniqueSocialClubs and otherCheckboxes based on loaded socialClubs
+          this.uniqueSocialClubs = [...new Set(this.socialClubs.map(club => club))];
+          this.otherCheckboxes = new Array(this.uniqueSocialClubs.length).fill(false);
+  
+          // Set loading to false once all data is loaded
+          this.loading = false;
+        });
     });
-  });
-}
-
-
-  ngAfterViewChecked(): void {
-    if (this.myseries) {
-      this.snameInput.nativeElement.value = this.myseries.name;
-      this.sdescriptionInput.nativeElement.value = this.myseries.description;
-    }
   }
 
   onEventSelectionChange(event: Event, eventId: number) {

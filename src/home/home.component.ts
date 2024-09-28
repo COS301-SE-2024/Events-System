@@ -141,43 +141,33 @@ notify() {
       this.toastContainer.nativeElement.removeChild(toast);
     }, 3000);
 }
-  ngOnInit() {
-    this.imageSource = this.randomHeaderService.getRandomHeaderSource();
-    // this.webSocketService.connect();
-    // this.webSocketService.notifications.subscribe((message:any) => {
-    //   this.showToast(message);
-    // });
-    const employeeId = Number(localStorage.getItem('ID')); // Assuming the employeeId is stored in local storage
+ngOnInit() {
+  this.imageSource = this.randomHeaderService.getRandomHeaderSource();
+  const employeeId = Number(localStorage.getItem('ID'));
 
-    /*if (!employeeId) {
-      this.router.navigate(['/login']);
-      return;
-    }*/
-  
-    fetch('https://events-system-back.wn.r.appspot.com/api/events', {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json"
-      }
+  fetch('https://events-system-back.wn.r.appspot.com/api/events', {
+    method: "GET",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    }
   })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(text => {
+      const data = text ? JSON.parse(text) : [];
+      this.events = Array.isArray(data) ? data : [data];
+
+      const hostFetches = this.events.map(event => fetch('https://events-system-back.wn.r.appspot.com/api/employees/' + event.hostId, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
         }
-        return response.text();
-      })
-      .then(text => {
-        // Check if the response is not empty before parsing
-        const data = text ? JSON.parse(text) : [];
-        this.events = Array.isArray(data) ? data : [data];
-  
-        const hostFetches = this.events.map(event => fetch('https://events-system-back.wn.r.appspot.com/api/employees/' + event.hostId, {
-          method: "GET",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          }
       })
         .then(response => {
           if (!response.ok) {
@@ -190,8 +180,7 @@ notify() {
           event.host = data;
         }));
 
-  
-        const socialClubsFetch = fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs')
+      const socialClubsFetch = fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs')
         .then(response => {
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -202,11 +191,15 @@ notify() {
           const data = text ? JSON.parse(text) : [];
           this.socialClubs = Array.isArray(data) ? data : [data];
         });
-  
-        return Promise.all([...hostFetches, socialClubsFetch]);
-      })
-      .then(() => {
-        this.slides = this.events.map((eventData, index) => {
+
+      return Promise.all([...hostFetches, socialClubsFetch]);
+    })
+    .then(() => {
+      const now = new Date();
+
+      this.slides = this.events
+        .filter(eventData => new Date(eventData.startDate) > now)
+        .map((eventData, index) => {
           const slide = {
             id: eventData.eventId,
             title: eventData.title,
@@ -225,37 +218,37 @@ notify() {
           this.cdr.detectChanges();
           return slide;
         });
-  
-        this.allSlides = [...this.slides];
-  
-        // Fetch RSVPs and filter slides
-        fetch('https://events-system-back.wn.r.appspot.com/api/event-rsvps')
-          .then(response => response.json())
-          .then(data => {
-            const rsvps = Array.isArray(data) ? data : [data];
-  
-            // Group RSVPs by event ID and count them
-            const rsvpCounts = rsvps.reduce((counts, rsvp) => {
-              counts[rsvp.eventId] = (counts[rsvp.eventId] || 0) + 1;
-              return counts;
-            }, {});
-  
-            // Sort all slides based on RSVP count for home slides
-            const sortedSlides = [...this.slides].sort((a, b) => (rsvpCounts[b.id] || 0) - (rsvpCounts[a.id] || 0));
-            this.Homeslides = JSON.parse(JSON.stringify(sortedSlides.slice(0, 10)));
-  
-            // Filter slides based on the current user's RSVP'd events for RSVP'd slides
-            const eventIds = rsvps.filter(rsvp => rsvp.employeeId === employeeId).map(rsvp => rsvp.eventId);
-            this.rsvpdSlides = this.slides.filter(slide => eventIds.includes(slide.id));
-            this.allRsvpdSlides = this.slides.filter(slide => eventIds.includes(slide.id));
-            this.isLoading = false;
 
-          });
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-  }
+      this.allSlides = [...this.slides];
+
+      fetch('https://events-system-back.wn.r.appspot.com/api/event-rsvps')
+        .then(response => response.json())
+        .then(data => {
+          const rsvps = Array.isArray(data) ? data : [data];
+
+          const rsvpCounts = rsvps.reduce((counts, rsvp) => {
+            counts[rsvp.eventId] = (counts[rsvp.eventId] || 0) + 1;
+            return counts;
+          }, {});
+
+          const sortedSlides = [...this.slides].sort((a, b) => (rsvpCounts[b.id] || 0) - (rsvpCounts[a.id] || 0));
+          this.Homeslides = JSON.parse(JSON.stringify(sortedSlides.slice(0, 10)));
+
+          const eventIds = rsvps.filter(rsvp => rsvp.employeeId === employeeId).map(rsvp => rsvp.eventId);
+          this.rsvpdSlides = this.slides.filter(slide => eventIds.includes(slide.id));
+          this.allRsvpdSlides = this.slides.filter(slide => eventIds.includes(slide.id));
+
+          // Sort rsvpdSlides by startDate
+          this.rsvpdSlides.sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
+          this.allRsvpdSlides.sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
+
+          this.isLoading = false;
+        });
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+}
   filterByDate(date: string) {
     this.selectedDate = date;
   this.rsvpdSlides = this.rsvpdSlides.filter(slide => slide.startDate === this.selectedDate);

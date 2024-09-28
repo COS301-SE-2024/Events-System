@@ -1,16 +1,16 @@
 :root {
-    --neutral: #1c2340; /* Neutral color from the entellect theme */
+    --neutral: #ffffff; /* Neutral color from the entellect theme */
 }
 
 
 .fc-theme-standard td, .fc-theme-standard th {
-    border: 3px solid var(--neutral);
+    border: 3px solid var(--secondary);
 }
 *, ::before, ::after {
     box-sizing: border-box;
     border-width: 0;
     border-style: solid;
-    border-color: var(--neutral);
+    border-color: var(--secondary);
 }
 .current-day {
     position: relative;

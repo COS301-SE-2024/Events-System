@@ -14,6 +14,7 @@ import { NotificationService } from './notification.service';
 import { WebSocketService } from './websocket.service';
 import { RefreshService } from './refresh.service';
 
+
 @Component({
   standalone: true,
   imports: [FormsModule, RouterModule, CommonModule, FullCalendarModule, NotifPopupComponent, ProfileComponent],
@@ -32,7 +33,7 @@ export class AppComponent implements OnInit{
   isHost = false;
   isEmployee = false;
   public notificationCount = 0; // Add a property to store the notification count
-
+ 
   title = 'Events-System';
   isDrawerThin = false;
   isDarkTheme = false;

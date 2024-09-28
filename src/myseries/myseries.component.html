@@ -1,15 +1,43 @@
-<div>
-    <div class="flex justify-end mt-4">
-        <button class="btn btn-outline btn-primary" (click)="navigateToCreateSeries()">
-            Create series
-        </button>
-    </div>
-    <div class="mt-4">
-        <app-myseriescard
-        *ngFor="let serie of series"
-        [seriesId]="serie.seriesId"
-        [name]="serie.name"></app-myseriescard>
-    </div>
-</div>
+<div class="relative flex flex-col bg-base-100 overflow-hidden ">
+    <div class="layout-container flex grow flex-col">
+      <div class="px-5 md:px-96 flex flex-1 justify-center py-5 ">
+        <div class="layout-content-container flex flex-col max-w-[2010px] flex-1">
+            <!--Page heading-->
+            <div class="flex items-center justify-between md:mx-10 mb-5">
+                <div class="font-poppins text-center text-secondary font-extrabold text-2xl md:text-3xl mb-2">
+                  <p>My Series</p>
+                </div>
+                
+                <div class="absolute right-0 mr-5 lg:mr-10">
+                    <button class="btn font-roboto btn-accent" (click)="navigateToCreateSeries()">
+                      <a >Create Series</a>
+                    </button>
+                </div>
+            </div>
 
-
+            <div *ngIf="isLoading; else content">
+              <div class="h-full flex flex-col gap-10">
+                <app-ghost-social-club-card></app-ghost-social-club-card>
+                <app-ghost-social-club-card></app-ghost-social-club-card>
+                <app-ghost-social-club-card></app-ghost-social-club-card>
+                <app-ghost-social-club-card></app-ghost-social-club-card>
+                <app-ghost-social-club-card></app-ghost-social-club-card>
+                <app-ghost-social-club-card></app-ghost-social-club-card>
+                <app-ghost-social-club-card></app-ghost-social-club-card>
+                <app-ghost-social-club-card></app-ghost-social-club-card>
+                <app-ghost-social-club-card></app-ghost-social-club-card>
+              </div>
+              </div>
+              <ng-template #content>
+                  <div class="h-full flex flex-col gap-10">
+                    <app-myseriescard
+                    *ngFor="let serie of series"
+                    [seriesId]="serie.seriesId"
+                    [name]="serie.name"
+                    [description]="serie.description"></app-myseriescard>
+                </div>
+                </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>

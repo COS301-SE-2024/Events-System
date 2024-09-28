@@ -270,10 +270,10 @@ export class LoginComponent {
         setTimeout(() => {
           this.showloginfailToast = false;
         }, 5000);
-        window.location.reload();
+        // window.location.reload();
       }
     } else {
-      window.location.reload();
+      // window.location.reload();
     }
   }
 

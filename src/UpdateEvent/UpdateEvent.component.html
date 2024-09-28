@@ -86,7 +86,7 @@
                   <div formArrayName="prepinputs">
                     <div *ngFor="let input of prepinputs.controls; index as i" [@fadeIn] class="flex">
                       <input [formControlName]="i" class="input input-bordered w-full mt-4"  (blur)="saveInputs()">
-                      <button (click)="removeprepInput(i)" class="btn btn-outline btn-warning mt-4 ml-2 opacity-35">-</button>
+                      <button (click)="removeprepInput(i)" class="btn btn-outline btn-warning mt-4 ml-2">-</button>
                     </div>
                   </div>
                   <button [disabled]="prepinputs.length === 5" (click)="addprepInput()" class="btn btn-accent btn-outline btn-wide mt-4">+</button>
@@ -103,7 +103,7 @@
                   <div formArrayName="agendainputs">
                     <div *ngFor="let input of agendainputs.controls; index as i" [@fadeIn] class="flex">
                       <input [formControlName]="i"  class="input input-bordered w-full mt-4"  (blur)="saveInputs()">
-                      <button (click)="removeagendaInput(i)" class="btn btn-outline btn-warning mt-4 ml-2 opacity-35">-</button>
+                      <button (click)="removeagendaInput(i)" class="btn btn-outline btn-warning mt-4 ml-2">-</button>
                     </div>
                   </div>
                   <button [disabled]="agendainputs.length === 5" (click)="addagendaInput()" class="btn btn-accent btn-outline btn-wide mt-4">+</button>

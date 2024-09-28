@@ -144,10 +144,10 @@ presubmit(){
         eventPreparation: this.prepinputs?.value.map((input: any) => this.sanitizePipe.transform(input)),
         
         eventDietaryAccommodations: [
-          sessionStorage.getItem('uuupdateisVegetarianSelected') === 'true' ? "Vegetarian" : null,
-          sessionStorage.getItem('uuupdateisVeganSelected') === 'true' ? "Vegan" : null,
-          sessionStorage.getItem('uuuupdateisHalalSelected') === 'true' ? "Halal" : null,
-          sessionStorage.getItem('uuupdateisGlutenFreeSelected') === 'true' ? "Gluten-free" : null
+          sessionStorage.getItem('uupdateisVegetarianSelected') === 'true' ? "Vegetarian" : null,
+          sessionStorage.getItem('uupdateisVeganSelected') === 'true' ? "Vegan" : null,
+          sessionStorage.getItem('uupdateisHalalSelected') === 'true' ? "Halal" : null,
+          sessionStorage.getItem('uupdateisGlutenFreeSelected') === 'true' ? "Gluten-free" : null
         ].filter(Boolean), // Remove null values
         tags: tags // Add tags to the event object
 
@@ -317,6 +317,8 @@ saveInputs() {
       })
       .then(data => {
         this.myevent = data;
+        this.selectedSocialClubId = this.myevent.socialClub; // Set the default value to the current event's social club ID
+
         // console.log(this.myevent);
         this.nameInput.nativeElement.value = sessionStorage.setItem('uName', data.title);
         this.descriptionInput.nativeElement.value = sessionStorage.setItem('uDescription', data.description);
