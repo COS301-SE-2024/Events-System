@@ -125,6 +125,13 @@ export class AppComponent implements OnInit{
     this.notificationService.notify();
   }
 
+  closeDrawer() {
+    const drawerCheckbox = document.getElementById('my-drawer-2') as HTMLInputElement;
+    if (drawerCheckbox) {
+      drawerCheckbox.checked = false;
+    }
+  }
+
   toggleDrawer() {
     this.isDrawerThin = !this.isDrawerThin;
   }

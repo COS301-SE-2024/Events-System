@@ -1,6 +1,6 @@
 <div class="container mx-auto p-4">
   <div class="card w-full bg-base-100 shadow-2xl mb-4">
-    <div class="tabs">
+    <div class="tabs tabs-boxed">
       <a class="tab text-secondary tab-bordered rounded-lg hover:bg-neutral" [class.tab-active]="selectedTab === 'details'" (click)="selectTab('details')">My Details</a>
       <a class="tab text-secondary tab-bordered rounded-lg hover:bg-neutral" [class.tab-active]="selectedTab === 'security'" (click)="selectTab('security')">Security</a>
     </div>
@@ -35,6 +35,15 @@
                   (change)="onAvatarChange($event)"
                 >
               </div>
+              <!-- Centering the button -->
+              <div class="flex justify-center mt-2 pb-4">
+                <button
+                  class="btn btn-error btn-sm"
+                  (click)="removeProfilePicture()"
+                >
+                  Remove Profile Picture
+                </button>
+              </div>
             </div>
 
             <!-- Container for Name -->
@@ -50,7 +59,7 @@
             </div>
             
             <!-- Container for Surname -->
-            <div class="lg:ml-16  items-center justify-around lg:grid grid-cols-2 gap-4">
+            <div class="lg:ml-16 items-center justify-around lg:grid grid-cols-2 gap-4">
               <h3 class="text-xl mb-2">Surname</h3>
               <input
                 type="text"
@@ -62,7 +71,7 @@
             </div>
             
             <!-- Container for Bio -->
-            <div class=" lg:ml-16 items-center justify-around  lg:grid grid-cols-2 gap-4">
+            <div class="lg:ml-16 items-center justify-around lg:grid grid-cols-2 gap-4">
               <h3 class="text-xl mb-2">Bio</h3>
               <textarea
                 #descriptionInput
@@ -78,45 +87,45 @@
         <div class="card bg-base-200 p-4 mb-4">
           <h3 class="text-lg font-bold mb-2 text-primary">Social Media Links</h3>
           <div class="ml-4"> <!-- Indentation -->
-            <div class=" lg:ml-16  items-center justify-around  lg:grid grid-cols-2 gap-4">
+            <div class="lg:ml-16 items-center justify-around lg:grid grid-cols-2 gap-4">
               <h3 class="text-xl mb-2">Gmail</h3>
-            <input
-              type="email"
-              #emailInput
-              [placeholder]="employeeData?.email|| 'E-mail'"
-              class="input input-bordered w-full mb-2"
-              (input)="email = emailInput.value"
-            >
+              <input
+                type="email"
+                #emailInput
+                [placeholder]="employeeData?.email || 'E-mail'"
+                class="input input-bordered w-full mb-2"
+                (input)="email = emailInput.value"
+              >
             </div>
-            <div class=" lg:ml-16  items-center justify-around  lg:grid grid-cols-2 gap-4">
+            <div class="lg:ml-16 items-center justify-around lg:grid grid-cols-2 gap-4">
               <h3 class="text-xl mb-2">X</h3>
-            <input
-              type="text"
-              #xInput
-              [placeholder]="employeeData?.twitter|| 'Twitter'"
-              class="input input-bordered w-full mb-2"
-              (input)="x = xInput.value"
-            >
+              <input
+                type="text"
+                #xInput
+                [placeholder]="employeeData?.twitter || 'Twitter'"
+                class="input input-bordered w-full mb-2"
+                (input)="x = xInput.value"
+              >
             </div>
-            <div class=" lg:ml-16  items-center justify-around  lg:grid grid-cols-2 gap-4">
+            <div class="lg:ml-16 items-center justify-around lg:grid grid-cols-2 gap-4">
               <h3 class="text-xl mb-2">LinkedIn</h3>
-            <input
-              type="text"
-              #linkedInInput
-              [placeholder]="employeeData?.linkedin|| 'LinkedIn'"
-              class="input input-bordered w-full mb-2"
-              (input)="linkedIn = linkedInInput.value"
-            >
+              <input
+                type="text"
+                #linkedInInput
+                [placeholder]="employeeData?.linkedin || 'LinkedIn'"
+                class="input input-bordered w-full mb-2"
+                (input)="linkedIn = linkedInInput.value"
+              >
             </div>
-            <div class=" lg:ml-16  items-center justify-around  lg:grid grid-cols-2 gap-4">
+            <div class="lg:ml-16 items-center justify-around lg:grid grid-cols-2 gap-4">
               <h3 class="text-xl mb-2">Github</h3>
-            <input
-              type="text"
-              #gitHubInput
-              [placeholder]="employeeData?.github|| 'Github'"
-              class="input input-bordered w-full mb-4"
-              (input)="gitHub = gitHubInput.value"
-            >
+              <input
+                type="text"
+                #gitHubInput
+                [placeholder]="employeeData?.github || 'Github'"
+                class="input input-bordered w-full mb-4"
+                (input)="gitHub = gitHubInput.value"
+              >
             </div>
           </div>
         </div>
@@ -132,27 +141,31 @@
     <div class="card-body">
       <div class="security-section mb-4">
         <!-- Public Information Card -->
-        <div class="card bg-base-200 p-4 mb-4">
-          <h3 class="text-lg font-bold text-primary mb-2">Public Information</h3>
-          <div class="ml-4"> <!-- Indentation -->
-            <div class="flex-col items-center mb-2">
-              <label class="flex items-center">
-                <input type="checkbox" class="toggle toggle-accent" [checked]="makeContactInfoPrivate" (change)="toggleContactInfoPrivate()">
-                <span class="ml-2 text-sm font-medium text-gray-700">Make Contact Information Private</span>
-              </label>
-              <p *ngIf="!makeContactInfoPrivate" class="ml-8 text-sm text-gray-500">your contact information is currently visible to the public</p>
-              <p *ngIf="makeContactInfoPrivate" class="ml-8 text-sm text-gray-500">your contact information is currently private</p>
-            </div>
-            <div class="flex-col items-center mb-4">
-              <label class="flex items-center">
-                <input type="checkbox" class="toggle toggle-accent" [checked]="makeSurnamePrivate" (change) = "toggleSurnamePrivate()">
-                <span class="ml-2 text-sm font-medium text-gray-700">Make Surname Private</span>
-              </label>
-              <p *ngIf="!makeSurnamePrivate" class="ml-8 text-sm text-gray-500">your surname is currently visible to the public</p>
-              <p *ngIf="makeSurnamePrivate" class="ml-8 text-sm text-gray-500">your surname is currently private</p>
-            </div>
-          </div>
-        </div>
+<div class="card bg-base-200 p-4 mb-4">
+  <h3 class="text-lg font-bold text-primary mb-4">Public Information</h3>
+  <div class=""> <!-- Indentation -->
+    <div class="flex flex-col mb-4"> <!-- Flex column for stacking -->
+      <label class="flex items-center mb-1"> <!-- Keep items-center for proper alignment -->
+        <input type="checkbox" class="toggle toggle-accent" [checked]="makeContactInfoPrivate" (change)="toggleContactInfoPrivate()" />
+        <span class="ml-2 text-sm font-medium text-gray-700">Make Contact Information Private</span>
+      </label>
+      <p *ngIf="!makeContactInfoPrivate" class="text-sm text-gray-500">Your contact information is currently visible to the public</p>
+      <p *ngIf="makeContactInfoPrivate" class="text-sm text-gray-500">Your contact information is currently private</p>
+    </div>
+    <div class="flex flex-col mb-4"> <!-- Flex column for stacking -->
+      <label class="flex items-center mb-1"> <!-- Keep items-center for proper alignment -->
+        <input type="checkbox" class="toggle toggle-accent" [checked]="makeSurnamePrivate" (change)="toggleSurnamePrivate()" />
+        <span class="ml-2 text-sm font-medium text-gray-700">Make Surname Private</span>
+      </label>
+      <!-- Move description directly under the toggle -->
+      <p *ngIf="!makeSurnamePrivate" class="ml-8 text-sm text-gray-500">Your surname is currently visible to the public</p>
+      <p *ngIf="makeSurnamePrivate" class="ml-8 text-sm text-gray-500">Your surname is currently private</p>
+    </div>
+  </div>
+</div>
+
+
+
         
         <!-- Change Password Card -->
         <div class="card bg-base-200 p-4 mb-4">
@@ -182,68 +195,64 @@
           </div>
         </div>
 
-        <!-- Delete Profile Card -->
-        <div class="card bg-base-200 p-4 mb-4">
-          <h3 class="text-lg font-bold text-primary mb-2">Delete Profile</h3>
-          <button class="btn btn-error btn-sm ml-auto" onClick="my_modal_2.showModal()">Delete Account</button>
+                <!-- Delete Profile Card -->
+                <div class="card bg-base-200 p-4 mb-4">
+                  <h3 class="text-lg font-bold text-primary mb-2">Delete Profile</h3>
+                  <button class="btn btn-error btn-sm ml-auto" onClick="my_modal_2.showModal()">Delete Account</button>
+                </div>
+        
+                <!-- Save Changes Button (Right Aligned) -->
+                <button class="btn btn-accent btn-sm ml-auto" (click)="saveChanges()">Save changes</button>
+              </div>
+            </div>
+          </div>
         </div>
-
-        <!-- Save Changes Button (Right Aligned) -->
-        <button class="btn btn-accent btn-sm ml-auto" (click)="saveChanges()">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<dialog id="my_modal_2" class="modal overflow-x-hidden backdrop-blur-sm">
-  <div class="modal-box">
-    <h3 class="font-bold text-lg">Delete Account?</h3>
-    <p class="py-4">Are you sure you want to delete this event?<br/> <span class="text-orange-300">this action is not reversible</span></p>
-    <div class="modal-action">
-    </div>
-    <div class="flex justify-between mt-4">
-      <form method="dialog">
-        <button class="btn btn-warning">Close</button>
-      </form>
-      <form method="dialog">
-        <button for="my_modal_2" (click)="deleteAccount()" class="btn btn-outline btn-error">Delete my account</button>
-      </form>
-
-    </div>
-  </div>
-  <label class="modal-backdrop" for="my_modal_2">Close</label>
-  <!-- <form method="dialog" class="modal-backdrop">
-    <button>close</button>
-  </form> -->
-</dialog>
-
-<div class="toast" *ngIf="isAPILoading">
-  <div class="alert alert-info flex justify-center">
-      <span class="loading loading-dots loading-md"></span>
-  </div>
-</div>
-
-<div class="toast" *ngIf="showchangesuccessToast">
-  <div class="alert alert-success">
-    <span>Changes saved</span>
-  </div>
-  </div>
-  
-  <div class="toast" *ngIf="showchangefailToast">
-  <div class="alert alert-error">
-    <span>Error saving changes</span>
-  </div>
-  </div>
-
-
-<div class="toast" *ngIf="showdeletesuccessToast">
-<div class="alert alert-success">
-  <span>Account deleted Redirecting...</span>
-</div>
-</div>
-
-<div class="toast" *ngIf="showdeletefailToast">
-<div class="alert alert-error">
-  <span>Error deleting account</span>
-</div>
-</div>
+        
+        <dialog id="my_modal_2" class="modal overflow-x-hidden backdrop-blur-sm">
+          <div class="modal-box">
+            <h3 class="font-bold text-lg">Delete Account?</h3>
+            <p class="py-4">Are you sure you want to delete this account?<br/> <span class="text-orange-300">This action is not reversible</span></p>
+            <div class="modal-action">
+              <!-- Close Modal Button -->
+              <form method="dialog">
+                <button class="btn btn-warning">Close</button>
+              </form>
+              <!-- Confirm Delete Account Button -->
+              <form method="dialog">
+                <button for="my_modal_2" (click)="deleteAccount()" class="btn btn-outline btn-error">Delete my account</button>
+              </form>
+            </div>
+          </div>
+          <label class="modal-backdrop" for="my_modal_2">Close</label>
+        </dialog>
+        
+        <div class="toast" *ngIf="isAPILoading">
+          <div class="alert alert-info flex justify-center">
+              <span class="loading loading-dots loading-md"></span>
+          </div>
+        </div>
+        
+        <div class="toast" *ngIf="showchangesuccessToast">
+          <div class="alert alert-success">
+            <span>Changes saved</span>
+          </div>
+        </div>
+          
+        <div class="toast" *ngIf="showchangefailToast">
+          <div class="alert alert-error">
+            <span>Error saving changes</span>
+          </div>
+        </div>
+        
+        <div class="toast" *ngIf="showdeletesuccessToast">
+          <div class="alert alert-success">
+            <span>Account deleted. Redirecting...</span>
+          </div>
+        </div>
+        
+        <div class="toast" *ngIf="showdeletefailToast">
+          <div class="alert alert-error">
+            <span>Error deleting account</span>
+          </div>
+        </div>
+        
