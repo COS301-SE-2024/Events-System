@@ -274,20 +274,25 @@ export class LoginComponent {
   }
 
   async signInWithGoogle() {
+    let fullUrl = ``;
+    const baseUrl = 'https://accounts.google.com/o/oauth2/auth/oauthchooseaccount';
+    const responseType = 'response_type=code';
+    const clientId = 'client_id=207465254722-7p4odomht6nnoc2cek9cb0j5jht2faos.apps.googleusercontent.com';// + environment.CLIENT_ID;
+    const scope = 'scope=profile%20email%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcalendar';
+    const redirectUri = 'redirect_uri=https%3A%2F%2Fevents-system.org%2Foauth';
+    const service = 'service=lso';
+    const o2v = 'o2v=1';
+    const ddm = 'ddm=0';
+    const flowName = 'flowName=GeneralOAuthFlow';
+    const accessType = 'access_type=offline';  // Added to request a refresh token
 
-      const baseUrl = 'https://accounts.google.com/o/oauth2/auth/oauthchooseaccount';
-      const responseType = 'response_type=code';
-      const clientId = 'client_id=' + environment.CLIENT_ID;
-      const scope = 'scope=profile%20email%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcalendar';
-      const redirectUri = 'redirect_uri=https%3A%2F%2Fevents-system.org%2Foauth';
-      const service = 'service=lso';
-      const o2v = 'o2v=1';
-      const ddm = 'ddm=0';
-      const flowName = 'flowName=GeneralOAuthFlow';
-      const fullUrl = `${baseUrl}?${responseType}&${clientId}&${scope}&${redirectUri}&${service}&${o2v}&${ddm}&${flowName}`;
+    if(!localStorage.getItem('ID') || !localStorage.getItem('googleRefresh')) {
+      fullUrl = `${baseUrl}?${responseType}&${clientId}&${scope}&${redirectUri}&${service}&${o2v}&${ddm}&${flowName}&${accessType}`;
+    }
+    else {
+      fullUrl = `${baseUrl}?${responseType}&${clientId}&${scope}&${redirectUri}&${service}&${o2v}&${ddm}&${flowName}`;
+    }
 
-      window.location.href = `${baseUrl}?${responseType}&${clientId}&${scope}&${redirectUri}&${service}&${o2v}&${ddm}&${flowName}`;
-
-      
+    window.location.href = fullUrl;
   }
 }
