@@ -115,6 +115,17 @@ public class AuthenticationService {
         tokenRepository.save(token);
     }
 
+    private void saveGoogleRefreshToken(Employee user, String refreshToken) {
+        var token = Token.builder()
+                .user(user)
+                .token(refreshToken)
+                .tokenType(TokenType.GOOGLE)
+                .expired(false)
+                .revoked(false)
+                .build();
+        tokenRepository.save(token);
+    }
+
     private void revokeAllUserTokens(Employee user) {
         var validUserTokens = tokenRepository.findAllValidTokenByEmployeeId(user.getEmployeeId());
         if (validUserTokens.isEmpty())
@@ -156,6 +167,7 @@ public class AuthenticationService {
         String email = oAuthRequest.getEmail();
         String firstName = oAuthRequest.getGiven_name();
         String lastName = oAuthRequest.getFamily_name();
+        String refreshToken = oAuthRequest.getRefresh_token();
 
         Optional<Employee> optionalEmployee = repository.findByEmailIgnoreCase(email);
         Employee employee;
@@ -180,10 +192,13 @@ public class AuthenticationService {
         }
         
         var jwtToken = jwtService.generateToken(employee);
-        var refreshToken = jwtService.generateRefreshToken(employee);
 
         revokeAllUserTokens(employee);
         saveUserToken(employee, jwtToken);
+        
+        if(refreshToken != null && !tokenRepository.hasGoogleToken(employee.getEmployeeId())) {
+            saveGoogleRefreshToken(employee, refreshToken);
+        }
 
         response.setStatus(HttpServletResponse.SC_OK);
 
