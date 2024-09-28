@@ -102,16 +102,39 @@ export class SocialClubCreateComponent implements OnInit {
           .then(response => response.json())
           .then(() => {
             // Show the success toast
-            this.showsuccessToast = true;
-            this.isAPILoading = false;
-            setTimeout(() => {
-              this.showsuccessToast = false;
-              window.history.back();
-            }, 5000);
-          })
-          .catch((error) => {
-            this.showfailToast = true;
-            this.isAPILoading = false;
+            this.hostID = data;
+
+            const formData = {
+              ownerID: this.hostID,
+              name: this.sanitizePipe.transform(this.createForm.get('name')?.value),
+              description: this.sanitizePipe.transform(this.createForm.get('description')?.value),
+              pictureLink: "pictureLink",
+              summaryDescription: this.sanitizePipe.transform(this.createForm.get('summaryDescription')?.value),
+              categories: [this.sanitizePipe.transform(this.createForm.get('categories')?.value)]
+            };
+            
+            try {
+              fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs', {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+              })
+              .then(response => response.json())
+              .then(() => {
+                // Show the success toast
+                this.showsuccessToast = true;
+                this.isAPILoading = false;
+                setTimeout(() => {
+                  this.showsuccessToast = false;
+                  window.history.back();
+                }, 5000);
+              })
+              .catch((error) => {
+                this.showfailToast = true;
+                this.isAPILoading = false;
 
             setTimeout(() => {
               this.showfailToast = false;

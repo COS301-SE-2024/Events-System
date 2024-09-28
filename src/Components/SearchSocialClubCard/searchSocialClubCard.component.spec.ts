@@ -4,6 +4,8 @@ import { SearchSocialClubCardComponent } from './searchSocialClubCard.component'
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 
 describe('SearchSocialClubCardComponent', () => {
   let component: SearchSocialClubCardComponent;
@@ -13,6 +15,19 @@ describe('SearchSocialClubCardComponent', () => {
     await TestBed.configureTestingModule({
       imports: [CommonModule, FormsModule, SearchSocialClubCardComponent],
       schemas: [NO_ERRORS_SCHEMA],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            params: of({ id: 'test-id' }),
+            snapshot: {
+              paramMap: {
+                get: (key: string) => 'test-id'
+              }
+            }
+          }
+        }
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(SearchSocialClubCardComponent);
@@ -40,9 +55,6 @@ describe('SearchSocialClubCardComponent', () => {
     expect(descriptionElement.nativeElement.textContent).toContain('This is a test club description.');
 
     const joinButton = fixture.debugElement.query(By.css('button:first-of-type'));
-    expect(joinButton.nativeElement.textContent).toContain('Join Club');
-
-    const leaveButton = fixture.debugElement.query(By.css('button:last-of-type'));
-    expect(leaveButton.nativeElement.textContent).toContain('Leave Club');
+    expect(joinButton.nativeElement.textContent).toContain('View Club');
   });
 });

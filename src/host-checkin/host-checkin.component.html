@@ -67,7 +67,7 @@
                 <p><strong>Status:</strong> {{ employee.status }}</p>
                 <p><strong>Last Updated:</strong> {{ employee.lastUpdated | date:'short' }}</p>
                 <div class="flex space-x-2">
-                  <a [routerLink]="['/profile', employee.id]" 
+                  <a [routerLink]="['/searchProfile', employee.id]" 
                      class="btn btn-info btn-sm" 
                      [ngClass]="{'bg-base-200 text-secondary': employee.status === 'Canceled'}">View Profile</a>
                   <button [disabled]="employee.status === 'Canceled'" 

@@ -37,7 +37,7 @@ export class DeleteSeriesComponent {
   }
   submit(){
     this.isAPILoading = true; // Set isLoading to true at the start of the method
-
+    console.log('Deleting series with id: ' + this.seriesId);
       fetch(`https://events-system-back.wn.r.appspot.com/api/eventseries/${this.seriesId}`, {
         method: 'DELETE',
         headers: {
