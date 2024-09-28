@@ -3,7 +3,11 @@ package com.back.demo.repository;
 import java.util.List;
 import java.util.Optional;
 import com.back.demo.model.Token;
+
+import jakarta.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param; // Import Param annotation
 
@@ -28,4 +32,9 @@ public interface TokenRepository extends JpaRepository<Token, Long> {
 
     @Query("select t from Token t where t.user.id = :userId and t.tokenType = :tokenType")
     Optional<Token> findByUserIdAndTokenType(@Param("userId") Long userId, @Param("tokenType") String tokenType);
+    
+    @Modifying
+    @Transactional
+    @Query("delete from Token t where t.user.id = :id and (t.expired = true or t.revoked = true)")
+    void deleteAllRevokedAndExpiredTokens(@Param("id") Long employeeId);
 }

@@ -128,6 +128,10 @@ export class LoginComponent {
     });
   }
   ngOnInit() {
+    if(this.getCookie('jwt') || this.getCookie('refresh') || this.getCookie('google')) {
+      this.logout();
+    }
+    
     localStorage.removeItem('employeeData');
     localStorage.removeItem('ID');
   }
@@ -294,5 +298,101 @@ export class LoginComponent {
     }
 
     window.location.href = fullUrl;
+  }
+
+  logout() {
+    this.checkCookies();
+
+    fetch('https://events-system-back.wn.r.appspot.com/api/v1/auth/logout', {
+        method: 'POST',
+        headers: {
+            'Authorization': 'Bearer ' + this.getCookie('jwt'), // Ensure the token is passed
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+      if (response.ok) {
+          // Successfully logged out
+          localStorage.removeItem('ID');
+          document.cookie = `jwt=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+          document.cookie = `refresh=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+          window.location.href = '/login'; // Redirect to login page or show logout success message
+      }
+      else {
+        window.location.href = '/login';
+      }
+    })
+    .catch(() => {
+        window.location.reload();
+    });
+  }
+
+  getCookie(cookieName: string) {
+    const name = cookieName + '=';
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const cookieArray = decodedCookie.split(';');
+
+    for (let i = 0; i < cookieArray.length; i++) {
+        const cookie = cookieArray[i].trim();
+        if (cookie.indexOf(name) === 0) {
+            return cookie.substring(name.length, cookie.length);
+        }
+    }
+    return null;
+  }
+
+  async checkCookies() {
+    // Get all cookies
+    const cookies = document.cookie.split('; ');
+
+    // Find the cookie by name
+    let accessToken = null;
+    let refreshToken = null;
+    for (const cookie of cookies) {
+        const [name, value] = cookie.split('=');
+        if (name === "jwt") {
+            accessToken = decodeURIComponent(value);
+            break;
+        }
+    }
+    for (const cookie of cookies) {
+      const [name, value] = cookie.split('=');
+      if (name === "refresh") {
+          refreshToken = decodeURIComponent(value);
+          break;
+      }
+    }
+    
+    if(!accessToken)        //If access token expired
+    {
+      if(!refreshToken)     //If refresh token expired
+      {
+        this.router.navigate(["/login"]);
+      }
+
+      try {
+        const response = await fetch("https://events-system-back.wn.r.appspot.com/api/v1/auth/refresh-token", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.getCookie("refresh")}`
+            },
+            body: JSON.stringify(FormData)
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const authData = await response.json();
+        document.cookie = `jwt=${authData.access_token}; path=/; expires=` + new Date(new Date().getTime() + 15 * 60 * 1000).toUTCString();
+        document.cookie = `refresh=${authData.refresh_token}; path=/; expires=` + new Date(new Date().getTime() + 24* 60 * 60 * 1000).toUTCString();
+        console.log('Token refresh successful');
+        // Handle the response data as needed
+      } catch (error) {
+          console.error('Error refreshing token');
+          // Handle errors appropriately
+      }
+    }
   }
 }
