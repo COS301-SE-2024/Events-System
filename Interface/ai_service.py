@@ -363,47 +363,47 @@ def recommend_events_bias(user_id, user_profiles, events_df, top_n=5):
     if user_profile.empty:
         return []
 
-    user_events = set(user_profile['event_id'].values[0])
-    user_actions = set(user_profile['weight'].values[0])
-    similar_users = user_profiles[user_profiles['user_id'] != user_id].copy()
+    user_events = set(user_profile['event_id'].values[0])   # Get user events
+    user_actions = set(user_profile['weight'].values[0])    # Get user actions
+    similar_users = user_profiles[user_profiles['user_id'] != user_id].copy()   # Get similar users
 
     similar_users['jaccard_similarity'] = similar_users.apply(
-        lambda row: jaccard_similarity(set(row['event_id']), user_events), axis=1
+        lambda row: jaccard_similarity(set(row['event_id']), user_events), axis=1   # get event attendance overlap
     )
 
     user_vector = np.array([1 if event in user_events else 0 for event in events_df['event_id']])
     similar_users['cosine_similarity'] = similar_users.apply(
-        lambda row: cosine_similarity([user_vector], [np.array([1 if event in row['event_id'] else 0 for event in events_df['event_id']])])[0][0], axis=1
+        lambda row: cosine_similarity([user_vector], [np.array([1 if event in row['event_id'] else 0 for event in events_df['event_id']])])[0][0], axis=1   # get event attendance pattern(
     )
 
     similar_users['common_actions_similarity'] = similar_users.apply(
-        lambda row: common_actions_similarity(set(row['weight']), user_actions), axis=1
+        lambda row: common_actions_similarity(set(row['weight']), user_actions), axis=1     # get similar behaviour patterns
     )
 
     similar_users['combined_similarity'] = (
-        similar_users['jaccard_similarity'] * 0.3 +
+        similar_users['jaccard_similarity'] * 0.3 +    
         similar_users['cosine_similarity'] * 0.3 +
-        similar_users['common_actions_similarity'] * 0.4
+        similar_users['common_actions_similarity'] * 0.4        # common actions is most important
     )
 
     scaler = MinMaxScaler()
-    similar_users['normalized_similarity'] = scaler.fit_transform(similar_users[['combined_similarity']])
+    similar_users['normalized_similarity'] = scaler.fit_transform(similar_users[['combined_similarity']])       # improving consistency
 
-    current_time = pd.Timestamp.now()
+    current_time = pd.Timestamp.now()       # to keep recommmendations relevant, apply time dilation
     similar_users['time_decay'] = similar_users['timestamp'].apply(lambda x: np.exp(-0.1 * (current_time - x).days))
 
     similar_users['final_similarity'] = similar_users['normalized_similarity'] * similar_users['time_decay']
 
-    similar_users = similar_users.sort_values(by='final_similarity', ascending=False)
+    similar_users = similar_users.sort_values(by='final_similarity', ascending=False)    # sort by final similarity
 
     recommendations = []
-    for _, row in similar_users.iterrows():
-        for event_id in row['event_id']:
-            if event_id not in user_events and event_id not in recommendations:
-                recommendations.append(event_id)
-            if len(recommendations) >= top_n:
+    for _, row in similar_users.iterrows():      # iterate through similar users
+        for event_id in row['event_id']:      # iterate through events
+            if event_id not in user_events and event_id not in recommendations:      # if event is not in user events or recommendations
+                recommendations.append(event_id)    # add event to recommendations
+            if len(recommendations) >= top_n:    # max 5 recommendations
                 break
-        if len(recommendations) >= top_n:
+        if len(recommendations) >= top_n:       # max 5 recommendations
             break
 
     return recommendations
@@ -422,12 +422,12 @@ def fetch_data():
 
 # Create user-event matrix
 def create_user_event_matrix(df):
-    user_event_matrix = df.pivot_table(index='user_id', columns='event_id', aggfunc='size', fill_value=0)
+    user_event_matrix = df.pivot_table(index='user_id', columns='event_id', aggfunc='size', fill_value=0)   # maps user to event interactions
     return user_event_matrix
 
 # Calculate user similarities
-def calculate_similarities(user_event_matrix):
-    user_similarities = cosine_similarity(user_event_matrix)
+def calculate_similarities(user_event_matrix):      # calculate cosine similarity between users
+    user_similarities = cosine_similarity(user_event_matrix)    # similarity of users based on attendance patterns
     user_similarities_df = pd.DataFrame(user_similarities, index=user_event_matrix.index, columns=user_event_matrix.index)
     return user_similarities_df
 
@@ -442,17 +442,18 @@ def recommend_events_collaborative(employee_id, user_event_matrix, user_similari
     if employee_id not in user_similarities_df.index:
         return get_most_popular_events(df, top_n=top_n)
 
-    similar_users = user_similarities_df[employee_id].sort_values(ascending=False).index[1:]
-    similar_users_events = user_event_matrix.loc[similar_users]
-    similar_users_events = similar_users_events[similar_users_events > 0].stack().reset_index()
-    similar_users_events.columns = ['employee_id', 'event_id', 'count']
+    similar_users = user_similarities_df[employee_id].sort_values(ascending=False).index[1:]      # most similar users should come first  
+        #BUGG remove first, which is user itself
+    similar_users_events = user_event_matrix.loc[similar_users] # get events similar users interacted with
+    similar_users_events = similar_users_events[similar_users_events > 0].stack().reset_index()     # only use events with interactions ( must be greater than 0 )
+    similar_users_events.columns = ['employee_id', 'event_id', 'count'] # rename the columns for readability
 
     employee_events = user_event_matrix.loc[employee_id]
-    employee_events = employee_events[employee_events > 0].index
+    employee_events = employee_events[employee_events > 0].index        # get events the employee interacted with
 
-    recommendations = similar_users_events[~similar_users_events['event_id'].isin(employee_events)]
-    recommendations = recommendations[~recommendations['event_id'].isin(rsvpd_events)]
-    recommendations = recommendations.groupby('event_id').sum().sort_values('count', ascending=False).head(top_n)
+    recommendations = similar_users_events[~similar_users_events['event_id'].isin(employee_events)]    # make sure employee hasn't interacted with events
+    recommendations = recommendations[~recommendations['event_id'].isin(rsvpd_events)]      # make sure employee hasn't RSVP'd to events
+    recommendations = recommendations.groupby('event_id').sum().sort_values('count', ascending=False).head(top_n)   # group by event_id and sum the count
 
     return recommendations.index.tolist()
 
@@ -497,16 +498,16 @@ def recommend():
     if user_id is None:
         return jsonify([])
 
-    user_analytics_df = fetch_user_analytics()
-    events_df = fetch_events()
-    social_clubs_df = fetch_social_clubs()
+    user_analytics_df = fetch_user_analytics()      # fetch user analytics
+    events_df = fetch_events()      # fetch events
+    social_clubs_df = fetch_social_clubs()      ##TODO add social club events to bias
 
-    user_analytics_df = process_user_actions(user_analytics_df, events_df)
-    user_profiles = create_user_profiles(user_analytics_df)
-    user_event_matrix = create_user_event_matrix(user_analytics_df)
-    user_similarities_df = calculate_similarities(user_event_matrix)
+    user_analytics_df = process_user_actions(user_analytics_df, events_df)      # process user actions
+    user_profiles = create_user_profiles(user_analytics_df)     # create user profiles
+    user_event_matrix = create_user_event_matrix(user_analytics_df)     # create user event matrix
+    user_similarities_df = calculate_similarities(user_event_matrix)    # calculate user similarities
 
-    recommended_event_ids = unified_recommendation(user_id, user_profiles, events_df, user_event_matrix, user_similarities_df, user_analytics_df)
+    recommended_event_ids = unified_recommendation(user_id, user_profiles, events_df, user_event_matrix, user_similarities_df, user_analytics_df)   # get recommendations
 
     return jsonify(recommended_event_ids)
 
