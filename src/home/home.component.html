@@ -59,7 +59,7 @@
 
       <div class="flex flex-col lg:flex-row justify-center space-y-2 sm:space-y-0  gap-x-2 mr-3.5">
         <div class="flex justify-center items-center font-roboto">
-          <input #dateInput type="date" id="date-input" name="date-input" class="bg-gray-400 w-44 px-2 h-12 rounded-lg border-2 border-gray-400 focus:border-accent text-base text-center outline-none text-gray-700 transition-colors duration-200 ease-in-out">
+          <input #dateInput  aria-label="Date input" type="date" id="date-input" name="date-input" class="bg-white w-44 px-2 h-12 rounded-lg border-2 border-gray-400 focus:border-accent text-base text-center outline-none text-gray-700 transition-colors duration-200 ease-in-out">
         </div>
         
         <div class="flex  font-roboto justify-center sm:justify-start md:justify-center space-x-2">
@@ -136,7 +136,7 @@
     <div class="relative lg:h-96 w-full"> 
       <div class="carousel carousel-center w-full p-4 lg:space-x-2 space-x-8 bg-transparent rounded-box h-full" #carousel3>
         <div *ngIf="isLoading; else content2">
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:-ml-14 ml-4 space-x-32">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-10 ml-4 space-x-52">
             <app-social-club-card-skeleton class="block lg:hidden"></app-social-club-card-skeleton>
             <app-social-club-card-skeleton class="hidden lg:block"></app-social-club-card-skeleton>
             <app-social-club-card-skeleton class="hidden lg:block"></app-social-club-card-skeleton>
