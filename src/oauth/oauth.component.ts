@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { response } from 'express';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { RefreshService } from 'src/app/refresh.service';
 @Component({
   selector: 'app-oauth',
   standalone: true,
@@ -15,7 +16,8 @@ export class OauthComponent implements OnInit{
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    private refreshService: RefreshService
   )
   {}
 
@@ -223,6 +225,7 @@ export class OauthComponent implements OnInit{
                   }
                 })
                 .then(() => {
+                  this.refreshService.triggerRefreshNavbar();
                   this.router.navigate(['']);
                 })
                 .catch((error) => {
@@ -453,6 +456,7 @@ export class OauthComponent implements OnInit{
                   }
                 })
                 .then(() => {
+                  this.refreshService.triggerRefreshNavbar();
                   this.router.navigate(['']);
                 })
                 .catch((error) => {

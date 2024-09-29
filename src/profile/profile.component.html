@@ -29,7 +29,6 @@
     <div class="tabs tabs-boxed w-full">
       <a class="tab text-secondary text-lg tab-bordered rounded-lg hover:bg-neutral" (click)="selectTab('about')" [class.tab-active]="selectedTab === 'about'">About</a>
       <a class="tab text-secondary text-lg tab-bordered rounded-lg hover:bg-neutral" (click)="selectTab('events')" [class.tab-active]="selectedTab === 'events'">Events History</a>
-      <a class="tab text-secondary text-lg tab-bordered rounded-lg hover:bg-neutral" (click)="selectTab('subscriptions')" [class.tab-active]="selectedTab === 'subscriptions'">Subscriptions</a>
     </div>
     <div *ngIf="selectedTab === 'about'" class="card w-full bg-base-100 shadow-2xl mb-4">
       <div class="card-body flex-row">
@@ -76,12 +75,6 @@
       </div>
     </div>
   
-    <div *ngIf="selectedTab === 'subscriptions'" class="card w-full bg-base-100 shadow-2xl mb-4">
-      <div class="card-body">
-        <h2 class="card-title text-primary">Subscriptions</h2>
-        <p>Details about the user's subscriptions.</p>
-      </div>
-    </div>
 </div>
   
   <!-- Mobile Version -->
@@ -104,7 +97,6 @@
     <div class="tabs tabs-boxed w-full">
       <a class="tab text-secondary text-lg tab-bordered rounded-lg hover:bg-neutral" (click)="selectTab('about')" [class.tab-active]="selectedTab === 'about'">About</a>
       <a class="tab text-secondary text-lg tab-bordered rounded-lg hover:bg-neutral" (click)="selectTab('events')" [class.tab-active]="selectedTab === 'events'">Events History</a>
-      <a class="tab text-secondary text-lg tab-bordered rounded-lg hover:bg-neutral" (click)="selectTab('subscriptions')" [class.tab-active]="selectedTab === 'subscriptions'">Subscriptions</a>
     </div>
     <div *ngIf="selectedTab === 'about'" class="card w-full bg-base-100 shadow-2xl mb-4">
       <div class="card-body">
@@ -148,13 +140,6 @@
           ></app-attended-event-card>
           
         </div>
-      </div>
-    </div>
-  
-    <div *ngIf="selectedTab === 'subscriptions'" class="card w-full bg-base-100 shadow-2xl mb-4">
-      <div class="card-body">
-        <h2 class="card-title text-primary">Subscriptions</h2>
-        <p>Details about the user's subscriptions.</p>
       </div>
     </div>
   </div>

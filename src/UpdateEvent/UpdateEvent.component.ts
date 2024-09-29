@@ -111,7 +111,8 @@ presubmit(){
     this.StartDateInput.nativeElement.value === '' || 
     this.EndDateInput.nativeElement.value === '' || 
     this.LocationInput.nativeElement.value === '' || 
-    this.SocialClubInput.nativeElement.value === '') {
+    this.SocialClubInput.nativeElement.value === '' ||
+    sessionStorage.getItem('ugeolocation') === '' ){
     alert('Please fill in all the details');
     return;
 }else{
@@ -126,7 +127,7 @@ presubmit(){
   // Retrieve tags from session storage
   const savedTags = sessionStorage.getItem('utags');
   const tags = savedTags ? JSON.parse(savedTags) : [];
-
+      
       const event = {
         title: this.sanitizePipe.transform(this.nameInput.nativeElement.value),
         description: this.sanitizePipe.transform(this.descriptionInput.nativeElement.value),
@@ -137,7 +138,8 @@ presubmit(){
         location: this.sanitizePipe.transform(this.LocationInput.nativeElement.value),
 
         hostId: localStorage.getItem('ID'),
-        geolocation: this.latitude + ', ' + this.longitude,
+        geolocation: this.sanitizePipe.transform(sessionStorage.getItem('ugeolocation') || ''), 
+        
         socialClub: this.sanitizePipe.transform(this.SocialClubInput.nativeElement.value),
         eventPictureLink: "https://example.com/soccer-tournament.jpg", // Replace with actual picture link
         eventAgendas: this.agendainputs?.value.map((input: any) => this.sanitizePipe.transform(input)),
@@ -265,6 +267,7 @@ initializeGooglePlaces() {
         this.latitude = place.geometry.location.lat();
         this.longitude = place.geometry.location.lng();
         this.location = place.formatted_address || '';
+        sessionStorage.setItem('ugeolocation', this.latitude + ', ' + this.longitude); // Store the geolocation in sessionStorage
         sessionStorage.setItem('Location', this.location); // Store the selected location in sessionStorage
         this.updateMapCenter(); // Update the map center
       }
@@ -327,6 +330,7 @@ saveInputs() {
         this.StartDateInput.nativeElement.value = sessionStorage.setItem('uStartDate', data.startDate);
         this.EndDateInput.nativeElement.value = sessionStorage.setItem('uEndDate', data.endDate);
         this.LocationInput.nativeElement.value = sessionStorage.setItem('uLocation', data.location);
+        sessionStorage.setItem('ugeolocation', data.geolocation);
         this.SocialClubInput.nativeElement.value = sessionStorage.setItem('uSocialClub', this.getSocialClubNameById(this.myevent.socialClub));
         if(data.eventDietaryAccommodations.includes('Vegetarian')){
           sessionStorage.setItem('uisVegetarianSelected', 'true');

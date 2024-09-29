@@ -94,7 +94,7 @@ export class AppComponent implements OnInit{
     // this.webSocketService.notifications.subscribe((message: string) => {
       // this.showToast(message);
     // });
-    this.checkCookies();
+    // this.checkCookies();
     // Apply the theme based on localStorage
     this.isDarkTheme = localStorage.getItem('theme') === 'dark';
     this.applyTheme();

@@ -62,7 +62,7 @@
                 <ng-container *ngIf="showHosts">
                   <app-search-host-card
                   *ngFor="let host of filteredHosts"
-                  [hostName]="host.firstName + ' ' + host.lastName"
+                  [hostName]="host.firstName + (host.publicSurname ? ' ' + host.lastName : '')"
                   [hostEmail]="host.email"
                   [hostImage]="host.employeePictureLink"
                   [hostBio]="host.employeeDescription"
