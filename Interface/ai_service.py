@@ -14,6 +14,7 @@ import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 from sqlalchemy import create_engine
 from sqlalchemy.engine.url import URL
+from datetime import datetime, timedelta, time
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
@@ -43,6 +44,24 @@ ACTION_WEIGHTS = {
     'submitted_feedback': 3.0,  # Default weight for submitted feedback
     'viewed_profile': 1.5  # Default weight for viewed profile
 }
+
+# Filter future events
+def filter_future_events(events_df):
+    current_time = datetime.now()
+    
+    # Ensure end_time is a datetime object
+    if 'start_date' in events_df.columns:
+        events_df['end_time'] = events_df.apply(
+            lambda row: datetime.combine(row['start_date'], row['end_time']) if isinstance(row['end_time'], time) else row['end_time'],
+            axis=1
+        )
+    elif 'end_date' in events_df.columns:
+        events_df['end_time'] = events_df.apply(
+            lambda row: datetime.combine(row['end_date'], row['end_time']) if isinstance(row['end_time'], time) else row['end_time'],
+            axis=1
+        )
+    
+    return events_df[events_df['end_time'] > current_time]
 
 # Fetch user analytics data
 def fetch_user_analytics():
@@ -269,11 +288,9 @@ def generate_tags():
     return jsonify({'tags': agendas})
 
 # Process user actions
-def process_user_actions(df, events_df):        # Ensure all values in 'action_type' column are strings
+def process_user_actions(df, events_df):
     # Ensure all values in 'action_type' column are strings
-    df['action_type'] = df['action_type'].astype(str)       
-    
-    # print("Original action_type column:\n", df['action_type'].to_string(index=False))
+    df['action_type'] = df['action_type'].astype(str)
 
     # Define regex patterns to match event IDs, social club IDs, ratings, and viewed profiles
     event_id_pattern = re.compile(r'view_event:\s*(\d+)|rsvp_event:\s*(\d+)')
@@ -311,13 +328,10 @@ def process_user_actions(df, events_df):        # Ensure all values in 'action_t
     # Add timestamp column for temporal dynamics
     df['timestamp'] = pd.to_datetime(df['timestamp'])
 
-    # Output the new columns
-    # print("Event IDs:", df['event_id'])
-    # print("Social Club IDs:", df['social_club_id'])
-    # print("Ratings:", df['rating'])
-    # print("Viewed Profiles:", df['viewed_profile'])
-    # print("Weights:", df['weight'])
-    # print("Timestamps:", df['timestamp'])
+    # Filter out records older than 14 days
+    two_weeks_ago = datetime.now() - timedelta(days=14)
+    df = df[df['timestamp'] >= two_weeks_ago]
+
     return df
 
 # Adjust create_user_profiles function
@@ -343,49 +357,42 @@ def common_actions_similarity(actions1, actions2):  # Calculate the number of co
     total_actions = len(actions1 | actions2)        # Return the ratio of common actions to total actions
     return common_actions / total_actions if total_actions != 0 else 0
 
-# Update recommend_events_bias function
-def recommend_events_bias(user_id, user_profiles, events_df, top_n=3):  # Fetch user profile
-    user_profile = user_profiles[user_profiles['user_id'] == user_id]   # Return empty list if user profile is empty
+# Adjust recommend_events_bias function
+def recommend_events_bias(user_id, user_profiles, events_df, top_n=5):
+    user_profile = user_profiles[user_profiles['user_id'] == user_id]
     if user_profile.empty:
         return []
 
-    user_events = set(user_profile['event_id'].values[0])   # Fetch user actions
-    user_actions = set(user_profile['weight'].values[0])    # Filter out the user from the user profiles
-    similar_users = user_profiles[user_profiles['user_id'] != user_id].copy()       
+    user_events = set(user_profile['event_id'].values[0])
+    user_actions = set(user_profile['weight'].values[0])
+    similar_users = user_profiles[user_profiles['user_id'] != user_id].copy()
 
-    # Calculate Jaccard similarity
-    similar_users.loc[:, 'jaccard_similarity'] = similar_users.apply(    # Calculate Jaccard similarity
-        lambda row: jaccard_similarity(set(row['event_id']), user_events), axis=1   # Calculate cosine similarity
+    similar_users['jaccard_similarity'] = similar_users.apply(
+        lambda row: jaccard_similarity(set(row['event_id']), user_events), axis=1
     )
 
-    # Calculate cosine similarity
     user_vector = np.array([1 if event in user_events else 0 for event in events_df['event_id']])
-    similar_users.loc[:, 'cosine_similarity'] = similar_users.apply(
+    similar_users['cosine_similarity'] = similar_users.apply(
         lambda row: cosine_similarity([user_vector], [np.array([1 if event in row['event_id'] else 0 for event in events_df['event_id']])])[0][0], axis=1
     )
 
-    # Calculate common actions similarity
-    similar_users.loc[:, 'common_actions_similarity'] = similar_users.apply(
+    similar_users['common_actions_similarity'] = similar_users.apply(
         lambda row: common_actions_similarity(set(row['weight']), user_actions), axis=1
     )
 
-    # Combine similarity measures
-    similar_users.loc[:, 'combined_similarity'] = (
+    similar_users['combined_similarity'] = (
         similar_users['jaccard_similarity'] * 0.3 +
         similar_users['cosine_similarity'] * 0.3 +
         similar_users['common_actions_similarity'] * 0.4
     )
 
-    # Normalize similarity scores
     scaler = MinMaxScaler()
-    similar_users.loc[:, 'normalized_similarity'] = scaler.fit_transform(similar_users[['combined_similarity']])
+    similar_users['normalized_similarity'] = scaler.fit_transform(similar_users[['combined_similarity']])
 
-    # Apply time decay
     current_time = pd.Timestamp.now()
-    similar_users.loc[:, 'time_decay'] = similar_users['timestamp'].apply(lambda x: np.exp(-0.1 * (current_time - x).days))
+    similar_users['time_decay'] = similar_users['timestamp'].apply(lambda x: np.exp(-0.1 * (current_time - x).days))
 
-    # Calculate final similarity score
-    similar_users.loc[:, 'final_similarity'] = similar_users['normalized_similarity'] * similar_users['time_decay']
+    similar_users['final_similarity'] = similar_users['normalized_similarity'] * similar_users['time_decay']
 
     similar_users = similar_users.sort_values(by='final_similarity', ascending=False)
 
@@ -426,53 +433,53 @@ def calculate_similarities(user_event_matrix):
 
 # Get most popular events
 def get_most_popular_events(df, top_n=5):
+    df = filter_future_events(df)
     popular_events = df['event_id'].value_counts().head(top_n).index.tolist()
     return popular_events
 
-# Generate recommendations
-def recommend_events_collaborative(employee_id, user_event_matrix, user_similarities_df, df, top_n=3, rsvpd_events=[]):
+# Adjust recommend_events_collaborative function
+def recommend_events_collaborative(employee_id, user_event_matrix, user_similarities_df, df, top_n=5, rsvpd_events=[]):
     if employee_id not in user_similarities_df.index:
-        return get_most_popular_events(df, top_n=5)
+        return get_most_popular_events(df, top_n=top_n)
 
     similar_users = user_similarities_df[employee_id].sort_values(ascending=False).index[1:]
     similar_users_events = user_event_matrix.loc[similar_users]
     similar_users_events = similar_users_events[similar_users_events > 0].stack().reset_index()
     similar_users_events.columns = ['employee_id', 'event_id', 'count']
-    
+
     employee_events = user_event_matrix.loc[employee_id]
     employee_events = employee_events[employee_events > 0].index
-    
+
     recommendations = similar_users_events[~similar_users_events['event_id'].isin(employee_events)]
     recommendations = recommendations[~recommendations['event_id'].isin(rsvpd_events)]
     recommendations = recommendations.groupby('event_id').sum().sort_values('count', ascending=False).head(top_n)
-    
+
     return recommendations.index.tolist()
 
 # Get most popular events
 def get_most_popular_events(df, top_n=5):
     popular_events = df['event_id'].value_counts().head(top_n).index.tolist()
     return popular_events
-
-def unified_recommendation(employee_id, user_profiles, events_df, user_event_matrix, user_similarities_df, df, top_n=3):
+# Update unified_recommendation function
+def unified_recommendation(employee_id, user_profiles, events_df, user_event_matrix, user_similarities_df, df, top_n=5):
+    events_df = filter_future_events(events_df)
     user_profile = user_profiles[user_profiles['user_id'] == employee_id]
-    if user_profile.empty:
-        print("\033[93mUsing most popular events\033[0m")
-        return get_most_popular_events(df, top_n=5)
+    # If user has no actions or is not in user_profiles, return most popular events
+    if user_profile.empty or len(user_profile['weight'].values[0]) == 0:
+        return get_most_popular_events(df, top_n=top_n)
 
     rsvpd_events = fetch_user_rsvps(employee_id)
     num_actions = len(user_profile['weight'].values[0])
-    print("\033[95mNumber of actions: " + str(num_actions) + "\033[0m")
-    if num_actions >= 10:  # Threshold for high activity
+    if num_actions >= 11:       # If the user has more than 10 actions, use the bias-based recommendation
         print("\033[96mUsing bias-based recommendation\033[0m")
         recommendations = recommend_events_bias(employee_id, user_profiles, events_df, top_n)
-    elif num_actions >= 5:
+    elif num_actions <= 10 and num_actions >= 3:         # If the user has between 3 and 10 actions, use the collaborative filtering-based recommendation
         print("\033[94mUsing collaborative filtering recommendation\033[0m")
         recommendations = recommend_events_collaborative(employee_id, user_event_matrix, user_similarities_df, df, top_n, rsvpd_events)
-    else:
+    elif num_actions <= 3:      # If the user has less than 3 actions, use the most popular events
         print("\033[93mUsing most popular events\033[0m")
-        recommendations = get_most_popular_events(df, top_n=5)
+        recommendations = get_most_popular_events(df, top_n=top_n)
 
-    # Filter out RSVPed events and replace them with others
     final_recommendations = []
     for event_id in recommendations:
         if event_id not in rsvpd_events:
@@ -480,22 +487,15 @@ def unified_recommendation(employee_id, user_profiles, events_df, user_event_mat
         if len(final_recommendations) >= top_n:
             break
 
-    # If we don't have enough recommendations, fill with most popular events
-    if len(final_recommendations) < top_n:
-        popular_events = get_most_popular_events(df, top_n=top_n)
-        for event_id in popular_events:
-            if event_id not in rsvpd_events and event_id not in final_recommendations:
-                final_recommendations.append(event_id)
-            if len(final_recommendations) >= top_n:
-                break
-
     return final_recommendations
+
+
 # Flask route for recommendations
 @app.route('/recommend', methods=['GET'])
 def recommend():
     user_id = request.args.get('user_id', type=int)
     if user_id is None:
-        return jsonify({"error": "user_id is required"}), 400
+        return jsonify([])
 
     user_analytics_df = fetch_user_analytics()
     events_df = fetch_events()

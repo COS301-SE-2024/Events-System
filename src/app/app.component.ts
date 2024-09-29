@@ -13,11 +13,11 @@ import { Subscription } from 'rxjs';
 import { NotificationService } from './notification.service';
 import { WebSocketService } from './websocket.service';
 import { RefreshService } from './refresh.service';
-
+import { SplashscreenComponent } from 'src/Splashscreen/Splashscreen.component';
 
 @Component({
   standalone: true,
-  imports: [FormsModule, RouterModule, CommonModule, FullCalendarModule, NotifPopupComponent, ProfileComponent],
+  imports: [FormsModule, RouterModule, CommonModule, FullCalendarModule, NotifPopupComponent, ProfileComponent, SplashscreenComponent],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
@@ -29,6 +29,8 @@ import { RefreshService } from './refresh.service';
         </button>;`
 })
 export class AppComponent implements OnInit{
+    @ViewChild('splashScreen') splashScreen!: SplashscreenComponent;
+  isSplashVisible = true;
   @ViewChild('toastContainer', { static: true }) toastContainer!: ElementRef;
   isHost = false;
   isEmployee = false;
@@ -50,9 +52,15 @@ export class AppComponent implements OnInit{
       private notificationService: NotificationService,
       // private webSocketService: WebSocketService,
       private cdr: ChangeDetectorRef,
-      private refreshService: RefreshService
+      private refreshService: RefreshService,
+      
 
     ) {
+      this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.isSplashVisible = false;
+      });
     this.notificationSubscription = this.notificationService.notification$.subscribe(() => {
       this.notificationCount++;
     });
@@ -98,6 +106,8 @@ export class AppComponent implements OnInit{
     // Apply the theme based on localStorage
     this.isDarkTheme = localStorage.getItem('theme') === 'dark';
     this.applyTheme();
+    this.splashScreen.hideSplashScreen();
+
   }
 
   getInitials(): string {
