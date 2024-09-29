@@ -205,8 +205,15 @@ export class MyScheduleComponent implements OnInit {
   
   getUpcomingEvents(): { [key: string]: any[] } {
     const now = new Date();
+    const employeeId = Number(localStorage.getItem('ID')); // Assuming the employeeId is stored in local storage
+  
     return Object.keys(this.groupedEvents).reduce((acc: { [key: string]: any[] }, key: string) => {
-      const events = this.groupedEvents[key].filter(event => new Date(`${event.startDate}T${event.startTime}`) >= now);
+      const events = this.groupedEvents[key].filter(event => {
+        const isUpcoming = new Date(`${event.startDate}T${event.startTime}`) >= now;
+        const isAttending = this.allrsvps.some(rsvp => rsvp.eventId === event.id && rsvp.employeeId === employeeId);
+        const isHosting = event.hostId === employeeId;
+        return isUpcoming && (isAttending || isHosting);
+      });
       if (events.length) {
         acc[key] = events;
       }
