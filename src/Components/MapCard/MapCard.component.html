@@ -2,7 +2,6 @@
   <div id="info-card" class="ml-2 relative flex flex-col my-1 bg-base-100 shadow-sm border border-base-100 rounded-lg w-96 h-72 info-card">
     <div class="relative h-32 lg:h-52 m-2.5 overflow-hidden text-secondary rounded-md">
       <img src="{{this.imageSource}}" alt="card-image" />
-      <button class="absolute top-2 right-2 bg-black bg-opacity-50 text-white rounded-full w-6 h-6 flex items-center justify-center" (click)="closeCard()">✖</button>
     </div>
     <div class="p-4">
       <h6 class="-mb-4 text-xl lg:text-4xl font-semibold -bottom-px" id="info-card-title">{{ title}}</h6>
@@ -19,10 +18,10 @@
     </div>
     </div>
     <div class="px-4 pb-4 pt-0 mt-2 bottom-3">
-      <button class="rounded-md bg-accent py-2 px-4 border border-transparent text-center text-sm text-base-100 transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button"
-            [routerLink]="['/event', eventID]">
-        Read more
-      </button>
+      <div class="flex w-full justify-between">
+        <button class="btn btn-outline font-roboto mt-4" (click)="closeCard()">Close</button>
+        <button class="btn btn-accent font-roboto mt-4" [routerLink]="['/event', eventID]">Read more</button>
+      </div>
     </div>
   </div>
 </div>
