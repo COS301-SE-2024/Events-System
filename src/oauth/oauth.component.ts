@@ -27,7 +27,7 @@ export class OauthComponent implements OnInit{
       const id = localStorage.getItem('ID');
       const refreshToken = localStorage.getItem('googleRefresh');
 
-      if (code && refreshToken) {
+      if (code && refreshToken && localStorage.getItem('googleRefresh') !== "undefined") {
         const baseUrl = 'https://oauth2.googleapis.com/token';
         const clientId = 'client_id=' + environment.CLIENT_ID;
         const clientSecret = 'client_secret=' + environment.CLIENT_SECRET;

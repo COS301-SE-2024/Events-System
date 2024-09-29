@@ -290,7 +290,7 @@ export class LoginComponent {
     const flowName = 'flowName=GeneralOAuthFlow';
     const accessType = 'access_type=offline';  // Added to request a refresh token
 
-    if(!localStorage.getItem('ID') || !localStorage.getItem('googleRefresh')) {
+    if(!localStorage.getItem('ID') || !localStorage.getItem('googleRefresh' || localStorage.getItem('googleRefresh') !== 'undefined')) {
       fullUrl = `${baseUrl}?${responseType}&${clientId}&${scope}&${redirectUri}&${service}&${o2v}&${ddm}&${flowName}&${accessType}`;
     }
     else {
