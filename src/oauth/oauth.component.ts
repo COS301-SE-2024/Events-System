@@ -103,7 +103,7 @@ export class OauthComponent implements OnInit{
                 .then(calendarData => calendarData.json())
                 .then(async calendarData => {
                   const events = calendarData.items;
-                  if (events.length === 0) {
+                  if (events.length == null || events.length === 0) {
                     //console.log("No upcoming events found.");
                     return;
                   }
@@ -334,7 +334,7 @@ export class OauthComponent implements OnInit{
                 .then(calendarData => calendarData.json())
                 .then(async calendarData => {
                   const events = calendarData.items;
-                  if (events.length === 0) {
+                  if (events.length == null || events.length === 0) {
                     //console.log("No upcoming events found.");
                     return;
                   }
