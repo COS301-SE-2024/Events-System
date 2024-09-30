@@ -6,7 +6,7 @@ import { Observable, from, Subject } from 'rxjs';
 })
 export class NotificationService {
 
-  private apiUrl = 'https://mock-api-url.com/notify/notify';
+  private apiUrl = 'http://localhost:8080/notify';
 
 
   sendNotification(Number: number, eventId: number, Message: string, eventtitle: string): Observable<string> {
