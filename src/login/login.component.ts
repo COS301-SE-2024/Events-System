@@ -196,6 +196,7 @@ export class LoginComponent {
 
         setTimeout(() => {
           this.showregistersuccessToast = false;
+          this.refreshService.triggerRefreshNavbar();
           this.router.navigate(['']);
         }, 5000);
         // Optionally, navigate to another page on successful registration
@@ -290,7 +291,7 @@ export class LoginComponent {
     const flowName = 'flowName=GeneralOAuthFlow';
     const accessType = 'access_type=offline';  // Added to request a refresh token
 
-    if(!localStorage.getItem('ID') || !localStorage.getItem('googleRefresh') || localStorage.getItem('googleRefresh') !== 'undefined') {
+    if(!localStorage.getItem('ID') || !localStorage.getItem('googleRefresh' || localStorage.getItem('googleRefresh') !== 'undefined')) {
       fullUrl = `${baseUrl}?${responseType}&${clientId}&${scope}&${redirectUri}&${service}&${o2v}&${ddm}&${flowName}&${accessType}`;
     }
     else {
@@ -316,10 +317,10 @@ export class LoginComponent {
           localStorage.removeItem('ID');
           document.cookie = `jwt=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
           document.cookie = `refresh=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-          //window.location.href = '/login'; // Redirect to login page or show logout success message
+          window.location.href = '/login'; // Redirect to login page or show logout success message
       }
       else {
-        //window.location.href = '/login';
+        window.location.href = '/login';
       }
     })
     .catch(() => {
