@@ -189,11 +189,17 @@ export class LoginComponent {
 
         // Store employee ID in local storage
         localStorage.setItem('ID', idData);
-        localStorage.setItem('googleSignIn', "true");
         document.cookie = `jwt=${data.access_token}; path=/; expires=` + new Date(new Date().getTime() + 15 * 60 * 1000).toUTCString();
         document.cookie = `refresh=${data.refresh_token}; path=/; expires=` + new Date(new Date().getTime() + 24* 60 * 60 * 1000).toUTCString();
 
-
+          // Fetch employee data using ID
+          const employeeId = localStorage.getItem('ID');
+          if (employeeId) {
+            const employeeResponse = await this.http.get(`https://events-system-back.wn.r.appspot.com/api/employees/${employeeId}`).toPromise();
+            localStorage.setItem('employeeData', JSON.stringify(employeeResponse));
+          } else {
+            window.location.reload();
+          }
         setTimeout(() => {
           this.showregistersuccessToast = false;
           this.refreshService.triggerRefreshNavbar();
