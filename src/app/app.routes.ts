@@ -35,6 +35,7 @@ import { MapComponent } from 'src/map/map.component';
 import { EventRatingsComponent } from 'src/EventRatings/eventRatings.component';
 import { AuthGuard } from './authguard.guard';
 import { LeaderboardComponent } from 'src/Leaderboard/Leaderboard.component';
+import { PrivacyPolicyComponent } from 'src/PrivacyPolicy/PrivacyPolicy.component';
 
 export const appRoutes: Route[] = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] }, // Home page
@@ -73,4 +74,5 @@ export const appRoutes: Route[] = [
   { path: 'reset-password/:token', component: ResetPasswordComponent },
   { path: 'feedbackandratings/:id', component: EventRatingsComponent, canActivate: [AuthGuard] },
   { path: 'leaderboard', component: LeaderboardComponent, canActivate: [AuthGuard] },
+  { path: 'privacy-policy', component: PrivacyPolicyComponent}
 ];

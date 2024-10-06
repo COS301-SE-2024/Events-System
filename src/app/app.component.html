@@ -2,20 +2,21 @@
 <div class="navbar bg-base-100 ">
   <div class="navbar-start">
     <div class="dropdown">
-      <label aria-label="Open drawer" for="my-drawer-2" class=""  *ngIf="!isLoginRoute">
-          <div tabindex="0" role="button"aria-label="drawer button" class="btn btn-ghost btn-circle">
-            <i   class="fa-solid fa-bars"></i>            </div>
-        </label>
+      <label aria-label="Open drawer" for="my-drawer-2" class="" *ngIf="!isLoginRoute && !isPrivacyRoute">
+        <div tabindex="0" role="button" aria-label="drawer button" class="btn btn-ghost btn-circle">
+          <i class="fa-solid fa-bars"></i>
+        </div>
+      </label>
     </div>
   </div>
   <div class="navbar-center">
 
-    <a routerLink="/" class="btn btn-ghost text-xl hidden"  *ngIf="!isLoginRoute">Events System</a>
+    <a routerLink="/" class="btn btn-ghost text-xl hidden"  *ngIf="!isLoginRoute && !isPrivacyRoute">Events System</a>
   </div>
   <div class="navbar-end">
     <!-- Notification Bell -->
-    <button class="btn btn-ghost btn-circle relative" (click)="togglePopover()" *ngIf="!isLoginRoute">
-      <div class="relative"  *ngIf="!isLoginRoute" >
+    <button class="btn btn-ghost btn-circle relative" (click)="togglePopover()" *ngIf="!isLoginRoute && !isPrivacyRoute">
+      <div class="relative"  *ngIf="!isLoginRoute && !isPrivacyRoute" >
         <!-- DaisyUI Notification Bell Icon -->
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2 2 0 0118 14V9a6 6 0 00-12 0v5a2 2,0,01-.595,1.195L3,17h5m6 0a3 3 0,01-6 0m6 0h-6" />
@@ -30,9 +31,9 @@
 
     
 
-    <button class="btn btn-ghost btn-circle hidden lg:block" aria-label="Search"  routerLink="/search" *ngIf="!isLoginRoute">
+    <button class="btn btn-ghost btn-circle hidden lg:block" aria-label="Search"  routerLink="/search" *ngIf="!isLoginRoute && !isPrivacyRoute">
       <a class="fa-solid fa-magnifying-glass"  ></a> </button>
-    <div class="dropdown dropdown-end"  *ngIf="!isLoginRoute">
+    <div class="dropdown dropdown-end"  *ngIf="!isLoginRoute && !isPrivacyRoute">
       <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar" *ngIf="employeeData?.employeePictureLink" >
         <div class="w-10 rounded-full">
           <img alt="Tailwind CSS Navbar component" [src]="employeeData?.employeePictureLink" />

@@ -86,6 +86,10 @@ export class AppComponent implements OnInit{
   get isLoginRoute() {
     return this.router.url === '/login';
   }
+
+  get isPrivacyRoute() {
+    return this.router.url === '/privacy-policy';
+  }
   ngOnInit() {
     console.log(this.employeeData.role);
     if (this.employeeData.role == 'MANAGER'){
