@@ -83,12 +83,16 @@ export class AppComponent implements OnInit{
     });
   }
 
-  get isLoginRoute() {
+  get isLoginRoute() {  
     return this.router.url === '/login';
   }
 
   get isPrivacyRoute() {
     return this.router.url === '/privacy-policy';
+  }
+
+  get isHomeRoute() {
+    return this.router.url === '/home';
   }
   ngOnInit() {
     console.log(this.employeeData.role);
