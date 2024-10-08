@@ -326,7 +326,7 @@ export class LoginComponent {
           window.location.href = '/login'; // Redirect to login page or show logout success message
       }
       else {
-        window.location.href = '/login';
+        window.location.href = '/home';
       }
     })
     .catch(() => {

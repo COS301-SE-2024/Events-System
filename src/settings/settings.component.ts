@@ -204,7 +204,7 @@ export class SettingsComponent implements OnInit {
             this.isAPILoading = false;
             setTimeout(() => {
               this.showdeletesuccessToast = false;
-              this.router.navigate(['/login']);
+              this.router.navigate(['/home']);
             }, 5000);
             //console.log('Account deleted', response);
             // alert('Account deleted');

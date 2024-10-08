@@ -75,7 +75,7 @@ export class AppComponent implements OnInit{
     this.routerEventsSubscription = this.router.events
     .pipe(filter((event: Event): event is NavigationEnd => event instanceof NavigationEnd))
     .subscribe((event: NavigationEnd) => {
-      if (event.url !== '/login' && !this.notificationCountFetched) {
+      if (event.url !== '/login' && !this.notificationCountFetched && event.url !== '/privacy-policy' && event.url !== '/home') {
         this.fetchNotificationCount();
       this.notificationCountFetched = true;
 
@@ -233,10 +233,10 @@ export class AppComponent implements OnInit{
           localStorage.removeItem('ID');
           document.cookie = `jwt=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
           document.cookie = `refresh=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-          window.location.href = '/login'; // Redirect to login page or show logout success message
+          window.location.href = '/home'; // Redirect to login page or show logout success message
       }
       else {
-        window.location.href = '/login';
+        window.location.href = '/home';
       }
     })
     .catch(() => {
@@ -284,7 +284,7 @@ export class AppComponent implements OnInit{
     {
       if(!refreshToken)     //If refresh token expired
       {
-        this.router.navigate(["/login"]);
+        this.router.navigate(["/home"]);
       }
 
       try {

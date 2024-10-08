@@ -24,7 +24,7 @@ export class NotifPopupComponent implements OnInit {
   ngOnInit(): void {
     const employeeId = Number(localStorage.getItem('ID')); // Assuming the employeeId is stored in local storage
     if (!employeeId) {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/home']);
       return;
     }
 

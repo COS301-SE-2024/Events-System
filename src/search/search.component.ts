@@ -36,7 +36,7 @@ export class SearchComponent {
     const employeeId = Number(localStorage.getItem('ID'));
 
     if (!employeeId) {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/home']);
       return;
     }
 
