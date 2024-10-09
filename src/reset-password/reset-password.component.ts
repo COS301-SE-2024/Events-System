@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormControl, ValidationErrors,  FormGroup, Validators, ReactiveFormsModule } from '@angular/forms'; 
-import { HttpClientModule, HttpClient  } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SanitizePipe } from 'src/app/sanitization.pipe';
@@ -15,7 +14,7 @@ import { SanitizePipe } from 'src/app/sanitization.pipe';
 export class ResetPasswordComponent implements OnInit{
   token = '';
   registerForm: FormGroup;
-  passwordPattern = '^(?=.*[a-z])(?!.* ).{8,20}$';
+  passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[@&*$#!.%])[a-zA-Z\d@&*$#!.%]{8,}$/;
   passwordControl2 = new FormControl('', [Validators.pattern(this.passwordPattern)]);
   passwordControl3 = new FormControl('', [Validators.pattern(this.passwordPattern)]);
   hidePassword = true;
@@ -109,4 +108,29 @@ export class ResetPasswordComponent implements OnInit{
       console.log('Form is invalid. Please check the fields.');
     }
   }
+
+  hasMinLength(): boolean {
+    const password = this.registerForm.get('password')?.value;
+    return password && password.length >= 8;
+  }
+
+  hasUppercase(): boolean {
+    const password = this.registerForm.get('password')?.value;
+    return password && /[A-Z]/.test(password);
+  }
+
+  hasLowercase(): boolean {
+    const password = this.registerForm.get('password')?.value;
+    return password && /[a-z]/.test(password);
+  }
+
+  hasSymbol(): boolean {
+    const password = this.registerForm.get('password')?.value;
+    return password && /[%@*$!#&]/.test(password);
+  }
+  isFormValid(): boolean {
+    return this.registerForm.valid && !this.passwordMismatchError;
+  }
+  
+  
 }

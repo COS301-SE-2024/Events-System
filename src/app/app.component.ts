@@ -83,16 +83,10 @@ export class AppComponent implements OnInit{
     });
   }
 
-  get isLoginRoute() {  
-    return this.router.url === '/login';
-  }
-
-  get isPrivacyRoute() {
-    return this.router.url === '/privacy-policy';
-  }
-
-  get isHomeRoute() {
-    return this.router.url === '/home';
+  get isSpecialRoute() {
+    const url = this.router.url.split('?')[0]; // Extract base path
+    console.log(url);
+    return /\/(login|privacy-policy|home|reset-password)/.test(url);
   }
   ngOnInit() {
     console.log(this.employeeData.role);
