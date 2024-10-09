@@ -57,22 +57,21 @@ public class NotificationService {
 
     public void notifyAllEmployees(Notification notif) {
         List<EventRSVP> rsvps = eventRSVPRepository.findByEventId(notif.getEventId());
-        List<EventSeriesSubscription> seriesSubscriptions = new ArrayList<>();
-
-        if (notif.getSeriesId() != null) {
-            seriesSubscriptions = eventSeriesSubscriptionRepository.findBySeriesId(notif.getSeriesId().longValue());
-            System.out.println("Series Subscriptions: " + seriesSubscriptions);
-        }else{
-            System.out.println("Null Series Subscriptions");
-        }
+    
+        // Send notifications to EventRSVP's
         for (EventRSVP rsvp : rsvps) {
             sendNotification(rsvp.getEmployeeId().longValue(), notif);
         }
-
-        for (EventSeriesSubscription seriesSubscription : seriesSubscriptions) {
-            sendNotification(seriesSubscription.getEmployeeId().longValue(), notif);
-        }
     
+        // If seriesId is not null, send notifications to series subscriptions
+        if (notif.getSeriesId() != null) {
+            List<EventSeriesSubscription> seriesSubscriptions = eventSeriesSubscriptionRepository.findBySeriesId(notif.getSeriesId().longValue());
+            System.out.println("Series Subscriptions: " + seriesSubscriptions);
+    
+            for (EventSeriesSubscription seriesSubscription : seriesSubscriptions) {
+                sendNotification(seriesSubscription.getEmployeeId().longValue(), notif);
+            }
+        }
     }
 
     private void sendNotification(Long employeeId, Notification notif) {

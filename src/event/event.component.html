@@ -73,7 +73,7 @@
                     </div>
                       <div class="card-actions justify-end">
                         <button class="btn btn-accent" *ngIf="!hasUserRSVPd"  @buttonFade (click)="rsvpToEvent()">Book Now</button>
-                        <button class="btn btn-outline btn-warning" *ngIf="hasUserRSVPd"  @buttonFade (click)="rsvpToEvent()">Cancel booking</button>
+                        <button class="btn btn-outline btn-error" *ngIf="hasUserRSVPd"  @buttonFade (click)="rsvpToEvent()">Cancel booking</button>
 
                       </div>
                     </div>

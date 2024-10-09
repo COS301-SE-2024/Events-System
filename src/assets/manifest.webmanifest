@@ -1,7 +1,7 @@
 {
   "name": "Events system",
-  "short_name": "SynC",
-  "display": "minimal-ui",
+  "short_name": "Events system",
+  "display": "standalone",
   "background_color": "#12192C",
   "description": "Collaborate with your colleagues and friends today, with the Entelect events System",
   "screenshots" : [
@@ -19,7 +19,7 @@
     }
   ],
   "scope": "./",
-  "start_url": "./",
+  "start_url": "/",
   "icons": [
     {
       "src": "icons/icon-72x72.png",

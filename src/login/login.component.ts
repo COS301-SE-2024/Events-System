@@ -128,7 +128,7 @@ export class LoginComponent {
     });
   }
   ngOnInit() {
-    if(this.getCookie('jwt') || this.getCookie('refresh') || this.getCookie('google')) {
+    if(this.getCookie('jwt') || this.getCookie('refresh')) {
       this.logout();
     }
     
@@ -189,13 +189,20 @@ export class LoginComponent {
 
         // Store employee ID in local storage
         localStorage.setItem('ID', idData);
-        localStorage.setItem('googleSignIn', "true");
         document.cookie = `jwt=${data.access_token}; path=/; expires=` + new Date(new Date().getTime() + 15 * 60 * 1000).toUTCString();
         document.cookie = `refresh=${data.refresh_token}; path=/; expires=` + new Date(new Date().getTime() + 24* 60 * 60 * 1000).toUTCString();
 
-
+          // Fetch employee data using ID
+          const employeeId = localStorage.getItem('ID');
+          if (employeeId) {
+            const employeeResponse = await this.http.get(`https://events-system-back.wn.r.appspot.com/api/employees/${employeeId}`).toPromise();
+            localStorage.setItem('employeeData', JSON.stringify(employeeResponse));
+          } else {
+            window.location.reload();
+          }
         setTimeout(() => {
           this.showregistersuccessToast = false;
+          this.refreshService.triggerRefreshNavbar();
           this.router.navigate(['']);
         }, 5000);
         // Optionally, navigate to another page on successful registration
@@ -290,7 +297,7 @@ export class LoginComponent {
     const flowName = 'flowName=GeneralOAuthFlow';
     const accessType = 'access_type=offline';  // Added to request a refresh token
 
-    if(!localStorage.getItem('ID') || !localStorage.getItem('googleRefresh')) {
+    if(!localStorage.getItem('ID') || !localStorage.getItem('googleRefresh') || localStorage.getItem('googleRefresh') === 'undefined') {
       fullUrl = `${baseUrl}?${responseType}&${clientId}&${scope}&${redirectUri}&${service}&${o2v}&${ddm}&${flowName}&${accessType}`;
     }
     else {
@@ -319,7 +326,7 @@ export class LoginComponent {
           window.location.href = '/login'; // Redirect to login page or show logout success message
       }
       else {
-        window.location.href = '/login';
+        window.location.href = '/home';
       }
     })
     .catch(() => {

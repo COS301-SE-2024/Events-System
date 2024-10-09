@@ -3,6 +3,19 @@
   <div class="drawer-content flex flex-col justify-center">
     <label for="my-drawer-3" class="btn btn-primary font-roboto drawer-button lg:hidden w-full">Filter</label>
 
+    <div class="hidden sm:block h-56 w-56 text-indigo-300 absolute a-z-10 -left-20 top-24">
+      <svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><defs><pattern id='a' patternUnits='userSpaceOnUse' width='40' height='40' patternTransform='scale(0.6) rotate(0)'><rect x='0' y='0' width='100%' height='100%' fill='none'/><path d='M11 6a5 5 0 01-5 5 5 5 0 01-5-5 5 5 0 015-5 5 5 0 015 5'  stroke-width='1' stroke='none' fill='currentColor'/></pattern></defs><rect width='800%' height='800%' transform='translate(0,0)' fill='url(#a)'/></svg>
+     </div>
+     <div class="hidden sm:block h-28 w-28 text-indigo-300 absolute a-z-10 right-64 bottom-96">
+      <svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><defs><pattern id='b' patternUnits='userSpaceOnUse' width='40' height='40' patternTransform='scale(0.5) rotate(0)'><rect x='0' y='0' width='100%' height='100%' fill='none'/><path d='M11 6a5 5 0 01-5 5 5 5 0 01-5-5 5 5 0 015-5 5 5 0 015 5'  stroke-width='1' stroke='none' fill='currentColor'/></pattern></defs><rect width='800%' height='800%' transform='translate(0,0)' fill='url(#b)'/></svg>
+     </div>
+     <div class="hidden sm:block h-28 w-28 text-indigo-300 absolute a-z-10 left-96 bottom-1/4">
+      <svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><defs><pattern id='b' patternUnits='userSpaceOnUse' width='40' height='40' patternTransform='scale(0.5) rotate(0)'><rect x='0' y='0' width='100%' height='100%' fill='none'/><path d='M11 6a5 5 0 01-5 5 5 5 0 01-5-5 5 5 0 015-5 5 5 0 015 5'  stroke-width='1' stroke='none' fill='currentColor'/></pattern></defs><rect width='800%' height='800%' transform='translate(0,0)' fill='url(#b)'/></svg>
+     </div>
+     <div class="hidden sm:block h-56 w-56 text-indigo-300 absolute a-z-10 right-32 -bottom-36">
+      <svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><defs><pattern id='a' patternUnits='userSpaceOnUse' width='40' height='40' patternTransform='scale(0.6) rotate(0)'><rect x='0' y='0' width='100%' height='100%' fill='none'/><path d='M11 6a5 5 0 01-5 5 5 5 0 01-5-5 5 5 0 015-5 5 5 0 015 5'  stroke-width='1' stroke='none' fill='currentColor'/></pattern></defs><rect width='800%' height='800%' transform='translate(0,0)' fill='url(#a)'/></svg>
+     </div>
+
     <div class="flex justify-center items-center">
       <div #eventContainer class="lg:mb-96 mt-2 mb-80 w-11/12 h-96 grid md:grid-cols-3 lg:grid-cols-4 grid-cols-1 lg:gap-6 lg:ml-0 md:ml-0 ml-16 gap-y-12">
         <div *ngIf="isLoading; else content">
@@ -175,7 +188,7 @@
 
   </div>
 </div>
-<button *ngIf="!showClearButton"   class="fixed bottom-4 right-4 bg-accent font-bold py-2 px-4 rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300 ease-in" 
+<button *ngIf="!showClearButton"   class="fixed bottom-4 right-4 bg-accent font-bold py-2 px-4 rounded-full shadow-lg hover:bg-primary transition-all duration-300 ease-in text-white" 
   
 [disabled]="showClearButton" 
   (click)="highlightRecommendedEvents()">

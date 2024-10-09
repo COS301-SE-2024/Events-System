@@ -205,7 +205,7 @@ export class EventRatingsComponent implements OnInit {
     {
       if(!refreshToken)     //If refresh token expired
       {
-        this.router.navigate(["/login"]);
+        this.router.navigate(["/home"]);
       }
 
       try {

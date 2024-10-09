@@ -31,20 +31,20 @@
 </div> -->
 
 <div 
-  class="relative flex flex-col mt-6 h-96 text-secondary bg-base-200 shadow-md bg-clip-border rounded-xl w-72 card" 
+  class="relative flex flex-col mt-6 h-96 bg-base-200 shadow-md bg-clip-border rounded-xl w-72 card" 
   [ngClass]="{'bg-neutral': isRecommended, 'bg-base-200': !isRecommended}">
   <div
     class="relative h-32 mx-4 -mt-6 overflow-hidden shadow-lg bg-clip-border rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40">
     <img [src]="imageSource" alt="Album"/>
   </div>
   <div class="p-6">
-    <h5 class="block mb-2 text-xl antialiased font-karla font-semibold leading-snug tracking-normal">
+    <h5 class="block mb-2 text-xl antialiased text-secondary font-karla font-semibold leading-snug tracking-normal">
       {{ eventTitle }}
     </h5>
-    <p class="font-roboto"> <i class="fa-solid fa-user mr-2"></i> {{ hostedBy }}</p>
-    <p class="font-roboto"><i class="fa-solid fa-location-pin mr-3"></i>{{ location }}</p>
-    <p class="font-roboto"><i class="fa-regular fa-clock mr-2"></i> {{startTime }} - {{ endTime }} </p>
-    <p *ngIf="isSameDate()" class="font-roboto">
+    <p class="font-roboto text-primary"> <i class="fa-solid fa-user mr-2"></i> {{ hostedBy }}</p>
+    <p class="font-roboto text-primary"><i class="fa-solid fa-location-pin mr-3"></i>{{ location }}</p>
+    <p class="font-roboto text-primary"><i class="fa-regular fa-clock mr-2"></i> {{startTime }} - {{ endTime }} </p>
+    <p *ngIf="isSameDate()" class="font-roboto text-primary ">
       <i class="fa-regular fa-calendar-days mr-3"></i>
       {{startDate | date:'d MMM' }} - {{ endDate| date:'d MMM'  }}
     </p>

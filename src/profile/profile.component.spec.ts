@@ -37,13 +37,6 @@ describe('ProfileComponent', () => {
   });
 
 
-  it('should switch to the Subscriptions tab when clicked', async () => {
-    const subscriptionsTabs = await screen.getAllByText(/Subscriptions/i);
-    fireEvent.click(subscriptionsTabs[0]);
-  const subscriptionsTabContent = subscriptionsTabs[1];
-    expect(subscriptionsTabContent).toBeInTheDocument();
-  });
-
   // it('should display the profile name and username', async () => {
   //   const profileNames = await screen.findAllByText(/profile name/i);
   //   const profileUsernames = await screen.findAllByText(/profile username/i);

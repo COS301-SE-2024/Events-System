@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { response } from 'express';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { RefreshService } from 'src/app/refresh.service';
 @Component({
   selector: 'app-oauth',
   standalone: true,
@@ -15,7 +16,8 @@ export class OauthComponent implements OnInit{
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    private refreshService: RefreshService
   )
   {}
 
@@ -25,7 +27,7 @@ export class OauthComponent implements OnInit{
       const id = localStorage.getItem('ID');
       const refreshToken = localStorage.getItem('googleRefresh');
 
-      if (code && refreshToken) {
+      if (code && refreshToken && localStorage.getItem('googleRefresh') !== "undefined") {
         const baseUrl = 'https://oauth2.googleapis.com/token';
         const clientId = 'client_id=' + environment.CLIENT_ID;
         const clientSecret = 'client_secret=' + environment.CLIENT_SECRET;
@@ -101,7 +103,7 @@ export class OauthComponent implements OnInit{
                 .then(calendarData => calendarData.json())
                 .then(async calendarData => {
                   const events = calendarData.items;
-                  if (events.length === 0) {
+                  if (events.length == null || events.length === 0) {
                     //console.log("No upcoming events found.");
                     return;
                   }
@@ -223,6 +225,7 @@ export class OauthComponent implements OnInit{
                   }
                 })
                 .then(() => {
+                  this.refreshService.triggerRefreshNavbar();
                   this.router.navigate(['']);
                 })
                 .catch((error) => {
@@ -331,7 +334,7 @@ export class OauthComponent implements OnInit{
                 .then(calendarData => calendarData.json())
                 .then(async calendarData => {
                   const events = calendarData.items;
-                  if (events.length === 0) {
+                  if (events.length == null || events.length === 0) {
                     //console.log("No upcoming events found.");
                     return;
                   }
@@ -453,6 +456,7 @@ export class OauthComponent implements OnInit{
                   }
                 })
                 .then(() => {
+                  this.refreshService.triggerRefreshNavbar();
                   this.router.navigate(['']);
                 })
                 .catch((error) => {
