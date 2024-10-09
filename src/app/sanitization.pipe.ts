@@ -33,7 +33,7 @@ export class SanitizePipe implements PipeTransform {
           /sys/g, /sysobjects/g, /syscolumns/g, /table/g,
       ];
       sqlInjectionPatterns.forEach(pattern => {
-          value = value.replace(pattern, '');     //remove : --, ;, /*, */, @, char, nchar, varchar, nvarchar, alter, begin, cast, declare, delete, drop, end, exec, execute, insert, kill, sys, sysobjects, syscolumns, table
+          value = value.replace(pattern, '');     //remove : --, ;, /*, */, char, nchar, varchar, nvarchar, alter, begin, cast, declare, delete, drop, end, exec, execute, insert, kill, sys, sysobjects, syscolumns, table
       });
   
   
@@ -42,7 +42,7 @@ export class SanitizePipe implements PipeTransform {
   
   
       // Remove potentially dangerous characters
-      const dangerousCharacters = /[<>;&"/\\#%*+=|^~]/g;    //remove : <, >, ;, &, ", /, \, #, %, *, +, =, |, ^, ~
+      const dangerousCharacters = /[<>;"/\\%+=|^~]/g;    //remove : <, >, ;, ", /, \, %, +, =, |, ^, ~
       value = value.replace(dangerousCharacters, '');
   
   

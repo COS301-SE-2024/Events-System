@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, ValidationErrors,  FormGroup, Validators, ReactiveFormsModule, ValidatorFn, AbstractControl } from '@angular/forms'; 
 import { HttpClientModule, HttpClient  } from '@angular/common/http';
@@ -15,12 +15,13 @@ import { SanitizePipe } from 'src/app/sanitization.pipe';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit, AfterViewInit{
   forgotPasswordForm: FormGroup;
   errorMessage = '';
   registerForm: FormGroup;
   loginForm: FormGroup;
   isAPILoading = false;
+  isRegisterAPILoading = false;
   showloginsuccessToast = false;
   showregistersuccessToast = false;
   showemailsuccessToast = false;
@@ -50,7 +51,7 @@ export class LoginComponent {
       firstName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
       lastName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
       email: ['', [Validators.required, Validators.email, Validators.pattern(/^[\w.]+@([\w-]+.)+[\w-]{2,4}$/)]], 
-      password: ['', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[&*^%$#!"'.])[a-zA-Z\d&*^%$#!"'.]{8,}$/)]], 
+      password: ['', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[@&*$#!.])[a-zA-Z\d@&*$#!.]{8,}$/)]], 
       confirmPassword: ['', [Validators.required]],
       role: ['', Validators.required]}, 
     { validators: this.passwordMatchValidator()});
@@ -91,7 +92,9 @@ export class LoginComponent {
         : null;
     };
   }
-
+  goBack(): void {
+    window.history.back();
+  }
   //  get passwordMismatchError(): boolean {
   //    return this.registerForm.errors?.['passwordMismatch'] && this.registerForm.get('confirmPassword')?.touched;
   //  }
@@ -115,7 +118,7 @@ export class LoginComponent {
         this.isAPILoading = false;
         setTimeout(() => {
           this.showemailfailToast = false;
-        }, 6000);
+        }, 4000);
 
       }
   })
@@ -134,6 +137,26 @@ export class LoginComponent {
     
     localStorage.removeItem('employeeData');
     localStorage.removeItem('ID');
+    // Subscribe to form value changes
+    this.loginForm.valueChanges.subscribe(() => {
+      if (this.loginForm.valid) {
+        this.enableLoginButton();
+      }
+    });
+  }
+  ngAfterViewInit() {
+    // Check form validity after view initialization
+    setTimeout(() => {
+      if (this.loginForm.valid) {
+        this.enableLoginButton();
+      }
+    }, 0);
+  }
+  enableLoginButton() {
+    const loginButton = document.querySelector('button[type="submit"]');
+    if (loginButton) {
+      loginButton.removeAttribute('disabled');
+    }
   }
 
   togglePasswordVisibility(): void {
@@ -153,7 +176,7 @@ export class LoginComponent {
   }
 
   onRegister(event: Event) {
-    this.isAPILoading = true;
+    this.isRegisterAPILoading = true;
     event.preventDefault();
 
     if (this.registerForm.valid) {
@@ -175,7 +198,7 @@ export class LoginComponent {
       .then(response => response.json())
       .then(async data => {
         this.showregistersuccessToast = true;
-        this.isAPILoading = false;
+        this.isRegisterAPILoading = false;
         // console.log('Registration successful:', data);
 
         // Get employee ID using access token
@@ -204,13 +227,13 @@ export class LoginComponent {
           this.showregistersuccessToast = false;
           this.refreshService.triggerRefreshNavbar();
           this.router.navigate(['']);
-        }, 5000);
+        }, 2000);
         // Optionally, navigate to another page on successful registration
 
       })
       .catch(error => {
         this.showregisterfailToast = true;
-        this.isAPILoading = false;
+        this.isRegisterAPILoading = false;
         setTimeout(() => {
           this.showregisterfailToast = false;
         }, 10000);
@@ -263,12 +286,12 @@ export class LoginComponent {
           }
         this.showloginsuccessToast = true;
         this.isAPILoading = false;
-        // Hide the toast after 5 seconds
+        // Hide the toast after 2 seconds
         setTimeout(() => {
           this.showloginsuccessToast = false;
           this.refreshService.triggerRefreshNavbar();
           this.router.navigate(['']);
-        }, 5000);
+        }, 2000);
         // Navigate to profile page
 
       } catch (error) {
@@ -401,5 +424,24 @@ export class LoginComponent {
           // Handle errors appropriately
       }
     }
+  }
+  hasMinLength(): boolean {
+    const password = this.registerForm.get('password')?.value;
+    return password && password.length >= 8;
+  }
+
+  hasUppercase(): boolean {
+    const password = this.registerForm.get('password')?.value;
+    return password && /[A-Z]/.test(password);
+  }
+
+  hasLowercase(): boolean {
+    const password = this.registerForm.get('password')?.value;
+    return password && /[a-z]/.test(password);
+  }
+
+  hasSymbol(): boolean {
+    const password = this.registerForm.get('password')?.value;
+    return password && /[@*$!#&]/.test(password);
   }
 }
