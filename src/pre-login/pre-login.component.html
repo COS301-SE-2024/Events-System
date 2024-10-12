@@ -42,11 +42,11 @@
     <div class=" justify-center space-x-4 mb-6 hidden sm:flex">
       <div class="mb-4">
         <p class="mb-4 text-center text-secondary">
-          Find out more about our <span class="cursor-pointer text-indigo-500 no-underline hover:text-indigo-500" routerLink="/privacy-policy">Privacy Policy</span>
+          Find out more about our <a class="cursor-pointer text-indigo-500 no-underline hover:text-indigo-500" (click)="navigateToPrivacyPolicy()">Privacy Policy</a>
         </p>
         <a href='/login' class="grid sm:w-96 w-64 cursor-pointer select-none rounded-md border border-accent hover:border-neutral bg-accent py-2 px-5 text-center ease-in duration-300 align-middle text-sm text-base-100 hover:bg-neutral hover:text-white shadow focus:text-secondary disabled:opacity-30 disabled:hover:border-primary disabled:hover:bg-primary disabled:hover:text-white">
           Get started
-        </a>
+        </a>`
       </div>
     </div>
   </div>
