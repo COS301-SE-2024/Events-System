@@ -63,7 +63,9 @@
                       <h2 class="card-title text-4xl flex items-center justify-center mb-6">Event details</h2>
                       <div class="flex lg:justify-evenly lg:flex-row flex-col">
                         <div>
-                            <p class="lg:text-4xl text-2xl"> <i class="fa-solid fa-user mr-2"></i> {{host.firstName}} {{host.lastName}} </p>
+                          <div class="tooltip" data-tip="Find out more about the host">
+                            <p class="lg:text-4xl text-2xl cursor-pointer underline" [routerLink]="['/searchProfile', event.hostId]"> <i class="fa-solid fa-user mr-2"  ></i>{{host.firstName}} {{host.lastName}} </p>
+                          </div>
                             <p class="lg:text-4xl text-2xl"><i class="fa-solid fa-location-pin mr-4"></i>{{event.location}}</p>
                         </div>
                         <div>
@@ -82,21 +84,28 @@
                 <div class="mt-28">
                     <h2 class="text-4xl flex items-center justify-center">Dietary accomodations</h2>
                     <div class="flex items-center justify-center mt-4">
-                      <button class="btn btn-outline btn-secondary" [disabled]="!isAccommodationAvailable('Vegetarian')">Vegetarian</button>
-                      <button class="btn btn-outline btn-secondary lg:ml-8" [disabled]="!isAccommodationAvailable('Vegan')">Vegan</button>
-                      <button class="btn btn-outline btn-secondary lg:ml-8" [disabled]="!isAccommodationAvailable('Halal')">Halal</button>
-                      <button class="btn btn-outline btn-secondary  lg:ml-8" [disabled]="!isAccommodationAvailable('Gluten-free')">Gluten-free</button>
+                      <button [ngClass]="{'border-primary': isAccommodationAvailable('Vegetarian'), 'border-secondary border-opacity-20': !isAccommodationAvailable('Vegetarian')}" class="border px-4 py-2 rounded cursor-default" [disabled]="!isAccommodationAvailable('Vegetarian')">Vegetarian</button>
+                      <button [ngClass]="{'border-primary': isAccommodationAvailable('Vegan'), 'border-secondary border-opacity-20': !isAccommodationAvailable('Vegan')}" class="border px-4 py-2 rounded lg:ml-8  cursor-default" [disabled]="!isAccommodationAvailable('Vegan')">Vegan</button>
+                      <button [ngClass]="{'border-primary': isAccommodationAvailable('Halal'), 'border-secondary border-opacity-20': !isAccommodationAvailable('Halal')}" class="border px-4 py-2 rounded lg:ml-8  cursor-default" [disabled]="!isAccommodationAvailable('Halal')">Halal</button>
+                      <button [ngClass]="{'border-primary': isAccommodationAvailable('Gluten-free'), 'border-secondary border-opacity-20': !isAccommodationAvailable('Gluten-free')}" class="border px-4 py-2 rounded lg:ml-8  cursor-default" [disabled]="!isAccommodationAvailable('Gluten-free')">Gluten-free</button>
                       </div>
                 </div>
 
 
-                <!-- Agenda -->
-                <div class="mt-28">
-                  <h2 class="text-4xl flex items-center justify-center">Tags</h2>
-                  <div class="flex items-center justify-center mt-4">
-                    <button *ngFor="let tag of event?.tags" class="btn btn-outline btn-base-100 lg:ml-8">{{tag}}</button>
+                <!-- Tags Section -->
+                <div class="mt-28 flex flex-col items-center">
+                  <div class="tooltip" data-tip="select a tag to find events with similar tags">
+                    <h2 class="text-4xl flex items-center justify-center">Tags</h2>
+                    <div class="flex items-center justify-center mt-4">
+                      <button *ngFor="let tag of event?.tags; let i = index" 
+                              [ngClass]="{'ml-8': i !== 0}" 
+                              class="border border-primary px-4 py-2 rounded cursor-pointer"
+                              [routerLink]="['/search']" 
+                              [queryParams]="{ tag: tag }">
+                        {{tag}}
+                      </button>
+                    </div>
                   </div>
-                
                 </div>
             
             <!-- Preperation details -->

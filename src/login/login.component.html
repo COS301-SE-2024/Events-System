@@ -79,7 +79,7 @@
 
               <div class="divider">or</div>
   
-              <button class="btn w-full mb-4 bg-base-100" (click)="signInWithGoogle()">
+              <button class="btn w-full mb-4 bg-base-100"  (click)="signInWithGoogle()">
                 <img
                 src="https://www.material-tailwind.com/logos/logo-google.png"
                 alt="google"
@@ -226,7 +226,7 @@
           <div class="-mt-12 w-full">
             <!-- Mobile sign up with google -->
             <div class="flex flex-col justify-center items-center">
-              <button class="btn lg:w-96 w-full mb-4  bg-base-100"  (click)="signInWithGoogle()">        
+              <button class="btn lg:w-96 w-full mb-4  bg-base-100"   onClick="my_modal_7.showModal()">        
                 <img src="https://www.material-tailwind.com/logos/logo-google.png"
                       alt="google"
                       class="h-6 w-6"
@@ -416,3 +416,21 @@
     </div>
 </dialog>
 
+<dialog id="my_modal_7" class="modal">
+  <div class="modal-box">
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+    </form>
+    <h3 class="text-lg font-medium">To allow your google calender to sync with your RSVP'd events, select this option</h3>
+    <img src="../assets/screenshots/Permissions.png" alt="">
+    <p class="mb-4 text-center">
+      Find out more in our <span class="cursor-pointer text-indigo-500 no-underline hover:text-indigo-500" routerLink="/privacy-policy">Privacy Policy</span>
+    </p>
+    <div class="text-right">
+      <button class="btn btn-accent mt-4"  (click)="signInWithGoogle()">I understand</button>
+    </div>
+  </div>
+  <form method="dialog" class="modal-backdrop">
+    <button>close</button>
+  </form>
+</dialog>

@@ -31,7 +31,7 @@ export class OauthComponent implements OnInit{
         const baseUrl = 'https://oauth2.googleapis.com/token';
         const clientId = 'client_id=' + environment.CLIENT_ID;
         const clientSecret = 'client_secret=' + environment.CLIENT_SECRET;
-        const redirectUri = 'redirect_uri=https%3A%2F%2Fevents-system.org%2Foauth';
+        const redirectUri = 'redirect_uri=http%3A%2F%2Flocalhost%3A4200%2Foauth';
         const grantType = 'grant_type=refresh_token';
         const fullUrl = `${clientId}&${clientSecret}&${grantType}&${redirectUri}&refresh_token=${refreshToken}`;
 
@@ -56,6 +56,9 @@ export class OauthComponent implements OnInit{
             })
             .then(info => info.json())
             .then(async info => {
+              if(!info.family_name){
+                info.family_name = " ";
+              }
               await fetch('https://events-system-back.wn.r.appspot.com/api/v1/auth/google', {
                 method: 'POST',
                 headers: {
@@ -90,6 +93,19 @@ export class OauthComponent implements OnInit{
                 document.cookie = `jwt=${authData.access_token}; path=/; expires=` + new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toUTCString();           // Expiry set to 24 hours
                 document.cookie = `refresh=${authData.refresh_token}; path=/; expires=` + new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000).toUTCString();  // Expiry set to 1 week
                 document.cookie = `google=${ACCESS_TOKEN}; path=/; expires=` + new Date(new Date().getTime() + 1 * 60 * 60 * 1000).toUTCString();  // Expiry set to 1 hour
+                              // Check for calendar permissions
+              const calendarResponse = await fetch(
+                'https://www.googleapis.com/calendar/v3/users/me/calendarList',
+                {
+                  method: 'GET',
+                  headers: {
+                    Authorization: `Bearer ${ACCESS_TOKEN}`,
+                    'Content-Type': 'application/json',
+                  },
+                }
+              );
+            
+              if (calendarResponse.ok) {
                 // Get the current UTC time in ISO 8601 format
                 const now = new Date().toISOString();
 
@@ -222,6 +238,12 @@ export class OauthComponent implements OnInit{
                   catch (error) {
                     // window.location.reload();
                     console.log(error);
+                    const employeeId = localStorage.getItem('ID');
+                    if (employeeId) {
+                      this.router.navigate(['']);
+                    } else {
+                      this.router.navigate(['/login']);
+                    }
                   }
                 })
                 .then(() => {
@@ -229,9 +251,14 @@ export class OauthComponent implements OnInit{
                   this.router.navigate(['']);
                 })
                 .catch((error) => {
-                  throw new Error(`API request failed: ${error}`);
+                  const employeeId = localStorage.getItem('ID');
+                  if (employeeId) {
+                    this.router.navigate(['']);
+                  } else {
+                    this.router.navigate(['/login']);
+                  }
                 })
-
+              }
               })
             })
           });
@@ -245,13 +272,19 @@ export class OauthComponent implements OnInit{
         catch (error) {
           // window.location.reload();
           console.log(error);
+          const employeeId = localStorage.getItem('ID');
+          if (employeeId) {
+            this.router.navigate(['']);
+          } else {
+            this.router.navigate(['/login']);
+          }
         }
       }
       else if (code) {
         const baseUrl = 'https://oauth2.googleapis.com/token';
         const clientId = 'client_id=' + environment.CLIENT_ID;
         const clientSecret = 'client_secret=' + environment.CLIENT_SECRET;
-        const redirectUri = 'redirect_uri=https%3A%2F%2Fevents-system.org%2Foauth';
+        const redirectUri = 'redirect_uri=http%3A%2F%2Flocalhost%3A4200%2Foauth';
         const grantType = 'grant_type=authorization_code';
         //const code = 'YOUR_AUTHORIZATION_CODE'; // replace with actual authorization code
         
@@ -278,6 +311,9 @@ export class OauthComponent implements OnInit{
           })
           .then(info => info.json())
           .then(async info => {
+            if(!info.family_name){
+              info.family_name = " ";
+            }
               // Include the refresh token in the body along with user info
               const requestBody = {
                   ...info, // Spread the user info object
@@ -320,7 +356,19 @@ export class OauthComponent implements OnInit{
                 document.cookie = `refresh=${authData.refresh_token}; path=/; expires=` + new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000).toUTCString();  // Expiry set to 1 week
                 document.cookie = `google=${ACCESS_TOKEN}; path=/; expires=` + new Date(new Date().getTime() + 1 * 60 * 60 * 1000).toUTCString();  // Expiry set to 1 hour
                 localStorage.setItem('googleRefresh', REFRESH_TOKEN);
-  
+              // Check for calendar permissions
+              const calendarResponse = await fetch(
+                'https://www.googleapis.com/calendar/v3/users/me/calendarList',
+                {
+                  method: 'GET',
+                  headers: {
+                    Authorization: `Bearer ${ACCESS_TOKEN}`,
+                    'Content-Type': 'application/json',
+                  },
+                }
+              );
+            
+              if (calendarResponse.ok) {
                 // Get the current UTC time in ISO 8601 format
                 const now = new Date().toISOString();
   
@@ -453,6 +501,12 @@ export class OauthComponent implements OnInit{
                   catch (error) {
                     // window.location.reload();
                     console.log(error);
+                    const employeeId = localStorage.getItem('ID');
+                    if (employeeId) {
+                      this.router.navigate(['']);
+                    } else {
+                      this.router.navigate(['/login']);
+                    }
                   }
                 })
                 .then(() => {
@@ -460,10 +514,17 @@ export class OauthComponent implements OnInit{
                   this.router.navigate(['']);
                 })
                 .catch((error) => {
-                  throw new Error(`API request failed: ${error}`);
+                  console.log(error);
+                  const employeeId = localStorage.getItem('ID');
+                  if (employeeId) {
+                    this.router.navigate(['']);
+                  } else {
+                    this.router.navigate(['/login']);
+                  }
                 })
-  
+              }
               })
+          
             })
           });
         
@@ -476,6 +537,12 @@ export class OauthComponent implements OnInit{
         catch (error) {
           // window.location.reload();
           console.log(error);
+          const employeeId = localStorage.getItem('ID');
+          if (employeeId) {
+            this.router.navigate(['']);
+          } else {
+            this.router.navigate(['/login']);
+          }
         }
         }
         else {

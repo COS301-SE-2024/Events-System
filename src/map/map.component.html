@@ -6,13 +6,30 @@
       <div class="absolute top-0 left-0 w-full p-4 flex items-center space-x-4 lg:justify-center justify-end">
         <label class="input input-bordered flex items-center gap-1 lg:w-96 z-[21]">
           <i class="fa fa-search" aria-hidden="true"></i>
-          <input type="text" class="grow" placeholder="Search for an event" (input)="onSearch($event)" />
+          <input type="text" class="grow" placeholder="Search for an event" (input)="onSearch($event)" (focus)="showSearchResults()" />
         </label>
         <label id="filter-button" for="my-drawer-4" class="btn btn-accent px-4 py-2 z-[500]" (click)="toggleFilter()">
           <i class="fa" [ngClass]="isFilterOpen ? 'fa-times' : 'fa-filter'" aria-hidden="true"></i>
         </label>
       </div>
       <div id="map" class="w-full h-screen"></div>
+      <!-- Search results section -->
+      <div *ngIf="showResults" @slideDown class="absolute top-16 left-[48.2%] transform -translate-x-1/2 w-96 rounded-lg p-4 bg-base-100 z-[21]">
+        <div class="flex justify-between items-center mb-2">
+          <span class="text-lg font-semibold">Search Results</span>
+          <button class="text-xl" (click)="closeSearchResults()">×</button>
+        </div>
+        <ul *ngIf="searchResults.length > 0; else noResults">
+          <li *ngFor="let result of searchResults" @fadeIn class="p-2 border-b border-accent cursor-pointer" (click)="focusOnEvent(result); closeSearchResults()">
+            <a >{{ result.title }}</a>
+          </li>
+        </ul>
+        <ng-template #noResults>
+          <div class="p-2 text-center text-gray-500">No results found</div>
+        </ng-template>
+      </div>
+      <!-- Backdrop to close the search results when clicking outside -->
+      <div *ngIf="showResults" class="fixed inset-0 bg-transparent z-[20]" (click)="closeSearchResults()"></div>
     </div>
     <app-map-card></app-map-card>
   </div>
@@ -36,4 +53,4 @@
       </ul>
     </div>
   </div>
-</div>
+</div>  

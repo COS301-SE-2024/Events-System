@@ -18,7 +18,9 @@ export class SearchProfileComponent implements OnInit {
   selectTab(tab: string) {
     this.selectedTab = tab;
   }
-
+  goBack(): void {
+    window.history.back();
+  }
   ngOnInit(): void {
     this.route.params.subscribe(params => {
     const storedEmployeeData1 = params['id'];

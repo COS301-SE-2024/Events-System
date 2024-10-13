@@ -44,17 +44,33 @@
     <p class="font-roboto text-primary"> <i class="fa-solid fa-user mr-2"></i> {{ hostedBy }}</p>
     <p class="font-roboto text-primary"><i class="fa-solid fa-location-pin mr-3"></i>{{ location }}</p>
     <p class="font-roboto text-primary"><i class="fa-regular fa-clock mr-2"></i> {{startTime }} - {{ endTime }} </p>
-    <p *ngIf="isSameDate()" class="font-roboto text-primary ">
+    <p *ngIf="isSameDate(); else differentDates" class="font-roboto text-primary ">
       <i class="fa-regular fa-calendar-days mr-3"></i>
-      {{startDate | date:'d MMM' }} - {{ endDate| date:'d MMM'  }}
+      {{startDate | date:'d MMM' }}
     </p>
+    <ng-template #differentDates>
+      <p class="font-roboto text-primary ">
+        <i class="fa-regular fa-calendar-days mr-3"></i>
+        {{startDate | date:'d MMM' }} - {{ endDate| date:'d MMM'  }}
+      </p>
+    </ng-template>
   </div>
   <div class="p-6 pt-0 flex justify-center items-center">
-    <button 
+    <button  *ngIf="loading"
+    [routerLink]="['/event', eventID]"
+    class="align-middle select-none font-roboto font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-neutral text-secondary shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
+    type="button" [ngClass]="{'bg-accent': isRecommended, 'bg-neutral': !isRecommended, 'text-secondary': !isRecommended, 'text-base-100': isRecommended}">Loading...
+  </button>
+    <button  *ngIf="!loading && !hasUserRSVPd"
       [routerLink]="['/event', eventID]"
       class="align-middle select-none font-roboto font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-neutral text-secondary shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
-      type="button" [ngClass]="{'bg-accent': isRecommended, 'bg-neutral': !isRecommended, 'text-secondary': !isRecommended, 'text-base-100': isRecommended}">
-      Book Now
+      type="button" [ngClass]="{'bg-accent': isRecommended, 'bg-neutral': !isRecommended, 'text-secondary': !isRecommended, 'text-base-100': isRecommended}">Book Now
     </button>
+
+    <button *ngIf="!loading && hasUserRSVPd"
+    [routerLink]="['/event', eventID]"
+    class="align-middle select-none font-roboto font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-base-100 text-secondary shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
+    type="button" [ngClass]="{'bg-accent': isRecommended, 'bg-neutral': !isRecommended, 'text-secondary': !isRecommended, 'text-base-100': isRecommended}">Cancel booking
+  </button>
   </div>
 </div>
