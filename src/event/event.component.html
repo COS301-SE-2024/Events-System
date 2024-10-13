@@ -82,13 +82,18 @@
                   </div>
                 <!-- dietary requirements -->
                 <div class="mt-28">
-                    <h2 class="text-4xl flex items-center justify-center">Dietary accomodations</h2>
+                    <h2 class="text-4xl flex items-center justify-center">Dietary accommodations</h2>
                     <div class="flex items-center justify-center mt-4">
-                      <button [ngClass]="{'border-primary': isAccommodationAvailable('Vegetarian'), 'border-secondary border-opacity-20': !isAccommodationAvailable('Vegetarian')}" class="border px-4 py-2 rounded cursor-default" [disabled]="!isAccommodationAvailable('Vegetarian')">Vegetarian</button>
-                      <button [ngClass]="{'border-primary': isAccommodationAvailable('Vegan'), 'border-secondary border-opacity-20': !isAccommodationAvailable('Vegan')}" class="border px-4 py-2 rounded lg:ml-8  cursor-default" [disabled]="!isAccommodationAvailable('Vegan')">Vegan</button>
-                      <button [ngClass]="{'border-primary': isAccommodationAvailable('Halal'), 'border-secondary border-opacity-20': !isAccommodationAvailable('Halal')}" class="border px-4 py-2 rounded lg:ml-8  cursor-default" [disabled]="!isAccommodationAvailable('Halal')">Halal</button>
-                      <button [ngClass]="{'border-primary': isAccommodationAvailable('Gluten-free'), 'border-secondary border-opacity-20': !isAccommodationAvailable('Gluten-free')}" class="border px-4 py-2 rounded lg:ml-8  cursor-default" [disabled]="!isAccommodationAvailable('Gluten-free')">Gluten-free</button>
-                      </div>
+                        <ng-container *ngIf="hasAccommodations(); else noAccommodations">
+                            <button *ngIf="isAccommodationAvailable('Vegetarian')" [ngClass]="{'border-primary': isAccommodationAvailable('Vegetarian'), 'border-secondary border-opacity-20': !isAccommodationAvailable('Vegetarian')}" class="border px-4 py-2 rounded cursor-default">Vegetarian</button>
+                            <button *ngIf="isAccommodationAvailable('Vegan')" [ngClass]="{'border-primary': isAccommodationAvailable('Vegan'), 'border-secondary border-opacity-20': !isAccommodationAvailable('Vegan')}" class="border px-4 py-2 rounded lg:ml-8 cursor-default">Vegan</button>
+                            <button *ngIf="isAccommodationAvailable('Halal')" [ngClass]="{'border-primary': isAccommodationAvailable('Halal'), 'border-secondary border-opacity-20': !isAccommodationAvailable('Halal')}" class="border px-4 py-2 rounded lg:ml-8 cursor-default">Halal</button>
+                            <button *ngIf="isAccommodationAvailable('Gluten-free')" [ngClass]="{'border-primary': isAccommodationAvailable('Gluten-free'), 'border-secondary border-opacity-20': !isAccommodationAvailable('Gluten-free')}" class="border px-4 py-2 rounded lg:ml-8 cursor-default">Gluten-free</button>
+                        </ng-container>
+                        <ng-template #noAccommodations>
+                            <p class="text-center text-secondary text-xl">No special accommodations</p>
+                        </ng-template>
+                    </div>
                 </div>
 
 
@@ -97,43 +102,62 @@
                   <div class="tooltip" data-tip="select a tag to find events with similar tags">
                     <h2 class="text-4xl flex items-center justify-center">Tags</h2>
                     <div class="flex items-center justify-center mt-4">
-                      <button *ngFor="let tag of event?.tags; let i = index" 
-                              [ngClass]="{'ml-8': i !== 0}" 
-                              class="border border-primary px-4 py-2 rounded cursor-pointer"
-                              [routerLink]="['/search']" 
-                              [queryParams]="{ tag: tag }">
-                        {{tag}}
-                      </button>
+                      <ng-container *ngIf="event?.tags?.length > 0; else noTags">
+                        <button *ngFor="let tag of event?.tags; let i = index" 
+                                [ngClass]="{'ml-8': i !== 0}" 
+                                class="border border-primary px-4 py-2 rounded cursor-pointer"
+                                [routerLink]="['/search']" 
+                                [queryParams]="{ tag: tag }">
+                          {{tag}}
+                        </button>
+                      </ng-container>
+                      <ng-template #noTags>
+                        <p class="text-center text-secondary text-xl">No tags listed</p>
+                      </ng-template>
                     </div>
                   </div>
                 </div>
-            
-            <!-- Preperation details -->
-                <div class="mt-28">
-                    <h2 class="text-4xl flex items-center justify-center">Preperation details</h2>
-                    <div class="flex items-center justify-center mt-6">
-                      <ul class="steps steps-vertical lg:steps-horizontal lg:text-3xl text-xl">
-                        <li class="step step-primary step-large" *ngFor="let preparation of event?.eventPreparation">{{preparation}}</li>
-                      </ul>
-                    </div>
-                </div>
+            <!-- Preparation details -->
+            <div class="mt-28">
+              <h2 class="text-4xl flex items-center justify-center">Preparation details</h2>
+              <div class="flex items-center justify-center mt-6">
+                <ng-container *ngIf="event?.eventPreparation?.length > 0; else noPreparationDetails">
+                  <ul class="steps steps-vertical lg:steps-horizontal lg:text-3xl text-xl">
+                    <ng-container *ngFor="let preparation of event?.eventPreparation">
+                      <li class="step step-primary step-large" *ngIf="preparation !== ''">{{preparation}}</li>
+                    </ng-container>
+                  </ul>
+                </ng-container>
+                <ng-template #noPreparationDetails>
+                  <p class="text-center text-secondary text-xl">No details listed</p>
+                </ng-template>
+              </div>
+            </div>
         
                 
                 <!-- Agenda -->
                 <div class="mt-28">
-                    <h2 class="text-4xl flex items-center justify-center">Agenda</h2>
-                    <div class="flex items-center justify-center mt-4">
+                  <h2 class="text-4xl flex items-center justify-center">Agenda</h2>
+                  <div class="flex items-center justify-center mt-4">
+                    <ng-container *ngIf="event?.eventAgendas?.length > 0; else noAgendaDetails">
                       <ul class="timeline timeline-vertical lg:text-3xl text-xl">
-                        <li *ngFor="let agenda of event?.eventAgendas; let i = index">
-                          <hr class="bg-primary"/>
-                          <div class="timeline-middle">
-                            <i class="fa-solid fa-check"></i>
-                          </div>
-                          <div [ngClass]="i % 2 === 0 ? 'timeline-start timeline-box' : 'timeline-end timeline-box'">{{agenda}}</div>
-                          <hr class="bg-primary"/>
-                        </li>
+                        <ng-container *ngFor="let agenda of event?.eventAgendas; let i = index">
+                          <li *ngIf="agenda !== ''">
+                            <hr class="bg-primary"/>
+                            <div class="timeline-middle">
+                              <i class="fa-solid fa-check"></i>
+                            </div>
+                            <div [ngClass]="i % 2 === 0 ? 'timeline-start timeline-box' : 'timeline-end timeline-box'">{{agenda}}</div>
+                            <hr class="bg-primary"/>
+                          </li>
+                        </ng-container>
                       </ul>
-                    </div>
+                    </ng-container>
+                    <ng-template #noAgendaDetails>
+                      <p class="text-center text-secondary text-xl">No agenda listed</p>
+                    </ng-template>
+                  </div>
+                </div>
 
         </div>
     

@@ -74,6 +74,7 @@ export class CreateEventComponent implements AfterViewInit, OnInit{
   isAPILoading = false;
   isNameEmpty = false;
   isDescriptionEmpty = false;
+  selectedSocialClub: string | null = null;
   generatedDescriptions: string[] = [];
   isstep2Empty = false;
   showsuccessToast = false;
@@ -297,6 +298,9 @@ presubmit(){
   if (!sessionStorage.getItem('StartTime') || sessionStorage.getItem('StartTime') === '') {
     missingDetails.push('Start time');
   }
+  if (!sessionStorage.getItem('SocialClub') || sessionStorage.getItem('SocialClub') === 'Select a social club') {
+    missingDetails.push('Social club');
+  }
   if (!sessionStorage.getItem('EndTime') || sessionStorage.getItem('EndTime') === '') {
     missingDetails.push('End time');
   }
@@ -493,13 +497,8 @@ saveTagsToSessionStorage() {
     }
   }
   nextStep2(){
-    console.log(this.StartTimeInput.nativeElement.value);
-    console.log(this.EndTimeInput.nativeElement.value);
-    console.log(this.StartDateInput.nativeElement.value);
-    console.log(this.EndDateInput.nativeElement.value);
-    console.log("location: " + this.LocationInput.nativeElement.value);
-    console.log(this.SocialClubInput.nativeElement.value);
-    if ( this.StartTimeInput.nativeElement.value === '' || this.EndTimeInput.nativeElement.value === '' || this.StartDateInput.nativeElement.value === '' || this.EndDateInput.nativeElement.value === '' || this.LocationInput.nativeElement.value === '' || this.SocialClubInput.nativeElement.value === '') {
+
+    if (this.StartTimeInput.nativeElement.value === '' || this.EndTimeInput.nativeElement.value === '' || this.StartDateInput.nativeElement.value === '' || this.EndDateInput.nativeElement.value === '' || this.LocationInput.nativeElement.value === '' || this.SocialClubInput.nativeElement.value === '') {
       this.isstep2Empty = true;
       return;
     }
@@ -522,6 +521,11 @@ saveTagsToSessionStorage() {
       sessionStorage.setItem(`EndDate`, enddateinput);
       sessionStorage.setItem(`Location`, locationinput);
       sessionStorage.setItem(`SocialClub`, socialclubinput);
+
+      if(sessionStorage.getItem('SocialClub') === 'Select a social club'){
+        this.isstep2Empty = true;
+        return;
+      }
       this.isstep2Empty = false;
 
       this.currentStep++;
@@ -765,6 +769,8 @@ saveTagsToSessionStorage() {
       this.isLoading = false;
     });
   }
-
+  onSocialClubChange(event: any): void {
+    this.selectedSocialClub = event.target.value;
+  }
   
 }

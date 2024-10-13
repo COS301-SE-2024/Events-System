@@ -150,6 +150,13 @@ export class EventComponent implements OnInit{
 
     return this.event?.eventDietaryAccommodations.includes(accommodation);
   }
+  hasAccommodations(): boolean {
+    return this.isAccommodationAvailable('Vegetarian') ||
+           this.isAccommodationAvailable('Vegan') ||
+           this.isAccommodationAvailable('Halal') ||
+           this.isAccommodationAvailable('Gluten-free');
+  }
+
   isAPILoading = false;
   showrsvpsuccessToast = false;
   showrsvpfailToast = false;
