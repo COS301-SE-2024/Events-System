@@ -4,7 +4,9 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -623,13 +625,24 @@ public class DialogflowService {
             if (queryResult.getIntent().getDisplayName().equals("Near Me")) {
                 double radiusKm = 30.0; // Define the radius in kilometers
                 List<EventWithDistance> nearbyEvents = eventService.getEventsNearUser(longitude, latitude, radiusKm);
-
+            
+                // Filter events to include only those that are current or happening in the future
+                LocalDateTime now = LocalDateTime.now();
+                List<EventWithDistance> currentOrFutureEvents = nearbyEvents.stream()
+                    .filter(eventWithDistance -> {
+                        Event event = eventWithDistance.getEvent();
+                        LocalDate eventDate = event.getStartDate().toLocalDate();
+                        LocalTime eventTime = event.getStartTime().toLocalTime();
+                        LocalDateTime eventDateTime = LocalDateTime.of(eventDate, eventTime);
+                        return eventDateTime.isAfter(now) || eventDateTime.isEqual(now);
+                    })
+                    .collect(Collectors.toList());
+            
                 // Format the response
                 StringBuilder eventsStringBuilder = new StringBuilder("Nearby events:\n");
-                for (EventWithDistance eventWithDistance : nearbyEvents) {
+                for (EventWithDistance eventWithDistance : currentOrFutureEvents) {
                     eventsStringBuilder.append(formatEventDetailswithDistance(eventWithDistance.getEvent(), eventWithDistance.getDistance())).append("\n");
                 }
-
                 return queryResult.getFulfillmentText() + "\n" + eventsStringBuilder.toString();
             }
     
