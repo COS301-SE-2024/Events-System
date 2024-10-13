@@ -421,13 +421,18 @@
     <form method="dialog">
       <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
     </form>
-    <h3 class="text-lg font-medium">To allow your google calender to sync with your RSVP'd events, select this option</h3>
+    <h3 class="text-lg font-medium">To allow your google calendar to sync with your RSVP'd events, select this option</h3>
     <img src="../assets/screenshots/Permissions.png" alt="">
     <p class="mb-4 text-center">
       Find out more in our <span class="cursor-pointer text-indigo-500 no-underline hover:text-indigo-500" routerLink="/privacy-policy">Privacy Policy</span>
     </p>
+
+    <div class="flex items-center">
+      <input class="checkbox checkbox-accent" type="checkbox" id="dontShowAgain" (change)="toggleDontShowAgain($event)">
+      <label for="dontShowAgain" class="label-text text-accent ml-4">Don't show again</label>
+    </div>
     <div class="text-right">
-      <button class="btn btn-accent mt-4"  (click)="signInWithGoogle()">I understand</button>
+      <button class="btn btn-accent mt-4" (click)="signInWithGoogle()">I understand</button>
     </div>
   </div>
   <form method="dialog" class="modal-backdrop">

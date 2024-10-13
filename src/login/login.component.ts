@@ -308,6 +308,20 @@ export class LoginComponent implements OnInit, AfterViewInit{
   }
 
   async signInWithGoogle() {
+    const dontShowModal7 = localStorage.getItem('dontShowModal7') === 'true';
+    if (dontShowModal7) {
+      this.redirectToGoogleAuth();
+    } else {
+      const modal = document.getElementById('my_modal_7') as HTMLDialogElement;
+      if (modal) {
+        modal.showModal();
+      }
+    }
+  }
+
+
+
+  redirectToGoogleAuth() {
     let fullUrl = ``;
     const baseUrl = 'https://accounts.google.com/o/oauth2/auth/oauthchooseaccount';
     const responseType = 'response_type=code';
@@ -444,4 +458,11 @@ export class LoginComponent implements OnInit, AfterViewInit{
     const password = this.registerForm.get('password')?.value;
     return password && /[@*$!#&]/.test(password);
   }
+
+  toggleDontShowAgain(event: Event): void {
+    const checkbox = event.target as HTMLInputElement;
+    localStorage.setItem('dontShowModal7', checkbox.checked ? 'true' : 'false');
+  }
+
+
 }
