@@ -92,7 +92,6 @@ export class LeaderboardComponent implements OnInit {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       this.users = await response.json();
-      console.log('Employees:', this.users);
     } catch (error) {
       console.error('There was a problem with the fetch operation:', error);
     }
@@ -112,7 +111,6 @@ export class LeaderboardComponent implements OnInit {
       }
       const text = await response.text();
       this.events = text ? JSON.parse(text) : [];
-      console.log('Events:', this.events);
     } catch (error) {
       console.error('There was a problem with the fetch operation:', error);
     }
@@ -131,7 +129,6 @@ export class LeaderboardComponent implements OnInit {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       this.rsvps = await response.json();
-      console.log('RSVPs:', this.rsvps);
     } catch (error) {
       console.error('There was a problem with the fetch operation:', error);
     }
@@ -148,7 +145,6 @@ export class LeaderboardComponent implements OnInit {
       }
     });
 
-    console.log('Hosting Count:', hostingCount);
 
     // Filter out users who aren't hosts (i.e., user.role !== 'MANAGER')
     this.hostUsers = this.users.filter(user => user.role === 'MANAGER');
@@ -161,13 +157,9 @@ export class LeaderboardComponent implements OnInit {
     this.hostUsers.sort((a, b) => b.eventsHosted - a.eventsHosted);
 
     const topEventsHosted = this.hostUsers.length > 0 ? this.hostUsers[0].eventsHosted : 0;
-    console.log('Top Events Hosted:', topEventsHosted);
     this.hostUsers.forEach(user => {
       user.Hostdiff = topEventsHosted - user.eventsHosted;
-      console.log('User:', user.firstName, 'User.diff:', user.Hostdiff, 'Top Events Hosted:', topEventsHosted, 'User.eventsHosted:', user.eventsHosted);
     });
-
-    console.log('Host Users:', this.hostUsers);
   }
 
   calculateEventRSVPs() {
@@ -183,7 +175,6 @@ export class LeaderboardComponent implements OnInit {
       }
     });
 
-    console.log('RSVP Count:', rsvpCount);
 
     this.attendUsers = [...this.users]; // Copy the users array
 
@@ -195,12 +186,10 @@ export class LeaderboardComponent implements OnInit {
     this.attendUsers.sort((a, b) => b.eventsAttended - a.eventsAttended);
 
     const topEventsAttended = this.attendUsers.length > 0 ? this.attendUsers[0].eventsAttended : 0;
-    console.log('Top Events Attended:', topEventsAttended);
     this.attendUsers.forEach(user => {
       user.Attenddiff = topEventsAttended - user.eventsAttended;
     });
 
-    console.log('Attend Users:', this.attendUsers);
   }
 
   getInitials(firstName: string, lastName: string): string {

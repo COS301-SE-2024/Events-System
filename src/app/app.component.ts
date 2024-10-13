@@ -85,7 +85,7 @@ export class AppComponent implements OnInit{
 
   get isSpecialRoute() {
     const url = this.router.url.split('?')[0]; // Extract base path
-    console.log(url);
+    // console.log(url);
     return /\/(login|privacy-policy|home|reset-password)/.test(url);
   }
   ngOnInit() {
@@ -108,7 +108,6 @@ export class AppComponent implements OnInit{
     // Apply the theme based on localStorage
     this.isDarkTheme = localStorage.getItem('theme') === 'dark';
     this.applyTheme();
-    this.splashScreen.hideSplashScreen();
 
   }
 
@@ -139,12 +138,7 @@ export class AppComponent implements OnInit{
     this.notificationService.notify();
   }
 
-  closeDrawer() {
-    const drawerCheckbox = document.getElementById('my-drawer-2') as HTMLInputElement;
-    if (drawerCheckbox) {
-      drawerCheckbox.checked = false;
-    }
-  }
+
 
   toggleDrawer() {
     this.isDrawerThin = !this.isDrawerThin;
@@ -316,6 +310,13 @@ export class AppComponent implements OnInit{
       document.body.classList.add('dark-theme');
     } else {
       document.body.classList.remove('dark-theme');
+    }
+  }
+
+    closeDrawer() {
+    const drawerCheckbox = document.getElementById('my-drawer-2') as HTMLInputElement;
+    if (drawerCheckbox) {
+      drawerCheckbox.checked = false;
     }
   }
 }

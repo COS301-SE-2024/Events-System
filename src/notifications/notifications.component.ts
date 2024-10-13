@@ -12,9 +12,7 @@ import { RouterModule, Router } from '@angular/router';
 export class NotificationsComponent implements OnInit {
   notifications = [
 
-    {notificationId: 1, message: 'Notification Title 1', eventTitle: 'This is the description for notification 1.', eventId: "ID 1", read: false, seriesTitle: 'Series Title 1', seriesId: "ID 1" },
-    {notificationId: 2, message: 'Notification Title 2', eventTitle: 'This is the description for notification 2.', eventId: "ID 2", read: false, seriesTitle: 'Series Title 1', seriesId: "ID 1"  },
-    {notificationId: 3, message: 'Notification Title 3', eventTitle: 'This is the description for notification 3.', eventId: "ID 3", read: false, seriesTitle: 'Series Title 1', seriesId: "ID 1"  },
+    {notificationId: 1, message: '', eventTitle: '', eventId: "", read: false, seriesTitle: '', seriesId: "" },
   ];
 
   selectedNotification: any = null;
