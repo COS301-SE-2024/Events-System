@@ -31,7 +31,7 @@ export class OauthComponent implements OnInit{
         const baseUrl = 'https://oauth2.googleapis.com/token';
         const clientId = 'client_id=' + environment.CLIENT_ID;
         const clientSecret = 'client_secret=' + environment.CLIENT_SECRET;
-        const redirectUri = 'redirect_uri=http%3A%2F%2Flocalhost%3A4200%2Foauth';
+        const redirectUri = 'redirect_uri=https%3A%2F%2Fevents-system.org%2Foauth';
         const grantType = 'grant_type=refresh_token';
         const fullUrl = `${clientId}&${clientSecret}&${grantType}&${redirectUri}&refresh_token=${refreshToken}`;
 
@@ -284,7 +284,7 @@ export class OauthComponent implements OnInit{
         const baseUrl = 'https://oauth2.googleapis.com/token';
         const clientId = 'client_id=' + environment.CLIENT_ID;
         const clientSecret = 'client_secret=' + environment.CLIENT_SECRET;
-        const redirectUri = 'redirect_uri=http%3A%2F%2Flocalhost%3A4200%2Foauth';
+        const redirectUri = 'redirect_uri=https%3A%2F%2Fevents-system.org%2Foauth';
         const grantType = 'grant_type=authorization_code';
         //const code = 'YOUR_AUTHORIZATION_CODE'; // replace with actual authorization code
         
