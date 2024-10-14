@@ -90,23 +90,20 @@
                       <button [ngClass]="{'border-primary': isAccommodationAvailable('Gluten-free'), 'border-secondary border-opacity-20': !isAccommodationAvailable('Gluten-free')}" class="border px-4 py-2 rounded lg:ml-8  cursor-default" [disabled]="!isAccommodationAvailable('Gluten-free')">Gluten-free</button>
                       </div>
                 </div>
-
-
-                <!-- Tags Section -->
-                <div class="mt-28 flex flex-col items-center">
-                  <div class="tooltip" data-tip="select a tag to find events with similar tags">
-                    <h2 class="text-4xl flex items-center justify-center">Tags</h2>
-                    <div class="flex items-center justify-center mt-4">
-                      <button *ngFor="let tag of event?.tags; let i = index" 
-                              [ngClass]="{'ml-8': i !== 0}" 
-                              class="border border-primary px-4 py-2 rounded cursor-pointer"
-                              [routerLink]="['/search']" 
-                              [queryParams]="{ tag: tag }">
-                        {{tag}}
-                      </button>
-                    </div>
+              <!-- Tags Section -->
+              <div class="mt-28 flex flex-col items-center">
+                <div class="tooltip" data-tip="select a tag to find events with similar tags">
+                  <h2 class="text-4xl flex items-center justify-center">Tags</h2>
+                  <div class="grid grid-cols-2 gap-4 mt-4">
+                    <button *ngFor="let tag of event?.tags; let i = index" 
+                            class="border border-primary px-4 py-2 rounded cursor-pointer"
+                            [routerLink]="['/search']" 
+                            [queryParams]="{ tag: tag }">
+                      {{tag}}
+                    </button>
                   </div>
                 </div>
+              </div>
             
             <!-- Preperation details -->
                 <div class="mt-28">
