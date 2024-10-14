@@ -161,7 +161,7 @@
 
         </div>
     
-        <div class="map mt-8 rounded-lg" *ngIf="isAPILoaded">
+        <div class="map mt-8 rounded-lg" *ngIf="isMapReady && isAPILoaded">
           <google-map height="24rem" width="100%" [options]="mapOptions">
             <map-marker [position]="markerPosition"></map-marker>
           </google-map>

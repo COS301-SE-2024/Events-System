@@ -358,9 +358,10 @@ export class LoginComponent implements OnInit, AfterViewInit{
       if (response.ok) {
           // Successfully logged out
           localStorage.removeItem('ID');
+          localStorage.removeItem('googleRefresh');
+          localStorage.removeItem('googleSignIn');
           document.cookie = `jwt=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
           document.cookie = `refresh=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-          window.location.href = '/login'; // Redirect to login page or show logout success message
       }
       else {
         window.location.href = '/home';
