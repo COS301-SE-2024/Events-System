@@ -1,7 +1,7 @@
 <div class="drawer lg:drawer-open drawer-end"  [ngClass]="{'blur-lg transition duration-1000': showRecommended}">
   <input id="my-drawer-3" type="checkbox" class="drawer-toggle" #drawerToggle />
   <div class="drawer-content flex flex-col justify-center">
-    <label for="my-drawer-3" class="btn btn-primary font-roboto drawer-button lg:hidden w-full">Filter</label>
+    <label for="my-drawer-3" class="btn btn-primary font-roboto drawer-button lg:hidden w-full" >Filter</label>
 
     <div class="hidden sm:block h-56 w-56 text-indigo-300 absolute a-z-10 -left-20 top-24">
       <svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><defs><pattern id='a' patternUnits='userSpaceOnUse' width='40' height='40' patternTransform='scale(0.6) rotate(0)'><rect x='0' y='0' width='100%' height='100%' fill='none'/><path d='M11 6a5 5 0 01-5 5 5 5 0 01-5-5 5 5 0 015-5 5 5 0 015 5'  stroke-width='1' stroke='none' fill='currentColor'/></pattern></defs><rect width='800%' height='800%' transform='translate(0,0)' fill='url(#a)'/></svg>
@@ -16,8 +16,8 @@
       <svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><defs><pattern id='a' patternUnits='userSpaceOnUse' width='40' height='40' patternTransform='scale(0.6) rotate(0)'><rect x='0' y='0' width='100%' height='100%' fill='none'/><path d='M11 6a5 5 0 01-5 5 5 5 0 01-5-5 5 5 0 015-5 5 5 0 015 5'  stroke-width='1' stroke='none' fill='currentColor'/></pattern></defs><rect width='800%' height='800%' transform='translate(0,0)' fill='url(#a)'/></svg>
      </div>
 
-    <div class="flex justify-center items-center">
-      <div #eventContainer class="lg:mb-96 mt-2 mb-80 w-11/12 h-96 grid md:grid-cols-3 lg:grid-cols-4 grid-cols-1 lg:gap-6 lg:ml-0 md:ml-0 ml-16 gap-y-12">
+    <div class="flex justify-center items-center" id="event-container">
+      <div #eventContainer  class="lg:mb-96 mt-2 mb-80 w-11/12 h-96 grid md:grid-cols-3 lg:grid-cols-4 grid-cols-1 lg:gap-6 lg:ml-0 md:ml-0 ml-16 gap-y-12">
         <div *ngIf="isLoading; else content">
           <div class="lg:mb-96 mt-2 mb-80 lg:ml-16 w-11/12 h-96 grid lg:grid-cols-4 grid-cols-1 gap-x-80 gap-y-12">
             <app-ghost-event-card></app-ghost-event-card>
@@ -49,7 +49,7 @@
       </div>
     </div>
   </div>
-  <div class="drawer-side h-full hide-scrollbar">
+  <div class="drawer-side h-full hide-scrollbar" id="filters">
     <label for="my-drawer-3" aria-label="close sidebar" class="drawer-overlay"></label>
     <ul class="menu h-full p-4 w-80 bg-base-200 text-base-content">
       <!-- Sidebar content here -->
@@ -140,7 +140,7 @@
   </div>
 </div>
 <!-- Recommended Events Overlay -->
-<div *ngIf="showRecommended" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+<div *ngIf="showRecommended"  class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
   <div class="p-4 md:p-8 rounded-lg w-full h-full md:w-auto md:h-auto overflow-y-auto md:overflow-visible">
     <h2 class="text-2xl font-bold mb-4">Recommended Events</h2>
     <div class="flex flex-col md:flex-row gap-4 overflow-y-auto md:overflow-y-visible max-h-full md:max-h-full items-center justify-center">
@@ -188,7 +188,7 @@
 
   </div>
 </div>
-<button *ngIf="!showClearButton"   class="fixed bottom-4 right-4 bg-accent font-bold py-2 px-4 rounded-full shadow-lg hover:bg-primary transition-all duration-300 ease-in text-white" 
+<button *ngIf="!showClearButton"   id="Recommended-events" class="fixed bottom-4 right-4 bg-accent font-bold py-2 px-4 rounded-full shadow-lg hover:bg-primary transition-all duration-300 ease-in text-white" 
   
 [disabled]="showClearButton" 
   (click)="highlightRecommendedEvents()">

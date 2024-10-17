@@ -19,9 +19,18 @@ describe('SettingsComponent', () => {
             params: of({ id: 'testId' })
           }
         }
-      ]
+      ],
+      componentProperties: {
+        employeeData: {
+          firstName: 'John',
+          lastName: 'Doe',
+          email: 'john.doe@example.com',
+          twitter: '@johndoe',
+          linkedin: 'linkedin.com/in/johndoe',
+          github: 'github.com/johndoe'
+        }
+      }
     });
-    
   });
 
   afterEach(() => {
@@ -67,11 +76,11 @@ describe('SettingsComponent', () => {
   });
 
   it('should update the social media links inputs correctly', async () => {
-    const emailInput = screen.getByPlaceholderText(/E-mail/i);
+    const emailInput = screen.getByPlaceholderText(/Email/i);
     fireEvent.input(emailInput, { target: { value: 'john.doe@example.com' } });
     expect(emailInput).toHaveValue('john.doe@example.com');
 
-    const xInput = screen.getByPlaceholderText(/Twitter/i);
+    const xInput = screen.getByPlaceholderText(/X/i);
     fireEvent.input(xInput, { target: { value: '@johndoe' } });
     expect(xInput).toHaveValue('@johndoe');
 
@@ -89,6 +98,4 @@ describe('SettingsComponent', () => {
     fireEvent.click(saveChangesButton);
     expect(saveChangesSpy).toHaveBeenCalled();
   });
-
-
 });

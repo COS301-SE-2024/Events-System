@@ -22,8 +22,14 @@
                   (click)="fileInput.click()"
                 >
                   <div class="w-full rounded-full relative">
-                    <img alt="Avatar" [src]="employeeData?.employeePictureLink || 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg'" style="width: 100%; height: 100%;">
-                    <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-full">
+                    <ng-container *ngIf="employeeData?.employeePictureLink; else initialsPlaceholder">
+                      <img alt="Avatar" [src]="employeeData?.employeePictureLink" style="width: 100%; height: 100%;">
+                    </ng-container>
+                    <ng-template #initialsPlaceholder>
+                      <div class="flex items-center justify-center bg-base-100 text-secondary rounded-full" style="width: 100%; height: 100%; font-size: 3rem;">
+                        {{ getInitials() }}
+                      </div>
+                    </ng-template>                    <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-full">
                       <i class="fas fa-pencil-alt text-white text-xl"></i>
                     </div>
                   </div>
@@ -33,6 +39,7 @@
                   #fileInput
                   class="hidden"
                   (change)="onAvatarChange($event)"
+                  accept="image/*"
                 >
               </div>
               <!-- Centering the button -->
@@ -52,7 +59,8 @@
               <input
                 type="text"
                 #nameInput
-                [placeholder]="employeeData?.firstName || 'Name'"
+                [(ngModel)]="employeeData.firstName"
+                placeholder="Name"
                 class="input input-bordered w-full mb-2"
                 (input)="name = nameInput.value"
               /> 
@@ -64,7 +72,8 @@
               <input
                 type="text"
                 #surnameInput
-                [placeholder]="employeeData?.lastName || 'Surname'"
+                [(ngModel)]="employeeData.lastName"
+                placeholder="Surname"
                 class="input input-bordered w-full mb-2"
                 (input)="surname = surnameInput.value"
               >
@@ -75,7 +84,8 @@
               <h3 class="text-xl mb-2">Bio</h3>
               <textarea
                 #descriptionInput
-                [placeholder]="employeeData?.employeeDescription || 'Bio'"
+                [(ngModel)]="employeeData.employeeDescription"
+                placeholder="Bio"
                 class="textarea textarea-bordered w-full mb-2"
                 (input)="description = descriptionInput.value"
               ></textarea>
@@ -92,7 +102,8 @@
               <input
                 type="email"
                 #emailInput
-                [placeholder]="employeeData?.email || 'E-mail'"
+                [(ngModel)]="employeeData.email"
+                placeholder="Email"
                 class="input input-bordered w-full mb-2"
                 (input)="email = emailInput.value"
               >
@@ -102,7 +113,8 @@
               <input
                 type="text"
                 #xInput
-                [placeholder]="employeeData?.twitter || 'Twitter'"
+                [(ngModel)]="employeeData.twitter"
+                placeholder="X"
                 class="input input-bordered w-full mb-2"
                 (input)="x = xInput.value"
               >
@@ -112,7 +124,8 @@
               <input
                 type="text"
                 #linkedInInput
-                [placeholder]="employeeData?.linkedin || 'LinkedIn'"
+                [(ngModel)]="employeeData.linkedin"
+                placeholder="LinkedIn"
                 class="input input-bordered w-full mb-2"
                 (input)="linkedIn = linkedInInput.value"
               >
@@ -122,7 +135,8 @@
               <input
                 type="text"
                 #gitHubInput
-                [placeholder]="employeeData?.github || 'Github'"
+                [(ngModel)]="employeeData.github"
+                placeholder="Github"
                 class="input input-bordered w-full mb-4"
                 (input)="gitHub = gitHubInput.value"
               >

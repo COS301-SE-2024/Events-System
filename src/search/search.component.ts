@@ -64,7 +64,12 @@ export class SearchComponent {
         })
         .then(text => {
           const data = text ? JSON.parse(text) : [];
-          this.events = Array.isArray(data) ? data : [data];
+          const events = Array.isArray(data) ? data : [data];
+          const currentDate = new Date();
+          this.events = events.filter(event => {
+            const eventEndDate = new Date(`${event.endDate}T${event.endTime}`);
+            return eventEndDate >= currentDate;
+          });
         }),
       fetch('https://events-system-back.wn.r.appspot.com/api/employees')
         .then(response => {

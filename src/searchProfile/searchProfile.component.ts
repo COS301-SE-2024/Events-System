@@ -2,18 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import {AttendedEventCardComponent} from 'src/Components/AttendedEventCard/attendedEventCard.component'
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-search-profile',
   standalone: true,
   imports: [CommonModule, AttendedEventCardComponent],
   templateUrl: './searchProfile.component.html',
-  styleUrl: './searchProfile.component.css',
+  styleUrl: './searchProfile.component.css'
 })
 export class SearchProfileComponent implements OnInit {
   selectedTab = 'about';
   employeeData: any; // Define employeeData property
   events: any[] = [];
+  showAlert = false; // Add this property
+
   constructor(private route: ActivatedRoute) {}
   selectTab(tab: string) {
     this.selectedTab = tab;
@@ -85,6 +88,24 @@ export class SearchProfileComponent implements OnInit {
         console.log('User analytics logged successfully');
       } catch (error) {
         console.error('Error logging user analytics:', error);
+      }
+    }
+    emailCopied = false;
+
+    copyEmail(): void {
+      if (this.employeeData?.email) {
+        navigator.clipboard.writeText(this.employeeData.email).then(() => {
+          this.emailCopied = true;
+          this.showAlert = true; // Show the alert
+
+          setTimeout(() => {
+            this.emailCopied = false;
+            this.showAlert = false; // Hide the alert after 2 seconds
+
+          }, 2000); // Reset the icon after 2 seconds
+        }).catch(err => {
+          console.error('Could not copy text: ', err);
+        });
       }
     }
 }

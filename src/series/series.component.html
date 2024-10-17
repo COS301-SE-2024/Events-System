@@ -8,7 +8,7 @@
                 <h2 class="skeleton mt-4 text-4xl lg:ml-64 text-secondary lg:h-8 h-24 lg:w-[700px] w-80"></h2>
             </div>
             <div>
-                <div class="card bg-base-100 shadow-xl lg:mt-4 mt-32">
+                <div class="card bg-base-100 shadow-xl lg:mt-4 mt-32" id="host">
                     <div class="card-body">
                       <h2 class="card-title skeleton lg:h-8 h-14 w-64 -ml-2"></h2>
                       <p class="skeleton lg:h-8 h-24 lg:w-[200px] w-80-ml-4"></p>
@@ -22,7 +22,10 @@
             </div>
 
         </div>
-        
+        <div class="flex justify-center align-middle mt-24" id="subscribe">
+          <div class=" skeleton w-11/12 h-52"  id="event-host-name">
+          </div>
+        </div>
     </div> 
         <!-- actual content -->
         <div *ngIf="!isLoading && series"x>
@@ -40,7 +43,7 @@
                         <h2 class="mt-4 font-roboto text-4xl lg:ml-64 text-secondary">{{series.description}}</h2>
                     </div>
                     <div>
-                        <div class="card bg-base-100 shadow-xl lg:mt-4 mt-32">
+                        <div class="card bg-base-100 shadow-xl lg:mt-4 mt-32" id="host">
                             <div class="card-body">
                                 <div *ngIf="series.host">
                                     <h2 class="card-title font-roboto">Managed by: {{series.host.firstName}} {{series.host.lastName}}</h2>
@@ -59,7 +62,7 @@
 
                 <!-- event details -->
                  
-                <div class="card bg-base-100 shadow-xl mt-4">
+                <div class="card bg-base-100 shadow-xl mt-4" id="subscribe">
                     <div class="card-body">
                       <h2 class="card-title font-karla text-4xl flex items-center justify-center mb-6">Subscribe Now!</h2>
                       <!-- <div class="flex lg:justify-evenly lg:flex-row flex-col">
@@ -80,7 +83,7 @@
                     </div>
                   </div>
             <!-- Preperation details -->
-            <div class="mt-28">
+            <div class="mt-28" id="events">
                 <h2 class="font-karla font-medium text-4xl flex items-center justify-center">Series events</h2>
                 <div class="flex items-center justify-center mt-6">
                     <div class="flex justify-center items-center">

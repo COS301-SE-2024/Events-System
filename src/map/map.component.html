@@ -4,11 +4,11 @@
     <!-- Page content here -->
     <div class="relative">
       <div class="absolute top-0 left-0 w-full p-4 flex items-center space-x-4 lg:justify-center justify-end">
-        <label class="input input-bordered flex items-center gap-1 lg:w-96 z-[21]">
+        <label class="input input-bordered flex items-center gap-1 lg:w-96 z-[21]" id="search">
           <i class="fa fa-search" aria-hidden="true"></i>
           <input type="text" class="grow" placeholder="Search for an event" (input)="onSearch($event)" (focus)="showSearchResults()" />
         </label>
-        <label id="filter-button" for="my-drawer-4" class="btn btn-accent px-4 py-2 z-[500]" (click)="toggleFilter()">
+        <label id="filter-button" for="my-drawer-4" class="btn btn-accent px-4 py-2 z-[500]" (click)="toggleFilter()" id="filter">
           <i class="fa" [ngClass]="isFilterOpen ? 'fa-times' : 'fa-filter'" aria-hidden="true"></i>
         </label>
       </div>

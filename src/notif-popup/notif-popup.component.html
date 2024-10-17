@@ -2,27 +2,45 @@
   <div class="popover-content bg-neutral shadow-xl rounded-lg w-64 p-3 absolute top-0 right-0 mt-4 mr-4 z-50">
     <div class="flex justify-between items-center mb-2">
       <h3 class="text-lg text-primary font-bold">Notifications</h3>
-      <button (click)="navigateAndClosePopup()" class="btn btn-neutral btn-sm hover:border-accent">Show all</button>
+      <button (click)="navigateAndClosePopup()" class="btn btn-neutral btn-sm hover:border-accent" [disabled]="notifications.length === 0">Show all</button>
     </div>
     <div class="notification-list space-y-2">
-      <div *ngFor="let notification of notifications" 
-           class="card p-2 mb-2 shadow-xl"
-           [ngClass]="{
-             'bg-gray-200': notification.read, 
-             'bg-base-200': !notification.read, 
-             'border-l-4 border-accent': !notification.read, 
-             'border-none': notification.read
-           }"
-           >
-        <div class="flex justify-between items-center">
-          <div class="flex items-center">
-            <span class="material-icons mr-2 text-info" [ngClass]="{'text-gray-400': notification.read, 'text-info': !notification.read}">
-              notifications
-            </span>
-            <div>
-              <h3 class="text-md font-bold" [ngClass]="{'text-gray-500': notification.read, 'text-base-content': !notification.read}">
-                {{ notification.eventId ? notification.eventTitle : notification.seriesTitle }} {{ notification.message }}
-              </h3>
+      <!-- Skeleton Loader -->
+      <div *ngIf="loading">
+        <div *ngFor="let i of [1, 2, 3]" class="card p-2 mb-2 shadow-xl bg-base-200 skeleton">
+          <div class="flex justify-between items-center">
+            <div class="flex items-center">
+              <span class="material-icons mr-2 text-gray-300">notifications</span>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- No Notifications Indicator -->
+      <div *ngIf="!loading && notifications.length === 0" class="text-center text-gray-500">
+        No notifications available.
+      </div>
+      <!-- Notification Items -->
+      <div *ngIf="!loading && notifications.length > 0">
+        <div *ngFor="let notification of notifications" 
+             class="card p-2 mb-2 shadow-xl"
+             [ngClass]="{
+               'bg-gray-200': notification.read, 
+               'bg-base-200': !notification.read, 
+               'border-l-4 border-accent': !notification.read, 
+               'border-none': notification.read
+             }"
+             >
+          <div class="flex justify-between items-center">
+            <div class="flex items-center">
+              <span class="material-icons mr-2 text-info" [ngClass]="{'text-gray-400': notification.read, 'text-info': !notification.read}">
+                notifications
+              </span>
+              <div>
+                <h3 class="text-md font-bold" [ngClass]="{'text-gray-500': notification.read, 'text-base-content': !notification.read}">
+                  {{ notification.eventId ? notification.eventTitle : notification.seriesTitle }} {{ notification.message }}
+                </h3>
+              </div>
             </div>
           </div>
         </div>

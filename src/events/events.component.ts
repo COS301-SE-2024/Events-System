@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { EventComponent } from 'src/Components/event/event.component';
 import { EventCardComponent } from 'src/Components/EventCard/eventCard.component';
 import { GhostEventCardComponent } from 'src/Components/GhostEventCard/GhostEventCard.component';
+import { EventsTourService } from './Eventstour.service';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-events',
   standalone: true,
@@ -49,6 +51,8 @@ export class EventsComponent implements OnInit{
   recommendedEventIds: string[] = [];
   showClearButton = false;
   showSuggestButton = false; // New property
+  reloaded = false;
+  constructor(private eventsTourService: EventsTourService, private route: ActivatedRoute) {} // Inject the EventsTourService
 
   onSubmit() {
     const dateInput = (<HTMLInputElement>document.getElementById('date-input')).value;
@@ -59,6 +63,23 @@ export class EventsComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      if (params['startTour'] === 'true') {
+        if (!sessionStorage.getItem('tourReloaded')) {
+          sessionStorage.setItem('tourReloaded', 'true');
+          window.location.reload();
+        } else {
+          sessionStorage.removeItem('tourReloaded');
+          this.startTour();
+        
+          // Remove 'startTour' from query params
+        const url = new URL(window.location.href);
+        url.searchParams.delete('startTour');
+        window.history.replaceState({}, '', url.toString());
+        }
+      }
+    });
+
     fetch('https://events-system-back.wn.r.appspot.com/api/events')
       .then(response => {
         return response.json();
@@ -72,7 +93,12 @@ export class EventsComponent implements OnInit{
           eventDate.setHours(0, 0, 0, 0); // Set the time to the start of the day
           return eventDate >= now;
         });
-  
+
+        // Store the eventID of the first event in sessionStorage
+        if (this.events.length > 0) {
+          sessionStorage.setItem('firstEventID', this.events[0].eventId);
+        }
+
         this.uniqueSocialClubs = [...new Set(this.events.map(event => event.socialClub))];
         this.otherCheckboxes = new Array(this.uniqueSocialClubs.length).fill(false);
         this.filterEvents();
@@ -244,5 +270,9 @@ export class EventsComponent implements OnInit{
     this.filterEvents();
     this.showRecommended = false; // Hide the recommended events overlay
     this.showClearButton = false; // Hide the "X" button
+  }
+
+  startTour(){
+    this.eventsTourService.startTour();
   }
 }

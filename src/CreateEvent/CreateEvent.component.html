@@ -24,11 +24,11 @@
         <h1 class="lg:text-6xl text-4xl text-center font-karla">Name your event</h1>
         <div class="tooltip tooltip-open tooltip-error mb-4"  [class.hidden]="!isNameEmpty" data-tip="please enter a Title">
         </div>
-          <input #nameInput type="text" placeholder="Type here" class="input input-bordered w-full max-w-xl text-lg h-12 mt-8 font-roboto" required/>
+          <input #nameInput type="text" placeholder="Type here" id="name-event" class="input input-bordered w-full max-w-xl text-lg h-12 mt-8 font-roboto" required/>
 
           <div class="flex justify-between mt-4">
           <button class="btn btn-outline btn-warning font-roboto" [disabled]="currentStep === 0">Back</button>
-          <button (click)="nextStep()" class="btn btn-success font-roboto">Next</button>
+          <button (click)="nextStep()" class="btn btn-success font-roboto" id="next1">Next</button>
         </div>
        
       </div>
@@ -44,10 +44,10 @@
               [class.hidden]="!isDescriptionEmpty" data-tip="Please enter a Description">
             </div>
             <textarea #descriptionInput class="textarea textarea-bordered w-full h-44 mt-4 font-roboto"
-              placeholder="Description" required></textarea>
+              placeholder="Description" id="description" required></textarea>
           </div>
           <div class="tooltip mt-12" data-tip="Generate Descriptions based on the provided title">
-            <button (click)="suggestDescriptions()" class="btn btn-outline btn-accent ml-2 w-96">
+            <button (click)="suggestDescriptions()" class="btn btn-outline btn-accent ml-2 w-96 " id="suggest">
               <ng-container *ngIf="!isLoading; else loading">
                 <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
               </ng-container>
@@ -70,7 +70,7 @@
         </div>
         <div class="flex justify-between mt-4 w-full">
           <button (click)="previousStep()" class="btn btn-outline btn-warning font-roboto"
-            [disabled]="currentStep === 0">Back</button>
+            [disabled]="currentStep === 0" id="Back">Back</button>
           <button (click)="nextStep1()" class="btn btn-success font-roboto">Next</button>
         </div>
       </div>
@@ -129,7 +129,7 @@
 
         <div class="flex justify-evenly lg:flex-row flex-col lg:ml-[0.8rem]">
           <!-- Add this input field for location -->
-          <div>
+          <div id="location-field">
             <div class="label mt-4 lg:-ml-4  flex justify-center" htmlFor="location">
               <span class="label-text font-roboto">Location</span>
             </div>
@@ -142,8 +142,9 @@
               <span class="label-text font-roboto">Social club</span>
             </div>
             <select  #SocialClubInput placeholder="Social club" class="select select-bordered w-96 max-w-md lg:ml-16 font-roboto">
-              <option disabled selected>Select a social club</option>
-              <option *ngFor="let club of uniqueSocialClubs">{{ club.name }}</option>   
+              <option disabled selected *ngIf="isSocialClubsLoading"><span class="loading loading-spinner loading-sm"></span></option>
+              <option disabled selected *ngIf="!isSocialClubsLoading">Select a social club</option>
+              <option *ngFor="let club of socialClubs">{{ club.name }}</option>   
             </select>
           </div>
 
@@ -307,7 +308,7 @@
             </div>
             <select disabled #SocialClubInput placeholder="Social club" class="select select-bordered w-96 max-w-md lg:ml-16 font-roboto">
               <option disabled selected>Select a social club</option>
-              <option *ngFor="let club of uniqueSocialClubs">{{ club.name }}</option>
+              <option *ngFor="let club of socialClubs">{{ club.name }}</option>
             </select>
           </div>
 

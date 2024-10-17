@@ -5,7 +5,8 @@ import { RandomHeaderService } from '../app/random-header.service';
 import { RouterModule } from '@angular/router';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { GoogleMapsLoaderService } from 'src/app/google-maps-loader.service';
-import { GoogleMapsModule } from '@angular/google-maps'
+import { GoogleMapsModule } from '@angular/google-maps';
+import { EventTourService } from './Eventtour.service';
 @Component({
   selector: 'app-event',
   standalone: true,
@@ -52,13 +53,19 @@ export class EventComponent implements OnInit{
   latitude: number | undefined;
   longitude: number | undefined;
   isAPILoaded = false;
-  constructor(private route: ActivatedRoute, private randomHeaderService: RandomHeaderService, private googleMapsLoader: GoogleMapsLoaderService, private ngZone: NgZone) { 
+  constructor(private route: ActivatedRoute, private randomHeaderService: RandomHeaderService, private googleMapsLoader: GoogleMapsLoaderService, private ngZone: NgZone, private eventTour: EventTourService) { 
     this.imageSource = '';
   }
   goBack(): void {
     window.history.back();
   }
   ngOnInit(): void {
+      this.route.queryParams.subscribe(params => {
+      if (params['startTour'] === 'true') {
+          this.startTour();
+        }
+    });
+    
     this.imageSource = this.randomHeaderService.getRandomHeaderSource();
     this.route.params.subscribe(async params => {
       this.eventId = params['id'];
@@ -412,4 +419,7 @@ export class EventComponent implements OnInit{
     }
   }
   
+  startTour(){
+    this.eventTour.startTour();
+  }
 }

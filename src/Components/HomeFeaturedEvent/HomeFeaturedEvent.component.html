@@ -4,11 +4,11 @@
   class="hero h-80 lg:w-[93%] rounded-xl"
   [style.background-image]="'url(' + imageSource + ')'"
    >
-  <div class="hero-overlay bg-opacity-80  rounded-xl"></div>
-  <div class="hero-content text-neutral-content text-center">
+  <div class=" bg-gradient-to-t from-black/100 via-black/80 to-black/20 rounded-xl hero-overlay"></div>
+  <div class="hero-content text-center">
     <div class="max-w-md">
-      <h1 class="mb-5 text-5xl font-poppins font-bold   mix-blend-screen">{{ eventTitle }}</h1>
-      <p class="mb-5 mix-blend-screen text-slate-400 line-clamp-3">{{ eventDescription }}</p>
+      <h1 class="mb-5 text-5xl font-poppins font-bold text-white">{{ eventTitle }}</h1>
+      <p class="mb-5 text-secondary opacity-90 line-clamp-3">{{ eventDescription }}</p>
                     <form action="">
           <div class="card-actions justify-center">
             <button [routerLink]="['/event', eventID]" type="submit" class="btn btn-accent">               

@@ -85,4 +85,8 @@ export class MyscheduleCardComponent implements OnInit{
   isDietaryAccommodationSelected(accommodation: string): boolean {
     return this.eventDietaryAccommodations?.includes(accommodation);
   }
+  isAccommodationAvailable(accommodation: string): boolean {
+
+    return this.eventDietaryAccommodations?.includes(accommodation);
+  }
 }

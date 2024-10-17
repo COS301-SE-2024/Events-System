@@ -21,7 +21,7 @@
           <!-- Email -->
             <div class="mb-4">
               <div class="label" htmlFor="email">
-                <span class="label-text text-secondary">Email</span>
+                <span class="label-text opacity-80">Email</span>
               </div>            
             <input 
               type="email" 
@@ -43,8 +43,8 @@
           <!-- Password -->
             <div class="mb-4">
               <div class="label" htmlFor="password">
-                <span class="label-text text-secondary">Password</span>
-                <span class="label-text-alt text-accent cursor-pointer hover:underline"  onclick="my_modal_2.showModal()" >Forgot Password</span>
+                <span class="label-text opacity-80">Password</span>
+                <span class="label-text-alt opacity-70 cursor-pointer underline"  onclick="my_modal_2.showModal()" >Forgot Password</span>
               </div>
               <div class="relative inline-flex w-full max-w-md  transition duration-300 ease-in">
               <input 
@@ -323,7 +323,7 @@
                   <!-- Indicators -->
                   <div class="mt-2 transition duration-300 ease-in">
                     <div class="transition duration-300 ease-in" [class.text-red-500]="!hasMinLength()" [class.text-green-500]="hasMinLength()" [class.line-through]="hasMinLength()">
-                      At least 8 characters
+                      8 - 20 characters
                     </div>
                     <div class="transition duration-300 ease-in" [class.text-red-500]="!hasUppercase()" [class.text-green-500]="hasUppercase()" [class.line-through]="hasUppercase()">
                       One Uppercase letter
@@ -332,7 +332,7 @@
                       One Lowercase letter
                     </div>
                     <div class="transition duration-300 ease-in" [class.text-red-500]="!hasSymbol()" [class.text-green-500]="hasSymbol()" [class.line-through]="hasSymbol()">
-                      One symbol from &#64;, *, $, !, #, &
+                      ONLY symbols from &#64;, *, $, !, #, &
                     </div>
                   </div>
                   </div>

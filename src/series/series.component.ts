@@ -6,7 +6,7 @@ import { RandomHeaderService } from '../app/random-header.service';
 import { EventCardComponent } from 'src/Components/EventCard/eventCard.component';
 import { GhostEventCardComponent } from 'src/Components/GhostEventCard/GhostEventCard.component';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-
+import { SeriesTourService } from './seriesTour.service';
 @Component({
   selector: 'app-series',
   standalone: true,
@@ -48,11 +48,16 @@ export class SeriesComponent implements OnInit {
   goBack(): void {
     window.history.back();
   }
-  constructor(private route: ActivatedRoute, private randomHeaderService: RandomHeaderService) {
+  constructor(private route: ActivatedRoute, private randomHeaderService: RandomHeaderService, private seriesTour: SeriesTourService) {
     this.imageSource = '';
   }
   ngOnInit(): void {
     this.imageSource = this.randomHeaderService.getRandomHeaderSource();
+    this.route.queryParams.subscribe(params => {
+      if (params['startTour'] === 'true') {
+          this.startTour();
+        }
+    });
     this.route.params.subscribe(async params => {
       this.seriesID = params['id'];
       await this.checkUserRSVP();
@@ -221,5 +226,7 @@ export class SeriesComponent implements OnInit {
     }
     this.hasUserRSVPd = !this.hasUserRSVPd; // Toggle the RSVP state
   }
-
+  startTour(){
+    this.seriesTour.startTour();
+  }
 }

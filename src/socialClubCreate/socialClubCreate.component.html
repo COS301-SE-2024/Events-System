@@ -21,10 +21,10 @@
             <div class="flex justify-center items-center">
                 <div *ngSwitchCase="1" class="mt-8" [@fadeInOut]>
                   <h1 class="lg:text-6xl text-4xl text-center font-karla">Name your club</h1>
-                    <input #nameInput type="text" formControlName="name" placeholder="Type club name..." class="input input-bordered w-full max-w-xl h-12 mt-8 font-roboto" required/>
+                    <input #nameInput type="text" formControlName="name" id="name-input" placeholder="Type club name..." class="input input-bordered w-full max-w-xl h-12 mt-8 font-roboto" required/>
                     <div class="flex justify-between mt-4">
                         <button (click)="previousStep()" class="btn btn-outline btn-warning font-roboto" [disabled]="currentStep === 1">Back</button>
-                        <button (click)="nextStep1()" class="btn btn-success font-roboto" type="submit">Next</button>
+                        <button (click)="nextStep1()" class="btn btn-success font-roboto" type="submit" id="next1">Next</button>
                     </div>
                 </div>
               </div>
@@ -34,9 +34,9 @@
                       <p class="text-center mt-7">Club description & Category</p>
                       <div class="flex flex-col items-center justify-center">
                           <!-- <div class="tooltip tooltip-open tooltip-error lg:ml-8 ml-4 -mb-4" data-tip="please enter a Description"></div> -->
-                          <textarea #summarydescriptionInput formControlName="summaryDescription" class="textarea textarea-bordered w-64 md:w-full h-20 mt-2" placeholder="Summary" required></textarea>     
+                          <textarea #summarydescriptionInput id="summary" formControlName="summaryDescription" class="textarea textarea-bordered w-64 md:w-full h-20 mt-2" placeholder="Summary" required></textarea>     
                           <div class="tooltip mt-12" data-tip="Get suggestions for summary descriptions based on your club name">
-                            <button (click)="suggestSummaryDescriptions()" class="btn btn-outline btn-accent ml-2 w-96">
+                            <button (click)="suggestSummaryDescriptions()" class="btn btn-outline btn-accent ml-2 w-96" id="suggest">
                               <ng-container *ngIf="!isLoading; else loading">
                                 <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
                               </ng-container>
