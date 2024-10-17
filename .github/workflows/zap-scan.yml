@@ -32,12 +32,13 @@ jobs:
       - name: Wait for Web Application to start
         run: sleep 10  # Adjust the time based on how long your app takes to start
 
-      # Run OWASP ZAP Baseline Scan
+      # Run OWASP ZAP Baseline Scan with Authorization header for JWT
       - name: Run OWASP ZAP Baseline Scan
         uses: zaproxy/action-baseline@v0.13.0
         with:
           target: 'https://events-system-back.wn.r.appspot.com'  # Adjust the URL to match your app's host and port
           fail_action: true   # Fail the job if any high-risk alerts are found
+          cmd_options: '-config api.addrs.addr.name=https://events-system-back.wn.r.appspot.com -config api.addrs.addr.regex=false -config spider.headers.addHeader="Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJncmVhdHNhZ2VAZ21haWwuY29tIiwiaWF0IjoxNzI5MTg2ODE1LCJleHAiOjE3MjkyNzMyMTV9.0wW137vf1vnj6Obdkh2JVBLzn31aRh2RPa7ZYprjG-I"'  # Adding the Authorization header for JWT
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
