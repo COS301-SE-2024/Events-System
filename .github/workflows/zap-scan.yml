@@ -22,6 +22,7 @@ jobs:
 
       # Start the web application (assumes a Node.js application; modify as needed)
       - name: Start Web Application
+        shell: bash
         run: |
           npm install  # Ensure dependencies are installed
           npm start  # Start the app in the background
