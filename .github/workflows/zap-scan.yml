@@ -44,13 +44,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Rename reports after the scan
-      - name: Rename ZAP Reports
-        run: |
-          mv zap_report.html zap_report.html
-          mv report_json.json report_json.json
-          mv report_md.md report_md.md
-
       # Stop the web application after the scan (use the appropriate command for your application)
       - name: Stop Web Application
         run: |
