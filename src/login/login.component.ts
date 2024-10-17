@@ -308,6 +308,20 @@ export class LoginComponent implements OnInit, AfterViewInit{
   }
 
   async signInWithGoogle() {
+    const dontShowModal7 = localStorage.getItem('dontShowModal7') === 'true';
+    if (dontShowModal7) {
+      this.redirectToGoogleAuth();
+    } else {
+      const modal = document.getElementById('my_modal_7') as HTMLDialogElement;
+      if (modal) {
+        modal.showModal();
+      }
+    }
+  }
+
+
+
+  redirectToGoogleAuth() {
     let fullUrl = ``;
     const baseUrl = 'https://accounts.google.com/o/oauth2/auth/oauthchooseaccount';
     const responseType = 'response_type=code';
@@ -344,9 +358,10 @@ export class LoginComponent implements OnInit, AfterViewInit{
       if (response.ok) {
           // Successfully logged out
           localStorage.removeItem('ID');
+          localStorage.removeItem('googleRefresh');
+          localStorage.removeItem('googleSignIn');
           document.cookie = `jwt=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
           document.cookie = `refresh=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-          window.location.href = '/login'; // Redirect to login page or show logout success message
       }
       else {
         window.location.href = '/home';
@@ -444,4 +459,11 @@ export class LoginComponent implements OnInit, AfterViewInit{
     const password = this.registerForm.get('password')?.value;
     return password && /[@*$!#&]/.test(password);
   }
+
+  toggleDontShowAgain(event: Event): void {
+    const checkbox = event.target as HTMLInputElement;
+    localStorage.setItem('dontShowModal7', checkbox.checked ? 'true' : 'false');
+  }
+
+
 }

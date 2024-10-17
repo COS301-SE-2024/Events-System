@@ -121,10 +121,12 @@ export class EventsComponent implements OnInit{
               return response.json();
             })
             .then(data => {
-              // Store the social club data in a property of the component
-              this.socialClubs.push(data);
-              this.uniqueSocialClubs = [...new Set(this.socialClubs.map(club => club))];
-              this.otherCheckboxes = new Array(this.uniqueSocialClubs.length).fill(false);
+              if (data) { // Check if data is not null
+                // Store the social club data in a property of the component
+                this.socialClubs.push(data);
+                this.uniqueSocialClubs = [...new Set(this.socialClubs.map(club => club))];
+                this.otherCheckboxes = new Array(this.uniqueSocialClubs.length).fill(false);
+              }
             });
         });
   

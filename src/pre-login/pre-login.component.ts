@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-pre-login',
   standalone: true,
@@ -9,6 +11,11 @@ import { environment } from 'src/environments/environment';
   styleUrl: './pre-login.component.css',
 })
 export class PreLoginComponent {
+  constructor(private router: Router) {}
+
+  navigateToPrivacyPolicy(): void {
+    this.router.navigate(['/privacy-policy']);
+  }
   async signInWithGoogle() {
     let fullUrl = ``;
     const baseUrl = 'https://accounts.google.com/o/oauth2/auth/oauthchooseaccount';

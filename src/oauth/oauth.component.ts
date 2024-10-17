@@ -28,6 +28,7 @@ export class OauthComponent implements OnInit{
       const refreshToken = localStorage.getItem('googleRefresh');
 
       if (code && refreshToken && localStorage.getItem('googleRefresh') !== "undefined") {
+        console.log("case 1");
         const baseUrl = 'https://oauth2.googleapis.com/token';
         const clientId = 'client_id=' + environment.CLIENT_ID;
         const clientSecret = 'client_secret=' + environment.CLIENT_SECRET;
@@ -94,18 +95,11 @@ export class OauthComponent implements OnInit{
                 document.cookie = `refresh=${authData.refresh_token}; path=/; expires=` + new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000).toUTCString();  // Expiry set to 1 week
                 document.cookie = `google=${ACCESS_TOKEN}; path=/; expires=` + new Date(new Date().getTime() + 1 * 60 * 60 * 1000).toUTCString();  // Expiry set to 1 hour
                               // Check for calendar permissions
-              const calendarResponse = await fetch(
-                'https://www.googleapis.com/calendar/v3/users/me/calendarList',
-                {
-                  method: 'GET',
-                  headers: {
-                    Authorization: `Bearer ${ACCESS_TOKEN}`,
-                    'Content-Type': 'application/json',
-                  },
-                }
-              );
+                const hasCalendarPermissions = await this.checkCalendarPermissions(ACCESS_TOKEN);
             
-              if (calendarResponse.ok) {
+              if (hasCalendarPermissions) {
+                console.log("calender accept");
+
                 // Get the current UTC time in ISO 8601 format
                 const now = new Date().toISOString();
 
@@ -258,6 +252,10 @@ export class OauthComponent implements OnInit{
                     this.router.navigate(['/login']);
                   }
                 })
+              }else{
+                console.log("calender not accept");
+                this.refreshService.triggerRefreshNavbar();
+                this.router.navigate(['']);
               }
               })
             })
@@ -281,6 +279,8 @@ export class OauthComponent implements OnInit{
         }
       }
       else if (code) {
+        console.log("case 2");
+
         const baseUrl = 'https://oauth2.googleapis.com/token';
         const clientId = 'client_id=' + environment.CLIENT_ID;
         const clientSecret = 'client_secret=' + environment.CLIENT_SECRET;
@@ -356,19 +356,11 @@ export class OauthComponent implements OnInit{
                 document.cookie = `refresh=${authData.refresh_token}; path=/; expires=` + new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000).toUTCString();  // Expiry set to 1 week
                 document.cookie = `google=${ACCESS_TOKEN}; path=/; expires=` + new Date(new Date().getTime() + 1 * 60 * 60 * 1000).toUTCString();  // Expiry set to 1 hour
                 localStorage.setItem('googleRefresh', REFRESH_TOKEN);
-              // Check for calendar permissions
-              const calendarResponse = await fetch(
-                'https://www.googleapis.com/calendar/v3/users/me/calendarList',
-                {
-                  method: 'GET',
-                  headers: {
-                    Authorization: `Bearer ${ACCESS_TOKEN}`,
-                    'Content-Type': 'application/json',
-                  },
-                }
-              );
+                // Check for calendar permissions
+                const hasCalendarPermissions = await this.checkCalendarPermissions(ACCESS_TOKEN);
             
-              if (calendarResponse.ok) {
+              if (hasCalendarPermissions) {
+                console.log("calender accept");
                 // Get the current UTC time in ISO 8601 format
                 const now = new Date().toISOString();
   
@@ -522,6 +514,10 @@ export class OauthComponent implements OnInit{
                     this.router.navigate(['/login']);
                   }
                 })
+              }else{
+                console.log("calender not accept");
+                this.refreshService.triggerRefreshNavbar();
+                this.router.navigate(['']);
               }
               })
           
@@ -549,5 +545,17 @@ export class OauthComponent implements OnInit{
         this.router.navigate(["/login"]);
       }
     });
+  }
+
+  
+  private async checkCalendarPermissions(accessToken: string): Promise<boolean> {
+    try {
+      const response = await fetch(`https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`);
+      const data = await response.json();
+      return data.scope.includes('https://www.googleapis.com/auth/calendar');
+    } catch (error) {
+      console.error('Error checking calendar permissions:', error);
+      return false;
+    }
   }
 }

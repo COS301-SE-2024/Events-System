@@ -40,6 +40,7 @@ export class EventComponent implements OnInit{
   isLoading = true;
   hasUserRSVPd = false;
   googleSignIn = false;
+  isMapReady = false; // Add this flag
   club: any = null;
   mapOptions: google.maps.MapOptions = {
     center: { lat: -25.7552742, lng: 28.2337029 },
@@ -59,44 +60,31 @@ export class EventComponent implements OnInit{
     window.history.back();
   }
   ngOnInit(): void {
-    // this.route.queryParams.subscribe(params => {
-    //   if (params['startTour'] === 'true') {
-    //     if (!sessionStorage.getItem('tourReloaded')) {
-    //       sessionStorage.setItem('tourReloaded', 'true');
-    //       window.location.reload();
-    //     } else {
-    //       sessionStorage.removeItem('tourReloaded');
-    //       this.startTour();
-    //     }
-    //   }
-    // });
-    this.route.queryParams.subscribe(params => {
+      this.route.queryParams.subscribe(params => {
       if (params['startTour'] === 'true') {
           this.startTour();
         }
     });
-
-      this.imageSource = this.randomHeaderService.getRandomHeaderSource();
-      this.route.params.subscribe(async params => { // Step 1: Make this an async function
-        this.eventId = params['id'];
     
-        await this.checkUserRSVP();
-        await this.fetchEventDetails();
-      });
+    this.imageSource = this.randomHeaderService.getRandomHeaderSource();
+    this.route.params.subscribe(async params => {
+      this.eventId = params['id'];
   
-    this.googleSignIn = Boolean(localStorage.getItem('googleSignIn'));
-    
-      setTimeout(() => {
+      await this.checkUserRSVP();
+      await this.fetchEventDetails();
+  
+      if (this.isMapReady) {
         this.googleMapsLoader.load().then(() => {
           this.isAPILoaded = true;
         }).catch(error => {
           console.error('Error loading Google Maps API:', error);
         });
-      }, 100);
-      this.logUserAnalytics("view_event: " + this.eventId);
-
-
-    }
+      }
+    });
+  
+    this.googleSignIn = Boolean(localStorage.getItem('googleSignIn'));
+    this.logUserAnalytics("view_event: " + this.eventId);
+  }
   
   async fetchEventDetails(): Promise<void> {
     try {
@@ -112,6 +100,8 @@ export class EventComponent implements OnInit{
       this.latitude = lat;
       this.longitude = lng;
       this.updateMapCenter();
+      this.isMapReady = true; // Set the flag to true after coordinates are available
+
     }
 
       const hostResponse = await fetch('https://events-system-back.wn.r.appspot.com/api/employees/' + this.event.hostId);
@@ -168,6 +158,13 @@ export class EventComponent implements OnInit{
 
     return this.event?.eventDietaryAccommodations.includes(accommodation);
   }
+  hasAccommodations(): boolean {
+    return this.isAccommodationAvailable('Vegetarian') ||
+           this.isAccommodationAvailable('Vegan') ||
+           this.isAccommodationAvailable('Halal') ||
+           this.isAccommodationAvailable('Gluten-free');
+  }
+
   isAPILoading = false;
   showrsvpsuccessToast = false;
   showrsvpfailToast = false;
