@@ -15,14 +15,22 @@ export class TourService {
     prevBtnText: '←',
     onPopoverRender: (popover, { config, state }) => {
         if (this.driverObj.isFirstStep()) { // Check if the current step is the first one
-  
+          
           // Add the "Don't show again" button
           const dontShowAgainButton = document.createElement('button');
           dontShowAgainButton.innerText = "Don't show again";
           dontShowAgainButton.className = 'dont-show-again-btn';
-          popover.previousButton.remove();
+          
+          // Remove the "next" button
+          const nextButton = popover.nextButton;
+          nextButton.remove();
+          
+          // Append the "Don't show again" button first
           popover.footerButtons.appendChild(dontShowAgainButton);
-  
+          
+          // Append the "next" button after the "Don't show again" button
+          popover.footerButtons.appendChild(nextButton);
+          
           dontShowAgainButton.addEventListener('click', () => {
             this.dontShowAgain();
             this.driverObj.destroy();
@@ -33,8 +41,15 @@ export class TourService {
                       // Add the "Don't show again" button
           const eventtourbutton = document.createElement('button');
           eventtourbutton.innerText = "take the tour";
-          eventtourbutton.className = 'dont-show-again-btn';
+          // Remove the "next" button
+          const nextButton = popover.nextButton;
+          nextButton.remove();
+          
+          // Append the "Don't show again" button first
           popover.footerButtons.appendChild(eventtourbutton);
+          
+          // Append the "next" button after the "Don't show again" button
+          popover.footerButtons.appendChild(nextButton);
   
           eventtourbutton.addEventListener('click', () => {
             this.openEventsTour();
@@ -44,8 +59,15 @@ export class TourService {
           // Add the "Don't show again" button
         const eventtourbutton = document.createElement('button');
         eventtourbutton.innerText = "take the tour";
-        eventtourbutton.className = 'dont-show-again-btn';
-        popover.footerButtons.appendChild(eventtourbutton);
+          // Remove the "next" button
+          const nextButton = popover.nextButton;
+          nextButton.remove();
+          
+          // Append the "Don't show again" button first
+          popover.footerButtons.appendChild(eventtourbutton);
+          
+          // Append the "next" button after the "Don't show again" button
+          popover.footerButtons.appendChild(nextButton);
 
         eventtourbutton.addEventListener('click', () => {
         this.openSocialClubsTour();
@@ -55,8 +77,15 @@ export class TourService {
           // Add the "Don't show again" button
         const eventtourbutton = document.createElement('button');
         eventtourbutton.innerText = "take the tour";
-        eventtourbutton.className = 'dont-show-again-btn';
-        popover.footerButtons.appendChild(eventtourbutton);
+          // Remove the "next" button
+          const nextButton = popover.nextButton;
+          nextButton.remove();
+          
+          // Append the "Don't show again" button first
+          popover.footerButtons.appendChild(eventtourbutton);
+          
+          // Append the "next" button after the "Don't show again" button
+          popover.footerButtons.appendChild(nextButton);
 
         eventtourbutton.addEventListener('click', () => {
         this.openSeriesTour();
@@ -66,58 +95,97 @@ export class TourService {
           // Add the "Don't show again" button
         const eventtourbutton = document.createElement('button');
         eventtourbutton.innerText = "take the tour";
-        eventtourbutton.className = 'dont-show-again-btn';
-        popover.footerButtons.appendChild(eventtourbutton);
+          // Remove the "next" button
+          const nextButton = popover.nextButton;
+          nextButton.remove();
+          
+          // Append the "Don't show again" button first
+          popover.footerButtons.appendChild(eventtourbutton);
+          
+          // Append the "next" button after the "Don't show again" button
+          popover.footerButtons.appendChild(nextButton);
 
         eventtourbutton.addEventListener('click', () => {
         this.openMapTour();
         });
         }
 
-        if(this.driverObj.getActiveIndex() === 14){
-          // Add the "Don't show again" button
-        const eventtourbutton = document.createElement('button');
-        eventtourbutton.innerText = "take the tour";
-        eventtourbutton.className = 'dont-show-again-btn';
-        popover.footerButtons.appendChild(eventtourbutton);
+        // if(this.driverObj.getActiveIndex() === 14){
+        //   // Add the "Don't show again" button
+        // const eventtourbutton = document.createElement('button');
+        // eventtourbutton.innerText = "take the tour";
+        // eventtourbutton.className = 'dont-show-again-btn';
+        //   // Remove the "next" button
+        //   const nextButton = popover.nextButton;
+        //   nextButton.remove();
+          
+        //   // Append the "Don't show again" button first
+        //   popover.footerButtons.appendChild(eventtourbutton);
+          
+        //   // Append the "next" button after the "Don't show again" button
+        //   popover.footerButtons.appendChild(nextButton);
 
-        eventtourbutton.addEventListener('click', () => {
-        this.openMyEventsTour();
-        });
-        }
-        if(this.driverObj.getActiveIndex() === 15){
-          // Add the "Don't show again" button
-        const eventtourbutton = document.createElement('button');
-        eventtourbutton.innerText = "take the tour";
-        eventtourbutton.className = 'dont-show-again-btn';
-        popover.footerButtons.appendChild(eventtourbutton);
+        // eventtourbutton.addEventListener('click', () => {
+        // this.openMyEventsTour();
+        // });
+        // }
+        // if(this.driverObj.getActiveIndex() === 15){
+        //   // Add the "Don't show again" button
+        // const eventtourbutton = document.createElement('button');
+        // eventtourbutton.innerText = "take the tour";
+        // eventtourbutton.className = 'dont-show-again-btn';
+        //   // Remove the "next" button
+        //   const nextButton = popover.nextButton;
+        //   nextButton.remove();
+          
+        //   // Append the "Don't show again" button first
+        //   popover.footerButtons.appendChild(eventtourbutton);
+          
+        //   // Append the "next" button after the "Don't show again" button
+        //   popover.footerButtons.appendChild(nextButton);
 
-        eventtourbutton.addEventListener('click', () => {
-        this.openMySocialClubsTour();
-        });
-        }
-        if(this.driverObj.getActiveIndex() === 16){
-          // Add the "Don't show again" button
-        const eventtourbutton = document.createElement('button');
-        eventtourbutton.innerText = "take the tour";
-        eventtourbutton.className = 'dont-show-again-btn';
-        popover.footerButtons.appendChild(eventtourbutton);
+        // eventtourbutton.addEventListener('click', () => {
+        // this.openMySocialClubsTour();
+        // });
+        // }
+        // if(this.driverObj.getActiveIndex() === 16){
+        //   // Add the "Don't show again" button
+        // const eventtourbutton = document.createElement('button');
+        // eventtourbutton.innerText = "take the tour";
+        // eventtourbutton.className = 'dont-show-again-btn';
+        //   // Remove the "next" button
+        //   const nextButton = popover.nextButton;
+        //   nextButton.remove();
+          
+        //   // Append the "Don't show again" button first
+        //   popover.footerButtons.appendChild(eventtourbutton);
+          
+        //   // Append the "next" button after the "Don't show again" button
+        //   popover.footerButtons.appendChild(nextButton);
 
-        eventtourbutton.addEventListener('click', () => {
-        this.openMySeriesTour();
-        });
-        }
-        if(this.driverObj.getActiveIndex() === 19){
-          // Add the "Don't show again" button
-        const eventtourbutton = document.createElement('button');
-        eventtourbutton.innerText = "take the tour";
-        eventtourbutton.className = 'dont-show-again-btn';
-        popover.footerButtons.appendChild(eventtourbutton);
+        // eventtourbutton.addEventListener('click', () => {
+        // this.openMySeriesTour();
+        // });
+        // }
+        // if(this.driverObj.getActiveIndex() === 19){
+        //   // Add the "Don't show again" button
+        // const eventtourbutton = document.createElement('button');
+        // eventtourbutton.innerText = "take the tour";
+        // eventtourbutton.className = 'dont-show-again-btn';
+        //   // Remove the "next" button
+        //   const nextButton = popover.nextButton;
+        //   nextButton.remove();
+          
+        //   // Append the "Don't show again" button first
+        //   popover.footerButtons.appendChild(eventtourbutton);
+          
+        //   // Append the "next" button after the "Don't show again" button
+        //   popover.footerButtons.appendChild(nextButton);
 
-        eventtourbutton.addEventListener('click', () => {
-        this.openSearchTour();
-        });
-        }
+        // eventtourbutton.addEventListener('click', () => {
+        // this.openSearchTour();
+        // });
+        // }
       },
       onNextClick:() => {
         if(this.driverObj.getActiveIndex() === 6){
@@ -133,6 +201,22 @@ export class TourService {
             this.driverObj.moveNext();
         }
       },
+      onPrevClick:() => {
+        if(this.driverObj.getActiveIndex() === 7){
+            this.sidebarservice.closeSidebar();
+            this.driverObj.movePrevious();
+        }else{
+            this.driverObj.movePrevious();
+        }
+      },
+      onDestroyStarted:() => {
+        if(!this.driverObj.hasNextStep()){
+          this.sidebarservice.closeSidebar();
+          this.driverObj.destroy();
+        }else{
+          this.driverObj.destroy();
+        }
+      },
     steps: [
       { 
         
@@ -141,7 +225,6 @@ export class TourService {
           description: 'Welcome to the Events system, feel free to take the tour',
           
         } 
-        
       },
       { 
         element: '#Popular-carousel', 

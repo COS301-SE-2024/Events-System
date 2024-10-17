@@ -158,6 +158,10 @@ body {
   /* @apply text-primary; */
 }
 
+.driver-popover.driverjs-theme .dont-show-again-btn {
+  @apply bg-base-100 border border-none hover:bg-accent;
+}
+
 .driver-popover.driverjs-theme .driver-popover-title {
   /* font-size: 20px; */
 }
@@ -179,7 +183,7 @@ body {
   /* font-size: 14px; */
   /* padding: 5px 8px; */
   /* border-radius: 6px; */
-  @apply transition-all duration-300
+  @apply transition-all duration-300;
 }
 
 .driver-popover.driverjs-theme button:hover {
