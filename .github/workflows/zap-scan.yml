@@ -30,7 +30,7 @@ jobs:
 
       # Wait for the application to fully start
       - name: Wait for Web Application to start
-        run: sleep 10  # Adjust the time based on how long your app takes to start
+        run: sleep 30  # Adjust the time based on how long your app takes to start
 
       # Run OWASP ZAP Baseline Scan
       - name: Run OWASP ZAP Baseline Scan
