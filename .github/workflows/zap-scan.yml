@@ -25,6 +25,7 @@ jobs:
         shell: bash
         run: |
           npm install
+          npm start &
         continue-on-error: true  # Continue even if there's an issue
 
       # Wait for the application to fully start
