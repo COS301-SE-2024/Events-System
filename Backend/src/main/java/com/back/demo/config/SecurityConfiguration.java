@@ -133,6 +133,7 @@ public class SecurityConfiguration {
                 .httpStrictTransportSecurity(hsts -> hsts
                     .maxAgeInSeconds(31536000)
                     .includeSubDomains(true)
+                    .preload(true)
                 )
                 .contentSecurityPolicy(policyConfig -> 
                     policyConfig.policyDirectives("default-src 'self'; script-src 'self' https://trusted-scripts.com"))
