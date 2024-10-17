@@ -9,7 +9,8 @@ export default {
   collectCoverageFrom: [
     "src/**/*.ts",
     "src/**/*.html",
-    "!src/**/*.component.ts"
+    "!src/**/*.component.ts",
+    "!src/**/*.service.ts"
   ],
 
   transform: {
