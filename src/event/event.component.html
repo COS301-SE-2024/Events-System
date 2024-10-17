@@ -8,7 +8,7 @@
                 <h2 class="skeleton mt-4 text-4xl lg:ml-64 text-secondary lg:h-8 h-24 lg:w-[700px] w-80"></h2>
             </div>
             <div>
-                <div class="card bg-base-100 shadow-xl lg:mt-4 mt-32">
+                <div class="card bg-base-100 shadow-xl lg:mt-4 mt-32" id="Hosted-by">
                     <div class="card-body">
                       <h2 class="card-title skeleton lg:h-8 h-14 w-64 -ml-2"></h2>
                       <p class="skeleton lg:h-8 h-24 lg:w-[200px] w-80-ml-4"></p>
@@ -21,6 +21,11 @@
 
             </div>
 
+
+        </div>
+        <div class="flex justify-center align-middle mt-24" id="event-details">
+          <div class=" skeleton w-11/12 h-52"  id="event-host-name">
+          </div>
         </div>
         
     </div> 
@@ -40,7 +45,7 @@
                         <h2 class="mt-4 text-4xl lg:ml-64 text-secondary">{{event.description}}</h2>
                     </div>
                     <div>
-                        <div class="card bg-base-100 shadow-xl lg:mt-4 mt-32">
+                        <div class="card bg-base-100 shadow-xl lg:mt-4 mt-32"  id="Hosted-by">
                             <div class="card-body">
 
                               <h2 class="card-title">Hosted by the: {{club.name}}</h2>
@@ -58,12 +63,14 @@
                 <!-- description -->
 
                 <!-- event details -->
-                <div class="card bg-base-100 shadow-xl mt-4">
+                <div class="card bg-base-100 shadow-xl mt-4" id="event-details">
                     <div class="card-body">
                       <h2 class="card-title text-4xl flex items-center justify-center mb-6">Event details</h2>
                       <div class="flex lg:justify-evenly lg:flex-row flex-col">
                         <div>
-                            <p class="lg:text-4xl text-2xl"> <i class="fa-solid fa-user mr-2"></i> {{host.firstName}} {{host.lastName}} </p>
+                          <div class="tooltip" data-tip="Find out more about the host">
+                            <p class="lg:text-4xl text-2xl cursor-pointer underline" [routerLink]="['/searchProfile', event.hostId]" id="event-host-name"> <i class="fa-solid fa-user mr-2"  ></i>{{host.firstName}} {{host.lastName}} </p>
+                          </div>
                             <p class="lg:text-4xl text-2xl"><i class="fa-solid fa-location-pin mr-4"></i>{{event.location}}</p>
                         </div>
                         <div>
@@ -79,62 +86,93 @@
                     </div>
                   </div>
                 <!-- dietary requirements -->
-                <div class="mt-28">
-                    <h2 class="text-4xl flex items-center justify-center">Dietary accomodations</h2>
+                <div class="mt-28" id="Dietary-accomodations">
+                    <h2 class="text-4xl flex items-center justify-center">Dietary accommodations</h2>
                     <div class="flex items-center justify-center mt-4">
-                      <button class="btn btn-outline btn-secondary" [disabled]="!isAccommodationAvailable('Vegetarian')">Vegetarian</button>
-                      <button class="btn btn-outline btn-secondary lg:ml-8" [disabled]="!isAccommodationAvailable('Vegan')">Vegan</button>
-                      <button class="btn btn-outline btn-secondary lg:ml-8" [disabled]="!isAccommodationAvailable('Halal')">Halal</button>
-                      <button class="btn btn-outline btn-secondary  lg:ml-8" [disabled]="!isAccommodationAvailable('Gluten-free')">Gluten-free</button>
-                      </div>
-                </div>
-
-
-                <!-- Agenda -->
-                <div class="mt-28">
-                  <h2 class="text-4xl flex items-center justify-center">Tags</h2>
-                  <div class="flex items-center justify-center mt-4">
-                    <button *ngFor="let tag of event?.tags" class="btn btn-outline btn-base-100 lg:ml-8">{{tag}}</button>
-                  </div>
-                
-                </div>
-            
-            <!-- Preperation details -->
-                <div class="mt-28">
-                    <h2 class="text-4xl flex items-center justify-center">Preperation details</h2>
-                    <div class="flex items-center justify-center mt-6">
-                      <ul class="steps steps-vertical lg:steps-horizontal lg:text-3xl text-xl">
-                        <li class="step step-primary step-large" *ngFor="let preparation of event?.eventPreparation">{{preparation}}</li>
-                      </ul>
+                        <ng-container *ngIf="hasAccommodations(); else noAccommodations">
+                            <button *ngIf="isAccommodationAvailable('Vegetarian')" [ngClass]="{'border-primary': isAccommodationAvailable('Vegetarian'), 'border-secondary border-opacity-20': !isAccommodationAvailable('Vegetarian')}" class="border px-4 py-2 rounded cursor-default">Vegetarian</button>
+                            <button *ngIf="isAccommodationAvailable('Vegan')" [ngClass]="{'border-primary': isAccommodationAvailable('Vegan'), 'border-secondary border-opacity-20': !isAccommodationAvailable('Vegan')}" class="border px-4 py-2 rounded lg:ml-8 cursor-default">Vegan</button>
+                            <button *ngIf="isAccommodationAvailable('Halal')" [ngClass]="{'border-primary': isAccommodationAvailable('Halal'), 'border-secondary border-opacity-20': !isAccommodationAvailable('Halal')}" class="border px-4 py-2 rounded lg:ml-8 cursor-default">Halal</button>
+                            <button *ngIf="isAccommodationAvailable('Gluten-free')" [ngClass]="{'border-primary': isAccommodationAvailable('Gluten-free'), 'border-secondary border-opacity-20': !isAccommodationAvailable('Gluten-free')}" class="border px-4 py-2 rounded lg:ml-8 cursor-default">Gluten-free</button>
+                        </ng-container>
+                        <ng-template #noAccommodations>
+                            <p class="text-center text-secondary text-xl">No special accommodations</p>
+                        </ng-template>
                     </div>
                 </div>
+
+
+                <!-- Tags Section -->
+                <div class="mt-28 flex flex-col items-center"  id="tags">
+                  <div class="tooltip" data-tip="select a tag to find events with similar tags">
+                    <h2 class="text-4xl flex items-center justify-center">Tags</h2>
+                    <div class="flex items-center justify-center mt-4"  id="ind-tags">
+                      <ng-container *ngIf="event?.tags?.length > 0; else noTags">
+                        <button *ngFor="let tag of event?.tags; let i = index" 
+                                [ngClass]="{'ml-8': i !== 0}" 
+                                class="border border-primary px-4 py-2 rounded cursor-pointer"
+                                [routerLink]="['/search']" 
+                                [queryParams]="{ tag: tag }">
+                          {{tag}}
+                        </button>
+                      </ng-container>
+                      <ng-template #noTags>
+                        <p class="text-center text-secondary text-xl">No tags listed</p>
+                      </ng-template>
+                    </div>
+                  </div>
+                </div>
+            <!-- Preparation details -->
+            <div class="mt-28" id="Preperation-details">
+              <h2 class="text-4xl flex items-center justify-center">Preparation details</h2>
+              <div class="flex items-center justify-center mt-6">
+                <ng-container *ngIf="event?.eventPreparation?.length > 0; else noPreparationDetails">
+                  <ul class="steps steps-vertical lg:steps-horizontal lg:text-3xl text-xl">
+                    <ng-container *ngFor="let preparation of event?.eventPreparation">
+                      <li class="step step-primary step-large" *ngIf="preparation !== ''">{{preparation}}</li>
+                    </ng-container>
+                  </ul>
+                </ng-container>
+                <ng-template #noPreparationDetails>
+                  <p class="text-center text-secondary text-xl">No details listed</p>
+                </ng-template>
+              </div>
+            </div>
         
                 
                 <!-- Agenda -->
-                <div class="mt-28">
-                    <h2 class="text-4xl flex items-center justify-center">Agenda</h2>
-                    <div class="flex items-center justify-center mt-4">
+                <div class="mt-28" id="Agenda-details">
+                  <h2 class="text-4xl flex items-center justify-center">Agenda</h2>
+                  <div class="flex items-center justify-center mt-4">
+                    <ng-container *ngIf="event?.eventAgendas?.length > 0; else noAgendaDetails">
                       <ul class="timeline timeline-vertical lg:text-3xl text-xl">
-                        <li *ngFor="let agenda of event?.eventAgendas; let i = index">
-                          <hr class="bg-primary"/>
-                          <div class="timeline-middle">
-                            <i class="fa-solid fa-check"></i>
-                          </div>
-                          <div [ngClass]="i % 2 === 0 ? 'timeline-start timeline-box' : 'timeline-end timeline-box'">{{agenda}}</div>
-                          <hr class="bg-primary"/>
-                        </li>
+                        <ng-container *ngFor="let agenda of event?.eventAgendas; let i = index">
+                          <li *ngIf="agenda !== ''">
+                            <hr class="bg-primary"/>
+                            <div class="timeline-middle">
+                              <i class="fa-solid fa-check"></i>
+                            </div>
+                            <div [ngClass]="i % 2 === 0 ? 'timeline-start timeline-box' : 'timeline-end timeline-box'">{{agenda}}</div>
+                            <hr class="bg-primary"/>
+                          </li>
+                        </ng-container>
                       </ul>
-                    </div>
+                    </ng-container>
+                    <ng-template #noAgendaDetails>
+                      <p class="text-center text-secondary text-xl">No agenda listed</p>
+                    </ng-template>
+                  </div>
+                </div>
 
         </div>
     
-        <div class="map mt-8 rounded-lg" *ngIf="isAPILoaded">
+        <div class="map mt-8 rounded-lg" id="map" *ngIf="isMapReady && isAPILoaded">
           <google-map height="24rem" width="100%" [options]="mapOptions">
             <map-marker [position]="markerPosition"></map-marker>
           </google-map>
           <!-- Add this button where you want it to appear, for example, after the location input -->
-        <div class="flex justify-center mt-4">
-          <button (click)="openInMaps()" class="btn btn-outline btn-primary font-roboto">
+        <div class="flex justify-center mt-4" >
+          <button (click)="openInMaps()" id="open-map" class="btn btn-outline btn-primary font-roboto">
             Open in Maps
           </button>
         </div>

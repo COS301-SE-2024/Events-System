@@ -52,7 +52,6 @@ export class DeleteSocialClubComponent {
   deleteClub() {
     this.route.params.subscribe(params => {   // Get the event ID from the URL
       this.clubID = params['id'];
-      
       if(this.deleteForm.valid) {
         this.isAPILoading = true;
         this.formName = this.deleteForm.get('name')?.value

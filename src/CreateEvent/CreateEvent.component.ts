@@ -9,7 +9,8 @@ import { GoogleMapsLoaderService } from 'src/app/google-maps-loader.service';
 import { GoogleMapsModule } from '@angular/google-maps'
 import { DomSanitizer } from '@angular/platform-browser';
 import { SanitizePipe } from 'src/app/sanitization.pipe';
-
+import { ActivatedRoute } from '@angular/router';
+import { CreateEventTourService } from './CreateEventTour.service';
 @Component({
   selector: 'app-create-event',
   standalone: true,
@@ -51,7 +52,7 @@ export class CreateEventComponent implements AfterViewInit, OnInit{
   prepform!: FormGroup;
   agendaform!: FormGroup;
   sanitizePipe: SanitizePipe;
-  constructor(private location: Location, private fb: FormBuilder, private ngZone: NgZone, private sanitizer: DomSanitizer, private googleMapsLoader: GoogleMapsLoaderService) { 
+  constructor(private location: Location, private fb: FormBuilder, private ngZone: NgZone, private sanitizer: DomSanitizer, private googleMapsLoader: GoogleMapsLoaderService, private route: ActivatedRoute, private createeventtour: CreateEventTourService) { 
     this.sanitizePipe = new SanitizePipe(this.sanitizer);
 
   }
@@ -74,6 +75,7 @@ export class CreateEventComponent implements AfterViewInit, OnInit{
   isAPILoading = false;
   isNameEmpty = false;
   isDescriptionEmpty = false;
+  selectedSocialClub: string | null = null;
   generatedDescriptions: string[] = [];
   isstep2Empty = false;
   showsuccessToast = false;
@@ -177,7 +179,31 @@ updateMapCenter() {
 }
 ngOnInit() {
   // this.initializeGooglePlaces();
-
+  this.route.queryParams.subscribe(params => {
+    if (params['startTour'] === 'true') {
+        this.startTour();
+        // Remove 'startTour' from query params
+        const url = new URL(window.location.href);
+        url.searchParams.delete('startTour');
+        window.history.replaceState({}, '', url.toString());
+                  
+      }
+  });
+  this.createeventtour.fillEventName.subscribe((name: string) => {
+    this.nameInput.nativeElement.value = name;
+  });
+  this.createeventtour.fillDescriptionName.subscribe((name: string) => {
+    this.descriptionInput.nativeElement.value = name;
+  });
+  this.createeventtour.clickNextButton.subscribe(() => {
+    this.nextStep();
+  });
+  this.createeventtour.clickNextButton2.subscribe(() => {
+    this.nextStep2();
+  });  
+  this.createeventtour.clickPrev.subscribe(() => {
+    this.previousStep();
+  });
         // Fetch social club information for each unique social club
         fetch('https://events-system-back.wn.r.appspot.com/api/events')
         .then(response => response.json())
@@ -189,21 +215,8 @@ ngOnInit() {
 
 
           // Prepare fetch requests for each unique social club
-          const socialClubFetches = this.uniqueSocialClubs.map(socialClubId =>
-            fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs/' + socialClubId)
-              .then(response => response.json())
-          );
-  
-          // Wait for all social club fetches to complete
-          const socialClubsData = await Promise.all(socialClubFetches);
-          socialClubsData.forEach(data => {
-            console.log(data);
-            // Store the social club data in a property of the component
-            this.socialClubs.push(data);
-          });
-          // Update uniqueSocialClubs and otherCheckboxes based on loaded socialClubs
-          this.uniqueSocialClubs = [...new Set(this.socialClubs.map(club => club))];
-          this.otherCheckboxes = new Array(this.uniqueSocialClubs.length).fill(false);
+          this.loadSocialClubs();
+
         });
   // const prepInputsData = sessionStorage.getItem('PrepInputs');
   // const agendaInputsData = sessionStorage.getItem('AgendaInputs');
@@ -252,6 +265,28 @@ this.prepform.get('agendainputs')?.valueChanges.subscribe(values => {
 
 }
 
+isSocialClubsLoading = true;
+
+async loadSocialClubs() {
+  // Declare socialClubFetches as an array to store the fetch promise
+  const socialClubFetches = [
+    fetch('https://events-system-back.wn.r.appspot.com/api/socialclubs')
+      .then(response => response.json())
+  ];
+
+  // Wait for all social club fetches to complete
+  const socialClubsData = await Promise.all(socialClubFetches);
+  socialClubsData.forEach(data => {
+    this.socialClubs.push(...data); // Use spread operator to push all items
+  });
+
+  // Update uniqueSocialClubs and otherCheckboxes based on loaded socialClubs
+  this.uniqueSocialClubs = [...new Set(this.socialClubs.map(club => club.name))];
+  this.otherCheckboxes = new Array(this.uniqueSocialClubs.length).fill(false);
+  this.isSocialClubsLoading = false;
+
+}
+
 initializeGooglePlaces() {
   const input = this.LocationInput.nativeElement as HTMLInputElement;
 
@@ -296,6 +331,9 @@ presubmit(){
   }
   if (!sessionStorage.getItem('StartTime') || sessionStorage.getItem('StartTime') === '') {
     missingDetails.push('Start time');
+  }
+  if (!sessionStorage.getItem('SocialClub') || sessionStorage.getItem('SocialClub') === 'Select a social club') {
+    missingDetails.push('Social club');
   }
   if (!sessionStorage.getItem('EndTime') || sessionStorage.getItem('EndTime') === '') {
     missingDetails.push('End time');
@@ -383,7 +421,7 @@ saveTagsToSessionStorage() {
     if (EndDatedata) {
       this.EndDateInput.nativeElement.value = EndDatedata;
     }
-    if (this.currentStep !== 2 && Locationdata) {
+    if (Locationdata) {
       this.LocationInput.nativeElement.value = Locationdata;
     }
     if (SocialClubdata) {
@@ -409,19 +447,25 @@ saveTagsToSessionStorage() {
     this.loadDataFromSessionStorage3();
     this.loadDataFromSessionStorage4();
   }
+  private dataLoadedForStep: boolean[] = [false, false, false, false, false];
+
   ngAfterViewChecked() {
-    if (this.currentStep === 0 && this.nameInput && this.nameInput.nativeElement && this.nameInput.nativeElement.offsetParent !== null) {
+    if (this.currentStep === 0 && !this.dataLoadedForStep[0] && this.nameInput && this.nameInput.nativeElement && this.nameInput.nativeElement.offsetParent !== null) {
       this.loadDataFromSessionStorage1();
-    } else if (this.currentStep === 1 && this.descriptionInput && this.descriptionInput.nativeElement && this.descriptionInput.nativeElement.offsetParent !== null) {
+      this.dataLoadedForStep[0] = true;
+    } else if (this.currentStep === 1 && !this.dataLoadedForStep[1] && this.descriptionInput && this.descriptionInput.nativeElement && this.descriptionInput.nativeElement.offsetParent !== null) {
       this.loadDataFromSessionStorage2();
-    } else if (this.currentStep === 2 && this.StartTimeInput && this.StartTimeInput.nativeElement && this.StartTimeInput.nativeElement.offsetParent !== null) {
+      this.dataLoadedForStep[1] = true;
+    } else if (this.currentStep === 2 && !this.dataLoadedForStep[2] && this.StartTimeInput && this.StartTimeInput.nativeElement && this.StartTimeInput.nativeElement.offsetParent !== null) {
       this.loadDataFromSessionStorage3();
-    } else if (this.currentStep === 3 && this.PrepInputs && this.PrepInputs.first && this.PrepInputs.first.nativeElement && this.PrepInputs.first.nativeElement.offsetParent !== null) {
+      this.dataLoadedForStep[2] = true;
+    } else if (this.currentStep === 3 && !this.dataLoadedForStep[3] && this.PrepInputs && this.PrepInputs.first && this.PrepInputs.first.nativeElement && this.PrepInputs.first.nativeElement.offsetParent !== null) {
       this.loadDataFromSessionStorage4();
-    } else if (this.currentStep === 4 && this.nameInput && this.StartTimeInput && this.nameInput.nativeElement && this.nameInput.nativeElement.offsetParent !== null) {
+      this.dataLoadedForStep[3] = true;
+    } else if (this.currentStep === 4 && !this.dataLoadedForStep[4] && this.nameInput && this.StartTimeInput && this.nameInput.nativeElement && this.nameInput.nativeElement.offsetParent !== null) {
       this.loadDataFromSessionStorage5();
+      this.dataLoadedForStep[4] = true;
     }
-    // Add other conditions for other steps
   }
 
   get prepinputs() {
@@ -469,7 +513,11 @@ saveTagsToSessionStorage() {
       const nameinput = this.nameInput.nativeElement.value;
       sessionStorage.setItem(`Name`, nameinput);
       this.isNameEmpty = false;
+      this.dataLoadedForStep[this.currentStep + 1] = false;
+
       this.currentStep++;
+      this.createeventtour.refreshTour();
+
     }
   }
   nextStep1(){
@@ -481,6 +529,8 @@ saveTagsToSessionStorage() {
       const descriptioninput = this.descriptionInput.nativeElement.value;
       sessionStorage.setItem(`Description`, descriptioninput);
       this.isDescriptionEmpty = false;
+      this.dataLoadedForStep[this.currentStep + 1] = false;
+
       this.currentStep++;
       if (this.currentStep === 2) {
         setTimeout(() => {
@@ -489,17 +539,15 @@ saveTagsToSessionStorage() {
           }).catch(error => {
             console.error('Error loading Google Maps API:', error);
           });      }, 1);
-      }
+      }    
+      this.createeventtour.refreshTour();
+
     }
+
   }
   nextStep2(){
-    console.log(this.StartTimeInput.nativeElement.value);
-    console.log(this.EndTimeInput.nativeElement.value);
-    console.log(this.StartDateInput.nativeElement.value);
-    console.log(this.EndDateInput.nativeElement.value);
-    console.log("location: " + this.LocationInput.nativeElement.value);
-    console.log(this.SocialClubInput.nativeElement.value);
-    if ( this.StartTimeInput.nativeElement.value === '' || this.EndTimeInput.nativeElement.value === '' || this.StartDateInput.nativeElement.value === '' || this.EndDateInput.nativeElement.value === '' || this.LocationInput.nativeElement.value === '' || this.SocialClubInput.nativeElement.value === '') {
+
+    if (this.StartTimeInput.nativeElement.value === '' || this.EndTimeInput.nativeElement.value === '' || this.StartDateInput.nativeElement.value === '' || this.EndDateInput.nativeElement.value === '' || this.LocationInput.nativeElement.value === '' || this.SocialClubInput.nativeElement.value === '') {
       this.isstep2Empty = true;
       return;
     }
@@ -522,20 +570,36 @@ saveTagsToSessionStorage() {
       sessionStorage.setItem(`EndDate`, enddateinput);
       sessionStorage.setItem(`Location`, locationinput);
       sessionStorage.setItem(`SocialClub`, socialclubinput);
+
+      if(sessionStorage.getItem('SocialClub') === 'Select a social club'){
+        this.isstep2Empty = true;
+        return;
+      }
       this.isstep2Empty = false;
+      this.dataLoadedForStep[this.currentStep + 1] = false;
 
       this.currentStep++;
+      this.createeventtour.refreshTour();
+
     }
+    
   }
   nextStep3() {
     if (this.currentStep < 4) {
       this.saveInputs();
+      this.dataLoadedForStep[this.currentStep + 1] = false;
+
       this.currentStep++;
+      this.createeventtour.refreshTour();
+
     }
   }
   previousStep() {
     if (this.currentStep > 0) {
+      this.dataLoadedForStep[this.currentStep-1] = false;
       this.currentStep--;
+      this.createeventtour.refreshTour();
+
     }
   }
   private googleMapsLoaded = false; // Flag to track if Google Maps has been loaded
@@ -766,5 +830,12 @@ saveTagsToSessionStorage() {
     });
   }
 
+  startTour(){
+    this.createeventtour.startTour();
+  }
+
+  onSocialClubChange(event: any): void {
+    this.selectedSocialClub = event.target.value;
+  }
   
 }

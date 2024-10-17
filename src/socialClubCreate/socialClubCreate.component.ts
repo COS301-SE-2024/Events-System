@@ -7,6 +7,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { RandomImageServiceService } from 'src/app/random-image-service.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SanitizePipe } from 'src/app/sanitization.pipe';
+import { SocialClubCreateTourService } from './SocialClubCreateTour.service';
 @Component({
   selector: 'app-social-club-create',
   standalone: true,
@@ -35,6 +36,7 @@ import { SanitizePipe } from 'src/app/sanitization.pipe';
   ]
 })
 export class SocialClubCreateComponent implements OnInit {
+  @ViewChild('nameInput') nameInput!: ElementRef;
   @ViewChild('summarydescriptionInput') summarydescriptionInput!: ElementRef;
   @ViewChild('descriptionInput') descriptionInput!: ElementRef;
   createForm: FormGroup;
@@ -55,7 +57,8 @@ export class SocialClubCreateComponent implements OnInit {
     private fb: FormBuilder,
     private http: HttpClient,
     private randomImageService: RandomImageServiceService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private socialclubcreatetour: SocialClubCreateTourService
   )
   {
     this.sanitizePipe = new SanitizePipe(this.sanitizer);
@@ -73,6 +76,30 @@ export class SocialClubCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.imageSource = this.randomImageService.getRandomImageSource();
+    this.route.queryParams.subscribe(params => {
+      if (params['startTour'] === 'true') {
+          this.startTour();
+          // Remove 'startTour' from query params
+        const url = new URL(window.location.href);
+        url.searchParams.delete('startTour');
+        window.history.replaceState({}, '', url.toString());
+        }
+    });
+    this.socialclubcreatetour.fillClubName.subscribe((name: string) => {
+      this.nameInput.nativeElement.value = name;
+    });
+    this.socialclubcreatetour.fillSummaryName.subscribe((name: string) => {
+      this.summarydescriptionInput.nativeElement.value = name;
+    });
+    this.socialclubcreatetour.clickNextButton.subscribe(() => {
+      this.nextStep();
+    });
+    this.socialclubcreatetour.clickNextButton2.subscribe(() => {
+      this.nextStep2();
+    });  
+    this.socialclubcreatetour.clickPrev.subscribe(() => {
+      this.previousStep();
+    });
   }
 
   createClub() {
@@ -123,6 +150,7 @@ export class SocialClubCreateComponent implements OnInit {
     if (this.currentStep < 3) {
       this.isPictureEmpty = false;
       ++this.currentStep;
+      this.socialclubcreatetour.refreshTour();
     }
   }
   nextStep1() {
@@ -133,6 +161,8 @@ export class SocialClubCreateComponent implements OnInit {
     if (this.currentStep < 3)
       this.isNameEmpty = false;
       ++this.currentStep;
+      this.socialclubcreatetour.refreshTour();
+
   }
   nextStep2() {
     if (!this.createForm.get('summaryDescription') || this.createForm.get('summaryDescription')?.value === '' || !this.createForm.get('description') || this.createForm.get('description')?.value === '' ) {
@@ -150,10 +180,14 @@ export class SocialClubCreateComponent implements OnInit {
   previousStep() {
     if (this.currentStep > 1) {
       --this.currentStep;
+      this.socialclubcreatetour.refreshTour();
+
     }
   }
   navigateToStep(step: number) {
     this.currentStep = step;
+    this.socialclubcreatetour.refreshTour();
+
   }
   goBack(): void {
     window.history.back();
@@ -302,5 +336,9 @@ suggestSummaryDescriptions() {
     console.error('Error fetching suggested descriptions:', error);
     this.isLoading = false;
   });
+}
+
+startTour(){
+  this.socialclubcreatetour.startTour();
 }
 }

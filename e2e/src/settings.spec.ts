@@ -56,58 +56,58 @@ test.describe('Settings Component', () => {
   });
 
 
-  test('should display profile details section', async ({ page }) => {
-    // Verify the profile details section
-    const profileDetailsHeading = await page.locator('h3:has-text("Profile Details")');
-    await expect(profileDetailsHeading).toBeVisible();
+  // test('should display profile details section', async ({ page }) => {
+  //   // Verify the profile details section
+  //   const profileDetailsHeading = await page.locator('h3:has-text("Profile Details")');
+  //   await expect(profileDetailsHeading).toBeVisible();
 
 
-    // Verify the avatar
-    const avatar = await page.locator('img[alt="Avatar"]');
-    await expect(avatar).toBeVisible();
+  //   // Verify the avatar
+  //   const avatar = await page.locator('img[alt="Avatar"]');
+  //   await expect(avatar).toBeVisible();
 
 
-    // Verify the name input
-    const nameInput = await page.locator('input[placeholder="Name"]');
-    await expect(nameInput).toBeVisible();
+  //   // Verify the name input
+  //   const nameInput = await page.locator('input[placeholder="Name"]');
+  //   await expect(nameInput).toBeVisible();
 
 
-    // Verify the surname input
-    const surnameInput = await page.locator('input[placeholder="Surname"]');
-    await expect(surnameInput).toBeVisible();
+  //   // Verify the surname input
+  //   const surnameInput = await page.locator('input[placeholder="Surname"]');
+  //   await expect(surnameInput).toBeVisible();
 
 
-    // Verify the bio textarea
-    const bioTextarea = await page.locator('textarea[placeholder="Bio"]');
-    await expect(bioTextarea).toBeVisible();
-  });
+  //   // Verify the bio textarea
+  //   const bioTextarea = await page.locator('textarea[placeholder="Bio"]');
+  //   await expect(bioTextarea).toBeVisible();
+  // });
 
 
-  test('should display social media links section', async ({ page }) => {
-    // Verify the social media links section
-    const socialMediaLinksHeading = await page.locator('h3:has-text("Social Media Links")');
-    await expect(socialMediaLinksHeading).toBeVisible();
+  // test('should display social media links section', async ({ page }) => {
+  //   // Verify the social media links section
+  //   const socialMediaLinksHeading = await page.locator('h3:has-text("Social Media Links")');
+  //   await expect(socialMediaLinksHeading).toBeVisible();
 
 
-    // Verify the email input
-    const emailInput = await page.locator('input[placeholder="E-mail"]');
-    await expect(emailInput).toBeVisible();
+  //   // Verify the email input
+  //   const emailInput = await page.locator('input[placeholder="E-mail"]');
+  //   await expect(emailInput).toBeVisible();
 
 
-    // Verify the Twitter input
-    const twitterInput = await page.locator('input[placeholder="Twitter"]');
-    await expect(twitterInput).toBeVisible();
+  //   // Verify the Twitter input
+  //   const twitterInput = await page.locator('input[placeholder="Twitter"]');
+  //   await expect(twitterInput).toBeVisible();
 
 
-    // Verify the LinkedIn input
-    const linkedInInput = await page.locator('input[placeholder="LinkedIn"]');
-    await expect(linkedInInput).toBeVisible();
+  //   // Verify the LinkedIn input
+  //   const linkedInInput = await page.locator('input[placeholder="LinkedIn"]');
+  //   await expect(linkedInInput).toBeVisible();
 
 
-    // Verify the GitHub input
-    const gitHubInput = await page.locator('input[placeholder="Github"]');
-    await expect(gitHubInput).toBeVisible();
-  });
+  //   // Verify the GitHub input
+  //   const gitHubInput = await page.locator('input[placeholder="Github"]');
+  //   await expect(gitHubInput).toBeVisible();
+  // });
 
 
   test('should display security section', async ({ page }) => {

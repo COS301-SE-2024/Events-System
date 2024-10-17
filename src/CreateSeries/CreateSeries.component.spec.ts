@@ -3,6 +3,8 @@ import { By } from '@angular/platform-browser';
 import { CreateSeriesComponent } from './CreateSeries.component';
 import { FormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 
 describe('CreateSeriesComponent', () => {
   let component: CreateSeriesComponent;
@@ -11,6 +13,15 @@ describe('CreateSeriesComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [FormsModule, NoopAnimationsModule, CreateSeriesComponent],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            params: of({ id: 'test-id' }),
+            queryParams: of({ startTour: 'true' })
+          }
+        }
+      ]
     }).compileComponents();
   });
 
@@ -30,6 +41,4 @@ describe('CreateSeriesComponent', () => {
     fixture.detectChanges();
     expect(component.currentStep).toBe(1);
   });
-
-
 });

@@ -1,37 +1,48 @@
 <!-- Desktop Version -->
 <div class="hidden md:block container mx-auto p-4">
     <div class="card w-full bg-base-100 shadow-2xl mb-4">
+      <button class="btn w-[50px] -mt-12 lg:ml-8 h-[30px] rounded-full"(click)="goBack()"><i class="fa-solid fa-arrow-left"></i></button>
+
       <div class="card-body">
         <div class="flex justify-between items-center">
           <div class="flex items-center">
             <div class="w-20">
-              <div  *ngIf="employeeData?.employeePictureLink"  _ngcontent-ng-c907525974="" tabindex="0" role="button" class="btn btn-ghost btn-circle avatar" style="width: 120px; height: 120px;">
-                <div _ngcontent-ng-c907525974="" class="w-full rounded-full">
-                  <img  _ngcontent-ng-c907525974="" alt="Profile Picture" [src]="employeeData?.employeePictureLink || 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg'" style="width: 100%; height: 100%;">
+              <div *ngIf="employeeData?.employeePictureLink" class="btn btn-ghost btn-circle avatar pointer-events-none" style="width: 120px; height: 120px;">
+                <div class="w-full rounded-full">
+                  <img alt="Profile Picture" [src]="employeeData?.employeePictureLink" style="width: 100%; height: 100%;">
                 </div>
               </div>
-              <div class="btn btn-ghost btn-circle avatar placeholder"  *ngIf="!employeeData?.employeePictureLink" style="width: 120px; height: 120px;">
-                <div class="w-full rounded-full" >
-                    <span class="text-2xl font-bold text-primary">{{ getInitials() }}</span>
-                  </div>
-            </div>
+              <div class="btn btn-ghost btn-circle avatar placeholder pointer-events-none" *ngIf="!employeeData?.employeePictureLink" style="width: 120px; height: 120px;">
+                <div class="w-full rounded-full">
+                  <span class="text-2xl font-bold text-primary">{{ getInitials() }}</span>
+                </div>
+              </div>
             </div>
             <div class="ml-12">
               <h2 name="name" class="text-2xl">{{ employeeData?.firstName }} 
                 <span *ngIf="employeeData?.publicSurname === true"> {{ employeeData?.lastName }}</span>
               </h2>
-              <p>{{ employeeData?.email }}</p>
+                <p (click)="copyEmail()" class="flex items-center cursor-pointer">
+                  {{ employeeData?.email }}
+                  <label class="swap swap-rotate ml-2">
+                    <!-- This hidden checkbox controls the state -->
+                    <input type="checkbox" [checked]="emailCopied" />
+                
+                    <i class="far swap-off fa-copy"></i>
+                
+                    <i class="fas swap-on fa-check"></i>
+                  </label>
+                </p>
             </div>
           </div>          
         </div>
-        <div class="tabs">
-          <a class="tab tab-bordered rounded-lg hover:bg-blue-200 hover:text-blue-800" (click)="selectTab('about')" [class.tab-active]="selectedTab === 'about'">About</a>
-          <a class="tab tab-bordered rounded-lg hover:bg-blue-200 hver:text-blue-800" (click)="selectTab('events')" [class.tab-active]="selectedTab === 'events'">Events History</a>
+        <div class="tabs tabs-boxed w-full">
+          <a class="tab text-secondary text-lg tab-bordered rounded-lg hover:bg-neutral" (click)="selectTab('about')" [class.tab-active]="selectedTab === 'about'">About</a>
+          <a class="tab text-secondary text-lg tab-bordered rounded-lg hover:bg-neutral" (click)="selectTab('events')" [class.tab-active]="selectedTab === 'events'">Events History</a>
         </div>
       </div>
     </div>
-  
-    <div *ngIf="selectedTab === 'about'" class="card w-full bg-base-100 shadow-2xl mb-4">
+        <div *ngIf="selectedTab === 'about'" class="card w-full bg-base-100 shadow-2xl mb-4">
       <div class="card-body flex-row">
         <div class="w-1/2">
           <h2 class="card-title">About Me</h2>
@@ -39,47 +50,53 @@
         </div>
         <div class="w-1/2">
           <div *ngIf="employeeData?.publicContacts">
-            <h3 class="text-xl mt-4">Contact Details</h3>
-            <ul>
-              <li class="flex items-center">
+            <h3 class="card-title">Contact Details</h3>
+            <ul class="flex flex-col">
+              <!-- <li class="flex items-center" *ngIf="employeeData?.email">
                 <i class="far fa-envelope"></i>
-                <a *ngIf="employeeData?.email" [href]="'mailto:' + employeeData.email" class="ml-2">{{ employeeData.email }}</a>
-                <span *ngIf="!employeeData?.email" class="ml-2">Not available</span>
+                <a [href]="'mailto:' + employeeData.email" class="ml-2">{{ employeeData.email }}</a>
+              </li> -->
+              <li class="flex items-center" *ngIf="employeeData?.twitter">
+                <i class="fab fa-x-twitter"></i>
+                <a [href]="'https://www.x.com/' + employeeData.twitter" target="_blank" rel="noopener noreferrer" class="ml-2">{{ employeeData.twitter }}</a>
               </li>
-              <li class="flex items-center">
-                <i class="fab fa-xing"></i>
-                <a *ngIf="employeeData?.twitter" [href]="employeeData.twitter" target="_blank" rel="noopener noreferrer" class="ml-2">{{ employeeData.twitter }}</a>
-                <span *ngIf="!employeeData?.twitter" class="ml-2">Not available</span>
-              </li>
-              <li class="flex items-center">
+              <li class="flex items-center" *ngIf="employeeData?.linkedin">
                 <i class="fab fa-linkedin"></i>
-                <a *ngIf="employeeData?.linkedin" [href]="employeeData.linkedin" target="_blank" rel="noopener noreferrer" class="ml-2">{{ employeeData.linkedin }}</a>
-                <span *ngIf="!employeeData?.linkedin" class="ml-2">Not available</span>
+                <a [href]="'https://www.linkedin.com/in/' + employeeData.linkedin" target="_blank" rel="noopener noreferrer" class="ml-2">
+                  {{ employeeData.linkedin }}
+                </a>
               </li>
-              <li class="flex items-center">
+              <li class="flex items-center" *ngIf="employeeData?.github">
                 <i class="fab fa-github"></i>
-                <a *ngIf="employeeData?.github" [href]="employeeData.github" target="_blank" rel="noopener noreferrer" class="ml-2">{{ employeeData.github }}</a>
-                <span *ngIf="!employeeData?.github" class="ml-2">Not available</span>
+                <a [href]="'https://www.github.com/' + employeeData.github" target="_blank" rel="noopener noreferrer" class="ml-2">
+                  {{ employeeData.github }}
+                </a>
+              </li>
+              <li *ngIf="!employeeData?.twitter && !employeeData?.linkedin && !employeeData?.github">
+                No contact details available.
               </li>
             </ul>
           </div>
-                           
         </div>
       </div>
     </div>
+
   
-  
-    <div *ngIf="selectedTab === 'events'" class=" w-full items-center shadow-2xl">
-      <div class=" overflow-y-hidden">
-        <div class="flex flex-wrap gap-x-20 gap-y-14 pt-6 pl-14">
+    <div *ngIf="selectedTab === 'events'" class="w-full items-center shadow-2xl">
+      <div class="overflow-y-hidden">
+        <div *ngIf="events.length > 0; else noEvents" class="flex flex-wrap gap-x-20 gap-y-14 pt-6 pl-14">
           <app-attended-event-card
-          *ngFor="let event of events"  
-              [eventID]="event.eventId"
-              [eventTitle]="event.title"
-              [description]="event.description"
+            *ngFor="let event of events"
+            [eventID]="event.eventId"
+            [eventTitle]="event.title"
+            [description]="event.description"
           ></app-attended-event-card>
-          
         </div>
+        <ng-template #noEvents>
+          <div class="flex justify-center items-center h-full">
+            <p class="text-lg text-gray-500">No event history available.</p>
+          </div>
+        </ng-template>
       </div>
     </div>
   
@@ -91,25 +108,32 @@
     <div class="card w-full bg-base-100 shadow-2xl mb-4">
       <div class="card-body">
         <div class="flex flex-col items-center">
-          <div *ngIf="employeeData?.employeePictureLink" tabindex="0" role="button" class="btn btn-ghost btn-circle avatar" style="width: 120px; height: 120px;">
+          <div *ngIf="employeeData?.employeePictureLink" class="btn btn-ghost btn-circle avatar pointer-events-none" style="width: 120px; height: 120px;">
             <div class="w-full rounded-full">
-              <img alt="Profile Picture"
-                [src]="employeeData?.employeePictureLink"
-                style="width: 100%; height: 100%;">
+              <img alt="Profile Picture" [src]="employeeData?.employeePictureLink" style="width: 100%; height: 100%;">
             </div>
           </div>
-          <div class="btn btn-ghost btn-circle avatar placeholder"  *ngIf="!employeeData?.employeePictureLink">
+          <div class="btn btn-ghost btn-circle avatar placeholder pointer-events-none" *ngIf="!employeeData?.employeePictureLink" style="width: 120px; height: 120px;">
             <div class="w-10 rounded-full bg-base-200 flex items-center justify-center">
-                <span class="text-xl font-bold text-primary">{{ getInitials() }}</span>
-              </div>
-        </div>
+              <span class="text-xl font-bold text-primary">{{ getInitials() }}</span>
+            </div>
+          </div>
           <div>
             <h2 name="name" class="text-2xl">{{ employeeData?.firstName }} 
               <span *ngIf="employeeData?.publicSurname === true"> {{ employeeData?.lastName }}</span>
             </h2>
-            <p>{{ employeeData?.email }}</p>
+            <p (click)="copyEmail()" class="flex items-center cursor-pointer">
+              {{ employeeData?.email }}
+              <label class="swap swap-rotate ml-2">
+                <!-- This hidden checkbox controls the state -->
+                <input type="checkbox" [checked]="emailCopied" />
+            
+                <i class="far swap-off fa-copy"></i>
+            
+                <i class="fas swap-on fa-check"></i>
+              </label>
+            </p>
           </div>
-          <button routerLink="/settings" class="btn btn-outline mt-4">Edit Profile</button>
         </div>
         <div class="tabs tabs-boxed w-full">
           <a class="tab tab-bordered rounded-lg hover:bg-blue-200 hover:text-blue-800" (click)="selectTab('about')" [class.tab-active]="selectedTab === 'about'">About</a>
@@ -124,44 +148,57 @@
         <p>{{ employeeData?.employeeDescription || 'No description available.' }}</p>
         <div *ngIf="employeeData?.publicContacts">
           <h3 class="text-xl mt-4">Contact Details</h3>
-          <ul>
-            <li class="flex items-center">
+          <ul class="flex flex-col">
+            <!-- <li class="flex items-center" *ngIf="employeeData?.email">
               <i class="far fa-envelope"></i>
-              <a *ngIf="employeeData?.email" [href]="'mailto:' + employeeData.email" class="ml-2">{{ employeeData.email }}</a>
-              <span *ngIf="!employeeData?.email" class="ml-2">Not available</span>
+              <a [href]="'mailto:' + employeeData.email" class="ml-2">{{ employeeData.email }}</a>
+            </li> -->
+            <li class="flex items-center" *ngIf="employeeData?.twitter">
+              <i class="fab fa-x-twitter"></i>
+              <a [href]="'https://www.x.com/' + employeeData.twitter" target="_blank" rel="noopener noreferrer" class="ml-2">{{ employeeData.twitter }}</a>
             </li>
-            <li class="flex items-center">
-              <i class="fab fa-xing"></i>
-              <a *ngIf="employeeData?.twitter" [href]="employeeData.twitter" target="_blank" rel="noopener noreferrer" class="ml-2">{{ employeeData.twitter }}</a>
-              <span *ngIf="!employeeData?.twitter" class="ml-2">Not available</span>
-            </li>
-            <li class="flex items-center">
+            <li class="flex items-center" *ngIf="employeeData?.linkedin">
               <i class="fab fa-linkedin"></i>
-              <a *ngIf="employeeData?.linkedin" [href]="employeeData.linkedin" target="_blank" rel="noopener noreferrer" class="ml-2">{{ employeeData.linkedin }}</a>
-              <span *ngIf="!employeeData?.linkedin" class="ml-2">Not available</span>
+              <a [href]="'https://www.linkedin.com/in/' + employeeData.linkedin" target="_blank" rel="noopener noreferrer" class="ml-2">
+                {{ employeeData.linkedin }}
+              </a>
             </li>
-            <li class="flex items-center">
+            <li class="flex items-center" *ngIf="employeeData?.github">
               <i class="fab fa-github"></i>
-              <a *ngIf="employeeData?.github" [href]="employeeData.github" target="_blank" rel="noopener noreferrer" class="ml-2">{{ employeeData.github }}</a>
-              <span *ngIf="!employeeData?.github" class="ml-2">Not available</span>
+              <a [href]="'https://www.github.com/' + employeeData.github" target="_blank" rel="noopener noreferrer" class="ml-2">
+                {{ employeeData.github }}
+              </a>
+            </li>
+            <li *ngIf="!employeeData?.email && !employeeData?.twitter && !employeeData?.linkedin && !employeeData?.github">
+              No contact details available.
             </li>
           </ul>
         </div>
       </div>
     </div>
   
-    <div *ngIf="selectedTab === 'events'" class=" w-full items-center shadow-2xl">
-      <div class=" overflow-y-hidden">
-        <div class="flex flex-wrap gap-x-20 gap-y-14 pt-6 pl-14">
+    <div *ngIf="selectedTab === 'events'" class="w-full items-center shadow-2xl">
+      <div class="overflow-y-hidden">
+        <div *ngIf="events.length > 0; else noEvents" class="flex flex-wrap gap-x-20 gap-y-14 pt-6 pl-14">
           <app-attended-event-card
-          *ngFor="let event of events"  
-              [eventID]="event.eventId"
-              [eventTitle]="event.title"
-              [description]="event.description"
+            *ngFor="let event of events"
+            [eventID]="event.eventId"
+            [eventTitle]="event.title"
+            [description]="event.description"
           ></app-attended-event-card>
-          
         </div>
+        <ng-template #noEvents>
+          <div class="flex justify-center items-center h-full">
+            <p class="text-lg text-gray-500">No event history available.</p>
+          </div>
+        </ng-template>
       </div>
     </div>
 
+  </div>
+
+  <div *ngIf="showAlert" class="toast toast-center toast-middle">
+    <div class="alert bg-secondary">
+      <span>Email copied to clipboard</span>
+    </div>
   </div>

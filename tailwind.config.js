@@ -4,12 +4,14 @@ module.exports = {
     'src/app/**/*.{html,ts}', // paths to your HTML and TypeScript files
     'src/**/*.{html,ts}', // paths to your HTML and TypeScript files
     './libs/**/*.{html,ts}', // don't forget to include your libraries if you use any
+    "./src/**/*.{html,ts}",
+
   ],
   daisyui: {
     themes: [
       {
         entellect:{
-          "primary": "#485970",
+          "primary": "#485f70",
           "secondary": "#767D75",
           "accent": "#A0BE23",
           "neutral": "#1c2340",
@@ -22,6 +24,18 @@ module.exports = {
   presets: [],
   darkMode: 'media', // or 'class'
   theme: {
+    extend: {
+      keyframes: {
+        glow: {
+          '0%': { opacity: '0.2' },
+          '50%': { opacity: '1' },
+          '100%': { opacity: '0.2' },
+        },
+      },
+      animation: {
+        glow: 'glow 2s infinite',
+      },
+    },
     accentColor: ({ theme }) => ({
       ...theme('colors'),
       auto: 'auto',

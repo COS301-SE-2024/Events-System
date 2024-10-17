@@ -7,6 +7,8 @@ import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule  } from '@angula
 import { RouterModule } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SanitizePipe } from 'src/app/sanitization.pipe';
+import { ActivatedRoute } from '@angular/router';
+import { CreateSeriesTourService } from './CreateSeriesTour.service';
 @Component({
   selector: 'app-create-series',
   standalone: true,
@@ -38,7 +40,7 @@ export class CreateSeriesComponent {
   prepform!: FormGroup;
   agendaform!: FormGroup;
   sanitizePipe: SanitizePipe;
-  constructor(private location: Location, private fb: FormBuilder, private sanitizer: DomSanitizer) { 
+  constructor(private location: Location, private fb: FormBuilder, private sanitizer: DomSanitizer, private route: ActivatedRoute, private createseriestour: CreateSeriesTourService) { 
     this.sanitizePipe = new SanitizePipe(this.sanitizer);
 
   }
@@ -106,6 +108,31 @@ export class CreateSeriesComponent {
     });
 }
 ngOnInit() {
+  this.route.queryParams.subscribe(params => {
+    if (params['startTour'] === 'true') {
+        this.startTour();
+        // Remove 'startTour' from query params
+        const url = new URL(window.location.href);
+        url.searchParams.delete('startTour');
+        window.history.replaceState({}, '', url.toString());
+        
+      }
+  });
+  this.createseriestour.fillSeriesName.subscribe((name: string) => {
+    this.snameInput.nativeElement.value = name;
+  });
+  this.createseriestour.fillDescriptionName.subscribe((name: string) => {
+    this.sdescriptionInput.nativeElement.value = name;
+  });
+  this.createseriestour.clickNextButton.subscribe(() => {
+    this.nextStep();
+  });
+  this.createseriestour.clickNextButton2.subscribe(() => {
+    this.nextStep2();
+  });  
+  this.createseriestour.clickPrev.subscribe(() => {
+    this.previousStep();
+  });
   const storedEventIds = sessionStorage.getItem('selectedEventIds');
   if (storedEventIds) {
     this.selectedEventIds = JSON.parse(storedEventIds);
@@ -115,7 +142,9 @@ ngOnInit() {
     .then(response => response.json())
     .then(async data => { // Mark this function as async
 
-      this.events = Array.isArray(data) ? data : [data];
+       // Filter out past events
+       const currentDate = new Date();
+       this.events = Array.isArray(data) ? data.filter(event => new Date(event.startDate) >= currentDate) : [];
       this.uniqueSocialClubs = [...new Set(this.events.map(event => event.socialClub))];
       this.otherCheckboxes = new Array(this.uniqueSocialClubs.length).fill(false);
 
@@ -210,7 +239,7 @@ onRowClick(eventId: number): void {
 
   }
   ngAfterViewInit() {
-    const namedata = sessionStorage.getItem('Name');
+    const namedata = sessionStorage.getItem('sName');
     if (namedata) {
       this.snameInput.nativeElement.value = namedata;
     }
@@ -334,5 +363,9 @@ onRowClick(eventId: number): void {
       console.error('Error fetching suggested descriptions:', error);
       this.isLoading = false;
     });
+  }
+
+  startTour(){
+    this.createseriestour.startTour();
   }
 }

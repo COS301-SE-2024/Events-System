@@ -1,37 +1,34 @@
 <!-- LOGIN Home -->
-<form  [formGroup]="loginForm" class="card-body">
-  <div class="flex  items-center justify-center ">
+<form  [formGroup]="loginForm" class="">
+  <div class="lg:flex items-center justify-center ">
     <div class="relative">
-      
   <div class="hidden sm:block h-56 w-56 text-indigo-300 absolute a-z-10 -left-20 -top-20">
      <svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><defs><pattern id='a' patternUnits='userSpaceOnUse' width='40' height='40' patternTransform='scale(0.6) rotate(0)'><rect x='0' y='0' width='100%' height='100%' fill='none'/><path d='M11 6a5 5 0 01-5 5 5 5 0 01-5-5 5 5 0 015-5 5 5 0 015 5'  stroke-width='1' stroke='none' fill='currentColor'/></pattern></defs><rect width='800%' height='800%' transform='translate(0,0)' fill='url(#a)'/></svg>
     </div>
   <div class="hidden sm:block h-28 w-28 text-indigo-300 absolute a-z-10 -right-20 -bottom-20">
      <svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><defs><pattern id='b' patternUnits='userSpaceOnUse' width='40' height='40' patternTransform='scale(0.5) rotate(0)'><rect x='0' y='0' width='100%' height='100%' fill='none'/><path d='M11 6a5 5 0 01-5 5 5 5 0 01-5-5 5 5 0 015-5 5 5 0 015 5'  stroke-width='1' stroke='none' fill='currentColor'/></pattern></defs><rect width='800%' height='800%' transform='translate(0,0)' fill='url(#b)'/></svg>
     </div>
-      <!-- Register -->
-      <div class="relative flex flex-col sm:w-[30rem] rounded-lg border-gray-400 bg-base-200 shadow-lg px-4">
+      <!-- Sign in -->
+      <div class="relative flex flex-col rounded-lg lg:bg-base-200 lg:shadow-lg lg:px-4">
         <div class="flex-auto p-6">
           <!-- Logo -->
-          <div class="mb-10 flex flex-shrink-0 flex-grow-0 items-center justify-center overflow-hidden">
-            <a href="#" class="flex cursor-pointer items-center gap-2 text-white no-underline hover:text-indigo-500">
-              <span class="flex-shrink-0 text-3xl font-black tracking-tight opacity-100 text-primary">Events system</span>
-            </a>
+          <div class="mb-2 flex flex-shrink-0 flex-grow-0 items-center justify-center overflow-hidden">
+            <span class="flex-shrink-0 text-3xl font-black tracking-tight opacity-100 text-primary">Events system</span>
           </div>
           <!-- /Logo -->
-          <h4 class="mb-2 font-medium text-secondary xl:text-xl text-center">Enter your email and password to sign in</h4>
+          <h4 class="mb-12 font-medium text-secondary xl:text-xl text-center">Enter your email and password to sign in</h4>
   
           <!-- Email -->
             <div class="mb-4">
               <div class="label" htmlFor="email">
-                <span class="label-text text-secondary">Email</span>
+                <span class="label-text opacity-80">Email</span>
               </div>            
             <input 
               type="email" 
               id="email" 
               formControlName="email" 
               placeholder="name@mail.com" 
-              class="input input-bordered w-full max-w-md"
+              class="input input-bordered w-full  transition duration-300 ease-in"
                required
                [ngClass]="{'input-error': loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched), 
                             'input-success': loginForm.get('email')?.valid}"
@@ -46,16 +43,16 @@
           <!-- Password -->
             <div class="mb-4">
               <div class="label" htmlFor="password">
-                <span class="label-text text-secondary">Password</span>
-                <span class="label-text-alt text-accent cursor-pointer hover:underline"  onclick="my_modal_2.showModal()" >Forgot Password</span>
+                <span class="label-text opacity-80">Password</span>
+                <span class="label-text-alt opacity-70 cursor-pointer underline"  onclick="my_modal_2.showModal()" >Forgot Password</span>
               </div>
-              <div class="relative inline-flex w-full max-w-md">
+              <div class="relative inline-flex w-full max-w-md  transition duration-300 ease-in">
               <input 
                 type="password" 
                 id="password" 
                 formControlName="password" 
                 placeholder="*******" 
-                class="input input-bordered w-full max-w-md"
+                class="input input-bordered w-full max-w-md  transition duration-300 ease-in"
                 [ngClass]="{'input-error': loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched), 
                             'input-success': loginForm.get('password')?.valid}"
                 />
@@ -82,7 +79,7 @@
 
               <div class="divider">or</div>
   
-              <button class="btn w-full mb-4 bg-base-100" (click)="signInWithGoogle()">
+              <button class="btn w-full mb-4 bg-base-100"  (click)="signInWithGoogle()">
                 <img
                 src="https://www.material-tailwind.com/logos/logo-google.png"
                 alt="google"
@@ -157,7 +154,7 @@
                     <span class="label-text text-slate-400">Email address</span>
                   </div>            
                   <input type="email" id="email" formControlName="email"  
-                        class="input input-bordered w-full max-w-md" 
+                        class="input input-bordered w-full max-w-md  transition duration-300 ease-in" 
                         [ngClass]="{'input-error': forgotPasswordForm.get('email')?.invalid && (forgotPasswordForm.get('email')?.dirty || forgotPasswordForm.get('email')?.touched), 
                                       'input-success': forgotPasswordForm.get('email')?.valid}"
                   />
@@ -215,34 +212,45 @@
 </dialog>
 
 <!-- CREATE ACCOUNT MODAL HOME -->
-<dialog id="my_modal_3" class="modal modal-middle backdrop-blur-sm ">
-  <div class="modal-box w-3/4 max-w-3xl bg-base-200 ">
+<dialog id="my_modal_3" class="modal modal-middle backdrop-blur-sm">
+  <div class="modal-box w-full h-full sm:w-10/12 sm:max-w-4xl bg-base-200">
     <form method="dialog" autocomplete="off">
       <button class="btn btn-sm btn-circle btn-ghost absolute right-5 top-2">
         ✕
       </button>
       <div class="text-center min-h-[160px] sm:p-6 p-4">
         <h4 class="sm:text-3xl text-2xl font-bold  text-primary">Create your account</h4>
-        <h4 class="mb-2 font-medium text-slate-400 xl:text-xl">Enter your information to register</h4>
+        <h4 class="font-thin text-secondary xl:text-xl">Enter your information to register</h4>
       </div>
-      <div class="shrink-0 w-full  ">
-        <form (submit)="onRegister($event)" [formGroup]="registerForm" class="">
-          <div class="shrink-0 w-full  ">
+
+          <div class="-mt-12 w-full">
+            <!-- Mobile sign up with google -->
+            <div class="flex flex-col justify-center items-center">
+              <button class="btn lg:w-96 w-full mb-4  bg-base-100"   onClick="my_modal_7.showModal()">        
+                <img src="https://www.material-tailwind.com/logos/logo-google.png"
+                      alt="google"
+                      class="h-6 w-6"
+                />
+                Sign up with google
+              </button>
+            </div>
+            <!-- mobile sign up with google -->
+            <div class="divider">or</div>
+
             <form (submit)="onRegister($event)" [formGroup]="registerForm" class="" autocomplete="off">
-              <div class="flex  justify-center items-center  ">
-                <div  class="grid md:grid-cols-2 gap-x-32 gap-y-6  ">
-              
-                  <!-- First name -->
-                  <div>
+              <div class="flex  justify-center items-center">
+                <div  class="grid md:grid-cols-2 gap-x-32 gap-y-6 w-full">
+   
+                  <div class="">
                     <div class="label" htmlFor="firstName">
-                      <span class="label-text text-slate-400">First Name</span>
+                      <span class="label-text text-secondary">First Name</span>
                     </div>         
                     <input
                       id="firstName"
                       name="firstName"
                       formControlName="firstName"
                       type="text"
-                      class="input input-bordered max-w-md w-72"
+                      class="input input-bordered max-w-xl w-full"
                       required
                             [ngClass]="{'input-error': registerForm.get('firstName')?.invalid && (registerForm.get('firstName')?.dirty || registerForm.get('firstName')?.touched), 
                                       'input-success': registerForm.get('firstName')?.valid}"
@@ -256,14 +264,14 @@
                   <!-- Second name -->
                   <div>
                     <div class="label" htmlFor="lastName">
-                      <span class="label-text text-slate-400">Last Name</span>
+                      <span class="label-text text-secondary">Last Name</span>
                     </div> 
                     <input
                       id="lastName"
                       name="lastName"
                       formControlName="lastName"
                       type="text"
-                      class="input input-bordered  max-w-md  w-72"
+                      class="input input-bordered max-w-xl w-full"
                       required
                             [ngClass]="{'input-error': registerForm.get('lastName')?.invalid && (registerForm.get('lastName')?.dirty || registerForm.get('lastName')?.touched), 
                                       'input-success': registerForm.get('lastName')?.valid}"
@@ -275,7 +283,7 @@
                 
                   <!-- Email -->
                   <div>
-                    <label htmlFor="email" class="block text-sm font-semibold text-heading text-slate-400">
+                    <label htmlFor="email" class="block text-sm font-semibold text-heading text-secondary">
                       Email
                     </label>
                     <input
@@ -283,7 +291,7 @@
                       name="email"
                       formControlName="email"
                       type="email"
-                      class="input input-bordered max-w-md  w-72"
+                      class="input input-bordered max-w-xl w-full"
                       required
                             [ngClass]="{'input-error': registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched), 
                                       'input-success': registerForm.get('email')?.valid}"
@@ -296,12 +304,12 @@
 
                   <!-- Password -->
                   <div>
-                    <label htmlFor="password" class="block text-sm font-semibold text-heading text-slate-400">
+                    <label htmlFor="password" class="block text-sm font-semibold text-heading text-secondary">
                       Password
                     </label>
                     <div class="relative inline-flex w-full max-w-md">
                             <input  autocomplete="off"  id="password1" type="password" name="password1"  autocomplete="off"  formControlName="password"
-                        class="input input-bordered max-w-md w-72 transition duration-300 ease-in"
+                        class="input input-bordered max-w-xl w-full transition duration-300 ease-in"
                         required
                               [ngClass]="{'input-error': registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched), 
                                           'input-success': registerForm.get('password')?.valid}"
@@ -310,33 +318,49 @@
                     </div>
 
                     <div *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)" class="text-red-500 text-sm mt-1">
-                      <div *ngIf="registerForm.get('password')?.errors?.['required']">Password is required.</div>
-                      <div *ngIf="registerForm.get('password')?.errors?.['pattern']">Password must be at least 8 characters, have at least one lowercase and uppercase letter, number and symbol *$!#&.</div> <!--need to add @-->
+                      <!-- <div *ngIf="registerForm.get('password')?.errors?.['required']">Password is required.</div> -->
                     </div>
+                  <!-- Indicators -->
+                  <div class="mt-2 transition duration-300 ease-in">
+                    <div class="transition duration-300 ease-in" [class.text-red-500]="!hasMinLength()" [class.text-green-500]="hasMinLength()" [class.line-through]="hasMinLength()">
+                      8 - 20 characters
+                    </div>
+                    <div class="transition duration-300 ease-in" [class.text-red-500]="!hasUppercase()" [class.text-green-500]="hasUppercase()" [class.line-through]="hasUppercase()">
+                      One Uppercase letter
+                    </div>
+                    <div class="transition duration-300 ease-in" [class.text-red-500]="!hasLowercase()" [class.text-green-500]="hasLowercase()" [class.line-through]="hasLowercase()">
+                      One Lowercase letter
+                    </div>
+                    <div class="transition duration-300 ease-in" [class.text-red-500]="!hasSymbol()" [class.text-green-500]="hasSymbol()" [class.line-through]="hasSymbol()">
+                      ONLY symbols from &#64;, *, $, !, #, &
+                    </div>
+                  </div>
                   </div>
 
                   <!-- Host selection -->
-                  <div class="w-28 text-slate-400">
-                    I am a
+                  <div class="tooltip tooltip-top" data-tip="This cannot be changed in the future">
+                  <div class="w-full text-secondary">
+                    I want to:
                     <label class="label cursor-pointer">
-                      <input type="radio" class="radio radio-primary" formControlName="role" value="Employee" required /> Employee
+                      <input type="radio" class="radio radio-primary" formControlName="role" value="Employee" required />Attend Events
                     </label>
                     <label class="label cursor-pointer">
-                      <input type="radio" class="radio radio-primary" formControlName="role" value="Host" /> Host
+                      <input type="radio" class="radio radio-primary" formControlName="role" value="Host" /> Host and attend Events
                     </label>
 
                     <div *ngIf="registerForm.get('role')?.invalid && (registerForm.get('role')?.dirty || registerForm.get('role')?.touched)" class="text-red-500 text-sm mt-1">
                       <div *ngIf="registerForm.get('role')?.errors?.['required']">Please make a selection</div>
                     </div>
                   </div>
+                </div>
 
                   <!-- Confirm Password -->
                   <div>
-                    <label htmlFor="confirmPassword" class="block text-sm font-semibold text-heading text-slate-400">
+                    <label htmlFor="confirmPassword" class="block text-sm font-semibold text-heading text-secondary">
                       Confirm Password
                     </label>
                     <div class="relative inline-flex w-full max-w-md">
-                      <input id="password2" type="password" name="password2" formControlName="confirmPassword" class="input input-bordered max-w-md w-72 transition duration-300 ease-in"
+                      <input id="password2" type="password" name="password2" formControlName="confirmPassword" class="input input-bordered max-w-xl w-full transition duration-300 ease-in"
                             required
                             [ngClass]="{'input-error': registerForm.get('confirmPassword')?.invalid && (registerForm.get('confirmPassword')?.dirty || registerForm.get('confirmPassword')?.touched ) || registerForm.errors?.['passwordMismatch'], 
                                         'input-success': registerForm.get('confirmPassword')?.valid && !registerForm.errors?.['passwordMismatch']}" 
@@ -360,44 +384,58 @@
               </div> 
 
 
-              <div class="flex items-center justify-center">
-                <button type="submit"  [disabled]="registerForm.invalid" class=" w-96 mt-4 inline-flex cursor-pointer items-center justify-center rounded-xl border-2 border-primary bg-primary px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:border-primary-accent hover:bg-primary-accent focus:outline-none focus:ring-2 focus:ring-orange-400/80 focus:ring-offset-0 disabled:opacity-30 disabled:hover:border-primary disabled:hover:bg-primary disabled:hover:text-white dark:focus:ring-white/80">
+              <div class="flex items-center justify-center lg:mt-12 mt-4">
+                <button type="submit"  [disabled]="registerForm.invalid" class=" w-96 mt-4 inline-flex cursor-pointer items-center justify-center rounded-md border-2 border-primary bg-primary px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:border-primary-accent hover:bg-primary-accent focus:outline-none focus:ring-2 focus:ring-orange-400/80 focus:ring-offset-0 disabled:opacity-30 disabled:hover:border-primary disabled:hover:bg-primary disabled:hover:text-white dark:focus:ring-white/80">
                   Create Account
                 </button>
               </div>
-
-              <div class="divider">or</div>
-
-              <div class="flex flex-col justify-center items-center">
-                <button class="btn lg:w-96 w-full mb-4  bg-base-100"  (click)="signInWithGoogle()">        
-                  <img src="https://www.material-tailwind.com/logos/logo-google.png"
-                        alt="google"
-                        class="h-6 w-6"
-                  />
-                  Sign up with google
-                </button>
-              </div>
+              
 
             </form>
           </div>
-        </form>
-      </div>
-
       <form method="dialog" class="modal-backdrop">
         <button>close</button>
       </form>
     </form>
   </div>
+  <div class="toast" *ngIf="isRegisterAPILoading">
+    <div class="alert alert-info flex justify-center">
+        <span class="loading loading-dots loading-md"></span>
+    </div>
+  </div>
+  <div class="toast" *ngIf="showregistersuccessToast">
+    <div class="alert alert-success">
+      <span>User Registered! Redirecting...</span>
+    </div>
+    </div>
+    
+    <div class="toast" *ngIf="showregisterfailToast">
+    <div class="alert alert-error">
+      <span>Error Registering User</span>
+    </div>
+    </div>
 </dialog>
 
-<div class="toast" *ngIf="showregistersuccessToast">
-  <div class="alert alert-success">
-    <span>User Registered! Redirecting...</span>
+<dialog id="my_modal_7" class="modal">
+  <div class="modal-box">
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+    </form>
+    <h3 class="text-lg font-medium">To allow your google calendar to sync with your RSVP'd events, select this option</h3>
+    <img src="../assets/screenshots/Permissions.png" alt="">
+    <p class="mb-4 text-center">
+      Find out more in our <span class="cursor-pointer text-indigo-500 no-underline hover:text-indigo-500" routerLink="/privacy-policy">Privacy Policy</span>
+    </p>
+
+    <div class="flex items-center">
+      <input class="checkbox checkbox-accent" type="checkbox" id="dontShowAgain" (change)="toggleDontShowAgain($event)">
+      <label for="dontShowAgain" class="label-text text-accent ml-4">Don't show again</label>
+    </div>
+    <div class="text-right">
+      <button class="btn btn-accent mt-4" (click)="signInWithGoogle()">I understand</button>
+    </div>
   </div>
-  </div>
-  
-  <div class="toast" *ngIf="showregisterfailToast">
-  <div class="alert alert-error">
-    <span>Error Registering User</span>
-  </div>
-  </div>
+  <form method="dialog" class="modal-backdrop">
+    <button>close</button>
+  </form>
+</dialog>

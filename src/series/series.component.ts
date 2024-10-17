@@ -6,7 +6,7 @@ import { RandomHeaderService } from '../app/random-header.service';
 import { EventCardComponent } from 'src/Components/EventCard/eventCard.component';
 import { GhostEventCardComponent } from 'src/Components/GhostEventCard/GhostEventCard.component';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-
+import { SeriesTourService } from './seriesTour.service';
 @Component({
   selector: 'app-series',
   standalone: true,
@@ -32,10 +32,10 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
     ]),
   ]
 })
-export class SeriesComponent implements OnInit{
+export class SeriesComponent implements OnInit {
   imageSource: string;
   isLoading = true;
-  seriesID= '';
+  seriesID = '';
   series: any = {
     host: {
       firstName: '',
@@ -48,69 +48,81 @@ export class SeriesComponent implements OnInit{
   goBack(): void {
     window.history.back();
   }
-  constructor(private route: ActivatedRoute, private randomHeaderService: RandomHeaderService) { 
+  constructor(private route: ActivatedRoute, private randomHeaderService: RandomHeaderService, private seriesTour: SeriesTourService) {
     this.imageSource = '';
   }
   ngOnInit(): void {
     this.imageSource = this.randomHeaderService.getRandomHeaderSource();
+    this.route.queryParams.subscribe(params => {
+      if (params['startTour'] === 'true') {
+          this.startTour();
+        }
+    });
     this.route.params.subscribe(async params => {
       this.seriesID = params['id'];
       await this.checkUserRSVP();
       await this.fetchEventDetails();
-      // Fetch series data and host data in parallel
-
     });
   }
 
   async fetchEventDetails(): Promise<void> {
     const seriesFetch = fetch('https://events-system-back.wn.r.appspot.com/api/eventseries/' + this.seriesID)
-    .then(response => response.json());
+      .then(response => response.json());
 
-  seriesFetch.then(data => {
-    this.series = data;
+    seriesFetch.then(data => {
+      this.series = data;
 
-    // Fetch host data for the series
-    const seriesHostFetch = fetch('https://events-system-back.wn.r.appspot.com/api/employees/' + this.series.hostId)
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-        this.series.host = data; // Add host data to the series
-      });
-
-    // Fetch event details for each event ID
-    const eventPromises = this.series.seriesEventIds.map((eventId: number) =>
-      fetch('https://events-system-back.wn.r.appspot.com/api/events/' + eventId)
+      // Fetch host data for the series
+      const seriesHostFetch = fetch('https://events-system-back.wn.r.appspot.com/api/employees/' + this.series.hostId)
         .then(response => response.json())
-    );
+        .then(data => {
+          console.log(data);
+          this.series.host = data; // Add host data to the series
+        });
 
-    Promise.all([seriesHostFetch, ...eventPromises]).then(results => {
-      const [_, ...events] = results;
-      this.events = events;
-      console.log(this.events);
-
-      // Fetch host information for each event
-      const hostFetches = this.events.map(event => {
-        return fetch('https://events-system-back.wn.r.appspot.com/api/employees/' + event.hostId)
+      // Fetch event details for each event ID
+      const eventPromises = this.series.seriesEventIds.map((eventId: number) =>
+        fetch('https://events-system-back.wn.r.appspot.com/api/events/' + eventId)
           .then(response => {
             if (!response.ok) {
+              if (response.status === 404) {
+                console.warn(`Event with ID ${eventId} not found (404). Skipping.`);
+                return null; // Skip this event
+              }
               throw new Error(`HTTP error! status: ${response.status}`);
             }
-            return response.json(); // Parse the response as JSON
+            return response.json();
           })
-          .then(data => {
-            console.log("host:", data); // Log the parsed data
-            event.host = data; // Add host data to the event
-          })
-          .catch(error => {
-            console.error('Error fetching host data:', error);
-          });
-      });
-      Promise.all(hostFetches).then(() => {
-        // All host information has been fetched and added to events
-        this.isLoading = false;
+      );
+
+      Promise.all([seriesHostFetch, ...eventPromises]).then(results => {
+        const [_, ...events] = results;
+        this.events = events.filter(event => event !== null); // Filter out null values
+        console.log(this.events);
+
+        // Fetch host information for each event
+        const hostFetches = this.events.map(event => {
+          return fetch('https://events-system-back.wn.r.appspot.com/api/employees/' + event.hostId)
+            .then(response => {
+              if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+              }
+              return response.json(); // Parse the response as JSON
+            })
+            .then(data => {
+              console.log("host:", data); // Log the parsed data
+              event.host = data; // Add host data to the event
+            })
+            .catch(error => {
+              console.error('Error fetching host data:', error);
+            });
+        });
+        Promise.all(hostFetches).then(() => {
+          // All host information has been fetched and added to events
+          this.isLoading = false;
+        });
       });
     });
-  });
   }
 
   async checkUserRSVP(): Promise<void> {
@@ -122,9 +134,9 @@ export class SeriesComponent implements OnInit{
     try {
       const response = await fetch('https://events-system-back.wn.r.appspot.com/api/eventseriessubscriptions');
       const rsvps = await response.json();
-      
+
       const matchingRSVP = rsvps.find((rsvp: any) => parseInt(rsvp.seriesId) === parseInt(this.seriesID) && rsvp.employeeId === parseInt(employeeId));
-      this.hasUserRSVPd = !!matchingRSVP.subscriptionId; 
+      this.hasUserRSVPd = !!matchingRSVP.subscriptionId;
 
       if (matchingRSVP) {
         this.matchingEventId = parseInt(matchingRSVP.seriesId); // Store the matching eventId
@@ -144,19 +156,19 @@ export class SeriesComponent implements OnInit{
   matchingRsvpId: number | null = null; // New property to store the matching rsvpId
   showunrsvpsuccessToast = false;
   showunrsvpfailToast = false;
-    // Method to toggle RSVP state and perform booking/canceling
-    async rsvpToSeries() : Promise<void>{
-      if (this.hasUserRSVPd) {
-        // Logic to cancel the booking
-        this.isAPILoading = true;
-        console.log('Cancelling RSVP:', this.matchingRsvpId);
-        fetch('https://events-system-back.wn.r.appspot.com/api/eventseriessubscriptions/' + this.matchingRsvpId, {
-          method: 'DELETE',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: '{}'
-        })
+  // Method to toggle RSVP state and perform booking/canceling
+  async rsvpToSeries(): Promise<void> {
+    if (this.hasUserRSVPd) {
+      // Logic to cancel the booking
+      this.isAPILoading = true;
+      console.log('Cancelling RSVP:', this.matchingRsvpId);
+      fetch('https://events-system-back.wn.r.appspot.com/api/eventseriessubscriptions/' + this.matchingRsvpId, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: '{}'
+      })
         .then(() => {
           // Show the success toast
           this.showunrsvpsuccessToast = true;
@@ -174,45 +186,47 @@ export class SeriesComponent implements OnInit{
           }, 5000);
           console.error('Error:', error);
         });
-      } else {
-        this.isAPILoading = true;
-        const requestBody = {
-          seriesId: this.seriesID,
-          employeeId: localStorage.getItem('ID'),
-        };
-      
-        try {
-          const response = await fetch('https://events-system-back.wn.r.appspot.com/api/eventseriessubscriptions', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(requestBody),
-          });
-      
-          if (!response.ok) {
-            throw new Error('Failed to RSVP to series');
-          }
-      
-          const responseData = await response.json();
-          this.showrsvpsuccessToast = true;
-          this.isAPILoading = false;
-          console.log('RSVP successful:', responseData);
-          setTimeout(() => {
-            this.showrsvpsuccessToast = false;
-          }, 5000);
-    
-        } catch (error) {
-          this.showrsvpfailToast = true;
-          this.isAPILoading = false;
-          setTimeout(() => {
-            this.showrsvpfailToast = false;
-          }, 10000);
-          console.error('Error RSVPing to event:', error);
-          // Handle error
+    } else {
+      this.isAPILoading = true;
+      const requestBody = {
+        seriesId: this.seriesID,
+        employeeId: localStorage.getItem('ID'),
+      };
+
+      try {
+        const response = await fetch('https://events-system-back.wn.r.appspot.com/api/eventseriessubscriptions', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(requestBody),
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to RSVP to series');
         }
+
+        const responseData = await response.json();
+        this.showrsvpsuccessToast = true;
+        this.isAPILoading = false;
+        console.log('RSVP successful:', responseData);
+        setTimeout(() => {
+          this.showrsvpsuccessToast = false;
+        }, 5000);
+
+      } catch (error) {
+        this.showrsvpfailToast = true;
+        this.isAPILoading = false;
+        setTimeout(() => {
+          this.showrsvpfailToast = false;
+        }, 10000);
+        console.error('Error RSVPing to event:', error);
+        // Handle error
       }
-      this.hasUserRSVPd = !this.hasUserRSVPd; // Toggle the RSVP state
     }
-  
+    this.hasUserRSVPd = !this.hasUserRSVPd; // Toggle the RSVP state
+  }
+  startTour(){
+    this.seriesTour.startTour();
+  }
 }

@@ -1,5 +1,3 @@
-
-
 <div class="flex lg:flex-row flex-col lg:mt-8 mt-4">
     <select class="select select-bordered w-full max-w-md lg:hidden" [(ngModel)]="selectedSection" (change)="setActiveSection(selectedSection)">
         <option value="faq" selected>Frequently asked Questions</option>
@@ -21,9 +19,12 @@
         <option value="deleteseries">Delete Series</option>
         <option value="notificatons">Notifications</option>
         <option value="Calender">Calender</option>
+        <option value="Map">Map</option>
+        <option value="Leaderboard">Leaderboard</option>
         <option value="MyEvents">My Events</option>
         <option value="MySocialClubs">My Social clubs</option>
         <option value="MySeries">My Series</option>
+        <option value="MySchedule">My Schedule</option>
         <option value="Settings">Settings</option>
         <option value="Search">Search</option>
         <option value="status">Status</option>
@@ -31,7 +32,7 @@
       </select>
       
       <!-- Menu for larger screens -->
-      <ul class="menu bg-base-200 w-80 text h-screen lg:block hidden">
+      <ul class="menu bg-base-100 w-80 text h-full lg:block hidden">
         <li><a (click)="setActiveSection('faq')">Frequently asked Questions</a></li>
         <li><a (click)="setActiveSection('account')">Account</a></li>
         <li><a (click)="setActiveSection('login')">Login</a></li>
@@ -41,8 +42,6 @@
         <li><a (click)="setActiveSection('createevents')">Create Events</a></li>
         <li><a (click)="setActiveSection('updateevents')">Update Events</a></li>
         <li><a (click)="setActiveSection('deleteevents')">Delete Events</a></li>
-
-
         <li><a (click)="setActiveSection('socialclubs')">Social Clubs</a></li>
         <li><a (click)="setActiveSection('createsocialclubs')">Create Social Clubs</a></li>
         <li><a (click)="setActiveSection('updatesocialclubs')">Update Social Clubs</a></li>
@@ -53,9 +52,12 @@
         <li><a (click)="setActiveSection('deleteseries')">Delete Series</a></li>
         <li><a (click)="setActiveSection('notifications')">Notifications</a></li>
         <li><a (click)="setActiveSection('Calender')">Calender</a></li>
+        <li><a (click)="setActiveSection('Map')">Map</a></li>
+        <li><a (click)="setActiveSection('Leaderboard')">Leaderboard</a></li>
         <li><a (click)="setActiveSection('MyEvents')">My Events</a></li>
         <li><a (click)="setActiveSection('MySocialClubs')">My Social clubs</a></li>
         <li><a (click)="setActiveSection('MySeries')">My Series</a></li>
+        <li><a (click)="setActiveSection('MySchedule')">My Schedule</a></li>
         <li><a (click)="setActiveSection('Settings')">Settings</a></li>
         <li><a (click)="setActiveSection('Search')">Search</a></li>
         <li><a (click)="setActiveSection('status')">Status</a></li>
@@ -64,72 +66,184 @@
       
     <div *ngIf="activeSection === 'faq'"  >
     <div class="flex justify-center w-full">
-        <h1 class="text-7xl lg:mt-0 mt-4">FREQUENTLY ASKED QUESTIONS</h1>
+        <h1 class="text-6xl lg:mt-0 mt-4 ml-2">FREQUENTLY ASKED QUESTIONS</h1>
     </div>
     <p class="lg:ml-8 lg:mt-8 mt-8 ml-2 justify-center w-11/12 text-center text-secondary">
         Quick answers to questions you may have about SynC and the Events system <br>
-        Can't find what you're looking for? Check out our full documentation.
+        Can't find what you're looking for? Check out our full <a class="text-accent underline" href="https://drive.google.com/file/d/1-LPjaxOfD49lFPG2mOdeL9iHURG6DOzY/view?usp=drive_link">User Manual</a>.
 
 
 </p>
-<div class="mt-8">
-    <div class="collapse collapse-plus bg-base-200">
-        <input type="radio" name="my-accordion-3" checked="checked" />
-        <div class="collapse-title text-xl font-medium">What's your tech stack?</div>
-        <div class="collapse-content text-secondary">
-            <p class="text-xl mt-4">
-                Our application is built using a modern technology stack to ensure high performance and a great user experience. Here's a brief overview:
-                </p>
-                <ul class="list-disc text-left mt-4 mx-auto w-11/12 lg:w-3/4">
-                <li><strong>Frontend:</strong> Developed with <em>Angular</em>, utilizing <em>Tailwind CSS</em> for styling and <em>DaisyUI</em> for UI components.</li>
-                <li><strong>Backend:</strong> Powered by <em>Spring Boot</em>, with <em>JWT</em> for secure authentication.</li>
-                <li><strong>Deployment:</strong> The frontend is deployed on <em>Cloudflare Pages</em> for fast content delivery, while the backend is hosted on <em>Google Cloud Platform</em> for scalability and reliability.</li>
-                <li><strong>Database:</strong> Our data is securely hosted by <em>AWS</em>, ensuring high availability and performance.</li>
-                </ul>
+        <div class="mt-8">
+            <div class="collapse collapse-plus bg-base-200">
+                <input type="radio" name="my-accordion-3" checked="checked" />
+                <div class="collapse-title text-xl font-medium">I do not have the pages for creating events?</div>
+                <div class="collapse-content text-secondary">
+                    <p class="text-xl mt-4">The ability to create events, series and hosts, is limited to only
+                        <strong>hosts</strong>, if you signed up to just attend events, you will not have this feature.</p>
+                    <p class="text-xl mt-4">If, however, you did sign up as a host, and still cannot see this feature, please
+                        send an email to <strong>bieber.capstone&#64;gmail.com</strong> for assistance</p>
+                </div>
+            </div>
+            <div class="collapse collapse-plus bg-base-200">
+                <input type="radio" name="my-accordion-3" checked="checked" />
+                <div class="collapse-title text-xl font-medium">Can the AI help me plan virtual events?</div>
+                <div class="collapse-content text-secondary">
+                    <p class="text-xl mt-4">Eve is our events assistant, she is limited to event related activity, like RSVPing to events, finding preperation details for an event, leaving a review, and many more event related actions!.
+                    </p>
+                </div>
+            </div>
+            <div class="collapse collapse-plus bg-base-200">
+                <input type="radio" name="my-accordion-3" />
+                <div class="collapse-title text-xl font-medium">How do I create an event in the system?</div>
+                <div class="collapse-content text-secondary">
+                    <p class="text-xl mt-4">
+                        A: Events can only be created by hosts, so if you happen to be a host! Creating an event in our system
+                        is a straightforward process that involves filling out a form on our website and submitting it. Here's
+                        how you can do it:
+                    </p>
+                    <ul class="list-disc text-left mt-4 mx-auto w-11/12 lg:w-3/4">
+                        <li><strong>1. Navigate to the <a href="/createevent?startTour=true" class="text-accent">Event creation page</a></strong>.</li>
+                        <li><strong>2. Fill Out the Event Form:</strong> On the event creation page, you will see a form that
+                            asks for details about the event you want to create. Fill out all the required fields, which
+                            typically include the event name, date, time, location, and a brief description.</li>
+                        <li><strong>3. Submit the Form:</strong> After filling out the form, review the information to make sure
+                            everything is correct. Then, click the "Submit" button to create your event.</li>
+                        <li><strong>4. Confirmation:</strong> Once your event is successfully created, you will receive a
+                            confirmation pop up. This indicates that your event has been added to our system and is now visible
+                            to other users!</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="collapse collapse-plus bg-base-200">
+                <input type="radio" name="my-accordion-3" />
+                <div class="collapse-title text-xl font-medium">Where do I look up events. I couldn't find a search bar</div>
+                <div class="collapse-content  text-secondary">
+                    <p class="text-xl mt-4">To access the search functionality, use the search icon located in the top navbar,
+                        on the left of your profile picture, or to the right of the notifications bell!</p>
+                    <p class="text-xl mt-4">Alternatively, open the menu and navigate to the <a href="/search"
+                            class="text-accent">search page</a></p>
+                </div>
+            </div>
+            <div class="collapse collapse-plus bg-base-200">
+                <input type="radio" name="my-accordion-3" />
+                <div class="collapse-title text-xl font-medium">Can I edit an event after creating it?</div>
+                <div class="collapse-content text-secondary">
+                    <p class="text-xl mt-4">
+                        A: Yes, you can edit an event after it has been created. To do this, navigate to the <a href="/myevents" class="text-accent">My Events page</a> and
+                        look for the "Edit" button. Clicking this button will allow you to update the event's details.
+                    </p>
+                </div>
+            </div>
+            <div class="collapse collapse-plus bg-base-200">
+                <input type="radio" name="my-accordion-3" />
+                <div class="collapse-title text-xl font-medium">Where can i communicate with the event organizers on the app?</div>
+                <div class="collapse-content text-secondary">
+                    <p class="text-xl mt-4">
+                        The app does not directly support messaging, but you can communicate with the event organizer, by navigating to the events page, and clicking on the hosts name, this will direct you to the hosts profile, where you can view their social media links
+                    </p>
+                </div>
+            </div>
+            <div class="collapse collapse-plus bg-base-200">
+                <input type="radio" name="my-accordion-3" />
+                <div class="collapse-title text-xl font-medium">How do I see who has RSVP'd for my event?</div>
+                <div class="collapse-content text-secondary">
+                    <p class="text-xl mt-4">
+                        To find out who has RSVPd to your event, navigate to the <a href="/myevents" class="text-accent">My Events page</a> and click on the <span class="text-accent">check in</span> button in the event. You will see a list of attendees who have RSVPd to the event.
+                    </p>
+                    <p class="text-xl mt-4">
+                        Once you're in this page, you can view more information about each attendee or remove them from the event.
+                    </p>
+                </div>
+            </div>
+            <div class="collapse collapse-plus bg-base-200">
+                <input type="radio" name="my-accordion-3" />
+                <div class="collapse-title text-xl font-medium">Can this app be used on mobile too?</div>
+                <div class="collapse-content text-secondary">
+                    <p class="text-xl mt-4">
+                        Yes! the app can be viewed on both desktop and mobile devices, use the <strong>"Download App"</strong> option in the menu, to download it to your device!
+                    </p>
+                </div>
+            </div>
+            <div class="collapse collapse-plus bg-base-200">
+                <input type="radio" name="my-accordion-3" />
+                <div class="collapse-title text-xl font-medium">What is a series?</div>
+                <div class="collapse-content text-secondary">
+                    <p class="text-xl mt-4">
+                        <strong>in short: </strong> A series a short term collection of events that fall under a specific topic or theme, like social clubs, but not persistent, once the final event in the series has taken place, the series is no longer accessible!
+                    </p>
+                    <p class="text-xl mt-4">
+                        Find more of our series <a href="/seriescenter?startTour=true" class="text-accent">here</a>
+                    </p>
+                </div>
+            </div>
+            <div class="collapse collapse-plus bg-base-200">
+                <input type="radio" name="my-accordion-3" />
+                <div class="collapse-title text-xl font-medium"> does history in the schedule page show me only my event history or all events that have taken place?</div>
+                <div class="collapse-content text-secondary">
+                    <p class="text-xl mt-4">
+                        The history tab in the <a href="/myschedule" class="text-accent">My Schedule page</a> shows only events that <span class="underline">you have RSVPd to, and have taken place</span>, it does not show all events that have taken place.
+                    </p>
+                </div>
+            </div>
+            <div class="collapse collapse-plus bg-base-200">
+                <input type="radio" name="my-accordion-3" />
+                <div class="collapse-title text-xl font-medium">How can I create a new event for an existing series?</div>
+                <div class="collapse-content text-secondary">
+                    <p class="text-xl mt-4">
+                        Once you have created a series, feel free to create new events, and use or "edit" option in the <a href="/myseries" class="text-accent">My series</a> page to add the new event to the existing series!
+                    </p>
+                </div>
+            </div>
+            <div class="collapse collapse-plus bg-base-200">
+                <input type="radio" name="my-accordion-3" />
+                <div class="collapse-title text-xl font-medium">Is there a limit to the number of events companies can create?</div>
+                <div class="collapse-content text-secondary">
+                    <p class="text-xl mt-4">
+                        There is no limit! shoot for the stars, and get to the top of the <a href="/leaderboard" class="text-accent">leaderboard!</a>
+                    </p>
+                </div>
+            </div>
+            <div class="collapse collapse-plus bg-base-200">
+                <input type="radio" name="my-accordion-3" />
+                <div class="collapse-title text-xl font-medium">Is my data secure on the app?</div>
+                <div class="collapse-content text-secondary">
+                    <p class="text-xl mt-4">
+                        We do our best to ensure the protection and security of your data, by minimizing the sensitive data we collect, and the parties that can access it
+                    </p>
+                    <p class="text-xl mt-4">
+                        Find out more in our <a href="/privacy-policy" class="text-accent">Privacy policy</a>
+                    </p>
+                </div>
+            </div>
+            <div class="collapse collapse-plus bg-base-200">
+                <input type="radio" name="my-accordion-3" />
+                <div class="collapse-title text-xl font-medium">How do I contact the app support team?</div>
+                <div class="collapse-content text-secondary">
+                    <p class="text-xl mt-4">
+                        If you encounter technical issues, or need to contact support, reach out to use at <strong>bieber.capstone&#64;gmail.com</strong>
+                    </p>
+                </div>
+            </div>
+            <div class="collapse collapse-plus bg-base-200">
+                <input type="radio" name="my-accordion-3" />
+                <div class="collapse-title text-xl font-medium"> How do I set a reminder for an event?</div>
+                <div class="collapse-content text-secondary">
+                    <p class="text-xl mt-4">
+                        Signing up to our app using google will automatically sync your events to your google calendar, and you will receive reminders for your events, a day, and an hour before the event starts
+                    </p>
+                </div>
+            </div>
+            <div class="collapse collapse-plus bg-base-200">
+                <input type="radio" name="my-accordion-3" />
+                <div class="collapse-title text-xl font-medium">Is there a way to quickly check if I have booked an event without having to enter the event details</div>
+                <div class="collapse-content text-secondary">
+                    <p class="text-xl mt-4">
+                        Yes! The Upcoming events section of the homepage, shows all your upcoming events in chronological order, feel free to <a href="/?startTour=true" class="text-accent">take a tour</a> of the home page to find out where!
+                    </p>
+                </div>
+            </div>
         </div>
-        </div>
-        <div class="collapse collapse-plus bg-base-200">
-        <input type="radio" name="my-accordion-3" />
-        <div class="collapse-title text-xl font-medium">How do I create an event in the system?</div>
-        <div class="collapse-content text-secondary">
-            <p class="text-xl mt-4">
-                A: Events can only be created by hosts, so if you happen to be a host! Creating an event in our system is a straightforward process that involves filling out a form on our website and submitting it. Here's how you can do it:
-                </p>
-                <ul class="list-disc text-left mt-4 mx-auto w-11/12 lg:w-3/4">
-                <li><strong>1. Navigate to the Event Creation Page:</strong> First, go to the event creation page on our website. You can find this by clicking on the "Create Event" link in the My Events menu.</li>
-                <li><strong>2. Fill Out the Event Form:</strong> On the event creation page, you will see a form that asks for details about the event you want to create. Fill out all the required fields, which typically include the event name, date, time, location, and a brief description.</li>
-                <li><strong>3. Submit the Form:</strong> After filling out the form, review the information to make sure everything is correct. Then, click the "Submit" button to create your event. The form data is sent to our backend service, specifically the createEvent method in the EventService, which saves the event</li>
-                <li><strong>4. Confirmation:</strong>  Once your event is successfully created, you will receive a confirmation message. This indicates that your event has been added to our system and is now visible to other users.</li>
-                </ul>
-        </div>
-        </div>
-        <div class="collapse collapse-plus bg-base-200">
-        <input type="radio" name="my-accordion-3" />
-        <div class="collapse-title text-xl font-medium">What information do I need to provide to create an event?</div>
-        <div class="collapse-content  text-secondary">
-            <p class="text-xl mt-4">
-                A: When creating an event, you will need to provide the following information:
-                </p>
-                <ul class="list-disc text-left mt-4 mx-auto w-11/12 lg:w-3/4">
-                <li><strong>1. Event Name:</strong> A unique name for your event.</li>
-                <li><strong>2. Description:</strong> A brief description of your event.</li>
-                <li><strong>3. Date and Time:</strong> When your event will take place.</li>
-                <li><strong>4. Location:</strong> Where your event will be held.</li>
-                <li><strong>5. Social club:</strong> The club that will be hosting the event.</li>
-                <li><strong>6. Preperation details and agenda details:</strong> any important details attendees should know. </li>            
-                </ul>
-        </div>
-        </div>
-        <div class="collapse collapse-plus bg-base-200">
-        <input type="radio" name="my-accordion-3" />
-        <div class="collapse-title text-xl font-medium">Can I edit an event after creating it?</div>
-        <div class="collapse-content text-secondary">
-            <p class="text-xl mt-4">
-                A: Yes, you can edit an event after it has been created. To do this, navigate to the My Event's page and look for the "Edit" button. Clicking this button will allow you to update the event's details.
-                </p>
-        </div>
-        </div>
-</div>
     </div>
 
 
@@ -200,22 +314,20 @@
 
     <div *ngIf="activeSection === 'login'">
         <div class="container mx-auto p-4">
-            <h1 class="text-3xl font-bold mb-4">Help Menu - Login</h1>
+            <h1 class="text-3xl font-bold mb-4">Login page</h1>
             
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Overview</h2>
-                <p>This component provides a login form for users to sign in with their email and password, as well as options to sign in with Google or X (Twitter). It also includes a "Forgot Password" modal and a registration form for new users.</p>
+                <p>This page provides a login form for users to sign in with their email and password, as well as options to sign in with Google. It also includes a "Forgot Password" option and a registration form for new users.</p>
             </div>
     
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Main Sections</h2>
                 <ul class="list-disc list-inside">
                     <li><strong>Login Form:</strong> Allows users to enter their email and password to sign in.</li>
-                    <li><strong>Remember Me:</strong> Checkbox to remember the user's login details.</li>
-                    <li><strong>Sign In Buttons:</strong> Buttons to sign in with email/password, Google, or X (Twitter).</li>
-                    <li><strong>Forgot Password Modal:</strong> Modal for users to reset their password.</li>
+                    <li><strong>Sign In Buttons:</strong> Buttons to sign in with email/password, Google</li>
+                    <li><strong>Forgot Password</strong> Pop-up for users to reset their password.</li>
                     <li><strong>Registration Form:</strong> Form for new users to create an account.</li>
-                    <li><strong>Toasts:</strong> Notifications for API loading, login success, login failure, registration success, and registration failure.</li>
                 </ul>
             </div>
     
@@ -224,7 +336,6 @@
                 <ul class="list-disc list-inside">
                     <li><strong>Email Input:</strong> Field for users to enter their email address.</li>
                     <li><strong>Password Input:</strong> Field for users to enter their password with an option to toggle visibility.</li>
-                    <li><strong>Remember Me:</strong> Checkbox to remember the user's login details.</li>
                     <li><strong>Sign In Button:</strong> Button to submit the login form.</li>
                 </ul>
             </div>
@@ -233,30 +344,7 @@
                 <h2 class="text-2xl font-semibold mb-2">Sign In Options</h2>
                 <ul class="list-disc list-inside">
                     <li><strong>Sign In with Google:</strong> Button to sign in using Google account.</li>
-                    <li><strong>Sign In with X (Twitter):</strong> Button to sign in using X (Twitter) account.</li>
-                </ul>
-            </div>
-    
-            <div class="shadow-md rounded-lg p-6 mb-6">
-                <h2 class="text-2xl font-semibold mb-2">Forgot Password Modal</h2>
-                <ul class="list-disc list-inside">
-                    <li><strong>Email Input:</strong> Field for users to enter their email address to receive reset instructions.</li>
-                    <li><strong>Reset Password Button:</strong> Button to submit the reset password request.</li>
-                </ul>
-            </div>
-    
-            <div class="shadow-md rounded-lg p-6 mb-6">
-                <h2 class="text-2xl font-semibold mb-2">Registration Form</h2>
-                <ul class="list-disc list-inside">
-                    <li><strong>First Name Input:</strong> Field for users to enter their first name.</li>
-                    <li><strong>Last Name Input:</strong> Field for users to enter their last name.</li>
-                    <li><strong>Email Input:</strong> Field for users to enter their email address.</li>
-                    <li><strong>Password Input:</strong> Field for users to enter their password with an option to toggle visibility.</li>
-                    <li><strong>Confirm Password Input:</strong> Field for users to confirm their password with an option to toggle visibility.</li>
-                    <li><strong>Role Selection:</strong> Radio buttons for users to select their role (Employee or Host).</li>
-                    <li><strong>Create Account Button:</strong> Button to submit the registration form.</li>
-                    <li><strong>Sign Up with Google:</strong> Button to sign up using Google account.</li>
-                    <li><strong>Sign Up with X (Twitter):</strong> Button to sign up using X (Twitter) account.</li>
+                    <li><strong>allow calender access:</strong> In order for the events you RSVP to, to reflect in your google calendar</li>
                 </ul>
             </div>
     
@@ -270,48 +358,28 @@
 
     <div *ngIf="activeSection === 'home'">
         <div class="container mx-auto p-4">
-            <h1 class="text-3xl font-bold mb-4">Help Menu - Home Component</h1>
-            
+            <h1 class="text-3xl font-bold mb-4">Home Page</h1>
+            <div>
+                <a class="text-accent font-bold underline" href="/?startTour=true">Take the tour</a>
+            </div>
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Overview</h2>
-                <p>This component displays featured events, upcoming events, and social clubs. It includes carousels for navigating through the events and clubs, and options to filter upcoming events by date.</p>
+                <p>This page displays Popular events, upcoming events, and social clubs. It includes carousels for navigating through the events and clubs, and options to filter upcoming events by date.</p>
             </div>
     
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Main Sections</h2>
                 <ul class="list-disc list-inside">
-                    <li><strong>Featured Events:</strong> Displays a carousel of featured events with skeleton loading.</li>
-                    <li><strong>Upcoming Events:</strong> Displays a carousel of upcoming events with a date filter and skeleton loading.</li>
+                    <li><strong>Popular Events:</strong> Displays a carousel of Popular events.</li>
+                    <li><strong>Upcoming Events:</strong> Displays a carousel of upcoming events with a date filter.</li>
                     <li><strong>Social Clubs:</strong> Displays a carousel of social clubs.</li>
                 </ul>
             </div>
     
             <div class="shadow-md rounded-lg p-6 mb-6">
-                <h2 class="text-2xl font-semibold mb-2">Featured Events</h2>
+                <h2 class="text-2xl font-semibold mb-2">Eve</h2>
                 <ul class="list-disc list-inside">
-                    <li><strong>Carousel:</strong> Displays featured events in a carousel format.</li>
-                    <li><strong>Skeleton Loading:</strong> Shows skeleton loaders while the events are being fetched.</li>
-                    <li><strong>Navigation:</strong> Buttons to navigate to the previous and next slides.</li>
-                </ul>
-            </div>
-    
-            <div class="shadow-md rounded-lg p-6 mb-6">
-                <h2 class="text-2xl font-semibold mb-2">Upcoming Events</h2>
-                <ul class="list-disc list-inside">
-                    <li><strong>Date Filter:</strong> Input field to filter events by date.</li>
-                    <li><strong>Filter Button:</strong> Button to apply the date filter.</li>
-                    <li><strong>Clear Button:</strong> Button to clear the date filter.</li>
-                    <li><strong>Carousel:</strong> Displays upcoming events in a carousel format.</li>
-                    <li><strong>Skeleton Loading:</strong> Shows skeleton loaders while the events are being fetched.</li>
-                    <li><strong>Navigation:</strong> Buttons to navigate to the previous and next slides.</li>
-                </ul>
-            </div>
-    
-            <div class="shadow-md rounded-lg p-6 mb-6">
-                <h2 class="text-2xl font-semibold mb-2">Social Clubs</h2>
-                <ul class="list-disc list-inside">
-                    <li><strong>Carousel:</strong> Displays social clubs in a carousel format.</li>
-                    <li><strong>Navigation:</strong> Buttons to navigate to the previous and next slides.</li>
+                    <li><strong>Overview:</strong> Eve is our events assistant chatbot, she can help with all event related activities, like RSVPing to events, displaying events close by, and the ways to prepare for events</li>
                 </ul>
             </div>
         </div>
@@ -320,21 +388,20 @@
 
     <div *ngIf="activeSection === 'profile'">
         <div class="container mx-auto p-4">
-            <h1 class="text-3xl font-bold mb-4">Help Menu - Profile Component</h1>
+            <h1 class="text-3xl font-bold mb-4">Profile Page</h1>
             
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Overview</h2>
-                <p>This component displays the user's profile information, including their picture, name, email, and various tabs for additional details such as "About", "Events History", and "Subscriptions". It is designed to be responsive, with different layouts for desktop and mobile views.</p>
+                <p>This page displays the user's profile information, including their picture, name, email, and various tabs for additional details such as "About" and "Events History". It is designed to be responsive, with different layouts for desktop and mobile views.</p>
             </div>
     
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Main Sections</h2>
                 <ul class="list-disc list-inside">
                     <li><strong>Profile Header:</strong> Displays the user's profile picture, name, and email, with an option to edit the profile.</li>
-                    <li><strong>Tabs:</strong> Navigation tabs to switch between "About", "Events History", and "Subscriptions".</li>
+                    <li><strong>Tabs:</strong> Navigation tabs to switch between "About", "Events History".</li>
                     <li><strong>About Tab:</strong> Displays the user's description and contact details.</li>
                     <li><strong>Events History Tab:</strong> Displays a list of events the user has participated in.</li>
-                    <li><strong>Subscriptions Tab:</strong> Displays the user's subscriptions.</li>
                 </ul>
             </div>
     
@@ -353,7 +420,6 @@
                 <ul class="list-disc list-inside">
                     <li><strong>About Tab:</strong> Displays the user's description and contact details.</li>
                     <li><strong>Events History Tab:</strong> Displays a list of events the user has participated in.</li>
-                    <li><strong>Subscriptions Tab:</strong> Displays the user's subscriptions.</li>
                 </ul>
             </div>
     
@@ -374,24 +440,19 @@
                     <li><strong>More Details Button:</strong> Button to view more details about the event.</li>
                 </ul>
             </div>
-    
-            <div class="shadow-md rounded-lg p-6">
-                <h2 class="text-2xl font-semibold mb-2">Subscriptions Tab</h2>
-                <ul class="list-disc list-inside">
-                    <li><strong>Subscriptions Details:</strong> Displays details about the user's subscriptions.</li>
-                </ul>
-            </div>
         </div>
     </div>
 
 
     <div *ngIf="activeSection === 'events'">
         <div class="container mx-auto p-4">
-            <h1 class="text-3xl font-bold mb-4">Help Menu - Events Component</h1>
-            
+            <h1 class="text-3xl font-bold mb-4">Events Page</h1>
+            <div>
+                <a class="text-accent font-bold underline" href="/events?startTour=true">Take the tour</a>
+            </div>
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Overview</h2>
-                <p>This component displays a list of events with filtering options. It includes a drawer for filtering events by social club, title, date, location, and dietary requirements.</p>
+                <p>This page displays a list of events with filtering options. It includes a drawer for filtering events by social club, title, date, location, and dietary requirements.</p>
             </div>
     
             <div class="shadow-md rounded-lg p-6 mb-6">
@@ -410,17 +471,6 @@
                     <li><strong>Date:</strong> Filter events by date.</li>
                     <li><strong>Location:</strong> Search events by location.</li>
                     <li><strong>Dietary Requirements:</strong> Filter events by dietary requirements.</li>
-                </ul>
-            </div>
-    
-            <div class="shadow-md rounded-lg p-6 mb-6">
-                <h2 class="text-2xl font-semibold mb-2">Actions</h2>
-                <ul class="list-disc list-inside">
-                    <li><strong>Filter:</strong> Opens the drawer to apply filters.</li>
-                    <li><strong>Clear:</strong> Clears the selected date filter.</li>
-                    <li><strong>Submit:</strong> Applies the selected filters.</li>
-                    <li><strong>Cancel:</strong> Closes the drawer without applying filters.</li>
-                    <li><strong>Save:</strong> Closes the drawer and applies the filters.</li>
                 </ul>
             </div>
     
@@ -445,11 +495,13 @@
 
     <div *ngIf="activeSection === 'createevents'">
         <div class="container mx-auto p-4">
-            <h1 class="text-3xl font-bold mb-4">Help Menu - Create Event Component</h1>
-            
+            <h1 class="text-3xl font-bold mb-4">Creating Events</h1>
+            <div>
+                <a class="text-accent font-bold underline" href="/createevent?startTour=true">Take the tour</a>
+            </div>
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Overview</h2>
-                <p>This component allows users to create an event through a multi-step form. Each step collects different pieces of information about the event, such as the title, description, timings, location, and other details.</p>
+                <p>The <a href="/createevents" class="text-accent">create events</a> page allows hosts to create an event through a multi-step form. Each step collects different pieces of information about the event, such as the title, description, timings, location, and other details.</p>
             </div>
     
             <div class="shadow-md rounded-lg p-6 mb-6">
@@ -466,18 +518,15 @@
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Step 1: Event Title</h2>
                 <ul class="list-disc list-inside">
-                    <li><strong>Input Field:</strong> Allows users to enter the event title. The input is required.</li>
-                    <li><strong>Next Button:</strong> Proceeds to the next step.</li>
-                    <li><strong>Back Button:</strong> Disabled in this step.</li>
+                    <li><strong>Title</strong> Allows users to enter the event title. The input is required.</li>
                 </ul>
             </div>
     
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Step 2: Event Description</h2>
                 <ul class="list-disc list-inside">
-                    <li><strong>Textarea:</strong> Allows users to enter the event description. The textarea is required.</li>
-                    <li><strong>Next Button:</strong> Proceeds to the next step.</li>
-                    <li><strong>Back Button:</strong> Goes back to the previous step.</li>
+                    <li><strong>Description</strong> Allows users to enter the event description. This input is required.</li>
+                    <li>The <i class="fa fa-lightbulb-o" aria-hidden="true"></i> allows the system to generate event information based on the title</li>
                 </ul>
             </div>
     
@@ -490,19 +539,20 @@
                     <li><strong>End Date:</strong> Input field for the event end date.</li>
                     <li><strong>Location:</strong> Input field for the event location.</li>
                     <li><strong>Social Club:</strong> Dropdown to select the associated social club.</li>
-                    <li><strong>Next Button:</strong> Proceeds to the next step.</li>
-                    <li><strong>Back Button:</strong> Goes back to the previous step.</li>
+                    <li><strong>Tags:</strong> add searchable tags that will allow users to find your event or similar events.</li>
+                    <li>The <i class="fa fa-lightbulb-o" aria-hidden="true"></i> allows the system to generate event information based on the title</li>
+
                 </ul>
             </div>
     
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Step 4: Additional Details</h2>
                 <ul class="list-disc list-inside">
-                    <li><strong>Preparation Details:</strong> Form to add preparation details.</li>
-                    <li><strong>Agenda Details:</strong> Form to add agenda details.</li>
-                    <li><strong>Dietary Accommodations:</strong> Buttons to select dietary accommodations (Vegetarian, Vegan, Halal, Gluten-free).</li>
-                    <li><strong>Next Button:</strong> Proceeds to the next step.</li>
-                    <li><strong>Back Button:</strong> Goes back to the previous step.</li>
+                    <li><strong>Preparation Details:</strong> Form to add preparation details. This will tell the user how best to prepare for an event.</li>
+                    <li><strong>Agenda Details:</strong> Form to add agenda details. This will give the user an approximation of the events proceedings</li>
+                    <li><strong>Dietary Accommodations:</strong> Buttons to select dietary accommodations (Vegetarian, Vegan, Halal, Gluten-free), The special diets that you will be accomodating during an event</li>
+                    <li>The <i class="fa fa-lightbulb-o" aria-hidden="true"></i> allows the system to generate event information based on the title</li>
+
                 </ul>
             </div>
     
@@ -517,7 +567,6 @@
                     <li><strong>Social Club:</strong> Displays the selected social club.</li>
                     <li><strong>Preparation Details:</strong> Displays the preparation details.</li>
                     <li><strong>Agenda Details:</strong> Displays the agenda details.</li>
-                    <li><strong>Back Button:</strong> Goes back to the previous step.</li>
                     <li><strong>Submit Button:</strong> Submits the event details.</li>
                 </ul>
             </div>
@@ -527,11 +576,11 @@
 
     <div *ngIf="activeSection === 'updateevents'">
         <div class="container mx-auto p-4">
-            <h1 class="text-3xl font-bold mb-4">Help Menu - Update Event Component</h1>
+            <h1 class="text-3xl font-bold mb-4">Update Events page</h1>
             
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Overview</h2>
-                <p>This component allows users to update an existing event. The form includes fields for the event title, description, timings, location, social club, preparation details, agenda details, and dietary accommodations.</p>
+                <p>The update events page allows hosts to update an existing event. The form includes fields for the event title, description, timings, location, social club, preparation details, agenda details, and dietary accommodations.</p>
             </div>
     
             <div class="shadow-md rounded-lg p-6 mb-6">
@@ -634,11 +683,11 @@
 
     <div *ngIf="activeSection === 'deleteevents'">
         <div class="container mx-auto p-4">
-            <h1 class="text-3xl font-bold mb-4">Help Menu - Delete Event Component</h1>
+            <h1 class="text-3xl font-bold mb-4">Delete Events page</h1>
             
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Overview</h2>
-                <p>This component allows users to delete an existing event. The form includes a confirmation step where the user must enter the event name to proceed with the deletion.</p>
+                <p>This page allows hosts to delete an existing event. The form includes a confirmation step where the user must enter the event name to proceed with the deletion.</p>
             </div>
     
             <div class="shadow-md rounded-lg p-6 mb-6">
@@ -665,23 +714,21 @@
         </div>
     </div>
 
-
-
-
     <div *ngIf="activeSection === 'socialclubs'">
         <div class="container mx-auto p-4">
-            <h1 class="text-3xl font-bold mb-4">Help Menu - Social Clubs</h1>
-            
+            <h1 class="text-3xl font-bold mb-4">Social Clubs page</h1>
+            <div>
+                <a class="text-accent font-bold underline" href="/socialclubs?startTour=true">Take the tour</a>
+            </div>
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Overview</h2>
-                <p>This component displays a list of social clubs with a search bar to filter clubs by name or creator. It includes a loading state with skeleton cards and displays the filtered list of social clubs.</p>
+                <p>The <a href="/socialclubs" class="text-accent">Social Clubs page</a> displays a list of social clubs with a search bar to filter clubs by name or creator. It includes a loading state with skeleton cards and displays the filtered list of social clubs.</p>
             </div>
     
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Main Sections</h2>
                 <ul class="list-disc list-inside">
                     <li><strong>Search Bar:</strong> Allows users to search for clubs by name or creator.</li>
-                    <li><strong>Skeleton Cards:</strong> Placeholder content shown while loading.</li>
                     <li><strong>Social Club Cards:</strong> Displays individual social club details.</li>
                 </ul>
             </div>
@@ -690,20 +737,7 @@
                 <h2 class="text-2xl font-semibold mb-2">Search Bar</h2>
                 <ul class="list-disc list-inside">
                     <li><strong>Input Field:</strong> Users can type to search for clubs by name or creator.</li>
-                    <li><strong>Icon:</strong> A magnifying glass icon indicating the search functionality.</li>
                 </ul>
-            </div>
-    
-            <div class="shadow-md rounded-lg p-6 mb-6">
-                <h2 class="text-2xl font-semibold mb-2">Actions</h2>
-                <ul class="list-disc list-inside">
-                    <li><strong>Update Search Term:</strong> Updates the search term as the user types in the input field.</li>
-                </ul>
-            </div>
-    
-            <div class="shadow-md rounded-lg p-6 mb-6">
-                <h2 class="text-2xl font-semibold mb-2">Loading State</h2>
-                <p>Displayed while the social clubs are loading. It shows skeleton cards to indicate the loading state.</p>
             </div>
     
             <div class="shadow-md rounded-lg p-6">
@@ -717,23 +751,22 @@
         </div>
     </div>
 
-
     <div *ngIf="activeSection === 'createsocialclubs'">
         <div class="container mx-auto p-4">
-            <h1 class="text-3xl font-bold mb-4">Help Menu - Social Club Create Component</h1>
-            
+            <h1 class="text-3xl font-bold mb-4">Create Social Club Page</h1>
+            <div>
+                <a class="text-accent font-bold underline" href="/socialclubcreate?startTour=true">Take the tour</a>
+            </div>
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Overview</h2>
-                <p>This component allows users to create a new social club by filling out a multi-step form. Each step collects different information about the club, such as its name, description, and category.</p>
+                <p>The <a href="/socialclubcreate" class="text-accent">Create Social Clubs page</a> allows hosts to create a new social club by filling out a multi-step form. Each step collects different information about the club, such as its name and description.</p>
             </div>
     
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Main Sections</h2>
                 <ul class="list-disc list-inside">
-                    <li><strong>Step Navigation:</strong> Allows users to navigate between different steps of the form.</li>
-                    <li><strong>Image Upload:</strong> Users can upload an image for the club profile.</li>
                     <li><strong>Club Name:</strong> Input field for the club name.</li>
-                    <li><strong>Club Description & Category:</strong> Textareas for summary and detailed descriptions, and a dropdown for selecting the category.</li>
+                    <li><strong>Club Summary & Description:</strong> Textareas for summary and detailed descriptions</li>
                     <li><strong>Summary:</strong> Displays a summary of the entered information before submission.</li>
                 </ul>
             </div>
@@ -743,7 +776,7 @@
                 <ul class="list-disc list-inside">
                     <li><strong>Club Name Input:</strong> 
                         <ul class="list-disc list-inside ml-4">
-                            <li>Input field to enter the club name.</li>
+                            <li>Input field to enter the club name, this will draw users in with a common theme or niche</li>
                             <li>Required field.</li>
                         </ul>
                     </li>
@@ -759,32 +792,23 @@
                             <li>Required field.</li>
                         </ul>
                     </li>
-                    <li><strong>Category Dropdown:</strong> 
-                        <ul class="list-disc list-inside ml-4">
-                            <li>Dropdown to select the club category.</li>
-                            <li>Options: Literature, Education, etc.</li>
-                        </ul>
-                    </li>
                 </ul>
             </div>
         </div>
     </div>
 
-
     <div *ngIf="activeSection === 'updatesocialclubs'">
         <div class="container mx-auto p-4">
-            <h1 class="text-3xl font-bold mb-4">Help Menu - Update Social Club Component</h1>
+            <h1 class="text-3xl font-bold mb-4">Update Social Clubs page</h1>
             
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Overview</h2>
-                <p>This component allows users to update the details of an existing social club. The form includes fields for the club name, category, summary, and detailed description.</p>
+                <p>This page allows host to update the details of an existing social club. The form includes fields for the club name, summary, and detailed description.</p>
             </div>
     
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Main Sections</h2>
                 <ul class="list-disc list-inside">
-                    <li><strong>Page Heading:</strong> Displays the current club name.</li>
-                    <li><strong>Back Button:</strong> Navigates back to the previous page.</li>
                     <li><strong>Form Fields:</strong> Input fields for club name, category, summary, and detailed description.</li>
                     <li><strong>Save Button:</strong> Submits the form to save changes.</li>
                 </ul>
@@ -799,12 +823,6 @@
                             <li>Required field.</li>
                         </ul>
                     </li>
-                    <li><strong>Category Dropdown:</strong> 
-                        <ul class="list-disc list-inside ml-4">
-                            <li>Dropdown to select the club category.</li>
-                            <li>Options: Literature, Education, etc.</li>
-                        </ul>
-                    </li>
                     <li><strong>Summary Description:</strong> 
                         <ul class="list-disc list-inside ml-4">
                             <li>Textarea for a short summary of the club.</li>
@@ -819,20 +837,16 @@
                     </li>
                 </ul>
             </div>
-    
-
-
         </div>
     </div>
 
-
     <div *ngIf="activeSection === 'deletesocialclubs'">
         <div class="container mx-auto p-4">
-            <h1 class="text-3xl font-bold mb-4">Help Menu - Delete Social Club Component</h1>
+            <h1 class="text-3xl font-bold mb-4">Delete Social Club page</h1>
             
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Overview</h2>
-                <p>This component allows users to delete an existing social club by confirming the club name. The form includes a text input for the club name and buttons to submit the deletion or go back.</p>
+                <p>This page allows hosts to delete an existing social club by confirming the club name. The form includes a text input for the club name and buttons to submit the deletion or go back.</p>
             </div>
     
             <div class="shadow-md rounded-lg p-6 mb-6">
@@ -859,14 +873,15 @@
         </div>
     </div>
 
-
     <div *ngIf="activeSection === 'series'">
         <div class="container mx-auto p-4">
-            <h1 class="text-3xl font-bold mb-4">Help Menu - Series Center Component</h1>
-            
+            <h1 class="text-3xl font-bold mb-4">Series Page</h1>
+            <div>
+                <a class="text-accent font-bold underline" href="/seriescenter?startTour=true">Take the tour</a>
+            </div>
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Overview</h2>
-                <p>This component displays a list of series events with filtering options. It includes a drawer for filtering events by title and a list of series cards.</p>
+                <p>The <a href="/seriescenter" class="text-accent">Series</a> page displays a list of series events with filtering options. It includes a drawer for filtering events by title and a list of series cards.</p>
             </div>
     
             <div class="shadow-md rounded-lg p-6 mb-6">
@@ -881,8 +896,6 @@
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Drawer</h2>
                 <ul class="list-disc list-inside">
-                    <li><strong>Drawer Toggle:</strong> A checkbox to control the drawer's open/close state.</li>
-                    <li><strong>Filter By Button:</strong> A button to display filter options.</li>
                     <li><strong>Filter Options:</strong> Options to filter series events by title.</li>
                     <li><strong>Cancel Button:</strong> A button to close the drawer without applying filters.</li>
                     <li><strong>Save Button:</strong> A button to apply the selected filters and close the drawer.</li>
@@ -892,8 +905,7 @@
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Series Cards</h2>
                 <ul class="list-disc list-inside">
-                    <li><strong>Series Card Component:</strong> Displays individual series event details such as series ID and name.</li>
-                    <li><strong>ngFor Directive:</strong> Iterates over the filtered events to display each series card.</li>
+                    <li><strong>Series Card Component:</strong> Displays individual series event details such as name.</li>
                 </ul>
             </div>
     
@@ -906,14 +918,15 @@
         </div>
     </div>
 
-
     <div *ngIf="activeSection === 'createseries'">
         <div class="container mx-auto p-4">
-            <h1 class="text-3xl font-bold mb-4">Help Menu - Create Series Component</h1>
-            
+            <h1 class="text-3xl font-bold mb-4">Create Series Page</h1>
+            <div>
+                <a class="text-accent font-bold underline" href="/createseries?startTour=true">Take the tour</a>
+            </div>
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Overview</h2>
-                <p>This component allows users to create a new series by navigating through multiple steps: Name, Description, Details, and Summary. Each step includes specific input fields and buttons to navigate between steps.</p>
+                <p>The <a href="/createseries" class="text-accent">create series</a> page allows hosts to create a new series by navigating through multiple steps: Name, Description, Details, and Summary. Each step includes specific input fields and buttons to navigate between steps.</p>
             </div>
     
             <div class="shadow-md rounded-lg p-6 mb-6">
@@ -925,44 +938,27 @@
             </div>
     
             <div class="shadow-md rounded-lg p-6 mb-6">
-                <h2 class="text-2xl font-semibold mb-2">Step Navigation</h2>
-                <ul class="list-disc list-inside">
-                    <li><strong>Steps:</strong> 
-                        <ul class="list-disc list-inside ml-4">
-                            <li>Each step has a class `step` and a conditional class `step-primary` based on the current step.</li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-    
-            <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Step Content</h2>
                 <ul class="list-disc list-inside">
                     <li><strong>Name Step:</strong> 
                         <ul class="list-disc list-inside ml-4">
                             <li>Input field for the series name.</li>
-                            <li>Tooltip for empty name warning.</li>
-                            <li>Buttons to navigate to the next step.</li>
                         </ul>
                     </li>
                     <li><strong>Description Step:</strong> 
                         <ul class="list-disc list-inside ml-4">
                             <li>Textarea for the series description.</li>
-                            <li>Tooltip for empty description warning.</li>
-                            <li>Buttons to navigate between steps.</li>
                         </ul>
                     </li>
                     <li><strong>Events Step:</strong> 
                         <ul class="list-disc list-inside ml-4">
-                            <li>Button to create a new event.</li>
+                            <li>Button to create a new event, if the event a host is looking to add to the series is not available</li>
                             <li>Table to display and select events.</li>
-                            <li>Buttons to navigate between steps.</li>
                         </ul>
                     </li>
                     <li><strong>Summary Step:</strong> 
                         <ul class="list-disc list-inside ml-4">
                             <li>Displays the entered name, description, and selected events.</li>
-                            <li>Buttons to navigate back and submit the form.</li>
                         </ul>
                     </li>
                 </ul>
@@ -970,24 +966,21 @@
         </div>
     </div>
 
-
     <div *ngIf="activeSection === 'updateseries'">
         <div class="container mx-auto p-4">
-            <h1 class="text-3xl font-bold mb-4">Help Menu - Update Series Component</h1>
+            <h1 class="text-3xl font-bold mb-4">Update Series Page</h1>
             
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Overview</h2>
-                <p>This component allows users to update an existing series by modifying its title, description, and associated events. The form includes input fields for the title and description, a table to select events, and buttons to submit the changes or go back.</p>
+                <p>This page allows hosts to update an existing series by modifying its title, description, and associated events. The form includes input fields for the title and description, a table to select events, and buttons to submit the changes or go back.</p>
             </div>
     
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Main Sections</h2>
                 <ul class="list-disc list-inside">
                     <li><strong>Page Heading:</strong> Displays a message indicating the purpose of the page.</li>
-                    <li><strong>Back Button:</strong> Navigates back to the previous page.</li>
                     <li><strong>Form Fields:</strong> Input fields for the series title and description.</li>
                     <li><strong>Events Table:</strong> Table to display and select events associated with the series.</li>
-                    <li><strong>Submit Button:</strong> Submits the form to update the series.</li>
                 </ul>
             </div>
     
@@ -1006,19 +999,16 @@
                     </li>
                 </ul>
             </div>
-
-
         </div>
     </div>
 
-
     <div *ngIf="activeSection === 'deleteseries'">
         <div class="container mx-auto p-4">
-            <h1 class="text-3xl font-bold mb-4">Help Menu - Delete Series Component</h1>
+            <h1 class="text-3xl font-bold mb-4">Delete Series Page</h1>
             
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Overview</h2>
-                <p>This component allows users to delete an existing series by confirming the series name. The form includes an input field for the series name, a back button, and a delete button. It also displays loading, success, and error messages.</p>
+                <p>This page allows hosts to delete an existing series by confirming the series name. The form includes an input field for the series name, a back button, and a delete button.</p>
             </div>
     
             <div class="shadow-md rounded-lg p-6 mb-6">
@@ -1028,7 +1018,6 @@
                     <li><strong>Back Button:</strong> Navigates back to the previous page.</li>
                     <li><strong>Form Fields:</strong> Input field for the series name.</li>
                     <li><strong>Action Buttons:</strong> Buttons to go back or delete the series.</li>
-                    <li><strong>Toasts:</strong> Displays loading, success, and error messages.</li>
                 </ul>
             </div>
     
@@ -1046,30 +1035,21 @@
         </div>
     </div>
 
-
     <div *ngIf="activeSection === 'notifications'">
         <div class="container mx-auto p-4">
-            <h1 class="text-3xl font-bold mb-4">Help Menu - Notifications Component</h1>
+            <h1 class="text-3xl font-bold mb-4">Notifications Page</h1>
             
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Overview</h2>
-                <p>This component displays a list of notifications with options to mark them as read/unread, view more details, and delete them. It also includes a popover for detailed notification information.</p>
+                <p>The <a href="/notifications" class="text-accent">Notifications page</a> page displays a list of notifications with options to mark them as read/unread, view more details, and delete them. It also includes a popover for detailed notification information.</p>
             </div>
     
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Main Sections</h2>
                 <ul class="list-disc list-inside">
-                    <li><strong>Header:</strong> Displays the title "Notifications".</li>
                     <li><strong>Action Buttons:</strong> Buttons to mark all notifications as read/unread and to clear all notifications.</li>
                     <li><strong>Notifications List:</strong> Displays a list of notification items.</li>
                     <li><strong>Popover:</strong> Displays detailed information about a selected notification.</li>
-                </ul>
-            </div>
-    
-            <div class="shadow-md rounded-lg p-6 mb-6">
-                <h2 class="text-2xl font-semibold mb-2">Header</h2>
-                <ul class="list-disc list-inside">
-                    <li><strong>Title:</strong> Displays the title "Notifications" in a large, bold font.</li>
                 </ul>
             </div>
     
@@ -1095,7 +1075,6 @@
             <div class="shadow-md rounded-lg p-6">
                 <h2 class="text-2xl font-semibold mb-2">Popover</h2>
                 <ul class="list-disc list-inside">
-                    <li><strong>Popover Background:</strong> A semi-transparent background that covers the entire screen when a notification is selected.</li>
                     <li><strong>Popover Content:</strong> Displays detailed information about the selected notification, including title and description.</li>
                     <li><strong>Close Button:</strong> Button to close the popover.</li>
                 </ul>
@@ -1103,23 +1082,21 @@
         </div>
     </div>
 
-
     <div *ngIf="activeSection === 'Calender'">
         <div class="container mx-auto p-4">
-            <h1 class="text-3xl font-bold mb-4">Help Menu - Calendar Component</h1>
+            <h1 class="text-3xl font-bold mb-4">Calendar Page</h1>
             
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Overview</h2>
-                <p>This component displays a calendar with multiple views (Month, Week, Day, and List) and allows users to interact with events. Users can filter events, search for events, and RSVP to events.</p>
+                <p>The <a href="/calender" class="text-accent">Calendar page</a> displays a calendar with multiple views (Month, Week, Day, and List) and allows users to interact with events. Users can filter events, and RSVP to events.</p>
             </div>
     
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Main Sections</h2>
                 <ul class="list-disc list-inside">
-                    <li><strong>Drawer:</strong> Contains filters and search functionality.</li>
+                    <li><strong>Drawer:</strong> Contains filters.</li>
                     <li><strong>Calendar:</strong> Displays events in different views (Month, Week, Day, List).</li>
                     <li><strong>Event List:</strong> Displays events in a list format for mobile view.</li>
-                    <li><strong>Toasts:</strong> Displays notifications for API loading and RSVP status.</li>
                 </ul>
             </div>
     
@@ -1127,7 +1104,6 @@
                 <h2 class="text-2xl font-semibold mb-2">Drawer</h2>
                 <ul class="list-disc list-inside">
                     <li><strong>Filter Button:</strong> Toggles the visibility of the drawer on mobile devices.</li>
-                    <li><strong>Search Bar:</strong> Allows users to search for events.</li>
                     <li><strong>Social Club Filters:</strong> Allows users to filter events by social clubs.</li>
                     <li><strong>Save/Cancel Buttons:</strong> Save or cancel the filter selections on mobile devices.</li>
                 </ul>
@@ -1140,62 +1116,149 @@
                     <li><strong>Week View:</strong> Displays events in a weekly calendar format.</li>
                     <li><strong>Day View:</strong> Displays events for a single day.</li>
                     <li><strong>List View:</strong> Displays all events in a list format for the week.</li>
-                    <li><strong>Event Details:</strong> Displays event details such as title, time, and location.</li>
+                    <li><strong>Event Details:</strong> Displays event details such as title and time.</li>
                 </ul>
             </div>
     
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Event List (Mobile View)</h2>
                 <ul class="list-disc list-inside">
-                    <li><strong>Event Items:</strong> Displays individual event items with details such as title, time, and location.</li>
-                    <li><strong>More Details Button:</strong> Navigates to the event details page.</li>
-                    <li><strong>RSVP Button:</strong> Allows users to RSVP to events (commented out in the current implementation).</li>
+                    <li><strong>Event Items:</strong> Displays individual event items with details such as title, Navigates to the event details page when selected.</li>
                 </ul>
             </div>
         </div>
     </div>
 
-
-    <div *ngIf="activeSection === 'MyEvents'">
+    <div *ngIf="activeSection === 'Map'">
         <div class="container mx-auto p-4">
-            <h1 class="text-3xl font-bold mb-4">Help Menu - My Events Component</h1>
-            
+            <h1 class="text-3xl font-bold mb-4">Map Page</h1>
+            <div>
+                <a class="text-accent font-bold underline" href="/map?startTour=true">Take the tour</a>
+            </div>
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Overview</h2>
-                <p>This component displays a list of events created by the user. It includes a loading state with skeleton cards and a content state with actual event cards. Users can also create new events.</p>
+                <p>The <a href="/map" class="text-accent">Map page</a> displays a map with various events marked on it. Users can search for events, filter events by social clubs and series, and interact with the map to find event details.</p>
             </div>
     
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Main Sections</h2>
                 <ul class="list-disc list-inside">
-                    <li><strong>Loading State:</strong> Displays skeleton cards while the events are being loaded.</li>
-                    <li><strong>Content State:</strong> Displays the actual event cards once the events are loaded.</li>
+                    <li><strong>Search Bar:</strong> Allows users to search for events by name.</li>
+                    <li><strong>Map:</strong> Displays events on a map.</li>
+                    <li><strong>Filter Drawer:</strong> Contains filters for social clubs and series.</li>
+                </ul>
+            </div>
+    
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Search Bar</h2>
+                <ul class="list-disc list-inside">
+                    <li><strong>Search Input:</strong> Allows users to type in event names to search for.</li>
+                    <li><strong>Search Results:</strong> Displays a list of events matching the search query.</li>
+                </ul>
+            </div>
+    
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Filter Drawer</h2>
+                <ul class="list-disc list-inside">
+                    <li><strong>Social Club Filters:</strong> Allows users to filter events by social clubs.</li>
+                    <li><strong>Series Filters:</strong> Allows users to filter events by series.</li>
+                    <li><strong>Save/Cancel Buttons:</strong> Save or cancel the filter selections on mobile devices.</li>
+                </ul>
+            </div>
+    
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Map</h2>
+                <ul class="list-disc list-inside">
+                    <li><strong>Event Markers:</strong> Displays events as markers on the map.</li>
+                    <li><strong>Event Details:</strong> Displays event details when a marker is clicked.</li>
+                </ul>
+            </div>
+    
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Search Results</h2>
+                <ul class="list-disc list-inside">
+                    <li><strong>Event Items:</strong> Displays individual event items with details such as title. Navigates to the event details page when selected.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="activeSection === 'Leaderboard'">
+        <div class="container mx-auto p-4">
+            <h1 class="text-3xl font-bold mb-4">Leaderboard Page</h1>
+            
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Overview</h2>
+                <p>The <a href="/leaderboard" class="text-accent">Leaderboard page</a> displays a leaderboard with tabs for "Events hosted" and "Events attended". Users can see the top achievers, filter the number of rows displayed, and navigate through pages of results.</p>
+            </div>
+    
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Main Sections</h2>
+                <ul class="list-disc list-inside">
+                    <li><strong>Tabs:</strong> Allows users to switch between "Events hosted" and "Events attended".</li>
+                    <li><strong>Leaderboard Table:</strong> Displays the leaderboard with rankings, names, and event counts.</li>
+                    <li><strong>Pagination Controls:</strong> Allows users to navigate through pages of results.</li>
+                    <li><strong>Rows Per Page:</strong> Allows users to select the number of rows displayed per page.</li>
+                </ul>
+            </div>
+    
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Tabs</h2>
+                <ul class="list-disc list-inside">
+                    <li><strong>Events Hosted:</strong> Displays the leaderboard for events hosted by users.</li>
+                    <li><strong>Events Attended:</strong> Displays the leaderboard for events attended by users.</li>
+                </ul>
+            </div>
+    
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Leaderboard Table</h2>
+                <ul class="list-disc list-inside">
+                    <li><strong>Rank:</strong> Displays the rank of the user.</li>
+                    <li><strong>Name:</strong> Displays the name of the user.</li>
+                    <li><strong>Events:</strong> Displays the number of events hosted or attended by the user.</li>
+                    <li><strong>Diff:</strong> Displays the difference in the number of events compared to the current leader (only visible on larger screens).</li>
+                </ul>
+            </div>
+    
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Pagination Controls</h2>
+                <ul class="list-disc list-inside">
+                    <li><strong>Previous Page Button:</strong> Navigates to the previous page of results.</li>
+                    <li><strong>Current Page Indicator:</strong> Displays the current page number and total pages.</li>
+                    <li><strong>Next Page Button:</strong> Navigates to the next page of results.</li>
+                </ul>
+            </div>
+    
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Rows Per Page</h2>
+                <ul class="list-disc list-inside">
+                    <li><strong>Rows Per Page Selector:</strong> Allows users to select the number of rows displayed per page.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="activeSection === 'MyEvents'">
+        <div class="container mx-auto p-4">
+            <h1 class="text-3xl font-bold mb-4">My Events Page</h1>
+            
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Overview</h2>
+                <p>The <a href="/myevents" class="text-accent">My Events page</a> displays a list of events created by the host. Hosts can also create new events.</p>
+            </div>
+    
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Main Sections</h2>
+                <ul class="list-disc list-inside">
+                    <li><strong>Content:</strong> Displays the actual event cards once the events are loaded.</li>
                     <li><strong>Create Event Button:</strong> Button to navigate to the event creation page.</li>
                 </ul>
             </div>
     
             <div class="shadow-md rounded-lg p-6 mb-6">
-                <h2 class="text-2xl font-semibold mb-2">Loading State</h2>
+                <h2 class="text-2xl font-semibold mb-2">Content</h2>
                 <ul class="list-disc list-inside">
-                    <li><strong>Skeleton Cards:</strong> Placeholder cards displayed while the events are being loaded.</li>
+                    <li><strong>Event Cards:</strong> Displays individual event cards with details such as title and description, and a link to the event details page.</li>
                     <li><strong>Create Event Button:</strong> Button to navigate to the event creation page, displayed at the top right.</li>
-                </ul>
-            </div>
-    
-            <div class="shadow-md rounded-lg p-6 mb-6">
-                <h2 class="text-2xl font-semibold mb-2">Content State</h2>
-                <ul class="list-disc list-inside">
-                    <li><strong>Event Cards:</strong> Displays individual event cards with details such as event ID, title, and a link to the event details page.</li>
-                    <li><strong>Create Event Button:</strong> Button to navigate to the event creation page, displayed at the top right.</li>
-                </ul>
-            </div>
-    
-            <div class="shadow-md rounded-lg p-6">
-                <h2 class="text-2xl font-semibold mb-2">Event Card Details</h2>
-                <ul class="list-disc list-inside">
-                    <li><strong>Event ID:</strong> Unique identifier for the event.</li>
-                    <li><strong>Event Title:</strong> Title of the event.</li>
-                    <li><strong>Event String:</strong> String representation of the event ID.</li>
                 </ul>
             </div>
         </div>
@@ -1204,19 +1267,18 @@
 
     <div *ngIf="activeSection === 'MySocialClubs'">
         <div class="container mx-auto p-4">
-            <h1 class="text-3xl font-bold mb-4">Help Menu - Social Club Listing Component</h1>
+            <h1 class="text-3xl font-bold mb-4">My Social Clubs Page</h1>
             
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Overview</h2>
-                <p>This component displays a list of social clubs. It includes a loading state with skeleton cards and a content state with actual club cards. Users can also create new clubs.</p>
+                <p>The <a href="/socialclublisting" class="text-accent">My Social Clubs page</a> displays a list of social clubs. Hosts can also create new clubs.</p>
             </div>
     
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Main Sections</h2>
                 <ul class="list-disc list-inside">
-                    <li><strong>Page Heading:</strong> Displays the title "My Clubs" and a button to create a new club.</li>
-                    <li><strong>Loading State:</strong> Displays skeleton cards while the clubs are being loaded.</li>
-                    <li><strong>Content State:</strong> Displays the actual club cards once the clubs are loaded.</li>
+                    <li><strong>Content:</strong> Displays the actual club cards once the clubs are loaded.</li>
+                    <li><strong>Create Social clubs Button:</strong> Button to navigate to the Social club creation page.</li>
                 </ul>
             </div>
     
@@ -1229,16 +1291,9 @@
             </div>
     
             <div class="shadow-md rounded-lg p-6 mb-6">
-                <h2 class="text-2xl font-semibold mb-2">Loading State</h2>
-                <ul class="list-disc list-inside">
-                    <li><strong>Skeleton Cards:</strong> Placeholder cards displayed while the clubs are being loaded.</li>
-                </ul>
-            </div>
-    
-            <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Content State</h2>
                 <ul class="list-disc list-inside">
-                    <li><strong>Club Cards:</strong> Displays individual club cards with details such as club ID, name, description, picture link, summary, and categories.</li>
+                    <li><strong>Club Cards:</strong> Displays individual club cards with details such as  name and description</li>
                 </ul>
             </div>
     
@@ -1248,11 +1303,11 @@
 
     <div *ngIf="activeSection === 'MySeries'">
         <div class="container mx-auto p-4">
-            <h1 class="text-3xl font-bold mb-4">Help Menu - My Series Component</h1>
+            <h1 class="text-3xl font-bold mb-4">My Series Page</h1>
             
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Overview</h2>
-                <p>This component displays a list of series created by the user. It includes a button to create a new series and a list of series cards displaying the series details.</p>
+                <p>The <a href="/myseries" class="text-accent">My Series page</a> displays a list of series created by the host. It includes a button to create a new series and a list of series cards displaying the series details.</p>
             </div>
     
             <div class="shadow-md rounded-lg p-6 mb-6">
@@ -1266,38 +1321,55 @@
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Create Series Button</h2>
                 <ul class="list-disc list-inside">
-                    <li><strong>Button:</strong> Located at the top right, this button allows users to navigate to the series creation page.</li>
-                    <li><strong>Action:</strong> Clicking the button triggers the `navigateToCreateSeries` method.</li>
+                    <li><strong>Button:</strong> Located at the top right, this button allows hosts to navigate to the series creation page.</li>
                 </ul>
             </div>
     
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Series List</h2>
                 <ul class="list-disc list-inside">
-                    <li><strong>Series Cards:</strong> Displays individual series cards with details such as series ID and name.</li>
-                    <li><strong>ngFor Directive:</strong> Iterates over the `series` array to display each series card.</li>
-                    <li><strong>Series Card Component:</strong> The `app-myseriescard` component is used to display each series card.</li>
-                </ul>
-            </div>
-    
-            <div class="shadow-md rounded-lg p-6">
-                <h2 class="text-2xl font-semibold mb-2">Series Card Details</h2>
-                <ul class="list-disc list-inside">
-                    <li><strong>Series ID:</strong> Unique identifier for the series, passed as an input to the `app-myseriescard` component.</li>
-                    <li><strong>Series Name:</strong> Name of the series, passed as an input to the `app-myseriescard` component.</li>
+                    <li><strong>Series Cards:</strong> Displays individual series cards with details such as name.</li>
                 </ul>
             </div>
         </div>
     </div>
 
-
-    <div *ngIf="activeSection === 'Settings'">
+    <div *ngIf="activeSection === 'MySchedule'">
         <div class="container mx-auto p-4">
-            <h1 class="text-3xl font-bold mb-4">Help Menu - Settings Component</h1>
+            <h1 class="text-3xl font-bold mb-4">My Schedule Page</h1>
             
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Overview</h2>
-                <p>This component allows users to manage their profile settings, including personal details, security settings, and social media links. It includes tabs for navigating between different sections.</p>
+                <p>The <a href="/myschedule" class="text-accent">My Schedule page</a> displays a list of upcoming, hosted, and past events. Users can navigate through different tabs to view events they are attending, hosting, or have attended in the past.</p>
+            </div>
+    
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Main Sections</h2>
+                <ul class="list-disc list-inside">
+                    <li><strong>Tabs:</strong> Allows users to switch between "Upcoming", "Hosting", and "History" events.</li>
+                    <li><strong>Event List:</strong> Displays a list of events based on the selected tab.</li>
+                </ul>
+            </div>
+    
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Tabs</h2>
+                <ul class="list-disc list-inside">
+                    <li><strong>Upcoming:</strong> Displays events that the user is scheduled to attend in the future.</li>
+                    <li><strong>Hosting:</strong> Displays events that the user is hosting (only visible for hosts).</li>
+                    <li><strong>History:</strong> Displays events that the user has attended in the past.</li>
+                </ul>
+            </div>
+    
+        </div>
+    </div>
+
+    <div *ngIf="activeSection === 'Settings'">
+        <div class="container mx-auto p-4">
+            <h1 class="text-3xl font-bold mb-4">Settings Page</h1>
+            
+            <div class="shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-semibold mb-2">Overview</h2>
+                <p>The <a href="/settings" class="text-accent">Settings Page</a>  allows users to manage their profile settings, including personal details, security settings, and social media links. It includes tabs for navigating between different sections.</p>
             </div>
     
             <div class="shadow-md rounded-lg p-6 mb-6">
@@ -1335,76 +1407,50 @@
                     <li><strong>Save Changes Button:</strong> Saves the changes made in the security section.</li>
                 </ul>
             </div>
-    
-            <div class="shadow-md rounded-lg p-6">
-                <h2 class="text-2xl font-semibold mb-2">Additional Features</h2>
-                <ul class="list-disc list-inside">
-                    <li><strong>Loading Indicator:</strong> Displays a loading indicator while API requests are being processed.</li>
-                    <li><strong>Success and Error Toasts:</strong> Displays success or error messages for saving changes and deleting the account.</li>
-                    <li><strong>Confirmation Dialog:</strong> Displays a confirmation dialog before deleting the account.</li>
-                </ul>
-            </div>
         </div>
     </div>
 
 
     <div *ngIf="activeSection === 'Search'">
         <div class="container mx-auto p-4">
-            <h1 class="text-3xl font-bold mb-4">Help Menu - Search Component</h1>
+            <h1 class="text-3xl font-bold mb-4">Search Page</h1>
             
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Overview</h2>
-                <p>This component allows users to search and explore events, hosts, and social clubs. It includes a search bar, filter checkboxes, and displays search results in different sections.</p>
+                <p>The <a href="/search" class="text-accent">Search Page</a>  allows users to search and explore events, hosts, and social clubs. It includes a search bar, filter checkboxes, and displays search results in different sections.</p>
             </div>
     
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Main Sections</h2>
                 <ul class="list-disc list-inside">
-                    <li><strong>Page Heading:</strong> Displays the title "Search and Explore".</li>
                     <li><strong>Search Bar:</strong> Allows users to input search terms to find events, hosts, and social clubs.</li>
                     <li><strong>Filter Checkboxes:</strong> Allows users to filter search results by events, hosts, and social clubs.</li>
-                    <li><strong>Loading State:</strong> Displays skeleton cards while search results are being loaded.</li>
                     <li><strong>Content State:</strong> Displays the actual search results once they are loaded.</li>
-                </ul>
-            </div>
-    
-            <div class="shadow-md rounded-lg p-6 mb-6">
-                <h2 class="text-2xl font-semibold mb-2">Page Heading</h2>
-                <ul class="list-disc list-inside">
-                    <li><strong>Title:</strong> Displays the title "Search and Explore" in a large, bold font.</li>
                 </ul>
             </div>
     
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Search Bar</h2>
                 <ul class="list-disc list-inside">
-                    <li><strong>Input Field:</strong> Allows users to enter search terms. The input is bound to the `updateSearchTerm` method.</li>
-                    <li><strong>Placeholder:</strong> Displays the placeholder text "Search for events, hosts and social clubs...".</li>
+                    <li><strong>Input Field:</strong> Allows users to enter search terms.</li>
                 </ul>
             </div>
     
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Filter Checkboxes</h2>
                 <ul class="list-disc list-inside">
-                    <li><strong>Events Checkbox:</strong> Allows users to filter search results to include events. Bound to the `onCheckboxChange` method.</li>
-                    <li><strong>Hosts Checkbox:</strong> Allows users to filter search results to include hosts. Bound to the `onCheckboxChange` method.</li>
-                    <li><strong>Social Clubs Checkbox:</strong> Allows users to filter search results to include social clubs. Bound to the `onCheckboxChange` method.</li>
-                </ul>
-            </div>
-    
-            <div class="shadow-md rounded-lg p-6 mb-6">
-                <h2 class="text-2xl font-semibold mb-2">Loading State</h2>
-                <ul class="list-disc list-inside">
-                    <li><strong>Skeleton Cards:</strong> Placeholder cards displayed while the search results are being loaded.</li>
+                    <li><strong>Events Checkbox:</strong> Allows users to filter search results to include events.</li>
+                    <li><strong>Hosts Checkbox:</strong> Allows users to filter search results to include hosts.</li>
+                    <li><strong>Social Clubs Checkbox:</strong> Allows users to filter search results to include social clubs.</li>
                 </ul>
             </div>
     
             <div class="shadow-md rounded-lg p-6 mb-6">
                 <h2 class="text-2xl font-semibold mb-2">Content State</h2>
                 <ul class="list-disc list-inside">
-                    <li><strong>Events Section:</strong> Displays event cards with details such as event ID, title, description, start and end time, start and end date, location, and social club.</li>
-                    <li><strong>Hosts Section:</strong> Displays host cards with details such as host name, email, image, bio, and ID.</li>
-                    <li><strong>Social Clubs Section:</strong> Displays social club cards with details such as club ID, name, summary, and description.</li>
+                    <li><strong>Events Section:</strong> Displays event cards with details such as title, description, start and end time, start and end date, location, and social club.</li>
+                    <li><strong>Hosts Section:</strong> Displays host cards with details such as host name, image, bio.</li>
+                    <li><strong>Social Clubs Section:</strong> Displays social club cards with details such as name, summary, and description.</li>
                 </ul>
             </div>
         </div>

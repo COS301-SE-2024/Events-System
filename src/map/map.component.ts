@@ -3,7 +3,9 @@ import { CommonModule } from '@angular/common';
 import * as L from 'leaflet';
 import { MapCardComponent } from 'src/Components/MapCard/MapCard.component';
 import { RandomImageServiceService } from 'src/app/random-image-service.service';
-
+import { trigger, state, style, transition, animate } from '@angular/animations';
+import { ActivatedRoute } from '@angular/router';
+import { MapTourService } from './mapTour.service';
 interface CustomMarker extends L.Marker {
   eventId: number;
   socialClub: number;
@@ -15,9 +17,23 @@ interface CustomMarker extends L.Marker {
   imports: [CommonModule, MapCardComponent],
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css'],
+  animations: [
+    trigger('slideDown', [
+      state('void', style({ height: '0px', opacity: 0 })),
+      state('*', style({ height: '*', opacity: 1 })),
+      transition('void <=> *', animate('300ms ease-in-out')),
+    ]),
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('300ms ease-in', style({ opacity: 1 })),
+      ]),
+    ]),
+  ],
+
 })
 export class MapComponent implements OnInit, AfterViewInit {
-  constructor(private randomImageService: RandomImageServiceService) {}
+  constructor(private randomImageService: RandomImageServiceService, private route: ActivatedRoute, private maptour: MapTourService) {}
   private map: L.Map | undefined;
   private markers: CustomMarker[] = [];
   private events: any[] = [];
@@ -32,10 +48,27 @@ export class MapComponent implements OnInit, AfterViewInit {
   checkedSeries: any[] = [];
   isDrawerOpen = false;
   isFilterOpen = false;
+  searchResults: any[] = [];
+  showResults = false;
 
   @ViewChild(MapCardComponent) mapCardComponent!: MapCardComponent;
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      if (params['startTour'] === 'true') {
+        if (!sessionStorage.getItem('tourReloaded')) {
+          sessionStorage.setItem('tourReloaded', 'true');
+          window.location.reload();
+        } else {
+          sessionStorage.removeItem('tourReloaded');
+          this.startTour();
+          // Remove 'startTour' from query params
+          const url = new URL(window.location.href);
+          url.searchParams.delete('startTour');
+          window.history.replaceState({}, '', url.toString());
+        }
+      }
+    });
     this.initMap();
     this.fetchEventsAndAddMarkers();
     this.fetchSeries();
@@ -186,8 +219,6 @@ export class MapComponent implements OnInit, AfterViewInit {
     }
   }
 
-
-
   private fetchSeries(): void {
     fetch('https://events-system-back.wn.r.appspot.com/api/eventseries') // Replace with your actual API endpoint
       .then((response) => response.json())
@@ -213,6 +244,8 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   onSearch(event: Event): void {
     const searchTerm = (event.target as HTMLInputElement).value.toLowerCase();
+    this.searchResults = this.events.filter(event => event.title.toLowerCase().includes(searchTerm));
+    this.showResults = true;
     this.markers.forEach((marker, index) => {
       const event = this.events[index];
       if (event.title.toLowerCase().includes(searchTerm)) {
@@ -221,6 +254,34 @@ export class MapComponent implements OnInit, AfterViewInit {
         this.map!.removeLayer(marker);
       }
     });
+  }
+
+  showSearchResults(): void {
+    this.showResults = true;
+  }
+
+  closeSearchResults(): void {
+    this.showResults = false;
+  }
+
+  focusOnEvent(event: any): void {
+    const marker = this.markers.find(marker => marker.eventId === event.eventId);
+    if (marker && this.map) {
+      this.map.setView(marker.getLatLng(), 13);
+      marker.openPopup();
+      this.showCard(
+        marker.getLatLng().lat,
+        marker.getLatLng().lng,
+        event.title,
+        event.description,
+        event.eventId,
+        event.startTime,
+        event.endTime,
+        event.startDate,
+        event.endDate,
+        event.eventPreparation
+      );
+    }
   }
 
   onOtherClubClick(i: number) {
@@ -307,5 +368,9 @@ export class MapComponent implements OnInit, AfterViewInit {
         }
       });
     }
+  }
+
+  startTour(){
+    this.maptour.startTour();
   }
 }

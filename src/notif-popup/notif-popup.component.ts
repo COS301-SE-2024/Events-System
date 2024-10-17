@@ -11,11 +11,9 @@ import { RouterModule, Router } from '@angular/router';
 })
 export class NotifPopupComponent implements OnInit {
   notifications = [
-
-    {notificationId: 1, message: 'Notification Title 1', eventTitle: 'This is the description for notification 1.', eventId: "ID 1", read: false, seriesTitle: 'Series Title 1', seriesId: "ID 1" },
-    {notificationId: 2, message: 'Notification Title 2', eventTitle: 'This is the description for notification 2.', eventId: "ID 2", read: false, seriesTitle: 'Series Title 1', seriesId: "ID 1"  },
-    {notificationId: 3, message: 'Notification Title 3', eventTitle: 'This is the description for notification 3.', eventId: "ID 3", read: false, seriesTitle: 'Series Title 1', seriesId: "ID 1"  },
+    {notificationId: 1, message: '', eventTitle: '', eventId: "", read: false, seriesTitle: '', seriesId: "" },
   ];
+  loading = true; // Add loading state
 
   @Output() closePopup: EventEmitter<void> = new EventEmitter<void>();
 
@@ -42,8 +40,8 @@ export class NotifPopupComponent implements OnInit {
       return response.json();
     })
     .then(data => {
-            // Filter unread notifications
-            const unreadNotifications = data.filter((notification:any) => notification.readAt === null);
+      // Filter unread notifications
+      const unreadNotifications = data.filter((notification:any) => notification.readAt === null);
 
       // Slice the last three notifications
       this.notifications = unreadNotifications.slice(-3).reverse();
@@ -53,12 +51,14 @@ export class NotifPopupComponent implements OnInit {
         const messageParts = notification.message.split(' ');
         notification.message = messageParts[1];
       });
+
+      this.loading = false; // Set loading to false when data is fetched
     })
     .catch(error => {
       console.error('Error fetching notifications:', error);
+      this.loading = false; // Set loading to false in case of error
     });
   }
-
 
   navigateAndClosePopup(): void {
     this.router.navigate(['/notifications']);

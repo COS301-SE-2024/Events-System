@@ -1,12 +1,15 @@
 <div class="relative flex flex-col bg-base-100 overflow-x-hidden">
     <div class="layout-container flex h-full grow flex-col">
       <div class="px-5 sm:px-96 flex flex-1 justify-center h-full">
+
         <div class="layout-content-container flex flex-col max-w-[2010px] flex-1">
+
             <!--Page heading-->
             <div class="font-poppins text-center text-secondary font-extrabold text-2xl md:text-3xl mb-2">
               <p>Search and Explore</p>
             </div>
-            
+            <button class="btn w-[50px]  lg:ml-8 h-[30px] rounded-full"(click)="goBack()"><i class="fa-solid fa-arrow-left"></i></button>
+
              <div class="flex items-center justify-center">
               <!--Search bar-->
               <div class="px-4 py-3 md:w-[1010px] mb-5 flex flex-col gap-5 font-roboto">
@@ -15,7 +18,7 @@
                     <div class="text-[#93adc8] flex border-none bg-base-200 items-center justify-center pl-4 rounded-l-xl border-r-0">
                       <div class="fa-solid fa-magnifying-glass"></div>
                     </div>
-                    <input placeholder="Search for events, event tags, hosts and social clubs..." (input)="updateSearchTerm($event)" class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl focus:outline-0 focus:ring-0 border-none bg-base-200 focus:border-none h-full placeholder:text-[#93adc8] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal" />
+                    <input placeholder="Search for events, event tags, hosts and social clubs..." (input)="updateSearchTerm($event)" [value]="searchTerm" class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl focus:outline-0 focus:ring-0 border-none bg-base-200 focus:border-none h-full placeholder:text-[#93adc8] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal" />
                   </div>
                 </label>
                 <div class="flex mt-2 space-x-2">

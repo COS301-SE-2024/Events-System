@@ -4,7 +4,7 @@ import {SearchEventCardComponent} from 'src/Components/SearchEventCard/searchEve
 import {SearchHostCardComponent } from 'src/Components/searchHostCard/searchHostCard.component';
 import {SearchSocialClubCardComponent} from 'src/Components/SearchSocialClubCard/searchSocialClubCard.component';
 import {GhostSearchEventCardComponent} from 'src/Components/GhostSearchEventCard/GhostSearchEventCard.component';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { filter } from 'rxjs';
@@ -18,7 +18,7 @@ import { filter } from 'rxjs';
 })
 
 export class SearchComponent {
-  constructor(private router: Router) { }
+  constructor(private router: Router, private route: ActivatedRoute) { }
   events: any[] = [];
   hosts: any[] = [];
   socialclubs: any[] = [];
@@ -32,13 +32,27 @@ export class SearchComponent {
   showEvents = true;
   showHosts = true;
   showSocialClubs = true;
+  goBack(): void {
+    window.history.back();
+  }
   ngOnInit(): void {
+    
     const employeeId = Number(localStorage.getItem('ID'));
 
     if (!employeeId) {
       this.router.navigate(['/home']);
       return;
     }
+    this.route.queryParams.subscribe(params => {
+      this.searchTerm = params['tag'] || '';
+      this.filterEvents();
+    });
+
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      window.scrollTo(0, 0);
+    });
 
     Promise.all([
       fetch('https://events-system-back.wn.r.appspot.com/api/events')
@@ -50,7 +64,12 @@ export class SearchComponent {
         })
         .then(text => {
           const data = text ? JSON.parse(text) : [];
-          this.events = Array.isArray(data) ? data : [data];
+          const events = Array.isArray(data) ? data : [data];
+          const currentDate = new Date();
+          this.events = events.filter(event => {
+            const eventEndDate = new Date(`${event.endDate}T${event.endTime}`);
+            return eventEndDate >= currentDate;
+          });
         }),
       fetch('https://events-system-back.wn.r.appspot.com/api/employees')
         .then(response => {
