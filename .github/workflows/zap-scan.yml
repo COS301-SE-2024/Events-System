@@ -24,8 +24,7 @@ jobs:
       - name: Start Web Application
         shell: bash
         run: |
-          npm install  # Ensure dependencies are installed
-          npm start &  # Start the app in the background
+          npm install
         continue-on-error: true  # Continue even if there's an issue
 
       # Wait for the application to fully start
