@@ -32,12 +32,10 @@ jobs:
       - name: Wait for Web Application to start
         run: sleep 10  # Adjust the time based on how long your app takes to start
 
-      # Run OWASP ZAP Baseline Scan
+      # Run OWASP ZAP Baseline Scan with a custom command
       - name: Run OWASP ZAP Baseline Scan
-        uses: zaproxy/action-baseline@v0.13.0
-        with:
-          target: 'https://Events-system.org'  # Adjust the URL to match your app's host and port
-          fail_action: true   # Fail the job if any high-risk alerts are found
+        run: |
+          docker run -v ${{ github.workspace }}:/zap/wrk/:rw --network=host -t ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t 'https://Events-system.org' -J report_json.json -w report_md.md -r report_html.html -config api.addrs.addr.name='https://Events-system.org' -config api.addrs.addr.regex=false -m WARN
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
