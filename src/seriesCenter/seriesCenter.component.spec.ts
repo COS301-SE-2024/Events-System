@@ -31,6 +31,7 @@ describe('SeriesCenterComponent', () => {
           provide: ActivatedRoute,
           useValue: {
             params: of({ id: 'test-id' }),
+            queryParams: of({ startTour: 'true' })
           },
         },
       ],
