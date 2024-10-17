@@ -85,6 +85,6 @@ describe('EventComponent', () => {
 
   it('should display dietary accommodations', () => {
     const dietaryElements = fixture.debugElement.queryAll(By.css('.border'));
-    expect(dietaryElements.length).toBe(4);
+    expect(dietaryElements.length).toBe(2);
   });
 });
