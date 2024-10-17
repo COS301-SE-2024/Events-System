@@ -36,7 +36,7 @@ jobs:
       - name: Run OWASP ZAP Baseline Scan
         uses: zaproxy/action-baseline@v0.13.0
         with:
-          target: 'https://events-system-back.wn.r.appspot.com'  # Adjust the URL to match your app's host and port
+          target: 'https://Events-system.org'  # Adjust the URL to match your app's host and port
           fail_action: true   # Fail the job if any high-risk alerts are found
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
