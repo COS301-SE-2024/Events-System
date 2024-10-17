@@ -4,7 +4,8 @@ import * as L from 'leaflet';
 import { MapCardComponent } from 'src/Components/MapCard/MapCard.component';
 import { RandomImageServiceService } from 'src/app/random-image-service.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-
+import { ActivatedRoute } from '@angular/router';
+import { MapTourService } from './mapTour.service';
 interface CustomMarker extends L.Marker {
   eventId: number;
   socialClub: number;
@@ -32,7 +33,7 @@ interface CustomMarker extends L.Marker {
 
 })
 export class MapComponent implements OnInit, AfterViewInit {
-  constructor(private randomImageService: RandomImageServiceService) {}
+  constructor(private randomImageService: RandomImageServiceService, private route: ActivatedRoute, private maptour: MapTourService) {}
   private map: L.Map | undefined;
   private markers: CustomMarker[] = [];
   private events: any[] = [];
@@ -53,6 +54,21 @@ export class MapComponent implements OnInit, AfterViewInit {
   @ViewChild(MapCardComponent) mapCardComponent!: MapCardComponent;
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      if (params['startTour'] === 'true') {
+        if (!sessionStorage.getItem('tourReloaded')) {
+          sessionStorage.setItem('tourReloaded', 'true');
+          window.location.reload();
+        } else {
+          sessionStorage.removeItem('tourReloaded');
+          this.startTour();
+          // Remove 'startTour' from query params
+          const url = new URL(window.location.href);
+          url.searchParams.delete('startTour');
+          window.history.replaceState({}, '', url.toString());
+        }
+      }
+    });
     this.initMap();
     this.fetchEventsAndAddMarkers();
     this.fetchSeries();
@@ -352,5 +368,9 @@ export class MapComponent implements OnInit, AfterViewInit {
         }
       });
     }
+  }
+
+  startTour(){
+    this.maptour.startTour();
   }
 }

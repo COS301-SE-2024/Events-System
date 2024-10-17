@@ -8,7 +8,7 @@
                 <h2 class="skeleton mt-4 text-4xl lg:ml-64 text-secondary lg:h-8 h-24 lg:w-[700px] w-80"></h2>
             </div>
             <div>
-                <div class="card bg-base-100 shadow-xl lg:mt-4 mt-32">
+                <div class="card bg-base-100 shadow-xl lg:mt-4 mt-32" id="Hosted-by">
                     <div class="card-body">
                       <h2 class="card-title skeleton lg:h-8 h-14 w-64 -ml-2"></h2>
                       <p class="skeleton lg:h-8 h-24 lg:w-[200px] w-80-ml-4"></p>
@@ -21,6 +21,11 @@
 
             </div>
 
+
+        </div>
+        <div class="flex justify-center align-middle mt-24" id="event-details">
+          <div class=" skeleton w-11/12 h-52"  id="event-host-name">
+          </div>
         </div>
         
     </div> 
@@ -40,7 +45,7 @@
                         <h2 class="mt-4 text-4xl lg:ml-64 text-secondary">{{event.description}}</h2>
                     </div>
                     <div>
-                        <div class="card bg-base-100 shadow-xl lg:mt-4 mt-32">
+                        <div class="card bg-base-100 shadow-xl lg:mt-4 mt-32"  id="Hosted-by">
                             <div class="card-body">
 
                               <h2 class="card-title">Hosted by the: {{club.name}}</h2>
@@ -58,13 +63,13 @@
                 <!-- description -->
 
                 <!-- event details -->
-                <div class="card bg-base-100 shadow-xl mt-4">
+                <div class="card bg-base-100 shadow-xl mt-4" id="event-details">
                     <div class="card-body">
                       <h2 class="card-title text-4xl flex items-center justify-center mb-6">Event details</h2>
                       <div class="flex lg:justify-evenly lg:flex-row flex-col">
                         <div>
                           <div class="tooltip" data-tip="Find out more about the host">
-                            <p class="lg:text-4xl text-2xl cursor-pointer underline" [routerLink]="['/searchProfile', event.hostId]"> <i class="fa-solid fa-user mr-2"  ></i>{{host.firstName}} {{host.lastName}} </p>
+                            <p class="lg:text-4xl text-2xl cursor-pointer underline" [routerLink]="['/searchProfile', event.hostId]" id="event-host-name"> <i class="fa-solid fa-user mr-2"  ></i>{{host.firstName}} {{host.lastName}} </p>
                           </div>
                             <p class="lg:text-4xl text-2xl"><i class="fa-solid fa-location-pin mr-4"></i>{{event.location}}</p>
                         </div>
@@ -81,8 +86,8 @@
                     </div>
                   </div>
                 <!-- dietary requirements -->
-                <div class="mt-28">
-                    <h2 class="text-4xl flex items-center justify-center">Dietary accomodations</h2>
+                <div class="mt-28"id="Dietary-accomodations">
+                    <h2 class="text-4xl flex items-center justify-center" >Dietary accomodations</h2>
                     <div class="flex items-center justify-center mt-4">
                       <button [ngClass]="{'border-primary': isAccommodationAvailable('Vegetarian'), 'border-secondary border-opacity-20': !isAccommodationAvailable('Vegetarian')}" class="border px-4 py-2 rounded cursor-default" [disabled]="!isAccommodationAvailable('Vegetarian')">Vegetarian</button>
                       <button [ngClass]="{'border-primary': isAccommodationAvailable('Vegan'), 'border-secondary border-opacity-20': !isAccommodationAvailable('Vegan')}" class="border px-4 py-2 rounded lg:ml-8  cursor-default" [disabled]="!isAccommodationAvailable('Vegan')">Vegan</button>
@@ -91,10 +96,10 @@
                       </div>
                 </div>
               <!-- Tags Section -->
-              <div class="mt-28 flex flex-col items-center">
+              <div class="mt-28 flex flex-col items-center" id="tags">
                 <div class="tooltip" data-tip="select a tag to find events with similar tags">
                   <h2 class="text-4xl flex items-center justify-center">Tags</h2>
-                  <div class="grid grid-cols-2 gap-4 mt-4">
+                  <div class="grid grid-cols-2 gap-4 mt-4"  id="ind-tags">
                     <button *ngFor="let tag of event?.tags; let i = index" 
                             class="border border-primary px-4 py-2 rounded cursor-pointer"
                             [routerLink]="['/search']" 
@@ -106,7 +111,7 @@
               </div>
             
             <!-- Preperation details -->
-                <div class="mt-28">
+                <div class="mt-28" id="Preperation-details">
                     <h2 class="text-4xl flex items-center justify-center">Preperation details</h2>
                     <div class="flex items-center justify-center mt-6">
                       <ul class="steps steps-vertical lg:steps-horizontal lg:text-3xl text-xl">
@@ -117,7 +122,7 @@
         
                 
                 <!-- Agenda -->
-                <div class="mt-28">
+                <div class="mt-28" id="Agenda-details">
                     <h2 class="text-4xl flex items-center justify-center">Agenda</h2>
                     <div class="flex items-center justify-center mt-4">
                       <ul class="timeline timeline-vertical lg:text-3xl text-xl">
@@ -134,13 +139,13 @@
 
         </div>
     
-        <div class="map mt-8 rounded-lg" *ngIf="isAPILoaded">
+        <div class="map mt-8 rounded-lg"  id="map" *ngIf="isAPILoaded">
           <google-map height="24rem" width="100%" [options]="mapOptions">
             <map-marker [position]="markerPosition"></map-marker>
           </google-map>
           <!-- Add this button where you want it to appear, for example, after the location input -->
-        <div class="flex justify-center mt-4">
-          <button (click)="openInMaps()" class="btn btn-outline btn-primary font-roboto">
+        <div class="flex justify-center mt-4" >
+          <button (click)="openInMaps()" id="open-map" class="btn btn-outline btn-primary font-roboto">
             Open in Maps
           </button>
         </div>

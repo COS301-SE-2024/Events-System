@@ -47,10 +47,10 @@
                         <!-- Dietary accomodations -->
                       <h2 class="text-2xl flex items-center justify-center text-slate-300">Dietary accomodations</h2>
                       <div class="flex items-center justify-center mt-4">
-                        <button class="btn btn-outline" [ngClass]="{'btn-accent': isDietaryAccommodationSelected('Vegetarian'), 'btn-disabled': !isDietaryAccommodationSelected('Vegetarian')}">Vegetarian</button>
-                        <button class="btn btn-outline lg:ml-8" [ngClass]="{'btn-accent': isDietaryAccommodationSelected('Vegan'), 'btn-disabled': !isDietaryAccommodationSelected('Vegan')}">Vegan</button>
-                        <button class="btn btn-outline lg:ml-8" [ngClass]="{'btn-accent': isDietaryAccommodationSelected('Halal'), 'btn-disabled': !isDietaryAccommodationSelected('Halal')}">Halal</button>
-                        <button class="btn btn-outline lg:ml-8" [ngClass]="{'btn-accent': isDietaryAccommodationSelected('Gluten-free'), 'btn-disabled': !isDietaryAccommodationSelected('Gluten-free')}">Gluten-free</button>
+                        <button *ngIf="isAccommodationAvailable('Vegetarian')" [ngClass]="{'border-primary': isAccommodationAvailable('Vegetarian'), 'border-secondary border-opacity-20': !isAccommodationAvailable('Vegetarian')}" class="border px-4 py-2 rounded cursor-default" [disabled]="!isAccommodationAvailable('Vegetarian')">Vegetarian</button>
+                        <button *ngIf="isAccommodationAvailable('Vegan')" [ngClass]="{'border-primary': isAccommodationAvailable('Vegan'), 'border-secondary border-opacity-20': !isAccommodationAvailable('Vegan')}" class="border px-4 py-2 rounded lg:ml-8  cursor-default" [disabled]="!isAccommodationAvailable('Vegan')">Vegan</button>
+                        <button *ngIf="isAccommodationAvailable('Halal')" [ngClass]="{'border-primary': isAccommodationAvailable('Halal'), 'border-secondary border-opacity-20': !isAccommodationAvailable('Halal')}" class="border px-4 py-2 rounded lg:ml-8  cursor-default" [disabled]="!isAccommodationAvailable('Halal')">Halal</button>
+                        <button *ngIf="isAccommodationAvailable('Gluten-free')" [ngClass]="{'border-primary': isAccommodationAvailable('Gluten-free'), 'border-secondary border-opacity-20': !isAccommodationAvailable('Gluten-free')}" class="border px-4 py-2 rounded lg:ml-8  cursor-default" [disabled]="!isAccommodationAvailable('Gluten-free')">Gluten-free</button>
                         </div>
                     </div>
                     <!-- Preperation details -->

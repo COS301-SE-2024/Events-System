@@ -30,7 +30,7 @@
     </div>
 </div> -->
 
-<div 
+<div id="event-card"
   class="relative flex flex-col mt-6 h-96 bg-base-200 shadow-md bg-clip-border rounded-xl w-72 card" 
   [ngClass]="{'bg-neutral': isRecommended, 'bg-base-200': !isRecommended}">
   <div
@@ -55,7 +55,7 @@
       </p>
     </ng-template>
   </div>
-  <div class="p-6 pt-0 flex justify-center items-center">
+  <div class="p-6 pt-0 flex justify-center items-center" id="event-book">
     <button  *ngIf="loading"
     [routerLink]="['/event', eventID]"
     class="align-middle select-none font-roboto font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-neutral text-secondary shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"

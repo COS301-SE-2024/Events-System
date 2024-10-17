@@ -1,5 +1,5 @@
 <div class="flex justify-center">
-  <div id="info-card" class="ml-2 relative flex flex-col my-1 bg-base-100 shadow-sm border border-base-100 rounded-lg w-96 h-72 info-card">
+  <div id="info-card" class="ml-2 relative flex flex-col my-1 bg-base-100 shadow-sm border border-base-100 rounded-lg w-96 h-72 lg:h-screen lg:overflow-y-auto">
     <div class="relative h-32 lg:h-52 m-2.5 overflow-hidden text-secondary rounded-md">
       <img src="{{this.imageSource}}" alt="card-image" />
     </div>
@@ -15,7 +15,7 @@
             <li class="step step-primary step-large" *ngFor="let preparation of PreperationDetails">{{preparation}}</li>
           </ul>
         </div>
-    </div>
+      </div>
     </div>
     <div class="px-4 pb-4 pt-0 mt-2 bottom-3">
       <div class="flex w-full justify-between">

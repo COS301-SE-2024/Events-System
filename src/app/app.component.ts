@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { filter } from 'rxjs/operators';
 
 import { FullCalendarModule } from '@fullcalendar/angular';
-
+import { SidebarService } from './sidebar.service';
 import { NotifPopupComponent } from 'src/notif-popup/notif-popup.component';
 import { ProfileComponent } from 'src/profile/profile.component';
 import { PwaService } from './pwa.service'; // Adjust the path as necessary
@@ -29,6 +29,8 @@ import { SplashscreenComponent } from 'src/Splashscreen/Splashscreen.component';
         </button>;`
 })
 export class AppComponent implements OnInit{
+  @ViewChild('drawerCheckbox') drawerCheckbox!: ElementRef<HTMLInputElement>;
+
     @ViewChild('splashScreen') splashScreen!: SplashscreenComponent;
   isSplashVisible = true;
   @ViewChild('toastContainer', { static: true }) toastContainer!: ElementRef;
@@ -53,7 +55,7 @@ export class AppComponent implements OnInit{
       // private webSocketService: WebSocketService,
       private cdr: ChangeDetectorRef,
       private refreshService: RefreshService,
-      
+      private sidebarService: SidebarService
 
     ) {
       this.router.events
@@ -89,6 +91,8 @@ export class AppComponent implements OnInit{
     return /\/(login|privacy-policy|home|reset-password)/.test(url);
   }
   ngOnInit() {
+    this.sidebarService.setDrawerCheckbox(this.drawerCheckbox);
+
     console.log(this.employeeData.role);
     if (this.employeeData.role == 'MANAGER'){
       this.isEmployee = true;
@@ -157,6 +161,7 @@ export class AppComponent implements OnInit{
 
   refreshNavbar() {
     this.employeeData = JSON.parse(localStorage.getItem('employeeData') || '{}');
+    localStorage.setItem("Role", this.employeeData.role);
     if(this.employeeData){
       if (this.employeeData.role == 'MANAGER'){
         this.isEmployee = true;
@@ -219,6 +224,7 @@ export class AppComponent implements OnInit{
       if (response.ok) {
           // Successfully logged out
           localStorage.removeItem('ID');
+          localStorage.removeItem('Role');
           document.cookie = `jwt=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
           document.cookie = `refresh=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
           window.location.href = '/home'; // Redirect to login page or show logout success message
@@ -319,4 +325,12 @@ export class AppComponent implements OnInit{
       drawerCheckbox.checked = false;
     }
   }
+
+  openSidebar() {
+    const drawerCheckbox = document.getElementById('my-drawer-2') as HTMLInputElement;
+    if (drawerCheckbox) {
+      drawerCheckbox.checked = true;
+    }
+  }
+
 }

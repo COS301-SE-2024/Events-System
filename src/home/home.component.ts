@@ -12,6 +12,9 @@ import { WebSocketService } from 'src/app/websocket.service';
 import { NotificationService } from 'src/app/notification.service';
 import { RandomHeaderService } from 'src/app/random-header.service';
 import { ChatbotComponent } from 'src/Components/chatbot/chatbot.component';
+import { TourService } from './tour.service'; // Import the TourService
+import { ActivatedRoute } from '@angular/router';
+// import 'shepherd.js/dist/css/shepherd.css';
 const myCredentials = {
   username: 'myUsername',
   password: 'myPassword'
@@ -52,7 +55,9 @@ export class HomeComponent implements OnInit {
     private router: Router,
     //  private webSocketService: WebSocketService,
       private notificationService: NotificationService,
-      private randomHeaderService: RandomHeaderService) { 
+      private tourService: TourService, // Inject the TourService
+      private randomHeaderService: RandomHeaderService,
+    private route: ActivatedRoute) { 
         this.imageSource = '';
 	// 	// Open connection with server socket
   //   const stompClient = this.webSocketService.connect();
@@ -65,7 +70,6 @@ export class HomeComponent implements OnInit {
   //           this.notifications = JSON.parse(notifications.body).count;
   //       })
   //   });
-
     }
 notify() {
   this.notificationService.sendNotification(Number(localStorage.getItem('ID')), 93, "tesst", "title").subscribe(response => {
@@ -142,6 +146,17 @@ notify() {
     }, 3000);
 }
 ngOnInit() {
+  this.route.queryParams.subscribe(params => {
+    if (params['startTour'] === 'true') {
+        this.startTour();
+                  // Remove 'startTour' from query params
+        const url = new URL(window.location.href);
+        url.searchParams.delete('startTour');
+        window.history.replaceState({}, '', url.toString());
+        
+      }
+  });
+
   this.imageSource = this.randomHeaderService.getRandomHeaderSource();
   const employeeId = Number(localStorage.getItem('ID'));
 
@@ -248,6 +263,12 @@ ngOnInit() {
     .catch(error => {
       console.error('Error:', error);
     });
+
+    // Auto-start the tour if it's the user's first time
+    if (!localStorage.getItem('dontShowTour')) {
+      this.startTour();
+    }
+
 }
   filterByDate(date: string) {
     this.selectedDate = date;
@@ -310,5 +331,8 @@ ngOnInit() {
   previousSCSlide() {
     const singleSlideWidth = this.carousel3.nativeElement.offsetWidth / 3;
     this.carousel3.nativeElement.scrollLeft -= singleSlideWidth;
+  }
+  startTour(){
+    this.tourService.startTour();
   }
 }

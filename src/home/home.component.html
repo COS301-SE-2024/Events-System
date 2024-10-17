@@ -13,7 +13,8 @@
    <div class="hidden sm:block h-56 w-56 text-indigo-300 absolute a-z-10 left-40 bottom-1/2">
     <svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><defs><pattern id='a' patternUnits='userSpaceOnUse' width='40' height='40' patternTransform='scale(0.6) rotate(0)'><rect x='0' y='0' width='100%' height='100%' fill='none'/><path d='M11 6a5 5 0 01-5 5 5 5 0 01-5-5 5 5 0 015-5 5 5 0 015 5'  stroke-width='1' stroke='none' fill='currentColor'/></pattern></defs><rect width='800%' height='800%' transform='translate(0,0)' fill='url(#a)'/></svg>
    </div>
-  <section class="bg-transparent text-center size-full">
+  <section class="bg-transparent text-center size-full " id="Popular-carousel">
+    <!-- <button (click)="startTour()"> start tour ( testing ) </button> -->
     <h2 class="font-poppins font-medium text-3xl mb-1 pb-1">Popular Events</h2>
     <div class="relative">
             <!-- Carousel 1 skeleton -->
@@ -52,7 +53,7 @@
     </div>
   </section>
 
-  <section class="bg-transparent text-center shadow-2xl pt-32 h-full"> <!--Upcoming events section-->
+  <section class="bg-transparent text-center shadow-2xl pt-32 h-full"  id="Upcoming-carousel"> <!--Upcoming events section-->
     <div class="flex flex-col text-center"> <!--lg:flex-row-->
       <h2 class="font-poppins font-medium text-3xl mb-1.5 pb-3 ">Your Upcoming Events</h2>
      
@@ -132,7 +133,7 @@
     </div>
   </section>
 
-  <section class="bg-transparent text-center pt-32 shadow-2xl h-full"> <!--Featured events section-->
+  <section class="bg-transparent text-center pt-32 shadow-2xl h-full" id="social-clubs"> <!--Featured events section-->
     <h2 class="font-poppins font-medium text-3xl mb-1.5 pb-3">Social clubs</h2>
 
     <div class="relative lg:h-96 w-full"> 
@@ -158,8 +159,8 @@
       </div>
     
       <div class="absolute top-1/2 left-0 right-0 transform -translate-y-1/2 lg:flex hidden justify-between px-3">
-        <a (click)="previousSCSlide()" class="btn btn-circle">❮</a>
-        <a (click)="nextSCSlide()" class="btn btn-circle">❯</a>
+        <a (click)="previousSCSlide()" class="btn btn-circle z-30">❮</a>
+        <a (click)="nextSCSlide()" class="btn btn-circle z-30">❯</a>
       </div>
     </div>
   </section>

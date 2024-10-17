@@ -47,7 +47,15 @@ export class SettingsComponent implements OnInit {
     this.sanitizePipe = new SanitizePipe(this.sanitizer);
 
   }
-
+  // Method to generate initials
+  getInitials(): string {
+    if (this.employeeData) {
+      const firstNameInitial = this.employeeData.firstName ? this.employeeData.firstName.charAt(0).toUpperCase() : '';
+      const lastNameInitial = this.employeeData.lastName ? this.employeeData.lastName.charAt(0).toUpperCase() : '';
+      return firstNameInitial + lastNameInitial;
+    }
+    return '';
+  }
   selectTab(tab: string) {
     this.selectedTab = tab;
   }
