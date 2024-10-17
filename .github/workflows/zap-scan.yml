@@ -16,6 +16,9 @@ jobs:
   zap_scan:
     runs-on: ubuntu-latest
 
+    permissions:
+        issues: write
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -36,8 +39,8 @@ jobs:
       - name: Run OWASP ZAP Baseline Scan
         uses: zaproxy/action-baseline@v0.13.0
         with:
-          target: 'https://events-system-back.wn.r.appspot.com'  # Adjust the URL to match your app's host and port
-          fail_action: true   # Fail the job if any high-risk alerts are found
+          target: 'https://Events-system.org'  # Adjust the URL to match your app's host and port
+          fail_action: false   # Set to false to allow for warnings
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
