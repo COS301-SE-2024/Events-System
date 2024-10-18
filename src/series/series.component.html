@@ -64,7 +64,7 @@
                  
                 <div class="card bg-base-100 shadow-xl mt-4" id="subscribe">
                     <div class="card-body">
-                      <h2 class="card-title font-karla text-4xl flex items-center justify-center mb-6">Subscribe Now!</h2>
+                      <h2 class="card-title font-karla text-4xl flex items-center justify-center mb-6">Subscribe Now</h2>
                       <!-- <div class="flex lg:justify-evenly lg:flex-row flex-col">
                         <div>
                             <p class="lg:text-4xl text-2xl"> <i class="fa-solid fa-user mr-2"></i> {{host.firstName}} {{host.lastName}} </p>
@@ -76,8 +76,8 @@
                         </div>
                     </div> -->
                        <div class="card-actions justify-center">
-                        <button class="btn btn-accent font-roboto" *ngIf="!hasUserRSVPd"  @buttonFade (click)="rsvpToSeries()">Book Now</button>
-                        <button class="btn btn-outline font-roboto btn-warning" *ngIf="hasUserRSVPd"  @buttonFade (click)="rsvpToSeries()">Cancel booking</button>
+                        <button class="btn btn-accent font-roboto" *ngIf="!hasUserRSVPd"  @buttonFade (click)="rsvpToSeries()">Subscribe</button>
+                        <button class="btn btn-outline font-roboto btn-warning" *ngIf="hasUserRSVPd"  @buttonFade (click)="rsvpToSeries()">Cancel Subscription</button>
 
                       </div>
                     </div>
