@@ -128,6 +128,16 @@ public class SecurityConfiguration {
                 logout.logoutUrl("/api/v1/auth/logout")
                     .addLogoutHandler(logoutHandler)
                     .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext())
+            )
+            .headers(headers -> headers
+                .httpStrictTransportSecurity(hsts -> hsts
+                    .maxAgeInSeconds(31536000)
+                    .includeSubDomains(true)
+                    .preload(true)
+                )
+                .contentSecurityPolicy(policyConfig -> 
+                    policyConfig.policyDirectives("default-src 'self'; script-src 'self' https://trusted-scripts.com"))
+                .permissionsPolicy(policy -> policy.policy("geolocation=(self), microphone=()"))
             );
 
         return http.build();
