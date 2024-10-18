@@ -8,4 +8,11 @@ export class AuthService {
     // Implement your logic to check if the user is logged in
     return !!localStorage.getItem('ID'); // Example implementation
   }
+  ismanager(): boolean{
+    if(localStorage.getItem('Role') == "MANAGER"){
+      return true;
+    }else{
+      return false;
+    }
+  }
 }

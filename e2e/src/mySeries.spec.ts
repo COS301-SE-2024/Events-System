@@ -25,6 +25,8 @@ test.describe('My Series Component', () => {
    
         await page.evaluate(() => {
             localStorage.setItem('ID', '10'); // Set a key-value pair in local storage
+            localStorage.setItem('Role', 'MANAGER'); // Add the Role key-value pair
+
             // Add other items as needed
         });
        

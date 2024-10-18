@@ -12,16 +12,16 @@
     </div>
 
     <div class="card-actions flex flex-wrap justify-center md:justify-end md:absolute md:bottom-0 md:right-0 md:mb-8 md:mr-8 gap-2">
-      <button [routerLink]="['/hostcheckin', eventID]" class="font-roboto cursor-pointer flex w-fit h-8 shrink-0 items-center justify-center font-semibold rounded-sm text-white text-sm border-none bg-gradient-to-r from-accent to-secondary px-4 transition duration-200 hover:from-accent hover:to-accent focus:outline-none disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80">        
+      <button [routerLink]="['/hostcheckin', eventID]" class="btn btn-accent btn-outline">        
         Check In
       </button>
-      <button [routerLink]="['/event', eventID]" class="font-roboto cursor-pointer flex h-8 shrink-0 items-center justify-center font-semibold rounded-sm text-white text-sm border-none bg-gradient-to-r from-accent to-secondary px-4 transition duration-200 hover:bg-gradient-to-r hover:from-accent hover:to-accent focus:outline-none disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80"> 
+      <button [routerLink]="['/event', eventID]" class="btn btn-accent btn-outline"> 
         Preview
       </button>
-      <button [routerLink]="['/updateevent', eventID]" class="font-roboto cursor-pointer flex h-8 shrink-0 items-center justify-center font-semibold rounded-sm text-white text-sm border-none bg-gradient-to-r from-accent to-secondary px-4 transition duration-200 hover:bg-gradient-to-r hover:from-accent hover:to-accent focus:outline-none disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80"> 
+      <button [routerLink]="['/updateevent', eventID]" class="btn btn-accent btn-outline"> 
         Edit
       </button>
-      <button [routerLink]="['/deleteevent', eventID]" class="font-roboto cursor-pointer flex h-8 shrink-0 items-center justify-center font-semibold rounded-sm text-white text-sm border-none bg-gradient-to-r from-accent to-secondary px-4 transition duration-200 hover:bg-gradient-to-r hover:from-accent hover:to-accent focus:outline-none disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80"> 
+      <button [routerLink]="['/deleteevent', eventID]" class="btn btn-error btn-outline"> 
         Delete
       </button>
     </div>

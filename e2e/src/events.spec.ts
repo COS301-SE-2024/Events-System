@@ -53,6 +53,6 @@ test.describe('EventsComponent Tests', () => {
 
 
   test('Test booking for an event', async ({ page }) => {
-    await page.click('button:has-text("Book Now")');
+    await page.click('button:has-text("See more")');
   });
 });

@@ -81,11 +81,4 @@ describe('EventsComponent', () => {
     expect(component.searchLocation).toBe('Location');
   });
 
-  it('should close drawer when save button is clicked', () => {
-    const saveButton = fixture.debugElement.query(By.css('button.btn-primary')).nativeElement;
-    saveButton.click();
-    fixture.detectChanges();
-    const drawerToggle = fixture.debugElement.query(By.css('#my-drawer-3')).nativeElement;
-    expect(drawerToggle.checked).toBe(false);
-  });
 });

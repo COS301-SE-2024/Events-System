@@ -12,12 +12,12 @@
     </div>
 
     <div class="card-actions md:justify-end md:absolute md:bottom-0 md:right-0 md:mb-8 md:mr-8">
-      <button [routerLink]="['/socialclub', clubID]" class="font-roboto cursor-pointer flex h-8 shrink-0 items-center justify-center font-semibold rounded-sm text-white text-sm border-none bg-gradient-to-r from-accent to-secondary pl-6 pr-7 transition duration-200 hover:from-accent hover:to-accent focus:outline-none disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80">        Preview
+      <button [routerLink]="['/socialclub', clubID]" class="btn btn-accent btn-outline">Preview
       </button>
-      <button [routerLink]="['/updatesocialclub', clubID]" class="font-roboto cursor-pointer flex h-8 shrink-0 items-center justify-center font-semibold rounded-sm text-white text-sm border-none bg-gradient-to-r from-accent to-secondary pl-6 pr-7 w-20 transition duration-200 hover:bg-gradient-to-r hover:from-accent hover:to-accent focus:outline-none disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80"> 
+      <button [routerLink]="['/updatesocialclub', clubID]" class="btn btn-accent btn-outline"> 
         Edit
       </button>
-      <button [routerLink]="['/deletesocialclub', clubID]" class="font-roboto cursor-pointer flex h-8 shrink-0 items-center justify-center font-semibold rounded-sm text-white text-sm border-none bg-gradient-to-r from-accent to-secondary pl-4 pr-4 w-20 transition duration-200 hover:bg-gradient-to-r hover:from-accent hover:to-accent focus:outline-none disabled:opacity-30 disabled:hover:text-white dark:focus:ring-white/80"> 
+      <button [routerLink]="['/deletesocialclub', clubID]" class="btn btn-error btn-outline"> 
           Delete
       </button>
     </div>

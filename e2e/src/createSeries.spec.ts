@@ -26,6 +26,8 @@ test.describe('Series Create Page', () => {
         // Set initial local storage values
         await page.evaluate(() => {
             localStorage.setItem('ID', '10');
+            localStorage.setItem('Role', 'MANAGER'); // Add the Role key-value pair
+
         });
         
         // Navigate to the events page
