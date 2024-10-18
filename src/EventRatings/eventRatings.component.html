@@ -49,7 +49,7 @@
       </div>
   </div> 
 
-<div *ngIf="!isLoading && event" style='font-family: Manrope, "Noto Sans", sans-serif;'>
+<div *ngIf="!isLoading" style='font-family: Manrope, "Noto Sans", sans-serif;'>
   <div class="hero h-80 min-w-dvw" [style.background-image]="'url(' + imageSource + ')'"></div> <!-- [style.background-image]="'url(' + imageSource + ')'" -->
   <button class="btn w-[50px] -mt-48 ml-4 lg:ml-8 h-[30px] rounded-full z-40" (click)="goBack()"><i class="fa-solid fa-arrow-left"></i></button> 
   <div class="layout-container flex h-full grow flex-col">
@@ -58,8 +58,8 @@
                 <div class="flex lg:justify-between lg:flex-row flex-col w-full">
                     <div class="w-full">
                         <div class="flex justify-between w-full">
-                            <h1 class="text-5xl lg:text-6xl" *ngIf="event">{{ event.title }}</h1>
-                            <button class="btn w-32" onclick="my_modal_5.showModal()">Write a review</button>
+                            <h1 class="text-5xl lg:text-6xl">{{ event.title }}</h1>
+                            <button class="btn w-32" [disabled]="!canWriteReview || !isEventPassed" onclick="my_modal_5.showModal()">Write a review</button>
                         </div>
                         
                         <h2 class="mt-4 text-xl text-secondary">{{ event.description }} </h2>
@@ -131,7 +131,7 @@
           </div>
         </div>
     </div>
-</div>
+
 
 <form (ngSubmit)="submitFeedback()">
     <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
@@ -233,7 +233,7 @@
       </div>
     </dialog>
   </form>
-
+</div>
   <div class="toast" *ngIf="isAPILoading">
     <div class="alert alert-info flex justify-center">
         <span class="loading loading-dots loading-md"></span>

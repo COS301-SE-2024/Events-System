@@ -38,7 +38,9 @@
         </div>
         <div class="tabs tabs-boxed w-full">
           <a class="tab text-secondary text-lg tab-bordered rounded-lg hover:bg-neutral" (click)="selectTab('about')" [class.tab-active]="selectedTab === 'about'">About</a>
-          <a class="tab text-secondary text-lg tab-bordered rounded-lg hover:bg-neutral" (click)="selectTab('events')" [class.tab-active]="selectedTab === 'events'">Events History</a>
+          <a class="tab text-secondary text-lg tab-bordered rounded-lg hover:bg-neutral" (click)="selectTab('events')" [class.tab-active]="selectedTab === 'events'">
+            {{ isHost() ? 'Hosting History' : 'Events History' }}
+          </a>
         </div>
       </div>
     </div>
@@ -137,7 +139,9 @@
         </div>
         <div class="tabs tabs-boxed w-full">
           <a class="tab tab-bordered rounded-lg hover:bg-blue-200 hover:text-blue-800" (click)="selectTab('about')" [class.tab-active]="selectedTab === 'about'">About</a>
-          <a class="tab tab-bordered rounded-lg hover:bg-blue-200 hover:text-blue-800" (click)="selectTab('events')" [class.tab-active]="selectedTab === 'events'">Events History</a>
+          <a class="tab tab-bordered rounded-lg hover:bg-blue-200 hover:text-blue-800" (click)="selectTab('events')" [class.tab-active]="selectedTab === 'events'">
+            {{ isHost() ? 'Hosting History' : 'Events History' }}
+          </a>
         </div>
       </div>
     </div>

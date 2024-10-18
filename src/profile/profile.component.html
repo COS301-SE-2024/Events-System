@@ -29,6 +29,7 @@
     <div class="tabs tabs-boxed w-full">
       <a class="tab text-secondary text-lg tab-bordered rounded-lg hover:bg-neutral" (click)="selectTab('about')" [class.tab-active]="selectedTab === 'about'">About</a>
       <a class="tab text-secondary text-lg tab-bordered rounded-lg hover:bg-neutral" (click)="selectTab('events')" [class.tab-active]="selectedTab === 'events'">Events History</a>
+      <a *ngIf="isHost" class="tab text-secondary text-lg tab-bordered rounded-lg hover:bg-neutral" (click)="selectTab('hostedevents')" [class.tab-active]="selectedTab === 'hostedevents'">Hosted events</a>
     </div>
     <div *ngIf="selectedTab === 'about'" class="card w-full bg-base-100 shadow-2xl mb-4">
       <div class="card-body flex-row">
@@ -78,7 +79,20 @@
         </div>
       </div>
     </div>
-  
+
+    <div *ngIf="selectedTab === 'hostedevents'" class=" w-full items-center shadow-2xl">
+      <div class=" overflow-y-hidden">
+        <div class="flex flex-wrap gap-x-20 gap-y-14 pt-6 pl-14">
+          <app-attended-event-card
+          *ngFor="let event of hostedevents"  
+              [eventID]="event.eventId"
+              [eventTitle]="event.title"
+              [description]="event.description"
+          ></app-attended-event-card>
+          
+        </div>
+      </div>
+    </div>
 </div>
   
   <!-- Mobile Version -->
@@ -101,6 +115,7 @@
     <div class="tabs tabs-boxed w-full">
       <a class="tab text-secondary text-lg tab-bordered rounded-lg hover:bg-neutral" (click)="selectTab('about')" [class.tab-active]="selectedTab === 'about'">About</a>
       <a class="tab text-secondary text-lg tab-bordered rounded-lg hover:bg-neutral" (click)="selectTab('events')" [class.tab-active]="selectedTab === 'events'">Events History</a>
+      <a *ngIf="isHost" class="tab text-secondary text-lg tab-bordered rounded-lg hover:bg-neutral" (click)="selectTab('hostedevents')" [class.tab-active]="selectedTab === 'hostedevents'">Hosted events</a>
     </div>
     <div *ngIf="selectedTab === 'about'" class="card w-full bg-base-100 shadow-2xl mb-4">
       <div class="card-body">
@@ -134,6 +149,19 @@
         <div class="flex flex-wrap gap-x-20 gap-y-14 pt-6 pl-14">
           <app-attended-event-card
           *ngFor="let event of events"  
+              [eventID]="event.eventId"
+              [eventTitle]="event.title"
+              [description]="event.description"
+          ></app-attended-event-card>
+          
+        </div>
+      </div>
+    </div>
+    <div *ngIf="selectedTab === 'hostedevents'" class=" w-full items-center shadow-2xl">
+      <div class=" overflow-y-hidden">
+        <div class="flex flex-wrap gap-x-20 gap-y-14 pt-6 pl-14">
+          <app-attended-event-card
+          *ngFor="let event of hostedevents"  
               [eventID]="event.eventId"
               [eventTitle]="event.title"
               [description]="event.description"
