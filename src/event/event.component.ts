@@ -192,14 +192,14 @@ export class EventComponent implements OnInit{
         // Hide the toast after 5 seconds
         setTimeout(() => {
           this.showunrsvpsuccessToast = false;
-        }, 5000);
+        }, 2000);
       })
       .catch((error) => {
         this.showunrsvpfailToast = true;
         this.isAPILoading = false;
         setTimeout(() => {
           this.showunrsvpfailToast = false;
-        }, 5000);
+        }, 2000);
         console.error('Error:', error);
       });
 

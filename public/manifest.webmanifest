@@ -1,8 +1,8 @@
 {
-  "name": "Events-System",
-  "short_name": "Events-System",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "name": "Events System",
+  "short_name": "Events System",
+  "theme_color": "#12192C",
+  "background_color": "#12192C",
   "display": "standalone",
   "scope": "./",
   "start_url": "/",

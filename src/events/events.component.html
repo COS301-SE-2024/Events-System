@@ -64,21 +64,21 @@
       <div class="mt-8">
         <button class="btn font-karla w-full no-animation">Filter By:</button>
 
-        <div class="collapse collapse-plus">
-          <input type="radio" name="my-accordion-3" checked="checked" />
+
           <div class="collapse collapse-plus">
-            <input type="radio" name="my-accordion-3" />
+            <input type="radio" name="my-accordion-3" checked="checked" />
             <div class="collapse-title text-xl font-roboto font-medium">
               Title
             </div>
 
             <div class="collapse-content">
-              <ul class="menu bg-base-200 w-56 rounded-box">
-                <input type="text" class="input input-bordered font-roboto w-full max-w-xs" (input)="updateSearchTerm($event)" placeholder="Search by title" />
+              <ul class="menu bg-base-200 w-full rounded-box">
+                <input type="text" class="input input-bordered font-roboto w-full max-w-lg" (input)="updateSearchTerm($event)" placeholder="Search by title" />
               </ul>
             </div>
           </div>
-
+          <div class="collapse collapse-plus">
+            <input type="radio" name="my-accordion-3" />
           <div class="collapse-title text-xl font-roboto font-medium">
             Date
           </div>
@@ -86,8 +86,8 @@
             <form (submit)="onSubmit()">
               <input type="date" id="date-input" [value]="selectedDate" (input)="handleInput($event)" name="date-input" class="bg-gray-400 w-full px-3 py-2 rounded-lg border-2 border-gray-400 font-roboto focus:border-indigo-500 text-base outline-none text-gray-700 transition-colors duration-200 ease-in-out">
               <div class="flex w-full">
-                <button class="btn btn-outline font-roboto mt-4" (click)="clearDateFilter(); drawerToggle.checked = false">Clear</button>
-                <button class="btn btn-primary font-roboto mt-4 ml-24" (click)="drawerToggle.checked = false" type="submit">Submit</button>
+                <button class="btn btn-outline btn-warning font-roboto mt-4" (click)="clearDateFilter(); drawerToggle.checked = false">Clear</button>
+                <button class="btn btn-accent font-roboto mt-4 ml-24 lg:hidden block" (click)="drawerToggle.checked = false" type="submit">Submit</button>
               </div>
             </form>
           </div>
@@ -99,7 +99,7 @@
             Location
           </div>
           <div class="collapse-content">
-            <ul class="menu bg-base-200 w-56 rounded-box">
+            <ul class="menu bg-base-200 w-full rounded-box">
               <input type="text" class="input input-bordered font-roboto w-full max-w-xs" (input)="updateSearchLocation($event)" placeholder="Search by Location" />
             </ul>
           </div>
@@ -113,23 +113,23 @@
           <div class="collapse-content">
             <ul class="menu bg-base-200 w-56 rounded-box font-roboto">
               <label class="label cursor-pointer">
-                <input type="radio" name="radio-10" class="radio checked:bg-red-500" checked (change)="updateDietaryAccommodation('')" />
+                <input type="radio" name="radio-10" class="radio checked:bg-accent" checked (change)="updateDietaryAccommodation('')" />
                 <span class="label-text">None</span>
               </label>
               <label class="label cursor-pointer">
-                <input type="radio" name="radio-10" class="radio checked:bg-red-500" (change)="updateDietaryAccommodation('Vegetarian')" />
+                <input type="radio" name="radio-10" class="radio checked:bg-accent" (change)="updateDietaryAccommodation('Vegetarian')" />
                 <span class="label-text">Vegetarian</span>
               </label>
               <label class="label cursor-pointer">
-                <input type="radio" name="radio-10" class="radio checked:bg-red-500" (change)="updateDietaryAccommodation('Vegan')" />
+                <input type="radio" name="radio-10" class="radio checked:bg-accent" (change)="updateDietaryAccommodation('Vegan')" />
                 <span class="label-text">Vegan</span>
               </label>
               <label class="label cursor-pointer">
-                <input type="radio" name="radio-10" class="radio checked:bg-red-500" (change)="updateDietaryAccommodation('Halal')" />
+                <input type="radio" name="radio-10" class="radio checked:bg-accent" (change)="updateDietaryAccommodation('Halal')" />
                 <span class="label-text">Halal</span>
               </label>
               <label class="label cursor-pointer">
-                <input type="radio" name="radio-10" class="radio checked:bg-red-500" (change)="updateDietaryAccommodation('Gluten-free')" />
+                <input type="radio" name="radio-10" class="radio checked:bg-accent" (change)="updateDietaryAccommodation('Gluten-free')" />
                 <span class="label-text">Gluten-free</span>
               </label>
             </ul>
