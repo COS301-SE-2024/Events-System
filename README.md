@@ -1,12 +1,20 @@
 <div align="center">
-<h1>Entelect Events System</h1>
+    <img src="https://github.com/user-attachments/assets/76ac7c9f-8034-45ca-9c48-7e9cc33cf1b2" width="240" height="auto">
+
+<h1 align="center">Entelect Events System</h1>
 <br>
-<a style="color: orange;font-size: 50px;text-decoration: underline;" href="https://events-system.org/">Deployed Site</a>
 </div>
-
+  <h3 align="center">A 301 capstone project Built for
+   <a href="https://entelect.co.za/">Entelect </a>
+  </h3>
 
 <br>
 
+<p align="center">
+
+https://github.com/user-attachments/assets/f507c511-bb79-47c4-b538-08c4b8d546a6
+
+</p>
 
 <div align="center" style="background-color: red;">
     <h2>Bieber Fever</h2>
@@ -37,19 +45,17 @@ Our team brings you an innovative team collaboration site powered by angular, st
 
 | Document                               | Link                                                                                                       |
 |---------------------------------------|------------------------------------------------------------------------------------------------------------|
-| **Technologies**                      | [**Technologies Used**](https://github.com/COS301-SE-2024/Events-System/wiki)    |
-| **Coding Standards**                 | [**Coding Standards**](https://github.com/COS301-SE-2024/Events-System/wiki/Backend-coding-standards) |
-| **SRS Document**                     | [**SRS Document**](https://docs.google.com/document/d/1IkNd7883CXhsH3ZvoKGpKpWrK2wgkBeg/edit?usp=drive_link&ouid=109737902115089118558&rtpof=true&sd=true)              |
+| **WIKI**                      | [**Technologies Used**](https://github.com/COS301-SE-2024/Events-System/wiki)    |
+| **SRS Document**                     | [**SRS Document**](https://drive.google.com/file/d/12BgaVvUaYqJJpjXi7lQUz0lnQkCqiQkB/view?usp=drive_link)              |
 | **Project Board**                    | [**Project Board**](https://github.com/orgs/COS301-SE-2024/projects/100)                     |
-| **Presentation**                      | [**Presentation**](https://docs.google.com/presentation/d/1WFUS8HzUa4GiifquZ9qwtiIB_9fEH1IALM_JrGgDWf8/edit?usp=drive_link) |
-| **Architecture**                      | [**Architecture Requirements**](https://docs.google.com/document/d/1AQTAW603MP4aSSwuqKOEXbl62YoEceQ1szSPMKhpIW0/edit?usp=drive_link) |
-| **User Manual**                      | [**User Manual**](https://docs.google.com/document/d/1AvNEAamtIrnZcAtqJ8JCZjV8uI60CV_R/edit?usp=drive_link&ouid=109737902115089118558&rtpof=true&sd=true) |
+| **Presentation**                      | [**Presentation**](https://docs.google.com/presentation/d/1DG3rZSBVjQiNuoIQnG1kJR7WrrhJRsUqUXkxhA3Kr8I/edit?usp=drive_link) |
+| **Architecture**                      | [**Architecture Requirements**](https://drive.google.com/file/d/1S67M2i3KhXB3egpI_TODEDcKjVb4lFnX/view?usp=drive_link) |
+| **User Manual**                      | [**User Manual**](https://drive.google.com/file/d/1OLeIV4ES9xUGv_mQEZPLA2Ac9XMKAuVO/view?usp=drive_link) |
 | **Technical Installation Manual**                      | [**Technical installation Manual**](https://github.com/COS301-SE-2024/Events-System/wiki/Technical-installation-manual) |
-| **Testing policy**                      | [**Testing policy**](https://docs.google.com/document/d/106CuNuTqG4AfYpYS5XJyBqeMHrky7XOsOzMeS-0wPJo/edit?usp=drive_link) |
-| **Event Recommender Engine Docs**                      | [**Recommender Engine**](https://docs.google.com/document/d/1Lh_mEJHsUIlT_9LCRcTAxHM7EEGxTjdeaMs9KjuU-Mo/edit?usp=drive_link) |
+| **Testing policy**                      | [**Testing policy**](https://drive.google.com/file/d/1DuDfUV50qVcRjXzLOMSq4XRf0v1hp2IQ/view?usp=drive_link) |
+| **Event Recommender Engine Docs**                      | [**Recommender Engine**](https://drive.google.com/file/d/1IR4NXLuDl4LhgMn6KoZ0mDI8hDII4EKp/view?usp=drive_link) |
 | **Demo Video**                      | [**Demo video**](https://drive.google.com/file/d/18d0zKV-BKLJ0k5i4n6ote0CDXZe3OV54/view?usp=drive_link) |
-| **Deployment Diagram**                      | [**Deployment Diagram**](https://drive.google.com/file/d/1gnIvh3odOxDcNP0cagQJmP_7bqXnsQco/view?usp=drive_link) |
-| **OWASP ZAP report**                      | [**OWASP report**](https://drive.google.com/file/d/1keBbRFxmtVcYMLinx1aSEYFy4RX8n8y0/view?usp=drive_linkk) |
+| **Deployment Diagram**                      | [**Deployment Diagram**](https://drive.google.com/file/d/1htquyse7xGp0ik58v3vP8FvAa0vxmMS0/view?usp=drive_link) |
 
 </div>
 
